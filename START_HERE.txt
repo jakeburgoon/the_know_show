@@ -1,0 +1,21 @@
+THE KNOW SHOW — VERSION 0.1.0
+
+Start with README.md for full, step-by-step instructions.
+
+QUICK SETUP:
+1. Create a Supabase project, open SQL Editor, and run supabase/schema.sql.
+2. Upload the CONTENTS of this folder into a GitHub repository.
+3. Import that repository into Vercel as a Next.js app.
+4. Add environment variables in Vercel:
+     SUPABASE_URL              = Your Supabase project URL
+     SUPABASE_SERVICE_ROLE_KEY = Your server-side Supabase service_role / secret key
+   Optional:
+     ROOM_CREATION_PASSCODE    = A password to restrict creation of new rooms.
+5. Deploy, open your Vercel URL, create a show, and share the room code with players.
+
+NEVER upload the secret key to GitHub or place it in a NEXT_PUBLIC_ variable.
+
+Rules: The Opening Act → The Main Event → The Final Word.
+One hidden Double Take clue per board scores double points.
+
+The full readme describes music, age advantages, hints, host judging, and testing.
