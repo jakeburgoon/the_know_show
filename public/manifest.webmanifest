@@ -1,1 +1,23 @@
-{"name":"The Know Show","short_name":"Know Show","description":"Live trivia night with your friends and family","start_url":"/","display":"standalone","background_color":"#f8f6ee","theme_color":"#142932","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "The Know Show",
+  "short_name": "Know Show",
+  "description": "Live trivia night with your friends and family",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f6ee",
+  "theme_color": "#142932",
+  "icons": [
+    {
+      "src": "/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

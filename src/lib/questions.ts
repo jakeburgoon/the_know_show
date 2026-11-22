@@ -1,17 +1,11 @@
 import bank from './question-bank.json';
-export type Question = {id:string;level:number;prompt:string;answer:string;hint:string;aliases:string[];categoryId:string;editorialStatus?:string;audiences?:('family'|'general'|'challenging')[]};
+export type Question = {id:string;level:number;prompt:string;answer:string;hint:string;aliases:string[];categoryId:string;editorialStatus?:string;sourceStatus?:string;sourceUrl?:string};
 export type Category = {id:string;name:string;description:string;type:'classic'|'creative';questionsByLevel: Record<string,Question[]>};
 export const CATEGORIES = bank.categories as Category[];
 export const CATEGORY_LOOKUP = new Map(CATEGORIES.map(c=>[c.id,c]));
 export const QUESTION_LOOKUP = new Map(CATEGORIES.flatMap(c=>Object.values(c.questionsByLevel).flat()).map(q=>[q.id,q]));
 export function cellKey(categoryId:string,level:number){return `${categoryId}:${level}`;}
 export function getQuestion(id:string){return QUESTION_LOOKUP.get(id);}
-// Question-set tags govern availability; broad questions stay in every
-// setting to preserve alternatives and support replayability.
-export function questionsForAudience(questions:Question[],audience:'family'|'general'|'challenging'):Question[]{
- return questions.filter(q=>!q.audiences || q.audiences.includes(audience));
-}
-
 export type FinalQuestion = { id: string; category: string; prompt: string; answer: string; hint: string; tier: 'family'|'teen'|'adult'; aliases?: string[] };
 export const FINALS: FinalQuestion[] = [
   {id:'f1',category:'Around the World',prompt:'This continent is the only one home to wild giraffes. Name it.',answer:'Africa',hint:'Its largest country by area is Algeria.',tier:'family'},

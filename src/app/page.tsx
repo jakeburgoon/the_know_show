@@ -11,7 +11,7 @@ export default function Home() {
   async function createRoom(){
     setBusy(true);setError('');
     try{
-      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode})});
+      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode,recentQuestionIds:JSON.parse(localStorage.getItem('knowshow:recentQuestionIds')||'[]')})});
       const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not create room.');
       localStorage.setItem(`knowshow:${data.code}:host`,data.token);
       router.push(`/room/${data.code}`);
@@ -19,7 +19,7 @@ export default function Home() {
   }
   function goToRoom(){const normalized=code.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6);if(normalized.length!==6){setError('Enter the six-character room code.');return;}router.push(`/room/${normalized}`);}
   return <main className="landing">
-    <header className="site-header"><div className="brand-mini"><span className="logo-mark">K<span>✳</span></span> THE KNOW SHOW</div><span className="edition">THE AT-HOME TRIVIA SHOW</span></header>
+    <header className="site-header"><div className="brand-mini"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></div><span className="edition">THE AT-HOME TRIVIA SHOW</span></header>
     <section className="hero"><div className="eyebrow"><span className="dot"/> THE STAGE IS YOURS</div>
       <h1>Brains on.<br/><em>Game on.</em></h1>
       <p>A lively, original trivia show for friends and family. Answer together on your phones, with an optional big-screen board, and see who knows their stuff.</p>

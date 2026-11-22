@@ -263,3 +263,23 @@
 .v25sharestatus{font-size:12px;color:#19665b;font-weight:700;margin:5px 0 12px}
 .v25phonesonly .v25detailscores{margin-top:16px}
 @media(max-width:680px){.v25pocketscores{padding:7px 12px;margin-left:-15px;margin-right:-15px}.v25phoneaudio{margin:8px 0}.v25phonesonly .v2questioncard{margin-top:6px}}
+
+/* The Know Show v1.0 — compact, streamlined brand and 4 x 3 game board. */
+.v1brandlogo{display:block;width:auto;max-width:100%;height:36px;object-fit:contain}
+.site-header .v1brandlogo{height:56px;max-width:min(65vw,330px)}
+.v2tvhead .v1brandlogo{height:45px;max-width:240px}
+.v2phonehead .v1brandlogo{height:34px;max-width:165px}
+.v1welcomelogo{display:block;width:min(75%,560px);height:auto;max-height:185px;object-fit:contain;margin:10px auto 20px}
+.v2board{grid-template-columns:repeat(4,minmax(0,1fr))}
+.v2boardcol{grid-template-rows:75px repeat(3,minmax(55px,1fr))}
+.v2tv .v2boardcol{grid-template-rows:minmax(65px,1fr) repeat(3,minmax(68px,1fr))}
+.v2phone .v2boardcol{grid-template-rows:60px repeat(3,48px)}
+.v2boardcard .v2boardcol{grid-template-rows:60px repeat(3,50px)}
+.v1automaticletter{border:1px solid #e9c986;border-radius:9px;background:#0d3947;padding:8px 12px;color:#fff4d6;font-size:13px;font-weight:700;margin:-5px 0 8px;position:relative;z-index:1}
+.v1automaticletter strong{font-size:19px;color:#ffdc8e;margin-left:5px}
+.v1hostdispute{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px;margin:9px 0;background:#fff0d4;border:2px solid #bf9047;color:#623d09;border-radius:11px;font-size:13px}
+.v1hostdispute span{flex:1 1 170px}.v1hostdispute button{background:#183e4c;color:#fff;padding:9px 12px;border:0;border-radius:8px;cursor:pointer}
+.v1wagerprogress{background:#e2f1ea;padding:12px;border-radius:10px;color:#124d43}
+@media(max-width:700px){.v2tv .v2boardcol{grid-template-rows:60px repeat(3,52px)}.v2boardcard .v2boardcol,.v2phone .v2boardcol{grid-template-rows:55px repeat(3,46px)}.v2phonehead .v1brandlogo{height:31px}}
+
+.v2questiondisplay::after,.v2intro::after,.v2drafthero::after{display:none!important}
