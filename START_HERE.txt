@@ -1,15 +1,15 @@
-THE KNOW SHOW — v1.1.0 VISUAL REFRESH
+THE KNOW SHOW — v1.2.0 ANSWER CHOICES UPDATE
 
-This is the COMPLETE app, not a small patch.
+Complete app replacement for your current v1.1 GitHub repository.
 
-From installed v1.0: See UPGRADE_FROM_V1.0.md.
+1. Unzip this file.
+2. Open the INNER `the-know-show` folder.
+3. Upload the contents into the ROOT of your GitHub repo, commit, and let Vercel deploy.
+4. In Host Controls, assign each player their Answer Format (Typed, All, Medium+Hard, or Hard only).
+5. Mid-game changes require pausing first.
 
-1. Unzip the download.
-2. Upload all items INSIDE the `the-know-show` folder to the root of your existing GitHub repository (overwriting matching paths).
-3. Commit. Vercel redeploys automatically if GitHub is connected.
-4. Reload the app after deployment. If the old style is cached, hard-refresh or reopen the installed PWA.
+NO NEW SUPABASE SQL OR ENVIRONMENT VARIABLES.
+V1.1 ROOMS ARE COMPATIBLE; previous first-letter/length settings no longer apply.
 
-NO SUPABASE CHANGES. NO ENVIRONMENT VARIABLE CHANGES.
-EXISTING V1.0 ROOMS CONTINUE TO WORK.
-
-The approved logo at public/know-show-logo.png is included unchanged.
+The approved main logo remains unchanged.
+See README.md and RELEASE_NOTES.md for details and multiple-choice content QA caveats.

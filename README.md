@@ -1,69 +1,66 @@
-> **Visual Refresh (v1.1):** This release is a direct upgrade from v1.0 with the approved logo, a redesigned landing page and Green Room, and matching navy/gold/cream styling across the app. See `UPGRADE_FROM_V1.0.md` and `RELEASE_NOTES.md`. No gameplay or database changes are necessary.
+# The Know Show — v1.2.0 (Answer Choices Update)
 
-# The Know Show — v1.0 (Family Game Night Edition)
+A complete replacement project for the existing **The Know Show v1.1** website. This release replaces first-letter and answer-length accommodations with a per-player multiple-choice option. It preserves the approved logo, navy/gold UI, and all v1.1 game rules.
 
-This is a complete GitHub replacement package. **You can upgrade directly from v0.2.5**; no intermediate versions are required. The new game rules and question IDs require **creating a new room** after deployment. Existing room snapshots created with v0.2.x do not work in v1.0. No changes to the existing Supabase SQL tables or Vercel environment variables are needed.
+## What's new
 
-## Upgrade from v0.2.5
+The host can select each player's **Answer format** in the Green Room or, during a game, after pausing in Host Controls:
 
-1. Extract `the-know-show-v1.1.0-direct-from-v0.2.5.zip` on your computer.
-2. Open the **inner** `the-know-show` folder.
-3. In GitHub, open your existing repository at its top level. Choose **Add file → Upload files**.
-4. Drag everything *inside* the inner `the-know-show` folder (including `src`, `public`, `supabase`, and other files) into the upload area. GitHub replaces matching paths, but doesn't automatically remove old paths.
-5. Commit the changes. Your connected Vercel deployment should redeploy automatically.
-6. Refresh the website and create a **new v1.0 room**.
+- **Write answers (default):** No four-choice assistance. Normal typed answer field.
+- **Four choices — every question:** Four answers on every regular question.
+- **Four choices — Medium & Hard:** Four answers on the middle and top difficulty rows, typed on Easy.
+- **Four choices — Hard only:** Four answers on the highest difficulty row, typed on Easy/Medium.
 
-An obsolete `public/icon.svg` file or older review documents left in GitHub are no longer referenced by the app. They can be removed later; they don't prevent this version from running.
+The Final Word is treated as **Hard** for answer-format accommodations. Each eligible player sees four answer buttons on their own phone, with **one-tap submission**. Other players and the host's management view don't see the choices; a host who also plays sees their own choices only in **Player View**.
 
-## Game rules
+Correct answers earn the **same base points** in both formats. The regular-question speed bonus is capped at **10% for four-choice answers** and **25% for typed answers**. Double Takes still double the base points before the normal speed bonus. Wrong answers earn zero. The Final Word's wager-based scoring is unchanged and has no separate speed bonus.
 
-- **One question set:** Standard Trivia only (no Family/Advanced selector).
-- **Two rounds:** The Opening Act and The Main Event.
-- **Four categories per round**, selected in a rotating draft from a randomized mix of classic and themed categories with readable descriptions.
-- **Three questions per category:** Easy, Medium, Hard. Round 1: **100 / 300 / 500**; Round 2: **200 / 600 / 1,000**.
-- **24 regular questions total**, plus The Final Word.
-- **Individual mode (default):** Everyone answers each question from their own phone, gets base points if correct, plus a speed bonus up to 25%. Wrong answers earn 0. Each player can use **one Double Take per round** after seeing the question and before submitting their answer.
-- **Team mode:** Teams answer in turn; after a wrong answer, the next team can attempt a single steal for half the question's points.
-- **Private accommodations:** The host can pause and adjust hints, first-letter support, answer-length support, and extra time. Enabled first letters display **automatically below the question**, with no taps or hint cost.
-- **Answer judging:** A question-specific set of accepted aliases plus conservative spelling tolerance. Small numeric/ordinal changes aren't treated as typos. The host can review disputes and adjust scores.
-- **The Final Word:** The question appears automatically after every player locks a wager. Wagers and answers are private until reveal.
-- **Display:** TV + Phones or Phones Only. Host may also join as a regular player and switch between Player and Host controls. The player view notifies an authenticated host of an active dispute.
-- **Music:** Cool Jazz is the default of six genres with two Suno-hosted arrangements each. Start the embedded music player on the TV or on the host phone (Phones Only). Suno controls its own play/pause and volume.
+Regular written hints and optional extra time remain available and can be customized. First-letter and answer-length support have been removed from the UI and grading logic.
 
-## Question library
+## Multiple-choice content quality
 
-- 45 categories × 3 difficulties × 4 candidate questions = **540 Standard Trivia questions**.
-- Question IDs, prompts, aliases, and hints are preserved from the latest **QA5 editorial review**. The extra source URL/status fields are retained for future question corrections.
-- **Important quality limitation:** 66 questions have recorded direct source verification (36 QA5, 30 QA4). 65 more have inherited source links that need rechecking; 409 are editorially screened but not individually externally verified. The library is intended for family playtesting, not a claim of comprehensive fact checking.
-- The app preferentially chooses questions the host device hasn't played recently. This history is saved locally in the host's browser and also carries forward when you start a new show in the same room. It won't synchronize across unrelated phones or cleared browser data.
-- Players can dispute an answer when an unlisted but reasonable alternative is entered.
+The 540 Standard Trivia questions now each contain **three incorrect answer options** alongside the correct answer (1620 distractors total). Many were generated from topic-specific pools and some were individually refined. Automated checks confirmed four distinct options and checked that none of the explicit distractors is graded as a correct answer. The complete review spreadsheet is **`CHOICE_OPTIONS_QA.csv`**.
 
-## Setup and deployment
+**Important editorial caveat:** Not all 1620 new distractors have been individually reviewed for plausibility or ambiguity; some may be too easy or oddly matched to their question. This is a family-playtest release, **not a claim that every multiple-choice option has been quality-certified**. The 540 original Standard Trivia questions and original hint text retain their previous (partially verified) status. The host may still skip a faulty question or rule on a dispute.
 
-The app requires Node 20+, Next.js, Supabase, and Vercel (or another Next.js host). Existing environment variables continue to work:
+## Upgrading v1.1 to v1.2
 
-```sh
+1. Download and extract the full v1.2 ZIP.
+2. Open the inner **`the-know-show`** folder.
+3. In the root of your existing GitHub `theknowshow` repository, select **Add file → Upload files**.
+4. Drag all files and folders from **inside** the extracted `the-know-show` folder into GitHub, replace matching paths, and commit. Vercel will redeploy if connected.
+5. Refresh the website (reopen the installed PWA if it still shows an old cached version).
+6. In each room, open **Host Controls → Player accommodations**, then assign answer formats. Existing first-letter/answer-length settings are intentionally ignored.
+
+**No Supabase SQL changes, keys, or new environment variables** are required. Existing v1.0/v1.1 game-room snapshots are compatible with the game engine. Creating a new room is recommended for a clean playtest, but isn't required for an existing v1.1 room.
+
+If you're upgrading from an older release than v1.0, create a fresh room because the core game schema changed in v1.0.
+
+## What stays the same
+
+- Standard Trivia only: 45 categories, four categories × three questions per round, 24 regular questions total.
+- Round 1: 100/300/500; Round 2: 200/600/1000.
+- One Double Take per player per round.
+- Individual Everyone Answers or turn-based Teams.
+- TV + Phones or Phones Only; host may also play from the same device.
+- Private host controls, QR joining, dispute review, and automatic Final Word reveal after wagering.
+- Approved logo file **`public/know-show-logo.png`**, identical to the original user-approved image.
+- Suno-hosted soundtrack choices with Cool Jazz as default.
+
+## Installation requirements
+
+Node 20+, Next.js, and the existing Supabase project. On Vercel, keep the current server-side environment variables:
+
+```env
 SUPABASE_URL=https://YOUR-PROJECT.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=YOUR-SERVER-SIDE-KEY
-# optional
-ROOM_CREATION_PASSCODE=
 ```
 
-Do **not** commit a real Supabase secret key to GitHub. The server key is used only in server-side route handlers. The existing `supabase/schema.sql` is included as reference for brand-new installations; don't run it again over an existing database.
+Do not commit credentials. If installing from scratch, run `supabase/schema.sql` once in a new Supabase project. Do not rerun it over your working database.
 
-For a local development environment with npm access:
+## Tests and limits
 
-```sh
-npm install
-npm run dev
-npm run build
-npm run test:engine
-```
-
-## Testing status
-
-The v1.0 engine passed 14 automated gameplay/regression tests, including a full 24-question match through automatic Final Word progression. TypeScript library compilation and TypeScript/JSX syntax checks passed. **A full `next build` could not be run in the packaging environment** because the project dependencies were unavailable. Check the Vercel build logs after upload, and share an error log if the deployment fails.
-
-## Branding
-
-`public/know-show-logo.png` is the **exact approved main logo**, byte-for-byte unchanged. The app icon sizes are simple square placements of that same approved artwork on a solid deep-teal field; they are not alternate or redesigned logos. Player and TV screens use streamlined teal, cream, and gold styling consistent with the logo.
+- 19 engine/regression tests passed, including choice privacy, difficulty gating, scoring, answer validation, compatibility with the Final Word, score disputes, replay selection, and a complete two-round game.
+- A TypeScript/TSX shape check passed in a dependency shim environment.
+- A full Next.js production build was **not** run because the required npm packages weren't installed in the working environment. Check the Vercel deployment log for final build confirmation.
+- Multiple-choice answer plausibility and the original question bank remain subject to additional editorial and factual verification.

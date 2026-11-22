@@ -43,11 +43,85 @@ test('question content hidden during introduction and never reveals key to host 
  let v=g.makeView(s,host,1,20500);assert.equal(v.active,undefined);assert.ok(v.intro.category);assert.equal(v.intro.points,100);
  s=g.tick(s,23000);v=g.makeView(s,host,2,23000);assert.ok(v.active.prompt);assert.equal(v.active.hostAnswer,undefined);
 });
-test('private first-letter hint appears automatically, not by request',()=>{
- let {s,a}=setup(2);s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,firstLetter:true},host,3000);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
- const v=g.makeView(s,a[0],1,23000);assert.equal(v.active.myFirstLetter,bank.getQuestion(s.active.questionId).answer.trim()[0].toUpperCase());
- assert.equal(g.makeView(s,a[1],1,23000).active.myFirstLetter,undefined);
- assert.equal(g.makeView(s,host,1,23000).active.myFirstLetter,undefined);
+test('private choices appear only for eligible question levels, not host or other players',()=>{
+ let {s,a}=setup(2);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'medium-hard'},host,3000);
+ s=draft(s,a);const cat=s.selected[0][0];
+ s=open(s,a[0],cat+':0');
+ assert.equal(g.makeView(s,a[0],1,23000).active.myChoices,undefined);
+ assert.equal(g.makeView(s,host,1,23000).active.myChoices,undefined);
+ // A later medium question should offer a stable, private four-choice list.
+ s.phase='board';s.active=undefined;s.chooserIndex=0;
+ s=open(s,a[0],cat+':1',40000);
+ const first=g.makeView(s,a[0],1,43000).active.myChoices;
+ assert.equal(first.length,4);
+ assert.deepEqual(first,g.makeView(s,a[0],4,44000).active.myChoices);
+ assert.equal(g.makeView(s,a[1],1,43000).active.myChoices,undefined);
+ assert.equal(g.makeView(s,host,1,43000).active.myChoices,undefined);
+});
+test('choice setting can be assigned and changed only before game or when paused',()=>{
+ let {s,a}=setup(2);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'hard'},host,3000);
+ assert.equal(s.players[0].choiceAccess,'hard');
+ s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23100),/Pause/);
+ s=g.mutate(s,{type:'pause'},host,23100);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23110);
+ assert.equal(s.players[0].choiceAccess,'all');
+ assert.equal(g.makeView(s,a[0],1,23150).active.myChoices.length,4);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'other'},host,23150),/Invalid/);
+});
+test('four-choice players earn full base points with a reduced speed bonus',()=>{
+ let {s,a}=setup(2);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,3000);
+ s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const q=bank.getQuestion(s.active.questionId);
+ const v=g.makeView(s,a[0],1,22900);
+ assert.ok(v.active.myChoices.includes(q.answer));
+ assert.throws(()=>g.mutate(s,{type:'submit-answer',answer:'a made up option'},a[0],23000),/displayed/);
+ s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[0],23000);
+ s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23000);
+ assert.equal(s.phase,'results');
+ const mc=s.resolution.answers[a[0].id],written=s.resolution.answers[a[1].id];
+ assert.equal(mc.answerFormat,'choices');assert.equal(written.answerFormat,'written');
+ assert.ok(mc.points>=100&&mc.points<=110);
+ assert.ok(written.points>=100&&written.points<=125);
+ assert.ok(mc.points<=written.points);
+});
+test('each category question has four distinct options that do not match aliases',()=>{
+ for(const q of bank.QUESTION_LOOKUP.values()){
+  assert.equal(q.distractors?.length,3,q.id);
+  const opts=[q.answer,...q.distractors];assert.equal(new Set(opts.map(x=>x.toLowerCase().trim())).size,4,q.id);
+  for(const d of q.distractors)assert.equal(g.isCorrect(d,q.answer,q.aliases),false,`${q.id}: ${d}`);
+ }
+});
+test('Hard-only choice assistance applies to hard questions and Final Word',()=>{
+ let {s,a}=setup(2);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'hard'},host,3000);
+ s=draft(s,a);const cat=s.selected[0][0];
+ for(let lev of [0,1,2]){
+  s.phase='board';s.active=undefined;s.chooserIndex=0;
+  s=open(s,a[0],cat+':'+lev,20000+lev*10000);
+  const v=g.makeView(s,a[0],1,23000+lev*10000);
+  assert.equal(Boolean(v.active.myChoices),lev===2);
+ }
+ s.phase='final-wager';s.active=undefined;s.final={id:'f7',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'wager',amount:0},a[0],60000);
+ s=g.mutate(s,{type:'wager',amount:0},a[1],60010);
+ assert.equal(s.phase,'final-question');
+ const f=g.makeView(s,a[0],1,60100).final;
+ assert.equal(f.myChoices.length,4);
+ assert.equal(g.makeView(s,a[1],1,60100).final.myChoices,undefined);
+ assert.equal(g.makeView(s,host,1,60100).final.myChoices,undefined);
+ assert.throws(()=>g.mutate(s,{type:'final-answer',answer:'not a listed choice'},a[0],60200),/displayed/);
+ const good=bank.FINALS.find(q=>q.id==='f7').answer;
+ s=g.mutate(s,{type:'final-answer',answer:good},a[0],60200);
+ assert.equal(s.final.answers[a[0].id].correct,true);
+});
+test('similar-looking opposite and distinct scientific terms are not accepted as typos',()=>{
+ assert.equal(g.isCorrect('endotherm','ectotherm'),false);
+ assert.equal(g.isCorrect('ethnology','ethology'),false);
+ assert.equal(g.isCorrect('reflection','refraction'),false);
 });
 test('reasonable aliases and typo tolerance but not wrong numbers',()=>{
  assert.ok(g.isCorrect('cold-blooded','Ectotherm',['Cold blooded','Cold-blooded']));

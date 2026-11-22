@@ -1,24 +1,15 @@
-# The Know Show v1.1.0 — Visual Refresh
+# The Know Show v1.2 — Answer Choices Update
 
-**Release:** Visual-only feature update based on v1.0.0. Compatible with existing rooms and database.
+- Replaces first-letter and answer-length accommodations with **personal four-choice answers**.
+- Host selects for each player: **Typed only / All questions / Medium & Hard / Hard only**. Can edit after pausing.
+- Multiple-choice answers are one-tap buttons displayed privately on the player's phone. The host's admin view cannot access answer choices while the question is active.
+- Four-choice speed bonus: **up to 10%**; typed speed bonus: **up to 25%**. Both receive full base points, and Double Take behavior is preserved.
+- The Final Word counts as Hard for this accommodation; wagering and score calculations remain unchanged.
+- Adds three proposed distractors for each of the 540 question-bank entries and for the Final Word question set. The 1620 regular-question distractors were structurally validated but are not all individually editorially checked. See `CHOICE_OPTIONS_QA.csv`.
+- Fixes several near-spelling grading confusions between scientifically distinct terms, including **ectotherm/endotherm**, **ethology/ethnology**, and **refraction/reflection**.
+- Preserves v1.1 branding, the user-approved logo unchanged, 4×3 board, all original gameplay modes, the 540-question Standard Trivia bank, and Cool Jazz soundtrack.
+- **No database schema changes**, no new environment variables, and no required room reset for v1.1 rooms. Old first-letter/length accommodations are ignored and should be reassigned as Answer Format.
 
-## Design changes
-- **Exact approved main logo** displayed prominently on the landing-page hero, along with a smaller logo in the navigation. The source PNG is unchanged, and the existing app icons are preserved.
-- **Landing page rebuilt:** navy spotlight-inspired hero, warm-gold accents, clearer game-night message, high-contrast Create/Join cards and buttons, short at-a-glance features, responsive phone layout.
-- **Green Room refreshed:** an on-brand logo/header area with the current room code, distinctive host-ready messaging, streamlined cards, clearer tab states, buttons, form controls, and QR panels.
-- **Cohesive interface palette:** deep navy, warm gold/yellow, cream and restrained teal/blue-green across category drafting, 4×3 game boards, question/introduction cards, live scores, host controls, and TV display.
-- **Readability preserved:** compact player question and answer form still appear together, numerical points are high-contrast, category and question phases are visually distinct, focus styles and reduced-motion preference are respected.
-- Browser theme and PWA background colors aligned to navy and cream.
+### Verification
 
-## Not changed
-- Gameplay engine, scores, modes, 24-question two-round structure, Final Word, accepted-answer matching, disputes and accommodations.
-- The 540-question candidate bank and source verification status; this update does not claim additional fact verification.
-- Approved main logo image, soundtracks and Cool Jazz default.
-- Supabase schema and environment variables.
-
-## Validation
-- All 14 v1.0 game engine regression tests passed after the visual-only change.
-- The updated TSX pages passed TypeScript compatibility and syntax checks.
-- The combined CSS parsed without stylesheet errors.
-- The approved `public/know-show-logo.png` was checked byte-for-byte against the user's approved original.
-- A full `next build` was **not** performed because Next.js/npm packages were unavailable in this execution environment. Vercel will run the real production build when the code is deployed.
+19 gameplay and regression tests passed. A TypeScript shape check passed. Production Next.js build was not executable without installing dependencies. Choice distractors still need complete human editorial review; use this as a family-playtest build.

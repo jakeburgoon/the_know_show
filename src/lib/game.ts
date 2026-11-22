@@ -1,4 +1,4 @@
-import { randomInt, randomUUID } from 'node:crypto';
+import { randomInt, randomUUID, createHash } from 'node:crypto';
 import { CATEGORIES, CATEGORY_LOOKUP, FINALS, getQuestion } from './questions';
 
 export const MAX_SEATS=8;
@@ -8,20 +8,21 @@ export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wa
 export type Mode='individual'|'teams';
 export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'off';
 export type DisplayMode='tv'|'phones';
+export type ChoiceAccess='off'|'all'|'medium-hard'|'hard';
 export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode};
-export type Player={id:string;name:string;age?:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;firstLetter:boolean;answerLength:boolean;joinedAt:number;doubleTakesRemaining:number};
-export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean};
-export type ActiveQuestion={key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];letterUsers:string[];lengthUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
+export type Player={id:string;name:string;age?:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;choiceAccess?:ChoiceAccess;joinedAt:number;doubleTakesRemaining:number};
+export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean;answerFormat?:'written'|'choices'};
+export type ActiveQuestion={key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
 export type FinalState={id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
 export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[]};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
  |{type:'settings';settings:Partial<Settings>}
- |{type:'player-bonuses';playerId:string;bonusHints?:number;bonusTimeSeconds?:number;firstLetter?:boolean;answerLength?:boolean}
+ |{type:'player-bonuses';playerId:string;bonusHints?:number;bonusTimeSeconds?:number;choiceAccess?:ChoiceAccess}
  |{type:'start-draft'}|{type:'draft-category';categoryId:string}
  |{type:'open-question';key:string}|{type:'submit-answer';answer:string;doubleTake?:boolean}
- |{type:'hint';kind:'first-letter'|'answer-length'|'written'}|{type:'pass'}
+ |{type:'hint';kind:'written'}|{type:'pass'}
  |{type:'dispute'}|{type:'resolve-dispute';playerId:string;correct:boolean}|{type:'dismiss-dispute';playerId:string}|{type:'skip-question'}
  |{type:'pause'}|{type:'adjust-score';playerId:string;delta:number}
  |{type:'start-final'}|{type:'wager';amount:number}|{type:'final-answer';answer:string}|{type:'finish'}|{type:'new-game'};
@@ -33,13 +34,23 @@ function player(s:GameState,a:Actor):Player {assert(a.kind==='player'&&a.id,'Joi
 const host=(a:Actor)=>assert(a.kind==='host','Only the host may do that.');
 const currentPlayer=(s:GameState)=>s.players[s.chooserIndex % s.players.length];
 const roundPoints=(s:GameState,key:string)=>ROUND_VALUES[s.round][Number(key.split(':')[1])]||0;
+export function choicesEnabled(access:ChoiceAccess|undefined,level:number):boolean {
+ return access==='all'||(access==='medium-hard'&&level>=1)||(access==='hard'&&level>=2);
+}
+function answerOptions(answer:string,distractors:string[]|undefined,questionId:string,playerId:string):string[]{
+ // All choices are server-authorized and ordered deterministically per player,
+ // so polling or switching tabs cannot reshuffle an active question.
+ const options=[answer,...(distractors??[])];
+ assert(options.length===4&&new Set(options.map(x=>normalize(x))).size===4,'This question needs four distinct answer choices.');
+ return options.sort((a,b)=>createHash('sha256').update(`${questionId}:${playerId}:${a}`).digest('hex').localeCompare(createHash('sha256').update(`${questionId}:${playerId}:${b}`).digest('hex')));
+}
 export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv'};}
 export function makeGame(recentQuestionIds:string[]=[]):GameState{return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string').slice(-350)};}
 export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
  assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
  const n=String(name||'').trim().replace(/\s+/g,' ').slice(0,28);assert(n.length>=2,'Enter a name of at least two characters.');
  assert(!original.players.some(p=>p.name.toLowerCase()===n.toLowerCase()),'That name is already in use.');
- const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,firstLetter:false,answerLength:false,joinedAt:now,doubleTakesRemaining:1};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
+ const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,choiceAccess:'off',joinedAt:now,doubleTakesRemaining:1};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
 }
 const normalize=(str:string)=>str.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/^[\s]*(?:(?:what|who|which|where)\s+(?:is|are|was|were)\s+|(?:it is|the answer is)\s+)/,'').replace(/[’']/g,'').replace(/\b(?:a|an|the)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 function distance(a:string,b:string){const prev=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let left=prev[0];prev[0]=i;for(let j=1;j<=b.length;j++){const old=prev[j];prev[j]=Math.min(prev[j]+1,prev[j-1]+1,left+(a[i-1]===b[j-1]?0:1));left=old;}}return prev[b.length];}
@@ -49,6 +60,10 @@ const numberWords:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four
 const protectedTerms=(s:string)=>normalize(s).split(' ').map(x=>numberWords[x]??x).filter(x=>/\d/.test(x));
 export function isCorrect(given:string,answer:string,aliases:string[]=[]):boolean {
  const g=normalize(given);if(!g)return false;
+ // These are distinct technical concepts even though their spellings are close.
+ // The user must not earn credit for naming the opposite concept.
+ const confusables=[['ectotherm','endotherm'],['ethology','ethnology'],['refraction','reflection']];
+ if(confusables.some(([a,b])=>(g===a&&normalize(answer)===b)||(g===b&&normalize(answer)===a)))return false;
  return [answer,...aliases].some(candidate=>{
    const a=normalize(candidate);if(!a)return false;
    if(g===a)return true;
@@ -95,17 +110,21 @@ function correctPoints(s:GameState,a:ActiveQuestion,p:Player,at:number,doubleTak
  if(s.settings.mode==='teams')return a.stealTurn?Math.floor(base/2):base;
  const duration=s.settings.answerSeconds*1000;
  const elapsed=Math.max(0,at-(a.startedAt??at));
- const bonus=duration?Math.round(base*0.25*Math.max(0,1-elapsed/duration)/5)*5:0;
+ const hasChoices=choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1]));
+ const maxSpeedBonus=hasChoices?0.10:0.25;
+ const bonus=duration?Math.round(base*maxSpeedBonus*Math.max(0,1-elapsed/duration)/5)*5:0;
  return base*(doubleTake?2:1)+bonus;
 }
 function storeSubmission(s:GameState,p:Player,answer:string,now:number,useDoubleTake=false){
  const a=s.active!,q=getQuestion(a.questionId)!;
  assert(answer.length>0&&answer.length<=200,'Enter an answer (up to 200 characters).');
  assert(!a.answers[p.id],'You already submitted an answer.');
+ const usesChoices=choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1]));
+ if(usesChoices)assert(answerOptions(q.answer,q.distractors,q.id,p.id).some(choice=>choice===answer),'Choose one of the displayed answers.');
  const correct=isCorrect(answer,q.answer,q.aliases??[]);
  if(useDoubleTake){assert(s.settings.mode==='individual'&&p.doubleTakesRemaining>0,'No Double Takes remaining.');p.doubleTakesRemaining--;}
  const points=correct?correctPoints(s,a,p,now,useDoubleTake):0;
- a.answers[p.id]={answer,at:now,correct,points,doubleTake:useDoubleTake,hintUsed:a.hintUsers.includes(p.id)};
+ a.answers[p.id]={answer,at:now,correct,points,doubleTake:useDoubleTake,hintUsed:a.hintUsers.includes(p.id),answerFormat:usesChoices?'choices':'written'};
  if(s.settings.mode==='teams') {
    if(correct||a.stealTurn||s.players.length<2)closeQuestion(s,now);
    else nextSteal(s,now);
@@ -159,8 +178,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    host(actor);assert(s.phase==='lobby'||!!s.pausedAt,'Pause the game before changing player accommodations.');const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');
    if(action.bonusHints!==undefined){assert(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=10,'Invalid bonus hints.');const difference=action.bonusHints-p.bonusHints;p.bonusHints=action.bonusHints;p.hintsRemaining=Math.max(0,p.hintsRemaining+difference);}
    if(action.bonusTimeSeconds!==undefined){assert(Number.isInteger(action.bonusTimeSeconds)&&action.bonusTimeSeconds>=0&&action.bonusTimeSeconds<=30,'Invalid time bonus.');p.bonusTimeSeconds=action.bonusTimeSeconds;}
-   if(action.firstLetter!==undefined){assert(typeof action.firstLetter==='boolean','Invalid first-letter setting.');p.firstLetter=action.firstLetter;}
-   if(action.answerLength!==undefined){assert(typeof action.answerLength==='boolean','Invalid answer-length setting.');p.answerLength=action.answerLength;}break;
+   if(action.choiceAccess!==undefined){assert(['off','all','medium-hard','hard'].includes(action.choiceAccess),'Invalid choice availability.');p.choiceAccess=action.choiceAccess;}break;
  }
  case 'start-draft':{
    host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');goDraft(s);break;
@@ -175,15 +193,13 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  case 'open-question':{
    assert(s.phase==='board','The board is not ready.');assert(actor.kind==='host'||actor.id===currentPlayer(s).id,'Another player is choosing.');
    const key=action.key;const [id,tier]=key.split(':');assert(s.selected[s.round].includes(id)&&/^[0-2]$/.test(tier)&&s.questionMap[key],'Not a question on this board.');assert(!s.usedKeys.includes(key),'That question was already played.');
-   s.active={key,questionId:s.questionMap[key],introUntilAt:now+2500,answers:{},hintUsers:[],letterUsers:[],lengthUsers:[],turnId:currentPlayer(s).id};s.phase='intro';log(s,`${CATEGORY_LOOKUP.get(id)!.name} for ${roundPoints(s,key)}!`);break;
+   s.active={key,questionId:s.questionMap[key],introUntilAt:now+2500,answers:{},hintUsers:[],turnId:currentPlayer(s).id};s.phase='intro';log(s,`${CATEGORY_LOOKUP.get(id)!.name} for ${roundPoints(s,key)}!`);break;
  }
  case 'hint':{
    const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='question'&&!!s.active,'No question is open.');const a=s.active;
    assert(s.settings.mode==='individual'||(a.stealTurn?a.stealId===p.id:a.turnId===p.id),'It is not your team’s turn.');
    assert(!a.answers[p.id],'You have already answered.');
-   if(action.kind==='written'){assert(p.hintsRemaining>0,'No hints remaining.');assert(!a.hintUsers.includes(p.id),'Already used a hint on this question.');p.hintsRemaining--;a.hintUsers.push(p.id);}
-   else if(action.kind==='first-letter'){assert(p.firstLetter,'First-letter assistance is not enabled.');a.letterUsers.push(p.id);}
-   else if(action.kind==='answer-length'){assert(p.answerLength,'Answer-length assistance is not enabled.');a.lengthUsers.push(p.id);}else throw new GameError('Unknown hint.');break;
+   if(action.kind==='written'){assert(p.hintsRemaining>0,'No hints remaining.');assert(!a.hintUsers.includes(p.id),'Already used a hint on this question.');p.hintsRemaining--;a.hintUsers.push(p.id);}else throw new GameError('Unknown hint.');break;
  }
  case 'submit-answer':{
    const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='question'&&!!s.active,'Question is not accepting answers.');const a=s.active;
@@ -249,8 +265,10 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  case 'final-answer':{
    const p=player(s,actor);assert(s.phase==='final-question'&&!!s.final,'Final answers are closed.');assert(now<=(s.final.deadlineAt??0),'The final timer has ended.');assert(!s.final.answers[p.id],'You already answered.');
    const q=FINALS.find(q=>q.id===s.final!.id)!;const ans=String(action.answer||'').trim();assert(ans.length>0&&ans.length<=200,'Enter an answer.');
+   const hasChoices=choicesEnabled(p.choiceAccess,2);
+   if(hasChoices)assert(answerOptions(q.answer,q.distractors,q.id,p.id).includes(ans),'Choose one of the displayed answers.');
    const correct=isCorrect(ans,q.answer,q.aliases||[]);const points=(s.final.wagers[p.id]??0)*(correct?1:-1);
-   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false};
+   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false,answerFormat:hasChoices?'choices':'written'};
    if(s.players.every(p=>s.final!.answers[p.id]))finishFinal(s,now);break;
  }
  case 'finish':{host(actor);assert(s.phase==='final-results'&&!s.final?.disputeIds.length,'Resolve all disputes before finishing.');s.phase='finished';break;}
@@ -272,8 +290,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    mySubmission:me?s.active.answers[me.id]?.answer:undefined,
    myDeadlineAt:me?(s.active.deadlineAt??0)+me.bonusTimeSeconds*1000:undefined,
    myWrittenHint:(me&&s.active.hintUsers.includes(me.id))?q.hint:undefined,
-   myFirstLetter:(me?.firstLetter)?q.answer.trim().charAt(0).toUpperCase():undefined,
-   myAnswerLength:(me&&s.active.lengthUsers.includes(me.id))?q.answer.replace(/[^a-zA-Z]/g,'').length:undefined,
+   myChoices:(me&&choicesEnabled(me.choiceAccess,Number(s.active.key.split(':')[1])))?answerOptions(q.answer,q.distractors,q.id,me.id):undefined,
    // Never send the answer before reveal—even to the host, who may also be playing.
    hostAnswer:undefined,
  }:undefined;
@@ -284,6 +301,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
+   myChoices:me&&s.phase==='final-question'&&choicesEnabled(me.choiceAccess,2)?answerOptions(finalQ.answer,finalQ.distractors,finalQ.id,me.id):undefined,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;

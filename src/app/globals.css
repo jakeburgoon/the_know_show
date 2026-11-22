@@ -483,3 +483,16 @@ body{background:var(--v11cream);color:var(--v11navy)}
  .v2phone .v2questioncard{margin-top:7px}
 }
 @media(prefers-reduced-motion:reduce){.v11action{transition:none!important}.v2tile{transition:none!important}}
+
+/* v1.2: personal four-choice assistance, with the same navy + gold design language. */
+.v12choiceselect{display:grid;gap:6px;margin-top:10px;font-size:13px;color:#24465e;font-weight:800}
+.v12choiceselect select{background:#fffdf6;border:1px solid #cbd4d6;color:#142e46;border-radius:10px;padding:12px;font:inherit;width:100%}
+.v12choices{margin-top:12px}
+.v12choices>p{font-size:13px;color:#f4dbaa!important;margin:0 0 10px;font-weight:700}
+.v12choicegrid{display:grid;grid-template-columns:1fr;gap:9px}
+.v12choice{width:100%;min-height:52px;display:flex;gap:12px;text-align:left;align-items:center;background:#fff7e2;color:#16354b;border:2px solid #e5cb84;border-radius:12px;padding:10px 12px;cursor:pointer;line-height:1.3;touch-action:manipulation}
+.v12choice span{background:#133b59;color:#ffdb84;border:1px solid #d4a953;min-width:30px;height:30px;display:grid;place-items:center;border-radius:8px;font-size:13px;font-weight:900}
+.v12choice strong{font-size:16px;font-weight:800}
+.v12choice:hover:not(:disabled),.v12choice:focus-visible{background:#ffe6a6;border-color:#ebaf29;outline:2px solid #0f5770;outline-offset:1px}
+.v12choice:disabled{opacity:.65;cursor:not-allowed}
+@media(max-width:700px){.v12choice{min-height:54px}.v12choicegrid{gap:7px}}
