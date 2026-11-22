@@ -1,26 +1,17 @@
-THE KNOW SHOW — VERSION 0.1.2
+THE KNOW SHOW — VERSION 0.2.0
 
-Start with README.md for full, step-by-step instructions.
+This is a FULL replacement for v0.1.2, including revised gameplay and 12 Suno music embeds. COOL JAZZ is the default.
 
-QUICK SETUP:
-1. Create a Supabase project, open SQL Editor, and run supabase/schema.sql.
-2. Upload the CONTENTS of this folder into a GitHub repository.
-3. Import that repository into Vercel as a Next.js app.
-4. Add environment variables in Vercel:
-     SUPABASE_URL              = Your Supabase project URL
-     SUPABASE_SERVICE_ROLE_KEY = Your server-side Supabase service_role / secret key
-   Optional:
-     ROOM_CREATION_PASSCODE    = A password to restrict creation of new rooms.
-5. Deploy, open your Vercel URL, create a show, and show the Green Room QR code for players to scan (or share the room code).
+TO UPGRADE YOUR EXISTING GITHUB/VERCEL APP:
+1. Open the extracted ZIP folder and select everything INSIDE it.
+2. Upload those contents at the ROOT of your existing `theknowshow` GitHub repository.
+3. Commit the changes and allow Vercel to deploy.
+4. Create a brand-new room after the update; older rooms are not compatible with v0.2.
+5. Scan the private host QR from the creator's laptop screen onto your host phone.
+6. Open /display/ROOMCODE on the laptop and share that browser tab to the TV.
+7. Start Cool Jazz playback by pressing Play in the TV's Suno player. Music playback/volume stay in Suno's player.
+8. Players join from the public QR on TV and answer from their phones.
 
-NEVER upload the secret key to GitHub or place it in a NEXT_PUBLIC_ variable.
+NO SUPABASE SCHEMA CHANGES ARE NEEDED if v0.1.2 is already working.
 
-Rules: The Opening Act → The Main Event → The Final Word.
-One hidden Double Take clue per board scores double points.
-
-The full readme describes music, age advantages, hints, host judging, and testing.
-
-UPDATING AN EXISTING DEPLOYMENT (v0.1.1 -> v0.1.2):
-Upload the updated code to the same GitHub repository and deploy in Vercel.
-No Supabase SQL changes or environment variable changes are needed.
-Open a newly created room as the host, scan its QR code from a separate phone, and join.
+For more detailed guidance and technical caveats, read README.md.

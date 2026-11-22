@@ -1,116 +1,110 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
+import { SUNO_SOUNDTRACKS, sunoEmbedUrl } from "../../lib/suno-catalog";
 
-// This is a separate, isolated proof-of-concept page. It does not touch the game engine.
-// Suno owns the audio player; cross-origin controls (volume, play/pause, position)
-// are intentionally not attempted.
-const STYLES = [
-  { id: "retro", name: "Retro 80s", description: "Your Trivia Time Warp synth-pop arrangement" },
-  { id: "indie", name: "Indie / Dream Pop", description: "Guitar, soft synths, nostalgic textures" },
-  { id: "jazz", name: "Cool Jazz", description: "Piano, trumpet, brushed drums" },
-  { id: "classical", name: "Classical", description: "Piano, strings, chamber ensemble" },
-  { id: "game", name: "Classic Game Show", description: "Bright, cheerful orchestration" },
-  { id: "pop", name: "Modern Pop", description: "Lively, contemporary sound" },
-  { id: "cinematic", name: "Cinematic", description: "Atmospheric, dramatic arrangement" },
-] as const;
-
-type StyleId = (typeof STYLES)[number]["id"];
-type SongMap = Partial<Record<StyleId, string>>;
-const STORAGE_KEY = "know-show-suno-test-songs-v1";
-const SAMPLE_ID = "35d82643-cbf4-4095-aae3-fc36708d2fcf";
-const SONG_RE = /(?:suno\.com\/(?:song|embed)\/)([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i;
-
-function songIdFrom(text: string): string | null {
-  const trimmed = text.trim();
-  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(trimmed)) return trimmed;
-  return trimmed.match(SONG_RE)?.[1] ?? null;
-}
-
-const button: React.CSSProperties = { border: "1px solid #bfd4d0", borderRadius: 10, padding: "12px 15px", background: "white", color: "#19353b", fontWeight: 700, cursor: "pointer" };
+// Experimental standalone page. This does not change existing rooms/gameplay.
+// Suno's iframe is cross-origin: playback, volume, looping, and autoplay cannot
+// be programmatically controlled with this simple supported embedding method.
+const STORAGE_KEY = "know-show-suno-catalog-v2";
+const pill: CSSProperties = {
+  border: "1px solid #b7d1c9",
+  borderRadius: 12,
+  padding: "12px 16px",
+  fontWeight: 700,
+  cursor: "pointer",
+  fontSize: 14,
+};
 
 export default function MusicTestPage() {
-  const [selected, setSelected] = useState<StyleId>("retro");
-  const [songs, setSongs] = useState<SongMap>({ retro: SAMPLE_ID });
-  const [draft, setDraft] = useState("");
-  const [playing, setPlaying] = useState(true);
-  const [message, setMessage] = useState("");
+  const [genreIndex, setGenreIndex] = useState(0);
+  const [version, setVersion] = useState<0 | 1>(0);
+  const [showPlayer, setShowPlayer] = useState(true);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     try {
-      const local = window.localStorage.getItem(STORAGE_KEY);
-      if (local) setSongs({ retro: SAMPLE_ID, ...(JSON.parse(local) as SongMap) });
-    } catch { /* Browser storage is optional. */ }
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (data && Number.isInteger(data.genreIndex) && data.genreIndex >= 0 && data.genreIndex < SUNO_SOUNDTRACKS.length) {
+        setGenreIndex(data.genreIndex);
+      }
+      if (data && (data.version === 0 || data.version === 1)) setVersion(data.version);
+    } catch { /* Local preferences are optional. */ }
+    setReady(true);
   }, []);
 
-  const selectedStyle = STYLES.find((s) => s.id === selected)!;
-  const currentId = songs[selected];
+  useEffect(() => {
+    if (!ready) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ genreIndex, version })); } catch { /* optional */ }
+  }, [genreIndex, version, ready]);
 
-  function chooseStyle(id: StyleId) {
-    setPlaying(false); // Unmounting the iframe stops any playing audio.
-    setSelected(id);
-    setMessage("");
-    setDraft("");
-    setPlaying(true); // Player loads, but user may need to press Play inside it.
+  const genre = SUNO_SOUNDTRACKS[genreIndex];
+  const track = genre.arrangements[version];
+
+  function selectGenre(index: number) {
+    setGenreIndex(index);
+    setVersion(0);
+    setShowPlayer(true);
   }
 
-  function saveSong() {
-    const id = songIdFrom(draft);
-    if (!id) {
-      setMessage("Use the full Suno song URL (suno.com/song/...) or embed URL, not a short /s/ link.");
-      return;
-    }
-    const next = { ...songs, [selected]: id };
-    setSongs(next);
-    setPlaying(true);
-    setMessage("Saved in this browser for testing. Press Play in the embedded player.");
-    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch { /* optional */ }
+  function selectVersion(next: 0 | 1) {
+    setVersion(next);
+    setShowPlayer(true);
   }
 
   return (
-    <main style={{ maxWidth: 1100, margin: "0 auto", padding: "30px 18px 70px", color: "#18343a" }}>
-      <a href="/" style={{ fontWeight: 700, color: "#13766e", textDecoration: "none" }}>← The Know Show</a>
-      <div style={{ padding: "34px 0 20px" }}>
-        <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.14em", color: "#13766e" }}>FREE EXPERIMENT · NOT PART OF A GAME</span>
-        <h1 style={{ fontSize: "clamp(2.2rem,6vw,4.1rem)", lineHeight: 1.02, margin: "13px 0" }}>Soundtrack Lab</h1>
-        <p style={{ color: "#53696e", maxWidth: 780 }}>Can The Know Show play your Suno arrangements without downloading them? Try the real embedded Suno player below. Switch styles, and paste full song links to add the other arrangements.</p>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 9, margin: "20px 0 30px" }}>
-        {STYLES.map((s) => (
-          <button type="button" key={s.id} onClick={() => chooseStyle(s.id)} aria-pressed={selected === s.id}
-            style={{ ...button, textAlign: "left", background: selected === s.id ? "#173b46" : "#fff", color: selected === s.id ? "#fff" : "#173b46", borderColor: selected === s.id ? "#173b46" : "#bfd4d0" }}>
-            <span style={{ display: "block", fontSize: 14 }}>{s.name}</span>
-            <span style={{ display: "block", fontSize: 11, fontWeight: 500, opacity: .7, marginTop: 6 }}>{songs[s.id] ? "Track ready" : "Add a Suno song"}</span>
-          </button>
-        ))}
-      </div>
-      <section style={{ background: "#fff", border: "1px solid #d7e4df", borderRadius: 20, padding: "clamp(18px,3vw,32px)", boxShadow: "0 7px 40px #1a36320d" }}>
-        <h2 style={{ fontSize: 26, margin: 0 }}>{selectedStyle.name}</h2>
-        <p style={{ color: "#60757b", margin: "7px 0 22px" }}>{selectedStyle.description}</p>
-        {currentId ? (
-          <>
-            {playing && <iframe key={`${selected}-${currentId}`} src={`https://suno.com/embed/${currentId}`} title={`Suno player – ${selectedStyle.name}`}
-              allow="autoplay; encrypted-media; fullscreen" loading="eager"
-              style={{ width: "100%", maxWidth: 760, height: 240, border: 0, display: "block", background: "#eef4f1", borderRadius: 12 }} />}
-            <div style={{ display: "flex", gap: 9, flexWrap: "wrap", marginTop: 18 }}>
-              <button type="button" onClick={() => setPlaying((p) => !p)} style={button}>{playing ? "Stop / unload player" : "Reload player"}</button>
-              <a href={`https://suno.com/song/${currentId}`} target="_blank" rel="noopener noreferrer"
-                style={{ ...button, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Open song on Suno ↗</a>
-            </div>
-          </>
-        ) : <p style={{ padding: "30px 15px", borderRadius: 12, background: "#edf4f1", color: "#577077" }}>No song added for this style yet. Paste its full Suno song link below.</p>}
-        <div style={{ marginTop: 28, borderTop: "1px solid #e2ece7", paddingTop: 22 }}>
-          <label htmlFor="suno-song-url" style={{ display: "block", fontWeight: 800, fontSize: 13, marginBottom: 9 }}>Add or replace the song for {selectedStyle.name}</label>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <input id="suno-song-url" value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="https://suno.com/song/…"
-              style={{ flex: "1 1 280px", padding: "12px 13px", border: "1px solid #b8cbc6", borderRadius: 10, minWidth: 0 }} />
-            <button type="button" onClick={saveSong} style={{ ...button, background: "#13766e", color: "#fff" }}>Load song</button>
+    <main style={{ minHeight: "100vh", background: "#f3f6f4", color: "#173a3a", padding: "30px 16px 72px" }}>
+      <div style={{ maxWidth: 1040, margin: "auto" }}>
+        <a href="/" style={{ color: "#17685d", fontWeight: 700, textDecoration: "none" }}>← Back to The Know Show</a>
+        <header style={{ margin: "32px 0 25px" }}>
+          <p style={{ color: "#17685d", fontWeight: 800, fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase" }}>Free Suno soundtrack experiment</p>
+          <h1 style={{ fontSize: "clamp(2rem,5vw,3.3rem)", margin: "10px 0" }}>Trivia Time Warp</h1>
+          <p style={{ maxWidth: 780, lineHeight: 1.6, color: "#5b6b69" }}>
+            Your twelve tracks, organized into six musical styles. Choose a genre and either arrangement, then press Play inside the embedded Suno player.
+          </p>
+        </header>
+        <section aria-label="Choose soundtrack genre" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 10, marginBottom: 24 }}>
+          {SUNO_SOUNDTRACKS.map((item, index) => (
+            <button key={item.id} type="button" onClick={() => selectGenre(index)} aria-pressed={index === genreIndex}
+              style={{ ...pill, minHeight: 86, textAlign: "left", background: index === genreIndex ? "#174d4c" : "#fff", color: index === genreIndex ? "#fff" : "#174d4c", borderColor: index === genreIndex ? "#174d4c" : "#c8d8d3" }}>
+              <span style={{ display: "block", fontSize: 15 }}>{item.label}</span>
+              <span style={{ display: "block", opacity: 0.75, fontSize: 12, marginTop: 7, fontWeight: 500 }}>2 arrangements</span>
+            </button>
+          ))}
+        </section>
+        <section style={{ background: "#fff", border: "1px solid #d8e4dd", borderRadius: 18, padding: "clamp(18px,3vw,32px)" }}>
+          <h2 style={{ margin: 0, fontSize: 28 }}>{genre.label}</h2>
+          <p style={{ color: "#5b6b69", margin: "8px 0 22px" }}>{genre.description}</p>
+          <div role="group" aria-label="Choose song arrangement" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 22 }}>
+            {genre.arrangements.map((arrangement, index) => (
+              <button key={arrangement.id} type="button" onClick={() => selectVersion(index as 0 | 1)} aria-pressed={version === index}
+                style={{ ...pill, background: version === index ? "#dbece6" : "#fff", color: "#173a3a", borderColor: version === index ? "#257864" : "#c8d8d3" }}>
+                Arrangement {index + 1}
+              </button>
+            ))}
           </div>
-          {message && <p role="status" style={{ fontSize: 13, color: "#23645a", marginTop: 12 }}>{message}</p>}
-          <p style={{ fontSize: 12, color: "#697d7f", marginTop: 12 }}>Tip: if Suno gives you a short link like suno.com/s/abc, open it first, then copy the redirected suno.com/song/… address. The embedded player is controlled by Suno, not by this test page.</p>
-        </div>
-      </section>
-      <p style={{ fontSize: 13, color: "#65767b", marginTop: 22 }}>This test does not connect to Supabase, alter your game, or download any songs. Browsers may require a click inside the Suno player to start audio. Host-phone remote control, volume adjustment, autoplay, and continuous looping are NOT validated by this test.</p>
+          <p style={{ fontWeight: 700, marginBottom: 12 }}>{track.title}</p>
+          {showPlayer ? (
+            <iframe key={track.id} src={sunoEmbedUrl(track.id)} title={`${genre.label} – ${track.title}`}
+              allow="autoplay; encrypted-media; fullscreen" loading="eager"
+              style={{ display: "block", width: "100%", maxWidth: 760, height: 245, border: 0, background: "#eef4f0", borderRadius: 12 }}/>
+          ) : (
+            <div style={{ display: "grid", placeItems: "center", width: "100%", maxWidth: 760, minHeight: 180, borderRadius: 12, background: "#eef4f0", color: "#546c64" }}>Suno player unloaded; audio stopped.</div>
+          )}
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+            <button type="button" onClick={() => setShowPlayer((value) => !value)} style={{ ...pill, color: "#173a3a", background: "#fff" }}>
+              {showPlayer ? "Stop / unload player" : "Reload player"}
+            </button>
+            <a href={track.shareUrl} target="_blank" rel="noopener noreferrer" style={{ ...pill, display: "inline-flex", alignItems: "center", background: "#fff", color: "#17685d", textDecoration: "none" }}>
+              Open this song on Suno ↗
+            </a>
+          </div>
+        </section>
+        <p style={{ marginTop: 24, color: "#637571", lineHeight: 1.6, fontSize: 13 }}>
+          Switching genres or arrangements reloads the Suno player and stops the previous track. You may need to click Play again. This is a preview page only: it does not yet enable host-phone remote playback or in-game music. Suno controls the embedded audio, including volume and looping. Classical is not yet part of this 12-track collection.
+        </p>
+      </div>
     </main>
   );
 }

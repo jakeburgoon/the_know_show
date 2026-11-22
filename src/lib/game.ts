@@ -1,361 +1,286 @@
 import { randomInt, randomUUID } from 'node:crypto';
-import { CATEGORIES, CATEGORY_LOOKUP, FINALS, cellKey, cellQuestion } from './questions';
+import { CATEGORIES, CATEGORY_LOOKUP, FINALS, getQuestion } from './questions';
 
-export const MAX_SEATS = 8;
-export const ROUND_NAMES = ['The Opening Act', 'The Main Event'] as const;
-export const ROUND_VALUES = [[200, 400, 600, 800, 1000], [400, 800, 1200, 1600, 2000]] as const;
-export type Phase = 'lobby'|'draft'|'board'|'clue'|'final-wager'|'final-answer'|'final-review'|'finished';
-export type Mode = 'individual'|'teams';
-export type MusicStyle = 'off'|'synth'|'keys'|'downtempo';
-export type Settings = {
-  mode: Mode; buzzSeconds: number; answerSeconds: number; finalSeconds: number;
-  normalHints: number; music: MusicStyle;
-};
-export type Player = { id: string; name: string; age: number; score: number; hintsRemaining: number; joinedAt: number; bonusHints: number; buzzBonusSeconds: number; };
-export type Attempt = { playerId: string; answer: string; verdict: 'correct'|'wrong'|'timed-out'; at: number };
-export type ActiveClue = {
-  key: string; startedAt: number; buzzOpenedAt: number; status: 'buzzing'|'answering'|'ruling';
-  buzzedBy?: string; responseDeadlineAt?: number; submittedAnswer?: string;
-  attempts: Attempt[]; hintUsers: string[]; revealed: boolean;
-};
-export type Resolution = { key: string; prompt: string; answer: string; explainer: string; points: number; wasDoubleTake: boolean; winner?: string; outcome: 'correct'|'passed' };
-export type FinalState = { id: string; wagers: Record<string,number>; answers: Record<string,string>; judgments: Record<string,boolean>; startedAt?: number; };
-export type GameState = {
-  id: string; createdAt: number; phase: Phase; settings: Settings;
-  players: Player[]; round: 0|1; selected: [string[],string[]]; draftIndex: number;
-  usedKeys: string[]; doubleTakeKeys: [string,string]; chooserId?: string;
-  clue?: ActiveClue; lastResolution?: Resolution; final?: FinalState;
-  announcement?: string; eventLog: string[];
-};
-export type Actor = {kind:'host'|'player'|'spectator';id?:string};
-export type Action =
-  | {type:'settings';settings:Partial<Settings>}
-  | {type:'player-bonuses';playerId:string;bonusHints?:number;buzzBonusSeconds?:number}
-  | {type:'start-draft'}
-  | {type:'draft-category';categoryId:string}
-  | {type:'open-clue';key:string}
-  | {type:'buzz'}
-  | {type:'hint'}
-  | {type:'submit-answer';answer:string}
-  | {type:'rule';verdict:'correct'|'wrong'|'timed-out'}
-  | {type:'reveal-answer'}
-  | {type:'close-clue'}
-  | {type:'advance-round'}
-  | {type:'start-final'}
-  | {type:'wager';amount:number}
-  | {type:'open-final'}
-  | {type:'final-answer';answer:string}
-  | {type:'review-final'}
-  | {type:'judge-final';playerId:string;correct:boolean}
-  | {type:'finish'}
-  | {type:'new-game'};
-
-export class GameError extends Error { constructor(message: string) { super(message); this.name='GameError'; } }
-function requireRule(ok: unknown, message: string): asserts ok { if (!ok) throw new GameError(message); }
-const randomFrom = <T,>(items: T[]): T => items[randomInt(items.length)];
-const lowestAge = (players: Player[]) => Math.min(...players.map(p=>p.age));
-// Every player can be given individual accommodations by the host, independent of age.
-const totalHints = (p:Player,settings:Settings) => settings.normalHints + (p.bonusHints ?? 0);
-function largestBuzzBonus(s:GameState,clue:ActiveClue):number {
-  return Math.max(0,...s.players.filter(x=>!clue.attempts.some(a=>a.playerId===x.id)).map(x=>x.buzzBonusSeconds??0));
+export const MAX_SEATS=8;
+export const ROUND_NAMES=['The Opening Act','The Main Event'] as const;
+export const ROUND_VALUES=[[100,200,300,400],[200,400,600,800]] as const;
+export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished';
+export type Mode='individual'|'teams';
+export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'off';
+export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean};
+export type Player={id:string;name:string;age:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;firstLetter:boolean;answerLength:boolean;joinedAt:number;doubleTakesRemaining:number};
+export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean};
+export type ActiveQuestion={key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];letterUsers:string[];lengthUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
+export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
+export type FinalState={id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
+export type GameState={schemaVersion:2;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[]};
+export type Actor={kind:'host'|'player'|'spectator';id?:string};
+export type Action=
+ |{type:'settings';settings:Partial<Settings>}
+ |{type:'player-bonuses';playerId:string;bonusHints?:number;bonusTimeSeconds?:number;firstLetter?:boolean;answerLength?:boolean}
+ |{type:'start-draft'}|{type:'draft-category';categoryId:string}
+ |{type:'open-question';key:string}|{type:'submit-answer';answer:string;doubleTake?:boolean}
+ |{type:'hint';kind:'first-letter'|'answer-length'|'written'}|{type:'pass'}
+ |{type:'dispute'}|{type:'resolve-dispute';playerId:string;correct:boolean}|{type:'dismiss-dispute';playerId:string}|{type:'skip-question'}
+ |{type:'pause'}|{type:'adjust-score';playerId:string;delta:number}
+ |{type:'start-final'}|{type:'wager';amount:number}|{type:'final-answer';answer:string}|{type:'finish'}|{type:'new-game'};
+export class GameError extends Error {constructor(message:string){super(message);this.name='GameError';}}
+function assert(x:unknown,message:string):asserts x {if(!x)throw new GameError(message);}
+const log=(s:GameState,m:string)=>{s.announcement=m;s.eventLog=[m,...s.eventLog].slice(0,30);};
+const shuffle=<T,>(a:readonly T[])=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=randomInt(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
+function player(s:GameState,a:Actor):Player {assert(a.kind==='player'&&a.id,'Join the show to play.');const p=s.players.find(x=>x.id===a.id);assert(p,'Player is not in this room.');return p;}
+const host=(a:Actor)=>assert(a.kind==='host','Only the host may do that.');
+const currentPlayer=(s:GameState)=>s.players[s.chooserIndex % s.players.length];
+const roundPoints=(s:GameState,key:string)=>ROUND_VALUES[s.round][Number(key.split(':')[1])]||0;
+export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false};}
+export function makeGame():GameState{return {schemaVersion:2,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[]};}
+export function joinGame(original:GameState,name:string,age:number,now=Date.now()) {
+ assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
+ assert(Number.isInteger(age)&&age>=3&&age<=110,'Please enter an age between 3 and 110.');
+ const n=String(name||'').trim().replace(/\s+/g,' ').slice(0,28);assert(n.length>=2,'Enter a name of at least two characters.');
+ assert(!original.players.some(p=>p.name.toLowerCase()===n.toLowerCase()),'That name is already in use.');
+ const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,age,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,firstLetter:false,answerLength:false,joinedAt:now,doubleTakesRemaining:2};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
 }
-function buzzWindowEndsAt(s:GameState,clue:ActiveClue):number|undefined {
-  // Give everyone the whole standard buzz window AFTER the last buzzer unlocks.
-  return s.settings.buzzSeconds>0?clue.buzzOpenedAt+(largestBuzzBonus(s,clue)+s.settings.buzzSeconds)*1000:undefined;
+const normalize=(str:string)=>str.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/^[\s]*(?:(?:what|who|which|where)\s+(?:is|are|was|were)\s+|(?:it is|the answer is)\s+)/,'').replace(/[’']/g,'').replace(/\b(?:a|an|the)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+function distance(a:string,b:string){const prev=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let left=prev[0];prev[0]=i;for(let j=1;j<=b.length;j++){const old=prev[j];prev[j]=Math.min(prev[j]+1,prev[j-1]+1,left+(a[i-1]===b[j-1]?0:1));left=old;}}return prev[b.length];}
+export function isCorrect(given:string,answer:string,aliases:string[]=[]):boolean {
+ const g=normalize(given);if(!g)return false;
+ return [answer,...aliases].some(candidate=>{const a=normalize(candidate);if(g===a)return true;
+   // Only accept spelling near-misses on reasonably long answers. No substring matching.
+   if(a.length<6||g.length<5||Math.abs(a.length-g.length)>2)return false;
+   const allowance=a.length>=9?2:1;
+   return distance(a,g)<=allowance;
+ });
 }
-function buzzEligibleAt(s:GameState,clue:ActiveClue,p:Player): number {
-  // A new buzz window (including after a wrong answer) begins at the same moment
-  // for all remaining players, but their assigned bonus offsets their waiting time.
-  const largest=largestBuzzBonus(s,clue);
-  return clue.buzzOpenedAt+Math.max(0,largest-(p.buzzBonusSeconds??0))*1000;
+function pickPool(s:GameState){
+ const excluded=new Set([...s.selected[0],...s.selected[1]]);
+ const allowed=CATEGORIES.filter(c=>!excluded.has(c.id)&&[1,2,3,4].every(n=>c.questionsByLevel[String(n)]?.length>=2));
+ const total=s.players.length<=3?8:s.players.length<=5?10:12;
+ const younger=s.players.some(p=>p.age<=12);
+ // Age informs a *shared*, balanced category suggestion pool only. No player receives an easier question.
+ const familyFriendly=new Set(['animals','space','science','food','movies','music','sports','books','nature','colors','games','counting','classroom','oceans','usa','animals_classic','movies_tv','us_geography','music_classic','sports_classic','food_classic','biology','art_classic']);
+ function choose(type:'classic'|'creative',count:number){
+   const choices=allowed.filter(c=>c.type===type);
+   if(!younger)return shuffle(choices).slice(0,count);
+   const favored=shuffle(choices.filter(c=>familyFriendly.has(c.id))).slice(0,Math.ceil(count/2));
+   return [...favored,...shuffle(choices.filter(c=>!favored.some(p=>p.id===c.id))).slice(0,count-favored.length)];
+ }
+ const classic=choose('classic',Math.round(total*.6));
+ const creative=choose('creative',total-classic.length);
+ return shuffle([...classic,...creative]).map(c=>c.id);
 }
-const shortName = (name:string) => name.trim().replace(/\s+/g,' ').slice(0,28);
-
-export function defaultSettings(): Settings {
-  return {mode:'individual',buzzSeconds:20,answerSeconds:30,finalSeconds:60,normalHints:3,music:'off'};
+function goDraft(s:GameState){s.players.forEach(p=>p.doubleTakesRemaining=2);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s);s.resolution=undefined;s.active=undefined;log(s,`Select five categories for ${ROUND_NAMES[s.round]}.`);}
+function nextQuestionChoices(s:GameState){for(const id of s.selected[s.round])for(let level=0;level<4;level++){
+ const key=`${id}:${level}`,c=CATEGORY_LOOKUP.get(id)!;const pool=shuffle(c.questionsByLevel[String(level+1)]);const already=new Set(Object.values(s.questionMap).map(id=>getQuestion(id)?.answer.toLowerCase()));s.questionMap[key]=(pool.find(q=>!already.has(q.answer.toLowerCase()))??pool[0]).id;
+}}
+function closeQuestion(s:GameState,now:number,skipped=false){
+ const a=s.active!;const q=getQuestion(a.questionId)!;
+ const resolution:Resolution={key:a.key,questionId:a.questionId,answer:q.answer,category:CATEGORY_LOOKUP.get(q.categoryId)!.name,
+   points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+6500,disputeIds:[],skipped};
+ for(const [id,submission] of Object.entries(a.answers)){const p=s.players.find(x=>x.id===id);if(p)p.score+=submission.points;}
+ s.usedKeys.push(a.key);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
+ log(s,skipped?'Question skipped.':`The answer is ${q.answer}.`);
 }
-export function makeGame(): GameState {
-  return {id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,
-    selected:[[],[]],draftIndex:0,usedKeys:[],doubleTakeKeys:['',''],eventLog:[]};
+function correctPoints(s:GameState,a:ActiveQuestion,p:Player,at:number,doubleTake=false){
+ const base=roundPoints(s,a.key);
+ if(s.settings.mode==='teams')return a.stealTurn?Math.floor(base/2):base;
+ const duration=s.settings.answerSeconds*1000;
+ const elapsed=Math.max(0,at-(a.startedAt??at));
+ const bonus=duration?Math.round(base*0.25*Math.max(0,1-elapsed/duration)/5)*5:0;
+ return base*(doubleTake?2:1)+bonus;
 }
-export function joinGame(current:GameState,name:string,age:number,now=Date.now()):{state:GameState;player:Player} {
-  requireRule(current.phase==='lobby','Joining is closed once the category draft begins.');
-  requireRule(current.players.length < MAX_SEATS,`This version supports up to ${MAX_SEATS} players or teams.`);
-  requireRule(Number.isInteger(age)&&age>=3&&age<=110,'Enter an age between 3 and 110. For teams, enter the youngest teammate’s age.');
-  const clean = shortName(name);
-  requireRule(clean.length>=2,'Enter a name with at least two characters.');
-  requireRule(!current.players.some(p=>p.name.toLowerCase()===clean.toLowerCase()),'That name is already taken.');
-  const state:GameState = structuredClone(current);
-  const player:Player = {id:randomUUID(),name:clean,age,score:0,hintsRemaining:state.settings.normalHints,joinedAt:now,bonusHints:0,buzzBonusSeconds:0};
-  state.players.push(player);
-  state.announcement=`${clean} joined the show!`;
-  return {state,player};
+function storeSubmission(s:GameState,p:Player,answer:string,now:number,useDoubleTake=false){
+ const a=s.active!,q=getQuestion(a.questionId)!;
+ assert(answer.length>0&&answer.length<=200,'Enter an answer (up to 200 characters).');
+ assert(!a.answers[p.id],'You already submitted an answer.');
+ const correct=isCorrect(answer,q.answer,q.aliases??[]);
+ if(useDoubleTake){assert(s.settings.mode==='individual'&&p.doubleTakesRemaining>0,'No Double Takes remaining.');p.doubleTakesRemaining--;}
+ const points=correct?correctPoints(s,a,p,now,useDoubleTake):0;
+ a.answers[p.id]={answer,at:now,correct,points,doubleTake:useDoubleTake,hintUsed:a.hintUsers.includes(p.id)};
+ if(s.settings.mode==='teams') {
+   if(correct||a.stealTurn||s.players.length<2)closeQuestion(s,now);
+   else nextSteal(s,now);
+ }else if(s.players.every(pl=>a.answers[pl.id]))closeQuestion(s,now);
 }
-const pushLog = (s:GameState,line:string) => {s.eventLog=[line,...s.eventLog].slice(0,30);s.announcement=line;};
-const hostOnly=(actor:Actor) => requireRule(actor.kind==='host','Only the host can do that.');
-const activePlayer=(s:GameState,actor:Actor):Player => {
-  requireRule(actor.kind==='player'&&!!actor.id,'Join as a player or team to do that.');
-  const p=s.players.find(p=>p.id===actor.id);
-  requireRule(p,'Player not found in this game.');
-  return p;
-};
-export function getPoints(s:GameState,key:string):number {
-  const n=Number(key.split(':')[1]);
-  const base=ROUND_VALUES[s.round][n];
-  return Number(base||0)*(s.doubleTakeKeys[s.round]===key?2:1);
+function nextSteal(s:GameState,now:number){const a=s.active!;a.stealTurn=true;a.stealId=s.players[(s.chooserIndex+1)%s.players.length].id;a.startedAt=now;a.deadlineAt=now+Math.max(10,s.settings.answerSeconds+(s.players.find(p=>p.id===a.stealId)?.bonusTimeSeconds||0))*1000;log(s,`${s.players.find(p=>p.id===a.stealId)!.name} has one chance to steal.`);}
+function finishFinal(s:GameState,now:number){
+ const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:false};}}
+ s.phase='final-results';f.endsAt=now+12000;log(s,'Final answers are in.');
 }
-export function normalizeAnswer(input:string):string {
-  return input.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
-    .replace(/^[\s]*(?:(?:what|who|where|which)\s+(?:is|are|was|were)\s+|(?:its|it is|the answer is)\s+)/,'')
-    .replace(/[’']/g,'').replace(/\b(?:a|an|the)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
-}
-function editDistance(a:string,b:string) {
-  const prev=Array.from({length:b.length+1},(_,i)=>i);
-  for(let i=1;i<=a.length;i++) { let last=prev[0];prev[0]=i;
-    for(let j=1;j<=b.length;j++) {const tmp=prev[j];prev[j]=Math.min(prev[j]+1,prev[j-1]+1,last+(a[i-1]===b[j-1]?0:1));last=tmp;}
-  } return prev[b.length];
-}
-export function suggestVerdict(given:string,answer:string,aliases:string[]=[]):'likely correct'|'possible match'|'likely incorrect' {
-  const v=normalizeAnswer(given); if(!v)return 'likely incorrect';
-  const expected=[answer,...aliases].map(normalizeAnswer);
-  if(expected.some(e=>e===v))return 'likely correct';
-  if(expected.some(e=>e.length>=5 && (e.includes(v)||v.includes(e))))return 'possible match';
-  if(expected.some(e=>e.length>=6 && editDistance(e,v)<=2))return 'possible match';
-  return 'likely incorrect';
-}
-function closeClue(s:GameState,winner?:string) {
-  const clue=s.clue!;const q=cellQuestion(clue.key)!;
-  s.usedKeys.push(clue.key);
-  s.lastResolution={key:clue.key,prompt:q.prompt,answer:q.answer,explainer:CATEGORY_LOOKUP.get(clue.key.split(':')[0])!.explainer,
-    points:getPoints(s,clue.key),wasDoubleTake:s.doubleTakeKeys[s.round]===clue.key,winner,outcome:winner?'correct':'passed'};
-  s.phase='board';s.clue=undefined;
-}
-function judgeWrong(s:GameState,verdict:'wrong'|'timed-out',now:number) {
-  const clue=s.clue!;const player=s.players.find(p=>p.id===clue.buzzedBy)!;
-  const points=getPoints(s,clue.key);
-  player.score-=points;
-  clue.attempts.push({playerId:player.id,answer:clue.submittedAnswer||'(no answer)',verdict,at:now});
-  pushLog(s,`${player.name} ${verdict==='timed-out'?'ran out of time':'missed'} (−${points}). Others can buzz.`);
-  clue.status='buzzing';clue.buzzOpenedAt=now;clue.buzzedBy=undefined;clue.responseDeadlineAt=undefined;clue.submittedAnswer=undefined;
-  if(s.players.every(p=>clue.attempts.some(a=>a.playerId===p.id))) { closeClue(s); pushLog(s,'All players have tried. The answer is revealed.'); }
+function shiftTimers(s:GameState,delta:number){if(s.active){s.active.introUntilAt+=delta;if(s.active.startedAt)s.active.startedAt+=delta;if(s.active.deadlineAt)s.active.deadlineAt+=delta;}if(s.resolution)s.resolution.endsAt+=delta;if(s.final){if(s.final.startedAt)s.final.startedAt+=delta;if(s.final.deadlineAt)s.final.deadlineAt+=delta;if(s.final.endsAt)s.final.endsAt+=delta;}}
+export function tick(original:GameState,now=Date.now()):GameState {
+ if(original.schemaVersion!==2)throw new GameError('This room was created in an older version. Create a new v0.2 room.');
+ if(original.pausedAt)return original;
+ const s:GameState=structuredClone(original);
+ if(s.phase==='intro'&&s.active&&now>=s.active.introUntilAt){s.phase='question';s.active.startedAt=s.active.introUntilAt;const p=s.players.find(p=>p.id===s.active?.turnId);s.active.deadlineAt=s.active.introUntilAt+(s.settings.answerSeconds+(s.settings.mode==='teams'?(p?.bonusTimeSeconds||0):0))*1000;}
+ if(s.phase==='question'&&s.active){const a=s.active;
+   if(s.settings.mode==='individual'){
+     const all=s.players.every(p=>a.answers[p.id]);const maxBonus=Math.max(0,...s.players.map(p=>p.bonusTimeSeconds));
+     if(all||now>=(a.deadlineAt??now)+maxBonus*1000)closeQuestion(s,now);
+   }else if(now>=(a.deadlineAt??now)){
+     if(a.stealTurn||s.players.length<2)closeQuestion(s,now);
+     else nextSteal(s,now);
+   }
+ }
+ if(s.phase==='results'&&s.resolution&&!s.resolution.disputeIds.length&&now>=s.resolution.endsAt){
+   if(s.usedKeys.filter(k=>s.selected[s.round].includes(k.split(':')[0])).length===20){
+     if(s.round===0){s.round=1;goDraft(s);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier===(Math.min(...s.players.map(p=>p.age))<=12?'family':Math.min(...s.players.map(p=>p.age))<=16?'teen':'adult')))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
+   }else{s.phase='board';s.resolution=undefined;}
+ }
+ if(s.phase==='final-question'&&s.final){if(s.players.every(p=>s.final!.answers[p.id])||now>=(s.final.deadlineAt??now))finishFinal(s,now);}
+ if(s.phase==='final-results'&&s.final&&!s.final.disputeIds.length&&now>=(s.final.endsAt??now)){s.phase='finished';log(s,'That’s a wrap!');}
+ return s;
 }
 export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now()):GameState {
-  requireRule(action && typeof action==='object' && typeof action.type==='string','Invalid game action.');
-  const s:GameState=structuredClone(original);
-  switch(action.type) {
-    case 'settings': {
-      hostOnly(actor); requireRule(s.phase==='lobby','Change settings before the game starts.');
-      const a=action.settings;
-      requireRule(a&&typeof a==='object'&&!Array.isArray(a),'Invalid settings.');
-      if(a.mode!==undefined){requireRule(a.mode==='individual'||a.mode==='teams','Invalid play mode.');s.settings.mode=a.mode;}
-      const numbers:[keyof Pick<Settings,'buzzSeconds'|'answerSeconds'|'finalSeconds'|'normalHints'>,number,number][]=[
-        ['buzzSeconds',0,120],['answerSeconds',0,180],['finalSeconds',0,300],['normalHints',0,10]];
-      numbers.forEach(([k,min,max])=>{ const v=a[k];if(v!==undefined){requireRule(Number.isInteger(v)&&v>=min&&v<=max,`Invalid ${k}.`);s.settings[k]=v;}});
-      if(a.music!==undefined){requireRule(['off','synth','keys','downtempo'].includes(a.music),'Invalid music choice.');s.settings.music=a.music;}
-      s.players.forEach(p=>p.hintsRemaining=totalHints(p,s.settings));
-      break;
-    }
-    case 'player-bonuses': {
-      hostOnly(actor);requireRule(s.phase==='lobby','Assign bonuses before the category draft begins.');
-      const p=s.players.find(x=>x.id===action.playerId);
-      requireRule(p,'Player not found.');
-      requireRule(action.bonusHints!==undefined||action.buzzBonusSeconds!==undefined,'Choose a bonus to change.');
-      if(action.bonusHints!==undefined){
-        requireRule(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=20,'Bonus hints must be between 0 and 20.');
-        p.bonusHints=action.bonusHints;
-      }
-      if(action.buzzBonusSeconds!==undefined){
-        requireRule(Number.isInteger(action.buzzBonusSeconds)&&action.buzzBonusSeconds>=0&&action.buzzBonusSeconds<=30,'Buzz head start must be between 0 and 30 seconds.');
-        p.buzzBonusSeconds=action.buzzBonusSeconds;
-      }
-      p.hintsRemaining=totalHints(p,s.settings);
-      break;
-    }
-    case 'start-draft': {
-      hostOnly(actor);requireRule(s.phase==='lobby','The show has already started.');requireRule(s.players.length>=2,'At least two players or teams are needed.');
-      s.players.forEach(p=>{p.bonusHints??=0;p.buzzBonusSeconds??=0;p.hintsRemaining=totalHints(p,s.settings);});
-      s.phase='draft';s.chooserId=s.players[0].id;pushLog(s,'Category draft is open. Players choose one category per turn across both rounds.');break;
-    }
-    case 'draft-category': {
-      requireRule(s.phase==='draft','It is not time to choose categories.');
-      const id=String(action.categoryId||'');requireRule(CATEGORY_LOOKUP.has(id),'Unknown category.');
-      requireRule(![...s.selected[0],...s.selected[1]].includes(id),'That category has already been picked.');
-      const who=s.players[s.draftIndex%s.players.length];
-      requireRule(actor.kind==='host'||(actor.kind==='player'&&actor.id===who.id),`It’s ${who.name}’s turn to pick.`);
-      const round=s.selected[0].length<6?0:1;
-      s.selected[round].push(id);s.draftIndex++;
-      pushLog(s,`${who.name} selected ${CATEGORY_LOOKUP.get(id)!.name} for ${ROUND_NAMES[round]}.`);
-      if(s.selected[1].length===6){
-        s.doubleTakeKeys=[0,1].map(r=>cellKey(randomFrom(s.selected[r as 0|1]),randomInt(5))) as [string,string];
-        s.phase='board';s.round=0;s.chooserId=s.players[0].id;
-        pushLog(s,`${ROUND_NAMES[0]} begins!`);
-      }break;
-    }
-    case 'open-clue': {
-      requireRule(s.phase==='board','Finish the current clue before opening another.');
-      requireRule(actor.kind==='host'||(actor.kind==='player'&&actor.id===s.chooserId),'It is not your turn to choose a question.');
-      const key=String(action.key||'');const [id,levelStr]=key.split(':');const level=Number(levelStr);
-      requireRule(s.selected[s.round].includes(id)&&Number.isInteger(level)&&level>=0&&level<5,'Choose a clue from this board.');
-      requireRule(!s.usedKeys.includes(key),'This clue was already played.');
-      s.clue={key,startedAt:now,buzzOpenedAt:now,status:'buzzing',attempts:[],hintUsers:[],revealed:false};s.phase='clue';
-      pushLog(s,`${CATEGORY_LOOKUP.get(id)!.name} for ${getPoints(s,key)}${s.doubleTakeKeys[s.round]===key?' — DOUBLE TAKE!':''}`);
-      break;
-    }
-    case 'buzz': {
-      const p=activePlayer(s,actor);requireRule(s.phase==='clue'&&!!s.clue&&s.clue.status==='buzzing','Buzzing is not open right now.');
-      const c=s.clue;
-      requireRule(!c.attempts.some(a=>a.playerId===p.id),'You already attempted this clue.');
-      const buzzEnd=buzzWindowEndsAt(s,c);
-      if(buzzEnd) requireRule(now<=buzzEnd,'The buzz window has closed.');
-      requireRule(now>=buzzEligibleAt(s,c,p),'Your buzzer is not open yet. The host assigned a head start to another player.');
-      c.buzzedBy=p.id;c.status='answering';
-      c.responseDeadlineAt=s.settings.answerSeconds?now+s.settings.answerSeconds*1000:undefined;
-      pushLog(s,`${p.name} buzzed first!`);break;
-    }
-    case 'hint': {
-      const p=activePlayer(s,actor);
-      requireRule(s.phase==='clue'&&s.clue?.status==='answering'&&s.clue.buzzedBy===p.id,'Hints are available only while answering your clue.');
-      requireRule(p.hintsRemaining>0,'You have no hints remaining.');
-      requireRule(!s.clue.hintUsers.includes(p.id),'You already used a hint on this clue.');
-      p.hintsRemaining--;s.clue.hintUsers.push(p.id);pushLog(s,`${p.name} used a hint.`);break;
-    }
-    case 'submit-answer': {
-      const p=activePlayer(s,actor);
-      requireRule(s.phase==='clue'&&s.clue?.status==='answering'&&s.clue.buzzedBy===p.id,'You do not have the active clue.');
-      if(s.clue.responseDeadlineAt)requireRule(now<=s.clue.responseDeadlineAt,'Your answer time has expired. Ask the host to rule.');
-      const answer=String(action.answer||'').trim().slice(0,200);
-      requireRule(answer.length>0,'Type an answer first.');s.clue.submittedAnswer=answer;s.clue.status='ruling';
-      pushLog(s,`${p.name} submitted an answer. Host ruling needed.`);break;
-    }
-    case 'rule': {
-      hostOnly(actor);requireRule(s.phase==='clue'&&!!s.clue,'No active clue.');
-      const c=s.clue;requireRule(!!c.buzzedBy,'No current contestant.');
-      requireRule(c.status==='ruling'||(action.verdict==='timed-out'&&c.status==='answering'),'Wait for an answer or rule a timeout.');
-      requireRule(['correct','wrong','timed-out'].includes(action.verdict),'Invalid ruling.');
-      const p=s.players.find(p=>p.id===c.buzzedBy)!;
-      if(action.verdict==='correct') {
-        const points=getPoints(s,c.key);p.score+=points;
-        c.attempts.push({playerId:p.id,answer:c.submittedAnswer||'',verdict:'correct',at:now});
-        closeClue(s,p.id);s.chooserId=p.id;pushLog(s,`${p.name} is correct! +${points}.`);
-      } else judgeWrong(s,action.verdict,now);
-      break;
-    }
-    case 'reveal-answer': {
-      hostOnly(actor);requireRule(s.phase==='clue'&&!!s.clue,'No active clue.');s.clue.revealed=true;pushLog(s,'The answer has been revealed.');break;
-    }
-    case 'close-clue': {
-      hostOnly(actor);requireRule(s.phase==='clue'&&!!s.clue,'No active clue.');closeClue(s);pushLog(s,'Clue closed. Answer revealed.');break;
-    }
-    case 'advance-round': {
-      hostOnly(actor);requireRule(s.phase==='board'&&s.round===0,'Finish the current clue in the first round.');
-      s.round=1;s.lastResolution=undefined;s.chooserId=s.players[0].id;pushLog(s,`${ROUND_NAMES[1]} begins!`);break;
-    }
-    case 'start-final': {
-      hostOnly(actor);requireRule(s.phase==='board'&&s.round===1,'Finish the current clue in the second round.');
-      const youngest=lowestAge(s.players);const tier=youngest<=12?'family':youngest<=16?'teen':'adult';
-      const pool=FINALS.filter(f=>f.tier===tier);const question=randomFrom(pool);
-      s.final={id:question.id,wagers:{},answers:{},judgments:{}};s.phase='final-wager';s.lastResolution=undefined;
-      pushLog(s,'The Final Word! Submit your private wagers.');break;
-    }
-    case 'wager': {
-      const p=activePlayer(s,actor);requireRule(s.phase==='final-wager'&&!!s.final,'Wagering is not open.');
-      const amount=action.amount;requireRule(Number.isInteger(amount)&&amount>=0&&amount<=Math.max(0,p.score),`Your wager must be between 0 and ${Math.max(0,p.score)}.`);
-      s.final.wagers[p.id]=amount;break;
-    }
-    case 'open-final': {
-      hostOnly(actor);requireRule(s.phase==='final-wager'&&!!s.final,'Final wagering is not active.');
-      s.players.forEach(p=>{if(s.final!.wagers[p.id]===undefined)s.final!.wagers[p.id]=0;});
-      s.final.startedAt=now;s.phase='final-answer';pushLog(s,'Final question is live!');break;
-    }
-    case 'final-answer': {
-      const p=activePlayer(s,actor);requireRule(s.phase==='final-answer'&&!!s.final,'The final question is not open.');
-      if(s.settings.finalSeconds>0) requireRule(now<=s.final.startedAt!+s.settings.finalSeconds*1000,'Final answer time has expired.');
-      requireRule(s.final.answers[p.id]===undefined,'You already locked an answer.');
-      const answer=String(action.answer||'').trim().slice(0,200);requireRule(answer.length>0,'Enter an answer first.');
-      s.final.answers[p.id]=answer;break;
-    }
-    case 'review-final': {
-      hostOnly(actor);requireRule(s.phase==='final-answer'&&!!s.final,'The final question has not been presented.');
-      s.phase='final-review';pushLog(s,'The final answers are ready for judging.');break;
-    }
-    case 'judge-final': {
-      hostOnly(actor);requireRule(s.phase==='final-review'&&!!s.final,'Final judging is not open.');
-      const id=String(action.playerId||'');const p=s.players.find(p=>p.id===id);requireRule(p,'Player not found.');
-      requireRule(typeof action.correct==='boolean','Choose correct or incorrect.');
-      const wager=s.final.wagers[id]??0;
-      if(s.final.judgments[id]!==undefined)p.score-=s.final.judgments[id]?wager:-wager;
-      s.final.judgments[id]=action.correct;p.score+=action.correct?wager:-wager;
-      pushLog(s,`${p.name} was ruled ${action.correct?'correct':'incorrect'} (${action.correct?'+':'−'}${wager}).`);break;
-    }
-    case 'finish': {
-      hostOnly(actor);requireRule(s.phase==='final-review'&&!!s.final,'Finish judging the final first.');
-      requireRule(s.players.every(p=>s.final!.judgments[p.id]!==undefined),'Judge every player before finishing.');
-      s.phase='finished';const leaders=[...s.players].sort((a,b)=>b.score-a.score);
-      pushLog(s,`The Know Show is over! ${leaders.filter(p=>p.score===leaders[0].score).map(p=>p.name).join(' & ')} ${leaders.filter(p=>p.score===leaders[0].score).length===1?'wins':'tie for first'}!`);break;
-    }
-    case 'new-game': {
-      hostOnly(actor);requireRule(s.phase==='finished','Finish the current show before starting another.');
-      const reset=makeGame();reset.id=s.id;reset.createdAt=s.createdAt;reset.settings=s.settings;
-      reset.players=s.players.map(p=>({...p,score:0,bonusHints:p.bonusHints??0,buzzBonusSeconds:p.buzzBonusSeconds??0,hintsRemaining:totalHints(p,reset.settings)}));
-      pushLog(reset,'New show! Adjust settings and start the category draft.');return reset;
-    }
-    default: throw new GameError('Unknown action type.');
-  }
-  return s;
+ assert(action&&typeof action.type==='string','Invalid action.');let s:GameState=structuredClone(tick(original,now));
+ switch(action.type){
+ case 'settings':{
+   host(actor);const opts=action.settings;
+   assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects'].includes(k)), 'Only music can change during the show.');
+   if(opts.mode!==undefined){assert(['individual','teams'].includes(opts.mode),'Invalid mode.');s.settings.mode=opts.mode;}
+   for(const k of ['answerSeconds','finalSeconds','normalHints'] as const){const v=opts[k];if(v!==undefined){assert(Number.isInteger(v)&&v>=0&&v<=(k==='normalHints'?10:120),`Invalid ${k}.`);s.settings[k]=v;}}
+   if(opts.music!==undefined){assert(['jazz','indie','retro','game','bluegrass','cinematic','off'].includes(opts.music),'Invalid music.');s.settings.music=opts.music;}
+   if(opts.arrangement!==undefined){assert(opts.arrangement===0||opts.arrangement===1,'Invalid arrangement.');s.settings.arrangement=opts.arrangement;}
+   if(opts.effects!==undefined){assert(typeof opts.effects==='boolean','Invalid effects choice.');s.settings.effects=opts.effects;}
+   for(const p of s.players)p.hintsRemaining=s.settings.normalHints+p.bonusHints;
+   break;
+ }
+ case 'player-bonuses':{
+   host(actor);assert(s.phase==='lobby','Set accommodations in the Green Room.');const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');
+   if(action.bonusHints!==undefined){assert(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=10,'Invalid bonus hints.');p.bonusHints=action.bonusHints;p.hintsRemaining=s.settings.normalHints+p.bonusHints;}
+   if(action.bonusTimeSeconds!==undefined){assert(Number.isInteger(action.bonusTimeSeconds)&&action.bonusTimeSeconds>=0&&action.bonusTimeSeconds<=30,'Invalid time bonus.');p.bonusTimeSeconds=action.bonusTimeSeconds;}
+   if(action.firstLetter!==undefined){assert(typeof action.firstLetter==='boolean','Invalid first-letter setting.');p.firstLetter=action.firstLetter;}
+   if(action.answerLength!==undefined){assert(typeof action.answerLength==='boolean','Invalid answer-length setting.');p.answerLength=action.answerLength;}break;
+ }
+ case 'start-draft':{
+   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');goDraft(s);break;
+ }
+ case 'draft-category':{
+   assert(s.phase==='draft','The category draft is closed.');const id=action.categoryId;
+   assert(s.draftPool.includes(id),'Choose a category from the available draft.');assert(!s.selected[s.round].includes(id),'Already selected.');
+   const chooser=s.players[(s.draftIndex+s.round*5)%s.players.length];assert(actor.kind==='host'||actor.id===chooser.id,`It is ${chooser.name}’s turn.`);
+   s.selected[s.round].push(id);s.draftIndex++;log(s,`${chooser.name} selected ${CATEGORY_LOOKUP.get(id)!.name}.`);
+   if(s.selected[s.round].length===5){nextQuestionChoices(s);s.phase='board';s.chooserIndex=s.round===0?0:5;log(s,`${ROUND_NAMES[s.round]} begins!`);}break;
+ }
+ case 'open-question':{
+   assert(s.phase==='board','The board is not ready.');assert(actor.kind==='host'||actor.id===currentPlayer(s).id,'Another player is choosing.');
+   const key=action.key;const [id,tier]=key.split(':');assert(s.selected[s.round].includes(id)&&/^[0-3]$/.test(tier)&&s.questionMap[key],'Not a question on this board.');assert(!s.usedKeys.includes(key),'That question was already played.');
+   s.active={key,questionId:s.questionMap[key],introUntilAt:now+2500,answers:{},hintUsers:[],letterUsers:[],lengthUsers:[],turnId:currentPlayer(s).id};s.phase='intro';log(s,`${CATEGORY_LOOKUP.get(id)!.name} for ${roundPoints(s,key)}!`);break;
+ }
+ case 'hint':{
+   const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='question'&&!!s.active,'No question is open.');const a=s.active;
+   assert(s.settings.mode==='individual'||(a.stealTurn?a.stealId===p.id:a.turnId===p.id),'It is not your team’s turn.');
+   assert(!a.answers[p.id],'You have already answered.');
+   if(action.kind==='written'){assert(p.hintsRemaining>0,'No hints remaining.');assert(!a.hintUsers.includes(p.id),'Already used a hint on this question.');p.hintsRemaining--;a.hintUsers.push(p.id);}
+   else if(action.kind==='first-letter'){assert(p.firstLetter,'First-letter assistance is not enabled.');a.letterUsers.push(p.id);}
+   else if(action.kind==='answer-length'){assert(p.answerLength,'Answer-length assistance is not enabled.');a.lengthUsers.push(p.id);}else throw new GameError('Unknown hint.');break;
+ }
+ case 'submit-answer':{
+   const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='question'&&!!s.active,'Question is not accepting answers.');const a=s.active;
+   if(s.settings.mode==='teams')assert((a.stealTurn?a.stealId:a.turnId)===p.id,'It is not your team’s turn.');
+   const effectiveDeadline=(a.deadlineAt??0)+(s.settings.mode==='individual'?p.bonusTimeSeconds*1000:0);
+   assert(!effectiveDeadline||now<=effectiveDeadline,'Your answer time has expired.');
+   storeSubmission(s,p,String(action.answer||'').trim(),now,Boolean(action.doubleTake));break;
+ }
+ case 'pass':{
+   const p=player(s,actor);assert(s.phase==='question'&&!!s.active&&s.settings.mode==='teams','Passing is only available for teams.');
+   assert((s.active.stealTurn?s.active.stealId:s.active.turnId)===p.id,'Not your team’s turn.');
+   if(s.active.stealTurn)closeQuestion(s,now);else nextSteal(s,now);break;
+ }
+ case 'dispute':{
+   const p=player(s,actor);assert(['results','final-results'].includes(s.phase),'A result can only be disputed after answers are revealed.');
+   const ids=s.phase==='results'?s.resolution?.disputeIds:s.final?.disputeIds;assert(ids,'No results.');assert(!ids.includes(p.id),'You already requested review.');
+   if(s.phase==='results'){s.resolution!.disputeIds.push(p.id);}else{s.final!.disputeIds.push(p.id);}log(s,`${p.name} requested a ruling review.`);break;
+ }
+ case 'resolve-dispute':{
+   host(actor);assert(s.phase==='results'||s.phase==='final-results','No results to review.');const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');
+   const r=s.phase==='results'?s.resolution?.answers[p.id]:s.final?.answers[p.id];
+   assert(r,'No submitted answer for this player.');
+   if(r.correct!==action.correct){p.score-=r.points;r.correct=action.correct;
+     if(s.phase==='results'){const a=s.resolution!;const base=roundPoints(s,a.key);r.points=action.correct?(s.settings.mode==='individual'?base*(r.doubleTake?2:1):base):0;
+       // Overrides award only the base: do not award a speculative speed bonus.
+     }else{r.points=action.correct?(s.final?.wagers[p.id]??0):-(s.final?.wagers[p.id]??0);}
+     p.score+=r.points;
+   }
+   if(s.phase==='results'){s.resolution!.disputeIds=s.resolution!.disputeIds.filter(id=>id!==p.id);s.resolution!.endsAt=now+5000;}
+   else{s.final!.disputeIds=s.final!.disputeIds.filter(id=>id!==p.id);s.final!.endsAt=now+8000;}
+   log(s,`Host reviewed ${p.name}’s answer.`);break;
+ }
+ case 'dismiss-dispute':{
+   host(actor);assert(s.phase==='results'||s.phase==='final-results','No result dispute to dismiss.');
+   if(s.phase==='results'&&s.resolution){s.resolution.disputeIds=s.resolution.disputeIds.filter(id=>id!==action.playerId);s.resolution.endsAt=now+5000;}
+   if(s.phase==='final-results'&&s.final){s.final.disputeIds=s.final.disputeIds.filter(id=>id!==action.playerId);s.final.endsAt=now+8000;}
+   log(s,'Host closed a dispute.');break;
+ }
+ case 'skip-question':{
+   host(actor);assert(s.phase==='question'||s.phase==='intro','No active question.');
+   // Revert any points already awarded, so skipping doesn't advantage quick submissions.
+   for(const [id,a] of Object.entries(s.active!.answers)){const p=s.players.find(x=>x.id===id);if(p&&a.doubleTake)p.doubleTakesRemaining++;}
+   s.active!.answers={};closeQuestion(s,now,true);break;
+ }
+ case 'pause':{
+   host(actor);if(s.pausedAt){shiftTimers(s,now-s.pausedAt);s.pausedAt=undefined;log(s,'Game resumed.');}
+   else{s.pausedAt=now;log(s,'Game paused.');}break;
+ }
+ case 'adjust-score':{
+   host(actor);assert(Number.isInteger(action.delta)&&Math.abs(action.delta)<=5000,'Enter a whole-number adjustment of at most 5000 points.');
+   const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');p.score+=action.delta;log(s,`${p.name}'s score adjusted by ${action.delta}.`);break;
+ }
+ case 'start-final':{
+   host(actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagers are not open.');
+   s.players.forEach(p=>{if(s.final!.wagers[p.id]===undefined)s.final!.wagers[p.id]=0;});s.final.startedAt=now;s.final.deadlineAt=now+s.settings.finalSeconds*1000;s.phase='final-question';log(s,'The Final Word begins!');break;
+ }
+ case 'wager':{
+   const p=player(s,actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagering has closed.');
+   assert(Number.isInteger(action.amount)&&action.amount>=0&&action.amount<=Math.max(0,p.score),'Wager must be between zero and your score.');s.final.wagers[p.id]=action.amount;break;
+ }
+ case 'final-answer':{
+   const p=player(s,actor);assert(s.phase==='final-question'&&!!s.final,'Final answers are closed.');assert(now<=(s.final.deadlineAt??0),'The final timer has ended.');assert(!s.final.answers[p.id],'You already answered.');
+   const q=FINALS.find(q=>q.id===s.final!.id)!;const ans=String(action.answer||'').trim();assert(ans.length>0&&ans.length<=200,'Enter an answer.');
+   const correct=isCorrect(ans,q.answer,q.aliases||[]);const points=(s.final.wagers[p.id]??0)*(correct?1:-1);
+   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false};
+   if(s.players.every(p=>s.final!.answers[p.id]))finishFinal(s,now);break;
+ }
+ case 'finish':{host(actor);assert(s.phase==='final-results'&&!s.final?.disputeIds.length,'Resolve all disputes before finishing.');s.phase='finished';break;}
+ case 'new-game':{
+   host(actor);assert(s.phase==='finished','Finish this show first.');const n=makeGame();n.id=s.id;n.createdAt=s.createdAt;n.settings=s.settings;n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:2}));return n;
+ }
+ default:throw new GameError('Unknown action type.');
+ }
+ return s;
 }
-
-export function makeView(s:GameState,actor:Actor,revision:number,now=Date.now()) {
-  const isHost=actor.kind==='host';
-  const self=actor.kind==='player'?s.players.find(p=>p.id===actor.id):undefined;
-  // Age guides the category draft as a recommendation only: players retain the final choice.
-  // Low-tier questions are easier throughout the board; Final Word has age-specific pools.
-  const familyIds=new Set(['animals','movies','colors','games','sports','food','counting','literally','classroom','music','myths','oceans','nature','space','books','rhyme']);
-  const teenIds=new Set(['space','world','words','history','science','movies','music','math','sports','books','nature','tech','myths','inventions','usa','earth','counting']);
-  const adultIds=new Set(['world','words','history','science','music','math','tech','landmarks','misleading','inventions','usa','earth','body','space','sports']);
-  const youngestAge=s.players.length?lowestAge(s.players):18;
-  const recommended=youngestAge<=12?familyIds:youngestAge<=16?teenIds:adultIds;
-  const catBasics=CATEGORIES.map(c=>({id:c.id,name:c.name,explainer:c.explainer,
-    suggested:recommended.has(c.id)}));
-  const question=s.clue?cellQuestion(s.clue.key):null;
-  const active=s.clue;
-  const meEligibleAt=active&&self?buzzEligibleAt(s,active,self):undefined;
-  const clue=active&&question?{
-    key:active.key,prompt:question.prompt,points:getPoints(s,active.key),wasDoubleTake:s.doubleTakeKeys[s.round]===active.key,
-    category:CATEGORY_LOOKUP.get(active.key.split(':')[0])!.name,
-    explainer:CATEGORY_LOOKUP.get(active.key.split(':')[0])!.explainer,
-    startedAt:active.startedAt,buzzOpenedAt:active.buzzOpenedAt,status:active.status,buzzedBy:active.buzzedBy,
-    responseDeadlineAt:active.responseDeadlineAt,buzzDeadlineAt:buzzWindowEndsAt(s,active),
-    attempts:active.attempts.map(a=>({playerId:a.playerId,verdict:a.verdict})),
-    meEligibleAt,meHint: (isHost || (self&&active.hintUsers.includes(self.id))) ? question.hint : undefined,
-    submittedAnswer: isHost||(self?.id===active.buzzedBy)?active.submittedAnswer:undefined,
-    suggested: isHost&&active.submittedAnswer ? suggestVerdict(active.submittedAnswer,question.answer,question.aliases) : undefined,
-    answer: isHost||active.revealed?question.answer:undefined,
-  }:null;
-  const finalQ=s.final?FINALS.find(f=>f.id===s.final?.id):undefined;
-  const finals=s.final&&finalQ?{
-    category:finalQ.category,
-    prompt:['final-answer','final-review','finished'].includes(s.phase)?finalQ.prompt:undefined,
-    startedAt:s.final.startedAt,
-    answer:isHost||s.phase==='finished'?finalQ.answer:undefined,
-    wagerCount:Object.keys(s.final.wagers).length,
-    answerCount:Object.keys(s.final.answers).length,
-    myWager:self?s.final.wagers[self.id]:undefined,
-    myAnswer:self?s.final.answers[self.id]:undefined,
-    review:s.phase==='final-review'||s.phase==='finished' ? s.players.map(p=>({id:p.id,name:p.name,
-      wager:isHost||s.phase==='finished'?s.final!.wagers[p.id]||0:undefined,
-      answer:isHost||s.phase==='finished'?s.final!.answers[p.id]??'(no answer)':undefined,
-      suggested:isHost ? suggestVerdict(s.final!.answers[p.id]||'',finalQ.answer,finalQ.aliases):undefined,
-      judged:isHost||s.phase==='finished'?s.final!.judgments[p.id]:undefined,
-    })) : undefined,
-  }:undefined;
-  const draftTurn=s.phase==='draft'&&s.players.length?s.players[s.draftIndex%s.players.length]:undefined;
-  return {
-    revision,serverNow:now,roomId:s.id,phase:s.phase,role:actor,settings:s.settings,
-    players:s.players,round:s.round,roundNames:ROUND_NAMES,roundValues:ROUND_VALUES,
-    selected:s.selected,usedKeys:s.usedKeys,chooserId:s.chooserId,announcement:s.announcement,
-    eventLog:s.eventLog.slice(0,10),categories:catBasics,draftTurnId:draftTurn?.id,draftTurnName:draftTurn?.name,
-    draftIndex:s.draftIndex,clue,lastResolution:s.lastResolution,final:finals,
-    myHints:self?.hintsRemaining,
-  };
+export function makeView(original:GameState,actor:Actor,revision:number,now=Date.now()){
+ const s=tick(original,now),isHost=actor.kind==='host',me=actor.kind==='player'?s.players.find(p=>p.id===actor.id):undefined;
+ const q=s.active?getQuestion(s.active.questionId):undefined;
+ const intro=s.active&&q?{key:s.active.key,category:CATEGORY_LOOKUP.get(q.categoryId)?.name,points:roundPoints(s,s.active.key),until:s.active.introUntilAt}:undefined;
+ const current=s.phase==='question'&&s.active&&q?{
+   ...intro,prompt:q.prompt,startedAt:s.active.startedAt,deadlineAt:s.active.deadlineAt,stealTurn:!!s.active.stealTurn,
+   answeringId:s.active.stealTurn?s.active.stealId:s.active.turnId,
+   submissionCount:Object.keys(s.active.answers).length,
+   mySubmission:me?s.active.answers[me.id]?.answer:undefined,
+   myDeadlineAt:me?(s.active.deadlineAt??0)+me.bonusTimeSeconds*1000:undefined,
+   myWrittenHint:(isHost||(me&&s.active.hintUsers.includes(me.id)))?q.hint:undefined,
+   myFirstLetter:(me&&s.active.letterUsers.includes(me.id))?q.answer.trim().charAt(0).toUpperCase():undefined,
+   myAnswerLength:(me&&s.active.lengthUsers.includes(me.id))?q.answer.replace(/[^a-zA-Z]/g,'').length:undefined,
+   // Host can review the key privately; TV and contestants never receive it during an open question.
+   hostAnswer:isHost?q.answer:undefined,
+ }:undefined;
+ const res=s.resolution?{...s.resolution,answers:Object.fromEntries(Object.entries(s.resolution.answers).map(([id,a])=>[id,{...a}]))}:undefined;
+ const finalQ=s.final?FINALS.find(f=>f.id===s.final?.id):undefined;
+ const f=s.final&&finalQ?{
+   category:finalQ.category,prompt:['final-question','final-results','finished'].includes(s.phase)?finalQ.prompt:undefined,
+   answer:['final-results','finished'].includes(s.phase)||isHost?finalQ.answer:undefined,
+   deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
+   myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
+   results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
+   disputeIds:s.final.disputeIds,
+ }:undefined;
+ return {revision,serverNow:now,phase:s.phase,roomId:s.id,role:actor,settings:s.settings,players:s.players,round:s.round,
+ roundNames:ROUND_NAMES,roundValues:ROUND_VALUES,selected:s.selected,usedKeys:s.usedKeys,chooserId:currentPlayer(s)?.id,
+ categories:CATEGORIES.map(c=>({id:c.id,name:c.name,description:c.description,type:c.type})),draftPool:s.draftPool,draftIndex:s.draftIndex,
+ draftTurnId:s.players.length?s.players[(s.draftIndex+s.round*5)%s.players.length]?.id:undefined,
+ active:current,intro,results:res,final:f,myHints:me?.hintsRemaining,paused:!!s.pausedAt,announcement:s.announcement,eventLog:s.eventLog.slice(0,10),
+ yourPlayer:me?.id,
+ };
 }
-export type GameView = ReturnType<typeof makeView>;
+export type GameView=ReturnType<typeof makeView>;

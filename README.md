@@ -1,122 +1,55 @@
-# The Know Show
+# The Know Show — v0.2 family playtest
 
-**Brains on. Game on.** An original, family-friendly multiplayer trivia show. Version 0.1.2 (pilot).
+This is a complete replacement for the v0.1.2 Next.js source, not just the Soundtrack Lab. It uses the same Supabase `know_show_rooms` and `know_show_members` tables and the same two server-side environment variables.
 
-- 2–8 players or teams, using phones as controllers; one host runs the game on a second screen.
-- Host Green Room shows a scannable **QR code** that opens the exact room join page; a large presentation view, copyable link, and six-character code are also provided.
-- 12 categories drafted by players one at a time: six for **The Opening Act** (200–1,000), six for **The Main Event** (400–2,000).
-- A secret **Double Take** on each board is worth twice the tile's points.
-- Fastest valid buzz wins. The host assigns individual buzzer head starts (0–30 seconds) to any players or teams before starting, regardless of age.
-- 3 private hints per player by default; the host can set an individual extra hint allowance (0–20), with no automatic age bonus. Host-controlled judging and steals after a wrong answer.
-- **The Final Word:** random age-adjusted final category, private wagers and answers, host-reviewed scoring.
-- 29 original draftable categories (145 questions) and 18 final questions, flexible answer suggestions, optional Web Speech dictation, adjustable timers, original procedurally generated soundscapes (muted by default).
-- Original visual identity, not associated with the Jeopardy! franchise.
+## Upgrade an existing deployment
 
-## Fast setup (Supabase + GitHub + Vercel)
+1. Download and unzip `the-know-show-v0.2.0.zip`.
+2. Upload **everything inside** the extracted project folder to the **root** of your existing `theknowshow` GitHub repository (matching files will be replaced). Do not upload the outer folder, the `.zip`, or `.engine-build`.
+3. Commit changes; Vercel redeploys from the connected repository. If GitHub web uploads do not delete old files, remove the unneeded old assets manually. This package does not require changes to Supabase.
+4. Open your Vercel site, create a **new room**, and scan the **private host QR** from the creator's private `/room/CODE` screen onto your phone **before** sharing the laptop display. Then open `/display/CODE` on your laptop and share that tab/window to the TV. The TV is a pure spectator display with no host controls.
+5. On the TV, press **Play** on the embedded Suno jazz player once. The embedded audio is controlled by Suno, and browser autoplay may block automatic playback.
+6. Everyone else joins using the public QR code on the TV or visits `/room/CODE`. Host/players get individual phone views.
 
-### 1. Create the Supabase database
+The creator's browser holds a private host token in local storage. If you close that browser before pairing another host device or copying the host QR/link, you may lose host access to the room. Never show the private host QR on the TV or post it publicly. Pairing currently **copies host access to another device**; it does not revoke the old host device. There is no account sign-in or formal host-transfer/revocation interface yet.
 
-1. Create a new project at https://supabase.com/ (or use a project you already have).
-2. Open its **SQL Editor**.
-3. Paste and run the **entire** file [`supabase/schema.sql`](supabase/schema.sql), once.
-4. Open **Project Settings → API** (wording varies by dashboard version). Copy the **Project URL** and the **service_role / secret API key**. This key MUST be kept private. **Do not use your public `anon` key here.**
+**Important:** Old rooms created in v0.1.2 use a different stored game-state format; make a new room after deploying v0.2. Existing database tables and keys stay the same.
 
-The SQL creates `know_show_rooms` and `know_show_members`. Row Level Security is enabled with no public policies; only the Next.js backend uses the server's secret key to read/write game data. The browser never talks directly to Supabase.
+## v0.2 rules
 
-### 2. Put the project on GitHub
+- **Individual / Everyone Answers (default):** Each player privately types an answer to every question. Correct submissions get base points, plus a speed bonus of up to 25% of the base value; wrong answers give zero. Points and correct responses are revealed together after all players answer or the overall time window ends.
+- **Double Take:** Each individual gets two per round. Activate it **after seeing the question** but before submitting; correct answers earn twice the base points **plus the normal speed bonus**. Incorrect answers still cost one Double Take but lose no points. Double Take decisions are individual and hidden until results.
+- **Team / Turn-Based:** Teams choose/answer in a fixed rotation, without buzzing. A wrong answer or pass offers the next team **one** steal attempt; a correct steal earns half the question value. The next question goes to the next team in the fixed rotation. No point deductions by default.
+- **Round boards:** The Opening Act has five categories with four questions each (100/200/300/400). The Main Event has five different categories (200/400/600/800). The category draft displays **8/10/12 randomly selected options** for **2–3 / 4–5 / 6–8 players**, with a balance of classic and creative types. The pool refreshes between rounds and excludes previously chosen categories.
+- **Question bank:** 45 categories, 453 curated **editorially reviewed candidates**, including 29 original creative category themes and 16 classic categories. Each category has at least two choices at each of four difficulty levels, including 93 retained original candidates. A random alternative is selected for each slot. Editorial revision and automated checks do **not** equal independent primary-source verification of every fact; review any disputed fact before public use.
+- **Automatic judgment:** Tolerates reasonable misspellings of longer answers (e.g., “cilumbus” for Columbus) and exact aliases, but does not attempt broad semantic understanding. Players can dispute results; this holds the game for a host ruling. The host can adjust a score or skip a faulty question.
+- **Accommodations:** Host-assigned extra written hints, extra thinking time, optional first-letter reveal, optional answer-length reveal. Players must tap to reveal their private assistance. Age does not automatically grant bonuses.
+- **The Final Word:** Everyone privately wagers up to their nonnegative current score, then answers. Automatic judging applies win/loss of wager, with a host override available.
 
-1. Extract this ZIP. The folder named `the-know-show` is the repository root.
-2. Create a new empty GitHub repository (for example, `the-know-show`).
-3. On GitHub, select **Add file → Upload files**. Upload the **contents** of the `the-know-show` folder, maintaining subfolder structure, and commit. (Alternatively, use Git from your computer: `git init`, `git add .`, `git commit`, `git remote add`, `git push`.)
-4. Do **not** upload `.env.local` or secret keys.
+## TV, phones, and soundtrack
 
-### 3. Deploy using Vercel
+- `/room/CODE`: host controls or personal contestant phone interface.
+- `/display/CODE`: spectator screen for the shared laptop/TV, with full-size categories/question, question intro, answer reveals, always-visible scoreboard, public QR code during the lobby, and the Suno player.
+- The 12 linked Suno tracks are grouped into six styles (two versions each). **Cool Jazz, Arrangement 1 is the default**. Host can switch style or arrangement during a show. The TV reacts when it refreshes; switching tracks reloads the Suno iframe and typically requires clicking Play again. The **Suno embed owns audio playback and volume**, which cannot currently be controlled reliably from the host phone. It may not loop or rotate tracks automatically. Music requires network connectivity. There are no embedded/downloaded commercial music recordings in this ZIP.
+- `/music-test`: standalone 12-song Soundtrack Lab remains available.
 
-1. Go to https://vercel.com/ and choose **Add New → Project → Import Git Repository**.
-2. Choose your GitHub repository. Vercel should detect **Next.js** and use `npm run build`.
-3. Add these **Environment Variables** for Production (and Preview if desired):
+## Supabase setup (new install only)
 
-   | Variable | Value |
-   | --- | --- |
-   | `SUPABASE_URL` | Your Supabase project URL, e.g. `https://xyz.supabase.co` |
-   | `SUPABASE_SERVICE_ROLE_KEY` | Your server-side Supabase service role / secret key |
-   | `ROOM_CREATION_PASSCODE` | Optional password to restrict who can create a new room. Leave unset to allow anyone. |
+Run `supabase/schema.sql` in Supabase SQL Editor. If you selected **Grant API access to new tables automatically OFF**, the earlier backend grants may also be needed; if the existing v0.1.2 game works, no SQL action is required. All database operations are performed server-side using `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (which can be a compatible Supabase `sb_secret_...` key). Never expose secret keys in GitHub, browser code, or `NEXT_PUBLIC_*` variables.
 
-4. Click **Deploy**. You do not need to configure a separate API server, because Next.js includes all the API endpoints.
-5. Open your Vercel URL on the host device and tap **Create a show**. Other players scan the QR code in the host’s Green Room (or open the same Vercel URL on phones and enter the six-character code).
+## Technical notes
 
-**Security:** Never prefix the service key with `NEXT_PUBLIC_`; that would expose it to browser users. The actual secret belongs only in Vercel's server-side environment variables.
+This app polls Supabase through Next.js API routes. It uses optimistic updates for concurrent answer submission. Client timestamps are not trusted for scoring; the server receives and timestamps submitted answers. Timed progression occurs when a client polls the room, including the TV. If all clients disconnect, the game waits until one reconnects and requests the current state.
 
-### 4. Test locally (optional)
+The Suno music is used via its public embeddable player for a noncommercial personal/family experiment. Please review Suno's applicable terms before distributing or monetizing the game; the ZIP intentionally contains only links, not recordings.
 
-Install Node.js 20+ and from this folder:
+## Validation
 
-```bash
-cp .env.example .env.local
-# Edit .env.local with your project's SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.
-npm install
-npm run dev
-```
+`npm install` then `npm run build` in an environment with package-registry access. Run `npm run test:engine` for engine tests. The package was checked with TypeScript source transpilation and isolated engine tests here, but the production Next.js build could not be executed in this environment because npm registry access failed. Treat v0.2 as a substantial playtest build and use a **fresh room** for your first test.
 
-Open http://localhost:3000 in your computer browser. To test a player without overriding the host's session, use a separate browser/private window at the same URL. For real mobile devices on the same Wi-Fi, deploy to Vercel or expose your local server over your LAN.
+## Not yet included in this pilot
 
-### 5. Start playing
-
-1. **Host:** Create the room on a computer or tablet. Show the Green Room QR code on the big screen, or choose **Show large QR**. Players can scan straight into that room; alternatively share the link or room code.
-2. **Players:** Join from individual phones, each entering a name and age. For team play, choose Teams in lobby settings first, then enter a team name and its youngest age, with one phone per team.
-3. **Host:** Adjust settings before starting the category draft.
-4. **Draft:** Players take turns picking categories until 12 are chosen. The selection order continues between rounds (it does not reset at round two).
-5. **Board:** The starting chooser picks any unopened clue. After an answer is awarded, that contestant chooses next. The host can always pick for someone.
-6. **Clue:** The first eligible buzzer enters an answer (or uses optional dictation) and may use a private hint. The host decides whether the answer counts; an incorrect answer loses the clue's points and reopens buzzing for other players. Hints don't subtract points.
-7. **Final:** Host chooses **Go to The Final Word** when the second round is done. Players privately wager (up to their nonnegative score), then type final answers. Host scores each response and shows results.
-
-**Tip:** You can advance rounds early; you don't need to finish all 30 questions if players have had enough.
-
-**In v0.1.1:** After everyone joins, the host can assign extra hints and buzzer head starts directly to each player in the Green Room. Age does not automatically grant either benefit. No database changes are required, but redeploying a new code version will be needed.
-
-**New in v0.1.2:** The host can display a scannable QR code in the Green Room, enlarge it for a TV, or copy a direct join link. The QR code is generated in the browser using the current site address and room code; it does not require a QR service or any database changes.
-
-## Question-bank customization
-
-Edit `src/lib/questions.ts`. Each `CATEGORIES` entry has a unique `id`, a display name, an explainer shown on screen, and **exactly five** questions, from easiest to hardest. Each question has a prompt, answer, optional alternative answer spellings, and a hint.
-
-Use `Q('Question?', 'Answer', 'Private hint', 'Alternate answer')` when adding a new question. Maintain at least 12 categories for a full game. Final questions live in `FINALS` with a `tier` (`family`, `teen`, or `adult`). The youngest age in the lobby determines which tier is randomly drawn for The Final Word: 12 or under = family, 13–16 = teen, 17+ = adult. Ages also surface suggested categories in the draft for mixed-age games; the ordinary question boards currently contain fixed questions rather than age-specific variants.
-
-**Host discretion:** The comparison engine displays a suggestion based on normalized answer text, alternative answers, and close spellings. It *never automatically scores* a written answer. The host's decision is authoritative.
-
-## Architecture & privacy
-
-```
-Phone/browser   →  Next.js UI on Vercel
-                     ↓ HTTP GET ~1.6s, POST actions
-                   Next.js API routes (server-side only)
-                     ↓ service role key
-                   Supabase Postgres (room snapshot + members)
-```
-
-- Players authenticate with a random, locally stored bearer token per device. The token is hashed in Postgres, and no secret token is returned by public room reads.
-- The host has a separate random secret token stored in their original browser. Keep that browser open or use its normal tab history; the secret will persist unless browser storage is cleared.
-- Raw question answers, unplayed prompts, hidden bonus tiles, private hints and final answers are *not* included in unauthenticated player API reads. The host receives an answer key for rulings.
-- Every update uses a revision condition to avoid losing simultaneous buzzer requests. The first successful database update wins, and other buzzes re-check the state.
-- Public scoreboard displays names, ages, scores, and remaining hints. **Don't enter sensitive personal data as names.** There is no login and no birthdate collection.
-- This is a *small-group pilot*. The game polls every ~1.6 seconds, not WebSockets. Very large audiences would benefit from Realtime plus rate limiting. Only eight player seats are supported in this release.
-
-## Known pilot limitations
-
-- No admin user accounts, saved host library, external AI question creation, or player reconnect across devices; each player's token is tied to the browser that joined.
-- The host can adjudicate an expired response using **Time expired / no answer**; the host must also close an expired buzz window. The app displays clocks but does not run an always-on server scheduler.
-- The host can reset only after a completed final round. New questions/categories can repeat between separate games.
-- There is one phone per team seat; individual teammates do not independently buzz for a team.
-- A guess close to the answer is a **host suggestion**, not an automatic acceptance.
-- Original music is synthesized in the browser. Browsers require a tap on **Music off** before audio begins.
-
-## Troubleshooting
-
-- **Room creation failed:** Check `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and that SQL ran successfully. Then redeploy after changing Vercel environment variables.
-- **Room does not exist:** The code must be six characters and from the current game; the host must have created the room on that same deployment.
-- **Host sees viewer mode:** You opened the room in another browser or cleared its local storage. The host's token isn't shared with guests.
-- **A phone cannot join:** Make sure the host has not already started the draft; add new players while the room is in the lobby.
-- **QR does not open on a phone:** Make sure the host opened the actual public Vercel deployment (not `localhost` or a private preview URL). The QR encodes the exact origin of the page the host is viewing.
-- **No music:** Sound is off by default. Choose a soundtrack in lobby settings, then tap **Music off** on the device where you want audio.
-
-For questions about deployment, share the exact error from Vercel's build or function logs (but never share API secrets).
+- Downloaded music tracks, remote Suno volume/play/pause, crossfades, or guaranteed automatic looping/shuffling (the embedded player does not expose reliable remote controls).
+- Classical and Modern Pop soundtracks: the supplied catalog contains six styles only. Additional tracks can be added later.
+- Polished game-show sound effects: music is available now; the old repeating browser-synth soundtrack has been removed.
+- Competitive buzzer mode (intentionally paused after the family playtest).
