@@ -117,3 +117,40 @@ test('pause stops timer and resume shifts deadline',()=>{
  s=g.mutate(s,{type:'pause'},{kind:'host'},81000);
  assert.equal(s.active.deadlineAt,end+55000);
 });
+
+const device=require('../.engine-build/device-session.js');
+test('a single device can keep host and player credentials independently',()=>{
+ const credentials={hostToken:'private-host-token',playerToken:'personal-player-token'};
+ assert.equal(device.actorToken('host',credentials),'private-host-token');
+ assert.equal(device.actorToken('player',credentials),'personal-player-token');
+ assert.equal(device.actorToken('tv',credentials),'');
+ assert.equal(device.actorToken('player',{hostToken:'private-host-token',playerToken:''}),'');
+});
+test('host can join as a contestant and perform each action under the appropriate role',()=>{
+ let s=g.makeGame();
+ const host={kind:'host'};
+ const joined=g.joinGame(s,'Host Playing',34,1100);s=joined.state;
+ const contestant={kind:'player',id:joined.player.id};
+ const other=g.joinGame(s,'Other Player',13,1200);s=other.state;
+ s=g.mutate(s,{type:'player-bonuses',playerId:contestant.id,bonusHints:2},host,1300);
+ assert.equal(s.players.find(p=>p.id===contestant.id).bonusHints,2);
+ s=draft(s,[contestant,{kind:'player',id:other.player.id}]);
+ s=open(s,keys(s)[0],contestant,21000);
+ assert.equal(g.makeView(s,host,1,24000).role.kind,'host');
+ assert.equal(g.makeView(s,contestant,1,24000).yourPlayer,contestant.id);
+ assert.equal(g.makeView(s,host,1,24000).active.hostAnswer,undefined,'Host must not receive question answer during play');
+ assert.equal(g.makeView(s,host,1,24000).active.myWrittenHint,undefined,'Host must not receive hidden question hint');
+ const answer=qs.getQuestion(s.active.questionId).answer;
+ s=g.mutate(s,{type:'submit-answer',answer},contestant,24100);
+ s=g.mutate(s,{type:'submit-answer',answer:'not correct'}, {kind:'player',id:other.player.id},24200);
+ assert.equal(s.phase,'results');
+ assert.ok(s.players.find(p=>p.id===contestant.id).score>0);
+});
+test('host-playing participant cannot see Final Word answer in advance',()=>{
+ let {s,actors}=setup('individual',2);
+ s=draft(s,actors);
+ s.phase='final-wager';s.final={id:qs.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
+ assert.equal(g.makeView(s,{kind:'host'},1,2000).final.answer,undefined);
+ s=g.mutate(s,{type:'start-final'},{kind:'host'},3000);
+ assert.equal(g.makeView(s,{kind:'host'},2,3100).final.answer,undefined);
+});

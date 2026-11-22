@@ -250,7 +250,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  return s;
 }
 export function makeView(original:GameState,actor:Actor,revision:number,now=Date.now()){
- const s=tick(original,now),isHost=actor.kind==='host',me=actor.kind==='player'?s.players.find(p=>p.id===actor.id):undefined;
+ const s=tick(original,now),me=actor.kind==='player'?s.players.find(p=>p.id===actor.id):undefined;
  const q=s.active?getQuestion(s.active.questionId):undefined;
  const intro=s.active&&q?{key:s.active.key,category:CATEGORY_LOOKUP.get(q.categoryId)?.name,points:roundPoints(s,s.active.key),until:s.active.introUntilAt}:undefined;
  const current=s.phase==='question'&&s.active&&q?{
@@ -259,17 +259,17 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    submissionCount:Object.keys(s.active.answers).length,
    mySubmission:me?s.active.answers[me.id]?.answer:undefined,
    myDeadlineAt:me?(s.active.deadlineAt??0)+me.bonusTimeSeconds*1000:undefined,
-   myWrittenHint:(isHost||(me&&s.active.hintUsers.includes(me.id)))?q.hint:undefined,
+   myWrittenHint:(me&&s.active.hintUsers.includes(me.id))?q.hint:undefined,
    myFirstLetter:(me&&s.active.letterUsers.includes(me.id))?q.answer.trim().charAt(0).toUpperCase():undefined,
    myAnswerLength:(me&&s.active.lengthUsers.includes(me.id))?q.answer.replace(/[^a-zA-Z]/g,'').length:undefined,
-   // Host can review the key privately; TV and contestants never receive it during an open question.
-   hostAnswer:isHost?q.answer:undefined,
+   // Never send the answer before reveal—even to the host, who may also be playing.
+   hostAnswer:undefined,
  }:undefined;
  const res=s.resolution?{...s.resolution,answers:Object.fromEntries(Object.entries(s.resolution.answers).map(([id,a])=>[id,{...a}]))}:undefined;
  const finalQ=s.final?FINALS.find(f=>f.id===s.final?.id):undefined;
  const f=s.final&&finalQ?{
    category:finalQ.category,prompt:['final-question','final-results','finished'].includes(s.phase)?finalQ.prompt:undefined,
-   answer:['final-results','finished'].includes(s.phase)||isHost?finalQ.answer:undefined,
+   answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,

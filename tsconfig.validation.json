@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "files": [
+    ".validation-shims.d.ts",
+    "src/lib/questions.ts",
+    "src/lib/game.ts",
+    "src/components/ShowRoom.tsx",
+    "src/app/room/[code]/page.tsx",
+    "src/app/display/[code]/page.tsx",
+    "src/lib/db.ts",
+    "src/lib/http.ts",
+    "src/app/api/rooms/route.ts",
+    "src/app/api/rooms/[code]/route.ts",
+    "src/app/api/rooms/[code]/join/route.ts",
+    "src/app/api/rooms/[code]/action/route.ts",
+    "src/lib/device-session.ts"
+  ]
+}

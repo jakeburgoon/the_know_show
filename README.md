@@ -1,19 +1,19 @@
-# The Know Show — v0.2 family playtest
+# The Know Show — v0.2.1 family playtest
 
 This is a complete replacement for the v0.1.2 Next.js source, not just the Soundtrack Lab. It uses the same Supabase `know_show_rooms` and `know_show_members` tables and the same two server-side environment variables.
 
 ## Upgrade an existing deployment
 
-1. Download and unzip `the-know-show-v0.2.0.zip`.
+1. Download and unzip `the-know-show-v0.2.1.zip`.
 2. Upload **everything inside** the extracted project folder to the **root** of your existing `theknowshow` GitHub repository (matching files will be replaced). Do not upload the outer folder, the `.zip`, or `.engine-build`.
 3. Commit changes; Vercel redeploys from the connected repository. If GitHub web uploads do not delete old files, remove the unneeded old assets manually. This package does not require changes to Supabase.
-4. Open your Vercel site, create a **new room**, and scan the **private host QR** from the creator's private `/room/CODE` screen onto your phone **before** sharing the laptop display. Then open `/display/CODE` on your laptop and share that tab/window to the TV. The TV is a pure spectator display with no host controls.
+4. Open your Vercel site. **Existing v0.2 rooms remain compatible**; you can create a new room if you prefer. On the laptop that created the room, open the **Host Controls** tab and scan the **private host QR** onto your phone. Then open `/display/CODE` on the laptop and share that tab/window to the TV. The TV is a pure spectator display with no host controls.
 5. On the TV, press **Play** on the embedded Suno jazz player once. The embedded audio is controlled by Suno, and browser autoplay may block automatic playback.
-6. Everyone else joins using the public QR code on the TV or visits `/room/CODE`. Host/players get individual phone views.
+6. On your phone, choose **My Player View** and join using your name and age, even if you are the host. Your host permissions remain intact. Switch among **My Player View**, **Host Controls**, and **TV Preview** using the tabs at the top; unfinished typed answers stay intact when switching. Everyone else joins through the public QR on the TV or `/room/CODE`.
 
-The creator's browser holds a private host token in local storage. If you close that browser before pairing another host device or copying the host QR/link, you may lose host access to the room. Never show the private host QR on the TV or post it publicly. Pairing currently **copies host access to another device**; it does not revoke the old host device. There is no account sign-in or formal host-transfer/revocation interface yet.
+The creator's browser holds a private host token in local storage. Starting in v0.2.1, the same device can separately store its host token and player token, allowing a host to compete without losing the ability to administer the game. An existing single v0.2 token is automatically identified and migrated when you open the room. If you close that browser before pairing another host device or copying the host QR/link, you may lose host access to the room. Never show the private host QR on the TV or post it publicly. Pairing currently **copies host access to another device**; it does not revoke the old host device. There is no account sign-in or formal host-transfer/revocation interface yet.
 
-**Important:** Old rooms created in v0.1.2 use a different stored game-state format; make a new room after deploying v0.2. Existing database tables and keys stay the same.
+**Important:** Rooms created in v0.1.2 use a different stored game-state format; create a new room if upgrading directly from that release. Rooms created in v0.2.0 **do not need to be recreated**. Existing database tables and keys stay the same. If v0.2.0 already overwrote your host token with a player login, scan the private host QR from your original creator laptop again; v0.2.1 will keep both tokens.
 
 ## v0.2 rules
 
@@ -28,7 +28,7 @@ The creator's browser holds a private host token in local storage. If you close 
 
 ## TV, phones, and soundtrack
 
-- `/room/CODE`: host controls or personal contestant phone interface.
+- `/room/CODE`: three tabs for **My Player View**, **Host Controls** (if paired), and **TV Preview**. The host can join as a contestant, answer normally, and switch back to host duties at any time. Player drafts survive tab changes. The preview has an explicit Back button and omits the Suno player to avoid accidental sound on phones.
 - `/display/CODE`: spectator screen for the shared laptop/TV, with full-size categories/question, question intro, answer reveals, always-visible scoreboard, public QR code during the lobby, and the Suno player.
 - The 12 linked Suno tracks are grouped into six styles (two versions each). **Cool Jazz, Arrangement 1 is the default**. Host can switch style or arrangement during a show. The TV reacts when it refreshes; switching tracks reloads the Suno iframe and typically requires clicking Play again. The **Suno embed owns audio playback and volume**, which cannot currently be controlled reliably from the host phone. It may not loop or rotate tracks automatically. Music requires network connectivity. There are no embedded/downloaded commercial music recordings in this ZIP.
 - `/music-test`: standalone 12-song Soundtrack Lab remains available.
@@ -38,6 +38,8 @@ The creator's browser holds a private host token in local storage. If you close 
 Run `supabase/schema.sql` in Supabase SQL Editor. If you selected **Grant API access to new tables automatically OFF**, the earlier backend grants may also be needed; if the existing v0.1.2 game works, no SQL action is required. All database operations are performed server-side using `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (which can be a compatible Supabase `sb_secret_...` key). Never expose secret keys in GitHub, browser code, or `NEXT_PUBLIC_*` variables.
 
 ## Technical notes
+
+Hosting/playing uses two independently saved room tokens on the same device. Players never receive the host token in their action requests, and host controls never submit player answers. The answer key is hidden from *all* roles during live questions, including host devices, so someone who hosts and plays does not accidentally see it.
 
 This app polls Supabase through Next.js API routes. It uses optimistic updates for concurrent answer submission. Client timestamps are not trusted for scoring; the server receives and timestamps submitted answers. Timed progression occurs when a client polls the room, including the TV. If all clients disconnect, the game waits until one reconnects and requests the current state.
 

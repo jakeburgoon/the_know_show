@@ -13,7 +13,7 @@ export default function Home() {
     try{
       const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode})});
       const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not create room.');
-      localStorage.setItem(`knowshow:${data.code}`,data.token);
+      localStorage.setItem(`knowshow:${data.code}:host`,data.token);
       router.push(`/room/${data.code}`);
     }catch(e){setError(e instanceof Error?e.message:'Could not create room.');setBusy(false);}
   }

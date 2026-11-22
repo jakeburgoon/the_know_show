@@ -1,17 +1,13 @@
-THE KNOW SHOW — VERSION 0.2.0
+THE KNOW SHOW — VERSION 0.2.1 — HOST CAN PLAY
 
-This is a FULL replacement for v0.1.2, including revised gameplay and 12 Suno music embeds. COOL JAZZ is the default.
+1. Unzip the file and open the extracted `the-know-show` folder.
+2. Upload ALL contents into the ROOT of your existing `theknowshow` GitHub repository and commit. Vercel should redeploy.
+3. Open the room on your laptop. If you are a host, switch to HOST CONTROLS; pair the phone using the private host QR if you haven't already.
+4. On your phone, tap MY PLAYER VIEW, join with your name and age, and play normally. Tap HOST CONTROLS whenever you need admin tools; tap MY PLAYER VIEW to return to your questions and answers.
+5. Tap TV PREVIEW to inspect the main display on the phone, then use the BACK button or the Player/Host tabs to return.
+6. Open `/display/ROOMCODE` on your laptop and cast/share it to your TV. Start Cool Jazz from the TV's Suno player.
 
-TO UPGRADE YOUR EXISTING GITHUB/VERCEL APP:
-1. Open the extracted ZIP folder and select everything INSIDE it.
-2. Upload those contents at the ROOT of your existing `theknowshow` GitHub repository.
-3. Commit the changes and allow Vercel to deploy.
-4. Create a brand-new room after the update; older rooms are not compatible with v0.2.
-5. Scan the private host QR from the creator's laptop screen onto your host phone.
-6. Open /display/ROOMCODE on the laptop and share that browser tab to the TV.
-7. Start Cool Jazz playback by pressing Play in the TV's Suno player. Music playback/volume stay in Suno's player.
-8. Players join from the public QR on TV and answer from their phones.
-
-NO SUPABASE SCHEMA CHANGES ARE NEEDED if v0.1.2 is already working.
-
-For more detailed guidance and technical caveats, read README.md.
+IMPORTANT:
+- No Supabase changes; v0.2.0 rooms continue working.
+- If your v0.2.0 phone lost its host token after joining, pair it again from the original creator's laptop. The new version saves both tokens.
+- Full production build wasn't possible here; engine tests and local type-shape validation passed.
