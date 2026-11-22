@@ -1,22 +1,28 @@
-# v0.2 curated question-bank QA
+# Updated audit addendum
 
-The included `src/lib/question-bank.json` has **453 questions across 45 categories**: 360 newly written and edited items, plus 93 original items retained from the earlier editorial audit. This includes **29 themed/creative categories** and **16 classic categories**. Each category has at least two available questions for every one of the four point-value levels. Individual games draw one alternative for each selected category and level.
+The original QA status below predates this audit. **The 96 new questions have now received an item-by-item editorial review and 14 revisions, but only the 14 amended items have external reference links recorded.** See `QUESTION_AUDIT_96.md` and `.csv`.
 
-## Work completed
+# v0.2.3 Question Bank Review
 
-- Carried forward the prior 505-item editorial audit, keeping the 93 originals marked editorially acceptable while omitting rejected and duplicated originals.
-- Rewrote the 88 flagged new questions from the audit rather than deleting their slots.
-- Replaced duplicate prompts in the newly merged bank and a misleading trick question; rewrote one hint that directly revealed the answer.
-- Checked all 453 prompts programmatically for exact duplicate text, literal answer-in-prompt leakage, and literal answer-in-written-hint leakage. All three checks reported **zero** after the corrections.
-- Confirmed every one of 45 categories has at least two alternatives at every level.
-- Checked engine behavior on typo-tolerant answer matching, aliases, all-player scoring, and one-optional-assistance-per-question behavior.
+**549 total candidate questions** across **45 categories**. The previous v0.2.2 package contained 453. This package adds **96 new items** (12 shared categories × 4 levels × 2 targeted question-set versions).
 
-## Important limitations
+## New tag field
 
-This is an **editorial review**, not comprehensive independent external-source verification of all 453 factual claims. An earlier audit checked selected claims using NASA, NOAA, the National Eye Institute, FIFA, IUPAC, and other primary sources, but not every question. Answer difficulty and appropriateness for mixed ages are judgment calls; game-play testing may identify further revisions. For a future public release, require source verification per question, human piloting, and a more exhaustive alias review. Automatic spelling tolerance is intentionally conservative; disputes allow host corrections.
+Each record includes `audiences`, an array of question-set keys: `family`, `general`, `challenging`. Previous general items have all three keys to preserve them as replayable alternatives. New targeted items have only the intended key. `externalSourceVerified` is `false` for all 96 new items.
 
-## Source files
+## Categories with new audience-specific versions
 
-- `src/lib/question-bank.json`: complete machine-readable question catalog, with per-question IDs, level, hints, aliases and editorial status.
-- `src/lib/questions.ts`: runtime mapping from the catalog to category and question IDs, plus The Final Word questions.
-- `tests/v02-engine.test.cjs`: automated engine behavior tests.
+Space Case; Game Night; U.S. Geography; World Geography; U.S. History; Biology; Chemistry; Astronomy; Sports; Movies & TV; Literature; Food & Drink.
+
+Each of these has a newly written Family Friendly question and a newly written Challenging question at **each of four point-value levels**, alongside the existing general alternatives.
+
+## Checks completed
+
+- Every question has an ID, category, level, prompt, answer, hint, and audience tag.
+- The 96 new question IDs are unique.
+- Across the complete 549-question bank, there are no exactly repeated normalized prompts.
+- New question prompts do not contain their full normalized answer as a substring.
+- Every audience setting has at least two eligible candidates at each level of each category.
+- Gameplay tests confirm category selection and questions use the room-selected profile and final question tier.
+
+**Limitations:** These are automated and editorial checks, *not* external fact verification of each item. A fully source-backed factual audit of every question is still outstanding. Difficulty has been editorially estimated, not empirically calibrated across player age/knowledge groups. In the 33 categories without targeted additions yet, the same broad questions may appear across multiple settings.

@@ -1,13 +1,9 @@
-THE KNOW SHOW — VERSION 0.2.1 — HOST CAN PLAY
+THE KNOW SHOW v0.2.5 — DIRECT FROM v0.2.2
 
-1. Unzip the file and open the extracted `the-know-show` folder.
-2. Upload ALL contents into the ROOT of your existing `theknowshow` GitHub repository and commit. Vercel should redeploy.
-3. Open the room on your laptop. If you are a host, switch to HOST CONTROLS; pair the phone using the private host QR if you haven't already.
-4. On your phone, tap MY PLAYER VIEW, join with your name and age, and play normally. Tap HOST CONTROLS whenever you need admin tools; tap MY PLAYER VIEW to return to your questions and answers.
-5. Tap TV PREVIEW to inspect the main display on the phone, then use the BACK button or the Player/Host tabs to return.
-6. Open `/display/ROOMCODE` on your laptop and cast/share it to your TV. Start Cool Jazz from the TV's Suno player.
+Unzip. Open the inner `the-know-show` folder. Upload all files/folders INSIDE it to the ROOT of your existing GitHub repo, replacing matching paths. Commit and let Vercel redeploy.
 
-IMPORTANT:
-- No Supabase changes; v0.2.2 rooms continue working.
-- If your v0.2.2 phone lost its host token after joining, pair it again from the original creator's laptop. The new version saves both tokens.
-- Full production build wasn't possible here; engine tests and local type-shape validation passed.
+No need to install versions 0.2.3 or 0.2.4. No Supabase SQL updates.
+
+Read UPGRADE_FROM_V0.2.2.md for full step-by-step guidance.
+
+Open Host Controls → Where everyone plays → Phones Only; use the PUBLIC join QR or Share invite on your phone. The host can join as a player via My Player View. The private host QR is for pairing a different device only.

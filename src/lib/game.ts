@@ -1,14 +1,16 @@
 import { randomInt, randomUUID } from 'node:crypto';
-import { CATEGORIES, CATEGORY_LOOKUP, FINALS, getQuestion } from './questions';
+import { CATEGORIES, CATEGORY_LOOKUP, FINALS, getQuestion, questionsForAudience } from './questions';
 
 export const MAX_SEATS=8;
 export const ROUND_NAMES=['The Opening Act','The Main Event'] as const;
 export const ROUND_VALUES=[[100,200,300,400],[200,400,600,800]] as const;
 export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished';
 export type Mode='individual'|'teams';
+export type QuestionSet='family'|'general'|'challenging';
 export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'off';
-export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean};
-export type Player={id:string;name:string;age:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;firstLetter:boolean;answerLength:boolean;joinedAt:number;doubleTakesRemaining:number};
+export type DisplayMode='tv'|'phones';
+export type Settings={mode:Mode;questionSet:QuestionSet;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode};
+export type Player={id:string;name:string;age?:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;firstLetter:boolean;answerLength:boolean;joinedAt:number;doubleTakesRemaining:number};
 export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean};
 export type ActiveQuestion={key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];letterUsers:string[];lengthUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
@@ -32,14 +34,13 @@ function player(s:GameState,a:Actor):Player {assert(a.kind==='player'&&a.id,'Joi
 const host=(a:Actor)=>assert(a.kind==='host','Only the host may do that.');
 const currentPlayer=(s:GameState)=>s.players[s.chooserIndex % s.players.length];
 const roundPoints=(s:GameState,key:string)=>ROUND_VALUES[s.round][Number(key.split(':')[1])]||0;
-export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false};}
+export function defaultSettings():Settings{return {mode:'individual',questionSet:'general',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv'};}
 export function makeGame():GameState{return {schemaVersion:2,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[]};}
-export function joinGame(original:GameState,name:string,age:number,now=Date.now()) {
+export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
  assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
- assert(Number.isInteger(age)&&age>=3&&age<=110,'Please enter an age between 3 and 110.');
  const n=String(name||'').trim().replace(/\s+/g,' ').slice(0,28);assert(n.length>=2,'Enter a name of at least two characters.');
  assert(!original.players.some(p=>p.name.toLowerCase()===n.toLowerCase()),'That name is already in use.');
- const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,age,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,firstLetter:false,answerLength:false,joinedAt:now,doubleTakesRemaining:2};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
+ const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,firstLetter:false,answerLength:false,joinedAt:now,doubleTakesRemaining:2};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
 }
 const normalize=(str:string)=>str.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/^[\s]*(?:(?:what|who|which|where)\s+(?:is|are|was|were)\s+|(?:it is|the answer is)\s+)/,'').replace(/[’']/g,'').replace(/\b(?:a|an|the)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 function distance(a:string,b:string){const prev=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let left=prev[0];prev[0]=i;for(let j=1;j<=b.length;j++){const old=prev[j];prev[j]=Math.min(prev[j]+1,prev[j-1]+1,left+(a[i-1]===b[j-1]?0:1));left=old;}}return prev[b.length];}
@@ -54,16 +55,18 @@ export function isCorrect(given:string,answer:string,aliases:string[]=[]):boolea
 }
 function pickPool(s:GameState){
  const excluded=new Set([...s.selected[0],...s.selected[1]]);
- const allowed=CATEGORIES.filter(c=>!excluded.has(c.id)&&[1,2,3,4].every(n=>c.questionsByLevel[String(n)]?.length>=2));
+ const audience=s.settings.questionSet ?? 'general';
+ const allowed=CATEGORIES.filter(c=>!excluded.has(c.id)&&[1,2,3,4].every(n=>questionsForAudience(c.questionsByLevel[String(n)]??[],audience).length>=2));
  const total=s.players.length<=3?8:s.players.length<=5?10:12;
- const younger=s.players.some(p=>p.age<=12);
- // Age informs a *shared*, balanced category suggestion pool only. No player receives an easier question.
- const familyFriendly=new Set(['animals','space','science','food','movies','music','sports','books','nature','colors','games','counting','classroom','oceans','usa','animals_classic','movies_tv','us_geography','music_classic','sports_classic','food_classic','biology','art_classic']);
+ const familyFavorites=new Set(['animals','animals_classic','space','games','movies','movies_tv','food','food_classic','colors','counting','classroom','sports_classic','us_geography','biology']);
+ const challengeFavorites=new Set(['astronomy','space','chemistry','biology','world_history','us_history','world_geography','physics','words','history','math','literature','inventions','us_geography']);
  function choose(type:'classic'|'creative',count:number){
-   const choices=allowed.filter(c=>c.type===type);
-   if(!younger)return shuffle(choices).slice(0,count);
-   const favored=shuffle(choices.filter(c=>familyFriendly.has(c.id))).slice(0,Math.ceil(count/2));
-   return [...favored,...shuffle(choices.filter(c=>!favored.some(p=>p.id===c.id))).slice(0,count-favored.length)];
+   const candidates=allowed.filter(c=>c.type===type);
+   if(audience==='general')return shuffle(candidates).slice(0,count);
+   const theme=audience==='family'?familyFavorites:challengeFavorites;
+   const prioritized=shuffle(candidates.filter(c=>theme.has(c.id)));
+   const first=prioritized.slice(0,Math.min(prioritized.length,Math.ceil(count*.65)));
+   return [...first,...shuffle(candidates.filter(c=>!first.includes(c))).slice(0,count-first.length)];
  }
  const classic=choose('classic',Math.round(total*.6));
  const creative=choose('creative',total-classic.length);
@@ -71,7 +74,12 @@ function pickPool(s:GameState){
 }
 function goDraft(s:GameState){s.players.forEach(p=>p.doubleTakesRemaining=2);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s);s.resolution=undefined;s.active=undefined;log(s,`Select five categories for ${ROUND_NAMES[s.round]}.`);}
 function nextQuestionChoices(s:GameState){for(const id of s.selected[s.round])for(let level=0;level<4;level++){
- const key=`${id}:${level}`,c=CATEGORY_LOOKUP.get(id)!;const pool=shuffle(c.questionsByLevel[String(level+1)]);const already=new Set(Object.values(s.questionMap).map(id=>getQuestion(id)?.answer.toLowerCase()));s.questionMap[key]=(pool.find(q=>!already.has(q.answer.toLowerCase()))??pool[0]).id;
+ const key=`${id}:${level}`,c=CATEGORY_LOOKUP.get(id)!;const audience=s.settings.questionSet ?? 'general';const eligible=questionsForAudience(c.questionsByLevel[String(level+1)],audience);
+ const tailored=eligible.filter(q=>q.audiences?.length===1&&q.audiences[0]===audience);
+ // The specialized pool should usually win, but leave general alternatives
+ // available so the same category can be played again with fresh questions.
+ const pool=tailored.length&&randomInt(100)<80?[...shuffle(tailored),...shuffle(eligible.filter(q=>!tailored.includes(q)))]:shuffle(eligible);
+ const already=new Set(Object.values(s.questionMap).map(id=>getQuestion(id)?.answer.toLowerCase()));s.questionMap[key]=(pool.find(q=>!already.has(q.answer.toLowerCase()))??pool[0]).id;
 }}
 function closeQuestion(s:GameState,now:number,skipped=false){
  const a=s.active!;const q=getQuestion(a.questionId)!;
@@ -124,7 +132,7 @@ export function tick(original:GameState,now=Date.now()):GameState {
  }
  if(s.phase==='results'&&s.resolution&&!s.resolution.disputeIds.length&&now>=s.resolution.endsAt){
    if(s.usedKeys.filter(k=>s.selected[s.round].includes(k.split(':')[0])).length===20){
-     if(s.round===0){s.round=1;goDraft(s);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier===(Math.min(...s.players.map(p=>p.age))<=12?'family':Math.min(...s.players.map(p=>p.age))<=16?'teen':'adult')))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
+     if(s.round===0){s.round=1;goDraft(s);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier===((s.settings.questionSet??'general')==='family'?'family':(s.settings.questionSet??'general')==='challenging'?'adult':'teen')))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
    }else{s.phase='board';s.resolution=undefined;}
  }
  if(s.phase==='final-question'&&s.final){if(s.players.every(p=>s.final!.answers[p.id])||now>=(s.final.deadlineAt??now))finishFinal(s,now);}
@@ -136,13 +144,15 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  switch(action.type){
  case 'settings':{
    host(actor);const opts=action.settings;
-   assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects'].includes(k)), 'Only music can change during the show.');
+   assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects','displayMode'].includes(k)), 'Only display and sound settings can change during the show.');
    if(opts.mode!==undefined){assert(['individual','teams'].includes(opts.mode),'Invalid mode.');s.settings.mode=opts.mode;}
+   if(opts.questionSet!==undefined){assert(['family','general','challenging'].includes(opts.questionSet),'Invalid question set.');s.settings.questionSet=opts.questionSet;}
    for(const k of ['answerSeconds','finalSeconds','normalHints'] as const){const v=opts[k];if(v!==undefined){assert(Number.isInteger(v)&&v>=0&&v<=(k==='normalHints'?10:120),`Invalid ${k}.`);s.settings[k]=v;}}
+   if(opts.displayMode!==undefined){assert(['tv','phones'].includes(opts.displayMode),'Invalid display mode.');s.settings.displayMode=opts.displayMode;}
    if(opts.music!==undefined){assert(['jazz','indie','retro','game','bluegrass','cinematic','off'].includes(opts.music),'Invalid music.');s.settings.music=opts.music;}
    if(opts.arrangement!==undefined){assert(opts.arrangement===0||opts.arrangement===1,'Invalid arrangement.');s.settings.arrangement=opts.arrangement;}
    if(opts.effects!==undefined){assert(typeof opts.effects==='boolean','Invalid effects choice.');s.settings.effects=opts.effects;}
-   for(const p of s.players)p.hintsRemaining=s.settings.normalHints+p.bonusHints;
+   if(opts.normalHints!==undefined)for(const p of s.players)p.hintsRemaining=s.settings.normalHints+p.bonusHints;
    break;
  }
  case 'player-bonuses':{
@@ -275,7 +285,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;
- return {revision,serverNow:now,phase:s.phase,roomId:s.id,role:actor,settings:s.settings,players:s.players,round:s.round,
+ return {revision,serverNow:now,phase:s.phase,roomId:s.id,role:actor,settings:{...s.settings,displayMode:s.settings.displayMode??'tv'},players:s.players,round:s.round,
  roundNames:ROUND_NAMES,roundValues:ROUND_VALUES,selected:s.selected,usedKeys:s.usedKeys,chooserId:currentPlayer(s)?.id,
  categories:CATEGORIES.map(c=>({id:c.id,name:c.name,description:c.description,type:c.type})),draftPool:s.draftPool,draftIndex:s.draftIndex,
  draftTurnId:s.players.length?s.players[(s.draftIndex+s.round*5)%s.players.length]?.id:undefined,

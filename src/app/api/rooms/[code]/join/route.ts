@@ -7,12 +7,12 @@ export const runtime='nodejs';
 export async function POST(request:Request,{params}:{params:Promise<{code:string}>}) {
   const {code:raw}=await params;const code=raw.toUpperCase();
   if(!/^[A-HJ-NP-Z2-9]{6}$/.test(code))return jsonError('Invalid room code.');
-  let body:{name?:unknown;age?:unknown};
+  let body:{name?:unknown};
   try {body=await request.json();}catch{return jsonError('Invalid join request.');}
   for(let attempt=0;attempt<10;attempt++) {
     try {
       const row=await getRoom(code);if(!row)return jsonError('Room not found.',404);
-      const {state,player}=joinGame(row.snapshot as GameState,String(body.name??''),Number(body.age));
+      const {state,player}=joinGame(row.snapshot as GameState,String(body.name??''));
       const token=newToken();
       const {error:memberError}=await db().from('know_show_members').insert({id:player.id,room_code:code,token_hash:tokenHash(token)});
       if(memberError)throw memberError;

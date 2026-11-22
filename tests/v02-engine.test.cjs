@@ -11,7 +11,7 @@ function open(s,key,actor,now){s=g.mutate(s,{type:'open-question',key},actor,now
  s=g.tick(s,now+2600);assert.equal(s.phase,'question');return s;}
 const keys=s=>s.selected[s.round].flatMap(id=>[0,1,2,3].map(l=>`${id}:${l}`));
 test('45 categories, at least two questions per level, and jazz soundtrack default',()=>{
- assert.equal(qs.CATEGORIES.length,45);assert.equal(qs.CATEGORIES.reduce((n,c)=>n+Object.values(c.questionsByLevel).flat().length,0),453);
+ assert.equal(qs.CATEGORIES.length,45);assert.equal(qs.CATEGORIES.reduce((n,c)=>n+Object.values(c.questionsByLevel).flat().length,0),549);
  for(const c of qs.CATEGORIES)for(let tier=1;tier<=4;tier++)assert.ok(c.questionsByLevel[tier].length>=2,c.name+' '+tier);
  assert.equal(g.defaultSettings().music,'jazz');
 });
@@ -82,7 +82,7 @@ test('host may switch Suno soundtrack during an active show, while mode stays fi
  let {s,actors}=setup();s=draft(s,actors);
  s=g.mutate(s,{type:'settings',settings:{music:'retro',arrangement:1}},{kind:'host'},20000);
  assert.equal(s.settings.music,'retro');assert.equal(s.settings.arrangement,1);
- assert.throws(()=>g.mutate(s,{type:'settings',settings:{mode:'teams'}},{kind:'host'},20001),/Only music can change/);
+ assert.throws(()=>g.mutate(s,{type:'settings',settings:{mode:'teams'}},{kind:'host'},20001),/Only display and sound settings can change/);
 });
 test('first-letter assistance is private and opt-in',()=>{
  let {s,actors}=setup();const id=s.players[0].id;
@@ -175,4 +175,125 @@ test('host can adjust accommodations only in lobby or while paused, preserving u
  assert.equal(s.active.deadlineAt,before+1200);
  const view=g.makeView(s,actors[0],9,24600);
  assert.equal(view.active.myDeadlineAt,s.active.deadlineAt+15000);
+});
+
+test('general is the default question set; a new player joins without age',()=>{
+ let state=g.makeGame();assert.equal(state.settings.questionSet,'general');
+ const joined=g.joinGame(state,'Player With No Age');
+ assert.equal(joined.player.name,'Player With No Age');
+ assert.equal(joined.player.age,undefined);
+});
+test('host can set three question versions in lobby, but not after the draft',()=>{
+ for(const questionSet of ['family','general','challenging']){
+  let {s,actors}=setup();
+  s=g.mutate(s,{type:'settings',settings:{questionSet}},{kind:'host'},5000);
+  assert.equal(s.settings.questionSet,questionSet);
+  s=draft(s,actors);
+  assert.throws(()=>g.mutate(s,{type:'settings',settings:{questionSet:'general'}},{kind:'host'},11000),/Only display and sound settings can change/);
+ }
+});
+test('shared categories include audience-specific questions at every difficulty',()=>{
+ const targeted=qs.CATEGORIES.filter(c=>[1,2,3,4].every(l=>c.questionsByLevel[l].some(q=>q.audiences?.length===1&&q.audiences[0]==='family')&&c.questionsByLevel[l].some(q=>q.audiences?.length===1&&q.audiences[0]==='challenging')));
+ assert.equal(targeted.length,12);
+ for(const c of targeted)for(let level=1;level<=4;level++)for(const a of ['family','general','challenging'])assert.ok(qs.questionsForAudience(c.questionsByLevel[level],a).length>=2);
+});
+test('newly selected boards draw variants matching selected question set',()=>{
+ const counts={family:0,challenging:0};
+ // Multiple games verify the tailored alternative is actually selectable (rather than only tagged).
+ for(const audience of ['family','challenging'])for(let k=0;k<24;k++){
+  let {s,actors}=setup('individual',2);
+  s=g.mutate(s,{type:'settings',settings:{questionSet:audience}},{kind:'host'},2000);
+  s=g.mutate(s,{type:'start-draft'},{kind:'host'},5000);
+  // Select a category with audience-specific questions if it is offered.
+  let cat=s.draftPool.find(id=>['space','games','us_geography','world_geography','biology','astronomy','chemistry','us_history','food_classic','sports_classic','movies_tv','literature'].includes(id));
+  if(!cat)continue;
+  s=g.mutate(s,{type:'draft-category',categoryId:cat},actors[0],5001);
+  for(let i=1;i<5;i++)s=g.mutate(s,{type:'draft-category',categoryId:s.draftPool.filter(id=>!s.selected[0].includes(id))[0]},actors[i%2],5001+i);
+  assert.equal(s.phase,'board');
+  for(let l=0;l<4;l++){
+   const q=qs.getQuestion(s.questionMap[`${cat}:${l}`]);
+   if(q.audiences?.length===1&&q.audiences[0]===audience)counts[audience]++;
+  }
+ }
+ assert.ok(counts.family>0 && counts.challenging>0,JSON.stringify(counts));
+});
+
+
+test('category descriptions are present in both the library and the client-facing draft pool',()=>{
+ const {s,actors}=setup('individual',4);
+ assert.equal(qs.CATEGORIES.length,45);
+ for(const c of qs.CATEGORIES){
+  assert.ok(c.description && c.description.length>=25,`Missing explanation: ${c.name}`);
+  assert.ok(['classic','creative'].includes(c.type));
+ }
+ const inDraft=g.mutate(s,{type:'start-draft'},{kind:'host'},10000);
+ const playerView=g.makeView(inDraft,actors[0],1,10000);
+ assert.equal(playerView.phase,'draft');
+ assert.equal(playerView.draftPool.length,10);
+ for(const id of playerView.draftPool){
+  const shown=playerView.categories.find(c=>c.id===id);
+  assert.ok(shown?.description?.length>=25,id);
+ }
+});
+
+test('audited 96-question expansion has unique answers and valid tailored entries',()=>{
+ const added=qs.CATEGORIES.flatMap(c=>Object.values(c.questionsByLevel).flat()).filter(q=>q.id.startsWith('v023-'));
+ assert.equal(added.length,96);
+ const ids=new Set();
+ for(const q of added){
+  assert.ok(!ids.has(q.id));ids.add(q.id);
+  assert.equal(q.audiences.length,1);
+  assert.ok(q.prompt.length>=20&&q.answer&&q.hint);
+  assert.ok(['family','challenging'].includes(q.audiences[0]));
+ }
+ const byId=Object.fromEntries(added.map(q=>[q.id,q]));
+ assert.equal(byId['v023-food_classic-challenging-2'].answer,'Kimchi');
+ assert.equal(byId['v023-movies_tv-challenging-4'].answer,'Seven Samurai');
+ assert.equal(byId['v023-astronomy-family-4'].answer,'Sunspot');
+ assert.equal(byId['v023-space-challenging-1'].answer,'Neptune');
+});
+
+test('new item categories and question variants are valid for direct upgrade from v0.2.2',()=>{
+ const s=g.makeGame();
+ assert.equal(s.schemaVersion,2);
+ assert.equal(s.settings.questionSet,'general');
+ assert.equal(s.settings.music,'jazz');
+ for(const c of qs.CATEGORIES)for(let level=1;level<=4;level++)for(const audience of ['family','general','challenging']){
+  const eligible=qs.questionsForAudience(c.questionsByLevel[String(level)],audience);
+  assert.ok(eligible.length>=2,`${c.name} ${level} ${audience}`);
+ }
+});
+
+
+test('phones-only option defaults off, allows host switching at any point without resetting the game',()=>{
+ let {s,actors}=setup();assert.equal(s.settings.displayMode,'tv');
+ s=g.mutate(s,{type:'settings',settings:{displayMode:'phones'}},{kind:'host'},4000);
+ assert.equal(s.settings.displayMode,'phones');
+ s=draft(s,actors);s=open(s,keys(s)[0],actors[0],20000);
+ const key=s.active.key,revision=g.makeView(s,actors[0],2,23100);
+ assert.equal(revision.settings.displayMode,'phones');
+ assert.ok(revision.active?.prompt);
+ assert.throws(()=>g.mutate(s,{type:'settings',settings:{displayMode:'tv'}},actors[0],23001),/Only the host/);
+ s=g.mutate(s,{type:'settings',settings:{displayMode:'tv'}},{kind:'host'},23002);
+ assert.equal(s.phase,'question');assert.equal(s.active.key,key);assert.equal(s.settings.displayMode,'tv');
+ s=g.mutate(s,{type:'settings',settings:{displayMode:'phones'}},{kind:'host'},23003);
+ assert.equal(s.settings.displayMode,'phones');
+ assert.throws(()=>g.mutate(s,{type:'settings',settings:{displayMode:'other'}},{kind:'host'},23004),/Invalid display mode/);
+});
+
+test('switching display mode does not restore already spent hints',()=>{
+ let {s,actors}=setup();s=draft(s,actors);s=open(s,keys(s)[0],actors[0],20000);
+ s=g.mutate(s,{type:'hint',kind:'written'},actors[0],23000);
+ const before=s.players[0].hintsRemaining;assert.equal(before,2);
+ s=g.mutate(s,{type:'settings',settings:{displayMode:'phones'}},{kind:'host'},23001);
+ assert.equal(s.players[0].hintsRemaining,before);
+ s=g.mutate(s,{type:'settings',settings:{music:'retro'}},{kind:'host'},23002);
+ assert.equal(s.players[0].hintsRemaining,before);
+});
+
+test('legacy v0.2 rooms without displayMode default to shared-TV arrangement',()=>{
+ let s=g.makeGame();delete s.settings.displayMode;
+ assert.equal(g.makeView(s,{kind:'spectator'},1).settings.displayMode,'tv');
+ s=g.mutate(s,{type:'settings',settings:{displayMode:'phones'}},{kind:'host'},1000);
+ assert.equal(s.settings.displayMode,'phones');
 });
