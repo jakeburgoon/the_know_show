@@ -200,12 +200,13 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const activeForPlayer=view.phase==='question'&&view.active&&(view.settings.mode==='individual'||view.active.answeringId===me?.id);
  const myDeadline=view.active?.myDeadlineAt??view.active?.deadlineAt;
  const myHasAnswered=Boolean(me&&view.active?.mySubmission!==undefined);
- return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span></header>
+ return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span></header>
    {hostToken&&<nav className="v2viewtabs" aria-label="Room views">
      <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>My Player View</button>
      {hostToken&&<button type="button" className={tab==='host'?'active':''} aria-current={tab==='host'?'page':undefined} onClick={()=>switchTab('host')}>Host Controls</button>}
      {hostToken&&<button type="button" className={tab==='tv'?'active':''} aria-current={tab==='tv'?'page':undefined} onClick={()=>switchTab('tv')}>TV Preview</button>}
    </nav>}
+   {view.phase==='lobby'&&<section className="v11roomhero" aria-label="The Green Room"><div className="v11roomherobrand"><img src="/know-show-logo.png" alt="The Know Show"/><span>THE GREEN ROOM</span></div><div className="v11roomherofooter"><div><strong>{isHost?'Welcome, showrunner.':'You’re in the right place.'}</strong><small>{isHost?'Get your players ready, then build the board.':'The show begins when everyone’s ready.'}</small></div><div className="v11roomcodeplate"><span>ROOM CODE</span><strong>{code}</strong></div></div></section>}
    {phonesOnly&&isPlayer&&view.phase!=='lobby'&&<PocketScores players={view.players} meId={me?.id}/>}
    {phonesOnly&&hostToken&&<PhoneSoundtrack music={view.settings.music} arrangement={view.settings.arrangement}/>}
    {tab==='tv'&&hostToken?<div className="v2tvpreview"><div className="v2tvpreviewnote"><strong>TV Preview</strong> · For the actual shared TV, open the full-screen TV display from Host Controls. <button type="button" onClick={()=>switchTab(playerToken?'player':hostToken?'host':'player')}>← Back to {playerToken?'Player':'Host'} View</button></div><TV view={view} code={code} origin={origin} now={now} preview/></div>:<>
@@ -291,7 +292,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='finished'&&<section className="v2card"><h2>Final standings</h2>{sorted.map((p,i)=><p key={p.id}>{i+1}. {p.name} — {fmt(p.score)} points</p>)}</section>}
    </>}
    <section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>
-   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.0</span></footer>
+   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.1</span></footer>
    </>}
  </main>;
 }

@@ -1,9 +1,15 @@
-THE KNOW SHOW v0.2.5 — DIRECT FROM v0.2.2
+THE KNOW SHOW — v1.1.0 VISUAL REFRESH
 
-Unzip. Open the inner `the-know-show` folder. Upload all files/folders INSIDE it to the ROOT of your existing GitHub repo, replacing matching paths. Commit and let Vercel redeploy.
+This is the COMPLETE app, not a small patch.
 
-No need to install versions 0.2.3 or 0.2.4. No Supabase SQL updates.
+From installed v1.0: See UPGRADE_FROM_V1.0.md.
 
-Read UPGRADE_FROM_V0.2.2.md for full step-by-step guidance.
+1. Unzip the download.
+2. Upload all items INSIDE the `the-know-show` folder to the root of your existing GitHub repository (overwriting matching paths).
+3. Commit. Vercel redeploys automatically if GitHub is connected.
+4. Reload the app after deployment. If the old style is cached, hard-refresh or reopen the installed PWA.
 
-Open Host Controls → Where everyone plays → Phones Only; use the PUBLIC join QR or Share invite on your phone. The host can join as a player via My Player View. The private host QR is for pairing a different device only.
+NO SUPABASE CHANGES. NO ENVIRONMENT VARIABLE CHANGES.
+EXISTING V1.0 ROOMS CONTINUE TO WORK.
+
+The approved logo at public/know-show-logo.png is included unchanged.

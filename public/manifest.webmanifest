@@ -4,8 +4,8 @@
   "description": "Live trivia night with your friends and family",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8f6ee",
-  "theme_color": "#142932",
+  "background_color": "#fff8e9",
+  "theme_color": "#0d233b",
   "icons": [
     {
       "src": "/app-icon-192.png",

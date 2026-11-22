@@ -2,12 +2,14 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Clapperboard, Crown, Mic2, Users } from 'lucide-react';
+import { ArrowRight, Check, CircleHelp, Clapperboard, Copy, MonitorPlay, Smartphone, Sparkles, Ticket, Users } from 'lucide-react';
 
 export default function Home() {
   const router=useRouter();
-  const [code,setCode]=useState('');const [passcode,setPasscode]=useState('');
-  const [busy,setBusy]=useState(false);const [error,setError]=useState('');
+  const [code,setCode]=useState('');
+  const [passcode,setPasscode]=useState('');
+  const [busy,setBusy]=useState(false);
+  const [error,setError]=useState('');
   async function createRoom(){
     setBusy(true);setError('');
     try{
@@ -17,26 +19,43 @@ export default function Home() {
       router.push(`/room/${data.code}`);
     }catch(e){setError(e instanceof Error?e.message:'Could not create room.');setBusy(false);}
   }
-  function goToRoom(){const normalized=code.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6);if(normalized.length!==6){setError('Enter the six-character room code.');return;}router.push(`/room/${normalized}`);}
-  return <main className="landing">
-    <header className="site-header"><div className="brand-mini"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></div><span className="edition">THE AT-HOME TRIVIA SHOW</span></header>
-    <section className="hero"><div className="eyebrow"><span className="dot"/> THE STAGE IS YOURS</div>
-      <h1>Brains on.<br/><em>Game on.</em></h1>
-      <p>A lively, original trivia show for friends and family. Answer together on your phones, with an optional big-screen board, and see who knows their stuff.</p>
-      <div className="hero-highlights"><span><Users size={17}/> 2–8 players or teams</span><span><Mic2 size={17}/> Everyone answers</span><span><Crown size={17}/> Team mode, too</span></div>
+  function goToRoom(){
+    const normalized=code.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6);
+    if(normalized.length!==6){setError('Enter the six-character room code.');return;}
+    router.push(`/room/${normalized}`);
+  }
+  return <main className="v11landing">
+    <header className="v11landingbar">
+      <Link href="/" aria-label="The Know Show home" className="v11landingbrand"><img src="/know-show-logo.png" alt="The Know Show"/></Link>
+      <Link href="/guide" className="v11howlink"><CircleHelp size={17}/> How to play</Link>
+    </header>
+    <section className="v11showcase" aria-labelledby="v11heroheading">
+      <div className="v11beam v11beamleft" aria-hidden="true"/><div className="v11beam v11beamright" aria-hidden="true"/>
+      <p className="v11overline"><span className="v11glowdot"/> YOUR LIVING ROOM. YOUR GAME SHOW.</p>
+      <img className="v11hero-logo" src="/know-show-logo.png" alt="The Know Show"/>
+      <h1 id="v11heroheading">A little knowledge. <span>A lot of fun.</span></h1>
+      <p className="v11herodeck">Pick your categories, answer from your phone, and see who takes the crown. No buzzers. Just a great game night.</p>
+      <div className="v11featureline" aria-label="How the game works"><span><Users size={17}/> Up to 8 players</span><span><Smartphone size={17}/> Everyone answers</span><span><MonitorPlay size={17}/> TV optional</span></div>
     </section>
-    <section className="entry-grid" aria-label="Start or join a show">
-      <div className="entry-panel host-panel"><div className="panel-icon"><Clapperboard size={25}/></div><h2>Run the show</h2><p>Create a room, choose your settings, and play with a TV or entirely on phones.</p>
-        <label className="input-label" htmlFor="passcode">Room-creation passcode <span className="subtle">(only if configured)</span></label>
-        <input id="passcode" className="input" type="password" value={passcode} onChange={e=>setPasscode(e.target.value)} autoComplete="off" placeholder="Optional"/>
-        <button className="button button-accent full" disabled={busy} onClick={createRoom}>{busy?'Creating…':'Create a show'} <ArrowRight size={18}/></button></div>
-      <div className="entry-panel join-panel"><div className="panel-icon"><Users size={25}/></div><h2>Join the fun</h2><p>Get the room code from the host. Pick your player name and get ready.</p>
-        <label className="input-label" htmlFor="room-code">Six-character room code</label>
-        <input id="room-code" className="input room-code" autoCapitalize="characters" value={code} onChange={e=>setCode(e.target.value.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6))} onKeyDown={e=>{if(e.key==='Enter')goToRoom();}} placeholder="ABC234" maxLength={6}/>
-        <button className="button button-outline full" onClick={goToRoom}>Enter the room <ArrowRight size={18}/></button></div>
+    <section className="v11entryzone" aria-labelledby="v11startheading">
+      <div className="v11entryheading"><p className="v11sectionkicker">THE SHOW STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
+      <div className="v11entrygrid">
+        <section className="v11entrycard v11createcard" aria-labelledby="v11createheading"><div className="v11cardtop"><div className="v11cardicon"><Clapperboard size={24}/></div><span className="v11steplabel">01 / HOST</span></div>
+          <h3 id="v11createheading">Run the show</h3><p>Create your room, invite your crew, and play along while hosting.</p>
+          <label htmlFor="passcode" className="v11fieldlabel">Room passcode <span>Optional, if configured</span></label>
+          <input id="passcode" className="v11field" type="password" value={passcode} onChange={e=>setPasscode(e.target.value)} autoComplete="off" placeholder="Leave blank if not needed"/>
+          <button type="button" className="v11action v11actiongold" disabled={busy} onClick={createRoom}>{busy?'Creating your room…':'Create a show'}<ArrowRight size={19}/></button>
+        </section>
+        <section className="v11entrycard v11joincard" aria-labelledby="v11joinheading"><div className="v11cardtop"><div className="v11cardicon"><Ticket size={24}/></div><span className="v11steplabel">02 / PLAYER</span></div>
+          <h3 id="v11joinheading">Join the fun</h3><p>Scan the host’s QR code, or enter your room code to get in.</p>
+          <label htmlFor="room-code" className="v11fieldlabel">Your six-character room code</label>
+          <input id="room-code" className="v11field v11codefield" autoCapitalize="characters" value={code} onChange={e=>setCode(e.target.value.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6))} onKeyDown={e=>{if(e.key==='Enter')goToRoom();}} placeholder="ABC234" maxLength={6}/>
+          <button type="button" className="v11action v11actionnavy" onClick={goToRoom}>Enter the room <ArrowRight size={19}/></button>
+        </section>
+      </div>
+      {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
-    {error&&<div role="alert" className="error-message">{error}</div>}
-    <footer className="landing-footer">THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD <span>•</span> Double Takes are in your hands <span>•</span> Play on phones, with or without a TV</footer>
-    <div className="bottom-note"><Link href="/guide">How to play</Link></div>
+    <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
+    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.1</span></footer>
   </main>;
 }

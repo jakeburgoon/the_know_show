@@ -1,31 +1,24 @@
-# The Know Show v1.0.0 — Family Game Night Edition
+# The Know Show v1.1.0 — Visual Refresh
 
-**Complete, direct replacement for v0.2.5. No Supabase migration required. Create a new room after deployment.**
+**Release:** Visual-only feature update based on v1.0.0. Compatible with existing rooms and database.
 
-### Shipped features
+## Design changes
+- **Exact approved main logo** displayed prominently on the landing-page hero, along with a smaller logo in the navigation. The source PNG is unchanged, and the existing app icons are preserved.
+- **Landing page rebuilt:** navy spotlight-inspired hero, warm-gold accents, clearer game-night message, high-contrast Create/Join cards and buttons, short at-a-glance features, responsive phone layout.
+- **Green Room refreshed:** an on-brand logo/header area with the current room code, distinctive host-ready messaging, streamlined cards, clearer tab states, buttons, form controls, and QR panels.
+- **Cohesive interface palette:** deep navy, warm gold/yellow, cream and restrained teal/blue-green across category drafting, 4×3 game boards, question/introduction cards, live scores, host controls, and TV display.
+- **Readability preserved:** compact player question and answer form still appear together, numerical points are high-contrast, category and question phases are visually distinct, focus styles and reduced-motion preference are respected.
+- Browser theme and PWA background colors aligned to navy and cream.
 
-- Exactly four categories per round and three Easy/Medium/Hard questions per category (24 regular questions, plus Final Word).
-- The Opening Act: 100/300/500. The Main Event: 200/600/1000.
-- One Double Take per individual player per round; no carryover.
-- One Standard Trivia question bank: 540 QA5 editorial candidates across 45 categories; four alternatives per category/difficulty.
-- Explicit acceptable answers and cautious spelling matching that protects numbers and ordinals.
-- Automatically shown first-letter accommodations, with optional written hints and answer-length hints.
-- Automatic Final Word question reveal once all wagers are locked.
-- Dispute banner and direct jump to Host Controls for hosts who are also playing.
-- Avoid previously played questions when possible using host-device local history, with an in-room history backup.
-- Exact approved main logo integrated as PNG in the home, host, and TV UI, plus derived app icons; streamlined teal/gold styling.
-- Retained Phone Only, TV + Phones, private host QR, public join QR, team turns and single steal, host-controlled accommodations, and all 12 Suno arrangements with Cool Jazz default.
+## Not changed
+- Gameplay engine, scores, modes, 24-question two-round structure, Final Word, accepted-answer matching, disputes and accommodations.
+- The 540-question candidate bank and source verification status; this update does not claim additional fact verification.
+- Approved main logo image, soundtracks and Cool Jazz default.
+- Supabase schema and environment variables.
 
-### Checks
-
-- 14 v1.0 engine/regression tests passed, including a full two-round game and Final Word.
-- TypeScript compilation of the game library passed; TSX syntax checks passed.
-- 540 question records audited for required fields and four-per-tier coverage.
-- Full Next.js production build and browser-on-device testing have **not** been completed here.
-
-### Known limitations
-
-- QA5 content remains partly editorial rather than individually externally verified (66 direct source checks / 540 questions).
-- Recent-question history persists per host browser, not across all devices and accounts.
-- Suno embeds require a local Play tap and cannot be reliably controlled for volume or playback from a second device.
-- Existing v0.2.x rooms are intentionally incompatible with the v1.0 game schema; create a fresh room.
+## Validation
+- All 14 v1.0 game engine regression tests passed after the visual-only change.
+- The updated TSX pages passed TypeScript compatibility and syntax checks.
+- The combined CSS parsed without stylesheet errors.
+- The approved `public/know-show-logo.png` was checked byte-for-byte against the user's approved original.
+- A full `next build` was **not** performed because Next.js/npm packages were unavailable in this execution environment. Vercel will run the real production build when the code is deployed.

@@ -1,10 +1,12 @@
+> **Visual Refresh (v1.1):** This release is a direct upgrade from v1.0 with the approved logo, a redesigned landing page and Green Room, and matching navy/gold/cream styling across the app. See `UPGRADE_FROM_V1.0.md` and `RELEASE_NOTES.md`. No gameplay or database changes are necessary.
+
 # The Know Show — v1.0 (Family Game Night Edition)
 
 This is a complete GitHub replacement package. **You can upgrade directly from v0.2.5**; no intermediate versions are required. The new game rules and question IDs require **creating a new room** after deployment. Existing room snapshots created with v0.2.x do not work in v1.0. No changes to the existing Supabase SQL tables or Vercel environment variables are needed.
 
 ## Upgrade from v0.2.5
 
-1. Extract `the-know-show-v1.0.0-direct-from-v0.2.5.zip` on your computer.
+1. Extract `the-know-show-v1.1.0-direct-from-v0.2.5.zip` on your computer.
 2. Open the **inner** `the-know-show` folder.
 3. In GitHub, open your existing repository at its top level. Choose **Add file → Upload files**.
 4. Drag everything *inside* the inner `the-know-show` folder (including `src`, `public`, `supabase`, and other files) into the upload area. GitHub replaces matching paths, but doesn't automatically remove old paths.
