@@ -1,3 +1,16 @@
+# v0.2.2 — Phone usability and in-game accommodations
+
+- Removed TV Preview tab and footer link from ordinary players. Paired host devices keep Player / Host / TV Preview navigation.
+- Compact mobile category board appears at the top when it is time to select a question; Player View scrolls to the top when a board/question loads.
+- iPhone text fields use a minimum 16px font to avoid automatic Safari zoom; answer textboxes no longer force focus; keyboard dismisses on answer submission.
+- Player questions and Final Word questions now use a distinctive, high-contrast presentation with a category/value badge and separate countdown.
+- Hosts can pause the show and adjust individual accommodations, including extra hints, first-letter reveal, answer-length reveal and bonus time. Used written hints are preserved when bonus allowance changes.
+- Clarified: the private host QR is only for securely pairing another host device; it is not necessary when already using the device with Host Controls.
+- Existing v0.2 game rooms continue to work; no Supabase schema or environment variable changes are needed.
+- 17 gameplay/regression tests passed, plus shim-based TypeScript validation. Full Next.js production build not verified in this environment.
+
+---
+
 # The Know Show v0.2.1 — Host can play update
 
 ## Fixes and additions

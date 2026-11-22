@@ -146,8 +146,8 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    break;
  }
  case 'player-bonuses':{
-   host(actor);assert(s.phase==='lobby','Set accommodations in the Green Room.');const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');
-   if(action.bonusHints!==undefined){assert(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=10,'Invalid bonus hints.');p.bonusHints=action.bonusHints;p.hintsRemaining=s.settings.normalHints+p.bonusHints;}
+   host(actor);assert(s.phase==='lobby'||!!s.pausedAt,'Pause the game before changing player accommodations.');const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');
+   if(action.bonusHints!==undefined){assert(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=10,'Invalid bonus hints.');const difference=action.bonusHints-p.bonusHints;p.bonusHints=action.bonusHints;p.hintsRemaining=Math.max(0,p.hintsRemaining+difference);}
    if(action.bonusTimeSeconds!==undefined){assert(Number.isInteger(action.bonusTimeSeconds)&&action.bonusTimeSeconds>=0&&action.bonusTimeSeconds<=30,'Invalid time bonus.');p.bonusTimeSeconds=action.bonusTimeSeconds;}
    if(action.firstLetter!==undefined){assert(typeof action.firstLetter==='boolean','Invalid first-letter setting.');p.firstLetter=action.firstLetter;}
    if(action.answerLength!==undefined){assert(typeof action.answerLength==='boolean','Invalid answer-length setting.');p.answerLength=action.answerLength;}break;

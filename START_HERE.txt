@@ -8,6 +8,6 @@ THE KNOW SHOW — VERSION 0.2.1 — HOST CAN PLAY
 6. Open `/display/ROOMCODE` on your laptop and cast/share it to your TV. Start Cool Jazz from the TV's Suno player.
 
 IMPORTANT:
-- No Supabase changes; v0.2.0 rooms continue working.
-- If your v0.2.0 phone lost its host token after joining, pair it again from the original creator's laptop. The new version saves both tokens.
+- No Supabase changes; v0.2.2 rooms continue working.
+- If your v0.2.2 phone lost its host token after joining, pair it again from the original creator's laptop. The new version saves both tokens.
 - Full production build wasn't possible here; engine tests and local type-shape validation passed.

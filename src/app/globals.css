@@ -126,3 +126,30 @@
 .v2tvpreview .v2tvhead{font-size:11px}
 .v2tvpreview .v2tvside .v2scores{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(min-width:800px){.v2tvpreview{margin-left:0;margin-right:0}.v2tvpreview .v2tvcolumns{grid-template-columns:1fr 220px}.v2tvpreview .v2tvside .v2scores{grid-template-columns:1fr}}
+
+/* v0.2.2: high-contrast player questions, efficient mobile board, and iOS input usability. */
+.v2questioncard{padding:12px;overflow:hidden;border:1px solid #a5c9c4;box-shadow:0 10px 32px rgba(17,63,65,.12)}
+.v2questiondisplay{position:relative;overflow:hidden;padding:clamp(20px,5vw,33px) clamp(17px,5vw,32px) 16px;border-radius:13px;background:linear-gradient(145deg,#123e50 0%,#195961 60%,#1f6b69 100%);color:#fff;border:1px solid #326e77}
+.v2questiondisplay:after{content:'✳';position:absolute;right:-14px;bottom:-65px;font-size:170px;color:#fff;opacity:.055;line-height:1;pointer-events:none}
+.v2questiondisplay .v2eyebrow{color:#f7cd85;font-size:12px;letter-spacing:.07em;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.v2questiondisplay .v2questionpoints{background:#f5d395;color:#16434f;border-radius:999px;padding:7px 11px;white-space:nowrap;font-size:11px;font-weight:900;letter-spacing:.04em}
+.v2questiondisplay .v2prompt{color:#fff!important;font-size:clamp(25px,5.8vw,38px)!important;line-height:1.24!important;letter-spacing:-.02em;font-weight:800;margin:0 0 22px;text-wrap:pretty;position:relative;z-index:1}
+.v2questiondisplay .v2countdown{color:#ffe3a7;background:#092e3a78;border:1px solid #ffffff38;display:table;padding:8px 16px;border-radius:12px;margin:0;font-size:26px;font-variant-numeric:tabular-nums}
+.v2boardcard .v2boardheading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.v2boardcard .v2boardheading h2{font-size:17px;margin:0;line-height:1.25}
+.v2boardcard .v2boardheading span{font-size:13px;font-weight:900;white-space:nowrap;color:#157265}
+.v2accommodationspanel{border-color:#afcaba}
+.v2phone input:not([type="checkbox"]),.v2phone select,.v2phone textarea{font-size:16px!important}
+@media(max-width:700px){
+ .v2phone{padding:0 9px 35px}
+ .v2phonehead{padding:11px 4px 9px}
+ .v2viewtabs{padding:7px 0 5px;gap:5px}
+ .v2viewtabs button{min-height:43px;padding:8px 4px}
+ .v2boardcard{margin:7px -4px 12px;padding:10px 6px 12px;border-radius:13px}
+ .v2boardcard .v2board{margin:7px 0 0;padding:5px;gap:3px}
+ .v2boardcard .v2boardcol{gap:3px;grid-template-rows:58px repeat(4,50px)}
+ .v2boardcard .v2tile{min-height:50px;font-size:clamp(13px,3.8vw,18px)}
+ .v2boardcard .v2boardcat{font-size:clamp(9px,2.25vw,12px);padding:3px 1px}
+ .v2questioncard{margin-top:7px}
+ .v2questiondisplay .v2prompt{font-size:clamp(25px,6vw,33px)!important}
+}

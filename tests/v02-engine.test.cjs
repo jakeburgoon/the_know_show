@@ -154,3 +154,25 @@ test('host-playing participant cannot see Final Word answer in advance',()=>{
  s=g.mutate(s,{type:'start-final'},{kind:'host'},3000);
  assert.equal(g.makeView(s,{kind:'host'},2,3100).final.answer,undefined);
 });
+
+test('host can adjust accommodations only in lobby or while paused, preserving used hints',()=>{
+ let {s,actors}=setup();const id=s.players[0].id;
+ s=draft(s,actors);s=open(s,keys(s)[0],actors[0],20000);
+ s=g.mutate(s,{type:'hint',kind:'written'},actors[0],23100);
+ assert.equal(s.players[0].hintsRemaining,2);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:id,bonusHints:2},{kind:'host'},23200),/Pause the game/);
+ const before=s.active.deadlineAt;
+ s=g.mutate(s,{type:'pause'},{kind:'host'},23300);
+ s=g.mutate(s,{type:'player-bonuses',playerId:id,bonusHints:2,firstLetter:true,bonusTimeSeconds:15,answerLength:true},{kind:'host'},23500);
+ assert.equal(s.players[0].hintsRemaining,4);
+ assert.equal(s.players[0].firstLetter,true);
+ assert.equal(s.players[0].answerLength,true);
+ assert.equal(s.players[0].bonusTimeSeconds,15);
+ s=g.mutate(s,{type:'player-bonuses',playerId:id,bonusHints:1},{kind:'host'},24000);
+ assert.equal(s.players[0].hintsRemaining,3);
+ assert.equal(s.players[0].bonusHints,1);
+ s=g.mutate(s,{type:'pause'},{kind:'host'},24500);
+ assert.equal(s.active.deadlineAt,before+1200);
+ const view=g.makeView(s,actors[0],9,24600);
+ assert.equal(view.active.myDeadlineAt,s.active.deadlineAt+15000);
+});
