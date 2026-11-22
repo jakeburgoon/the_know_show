@@ -1,4 +1,4 @@
-THE KNOW SHOW — VERSION 0.1.0
+THE KNOW SHOW — VERSION 0.1.2
 
 Start with README.md for full, step-by-step instructions.
 
@@ -11,7 +11,7 @@ QUICK SETUP:
      SUPABASE_SERVICE_ROLE_KEY = Your server-side Supabase service_role / secret key
    Optional:
      ROOM_CREATION_PASSCODE    = A password to restrict creation of new rooms.
-5. Deploy, open your Vercel URL, create a show, and share the room code with players.
+5. Deploy, open your Vercel URL, create a show, and show the Green Room QR code for players to scan (or share the room code).
 
 NEVER upload the secret key to GitHub or place it in a NEXT_PUBLIC_ variable.
 
@@ -19,3 +19,8 @@ Rules: The Opening Act → The Main Event → The Final Word.
 One hidden Double Take clue per board scores double points.
 
 The full readme describes music, age advantages, hints, host judging, and testing.
+
+UPDATING AN EXISTING DEPLOYMENT (v0.1.1 -> v0.1.2):
+Upload the updated code to the same GitHub repository and deploy in Vercel.
+No Supabase SQL changes or environment variable changes are needed.
+Open a newly created room as the host, scan its QR code from a separate phone, and join.

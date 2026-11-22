@@ -2,7 +2,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowRight, Award, Check, ChevronRight, Clipboard, Clock3, Eye, EyeOff, HelpCircle, Lightbulb, LockKeyhole, Mic, Music2, Play, RotateCcw, Send, Settings2, SkipForward, Sparkles, Users, Volume2, VolumeX, X } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
+import { ArrowRight, Award, Check, ChevronRight, Clipboard, Clock3, CopyCheck, Expand, ScanLine, Eye, EyeOff, HelpCircle, Lightbulb, LockKeyhole, Mic, Music2, Play, RotateCcw, Send, Settings2, SkipForward, Sparkles, Users, Volume2, VolumeX, X } from 'lucide-react';
 import type { Action,GameView,Settings } from '@/lib/game';
 
 type RequestError=Error;
@@ -58,8 +59,11 @@ export default function RoomPage() {
   const [view,setView]=useState<GameView|null>(null);const [busy,setBusy]=useState(false);
   const [error,setError]=useState('');const [joinName,setJoinName]=useState('');const [joinAge,setJoinAge]=useState('');
   const [settingsOpen,setSettingsOpen]=useState(false);const [showLog,setShowLog]=useState(false);
+  const [joinUrl,setJoinUrl]=useState(''); const [qrExpanded,setQrExpanded]=useState(false); const [linkCopied,setLinkCopied]=useState(false);
   const [wager,setWager]=useState('0');const [now,setNow]=useState(Date.now());const latestRevision=useRef(-1);
-  useEffect(()=>{setToken(getToken(code));setReady(true);},[code]);
+  useEffect(()=>{setToken(getToken(code));setReady(true);setJoinUrl(`${window.location.origin}/room/${encodeURIComponent(code)}`);},[code]);
+  useEffect(()=>{if(!qrExpanded)return;const closeOnEscape=(event:KeyboardEvent)=>{if(event.key==='Escape')setQrExpanded(false);};window.addEventListener('keydown',closeOnEscape);return()=>window.removeEventListener('keydown',closeOnEscape);},[qrExpanded]);
+  async function copyJoinLink(){if(!joinUrl)return;try{await navigator.clipboard.writeText(joinUrl);setLinkCopied(true);}catch{setLinkCopied(false);}}
   const refresh=useCallback(async()=>{
     if(!ready)return;
     try{const res=await fetch(`/api/rooms/${code}`,{headers:token?{Authorization:`Bearer ${token}`}:{},cache:'no-store'});
@@ -94,7 +98,7 @@ export default function RoomPage() {
   const canPickDraft=isHost||(isPlayer&&view?.draftTurnId===myId);
   const canBuzz=Boolean(view?.phase==='clue'&&view.clue?.status==='buzzing'&&myPlayer&&!view.clue.attempts.some(a=>a.playerId===myId)
     &&(!view.clue.meEligibleAt||now>=view.clue.meEligibleAt)
-    &&(!view.settings.buzzSeconds||now<=view.clue.buzzOpenedAt+view.settings.buzzSeconds*1000));
+    &&(!view.clue.buzzDeadlineAt||now<=view.clue.buzzDeadlineAt));
   const finalMax=Math.max(0,myPlayer?.score||0);
   const stageLabel=view?.phase==='finished'?'The Curtain Call':view?.phase?.startsWith('final')?'The Final Word':view?.phase==='draft'?'Category Draft':view?.phase==='lobby'?'Green Room':view?.roundNames[view.round];
   if(!ready||(!view&&!error))return <main className="room-shell loading-screen"><div className="spinning-star">✳</div><p>Getting the stage ready…</p></main>;
@@ -111,26 +115,39 @@ export default function RoomPage() {
       <form className="join-form" onSubmit={e=>{e.preventDefault();void join();}}><label>Your {view.settings.mode==='teams'?'team name':'player name'}<input required className="input" minLength={2} maxLength={28} placeholder={view.settings.mode==='teams'?'The Brainiacs':'Your name'} value={joinName} onChange={e=>setJoinName(e.target.value)}/></label>
         <label>{view.settings.mode==='teams'?'Youngest teammate’s age':'Your age'}<input className="input" type="number" required min={3} max={110} placeholder="e.g. 12" value={joinAge} onChange={e=>setJoinAge(e.target.value)}/></label>
         <button type="submit" className="button button-accent" disabled={busy}>{busy?'Joining…':'Join the show'} <ArrowRight size={18}/></button>
-      </form><p className="small-note">We ask only for age, not date of birth, to set optional family-friendly advantages.</p>
+      </form><p className="small-note">We ask only for age, not date of birth, to suggest suitable categories and select the final question. The host assigns hints and buzzer advantages separately.</p>
     </section>}
     {role==='spectator'&&view.phase!=='lobby'&&<div className="notice-bar"><Eye size={17}/> You’re watching in spectator mode. Joining closes when the game begins.</div>}
     <Scoreboard players={sorted} myId={myId} mode={view.settings.mode} />
     {view.announcement&&<div className="announcement"><Sparkles size={17}/>{view.announcement}</div>}
+    {view.phase==='lobby'&&isHost&&<section className="join-invite card" aria-label="Invite players by QR code">
+      <div className="join-invite-content"><span className="eyebrow">INVITE YOUR CONTESTANTS</span><h2>Scan to join the show</h2>
+        <p>Display this on the big screen. Players scan with their phones, enter their name and age, and join this room automatically—no room code to type.</p>
+        <div className="join-room-plate"><span>YOUR ROOM CODE</span><strong>{code}</strong></div>
+        <div className="invite-buttons"><button type="button" className="button button-accent" disabled={!joinUrl} onClick={()=>setQrExpanded(true)}><Expand size={17}/> Show large QR</button>
+          <button type="button" className="button button-outline" disabled={!joinUrl} onClick={()=>void copyJoinLink()}>{linkCopied?<CopyCheck size={17}/>:<Clipboard size={17}/>} {linkCopied?'Link copied':'Copy join link'}</button></div>
+        <p className="small-note">No camera? Players can visit your website and enter code <b>{code}</b> instead.</p>
+      </div>
+      <div className="join-invite-qr">{joinUrl?<QRCodeSVG value={joinUrl} size={220} bgColor="#ffffff" fgColor="#142932" marginSize={4} level="M" aria-label={`QR code to join room ${code}`}/>:<span>Preparing QR code…</span>}
+        <span><ScanLine size={16}/> Scan with your phone camera</span>
+      </div>
+    </section>}
     {view.phase==='lobby'&&<section className="lobby-layout">
       <div className="card main-card"><span className="eyebrow">BEFORE THE LIGHTS GO UP</span><h2>The green room</h2>
-        <p>Invite everyone to join using room code <strong>{code}</strong>. Then the category draft begins. Each player picks a category in turn until both boards are ready.</p>
-        <div className="stat-strip"><div><strong>{players.length}/{8}</strong><span>SEATS FILLED</span></div><div><strong>{view.settings.normalHints}+{view.settings.youngestBonusHints}</strong><span>HINTS + YOUNGEST BONUS</span></div><div><strong>{view.settings.ageHeadStart?`${view.settings.headStartSeconds}s`:'Off'}</strong><span>YOUNGEST HEAD START</span></div></div>
+        <p>Invite everyone to join using room code <strong>{code}</strong>. When everyone is here, the host can personalize hints and buzzer advantages for any player before the category draft begins.</p>
+        <div className="stat-strip"><div><strong>{players.length}/{8}</strong><span>SEATS FILLED</span></div><div><strong>{view.settings.normalHints}</strong><span>STANDARD HINTS EACH</span></div><div><strong>{players.filter(p=>(p.bonusHints||0)>0||(p.buzzBonusSeconds||0)>0).length}</strong><span>PLAYERS WITH BONUSES</span></div></div>
         {isHost?<><button className="button button-outline" onClick={()=>setSettingsOpen(!settingsOpen)}><Settings2 size={17}/>{settingsOpen?'Hide':'Change'} settings</button>
           {settingsOpen&&<SettingsPanel settings={view.settings} update={patch=>void action({type:'settings',settings:patch})} disabled={busy}/>}
+          <PlayerBonuses players={players} normalHints={view.settings.normalHints} disabled={busy} update={(playerId,patch)=>void action({type:'player-bonuses',playerId,...patch})}/>
           <button className="button button-accent big-action" disabled={busy||players.length<2} onClick={()=>void action({type:'start-draft'})}><Play size={19}/> Start the category draft <ChevronRight size={18}/></button>
           {players.length<2&&<p className="small-note">At least two players or teams are needed.</p>}</>
           :isPlayer?<p className="ready-message"><Check size={20}/> You’re in! The host starts when everyone is ready.</p>:null}
       </div><aside className="card side-card"><h3>Tonight’s format</h3><div className="format-item"><span>01</span><div><b>The Opening Act</b><p>Six categories, five clues each.</p></div></div><div className="format-item"><span>02</span><div><b>The Main Event</b><p>Higher point values. More pressure.</p></div></div><div className="format-item"><span>03</span><div><b>The Final Word</b><p>A private wager and one last answer.</p></div></div><div className="format-item"><span>✳</span><div><b>Double Take</b><p>One secret clue per board pays double.</p></div></div></aside>
     </section>}
     {view.phase==='draft'&&<section className="draft-page">
-      <div className="section-heading"><div><span className="eyebrow">12 CATEGORIES · TWO BOARDS</span><h2>{view.draftTurnName}’s pick</h2><p>{canPickDraft?'Choose a category below. Each one includes a quick explanation.':'Waiting for the current picker.'}</p></div><span className="draft-progress">{view.draftIndex} / 12 selected</span></div>
+      <div className="section-heading"><div><span className="eyebrow">12 CATEGORIES · TWO BOARDS</span><h2>{view.draftTurnName}’s pick</h2><p>{canPickDraft?'Choose a category below. Suggested picks reflect the ages of the players, but all categories remain available.':'Waiting for the current picker.'}</p></div><span className="draft-progress">{view.draftIndex} / 12 selected</span></div>
       <div className="draft-boards"><DraftSummary title="The Opening Act" ids={view.selected[0]} categories={view.categories}/><DraftSummary title="The Main Event" ids={view.selected[1]} categories={view.categories}/></div>
-      <div className="draft-options">{view.categories.filter(c=>![...view.selected[0],...view.selected[1]].includes(c.id)).map(c=><button key={c.id} className="category-choice" disabled={!canPickDraft||busy} onClick={()=>void action({type:'draft-category',categoryId:c.id})}><strong>{c.name}</strong><small>{c.explainer}</small>{canPickDraft&&<span className="pick-symbol">+</span>}</button>)}</div>
+      <div className="draft-options">{view.categories.filter(c=>![...view.selected[0],...view.selected[1]].includes(c.id)).sort((a,b)=>Number(b.suggested)-Number(a.suggested)).map(c=><button key={c.id} className="category-choice" disabled={!canPickDraft||busy} onClick={()=>void action({type:'draft-category',categoryId:c.id})}><strong>{c.name}{c.suggested&&<span className="suggested-label"> · Recommended</span>}</strong><small>{c.explainer}</small>{canPickDraft&&<span className="pick-symbol">+</span>}</button>)}</div>
     </section>}
     {view.phase==='board'&&<section className="board-page">
       <div className="board-top"><div><span className="eyebrow">ROUND {view.round+1} OF 2</span><h2>{view.roundNames[view.round]}</h2><p>{players.find(p=>p.id===view.chooserId)?.name||'The host'} chooses the next clue. Hidden somewhere: <b>Double Take</b>.</p></div>
@@ -146,11 +163,11 @@ export default function RoomPage() {
       {view.clue.wasDoubleTake&&<div className="double-banner"><Sparkles size={18}/> DOUBLE TAKE! THIS CLUE IS WORTH TWICE ITS NORMAL VALUE.</div>}
       <div className="clue-stage"><div className="clue-question">{view.clue.prompt}</div></div>
       <div className="clue-bottom"><div className="clue-status">
-        {view.clue.status==='buzzing'?<><b><Clock3 size={18}/> Buzzers open</b><span>Time: <Countdown end={view.settings.buzzSeconds?view.clue.buzzOpenedAt+view.settings.buzzSeconds*1000:undefined} now={now}/></span></>:
+        {view.clue.status==='buzzing'?<><b><Clock3 size={18}/> Buzzers open</b><span>Time: <Countdown end={view.clue.buzzDeadlineAt} now={now}/></span></>:
           <><b><Mic size={19}/> {players.find(p=>p.id===view.clue!.buzzedBy)?.name} has the mic</b><span>Answer time: <Countdown end={view.clue.responseDeadlineAt} now={now}/></span></>}
       </div>
       {view.clue.status==='buzzing'&&isPlayer&&<div className="contestant-controls"><button className="buzzer" disabled={!canBuzz||busy} onClick={()=>void action({type:'buzz'})}><span>BUZZ!</span></button>
-        {view.clue.attempts.some(a=>a.playerId===myId)?<p>You have already tried this clue.</p>:view.clue.meEligibleAt&&now<view.clue.meEligibleAt?<p>Youngest-player head start: <Countdown end={view.clue.meEligibleAt} now={now}/></p>:!canBuzz?<p>The buzzing window has closed.</p>:<p>Tap as soon as you know it!</p>}
+        {view.clue.attempts.some(a=>a.playerId===myId)?<p>You have already tried this clue.</p>:view.clue.meEligibleAt&&now<view.clue.meEligibleAt?<p>Your buzzer opens in <Countdown end={view.clue.meEligibleAt} now={now}/> (host-assigned head start).</p>:!canBuzz?<p>The buzzing window has closed.</p>:<p>Tap as soon as you know it!</p>}
       </div>}
       {view.clue.status==='answering'&&isPlayer&&view.clue.buzzedBy===myId&&<div className="answer-area"><h3>Your answer</h3><AnswerBox key={view.clue.key} onSubmit={answer=>void action({type:'submit-answer',answer})} disabled={busy}/>
         <button className="button button-outline" disabled={busy||!view.myHints||!!view.clue.meHint} onClick={()=>void action({type:'hint'})}><Lightbulb size={17}/> Use a hint ({view.myHints} left)</button>
@@ -190,6 +207,16 @@ export default function RoomPage() {
       {view.final?.answer&&<p className="final-reveal">The Final Word: <strong>{view.final.answer}</strong></p>}
       {isHost&&<button className="button button-accent big-action" disabled={busy} onClick={()=>void action({type:'new-game'})}><RotateCcw size={18}/> Play another show</button>}
     </section>}
+    {qrExpanded&&isHost&&view.phase==='lobby'&&<div className="qr-overlay" role="presentation" onClick={()=>setQrExpanded(false)}>
+      <div className="qr-dialog" role="dialog" aria-modal="true" aria-label="Scan to join The Know Show" onClick={e=>e.stopPropagation()}>
+        <button className="qr-close" type="button" onClick={()=>setQrExpanded(false)} aria-label="Close large QR code"><X size={23}/></button>
+        <span className="eyebrow">THE KNOW SHOW</span><h2>Join the fun!</h2><p>Scan this code with your phone camera.</p>
+        {joinUrl&&<div className="qr-large-image"><QRCodeSVG value={joinUrl} size={340} bgColor="#ffffff" fgColor="#142932" marginSize={4} level="M" aria-label={`QR code to join room ${code}`}/></div>}
+        <div className="qr-large-code">ROOM CODE <strong>{code}</strong></div>
+        <p className="qr-footnote">Or visit {joinUrl?new URL(joinUrl).host:'the website'} and enter the room code above.</p>
+        <button type="button" className="button button-outline" onClick={()=>setQrExpanded(false)}>Back to Green Room</button>
+      </div>
+    </div>}
     <footer className="room-footer"><button className="text-button" onClick={()=>setShowLog(!showLog)}><HelpCircle size={16}/> {showLog?'Hide':'Show'} activity log</button><Link href="/guide">How to play</Link><span>The Know Show · Your trivia night, your rules.</span></footer>
     {showLog&&<div className="log-panel">{view.eventLog.map((msg,i)=><p key={`${msg}-${i}`}>{msg}</p>)}</div>}
   </main>;
@@ -198,25 +225,33 @@ export default function RoomPage() {
 function Scoreboard({players,myId,mode}:{players:GameView['players'];myId?:string;mode:Settings['mode']}) {
   if(players.length===0)return <div className="no-players"><Users size={19}/> No {mode==='teams'?'teams':'players'} have joined yet.</div>;
   return <div className="scoreboard">{players.map((p,i)=><div className={`player-chip ${p.id===myId?'my-chip':''}`} key={p.id}>
-    <span className="player-rank">{i+1}</span><div className="player-details"><strong>{p.name}</strong><small>Age {p.age} · {p.hintsRemaining} hints</small></div><b className="player-score">{formatScore(p.score)}</b>
+    <span className="player-rank">{i+1}</span><div className="player-details"><strong>{p.name}</strong><small>Age {p.age} · {p.hintsRemaining} hints{(p.buzzBonusSeconds??0)>0?` · +${p.buzzBonusSeconds}s buzz`:''}</small></div><b className="player-score">{formatScore(p.score)}</b>
   </div>)}</div>;
 }
 function DraftSummary({title,ids,categories}:{title:string;ids:string[];categories:GameView['categories']}) {
   return <div className="draft-summary card"><span className="small-cap">{title}</span><h3>{ids.length}/6 picked</h3><div className="draft-chips">{ids.map(id=><span key={id}>{categories.find(c=>c.id===id)?.name}</span>)}{ids.length===0&&<small>No categories picked yet</small>}</div></div>;
 }
+function PlayerBonuses({players,normalHints,disabled,update}:{players:GameView['players'];normalHints:number;disabled:boolean;update:(playerId:string,patch:{bonusHints?:number;buzzBonusSeconds?:number})=>void}) {
+  return <section className="bonus-panel" aria-label="Host-assigned player bonuses">
+    <div className="bonus-panel-header"><h3>Player bonuses</h3><p>Once everyone joins, choose any combination of bonus hints and buzzer head starts. Age never grants a bonus automatically.</p></div>
+    {players.length===0?<p className="small-note">Player controls appear when someone joins.</p>:<div className="bonus-grid">{players.map(p=><div className="bonus-player" key={p.id}>
+      <div className="bonus-player-name"><strong>{p.name}</strong><span>Age {p.age} · {normalHints+(p.bonusHints??0)} total hints</span></div>
+      <NumberSetting key={`${p.id}-hints`} label="Extra hints" value={p.bonusHints??0} min={0} max={20} disabled={disabled} onChange={v=>update(p.id,{bonusHints:v})}/>
+      <NumberSetting key={`${p.id}-buzz`} label="Buzzer head start (seconds)" value={p.buzzBonusSeconds??0} min={0} max={30} disabled={disabled} onChange={v=>update(p.id,{buzzBonusSeconds:v})}/>
+    </div>)}</div>}
+    <p className="small-note">Example: with bonuses of 5s, 3s, and 0s, the players can buzz at 0s, 2s, and 5s. After an incorrect answer, the remaining players get a new buzz window with their own bonuses.</p>
+  </section>;
+}
 function SettingsPanel({settings,update,disabled}:{settings:Settings;update:(patch:Partial<Settings>)=>void;disabled:boolean}) {
   return <section className="settings-panel" aria-label="Game settings"><h3>Show settings</h3>
     <div className="settings-grid">
       <label>Play mode<select disabled={disabled} className="input" value={settings.mode} onChange={e=>update({mode:e.target.value as Settings['mode']})}><option value="individual">Individual players</option><option value="teams">Teams (one device per team)</option></select></label>
-      <label>Age-based head start<select disabled={disabled} className="input" value={settings.ageHeadStart?'yes':'no'} onChange={e=>update({ageHeadStart:e.target.value==='yes'})}><option value="yes">On</option><option value="no">Off</option></select></label>
-      <NumberSetting label="Head start (seconds)" value={settings.headStartSeconds} min={0} max={15} disabled={disabled} onChange={v=>update({headStartSeconds:v})}/>
       <NumberSetting label="Buzz window (0 = untimed)" value={settings.buzzSeconds} min={0} max={120} disabled={disabled} onChange={v=>update({buzzSeconds:v})}/>
       <NumberSetting label="Answer time (0 = untimed)" value={settings.answerSeconds} min={0} max={180} disabled={disabled} onChange={v=>update({answerSeconds:v})}/>
       <NumberSetting label="Final Word time (0 = untimed)" value={settings.finalSeconds} min={0} max={300} disabled={disabled} onChange={v=>update({finalSeconds:v})}/>
       <NumberSetting label="Hints per player" value={settings.normalHints} min={0} max={10} disabled={disabled} onChange={v=>update({normalHints:v})}/>
-      <NumberSetting label="Extra hints for youngest" value={settings.youngestBonusHints} min={0} max={10} disabled={disabled} onChange={v=>update({youngestBonusHints:v})}/>
       <label>Soundtrack (off by default)<select className="input" disabled={disabled} value={settings.music} onChange={e=>update({music:e.target.value as Settings['music']})}><option value="off">Off</option><option value="synth">Original retro synth</option><option value="keys">Original classical-style keys</option><option value="downtempo">Original indie downtempo</option></select></label>
-    </div><p className="small-note">Hints are private, one per answered clue. The youngest player (or the youngest teammate on each team) gets the extra hints and optional head start. Settings lock when the draft starts.</p>
+    </div><p className="small-note">These are the default settings for everyone. Give bonus hints and buzzer head starts to individual players in the roster above. A hint is private and usable once per question. Settings lock when the draft starts.</p>
   </section>;
 }
 function NumberSetting({label,value,min,max,disabled,onChange}:{label:string;value:number;min:number;max:number;disabled:boolean;onChange:(v:number)=>void}) {

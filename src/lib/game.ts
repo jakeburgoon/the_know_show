@@ -8,11 +8,10 @@ export type Phase = 'lobby'|'draft'|'board'|'clue'|'final-wager'|'final-answer'|
 export type Mode = 'individual'|'teams';
 export type MusicStyle = 'off'|'synth'|'keys'|'downtempo';
 export type Settings = {
-  mode: Mode; ageHeadStart: boolean; headStartSeconds: number;
-  buzzSeconds: number; answerSeconds: number; finalSeconds: number;
-  normalHints: number; youngestBonusHints: number; music: MusicStyle;
+  mode: Mode; buzzSeconds: number; answerSeconds: number; finalSeconds: number;
+  normalHints: number; music: MusicStyle;
 };
-export type Player = { id: string; name: string; age: number; score: number; hintsRemaining: number; joinedAt: number; };
+export type Player = { id: string; name: string; age: number; score: number; hintsRemaining: number; joinedAt: number; bonusHints: number; buzzBonusSeconds: number; };
 export type Attempt = { playerId: string; answer: string; verdict: 'correct'|'wrong'|'timed-out'; at: number };
 export type ActiveClue = {
   key: string; startedAt: number; buzzOpenedAt: number; status: 'buzzing'|'answering'|'ruling';
@@ -31,6 +30,7 @@ export type GameState = {
 export type Actor = {kind:'host'|'player'|'spectator';id?:string};
 export type Action =
   | {type:'settings';settings:Partial<Settings>}
+  | {type:'player-bonuses';playerId:string;bonusHints?:number;buzzBonusSeconds?:number}
   | {type:'start-draft'}
   | {type:'draft-category';categoryId:string}
   | {type:'open-clue';key:string}
@@ -54,12 +54,25 @@ export class GameError extends Error { constructor(message: string) { super(mess
 function requireRule(ok: unknown, message: string): asserts ok { if (!ok) throw new GameError(message); }
 const randomFrom = <T,>(items: T[]): T => items[randomInt(items.length)];
 const lowestAge = (players: Player[]) => Math.min(...players.map(p=>p.age));
-const hintsFor = (age:number, minAge:number, settings:Settings) => settings.normalHints + (age===minAge ? settings.youngestBonusHints : 0);
+// Every player can be given individual accommodations by the host, independent of age.
+const totalHints = (p:Player,settings:Settings) => settings.normalHints + (p.bonusHints ?? 0);
+function largestBuzzBonus(s:GameState,clue:ActiveClue):number {
+  return Math.max(0,...s.players.filter(x=>!clue.attempts.some(a=>a.playerId===x.id)).map(x=>x.buzzBonusSeconds??0));
+}
+function buzzWindowEndsAt(s:GameState,clue:ActiveClue):number|undefined {
+  // Give everyone the whole standard buzz window AFTER the last buzzer unlocks.
+  return s.settings.buzzSeconds>0?clue.buzzOpenedAt+(largestBuzzBonus(s,clue)+s.settings.buzzSeconds)*1000:undefined;
+}
+function buzzEligibleAt(s:GameState,clue:ActiveClue,p:Player): number {
+  // A new buzz window (including after a wrong answer) begins at the same moment
+  // for all remaining players, but their assigned bonus offsets their waiting time.
+  const largest=largestBuzzBonus(s,clue);
+  return clue.buzzOpenedAt+Math.max(0,largest-(p.buzzBonusSeconds??0))*1000;
+}
 const shortName = (name:string) => name.trim().replace(/\s+/g,' ').slice(0,28);
 
 export function defaultSettings(): Settings {
-  return {mode:'individual',ageHeadStart:true,headStartSeconds:5,buzzSeconds:20,answerSeconds:30,
-    finalSeconds:60,normalHints:3,youngestBonusHints:2,music:'off'};
+  return {mode:'individual',buzzSeconds:20,answerSeconds:30,finalSeconds:60,normalHints:3,music:'off'};
 }
 export function makeGame(): GameState {
   return {id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,
@@ -73,10 +86,8 @@ export function joinGame(current:GameState,name:string,age:number,now=Date.now()
   requireRule(clean.length>=2,'Enter a name with at least two characters.');
   requireRule(!current.players.some(p=>p.name.toLowerCase()===clean.toLowerCase()),'That name is already taken.');
   const state:GameState = structuredClone(current);
-  const player:Player = {id:randomUUID(),name:clean,age,score:0,hintsRemaining:0,joinedAt:now};
+  const player:Player = {id:randomUUID(),name:clean,age,score:0,hintsRemaining:state.settings.normalHints,joinedAt:now,bonusHints:0,buzzBonusSeconds:0};
   state.players.push(player);
-  const minAge = lowestAge(state.players);
-  state.players.forEach(p=>p.hintsRemaining=hintsFor(p.age,minAge,state.settings));
   state.announcement=`${clean} joined the show!`;
   return {state,player};
 }
@@ -137,16 +148,32 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
       const a=action.settings;
       requireRule(a&&typeof a==='object'&&!Array.isArray(a),'Invalid settings.');
       if(a.mode!==undefined){requireRule(a.mode==='individual'||a.mode==='teams','Invalid play mode.');s.settings.mode=a.mode;}
-      if(a.ageHeadStart!==undefined){requireRule(typeof a.ageHeadStart==='boolean','Invalid setting.');s.settings.ageHeadStart=a.ageHeadStart;}
-      const numbers:[keyof Pick<Settings,'headStartSeconds'|'buzzSeconds'|'answerSeconds'|'finalSeconds'|'normalHints'|'youngestBonusHints'>,number,number][]=[
-        ['headStartSeconds',0,15],['buzzSeconds',0,120],['answerSeconds',0,180],['finalSeconds',0,300],['normalHints',0,10],['youngestBonusHints',0,10]];
+      const numbers:[keyof Pick<Settings,'buzzSeconds'|'answerSeconds'|'finalSeconds'|'normalHints'>,number,number][]=[
+        ['buzzSeconds',0,120],['answerSeconds',0,180],['finalSeconds',0,300],['normalHints',0,10]];
       numbers.forEach(([k,min,max])=>{ const v=a[k];if(v!==undefined){requireRule(Number.isInteger(v)&&v>=min&&v<=max,`Invalid ${k}.`);s.settings[k]=v;}});
       if(a.music!==undefined){requireRule(['off','synth','keys','downtempo'].includes(a.music),'Invalid music choice.');s.settings.music=a.music;}
-      if(s.players.length){const min=lowestAge(s.players);s.players.forEach(p=>p.hintsRemaining=hintsFor(p.age,min,s.settings));}
+      s.players.forEach(p=>p.hintsRemaining=totalHints(p,s.settings));
+      break;
+    }
+    case 'player-bonuses': {
+      hostOnly(actor);requireRule(s.phase==='lobby','Assign bonuses before the category draft begins.');
+      const p=s.players.find(x=>x.id===action.playerId);
+      requireRule(p,'Player not found.');
+      requireRule(action.bonusHints!==undefined||action.buzzBonusSeconds!==undefined,'Choose a bonus to change.');
+      if(action.bonusHints!==undefined){
+        requireRule(Number.isInteger(action.bonusHints)&&action.bonusHints>=0&&action.bonusHints<=20,'Bonus hints must be between 0 and 20.');
+        p.bonusHints=action.bonusHints;
+      }
+      if(action.buzzBonusSeconds!==undefined){
+        requireRule(Number.isInteger(action.buzzBonusSeconds)&&action.buzzBonusSeconds>=0&&action.buzzBonusSeconds<=30,'Buzz head start must be between 0 and 30 seconds.');
+        p.buzzBonusSeconds=action.buzzBonusSeconds;
+      }
+      p.hintsRemaining=totalHints(p,s.settings);
       break;
     }
     case 'start-draft': {
       hostOnly(actor);requireRule(s.phase==='lobby','The show has already started.');requireRule(s.players.length>=2,'At least two players or teams are needed.');
+      s.players.forEach(p=>{p.bonusHints??=0;p.buzzBonusSeconds??=0;p.hintsRemaining=totalHints(p,s.settings);});
       s.phase='draft';s.chooserId=s.players[0].id;pushLog(s,'Category draft is open. Players choose one category per turn across both rounds.');break;
     }
     case 'draft-category': {
@@ -178,9 +205,9 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
       const p=activePlayer(s,actor);requireRule(s.phase==='clue'&&!!s.clue&&s.clue.status==='buzzing','Buzzing is not open right now.');
       const c=s.clue;
       requireRule(!c.attempts.some(a=>a.playerId===p.id),'You already attempted this clue.');
-      if(s.settings.buzzSeconds>0) requireRule(now<=c.buzzOpenedAt+s.settings.buzzSeconds*1000,'The buzz window has closed.');
-      if(s.settings.ageHeadStart && s.players.some(p=>p.age>lowestAge(s.players)) && p.age>lowestAge(s.players))
-        requireRule(now>=c.startedAt+s.settings.headStartSeconds*1000,`The youngest players have a ${s.settings.headStartSeconds}-second head start.`);
+      const buzzEnd=buzzWindowEndsAt(s,c);
+      if(buzzEnd) requireRule(now<=buzzEnd,'The buzz window has closed.');
+      requireRule(now>=buzzEligibleAt(s,c,p),'Your buzzer is not open yet. The host assigned a head start to another player.');
       c.buzzedBy=p.id;c.status='answering';
       c.responseDeadlineAt=s.settings.answerSeconds?now+s.settings.answerSeconds*1000:undefined;
       pushLog(s,`${p.name} buzzed first!`);break;
@@ -269,8 +296,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
     case 'new-game': {
       hostOnly(actor);requireRule(s.phase==='finished','Finish the current show before starting another.');
       const reset=makeGame();reset.id=s.id;reset.createdAt=s.createdAt;reset.settings=s.settings;
-      reset.players=s.players.map(p=>({...p,score:0,hintsRemaining:0}));
-      const min=lowestAge(reset.players);reset.players.forEach(p=>p.hintsRemaining=hintsFor(p.age,min,reset.settings));
+      reset.players=s.players.map(p=>({...p,score:0,bonusHints:p.bonusHints??0,buzzBonusSeconds:p.buzzBonusSeconds??0,hintsRemaining:totalHints(p,reset.settings)}));
       pushLog(reset,'New show! Adjust settings and start the category draft.');return reset;
     }
     default: throw new GameError('Unknown action type.');
@@ -281,16 +307,24 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
 export function makeView(s:GameState,actor:Actor,revision:number,now=Date.now()) {
   const isHost=actor.kind==='host';
   const self=actor.kind==='player'?s.players.find(p=>p.id===actor.id):undefined;
-  const catBasics=CATEGORIES.map(c=>({id:c.id,name:c.name,explainer:c.explainer}));
+  // Age guides the category draft as a recommendation only: players retain the final choice.
+  // Low-tier questions are easier throughout the board; Final Word has age-specific pools.
+  const familyIds=new Set(['animals','movies','colors','games','sports','food','counting','literally','classroom','music','myths','oceans','nature','space','books','rhyme']);
+  const teenIds=new Set(['space','world','words','history','science','movies','music','math','sports','books','nature','tech','myths','inventions','usa','earth','counting']);
+  const adultIds=new Set(['world','words','history','science','music','math','tech','landmarks','misleading','inventions','usa','earth','body','space','sports']);
+  const youngestAge=s.players.length?lowestAge(s.players):18;
+  const recommended=youngestAge<=12?familyIds:youngestAge<=16?teenIds:adultIds;
+  const catBasics=CATEGORIES.map(c=>({id:c.id,name:c.name,explainer:c.explainer,
+    suggested:recommended.has(c.id)}));
   const question=s.clue?cellQuestion(s.clue.key):null;
   const active=s.clue;
-  const meEligibleAt=active&&self&&s.settings.ageHeadStart&&self.age>lowestAge(s.players) && s.players.some(p=>p.age===lowestAge(s.players)) ?active.startedAt+s.settings.headStartSeconds*1000:active?.startedAt;
+  const meEligibleAt=active&&self?buzzEligibleAt(s,active,self):undefined;
   const clue=active&&question?{
     key:active.key,prompt:question.prompt,points:getPoints(s,active.key),wasDoubleTake:s.doubleTakeKeys[s.round]===active.key,
     category:CATEGORY_LOOKUP.get(active.key.split(':')[0])!.name,
     explainer:CATEGORY_LOOKUP.get(active.key.split(':')[0])!.explainer,
     startedAt:active.startedAt,buzzOpenedAt:active.buzzOpenedAt,status:active.status,buzzedBy:active.buzzedBy,
-    responseDeadlineAt:active.responseDeadlineAt,
+    responseDeadlineAt:active.responseDeadlineAt,buzzDeadlineAt:buzzWindowEndsAt(s,active),
     attempts:active.attempts.map(a=>({playerId:a.playerId,verdict:a.verdict})),
     meEligibleAt,meHint: (isHost || (self&&active.hintUsers.includes(self.id))) ? question.hint : undefined,
     submittedAnswer: isHost||(self?.id===active.buzzedBy)?active.submittedAnswer:undefined,

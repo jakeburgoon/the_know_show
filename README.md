@@ -1,12 +1,13 @@
 # The Know Show
 
-**Brains on. Game on.** An original, family-friendly multiplayer trivia show. Version 0.1.0 (pilot).
+**Brains on. Game on.** An original, family-friendly multiplayer trivia show. Version 0.1.2 (pilot).
 
 - 2–8 players or teams, using phones as controllers; one host runs the game on a second screen.
+- Host Green Room shows a scannable **QR code** that opens the exact room join page; a large presentation view, copyable link, and six-character code are also provided.
 - 12 categories drafted by players one at a time: six for **The Opening Act** (200–1,000), six for **The Main Event** (400–2,000).
 - A secret **Double Take** on each board is worth twice the tile's points.
-- Fastest valid buzz wins. The youngest player(s) can get a configurable 5-second exclusive window; team ages use youngest teammate.
-- 3 private hints per player plus 2 for the youngest by default; host-controlled judging, score changes, and steals after a wrong answer.
+- Fastest valid buzz wins. The host assigns individual buzzer head starts (0–30 seconds) to any players or teams before starting, regardless of age.
+- 3 private hints per player by default; the host can set an individual extra hint allowance (0–20), with no automatic age bonus. Host-controlled judging and steals after a wrong answer.
 - **The Final Word:** random age-adjusted final category, private wagers and answers, host-reviewed scoring.
 - 29 original draftable categories (145 questions) and 18 final questions, flexible answer suggestions, optional Web Speech dictation, adjustable timers, original procedurally generated soundscapes (muted by default).
 - Original visual identity, not associated with the Jeopardy! franchise.
@@ -42,7 +43,7 @@ The SQL creates `know_show_rooms` and `know_show_members`. Row Level Security is
    | `ROOM_CREATION_PASSCODE` | Optional password to restrict who can create a new room. Leave unset to allow anyone. |
 
 4. Click **Deploy**. You do not need to configure a separate API server, because Next.js includes all the API endpoints.
-5. Open your Vercel URL on the host device and tap **Create a show**. Other players open the same Vercel URL on phones and type the six-character code.
+5. Open your Vercel URL on the host device and tap **Create a show**. Other players scan the QR code in the host’s Green Room (or open the same Vercel URL on phones and enter the six-character code).
 
 **Security:** Never prefix the service key with `NEXT_PUBLIC_`; that would expose it to browser users. The actual secret belongs only in Vercel's server-side environment variables.
 
@@ -61,7 +62,7 @@ Open http://localhost:3000 in your computer browser. To test a player without ov
 
 ### 5. Start playing
 
-1. **Host:** Create the room on a computer or tablet and share the room code.
+1. **Host:** Create the room on a computer or tablet. Show the Green Room QR code on the big screen, or choose **Show large QR**. Players can scan straight into that room; alternatively share the link or room code.
 2. **Players:** Join from individual phones, each entering a name and age. For team play, choose Teams in lobby settings first, then enter a team name and its youngest age, with one phone per team.
 3. **Host:** Adjust settings before starting the category draft.
 4. **Draft:** Players take turns picking categories until 12 are chosen. The selection order continues between rounds (it does not reset at round two).
@@ -69,13 +70,17 @@ Open http://localhost:3000 in your computer browser. To test a player without ov
 6. **Clue:** The first eligible buzzer enters an answer (or uses optional dictation) and may use a private hint. The host decides whether the answer counts; an incorrect answer loses the clue's points and reopens buzzing for other players. Hints don't subtract points.
 7. **Final:** Host chooses **Go to The Final Word** when the second round is done. Players privately wager (up to their nonnegative score), then type final answers. Host scores each response and shows results.
 
-**Tip:** You can advance rounds early; you don't need to finish all 30 clues if players have had enough.
+**Tip:** You can advance rounds early; you don't need to finish all 30 questions if players have had enough.
+
+**In v0.1.1:** After everyone joins, the host can assign extra hints and buzzer head starts directly to each player in the Green Room. Age does not automatically grant either benefit. No database changes are required, but redeploying a new code version will be needed.
+
+**New in v0.1.2:** The host can display a scannable QR code in the Green Room, enlarge it for a TV, or copy a direct join link. The QR code is generated in the browser using the current site address and room code; it does not require a QR service or any database changes.
 
 ## Question-bank customization
 
 Edit `src/lib/questions.ts`. Each `CATEGORIES` entry has a unique `id`, a display name, an explainer shown on screen, and **exactly five** questions, from easiest to hardest. Each question has a prompt, answer, optional alternative answer spellings, and a hint.
 
-Use `Q('Question?', 'Answer', 'Private hint', 'Alternate answer')` when adding a new question. Maintain at least 12 categories for a full game. Final questions live in `FINALS` with a `tier` (`family`, `teen`, or `adult`). The youngest age in the lobby determines which tier is randomly drawn for The Final Word: 12 or under = family, 13–16 = teen, 17+ = adult.
+Use `Q('Question?', 'Answer', 'Private hint', 'Alternate answer')` when adding a new question. Maintain at least 12 categories for a full game. Final questions live in `FINALS` with a `tier` (`family`, `teen`, or `adult`). The youngest age in the lobby determines which tier is randomly drawn for The Final Word: 12 or under = family, 13–16 = teen, 17+ = adult. Ages also surface suggested categories in the draft for mixed-age games; the ordinary question boards currently contain fixed questions rather than age-specific variants.
 
 **Host discretion:** The comparison engine displays a suggestion based on normalized answer text, alternative answers, and close spellings. It *never automatically scores* a written answer. The host's decision is authoritative.
 
@@ -111,6 +116,7 @@ Phone/browser   →  Next.js UI on Vercel
 - **Room does not exist:** The code must be six characters and from the current game; the host must have created the room on that same deployment.
 - **Host sees viewer mode:** You opened the room in another browser or cleared its local storage. The host's token isn't shared with guests.
 - **A phone cannot join:** Make sure the host has not already started the draft; add new players while the room is in the lobby.
+- **QR does not open on a phone:** Make sure the host opened the actual public Vercel deployment (not `localhost` or a private preview URL). The QR encodes the exact origin of the page the host is viewing.
 - **No music:** Sound is off by default. Choose a soundtrack in lobby settings, then tap **Music off** on the device where you want audio.
 
 For questions about deployment, share the exact error from Vercel's build or function logs (but never share API secrets).

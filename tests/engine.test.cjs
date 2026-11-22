@@ -17,9 +17,9 @@ test('bank has enough unique categories with five valid questions and age-tier f
   for(const c of CATEGORIES){assert.equal(c.questions.length,5,c.name);assert.ok(c.explainer);for(const q of c.questions)assert.ok(q.prompt&&q.answer&&q.hint);}
   assert.ok(FINALS.filter(q=>q.tier==='family').length>=5);
 });
-test('younger players get extra hints; max 8 and duplicate names rejected',()=>{
+test('age alone does not grant extra hints; max 8 and duplicate names rejected',()=>{
   let s=makeGame();const a=join(s,'Ari',10);s=a.state;const b=join(s,'Bee',16);s=b.state;
-  assert.equal(s.players.find(p=>p.id===a.player.id).hintsRemaining,5);
+  assert.equal(s.players.find(p=>p.id===a.player.id).hintsRemaining,3);
   assert.equal(s.players.find(p=>p.id===b.player.id).hintsRemaining,3);
   assert.throws(()=>join(s,'Ari',8));
   for(let i=2;i<MAX_SEATS;i++)s=join(s,`Guest ${i}`,20).state;
@@ -32,13 +32,70 @@ test('drafting cycles through both rounds without restarting pick order',()=>{
   const plain=makeView(s,as(a),0);
   assert.ok(!JSON.stringify(plain).includes('doubleTakeKeys'));
 });
-test('age advantage blocks older players until five seconds have elapsed; buzz winner locks clue',()=>{
-  let {s,a,b}=drafted();const key=`${s.selected[0][0]}:0`;
+test('host-assigned head start blocks other players regardless of their ages; buzz locks question',()=>{
+  let s=makeGame();const a=join(s,'Ari',30);s=a.state;const b=join(s,'Bee',10);s=b.state;
+  s=act(s,{type:'player-bonuses',playerId:a.player.id,buzzBonusSeconds:5});
+  s=act(s,{type:'start-draft'});
+  for(let i=0;i<12;i++)s=act(s,{type:'draft-category',categoryId:CATEGORIES[i].id},host);
+  const key=`${s.selected[0][0]}:0`;
   s=act(s,{type:'open-clue',key},host,1_000_000);
-  assert.throws(()=>act(s,{type:'buzz'},as(b),1_000_001),/head start/);
-  s=act(s,{type:'buzz'},as(a),1_000_100);
-  assert.equal(s.clue.buzzedBy,a.id);
-  assert.throws(()=>act(s,{type:'buzz'},as(b),1_000_200));
+  assert.equal(makeView(s,as(b.player),1).clue.meEligibleAt,1_005_000);
+  assert.throws(()=>act(s,{type:'buzz'},as(b.player),1_000_001),/head start/);
+  s=act(s,{type:'buzz'},as(a.player),1_000_100);
+  assert.equal(s.clue.buzzedBy,a.player.id);
+  assert.throws(()=>act(s,{type:'buzz'},as(b.player),1_000_200));
+});
+
+test('host independently gives bonus hints and buzz time to any number of contestants',()=>{
+  let s=makeGame();const all=[];
+  for(let i=0;i<6;i++){const j=join(s,`Guest ${i}`,10+i*5);s=j.state;all.push(j.player);}
+  s=act(s,{type:'settings',settings:{normalHints:4}});
+  for(let i=0;i<all.length;i++)s=act(s,{type:'player-bonuses',playerId:all[i].id,bonusHints:i,buzzBonusSeconds:i*2});
+  for(let i=0;i<all.length;i++){
+    const p=s.players.find(p=>p.id===all[i].id);
+    assert.equal(p.hintsRemaining,4+i);
+    assert.equal(p.buzzBonusSeconds,i*2);
+  }
+  assert.throws(()=>act(s,{type:'player-bonuses',playerId:all[0].id,bonusHints:21}),/between 0 and 20/);
+  assert.throws(()=>act(s,{type:'player-bonuses',playerId:all[0].id,buzzBonusSeconds:31}),/between 0 and 30/);
+  assert.throws(()=>act(s,{type:'player-bonuses',playerId:all[0].id,bonusHints:2},as(all[0])),/Only the host/);
+  s=act(s,{type:'start-draft'});
+  assert.throws(()=>act(s,{type:'player-bonuses',playerId:all[0].id,bonusHints:1}),/before the category draft/);
+});
+
+test('staggered buzz bonuses remain correct when a previous player missed',()=>{
+  let s=makeGame();const aa=join(s,'Ari',25);s=aa.state;const bb=join(s,'Bee',12);s=bb.state;const cc=join(s,'Cee',8);s=cc.state;
+  s=act(s,{type:'player-bonuses',playerId:aa.player.id,buzzBonusSeconds:5});
+  s=act(s,{type:'player-bonuses',playerId:bb.player.id,buzzBonusSeconds:3});
+  s=act(s,{type:'start-draft'});
+  for(let i=0;i<12;i++)s=act(s,{type:'draft-category',categoryId:CATEGORIES[i].id},host);
+  const key=`${s.selected[0][0]}:0`;
+  s=act(s,{type:'open-clue',key},host,1_000_000);
+  assert.equal(makeView(s,as(aa.player),1).clue.meEligibleAt,1_000_000);
+  assert.equal(makeView(s,as(bb.player),1).clue.meEligibleAt,1_002_000);
+  assert.equal(makeView(s,as(cc.player),1).clue.meEligibleAt,1_005_000);
+  assert.equal(makeView(s,as(cc.player),1).clue.buzzDeadlineAt,1_025_000);
+  assert.throws(()=>act(s,{type:'buzz'},as(cc.player),1_004_999));
+  s=act(s,{type:'buzz'},as(aa.player),1_001_000);
+  s=act(s,{type:'submit-answer',answer:'oops'},as(aa.player),1_001_001);
+  s=act(s,{type:'rule',verdict:'wrong'},host,1_001_002);
+  // The 5-second contender already used their attempt. B gets first access, C after 3 seconds.
+  assert.equal(makeView(s,as(bb.player),2).clue.meEligibleAt,1_001_002);
+  assert.equal(makeView(s,as(cc.player),2).clue.meEligibleAt,1_004_002);
+  s=act(s,{type:'buzz'},as(bb.player),1_001_500);
+  assert.equal(s.clue.buzzedBy,bb.player.id);
+});
+
+test('full buzz window remains open after all player head starts have elapsed',()=>{
+  let s=makeGame();const aa=join(s,'Ari',10);s=aa.state;const bb=join(s,'Bee',8);s=bb.state;
+  s=act(s,{type:'player-bonuses',playerId:aa.player.id,buzzBonusSeconds:30});
+  s=act(s,{type:'start-draft'});
+  for(let i=0;i<12;i++)s=act(s,{type:'draft-category',categoryId:CATEGORIES[i].id},host);
+  s=act(s,{type:'open-clue',key:`${s.selected[0][0]}:0`},host,1_000_000);
+  assert.equal(makeView(s,as(bb.player),1).clue.buzzDeadlineAt,1_050_000);
+  assert.throws(()=>act(s,{type:'buzz'},as(bb.player),1_029_999));
+  s=act(s,{type:'buzz'},as(bb.player),1_040_000);
+  assert.equal(s.clue.buzzedBy,bb.player.id);
 });
 test('private hints, wrong deductions, next buzzer, correct score, and answer security',()=>{
   let {s,a,b}=drafted();const key=`${s.selected[0][0]}:0`;
@@ -90,6 +147,28 @@ test('incorrect answer reopens a fresh buzz window so a later steal is possible'
   s=act(s,{type:'buzz'},as(b),1_010_500);
   assert.equal(s.clue.buzzedBy,b.id);
 });
+test('ages recommend different categories but never restrict the category draft',()=>{
+  let s=makeGame();s=join(s,'Ada',9).state;s=join(s,'Ben',35).state;
+  const family=makeView(s,host,0).categories.filter(c=>c.suggested).map(c=>c.id);
+  assert.ok(family.includes('colors'));
+  s=act(s,{type:'start-draft'});
+  const hard=CATEGORIES.find(c=>!family.includes(c.id));
+  s=act(s,{type:'draft-category',categoryId:hard.id},host);
+  assert.equal(s.selected[0][0],hard.id);
+  let adult=makeGame();adult=join(adult,'Ada',25).state;adult=join(adult,'Ben',35).state;
+  const adults=makeView(adult,host,0).categories.filter(c=>c.suggested).map(c=>c.id);
+  assert.notDeepEqual(adults,family);
+});
+
+test('individual bonuses carry into a second game',()=>{
+  let s=makeGame();const a=join(s,'Ari',35);s=a.state;const b=join(s,'Bee',7);s=b.state;
+  s=act(s,{type:'player-bonuses',playerId:a.player.id,bonusHints:6,buzzBonusSeconds:10});
+  s.phase='finished';s=act(s,{type:'new-game'});
+  assert.equal(s.phase,'lobby');
+  const p=s.players.find(p=>p.id===a.player.id);
+  assert.equal(p.hintsRemaining,9);assert.equal(p.bonusHints,6);assert.equal(p.buzzBonusSeconds,10);
+});
+
 test('Double Take provides exactly twice the displayed points',()=>{
   let {s,a}=drafted();const key=s.doubleTakeKeys[0];const level=Number(key.split(':')[1]);
   const base=[200,400,600,800,1000][level];
