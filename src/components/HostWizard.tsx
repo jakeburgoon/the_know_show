@@ -1,11 +1,12 @@
 'use client';
+import {useState} from 'react';
 import {ArrowLeft,ArrowRight,Check,Clapperboard,MonitorPlay,Music2,Smartphone,Users} from 'lucide-react';
 import {SUNO_SOUNDTRACKS} from '@/lib/suno-catalog';
 import type {AnswerStyle,DisplayMode,Mode,MusicStyle,Settings} from '@/lib/game';
 
 const stages=['Who is playing?','Where will the show happen?','What is the soundtrack?','How will players answer?'];
-type Props={step:number;settings:Settings;busy:boolean;onBack:()=>void;onChoose:(update:Partial<Settings>)=>Promise<void>};
-export default function HostWizard({step,settings,busy,onBack,onChoose}:Props){
+type Props={step:number;settings:Settings;busy:boolean;error?:string;onBack:()=>void;onNext:(update:Partial<Settings>)=>Promise<void>};
+export default function HostWizard({step,settings,busy,error,onBack,onNext}:Props){
  const options: {value:string;title:string;details:string;icon?:React.ReactNode}[] =
    step===0?[
     {value:'individual',title:'Individual players',details:'Everyone answers every question and earns their own points.',icon:<Users/>},
@@ -21,12 +22,14 @@ export default function HostWizard({step,settings,busy,onBack,onChoose}:Props){
     {value:'choices',title:'Everyone chooses',details:'Every regular question offers four possible answers. Final Word is written.'},
     {value:'mixed',title:'A mix of both',details:'Assign written answers or four choices separately to each player on the next screen.'}
    ];
- const selected=step===0?settings.mode:step===1?(settings.displayMode??'tv'):step===2?settings.music:(settings.answerStyle??'written');
- const choose=async(value:string)=>{
-   if(step===0)await onChoose({mode:value as Mode});
-   else if(step===1)await onChoose({displayMode:value as DisplayMode});
-   else if(step===2)await onChoose({music:value as MusicStyle,arrangement:0});
-   else await onChoose({answerStyle:value as AnswerStyle});
+ // Keep a choice visible for review. Only Next saves it and advances setup.
+ const initialChoice=step===0?settings.mode:step===1?(settings.displayMode??'tv'):step===2?settings.music:(settings.answerStyle??'written');
+ const [selected,setSelected]=useState<string>(initialChoice);
+ const next=async()=>{
+   if(step===0)await onNext({mode:selected as Mode});
+   else if(step===1)await onNext({displayMode:selected as DisplayMode});
+   else if(step===2)await onNext({music:selected as MusicStyle,arrangement:0});
+   else await onNext({answerStyle:selected as AnswerStyle});
  };
  return <main className="ks-wizard">
    <header className="ks-wizard-brand"><img src="/know-show-logo.png" alt="The Know Show"/><span>HOST SETUP</span></header>
@@ -37,13 +40,19 @@ export default function HostWizard({step,settings,busy,onBack,onChoose}:Props){
     <h1>{stages[step]}</h1>
     <p>{step===3?'Choose a starting format. You can customize each player after everyone joins.':'Pick what works for your group. You can change these settings before the game begins.'}</p>
     <div className={'ks-wizard-options'+(step===2?' music':'')}>
-      {options.map(opt=><button key={opt.value} type="button" disabled={busy} className={'ks-wizard-option'+(selected===opt.value?' selected':'')} onClick={()=>void choose(opt.value)}>
+      {options.map(opt=><button key={opt.value} type="button" disabled={busy} className={'ks-wizard-option'+(selected===opt.value?' selected':'')} onClick={()=>setSelected(opt.value)} aria-pressed={selected===opt.value}>
        {opt.icon&&<span className="ks-wizard-icon">{opt.icon}</span>}
        <span className="ks-wizard-option-text"><strong>{opt.title}</strong><small>{opt.details}</small></span>
        <span className="ks-wizard-check">{selected===opt.value?<Check size={20}/>:<ArrowRight size={19}/>}</span>
       </button>)}
     </div>
-    {step>0&&<button className="ks-back" type="button" disabled={busy} onClick={onBack}><ArrowLeft size={17}/> Previous question</button>}
+    {error&&<p className="ks-wizard-error" role="alert">{error}</p>}
+    <nav className="ks-wizard-nav" aria-label="Setup navigation">
+      {step>0?<button className="ks-back" type="button" disabled={busy} onClick={onBack}><ArrowLeft size={18}/> Previous</button>:<span aria-hidden="true"/>}
+      <button className="ks-next" type="button" disabled={busy||!selected} onClick={()=>void next()}>
+        {busy?'Saving…':step===3?'Continue to Green Room':'Next'} <ArrowRight size={18}/>
+      </button>
+    </nav>
    </section>
  </main>;
 }

@@ -323,7 +323,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  if(!view)return <main className="v2loading"><h2>Can't open this room</h2><p>{error}</p><Link href="/">Create a new show</Link></main>;
  if(view.phase==='closed')return <main className="v2loading"><p>Taking everyone back to the homepage…</p><Link href="/">Return home</Link></main>;
  if(displayOnly)return <TV view={view} code={code} origin={origin} now={timerNow}/>;
- if(isHost&&view.phase==='lobby'&&setupStep<4)return <HostWizard step={setupStep} settings={view.settings} busy={busy} onChoose={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
+ if(isHost&&view.phase==='lobby'&&setupStep<4)return <HostWizard key={setupStep} step={setupStep} settings={view.settings} busy={busy} error={error} onNext={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
  if(isHost&&view.phase==='lobby'&&setupStep>=4){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
    const answerLabel=(access:Player['choiceAccess'])=>access==='all'?'Four choices · always':access==='medium-hard'?'Four choices · medium and hard':access==='hard'?'Four choices · hard only':'Written answers';
    return <main className="ks-lobby"><header className="ks-lobby-top"><img src="/know-show-logo.png" alt="The Know Show"/><span>ROOM · {code}</span></header>

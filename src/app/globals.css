@@ -316,7 +316,9 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .v11glowdot{width:7px;height:7px;border-radius:50%;background:#f3c954;box-shadow:0 0 13px #ffd672}
 .v11hero-logo{display:block;width:min(79vw,655px);max-height:238px;height:auto;object-fit:contain;margin:0 auto 5px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.18))}
 .v11showcase h1{color:#fff9e9;font-size:clamp(27px,4.2vw,49px);font-weight:800;letter-spacing:-.045em;line-height:1.15;margin:7px auto 12px;max-width:950px}
-.v11showcase h1 span{color:var(--v11goldbright)}
+/* Keep the approved logo image unchanged; emphasize the SHOW/KNOW words using type only. */
+.v11showcase h1 .v11headline-show{color:#f4c85f;font-style:normal;font-weight:950;letter-spacing:.015em}
+.v11showcase h1 .v11headline-know{color:#fff9e9;font-weight:950;letter-spacing:.015em;text-decoration:underline;text-decoration-color:#edbf50;text-decoration-thickness:.105em;text-underline-offset:.13em}
 .v11herodeck{margin:0 auto;max-width:680px;color:#d2dce8;font-size:clamp(14px,1.65vw,18px);line-height:1.55}
 .v11featureline{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:23px auto 0}
 .v11featureline span{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff30;background:#ffffff0d;border-radius:999px;padding:9px 14px;font-size:12px;color:#f4ead4;font-weight:700}
@@ -560,7 +562,13 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-wizard-option{display:flex;align-items:center;text-align:left;width:100%;gap:14px;padding:16px;border:2px solid #dce2df;border-radius:14px;background:#fff;color:#173951;cursor:pointer;transition:border-color .15s,box-shadow .15s;min-height:82px}
 .ks-wizard-option.selected,.ks-wizard-option:hover{border-color:#cba448;background:#fff6db;box-shadow:0 3px 12px #a88a3a1f}
 .ks-wizard-option:disabled{opacity:.5;cursor:wait}.ks-wizard-icon{flex:none;display:flex;align-items:center;color:#c69c3e}.ks-wizard-option-text{flex:1;display:grid;gap:6px}.ks-wizard-option strong{font-size:16px}.ks-wizard-option small{line-height:1.38;font-size:13px;color:#5d7182;font-weight:500}.ks-wizard-check{display:grid;place-items:center;color:#bd8e26}
-.ks-back{display:flex;align-items:center;gap:8px;background:transparent;color:#274e62;border:none;padding:12px 3px;margin-top:20px;font-weight:800;cursor:pointer}
+/* Explicit review-and-continue navigation: choosing a card never changes steps. */
+.ks-wizard-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
+.ks-back{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#274e62;border:none;padding:12px 3px;font-weight:800;cursor:pointer}
+.ks-next{display:inline-flex;justify-content:center;align-items:center;gap:10px;border:0;border-radius:11px;background:#153954;color:#fff5d5;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 3px 0 #0b2339}
+.ks-next:hover:not(:disabled){background:#234f6b}.ks-next:disabled{opacity:.55;cursor:wait}
+.ks-wizard-error{margin:14px 0 0;color:#9f352a;font-size:13px;font-weight:700}
+@media(max-width:520px){.ks-wizard-nav{gap:6px}.ks-next{padding:13px 10px;font-size:13px;max-width:70%;min-width:0;line-height:1.25;text-align:center}.ks-back{font-size:13px;flex-shrink:0}}
 .ks-lobby-hero,.ks-lobby-players,.ks-lobby-hostplay,.ks-lobby-extras{margin:22px auto;background:#fffdf8;border:1px solid #e6d5b6;border-radius:18px;box-shadow:0 4px 15px #1f3e4a0f;padding:24px;text-align:left}
 .ks-lobby-hero{text-align:center}.ks-lobby-hero .ks-tag{justify-content:center}.ks-lobby-qr{display:table;background:#fff;margin:22px auto 8px;padding:18px;border-radius:15px;border:3px solid #e0be65;box-shadow:0 5px 20px #1737531c}.ks-lobby-code{font-size:11px;font-weight:900;letter-spacing:.13em;color:#7b673d}.ks-lobby-code strong{display:block;margin:4px auto;font-size:32px;letter-spacing:.2em;color:#143753}.ks-lobby-share{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:16px}
 .ks-lobby-share button,.ks-lobby-share a,.ks-lobby-hostplay button{background:#173753;color:#fff3d2;border:0;padding:12px 16px;text-decoration:none;border-radius:11px;font-weight:800;cursor:pointer}

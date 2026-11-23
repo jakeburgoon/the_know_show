@@ -1,10 +1,10 @@
-# The Know Show v1.5.2
+# The Know Show v1.5.3
 
-The complete Next.js application, cumulative through v1.5.2. In addition to guided host setup, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, a separate 56-question championship pool, and two private hints purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
+The complete Next.js application, cumulative through v1.5.3. In addition to reviewed, Next/Previous guided host setup, refreshed homepage copy with four feature chips, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, a separate 56-question championship pool, and two private hints purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
 
-See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
+In v1.5.3, homepage wording is refreshed, with four concise feature chips, and host setup now waits for an explicit Next tap after a choice is highlighted. See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
 
-# The Know Show — v1.5.2
+# The Know Show — v1.5.3
 
 A live trivia-night app for up to eight players or teams, with a 56-category, 672-question library (45 year-round categories plus eleven seasonal ones), two rounds of category drafting, optional private four-choice assistance, Double Takes, The Final Word with a two-hint cap and pre-wager hint purchases, and a celebratory Curtain Call.
 

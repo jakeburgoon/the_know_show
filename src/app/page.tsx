@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check, CircleHelp, Clapperboard, Copy, MonitorPlay, Smartphone, Sparkles, Ticket, Users } from 'lucide-react';
+import { ArrowRight, Check, CircleHelp, Clapperboard, Copy, Grid2X2, PenLine, Sparkles, Ticket, Users, UsersRound } from 'lucide-react';
 import QRJoinScanner from '@/components/QRJoinScanner';
 
 export default function Home() {
@@ -34,12 +34,12 @@ export default function Home() {
       <div className="v11beam v11beamleft" aria-hidden="true"/><div className="v11beam v11beamright" aria-hidden="true"/>
       <p className="v11overline"><span className="v11glowdot"/> YOUR LIVING ROOM. YOUR GAME SHOW.</p>
       <img className="v11hero-logo" src="/know-show-logo.png" alt="The Know Show"/>
-      <h1 id="v11heroheading">A little knowledge. <span>A lot of fun.</span></h1>
-      <p className="v11herodeck">Pick your categories, answer from your phone, and see who takes the crown. No buzzers. Just a great game night.</p>
-      <div className="v11featureline" aria-label="How the game works"><span><Users size={17}/> Up to 8 players</span><span><Smartphone size={17}/> Everyone answers</span><span><MonitorPlay size={17}/> TV optional</span></div>
+      <h1 id="v11heroheading">It’s time to <em className="v11headline-show">SHOW</em> what you <strong className="v11headline-know">KNOW</strong>.</h1>
+      <p className="v11herodeck">Choose your categories, answer your way, and find out who knows the most.</p>
+      <div className="v11featureline" aria-label="How the game works"><span><Users size={17}/> 2–8 players</span><span><Grid2X2 size={17}/> 50+ categories</span><span><PenLine size={17}/> Answer your way</span><span><UsersRound size={17}/> Individuals or teams</span></div>
     </section>
     <section className="v11entryzone" aria-labelledby="v11startheading">
-      <div className="v11entryheading"><p className="v11sectionkicker">THE SHOW STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
+      <div className="v11entryheading"><p className="v11sectionkicker">GAME NIGHT STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
       <div className="v11entrygrid">
         <section className="v11entrycard v11createcard" aria-labelledby="v11createheading"><div className="v11cardtop"><div className="v11cardicon"><Clapperboard size={24}/></div><span className="v11steplabel">01 / HOST</span></div>
           <h3 id="v11createheading">Host a show</h3><p>Answer four quick setup questions, invite your players, and start the show.</p>
@@ -57,6 +57,6 @@ export default function Home() {
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
     <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
-    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.5.0</span></footer>
+    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.5.3</span></footer>
   </main>;
 }

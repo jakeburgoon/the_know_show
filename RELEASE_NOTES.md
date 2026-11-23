@@ -1,3 +1,11 @@
+# v1.5.3 — Reviewed host setup and refreshed homepage
+
+Complete cumulative update over v1.5.2. Host setup choices now highlight locally when tapped; each step advances **only** when the host uses the visible **Next** button. **Previous** stays on the left from step two onward, and the last step shows **Continue to Green Room** on the right. Saving the selected choice remains server-side and must succeed before advancing; failures appear on the setup screen. Returning to earlier steps loads the previously saved settings. The four-question flow, existing settings, and Green Room are otherwise unchanged.
+
+Homepage copy now reads **“It’s time to SHOW what you KNOW.”** with distinct typographic emphasis, followed by **“Choose your categories, answer your way, and find out who knows the most.”** The four feature chips read **2–8 players**, **50+ categories**, **Answer your way**, and **Individuals or teams**. The section label is **GAME NIGHT STARTS HERE**; **Ready to play?** and the host/join instructions remain as agreed. All logo/icon image files are copied unchanged.
+
+**Validation:** Static checks for the four feature chips, homepage copy, non-advancing option buttons, footer navigation, wiring to the server action, and asset hashes. All 42 regression engine tests pass, and TSX syntax checks pass for the edited components. The full production Next.js build must still be verified by Vercel if dependencies are unavailable. No database or environment changes.
+
 # v1.5.2 — One-screen wager and 56 category-specific Final Word questions
 
 Complete cumulative update over v1.5.1. The Final Word **player** screen now combines the category, remaining points, a two-hint purchase section, a wager slider (plus optional exact entry and quick selections), and live projected balances for a right or wrong answer. Hints cost 500 points each; at most **two hints** may be purchased before locking a wager. Purchased points are deducted immediately, purchases are final, and regular-round hints do not carry over. The question itself remains hidden until all wagers are locked, and the final answer is typed only.
