@@ -1,10 +1,10 @@
-# The Know Show v1.5.0
+# The Know Show v1.5.1
 
-The complete Next.js application, cumulative through v1.5.0. In addition to guided host setup, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, three private hints per final question, and optional purchases for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
+The complete Next.js application, cumulative through v1.5.1. In addition to guided host setup, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, three private hints per final question purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
 
 See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
 
-# The Know Show — v1.5.0
+# The Know Show — v1.5.1
 
 A live trivia-night app for up to eight players or teams, with a 56-category, 672-question library (45 year-round categories plus eleven seasonal ones), two rounds of category drafting, optional private four-choice assistance, Double Takes, The Final Word with a three-hint cap and pre-wager hint purchases, and a celebratory Curtain Call.
 
@@ -23,7 +23,7 @@ The host can assign each player an Answer Format: **Write answers** (default), *
 
 Each four-choice player sees a private, single-tap selection on their phone for eligible **regular** questions. Written and multiple-choice correct answers receive the same base points. Regular-question speed bonuses are capped at 25% (written) and 10% (four-choice). Double Take rules are unchanged.
 
-**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are three progressive final hints per question; remaining hints carry forward, and additional credits cost 500 points each before wagering (maximum three reveals).
+**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are three progressive Final Word hints per question. Regular-game hints never carry into Final Word; each player may instead purchase up to three Final Word hints for 500 points each **before wagering**. Each purchase immediately reduces their balance and maximum wager.
 
 ## Game rules and features
 

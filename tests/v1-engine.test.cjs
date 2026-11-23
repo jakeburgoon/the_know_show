@@ -290,36 +290,44 @@ test('every Final Word question has three distinct, private, ordered hints',()=>
    for(const h of q.hints)assert.ok(h.length>=12,`${q.id} has a very short clue`);
  }
 });
-test('final hints are purchasable for 500 points only before wagering and deduct immediately',()=>{
+test('Final Word hints cost 500 points, purchase before wagering, and deduct immediately',()=>{
  let {s,a}=setup(2);s.players[0].score=1100;s.players[0].hintsRemaining=1;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
- let v=g.makeView(s,a[0],1,10000);assert.equal(v.final.myPurchasableHints,2);
+ let v=g.makeView(s,a[0],1,10000);
+ assert.equal(v.final.myPurchasableHints,3,'A remaining regular hint cannot restrict Final Word purchases');
+ assert.equal(v.final.myAvailableHints,0,'No free Final Word hints even with regular hints');
  s=g.mutate(s,{type:'buy-final-hint'},a[0],10001);
  assert.equal(s.players[0].score,600);assert.equal(s.final.purchasedHints[a[0].id],1);
  s=g.mutate(s,{type:'buy-final-hint'},a[0],10002);
- assert.equal(s.players[0].score,100);assert.equal(g.makeView(s,a[0],1,10002).final.myPurchasableHints,0);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10003),/three Final Word hints/);
+ assert.equal(s.players[0].score,100);assert.equal(g.makeView(s,a[0],1,10002).final.myPurchasableHints,1);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10003),/at least 500/);
  assert.throws(()=>g.mutate(s,{type:'wager',amount:101},a[0],10004),/Wager must/);
  s=g.mutate(s,{type:'wager',amount:100},a[0],10005);
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10006),/before locking/);
  s=g.mutate(s,{type:'wager',amount:0},a[1],10007);
  assert.equal(s.phase,'final-question');
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10008),/purchases are closed/);
+ assert.equal(s.players[0].hintsRemaining,1,'Regular hint balance must remain untouched');
 });
 test('a Final Word hint cannot be purchased when the player lacks 500 points',()=>{
- let {s,a}=setup(2);s.players[0].score=499;s.players[0].hintsRemaining=0;
+ let {s,a}=setup(2);s.players[0].score=499;s.players[0].hintsRemaining=4;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],4000),/at least 500/);
  assert.equal(s.players[0].score,499);
+ assert.equal(g.makeView(s,a[0],1,4001).final.myAvailableHints,0);
+ assert.equal(g.makeView(s,a[0],1,4001).final.myPurchasableHints,3);
 });
-test('free remaining hints are used first, purchased hints next, and only three can be revealed',()=>{
- let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=0;
+test('only purchased Final Word hints can be revealed; regular hints are never consumed',()=>{
+ let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=3;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
- for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
+ for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
+ assert.equal(s.players[0].score,500);
  s=g.mutate(s,{type:'wager',amount:500},a[0],4000);
  s=g.mutate(s,{type:'wager',amount:0},a[1],4001);
  let v=g.makeView(s,a[0],1,4050);assert.equal(v.final.myRevealedHints.length,0);
  assert.equal(v.final.myAvailableHints,3);
+ assert.equal(g.makeView(s,a[1],1,4050).final.myAvailableHints,0);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[1],4075),/No purchased Final Word hints remaining/);
  for(let i=0;i<3;i++){
    s=g.mutate(s,{type:'final-hint'},a[0],4100+i);
    v=g.makeView(s,a[0],1,4200+i);
@@ -328,27 +336,32 @@ test('free remaining hints are used first, purchased hints next, and only three 
    assert.deepEqual(g.makeView(s,a[1],1,4250+i).final.myRevealedHints,[]);
    assert.deepEqual(g.makeView(s,host,1,4250+i).final.myRevealedHints,[]);
  }
- assert.equal(s.players[0].hintsRemaining,0);
- assert.equal(s.final.purchasedHintsUsed[a[0].id],2);
+ assert.equal(s.players[0].hintsRemaining,1);
+ assert.equal(s.players[1].hintsRemaining,3);
+ assert.equal(s.final.purchasedHintsUsed[a[0].id],3);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4300),/three hints/);
- assert.throws(()=>g.mutate(s,{type:'final-hint'},a[1],4300),/No Final Word hints remaining/);
  s=g.mutate(s,{type:'final-answer',answer:'Gabriel García Márquez'},a[0],4500);
  assert.equal(s.final.answers[a[0].id].hintUsed,true);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4600),/already locked/);
 });
-test('players with three remaining hints cannot purchase more, while players with none can buy three',()=>{
+test('regular hints are independent from Final Word purchases and all three can be bought',()=>{
  let {s,a}=setup(2);s.phase='final-wager';s.final={id:'f12',wagers:{},answers:{},disputeIds:[]};
  s.players[0].score=2000;s.players[0].hintsRemaining=5;
- assert.equal(g.makeView(s,a[0],1,5000).final.myPurchasableHints,0);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],5000),/three Final Word hints/);
+ assert.equal(g.makeView(s,a[0],1,5000).final.myPurchasableHints,3);
+ assert.equal(g.makeView(s,a[0],1,5000).final.myAvailableHints,0);
+ for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],5001+i);
+ assert.equal(s.players[0].score,500);assert.equal(s.players[0].hintsRemaining,5);
+ assert.equal(g.makeView(s,a[0],1,5004).final.myPurchasableHints,0);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],5005),/three Final Word hints/);
  s.players[1].score=1600;s.players[1].hintsRemaining=0;
- for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[1],5001+i);
+ for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[1],5101+i);
  assert.equal(s.players[1].score,100);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5005),/three Final Word hints/);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5105),/three Final Word hints/);
 });
-test('Final Word hints respect the deadline, and draft auto-submission remembers hint use',()=>{
- let {s,a}=setup(2);s.players[0].hintsRemaining=1;
+test('Final Word hints respect the deadline, and draft auto-submission remembers purchased hint use',()=>{
+ let {s,a}=setup(2);s.players[0].score=800;s.players[0].hintsRemaining=2;
  s.phase='final-wager';s.final={id:'f7',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],7500);
  s=g.mutate(s,{type:'wager',amount:0},a[0],8000);s=g.mutate(s,{type:'wager',amount:0},a[1],8001);
  s=g.mutate(s,{type:'final-hint'},a[0],8100);
  const due=s.final.deadlineAt;
@@ -357,6 +370,7 @@ test('Final Word hints respect the deadline, and draft auto-submission remembers
  s=g.tick(s,due);
  assert.equal(s.phase,'final-results');assert.equal(s.final.answers[a[0].id].correct,true);
  assert.equal(s.final.answers[a[0].id].hintUsed,true);
+ assert.equal(s.players[0].hintsRemaining,2);
 });
 
 

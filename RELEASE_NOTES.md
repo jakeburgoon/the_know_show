@@ -1,3 +1,15 @@
+# v1.5.1 — Final Word hints are purchased only
+
+This is a focused, complete cumulative update to v1.5.0. **Unused regular-game hints never carry into The Final Word.** The host still controls regular-round hint allowances (including player accommodations), but those allowances apply only to ordinary questions.
+
+- Each player starts Final Word with **zero** usable hints, regardless of how many regular hints remain.
+- Before locking their wager, players may purchase **up to three** Final Word hints for **500 points each**. Each purchase immediately reduces their score and therefore their maximum wager.
+- During Final Word, a player can reveal only the hints they personally purchased. Hints are progressive and private. Revealing them never changes `hintsRemaining` from regular rounds.
+- Unpurchased hints cannot be revealed, unused purchases do not provide a refund, and hints cannot be purchased after locking the wager.
+- The Final Word screen explains these rules and indicates purchased / available hint counts. No changes to other mechanics, the 672-question library, or approved artwork.
+- **Verification:** All 39 automated game-engine tests passed with updated checks that distinguish regular and Final Word hints. Engine TypeScript compilation passed using existing local Node type definitions. Production Next.js build and end-to-end device testing were not performed here; verify the Vercel build after deployment.
+- **Deployment:** Replace the repository with this complete v1.5.1 application (no need to install v1.5.0 first). No SQL migration or environment-variable changes are needed. Start a fresh room to test the new hint rules.
+
 # v1.5.0 — Show Flow, Seasonal Trivia & Improved Variety
 
 Complete cumulative update from v1.4.1, including the previous, unreleased v1.4.2 Final Word work.

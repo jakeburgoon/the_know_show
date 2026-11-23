@@ -350,7 +350,8 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='final-wager'&&!!s.final,'Final hint purchases are closed.');
    assert(s.final.wagers[p.id]===undefined,'Purchase hints before locking your wager.');
    const bought=s.final.purchasedHints?.[p.id]??0;
-   assert(Math.min(MAX_FINAL_HINTS,p.hintsRemaining)+bought<MAX_FINAL_HINTS,'You already have access to three Final Word hints.');
+   // Final Word is a separate hint economy: regular-round hints never carry over.
+   assert(bought<MAX_FINAL_HINTS,'You already purchased all three Final Word hints.');
    assert(p.score>=FINAL_HINT_PRICE,'You need at least 500 points to buy a hint.');
    p.score-=FINAL_HINT_PRICE;(s.final.purchasedHints??={})[p.id]=bought+1;
    break;
@@ -361,12 +362,9 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(now<=(s.final.deadlineAt??0),'Final Word time has expired.');
    const shown=s.final.revealedHints?.[p.id]??0;
    assert(shown<MAX_FINAL_HINTS,'All three hints are already revealed.');
-   if(p.hintsRemaining>0){p.hintsRemaining--;}
-   else{
-     const used=s.final.purchasedHintsUsed?.[p.id]??0;
-     assert(used<(s.final.purchasedHints?.[p.id]??0),'No Final Word hints remaining.');
-     (s.final.purchasedHintsUsed??={})[p.id]=used+1;
-   }
+   const used=s.final.purchasedHintsUsed?.[p.id]??0;
+   assert(used<(s.final.purchasedHints?.[p.id]??0),'No purchased Final Word hints remaining.');
+   (s.final.purchasedHintsUsed??={})[p.id]=used+1;
    (s.final.revealedHints??={})[p.id]=shown+1;
    break;
  }
@@ -428,9 +426,9 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    myDraft:me?s.final.drafts?.[me.id]:undefined,
    hintPrice:FINAL_HINT_PRICE, maxHints:MAX_FINAL_HINTS,
    myPurchasedHints:me?(s.final.purchasedHints?.[me.id]??0):undefined,
-   myPurchasableHints:me&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-Math.min(MAX_FINAL_HINTS,me.hintsRemaining)-(s.final.purchasedHints?.[me.id]??0)):0,
+   myPurchasableHints:me&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-(s.final.purchasedHints?.[me.id]??0)):0,
    myRevealedHints:me&&s.phase!=='final-wager'?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
-   myAvailableHints:me?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),me.hintsRemaining+(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
+   myAvailableHints:me?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;

@@ -1,4 +1,4 @@
-THE KNOW SHOW — v1.5.0 · FULL CUMULATIVE UPDATE
+THE KNOW SHOW — v1.5.1 · FULL CUMULATIVE UPDATE
 
 This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
 
@@ -10,14 +10,14 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW IN v1.5.0
-- Full 1.4.2 Final Word improvements: visible server-aligned timer and 18 sets of 3 final hints; additional hints cost 500 pts before wagering, subject to 3-hint cap.
+NEW IN v1.5.1
+- Final Word hints are now entirely separate from regular-game hints. Players start the final with zero; they may buy up to 3 for 500 points each before placing wagers. Purchases immediately reduce wagerable score. All 18 Final Word questions retain three progressive private hints and the visible timer.
 - More visible Player View sound controls; QR-scanning camera window on homepage; rematch or a fresh home-screen show after the Curtain Call.
 - Answer-first results reveal followed by leaderboard; improved draft turn prompts and subtle navy/gold board depth.
 - Repeat reduction across rematches and new rooms created from the same host browser; 11 seasonal categories added (132 new questions), active by month. Each Build the Board phase includes one seasonal offer when any are in season, alongside regular options.
 - Approved main logo and app icons preserved exactly. 45 original categories / 540 questions unchanged. Total library: 56 categories and 672 questions.
 
 VALIDATION
-39 automated game-engine tests and a focused TypeScript check passed. Full Next.js production build could not run here because dependency installation timed out; check the Vercel build. No full-device end-to-end QA was run.
+39 automated game-engine tests and engine TypeScript compilation passed. Full Next.js production build could not run here because dependency installation timed out; check the Vercel build. No full-device end-to-end QA was run.
 
 See README.md and RELEASE_NOTES.md for more detail.
