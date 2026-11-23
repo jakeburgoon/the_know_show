@@ -1,3 +1,10 @@
+## v1.3.1 — Build fix
+
+- Fixed the TypeScript error in `src/components/ShowRoom.tsx` caused by a redundant `finished` phase comparison after the finished-screen early return.
+- Removed two unreachable legacy finished-screen sections. The Curtain Call remains the only finished-state display.
+- Updated the engine-test build command to include the existing standings module and stabilized a random category-selection test.
+- No changes to gameplay rules, question bank, assets, environment variables, or database schema.
+
 # The Know Show — v1.3.0 · Better Choices + Curtain Call
 
 Based directly on the supplied **v1.2.0** project ZIP. The 540 original trivia questions, 45 categories, canonical answers, answer aliases, hints, existing game rules, and approved logo are preserved.

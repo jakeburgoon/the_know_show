@@ -1,3 +1,5 @@
+The Know Show v1.3.1 — Vercel TypeScript build correction
+
 THE KNOW SHOW — v1.3.0 · BETTER CHOICES + CURTAIN CALL
 
 Complete replacement project for the uploaded v1.2.0 app.

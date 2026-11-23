@@ -206,7 +206,6 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  },[tab,view?.phase,view?.active?.key,displayOnly]);
  const activeKey=view?.active?.key??view?.intro?.key??'';
  useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft('');setDoubleTake(false);}},[activeKey]);
- const sorted=useMemo(()=>[...(view?.players||[])].sort((a,b)=>b.score-a.score),[view?.players]);
  const genre=SUNO_SOUNDTRACKS.find(t=>t.id===view?.settings.music);
  useEffect(()=>{
    if(!hostToken||!view?.playedQuestionIds?.length)return;
@@ -223,7 +222,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    <CurtainCall players={view.players} mode="phone"/>
    {Boolean(hostToken)&&<div className="v13finishactions"><button type="button" className="v13newshow" disabled={busy} onClick={()=>void act({type:'new-game'},hostToken)}>Start another show</button>{error&&<p role="alert">{error}</p>}</div>}
  </main>;
- const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.phase==='finished'?'The Curtain Call':view.roundNames[view.round];
+ const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.roundNames[view.round];
  const phonesOnly=(view.settings.displayMode??'tv')==='phones';
  const roomUrl=`${origin}/room/${code}`,hostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
  const wrongs=view.results?.answers||{};
@@ -284,7 +283,6 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: {view.final?.category}</p><p>{view.final?.wagerCount}/{view.players.length} wagers received.</p><p className="v1wagerprogress">The question will appear automatically when all wagers are locked.</p></section>}
      {view.phase==='final-question'&&<section className="v2card"><h2>The Final Word</h2><p>{view.final?.prompt}</p><p>Answer remains hidden until all final answers are revealed.</p><p>{view.final?.answerCount}/{view.players.length} submitted · {remain(view.final?.deadlineAt,now)}</p></section>}
      {view.phase==='final-results'&&<section className="v2card"><h2>Final results</h2><p>Answer: <strong>{view.final?.answer}</strong></p>{view.final?.results?.map(p=><div key={p.id} className="v2hostresult"><b>{p.name}: {p.answer}</b><div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Incorrect</button></div></div>)}<button className="v2primary" disabled={busy} onClick={()=>void act({type:'finish'})}>Show final standings</button></section>}
-     {view.phase==='finished'&&<section className="v2card"><h2>Show complete!</h2><button className="v2primary" disabled={busy} onClick={()=>void act({type:'new-game'})}>Play another game</button></section>}
      {view.phase!=='lobby'&&<section className="v2card"><h2>Score adjustments</h2>{view.players.map(p=><div className="v2scoreedit" key={p.id}><span>{p.name} · {fmt(p.score)}</span><input inputMode="numeric" aria-label={`Score adjustment for ${p.name}`} placeholder="+100 or -100" value={scoreEdits[p.id]||''} onChange={e=>setScoreEdits(v=>({...v,[p.id]:e.target.value}))}/><button className="v2small" disabled={busy||!Number.isInteger(Number(scoreEdits[p.id]))||!scoreEdits[p.id]} onClick={()=>{void act({type:'adjust-score',playerId:p.id,delta:Number(scoreEdits[p.id])});setScoreEdits(v=>({...v,[p.id]:''}));}}>Apply</button></div>)}</section>}
    </>}
    {isPlayer&&<>
@@ -321,10 +319,9 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: <strong>{view.final?.category}</strong></p><p>Choose a wager from zero to your current nonnegative score.</p>{view.final?.myWager===undefined?<form className="v2form" onSubmit={e=>{e.preventDefault();void act({type:'wager',amount:Number(wager)});}}><label>Your wager<input type="number" min={0} max={Math.max(0,me?.score||0)} value={wager} onChange={e=>setWager(e.target.value)}/></label><button disabled={busy||Number(wager)>Math.max(0,me?.score||0)}>Lock wager</button></form>:<p>Wager locked: {fmt(view.final.myWager)}</p>}</section>}
      {view.phase==='final-question'&&<section className="v2card v2questioncard"><div className="v2questiondisplay"><p className="v2eyebrow">THE FINAL WORD · {view.final?.category}</p><h2 className="v2prompt">{view.final?.prompt}</h2><div className="v2countdown" aria-label="Time remaining">{remain(view.final?.deadlineAt,now)}</div>{view.final?.myAnswer!==undefined?<p className="v2locked">Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={setFinalDraft} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/>}</div></section>}
      {view.phase==='final-results'&&<section className="v2card"><h2>Correct answer: {view.final?.answer}</h2><div className="v2resultgrid">{view.final?.results?.map(r=><div key={r.id} className={'v2result '+(r.correct?'right':'wrong')}><b>{r.name}</b><span>{r.correct?'Correct':'Incorrect'}</span><strong>{r.points>=0?'+':''}{fmt(r.points)}</strong></div>)}</div><button className="v2small" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>Dispute my result</button></section>}
-     {view.phase==='finished'&&<section className="v2card"><h2>Final standings</h2>{sorted.map((p,i)=><p key={p.id}>{i+1}. {p.name} — {fmt(p.score)} points</p>)}</section>}
    </>}
    <section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>
-   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.3</span></footer>
+   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.3.1</span></footer>
    </>}
  </main>;
 }

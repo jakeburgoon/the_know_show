@@ -195,7 +195,7 @@ test('replay tracker prefers unseen questions, within and between game rooms',()
  const saved=[chosen];let other=setup(2,'individual',saved); // draft pool is random, force direct category selection in a controlled room
  other.s=g.mutate(other.s,{type:'start-draft'},host,10000);other.s.draftPool[0]=id;
  other.s=g.mutate(other.s,{type:'draft-category',categoryId:id},other.a[0],10001);
- for(let i=1;i<4;i++)other.s=g.mutate(other.s,{type:'draft-category',categoryId:other.s.draftPool[i]},other.a[i%2],10001+i);
+ for(let i=1;i<4;i++){const next=other.s.draftPool.find(categoryId=>!other.s.selected[0].includes(categoryId));other.s=g.mutate(other.s,{type:'draft-category',categoryId:next},other.a[i%2],10001+i);}
  assert.equal(other.s.phase,'board');assert.notEqual(other.s.questionMap[`${id}:0`],chosen);
 });
 test('creating a new game in the same room carries the already-played history',()=>{
