@@ -1,15 +1,14 @@
-THE KNOW SHOW — v1.2.0 ANSWER CHOICES UPDATE
+THE KNOW SHOW — v1.3.0 · BETTER CHOICES + CURTAIN CALL
 
-Complete app replacement for your current v1.1 GitHub repository.
+Complete replacement project for the uploaded v1.2.0 app.
 
-1. Unzip this file.
+1. Unzip the ZIP file.
 2. Open the INNER `the-know-show` folder.
-3. Upload the contents into the ROOT of your GitHub repo, commit, and let Vercel deploy.
-4. In Host Controls, assign each player their Answer Format (Typed, All, Medium+Hard, or Hard only).
-5. Mid-game changes require pausing first.
+3. Upload ALL its contents to the ROOT of your existing GitHub repository, replacing changed paths; commit.
+4. Check your connected Vercel deployment build log and refresh the site / PWA.
+5. Try a short room, with one accommodated player, a written Final Word, and the celebratory finish (including ties).
 
-NO NEW SUPABASE SQL OR ENVIRONMENT VARIABLES.
-V1.1 ROOMS ARE COMPATIBLE; previous first-letter/length settings no longer apply.
+No new Supabase SQL or env vars are needed. Existing v1.2 rooms and settings are compatible.
+The main logo and app icons remain exactly unchanged.
 
-The approved main logo remains unchanged.
-See README.md and RELEASE_NOTES.md for details and multiple-choice content QA caveats.
+Inside: README.md, RELEASE_NOTES.md, CHOICE_OPTIONS_QA.csv.

@@ -496,3 +496,53 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .v12choice:hover:not(:disabled),.v12choice:focus-visible{background:#ffe6a6;border-color:#ebaf29;outline:2px solid #0f5770;outline-offset:1px}
 .v12choice:disabled{opacity:.65;cursor:not-allowed}
 @media(max-width:700px){.v12choice{min-height:54px}.v12choicegrid{gap:7px}}
+
+/* v1.3 · Curtain Call. One dedicated celebration and one final standings table. */
+.v13tvfinished{background:radial-gradient(ellipse at 50% 25%,#163c5b 0%,#061728 74%);overflow:hidden}
+.v13tvfinished .v2tvcolumns{display:grid;grid-template-columns:1fr}
+.v13tvfinished .v2tvmain{background:transparent;border:0;box-shadow:none;padding:0;min-height:calc(100vh - 110px)}
+.v13tvfinished .v2tvhead{position:relative;z-index:3}
+.v13curtain{position:relative;isolation:isolate;overflow:hidden;width:100%;color:#f9f3e7;text-align:center;background:radial-gradient(ellipse at 50% 10%,#234e6d 0%,#103351 40%,#091e35 100%);border:1px solid #b69355;border-radius:24px;padding:clamp(22px,3vw,46px) clamp(15px,3vw,48px) 35px;box-shadow:inset 0 0 0 5px #e3bb5a0d,0 22px 60px #071a2b3b}
+.v13curtain:before{content:"";position:absolute;z-index:-1;inset:12px;border:1px solid #bc97503b;border-radius:17px;pointer-events:none}
+.v13curtain-inner{position:relative;z-index:1;max-width:930px;margin:auto}
+.v13curtain-eyebrow{color:#ffe2a4;font-size:12px;font-weight:900;letter-spacing:.32em;margin:0 0 8px}
+.v13curtain h1{font-size:clamp(35px,5.6vw,70px);line-height:1.05;margin:0;color:#fff6dc;letter-spacing:-.045em}
+.v13trophy{margin:19px auto 9px;color:#ffce64;filter:drop-shadow(0 4px 19px #f6c4537d);display:flex;justify-content:center}
+.v13winner-label{color:#f4cd76;font-size:12px;font-weight:900;letter-spacing:.18em;margin:8px 0 12px}
+.v13winners{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:14px;margin:0 auto}
+.v13winner{min-width:min(100%,240px);display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 14px}
+.v13winner strong{font-family:'Space Grotesk',system-ui,sans-serif;font-size:clamp(36px,5.2vw,72px);font-weight:900;letter-spacing:-.048em;line-height:1.08;color:#fffef7;overflow-wrap:anywhere}
+.v13winner span{font-size:clamp(28px,3.1vw,45px);font-weight:900;color:#ffce64;font-variant-numeric:tabular-nums}
+.v13winner small{font-size:12px;letter-spacing:.12em;font-weight:900}
+.v13winners--tie .v13winner{flex:1 1 180px;max-width:420px;border:1px solid #f6cc774d;border-radius:15px;background:#f6d37b10;padding:15px 18px}
+.v13winners--tie .v13winner strong{font-size:clamp(29px,4.1vw,54px)}
+.v13victory-line{color:#d7e3ec;font-size:clamp(14px,1.5vw,19px);margin:12px 0 25px}
+.v13standings{max-width:800px;margin:0 auto;text-align:left;border-top:1px solid #ecc66d66;padding-top:20px}
+.v13standings h2{color:#f6d181;font-size:clamp(17px,1.7vw,23px);font-weight:900;text-transform:uppercase;letter-spacing:.14em;margin:0 0 12px;text-align:center}
+.v13standings ol{list-style:none;counter-reset:none;margin:0;padding:0;display:grid;gap:6px}
+.v13standings li{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px;border-radius:10px;background:#ffffff0b;border:1px solid #ffffff1b;font-size:clamp(13px,1.4vw,19px)}
+.v13standings li.v13first{background:#f6cd7721;border-color:#dfb7688f}
+.v13standing-rank{width:30px;height:30px;border-radius:50%;background:#ffffff1e;color:#ebedf0;display:grid;place-items:center;font-weight:900;font-variant-numeric:tabular-nums}
+.v13first .v13standing-rank{background:#eac36d;color:#14263a}
+.v13standing-name{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:7px;font-weight:750}
+.v13standing-name svg{flex:none;color:#f4cc77}
+.v13standings li strong{font-variant-numeric:tabular-nums;white-space:nowrap;color:#fae2a6}
+.v13standings li small{font-size:11px;font-weight:700;color:#bdcbd8}
+.v13confetti{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.v13confetti span{position:absolute;top:-20px;width:9px;height:17px;border-radius:2px;opacity:0;transform:translateY(0) rotate(0deg);animation:v13confettiFall 3s ease-in forwards}
+.v13confetti span:nth-child(4n){width:7px;height:12px;border-radius:50%}
+.v13confetti span:nth-child(5n){width:13px;height:7px}
+@keyframes v13confettiFall{0%{opacity:0;transform:translateY(-18px) rotate(0deg)}8%{opacity:.95}78%{opacity:.85}100%{opacity:0;transform:translateY(min(105vh,950px)) rotate(680deg)}}
+.v13phonefinish{min-height:100vh;background:#071b30;padding:16px clamp(10px,3vw,26px) 40px;font-family:'DM Sans',system-ui,sans-serif;color:#fffaf0}
+.v13finishhead{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 2px 17px;color:#f4d381;font-size:11px;font-weight:900;letter-spacing:.13em}
+.v13finishhead img{display:block;height:45px;max-width:min(47vw,210px);object-fit:contain}
+.v13curtain--phone{max-width:950px;margin:auto;padding:28px clamp(12px,3vw,25px) 26px}
+.v13curtain--phone .v13winner strong{font-size:clamp(32px,8vw,60px)}
+.v13curtain--phone .v13winners--tie .v13winner strong{font-size:clamp(25px,6vw,44px)}
+.v13curtain--phone .v13winner span{font-size:clamp(24px,6vw,38px)}
+.v13finishactions{max-width:950px;margin:17px auto;text-align:center}
+.v13newshow{font:inherit;font-weight:900;font-size:16px;padding:14px 28px;border:1px solid #f3d78d;background:#f1c967;color:#0b2942;border-radius:12px;cursor:pointer;box-shadow:0 8px 22px #0003}
+.v13newshow:disabled{opacity:.5;cursor:not-allowed}
+.v13finishactions p{color:#ffe1cc}
+@media(max-width:700px){.v13curtain h1{font-size:37px}.v13curtain-eyebrow{font-size:10px}.v13standings li{grid-template-columns:27px minmax(0,1fr) auto;gap:7px;padding:9px 8px}.v13standing-rank{width:26px;height:26px}.v13winners--tie .v13winner{min-width:0;flex-basis:125px;padding:9px}}
+@media(prefers-reduced-motion:reduce){.v13confetti{display:none}}

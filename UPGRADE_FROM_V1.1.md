@@ -1,7 +1,7 @@
-# Upgrade v1.1 → v1.2
+# Upgrade the existing The Know Show app to v1.3.0
 
-Upload all files and folders **inside** the extracted `the-know-show` project directory to the root of your existing GitHub repository using **Add file → Upload files**, then commit. Vercel will deploy automatically if linked.
+This release starts from the supplied v1.2.0 baseline and can replace the files in your deployed GitHub repository. Unzip, open the inner `the-know-show` folder, upload its **contents** (not the outer folder) to the repository root, overwrite changed files, and commit. Vercel redeploys if linked. Confirm the build succeeds.
 
-Do not upload the outer folder or the ZIP as a single file. You don't need to run new Supabase SQL or change Vercel environment variables. Existing v1.1 rooms are compatible. To use the new assistance, go to **Host Controls → Player accommodations**, select a player's Answer Format, and choose **Write answers**, **Four choices for all questions**, **Four choices for Medium & Hard**, or **Four choices for Hard only**. Pause first if already playing. Old first-letter and answer-length assignments no longer apply.
+No Supabase migration, environment variable updates, or room reset is required when upgrading from v1.1/v1.2. The v1.2 four-choice settings remain supported for normal questions. **Final Word is now written-only.** The 540-question answer choices have been reviewed and the finished screen has a new celebration and one standings table.
 
-Before broadly distributing the app, audit the new distractors in `CHOICE_OPTIONS_QA.csv`. They currently pass automated structural checks but not an individual editorial quality check for all 540 questions.
+For older v1.1 settings, the first-letter and answer-length accommodations are no longer used; assign the new per-player Answer Format before playing. See `README.md`, `RELEASE_NOTES.md`, and `CHOICE_OPTIONS_QA.csv`.

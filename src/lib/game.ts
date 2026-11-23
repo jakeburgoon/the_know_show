@@ -57,7 +57,8 @@ function distance(a:string,b:string){const prev=Array.from({length:b.length+1},(
 // Protect digits, ordinal numbers, and small words from permissive typos.
 // Recognized equivalent wording belongs in each question's explicit alias list.
 const numberWords:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20',first:'1st',second:'2nd',third:'3rd',fourth:'4th',fifth:'5th',sixth:'6th',seventh:'7th',eighth:'8th',ninth:'9th',tenth:'10th',eleventh:'11th',twelfth:'12th',thirteenth:'13th',fourteenth:'14th',fifteenth:'15th',sixteenth:'16th',seventeenth:'17th',eighteenth:'18th',nineteenth:'19th',twentieth:'20th'};
-const protectedTerms=(s:string)=>normalize(s).split(' ').map(x=>numberWords[x]??x).filter(x=>/\d/.test(x));
+const romanNumerals=new Set(['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi','xii','xiii','xiv','xv']);
+const protectedTerms=(s:string)=>normalize(s).split(' ').map(x=>numberWords[x]??x).filter(x=>/\d/.test(x)||romanNumerals.has(x));
 export function isCorrect(given:string,answer:string,aliases:string[]=[]):boolean {
  const g=normalize(given);if(!g)return false;
  // These are distinct technical concepts even though their spellings are close.
@@ -73,6 +74,13 @@ export function isCorrect(given:string,answer:string,aliases:string[]=[]):boolea
    const allowance=a.length>=9?2:1;
    return distance(a,g)<=allowance;
  });
+}
+/** Treat every published distractor as incorrect, even when fuzzy typo matching
+ * would otherwise confuse close but different words (e.g. Ming/Qing). */
+export function isCorrectForQuestion(given:string,q:{answer:string;aliases?:string[];distractors?:string[]}):boolean {
+ const input=normalize(given);
+ if((q.distractors??[]).some(d=>normalize(d)===input))return false;
+ return isCorrect(given,q.answer,q.aliases??[]);
 }
 function pickPool(s:GameState){
  const excluded=new Set([...s.selected[0],...s.selected[1]]);
@@ -121,7 +129,7 @@ function storeSubmission(s:GameState,p:Player,answer:string,now:number,useDouble
  assert(!a.answers[p.id],'You already submitted an answer.');
  const usesChoices=choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1]));
  if(usesChoices)assert(answerOptions(q.answer,q.distractors,q.id,p.id).some(choice=>choice===answer),'Choose one of the displayed answers.');
- const correct=isCorrect(answer,q.answer,q.aliases??[]);
+ const correct=isCorrectForQuestion(answer,q);
  if(useDoubleTake){assert(s.settings.mode==='individual'&&p.doubleTakesRemaining>0,'No Double Takes remaining.');p.doubleTakesRemaining--;}
  const points=correct?correctPoints(s,a,p,now,useDoubleTake):0;
  a.answers[p.id]={answer,at:now,correct,points,doubleTake:useDoubleTake,hintUsed:a.hintUsers.includes(p.id),answerFormat:usesChoices?'choices':'written'};
@@ -265,10 +273,9 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  case 'final-answer':{
    const p=player(s,actor);assert(s.phase==='final-question'&&!!s.final,'Final answers are closed.');assert(now<=(s.final.deadlineAt??0),'The final timer has ended.');assert(!s.final.answers[p.id],'You already answered.');
    const q=FINALS.find(q=>q.id===s.final!.id)!;const ans=String(action.answer||'').trim();assert(ans.length>0&&ans.length<=200,'Enter an answer.');
-   const hasChoices=choicesEnabled(p.choiceAccess,2);
-   if(hasChoices)assert(answerOptions(q.answer,q.distractors,q.id,p.id).includes(ans),'Choose one of the displayed answers.');
-   const correct=isCorrect(ans,q.answer,q.aliases||[]);const points=(s.final.wagers[p.id]??0)*(correct?1:-1);
-   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false,answerFormat:hasChoices?'choices':'written'};
+   // Final Word is always independently typed, regardless of any regular-round accommodation.
+   const correct=isCorrectForQuestion(ans,q);const points=(s.final.wagers[p.id]??0)*(correct?1:-1);
+   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false,answerFormat:'written'};
    if(s.players.every(p=>s.final!.answers[p.id]))finishFinal(s,now);break;
  }
  case 'finish':{host(actor);assert(s.phase==='final-results'&&!s.final?.disputeIds.length,'Resolve all disputes before finishing.');s.phase='finished';break;}
@@ -301,7 +308,6 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
-   myChoices:me&&s.phase==='final-question'&&choicesEnabled(me.choiceAccess,2)?answerOptions(finalQ.answer,finalQ.distractors,finalQ.id,me.id):undefined,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;

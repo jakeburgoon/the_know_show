@@ -92,10 +92,10 @@ test('each category question has four distinct options that do not match aliases
  for(const q of bank.QUESTION_LOOKUP.values()){
   assert.equal(q.distractors?.length,3,q.id);
   const opts=[q.answer,...q.distractors];assert.equal(new Set(opts.map(x=>x.toLowerCase().trim())).size,4,q.id);
-  for(const d of q.distractors)assert.equal(g.isCorrect(d,q.answer,q.aliases),false,`${q.id}: ${d}`);
+  for(const d of q.distractors)assert.equal(g.isCorrectForQuestion(d,q),false,`${q.id}: ${d}`);
  }
 });
-test('Hard-only choice assistance applies to hard questions and Final Word',()=>{
+test('Hard-only accommodations affect regular hard questions, but Final Word always requires writing',()=>{
  let {s,a}=setup(2);
  s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'hard'},host,3000);
  s=draft(s,a);const cat=s.selected[0][0];
@@ -110,13 +110,36 @@ test('Hard-only choice assistance applies to hard questions and Final Word',()=>
  s=g.mutate(s,{type:'wager',amount:0},a[1],60010);
  assert.equal(s.phase,'final-question');
  const f=g.makeView(s,a[0],1,60100).final;
- assert.equal(f.myChoices.length,4);
+ assert.equal(f.myChoices,undefined);
  assert.equal(g.makeView(s,a[1],1,60100).final.myChoices,undefined);
  assert.equal(g.makeView(s,host,1,60100).final.myChoices,undefined);
- assert.throws(()=>g.mutate(s,{type:'final-answer',answer:'not a listed choice'},a[0],60200),/displayed/);
+ // Free text cannot be rejected for failing to match a multiple-choice option.
+ s=g.mutate(s,{type:'final-answer',answer:'my own written guess'},a[0],60200);
+ assert.equal(s.final.answers[a[0].id].answerFormat,'written');
+ assert.equal(s.final.answers[a[0].id].correct,false);
  const good=bank.FINALS.find(q=>q.id==='f7').answer;
- s=g.mutate(s,{type:'final-answer',answer:good},a[0],60200);
- assert.equal(s.final.answers[a[0].id].correct,true);
+ s=g.mutate(s,{type:'final-answer',answer:good},a[1],60300);
+ assert.equal(s.final.answers[a[1].id].answerFormat,'written');
+ assert.equal(s.final.answers[a[1].id].correct,true);
+});
+test('all written Final Word submissions work even when every player has always-on choices',()=>{
+ let {s,a}=setup(3);
+ for(const p of a)s=g.mutate(s,{type:'player-bonuses',playerId:p.id,choiceAccess:'all'},host,3000);
+ s.phase='final-wager';s.final={id:'f1',wagers:{},answers:{},disputeIds:[]};
+ for(const p of a)s=g.mutate(s,{type:'wager',amount:0},p,5000);
+ for(const p of a)assert.equal(g.makeView(s,p,1,5100).final.myChoices,undefined);
+ for(const [i,p] of a.entries())s=g.mutate(s,{type:'final-answer',answer:i?'Africa':'a written guess'},p,5500+i);
+ assert.equal(s.phase,'final-results');
+ for(const r of Object.values(s.final.answers))assert.equal(r.answerFormat,'written');
+});
+test('final scoreboard gives equal rank and recognition to tied winners',()=>{
+ const {finalStandings}=require('../.engine-build/standings.js');
+ const players=[{id:'a',name:'A',score:400},{id:'b',name:'B',score:500},{id:'c',name:'C',score:200},{id:'d',name:'D',score:500}];
+ const result=finalStandings(players);
+ assert.equal(result.tied,true);
+ assert.deepEqual(result.winners.map(p=>p.name),['B','D']);
+ assert.deepEqual(result.standings.map(s=>s.place),[1,1,3,4]);
+ assert.equal(result.standings.filter(s=>s.isWinner).length,2);
 });
 test('similar-looking opposite and distinct scientific terms are not accepted as typos',()=>{
  assert.equal(g.isCorrect('endotherm','ectotherm'),false);

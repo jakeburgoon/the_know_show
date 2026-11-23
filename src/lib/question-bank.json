@@ -1,5 +1,5 @@
 {
-  "version": "v1.2.0-multiple-choice-playtest",
+  "version": "v1.3.0-curated-choices-and-curtain-call",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -60,9 +60,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mercury",
-              "Mars",
-              "Apollo 11"
+              "Vanguard 1",
+              "Explorer 1",
+              "Sputnik 2"
             ]
           },
           {
@@ -79,9 +79,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/chronology.html",
             "distractors": [
-              "Neptune",
-              "Mercury",
-              "Mars"
+              "Apollo 8",
+              "Apollo 10",
+              "Apollo 12"
             ]
           }
         ],
@@ -132,9 +132,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.nasa.gov/former-astronaut-sally-ride/",
             "distractors": [
-              "Neptune",
-              "Supernova",
-              "Mercury"
+              "Judith Resnik",
+              "Kathryn Sullivan",
+              "Eileen Collins"
             ]
           },
           {
@@ -166,9 +166,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://science.nasa.gov/saturn/moons/titan/facts/",
             "distractors": [
-              "Europa",
-              "Ganymede",
-              "Enceladus"
+              "Enceladus",
+              "Dione",
+              "Rhea"
             ]
           },
           {
@@ -198,9 +198,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://science.nasa.gov/mission/mars-2020-perseverance/location-map/",
             "distractors": [
-              "Event horizon",
-              "Titan",
-              "Luna 9"
+              "Curiosity",
+              "Opportunity",
+              "Spirit"
             ]
           },
           {
@@ -217,9 +217,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/chronology.html",
             "distractors": [
-              "Titan",
-              "Event horizon",
-              "Perseverance"
+              "Luna 2",
+              "Luna 13",
+              "Luna 16"
             ]
           }
         ]
@@ -243,9 +243,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Hibernation",
-              "Molt",
-              "Camouflage"
+              "Molting",
+              "Pupation",
+              "Ecdysis"
             ]
           },
           {
@@ -261,8 +261,8 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Albatross",
               "Puffin",
+              "Kiwi",
               "Emu"
             ]
           },
@@ -293,9 +293,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Octopus",
-              "Leopard",
-              "Hippo"
+              "Elephant",
+              "Ostrich",
+              "Camel"
             ]
           }
         ],
@@ -311,9 +311,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://animals.sandiegozoo.org/animals/emu",
             "distractors": [
-              "Crocodile",
-              "Giraffe",
-              "Cheetah"
+              "Cassowary",
+              "Ostrich",
+              "Rhea"
             ]
           },
           {
@@ -327,9 +327,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ostrich",
-              "Emu",
-              "Puffin"
+              "Swift",
+              "Kingfisher",
+              "Sunbird"
             ]
           },
           {
@@ -343,9 +343,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Omnivore",
-              "Emu",
-              "Hummingbird"
+              "Flying squirrel",
+              "Sugar glider",
+              "Colugo"
             ]
           },
           {
@@ -359,9 +359,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Giraffe",
-              "Bat",
-              "Emu"
+              "Carnivore",
+              "Herbivore",
+              "Insectivore"
             ]
           }
         ],
@@ -411,9 +411,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Herpetology",
-              "Crepuscular",
-              "Ethology"
+              "Marsupial",
+              "Placental mammal",
+              "Insectivore"
             ]
           },
           {
@@ -427,9 +427,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Herpetology",
-              "Monotreme",
-              "Ethology"
+              "Nocturnal",
+              "Diurnal",
+              "Cathemeral"
             ]
           }
         ]
@@ -455,9 +455,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.gob.cl/en/regions/metropolitan-region/",
             "distractors": [
-              "Nigeria",
-              "United Kingdom",
-              "Portugal"
+              "Peru",
+              "Argentina",
+              "Bolivia"
             ]
           },
           {
@@ -471,9 +471,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Jamaica",
-              "Ghana",
-              "Netherlands"
+              "Greece",
+              "Croatia",
+              "Portugal"
             ]
           },
           {
@@ -490,8 +490,8 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mekong River",
               "Seine",
+              "Rhine",
               "Danube"
             ]
           },
@@ -506,9 +506,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ghana",
-              "Peru",
-              "Uruguay"
+              "South Korea",
+              "China",
+              "Vietnam"
             ]
           }
         ],
@@ -524,9 +524,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Austria",
-              "Pakistan",
-              "Sweden"
+              "Mauritania",
+              "Gambia",
+              "Guinea-Bissau"
             ]
           },
           {
@@ -541,8 +541,8 @@
             "sourceUrl": "",
             "distractors": [
               "Sydney",
-              "Madrid",
-              "Auckland"
+              "Melbourne",
+              "Adelaide"
             ]
           },
           {
@@ -556,9 +556,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Malaysia",
-              "Panama",
-              "Uruguay"
+              "Tunisia",
+              "Algeria",
+              "Egypt"
             ]
           },
           {
@@ -574,9 +574,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.nesdis.noaa.gov/about/k-12-education/oceans-coasts/what-the-gulf-stream",
             "distractors": [
-              "Senegal",
-              "Canberra",
-              "Morocco"
+              "Labrador Current",
+              "North Atlantic Current",
+              "Canary Current"
             ]
           }
         ],
@@ -597,9 +597,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://science.nasa.gov/earth/earth-observatory/bosporus-strait-and-istanbul-turkey-2384/",
             "distractors": [
-              "Bering Strait",
               "Dardanelles",
-              "Strait of Gibraltar"
+              "Strait of Kerch",
+              "Strait of Otranto"
             ]
           },
           {
@@ -613,9 +613,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Dardanelles",
-              "Strait of Magellan",
-              "Bering Strait"
+              "Strait of Sicily",
+              "Strait of Messina",
+              "Bosporus"
             ]
           },
           {
@@ -629,9 +629,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "South Africa",
-              "Ghana",
-              "Sweden"
+              "Slovakia",
+              "Croatia",
+              "Serbia"
             ]
           },
           {
@@ -645,9 +645,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Malaysia",
-              "Greece",
-              "Austria"
+              "Botswana",
+              "Namibia",
+              "Zimbabwe"
             ]
           }
         ]
@@ -671,9 +671,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Synonym",
-              "Homophones",
-              "Comma"
+              "Initialism",
+              "Backronym",
+              "Contraction"
             ]
           },
           {
@@ -687,9 +687,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Synonym",
-              "Acronym",
-              "Comma"
+              "Homographs",
+              "Homonyms",
+              "Heteronyms"
             ]
           },
           {
@@ -719,9 +719,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Homophones",
-              "Acronym",
-              "Anagram"
+              "Antonym",
+              "Homonym",
+              "Hypernym"
             ]
           }
         ],
@@ -755,9 +755,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Anagram",
+              "Compound word",
               "Acronym",
-              "Palindrome"
+              "Neologism"
             ]
           },
           {
@@ -771,8 +771,8 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Synonym",
               "Palindrome",
+              "Acronym",
               "Portmanteau"
             ]
           },
@@ -788,8 +788,8 @@
             "sourceUrl": "",
             "distractors": [
               "Anagram",
-              "Synonym",
-              "Portmanteau"
+              "Heteronym",
+              "Homograph"
             ]
           }
         ],
@@ -823,9 +823,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/heteronym",
             "distractors": [
-              "Synonym",
               "Homophone",
-              "Homograph"
+              "Homonym",
+              "Antonym"
             ]
           },
           {
@@ -839,9 +839,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Neologism",
-              "Asyndeton",
-              "Heteronym"
+              "Lipogram",
+              "Palindrome",
+              "Tautogram"
             ]
           },
           {
@@ -855,9 +855,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Pangram",
-              "Synonym",
-              "Asyndeton"
+              "Archaism",
+              "Loanword",
+              "Back-formation"
             ]
           }
         ]
@@ -881,9 +881,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mayflower",
-              "Berlin Wall",
-              "World War II"
+              "Buzz Aldrin",
+              "Yuri Gagarin",
+              "Alan Shepard"
             ]
           },
           {
@@ -897,9 +897,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Neil Armstrong",
-              "Mayflower",
-              "World War II"
+              "Hadrian's Wall",
+              "Great Wall of China",
+              "Western Wall"
             ]
           },
           {
@@ -918,9 +918,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Neil Armstrong",
-              "Mayflower",
-              "Berlin Wall"
+              "World War I",
+              "Korean War",
+              "Cold War"
             ]
           },
           {
@@ -934,9 +934,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Neil Armstrong",
-              "Berlin Wall",
-              "World War II"
+              "Speedwell",
+              "Susan Constant",
+              "Discovery"
             ]
           }
         ],
@@ -956,9 +956,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Italy",
-              "Pompeii",
-              "Tutankhamun"
+              "Jawaharlal Nehru",
+              "Subhas Chandra Bose",
+              "Muhammad Ali Jinnah"
             ]
           },
           {
@@ -972,9 +972,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ghana",
-              "Kenya",
-              "Costa Rica"
+              "France",
+              "Germany",
+              "England"
             ]
           },
           {
@@ -993,9 +993,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.metmuseum.org/exhibitions/listings/2006/discovering-tutankhamun",
             "distractors": [
-              "Italy",
-              "Pompeii",
-              "Mahatma Gandhi"
+              "Ramses II",
+              "Akhenaten",
+              "Amenhotep III"
             ]
           },
           {
@@ -1009,9 +1009,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Italy",
-              "Mahatma Gandhi",
-              "Tutankhamun"
+              "Herculaneum",
+              "Oplontis",
+              "Stabiae"
             ]
           }
         ],
@@ -1049,9 +1049,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Treaty of Paris",
               "Peace of Augsburg",
-              "Ottoman Empire"
+              "Peace of Utrecht",
+              "Treaty of Nijmegen"
             ]
           },
           {
@@ -1065,9 +1065,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Italy",
-              "Peace of Augsburg",
-              "Peace of Westphalia"
+              "Safavid Empire",
+              "Mughal Empire",
+              "Habsburg Empire"
             ]
           },
           {
@@ -1084,9 +1084,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.deutschlandmuseum.de/en/history/calendar/1555-09-25-the-peace-of-augsburg/",
             "distractors": [
-              "Ottoman Empire",
               "Peace of Westphalia",
-              "Treaty of Paris"
+              "Peace of Passau",
+              "Peace of Prague"
             ]
           }
         ]
@@ -1130,9 +1130,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Water",
-              "Electron",
-              "100"
+              "Molecules",
+              "Electrons",
+              "Ions"
             ]
           },
           {
@@ -1146,9 +1146,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Water",
-              "Atoms",
-              "100"
+              "Proton",
+              "Neutron",
+              "Positron"
             ]
           },
           {
@@ -1219,9 +1219,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Katal",
-              "Conservation of energy",
-              "Second law of thermodynamics"
+              "Volt",
+              "Siemens",
+              "Farad"
             ]
           },
           {
@@ -1235,9 +1235,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.britannica.com/science/electronegativity",
             "distractors": [
-              "Ohm",
-              "Conservation of energy",
-              "Second law of thermodynamics"
+              "Electron affinity",
+              "Ionization energy",
+              "Electronegativity difference"
             ]
           }
         ],
@@ -1255,9 +1255,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.nist.gov/pml/special-publication-330/sp-330-appendix-1",
             "distractors": [
-              "Ohm",
-              "Frederick Sanger",
-              "Moment magnitude scale"
+              "Mole",
+              "Becquerel",
+              "Enzyme unit"
             ]
           },
           {
@@ -1275,9 +1275,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity",
             "distractors": [
-              "Katal",
-              "Frederick Sanger",
-              "DNA polymerase"
+              "Richter magnitude scale",
+              "Surface-wave magnitude scale",
+              "Body-wave magnitude scale"
             ]
           },
           {
@@ -1293,9 +1293,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK21129/",
             "distractors": [
-              "Frederick Sanger",
-              "Katal",
-              "Moment magnitude scale"
+              "RNA polymerase",
+              "DNA ligase",
+              "DNA helicase"
             ]
           },
           {
@@ -1312,9 +1312,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.genome.gov/nov-7-2017-40th-anniversary-of-landmark-dna-sequencing-methods",
             "distractors": [
-              "Albert Einstein",
-              "Michael Faraday",
-              "Nikola Tesla"
+              "Walter Gilbert",
+              "Frederick Griffith",
+              "Kary Mullis"
             ]
           }
         ]
@@ -1376,9 +1376,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Cabbage",
-              "Soybeans",
-              "Butter"
+              "Barley",
+              "Farro",
+              "Orzo"
             ]
           },
           {
@@ -1450,9 +1450,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Al dente",
-              "Julienne",
-              "Emulsification"
+              "Baking powder",
+              "Sourdough starter",
+              "Baking soda"
             ]
           },
           {
@@ -1468,9 +1468,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://dictionary.cambridge.org/us/dictionary/english/al-dente",
             "distractors": [
-              "Yeast",
-              "Julienne",
-              "Emulsification"
+              "Al forno",
+              "Al fresco",
+              "Al vapore"
             ]
           }
         ],
@@ -1490,9 +1490,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.famic.go.jp/english/jas/_doc/jas0022.pdf",
             "distractors": [
-              "Saffron",
-              "Béchamel",
-              "Mise en place"
+              "Miso",
+              "Tempeh",
+              "Natto"
             ]
           },
           {
@@ -1527,9 +1527,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Julienne",
-              "Béchamel",
-              "Saffron"
+              "À la minute",
+              "En papillote",
+              "Mise en bouche"
             ]
           },
           {
@@ -1543,9 +1543,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Béchamel",
-              "Mise en place",
-              "Koji"
+              "Turmeric",
+              "Paprika",
+              "Sumac"
             ]
           }
         ]
@@ -1573,9 +1573,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Frozen",
-              "Clownfish",
-              "Space ranger action figure"
+              "Emerald green",
+              "Sapphire blue",
+              "Golden yellow"
             ]
           },
           {
@@ -1596,9 +1596,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Clownfish",
-              "Frozen",
-              "Ruby red"
+              "Toy robot",
+              "Toy cowboy doll",
+              "Toy astronaut"
             ]
           },
           {
@@ -1612,9 +1612,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "The Matrix",
-              "Back to the Future",
-              "Shrek"
+              "Moana",
+              "Tangled",
+              "Encanto"
             ]
           },
           {
@@ -1628,9 +1628,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Space ranger action figure",
-              "Frozen",
-              "Ruby red"
+              "Angelfish",
+              "Blue tang",
+              "Damselfish"
             ]
           }
         ],
@@ -1648,9 +1648,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2002",
             "distractors": [
-              "Finding Nemo",
               "Monsters, Inc.",
-              "The Incredibles"
+              "Jimmy Neutron: Boy Genius",
+              "Ice Age"
             ]
           },
           {
@@ -1666,9 +1666,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Wes Anderson",
-              "Yoda",
-              "Shrek"
+              "Daily Bugle",
+              "Gotham Gazette",
+              "Metropolis Herald"
             ]
           },
           {
@@ -1682,9 +1682,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Wes Anderson",
-              "Daily Planet",
-              "Shrek"
+              "Grogu",
+              "Yaddle",
+              "Kit Fisto"
             ]
           },
           {
@@ -1698,9 +1698,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.moma.org/calendar/events/614",
             "distractors": [
-              "Akira Kurosawa",
-              "Yoda",
-              "Shrek"
+              "David Fincher",
+              "Tim Burton",
+              "Christopher Nolan"
             ]
           }
         ],
@@ -1718,9 +1718,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.bfi.org.uk/film/878cd0fa-33da-547a-b128-84cec508f7da/rashomon",
             "distractors": [
-              "Spirited Away",
-              "Bong Joon-ho",
-              "Wes Anderson"
+              "Hayao Miyazaki",
+              "Yasujiro Ozu",
+              "Kenji Mizoguchi"
             ]
           },
           {
@@ -1736,9 +1736,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2003",
             "distractors": [
-              "The Lion King",
-              "Frozen",
-              "Toy Story"
+              "Howl's Moving Castle",
+              "Princess Mononoke",
+              "My Neighbor Totoro"
             ]
           },
           {
@@ -1755,9 +1755,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2020",
             "distractors": [
-              "Spirited Away",
-              "Akira Kurosawa",
-              "Shrek"
+              "Park Chan-wook",
+              "Lee Chang-dong",
+              "Hong Sang-soo"
             ]
           },
           {
@@ -1802,9 +1802,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://music.si.edu/story/early-southern-guitar-sounds-brief-history-guitar-and-its-travel-south",
             "distractors": [
-              "Cello",
-              "Flute",
-              "Piano"
+              "Banjo",
+              "Mandolin",
+              "Ukulele"
             ]
           },
           {
@@ -1839,9 +1839,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.metmuseum.org/pt/perspectives/musical-instruments-highlights-of-the-metropolitan-museum-of-art",
             "distractors": [
-              "Harp",
-              "Flute",
-              "French horn"
+              "Harpsichord",
+              "Clavichord",
+              "Celesta"
             ]
           },
           {
@@ -1857,9 +1857,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Piano",
-              "Guitar",
-              "Violin"
+              "Orchestra",
+              "Quartet",
+              "Ensemble"
             ]
           }
         ],
@@ -1875,9 +1875,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.loc.gov/nls/services-and-resources/music-service-and-materials/music-appreciation/opera/",
             "distractors": [
-              "Crescendo",
-              "Legato",
-              "Staccato"
+              "Unison",
+              "Fifth",
+              "Whole step"
             ]
           },
           {
@@ -1907,9 +1907,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Adagio",
-              "Presto",
-              "Staccato"
+              "Diminuendo",
+              "Accelerando",
+              "Ritardando"
             ]
           },
           {
@@ -1961,9 +1961,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://blogs.loc.gov/nls-music-notes/2020/05/song-stories-time-out-for-take-five/?loclr=blognls",
             "distractors": [
-              "Ritardando",
-              "Oboe",
-              "Igor Stravinsky"
+              "Blue Rondo à la Turk",
+              "Unsquare Dance",
+              "Strange Meadow Lark"
             ]
           },
           {
@@ -1977,9 +1977,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Guitar",
-              "Mandolin",
-              "Harp"
+              "Bassoon",
+              "Clarinet",
+              "Flute"
             ]
           },
           {
@@ -1995,9 +1995,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Crescendo",
-              "Oboe",
-              "Igor Stravinsky"
+              "Accelerando",
+              "A tempo",
+              "Crescendo"
             ]
           }
         ]
@@ -2138,9 +2138,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "30",
-              "36",
-              "12"
+              "1/12",
+              "1/8",
+              "1/9"
             ]
           },
           {
@@ -2217,9 +2217,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "34650",
-              "56",
-              "1/6"
+              "1/5",
+              "1/10",
+              "2/5"
             ]
           },
           {
@@ -2266,9 +2266,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "5",
-              "Baseball",
-              "6"
+              "Defender",
+              "Midfielder",
+              "Striker"
             ]
           },
           {
@@ -2300,9 +2300,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Manchester City",
-              "Chelsea",
-              "Leicester City"
+              "6",
+              "4",
+              "7"
             ]
           },
           {
@@ -2339,9 +2339,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.wtatennis.com/tournaments/roland-garros",
             "distractors": [
-              "Bagel",
-              "Birdie",
-              "Gymnastics"
+              "Wimbledon",
+              "Australian Open",
+              "US Open"
             ]
           },
           {
@@ -2355,9 +2355,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "French Open",
-              "Birdie",
-              "Gymnastics"
+              "Breadstick",
+              "Golden set",
+              "Love set"
             ]
           },
           {
@@ -2371,9 +2371,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Bagel",
-              "Gymnastics",
-              "French Open"
+              "Eagle",
+              "Bogey",
+              "Albatross"
             ]
           },
           {
@@ -2389,9 +2389,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Bagel",
-              "Birdie",
-              "French Open"
+              "Artistic swimming",
+              "Figure skating",
+              "Trampoline gymnastics"
             ]
           }
         ],
@@ -2411,9 +2411,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.formula1.com/en/latest/article/who-was-guiseppe-farina-f1s-first-winner-and-world-champion.2F9v3g8tSavnqiL9wUjYAx.2F9v3g8tSavnqiL9wUjYAx",
             "distractors": [
-              "Uruguay",
-              "New Zealand",
-              "Miguel Indurain"
+              "Juan Manuel Fangio",
+              "Alberto Ascari",
+              "Luigi Fagioli"
             ]
           },
           {
@@ -2430,9 +2430,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.world.rugby/news/617532/tournament-history?lang=en",
             "distractors": [
-              "Jamaica",
-              "Greece",
-              "Australia"
+              "Australia",
+              "South Africa",
+              "France"
             ]
           },
           {
@@ -2449,9 +2449,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.letour.fr/en/news/2023/where-champions-are-forged-i-vi-san-sebastian-miguel-indurain-everyones-favourite-neighbour/1309029",
             "distractors": [
-              "Giuseppe Farina",
-              "Uruguay",
-              "New Zealand"
+              "Bernard Hinault",
+              "Laurent Fignon",
+              "Greg LeMond"
             ]
           },
           {
@@ -2465,9 +2465,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/uruguay-1930",
             "distractors": [
-              "Vietnam",
-              "Panama",
-              "Mongolia"
+              "Argentina",
+              "Brazil",
+              "Chile"
             ]
           }
         ]
@@ -2493,9 +2493,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "George Orwell",
-              "Leo Tolstoy",
-              "Mark Twain"
+              "Eoin Colfer",
+              "J. K. Rowling",
+              "Suzanne Collins"
             ]
           },
           {
@@ -2527,9 +2527,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Llama",
-              "Panda",
-              "Falcon"
+              "Tiger",
+              "Leopard",
+              "Wolf"
             ]
           },
           {
@@ -2545,9 +2545,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Rick Riordan",
-              "Harry Potter",
-              "Lion"
+              "Paddington Bear",
+              "Corduroy",
+              "Baloo"
             ]
           }
         ],
@@ -2563,9 +2563,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Jane Eyre",
-              "Beloved",
-              "Pride and Prejudice"
+              "Fern",
+              "Templeton",
+              "Miss Spider"
             ]
           },
           {
@@ -2619,9 +2619,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.sparknotes.com/lit/mocking/point-of-view/",
             "distractors": [
-              "Charlotte",
-              "Frodo Baggins",
-              "Arthur Conan Doyle"
+              "Jem Finch",
+              "Dill Harris",
+              "Atticus Finch"
             ]
           }
         ],
@@ -2639,9 +2639,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.penguinrandomhouse.com/books/669597/the-master-and-margarita-by-mikhail-bulgakov-translated-by-michael-glenny-introduction-by-simon-franklin/9780679410461/",
             "distractors": [
-              "Charles Dickens",
+              "Fyodor Dostoevsky",
               "Leo Tolstoy",
-              "Jane Austen"
+              "Nikolai Gogol"
             ]
           },
           {
@@ -2659,9 +2659,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.gutenberg.org/files/1260/1260-h/1260-h.htm",
             "distractors": [
-              "Mikhail Bulgakov",
-              "Boxer",
-              "Things Fall Apart"
+              "John",
+              "Richard",
+              "St. John"
             ]
           },
           {
@@ -2733,9 +2733,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Lightning",
-              "Weather front",
-              "Rain"
+              "Waterspout",
+              "Dust devil",
+              "Funnel cloud"
             ]
           },
           {
@@ -2749,9 +2749,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Lightning",
-              "Tornado",
-              "Snow"
+              "Drizzle",
+              "Sleet",
+              "Hail"
             ]
           },
           {
@@ -2765,9 +2765,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Tornado",
-              "Rain",
-              "Snow"
+              "Static discharge",
+              "Thunder",
+              "Aurora"
             ]
           }
         ],
@@ -2875,9 +2875,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://nsidc.org/learn/parts-cryosphere/snow/science-snow",
             "distractors": [
-              "Enhanced Fujita scale",
-              "Monsoon",
-              "Intertropical Convergence Zone"
+              "Graupel",
+              "Hoarfrost",
+              "Sastrugi"
             ]
           },
           {
@@ -2894,9 +2894,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.weather.gov/tae/ef_scale",
             "distractors": [
-              "Firn",
-              "Monsoon",
-              "Intertropical Convergence Zone"
+              "TORRO scale",
+              "Saffir–Simpson scale",
+              "Beaufort scale"
             ]
           },
           {
@@ -2910,9 +2910,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Intertropical Convergence Zone",
-              "Enhanced Fujita scale",
-              "Firn"
+              "Sea breeze",
+              "Trade wind",
+              "Westerlies"
             ]
           }
         ]
@@ -2955,9 +2955,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Universal Serial Bus",
-              "Central Processing Unit",
-              "Icon"
+              "Mouse",
+              "Trackpad",
+              "Touchscreen"
             ]
           },
           {
@@ -2971,9 +2971,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Central Processing Unit",
-              "HyperText Markup Language",
-              "Keyboard"
+              "Universal System Bus",
+              "Unified Serial Bus",
+              "Universal Service Bus"
             ]
           },
           {
@@ -2987,9 +2987,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Universal Serial Bus",
-              "HyperText Markup Language",
-              "Keyboard"
+              "Central Performance Unit",
+              "Computer Processing Unit",
+              "Control Processing Unit"
             ]
           }
         ],
@@ -3043,9 +3043,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "HyperText Markup Language",
-              "Camera",
-              "JSON"
+              "Glitch",
+              "Fault",
+              "Crash"
             ]
           },
           {
@@ -3059,9 +3059,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Universal Serial Bus",
-              "Central Processing Unit",
-              "Camera"
+              "HyperText Machine Language",
+              "High-level Text Markup Language",
+              "Hyperlink Text Markup Language"
             ]
           }
         ],
@@ -3117,9 +3117,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://owasp.org/www-community/attacks/SQL_Injection",
             "distractors": [
-              "TLS",
-              "DHCP",
-              "Cross-site scripting"
+              "Cross-site request forgery",
+              "Command injection",
+              "Insecure deserialization"
             ]
           },
           {
@@ -3135,9 +3135,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://developer.mozilla.org/en-US/docs/Glossary/TLS",
             "distractors": [
-              "DHCP",
-              "Cross-site scripting",
-              "SQL injection"
+              "SSH",
+              "IPsec",
+              "WPA3"
             ]
           }
         ]
@@ -3179,9 +3179,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Heart",
-              "Lungs",
-              "Nervous system"
+              "Gums",
+              "Jawbone",
+              "Palate"
             ]
           },
           {
@@ -3195,9 +3195,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Femur",
-              "Nervous system",
-              "Pancreas"
+              "Lungs",
+              "Liver",
+              "Kidneys"
             ]
           },
           {
@@ -3211,9 +3211,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Heart",
-              "Teeth",
-              "Femur"
+              "Endocrine system",
+              "Circulatory system",
+              "Muscular system"
             ]
           }
         ],
@@ -3265,9 +3265,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Femur",
-              "Pancreas",
-              "Left ventricle"
+              "Red blood cells",
+              "White blood cells",
+              "Plasma"
             ]
           },
           {
@@ -3283,9 +3283,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.cdc.gov/heart-defects/how-the-heart-works/index.html",
             "distractors": [
-              "Heart",
-              "Platelets",
-              "Femur"
+              "Right ventricle",
+              "Left atrium",
+              "Right atrium"
             ]
           }
         ],
@@ -3323,9 +3323,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK279394/",
             "distractors": [
-              "Diaphragm",
-              "Corpus callosum",
-              "Glomerulus"
+              "Cochlea",
+              "Utricle",
+              "Saccule"
             ]
           },
           {
@@ -3339,9 +3339,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Semicircular canals",
-              "Corpus callosum",
-              "Glomerulus"
+              "Intercostal muscles",
+              "Pleura",
+              "Sternum"
             ]
           },
           {
@@ -3355,9 +3355,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK448209/",
             "distractors": [
-              "Diaphragm",
-              "Semicircular canals",
-              "Glomerulus"
+              "Anterior commissure",
+              "Fornix",
+              "Internal capsule"
             ]
           }
         ]
@@ -3381,9 +3381,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Zeus",
-              "Poseidon",
-              "Thor"
+              "Phaethon",
+              "Daedalus",
+              "Bellerophon"
             ]
           },
           {
@@ -3397,9 +3397,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Thor",
+              "Hades",
               "Zeus",
-              "Icarus"
+              "Triton"
             ]
           },
           {
@@ -3413,9 +3413,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Poseidon",
-              "Zeus",
-              "Icarus"
+              "Odin",
+              "Tyr",
+              "Loki"
             ]
           },
           {
@@ -3430,8 +3430,8 @@
             "sourceUrl": "",
             "distractors": [
               "Poseidon",
-              "Icarus",
-              "Pegasus"
+              "Hades",
+              "Apollo"
             ]
           }
         ],
@@ -3463,9 +3463,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.metmuseum.org/art/collection/search/191330",
             "distractors": [
-              "Pegasus",
-              "Minotaur",
-              "Anubis"
+              "Arion",
+              "Linus",
+              "Amphion"
             ]
           },
           {
@@ -3479,9 +3479,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Pegasus",
-              "Sphinx",
-              "Zeus"
+              "Centaur",
+              "Satyr",
+              "Cyclops"
             ]
           },
           {
@@ -3495,9 +3495,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Minotaur",
-              "Zeus",
-              "Atlas"
+              "Arion",
+              "Chrysaor",
+              "Hippocampus"
             ]
           }
         ],
@@ -3529,9 +3529,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Sphinx",
-              "Atlas",
-              "Yggdrasil"
+              "Perseus",
+              "Heracles",
+              "Jason"
             ]
           },
           {
@@ -3549,9 +3549,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Bifröst",
-              "Valhalla",
-              "Jörmungandr"
+              "Glasir",
+              "Barnstokkr",
+              "Læraðr"
             ]
           },
           {
@@ -3565,9 +3565,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Minotaur",
-              "Theseus",
-              "Atlas"
+              "Chimera",
+              "Manticore",
+              "Lamassu"
             ]
           }
         ]
@@ -3593,9 +3593,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Silver",
-              "Brown",
-              "Cyan"
+              "Orange",
+              "Green",
+              "Brown"
             ]
           },
           {
@@ -3625,9 +3625,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Green",
-              "Purple",
-              "Pink"
+              "Carotene",
+              "Anthocyanin",
+              "Xanthophyll"
             ]
           },
           {
@@ -3641,9 +3641,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Violet",
-              "Gold",
-              "Indigo"
+              "Turquoise",
+              "Orange",
+              "Purple"
             ]
           }
         ],
@@ -3693,9 +3693,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Violet",
-              "White",
-              "Refraction"
+              "Analogous colors",
+              "Split-complementary colors",
+              "Triadic colors"
             ]
           },
           {
@@ -3709,9 +3709,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Brown",
-              "Gold",
-              "Silver"
+              "Blue",
+              "Red",
+              "Green"
             ]
           }
         ],
@@ -3750,9 +3750,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://cie.co.at/eilvterm/17-23-076",
             "distractors": [
-              "HSV",
-              "Violet",
-              "White"
+              "RGB",
+              "CMYK",
+              "CIE XYZ"
             ]
           },
           {
@@ -3768,9 +3768,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "CIELAB",
-              "Violet",
-              "White"
+              "HSL",
+              "RGB",
+              "CMYK"
             ]
           },
           {
@@ -3786,9 +3786,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://pubs.usgs.gov/gip/gemstones/mineral.html",
             "distractors": [
-              "Carmine",
-              "CIELAB",
-              "HSV"
+              "Azurite",
+              "Sodalite",
+              "Blue apatite"
             ]
           }
         ]
@@ -3815,9 +3815,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Stockholm",
-              "Shanghai",
-              "Kyoto"
+              "Philadelphia",
+              "Boston",
+              "Washington, D.C."
             ]
           },
           {
@@ -3831,9 +3831,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mongolia",
-              "France",
-              "Singapore"
+              "Pakistan",
+              "Bangladesh",
+              "Nepal"
             ]
           },
           {
@@ -3847,9 +3847,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Havana",
-              "Austin",
-              "Albany"
+              "Lyon",
+              "Marseille",
+              "Bordeaux"
             ]
           },
           {
@@ -3863,9 +3863,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "India",
-              "Paris",
-              "Barcelona"
+              "Jaipur",
+              "Delhi",
+              "Lucknow"
             ]
           }
         ],
@@ -3897,9 +3897,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Seattle",
-              "Cincinnati",
-              "Vancouver"
+              "Manchester",
+              "Birmingham",
+              "Liverpool"
             ]
           },
           {
@@ -3913,9 +3913,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Le Corbusier",
-              "Frank Lloyd Wright",
-              "I. M. Pei"
+              "Madrid",
+              "Seville",
+              "Valencia"
             ]
           },
           {
@@ -3929,9 +3929,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Louisiana",
-              "Oklahoma",
-              "Texas"
+              "Utah",
+              "Nevada",
+              "New Mexico"
             ]
           }
         ],
@@ -3963,9 +3963,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Morocco",
-              "Costa Rica",
-              "Malaysia"
+              "Eritrea",
+              "Sudan",
+              "Kenya"
             ]
           },
           {
@@ -3982,9 +3982,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://whc.unesco.org/en/list/64",
             "distractors": [
-              "Petra",
-              "Ethiopia",
-              "Bagan"
+              "Copán",
+              "Palenque",
+              "Calakmul"
             ]
           },
           {
@@ -4000,9 +4000,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://whc.unesco.org/en/list/1588",
             "distractors": [
-              "Tigris",
-              "Congo River",
-              "Thames"
+              "Angkor",
+              "Borobudur",
+              "Sukhothai"
             ]
           }
         ]
@@ -4064,9 +4064,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Euphrates",
-              "Volga River",
-              "Seine"
+              "Check",
+              "Port",
+              "Pitch"
             ]
           },
           {
@@ -4134,9 +4134,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Whale",
-              "Flamingo",
-              "Salamander"
+              "Falcon",
+              "Hawk",
+              "Osprey"
             ]
           },
           {
@@ -4150,9 +4150,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Orion",
-              "Ursa Major",
-              "Andromeda"
+              "Nova",
+              "Comet",
+              "Meteor"
             ]
           }
         ],
@@ -4169,8 +4169,8 @@
             "sourceUrl": "",
             "distractors": [
               "Andromeda",
-              "Cygnus",
-              "Cassiopeia"
+              "Cassiopeia",
+              "Cygnus"
             ]
           },
           {
@@ -4205,9 +4205,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mercury",
-              "Orion",
-              "Semaphore"
+              "Lever",
+              "Relay",
+              "Toggle"
             ]
           },
           {
@@ -4221,9 +4221,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Saturn",
-              "Uranus",
-              "Neptune"
+              "Venus",
+              "Mars",
+              "Jupiter"
             ]
           }
         ]
@@ -4263,9 +4263,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Happy",
-              "Lamb",
-              "Glow"
+              "Wobbler",
+              "Hobbler",
+              "Nobbler"
             ]
           },
           {
@@ -4279,9 +4279,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Glow",
-              "Happy",
-              "Cobbler"
+              "Ram",
+              "Clam",
+              "Ham"
             ]
           },
           {
@@ -4295,9 +4295,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Glance",
-              "Lamb",
-              "Cobbler"
+              "Sappy",
+              "Nappy",
+              "Zappy"
             ]
           }
         ],
@@ -4313,9 +4313,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Hoax",
-              "Soak",
-              "Soar"
+              "Croaks",
+              "Cloaks",
+              "Soaks"
             ]
           },
           {
@@ -4329,9 +4329,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Goat",
-              "Lamb",
-              "Glance"
+              "Blush",
+              "Crush",
+              "Rush"
             ]
           },
           {
@@ -4347,9 +4347,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Coax",
-              "Happy",
-              "Goat"
+              "Trance",
+              "Chance",
+              "Prance"
             ]
           },
           {
@@ -4363,9 +4363,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Glance",
-              "Coax",
-              "Plush"
+              "Stoat",
+              "Coat",
+              "Moat"
             ]
           }
         ],
@@ -4385,7 +4385,7 @@
             "distractors": [
               "State",
               "Plate",
-              "Stray"
+              "Weight"
             ]
           },
           {
@@ -4399,9 +4399,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Atone",
-              "Abate",
-              "Strait"
+              "Foretell",
+              "Compel",
+              "Excel"
             ]
           },
           {
@@ -4415,9 +4415,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Abate",
-              "Expel",
-              "Strait"
+              "Stone",
+              "Groan",
+              "Drone"
             ]
           },
           {
@@ -4431,9 +4431,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Atone",
-              "Glance",
-              "Expel"
+              "Elate",
+              "Inflate",
+              "Debate"
             ]
           }
         ]
@@ -4478,9 +4478,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "12",
-              "2",
-              "9"
+              "1 mile",
+              "2 miles",
+              "3 miles"
             ]
           },
           {
@@ -4539,9 +4539,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "10",
-              "Once",
-              "60 minutes"
+              "Two sisters and their mother",
+              "Three sisters",
+              "A mother, her son, and his grandmother"
             ]
           },
           {
@@ -4557,9 +4557,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "A grandmother, her daughter, and her granddaughter",
-              "10",
-              "60 minutes"
+              "Twice",
+              "Nine times",
+              "Ten times"
             ]
           },
           {
@@ -4595,9 +4595,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "10",
-              "A grandmother, her daughter, and her granddaughter",
-              "Once"
+              "30 minutes",
+              "90 minutes",
+              "120 minutes"
             ]
           }
         ],
@@ -4636,9 +4636,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Monopoly",
-              "4",
-              "11"
+              "Toward the south",
+              "Toward the north",
+              "Straight up"
             ]
           },
           {
@@ -4716,9 +4716,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Tim Berners-Lee",
-              "Printer",
-              "Thomas Edison"
+              "Telescope",
+              "Magnifying glass",
+              "Endoscope"
             ]
           },
           {
@@ -4732,9 +4732,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Tim Berners-Lee",
-              "Microscope",
-              "Thomas Edison"
+              "Scanner",
+              "Plotter",
+              "Photocopier"
             ]
           },
           {
@@ -4750,9 +4750,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Marie Curie",
-              "James Clerk Maxwell",
-              "Isaac Newton"
+              "Vint Cerf",
+              "Robert Cailliau",
+              "Tim Cook"
             ]
           }
         ],
@@ -4790,9 +4790,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Marie Curie",
-              "Nikola Tesla",
-              "Isaac Newton"
+              "William Caxton",
+              "Aldus Manutius",
+              "Bi Sheng"
             ]
           },
           {
@@ -4809,9 +4809,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Braille",
-              "Johannes Gutenberg",
-              "MRI"
+              "Elisha Gray",
+              "Antonio Meucci",
+              "Thomas Edison"
             ]
           },
           {
@@ -4827,9 +4827,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Alexander Graham Bell",
-              "Johannes Gutenberg",
-              "MRI"
+              "Morse code",
+              "Moon type",
+              "New York Point"
             ]
           }
         ],
@@ -4886,9 +4886,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Louis Pasteur",
-              "Rosalind Franklin",
-              "Frederick Sanger"
+              "George Westinghouse",
+              "Thomas Edison",
+              "Michael Faraday"
             ]
           },
           {
@@ -4904,9 +4904,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.si.edu/object/electric-motor-alternating-current%3Anmah_739995",
             "distractors": [
-              "Isaac Newton",
-              "Antoine Lavoisier",
-              "Marie Curie"
+              "Michael Faraday",
+              "Thomas Davenport",
+              "Galileo Ferraris"
             ]
           }
         ]
@@ -4930,9 +4930,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nevada",
-              "North Carolina",
-              "New Mexico"
+              "Texas",
+              "California",
+              "Montana"
             ]
           },
           {
@@ -4946,9 +4946,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Texas",
-              "Maine",
-              "Alabama"
+              "Pennsylvania",
+              "New Jersey",
+              "Massachusetts"
             ]
           },
           {
@@ -5016,9 +5016,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Amazon River",
-              "Nile",
-              "Tigris"
+              "Colorado River",
+              "Pecos River",
+              "Nueces River"
             ]
           },
           {
@@ -5032,9 +5032,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Connecticut",
-              "Missouri",
-              "Pennsylvania"
+              "California",
+              "Arizona",
+              "Georgia"
             ]
           },
           {
@@ -5050,9 +5050,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.nps.gov/places/mammoth-cave-national-park.htm",
             "distractors": [
-              "Texas",
-              "Nebraska",
-              "Tennessee"
+              "Tennessee",
+              "Virginia",
+              "West Virginia"
             ]
           }
         ],
@@ -5088,9 +5088,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.fs.usda.gov/sites/nfs/files/legacy-media/elyunque/Final%20Record%20of%20Decision-English.pdf",
             "distractors": [
-              "Oregon",
-              "Illinois",
-              "Kentucky"
+              "Guam",
+              "U.S. Virgin Islands",
+              "American Samoa"
             ]
           },
           {
@@ -5106,9 +5106,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.usgs.gov/crater-lake",
             "distractors": [
-              "Colorado",
-              "Virginia",
-              "Nevada"
+              "Washington",
+              "California",
+              "Idaho"
             ]
           },
           {
@@ -5122,9 +5122,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "New York",
-              "Louisiana",
-              "Indiana"
+              "Hawaii",
+              "Washington",
+              "California"
             ]
           }
         ]
@@ -5168,9 +5168,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Indian Ocean",
-              "Coral reef",
-              "Lungs"
+              "Sea",
+              "Gulf",
+              "Lake"
             ]
           },
           {
@@ -5241,9 +5241,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Asia",
-              "Europe",
-              "South America"
+              "Continental slope",
+              "Continental rise",
+              "Abyssal plain"
             ]
           },
           {
@@ -5257,9 +5257,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Continental shelf",
-              "Arctic Ocean",
-              "Challenger Deep"
+              "Shoal",
+              "Pod",
+              "Swarm"
             ]
           },
           {
@@ -5311,9 +5311,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Challenger Deep",
-              "Thermohaline circulation",
-              "Arctic Ocean"
+              "Tonga Trench",
+              "Philippine Trench",
+              "Kermadec Trench"
             ]
           },
           {
@@ -5329,9 +5329,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mariana Trench",
-              "School",
-              "Continental shelf"
+              "Sirena Deep",
+              "Horizon Deep",
+              "Brownson Deep"
             ]
           },
           {
@@ -5349,9 +5349,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://oceanservice.noaa.gov/facts/light_travel.html",
             "distractors": [
-              "Mariana Trench",
-              "Challenger Deep",
-              "Thermohaline circulation"
+              "Bathypelagic zone",
+              "Hadopelagic zone",
+              "Mesopelagic zone"
             ]
           }
         ]
@@ -5414,9 +5414,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "4",
-              "12",
-              "64"
+              "X and J",
+              "Q and X",
+              "Z and J"
             ]
           },
           {
@@ -5487,9 +5487,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Clue",
-              "Catan",
-              "Dark blue"
+              "Flush",
+              "Straight",
+              "Three of a kind"
             ]
           },
           {
@@ -5503,9 +5503,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Clue",
-              "Full house",
-              "Catan"
+              "Red",
+              "Green",
+              "Yellow"
             ]
           }
         ],
@@ -5542,9 +5542,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Castling",
               "En passant",
-              "9",
-              "Ko"
+              "Stalemate"
             ]
           },
           {
@@ -5579,9 +5579,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://britgo.org/rules/agarules.html",
             "distractors": [
-              "Clue",
-              "Monopoly",
-              "Chess"
+              "Atari",
+              "Sente",
+              "Komi"
             ]
           }
         ]
@@ -5641,9 +5641,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Crust",
-              "Magma",
-              "Sedimentary rock"
+              "Accelerometer",
+              "Gravimeter",
+              "Tiltmeter"
             ]
           },
           {
@@ -5657,9 +5657,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Magma",
-              "Seismograph",
-              "Sedimentary rock"
+              "Mantle",
+              "Lithosphere",
+              "Outer core"
             ]
           }
         ],
@@ -5693,9 +5693,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Divergent boundary",
-              "Igneous rock",
-              "Mechanical weathering"
+              "Prime meridian",
+              "Tropic of Cancer",
+              "International Date Line"
             ]
           },
           {
@@ -5711,9 +5711,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Equator",
-              "Igneous rock",
-              "Mohorovičić discontinuity"
+              "Convergent boundary",
+              "Transform boundary",
+              "Subduction zone"
             ]
           },
           {
@@ -5729,9 +5729,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Magma",
-              "Equator",
-              "Mechanical weathering"
+              "Metamorphic rock",
+              "Sedimentary rock",
+              "Clastic rock"
             ]
           }
         ],
@@ -5768,9 +5768,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mohorovičić discontinuity",
-              "Mohs scale",
-              "Rodinia"
+              "P-wave",
+              "Rayleigh wave",
+              "Love wave"
             ]
           },
           {
@@ -5806,9 +5806,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mohorovičić discontinuity",
-              "S-wave",
-              "Rodinia"
+              "Richter scale",
+              "Mercalli intensity scale",
+              "Moment magnitude scale"
             ]
           }
         ]
@@ -5832,9 +5832,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Worm",
-              "Cake",
-              "Dogs"
+              "Fly",
+              "Cluck",
+              "Lay"
             ]
           },
           {
@@ -5848,9 +5848,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Hatch",
-              "Worm",
-              "Dogs"
+              "Pie",
+              "Bread",
+              "Candy"
             ]
           },
           {
@@ -5864,9 +5864,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Hatch",
-              "Cake",
-              "Dogs"
+              "Seed",
+              "Fly",
+              "Bug"
             ]
           },
           {
@@ -5882,9 +5882,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gauntlet",
-              "Music",
-              "Eating"
+              "Cows",
+              "Birds",
+              "Mice"
             ]
           }
         ],
@@ -5902,9 +5902,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gauntlet",
-              "Lily",
-              "Dogs"
+              "Piper",
+              "Stage",
+              "Orchestra"
             ]
           },
           {
@@ -5937,9 +5937,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Hatch",
-              "Worm",
-              "Eating"
+              "Stormy",
+              "Cloudy",
+              "Sunny"
             ]
           },
           {
@@ -5955,9 +5955,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gauntlet",
-              "Music",
-              "Dogs"
+              "Cooking",
+              "Mixing",
+              "Serving"
             ]
           }
         ],
@@ -5975,9 +5975,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://dictionary.cambridge.org/us/dictionary/english/pyrrhic-victory",
             "distractors": [
-              "Charybdis",
-              "Petard",
-              "Lily"
+              "Decisive",
+              "Symbolic",
+              "Moral"
             ]
           },
           {
@@ -5991,9 +5991,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.britishmuseum.org/sites/default/files/2019-12/Large%20print%20guide_Troy.pdf",
             "distractors": [
-              "Petard",
-              "Pyrrhic",
-              "Lily"
+              "Hydra",
+              "Cyclops",
+              "Cerberus"
             ]
           },
           {
@@ -6007,9 +6007,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Charybdis",
-              "Lily",
-              "Pyrrhic"
+              "Sword",
+              "Shield",
+              "Trumpet"
             ]
           },
           {
@@ -6023,9 +6023,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gauntlet",
-              "Music",
-              "Petard"
+              "Rose",
+              "Laurel",
+              "Crown"
             ]
           }
         ]
@@ -6125,9 +6125,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "100",
-              "25",
-              "0"
+              "180",
+              "270",
+              "540"
             ]
           },
           {
@@ -6255,9 +6255,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nitrogen",
-              "Iron",
-              "Oxygen"
+              "116",
+              "120",
+              "114"
             ]
           }
         ]
@@ -6331,9 +6331,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Verb",
-              "Period",
-              "0"
+              "Pentagon",
+              "Rectangle",
+              "Trapezoid"
             ]
           }
         ],
@@ -6349,9 +6349,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Protagonist",
-              "Geometry",
-              "Johannes Kepler"
+              "Simile",
+              "Metaphor",
+              "Personification"
             ]
           },
           {
@@ -6399,9 +6399,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Geometry",
-              "Hyperbole",
-              "Johannes Kepler"
+              "Antagonist",
+              "Narrator",
+              "Deuteragonist"
             ]
           }
         ],
@@ -6420,9 +6420,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Candela",
-              "Robert Frost",
-              "Friedrich Fröbel"
+              "Proof by induction",
+              "Direct proof",
+              "Proof by contrapositive"
             ]
           },
           {
@@ -6438,9 +6438,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Candela",
-              "Proof by contradiction",
-              "Friedrich Fröbel"
+              "Walt Whitman",
+              "Emily Dickinson",
+              "Langston Hughes"
             ]
           },
           {
@@ -6454,9 +6454,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Robert Frost",
-              "Proof by contradiction",
-              "Friedrich Fröbel"
+              "Lumen",
+              "Lux",
+              "Nit"
             ]
           },
           {
@@ -6474,9 +6474,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.froebel.org.uk/news/froebel-the-united-states-kindergarten",
             "distractors": [
-              "Candela",
-              "Robert Frost",
-              "Proof by contradiction"
+              "Maria Montessori",
+              "Johann Pestalozzi",
+              "John Dewey"
             ]
           }
         ]
@@ -6519,9 +6519,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Illinois",
-              "Washington",
-              "Minnesota"
+              "Sierra Nevada",
+              "Cascade Range",
+              "Uinta Mountains"
             ]
           },
           {
@@ -6535,9 +6535,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nevada",
               "Wisconsin",
-              "New York"
+              "Iowa",
+              "North Dakota"
             ]
           },
           {
@@ -6553,9 +6553,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Kansas",
-              "New Jersey",
-              "Hawaii"
+              "Oregon",
+              "Idaho",
+              "California"
             ]
           }
         ],
@@ -6571,9 +6571,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Stockholm",
-              "Delhi",
-              "Amsterdam"
+              "Burlington",
+              "Rutland",
+              "St. Albans"
             ]
           },
           {
@@ -6587,9 +6587,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nebraska",
-              "Alabama",
-              "New Mexico"
+              "Wyoming",
+              "North Dakota",
+              "Nebraska"
             ]
           },
           {
@@ -6603,9 +6603,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "West Virginia",
-              "Texas",
-              "Massachusetts"
+              "Utah",
+              "Colorado",
+              "California"
             ]
           },
           {
@@ -6619,9 +6619,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Washington",
-              "Wyoming",
-              "New Hampshire"
+              "Pennsylvania",
+              "Vermont",
+              "Massachusetts"
             ]
           }
         ],
@@ -6641,9 +6641,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.nps.gov/seki/learn/news/quick-fact-sheet.htm",
             "distractors": [
-              "Kansas",
-              "Maine",
-              "Nevada"
+              "Mount Elbert",
+              "Mount Rainier",
+              "Mount Shasta"
             ]
           },
           {
@@ -6657,9 +6657,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Minnesota",
-              "Oregon",
-              "South Carolina"
+              "New Hampshire",
+              "Florida",
+              "Rhode Island"
             ]
           },
           {
@@ -6673,9 +6673,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Missouri",
-              "Montana",
-              "West Virginia"
+              "Nebraska",
+              "Colorado",
+              "Missouri"
             ]
           },
           {
@@ -6691,9 +6691,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.nps.gov/grba/index.htm",
             "distractors": [
-              "South Carolina",
-              "Minnesota",
-              "Oklahoma"
+              "Utah",
+              "California",
+              "Arizona"
             ]
           }
         ]
@@ -6717,9 +6717,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Dakar",
-              "Dublin",
-              "Honolulu"
+              "Toronto",
+              "Montreal",
+              "Vancouver"
             ]
           },
           {
@@ -6736,9 +6736,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Saudi Arabia",
-              "Mongolia",
-              "United Kingdom"
+              "Greece",
+              "Bulgaria",
+              "Georgia"
             ]
           },
           {
@@ -6752,9 +6752,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Argentina",
-              "Mexico",
-              "New Zealand"
+              "Spain",
+              "Italy",
+              "France"
             ]
           },
           {
@@ -6786,9 +6786,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://legalinfo.mn/en/edtl/16532192570111",
             "distractors": [
-              "Austria",
-              "New Zealand",
-              "Ireland"
+              "Kazakhstan",
+              "Kyrgyzstan",
+              "Uzbekistan"
             ]
           },
           {
@@ -6802,9 +6802,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Buenos Aires",
-              "Ulaanbaatar",
-              "Dublin"
+              "Auckland",
+              "Christchurch",
+              "Hamilton"
             ]
           },
           {
@@ -6818,9 +6818,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "South Korea",
-              "Poland",
-              "Argentina"
+              "Syria",
+              "Lebanon",
+              "Israel"
             ]
           },
           {
@@ -6836,9 +6836,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.dfat.gov.au/geo/andorra/andorra-country-brief",
             "distractors": [
-              "Pyrenees",
-              "Portugal",
-              "Mongolia"
+              "Liechtenstein",
+              "San Marino",
+              "Monaco"
             ]
           }
         ],
@@ -6873,9 +6873,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Andorra",
-              "Volga River",
-              "Paraguay"
+              "Alps",
+              "Cantabrian Mountains",
+              "Massif Central"
             ]
           },
           {
@@ -6889,9 +6889,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Mongolia",
-              "Volga River",
-              "Portugal"
+              "Bolivia",
+              "Uruguay",
+              "Ecuador"
             ]
           },
           {
@@ -6931,9 +6931,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.archives.gov/milestone-documents/louisiana-purchase-treaty",
             "distractors": [
-              "George Washington",
-              "United States Constitution",
-              "Declaration of Independence"
+              "Alaska Purchase",
+              "Gadsden Purchase",
+              "Florida Purchase"
             ]
           },
           {
@@ -6952,9 +6952,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Articles of Confederation",
               "Declaration of Independence",
-              "George Washington",
-              "Louisiana Purchase"
+              "Bill of Rights"
             ]
           },
           {
@@ -6968,9 +6968,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Articles of Confederation",
               "United States Constitution",
-              "George Washington",
-              "Louisiana Purchase"
+              "Treaty of Paris"
             ]
           },
           {
@@ -6986,9 +6986,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Louisiana Purchase",
-              "United States Constitution",
-              "Declaration of Independence"
+              "John Adams",
+              "Thomas Jefferson",
+              "James Madison"
             ]
           }
         ],
@@ -7050,9 +7050,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "5th Amendment",
-              "2nd Amendment",
-              "13th Amendment"
+              "Suffragism",
+              "Temperance movement",
+              "Labor movement"
             ]
           },
           {
@@ -7068,9 +7068,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Abolitionism",
-              "19th Amendment",
-              "Monroe Doctrine"
+              "American Revolutionary War",
+              "War of 1812",
+              "Mexican–American War"
             ]
           }
         ],
@@ -7115,9 +7115,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "1st Amendment",
-              "4th Amendment",
-              "25th Amendment"
+              "15th Amendment",
+              "17th Amendment",
+              "18th Amendment"
             ]
           },
           {
@@ -7133,9 +7133,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.archives.gov/milestone-documents/homestead-act",
             "distractors": [
+              "Morrill Land-Grant Act",
               "Dawes Act",
-              "16th Amendment",
-              "Brown v. Board of Education"
+              "Timber Culture Act"
             ]
           },
           {
@@ -7153,9 +7153,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "16th Amendment",
-              "Homestead Act",
-              "Dawes Act"
+              "Plessy v. Ferguson",
+              "Sweatt v. Painter",
+              "Mendez v. Westminster"
             ]
           }
         ]
@@ -7181,9 +7181,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Pakistan",
-              "Ghana",
-              "Portugal"
+              "Sudan",
+              "Libya",
+              "Ethiopia"
             ]
           },
           {
@@ -7197,9 +7197,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Philadelphia",
-              "Buenos Aires",
-              "Havana"
+              "Vienna",
+              "Prague",
+              "Budapest"
             ]
           },
           {
@@ -7213,9 +7213,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Albany",
-              "Madrid",
-              "Stockholm"
+              "Corinth",
+              "Delphi",
+              "Sparta"
             ]
           },
           {
@@ -7251,9 +7251,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://education.nationalgeographic.org/resource/key-components-civilization/",
             "distractors": [
-              "Augustus",
-              "Byzantine Empire",
-              "Inca Empire"
+              "Akkadians",
+              "Babylonians",
+              "Assyrians"
             ]
           },
           {
@@ -7267,9 +7267,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Augustus",
-              "Inca Empire",
-              "Sumerians"
+              "Ottoman Empire",
+              "Latin Empire",
+              "Holy Roman Empire"
             ]
           },
           {
@@ -7285,9 +7285,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Byzantine Empire",
-              "Inca Empire",
-              "Sumerians"
+              "Tiberius",
+              "Julius Caesar",
+              "Nero"
             ]
           },
           {
@@ -7304,9 +7304,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Augustus",
-              "Egypt",
-              "Byzantine Empire"
+              "Wari Empire",
+              "Chimú Empire",
+              "Aztec Empire"
             ]
           }
         ],
@@ -7328,9 +7328,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.loc.gov/item/2021667736/",
             "distractors": [
-              "Ming dynasty",
-              "Treaty of Tordesillas",
-              "Battle of Trafalgar"
+              "Augsburg Confession",
+              "Edict of Worms",
+              "Heidelberg Catechism"
             ]
           },
           {
@@ -7346,9 +7346,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://memorials.iwm.org.uk/memorial/83224",
             "distractors": [
-              "Ming dynasty",
-              "Treaty of Tordesillas",
-              "Ninety-Five Theses"
+              "Battle of Copenhagen",
+              "Battle of the Nile",
+              "Battle of Cape St. Vincent"
             ]
           },
           {
@@ -7383,9 +7383,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Treaty of Tordesillas",
-              "Ninety-Five Theses",
-              "Battle of Trafalgar"
+              "Qing dynasty",
+              "Yuan dynasty",
+              "Song dynasty"
             ]
           }
         ]
@@ -7411,9 +7411,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Vertebrates",
-              "Nectar",
-              "Mitochondrion"
+              "Stems",
+              "Leaves",
+              "Flowers"
             ]
           },
           {
@@ -7429,9 +7429,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Vertebrates",
-              "Roots",
-              "Nectar"
+              "Chloroplast",
+              "Ribosome",
+              "Nucleus"
             ]
           },
           {
@@ -7447,9 +7447,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Roots",
-              "Nectar",
-              "Mitochondrion"
+              "Invertebrates",
+              "Mammals",
+              "Arthropods"
             ]
           },
           {
@@ -7463,9 +7463,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Vertebrates",
-              "Roots",
-              "Mitochondrion"
+              "Pollen",
+              "Sap",
+              "Plant resin"
             ]
           }
         ],
@@ -7484,9 +7484,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Carbon dioxide",
-              "Nucleus",
-              "Homozygous"
+              "RNA",
+              "Protein",
+              "ATP"
             ]
           },
           {
@@ -7516,9 +7516,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Carbon dioxide",
-              "Nucleus",
-              "DNA"
+              "Heterozygous",
+              "Hemizygous",
+              "Compound heterozygous"
             ]
           },
           {
@@ -7534,9 +7534,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nucleus",
-              "Homozygous",
-              "DNA"
+              "Oxygen",
+              "Nitrogen",
+              "Carbon monoxide"
             ]
           }
         ],
@@ -7588,9 +7588,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Convergent evolution",
-              "Cytokinesis",
-              "Peroxisome"
+              "Translation",
+              "DNA replication",
+              "Reverse transcription"
             ]
           },
           {
@@ -7604,9 +7604,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Peroxisome",
-              "Transcription",
-              "Nucleus"
+              "Mitosis",
+              "Meiosis",
+              "Karyokinesis"
             ]
           }
         ]
@@ -7650,9 +7650,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Silicon",
-              "Sodium",
-              "Sulfur"
+              "Oxygen",
+              "Argon",
+              "Carbon dioxide"
             ]
           },
           {
@@ -7666,9 +7666,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Carbon",
-              "Nitrogen",
-              "Sodium"
+              "C",
+              "N",
+              "H"
             ]
           },
           {
@@ -7685,9 +7685,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "O",
-              "Nitrogen",
-              "7"
+              "Baking soda",
+              "Baking powder",
+              "Potassium chloride"
             ]
           }
         ],
@@ -7703,9 +7703,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Reduction",
-              "Sublimation",
-              "H2O"
+              "Mass number",
+              "Atomic mass",
+              "Valence number"
             ]
           },
           {
@@ -7751,9 +7751,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Carbon",
-              "Hydrogen",
-              "Nitrogen"
+              "Gold",
+              "Copper",
+              "Platinum"
             ]
           }
         ],
@@ -7824,9 +7824,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Le Chatelier's principle",
-              "Atomic number",
-              "Reduction"
+              "Melting",
+              "Evaporation",
+              "Deposition"
             ]
           }
         ]
@@ -7850,9 +7850,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gravity",
-              "Newton",
-              "Kinetic energy"
+              "Air resistance",
+              "Tension",
+              "Normal force"
             ]
           },
           {
@@ -7869,9 +7869,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Only at absolute zero",
               "Yes",
-              "Only in a vacuum"
+              "Only if the push lasts several seconds",
+              "Only if you push with enough force"
             ]
           },
           {
@@ -7887,9 +7887,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Gravitational potential energy",
-              "Gravity",
-              "Friction"
+              "Elastic potential energy",
+              "Thermal energy",
+              "Chemical energy"
             ]
           },
           {
@@ -7903,9 +7903,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Magnetic force",
               "Friction",
-              "Newton",
-              "Kinetic energy"
+              "Air resistance"
             ]
           }
         ],
@@ -7943,9 +7943,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Elastic potential energy",
               "Kinetic energy",
-              "Newton",
-              "Farad"
+              "Chemical energy"
             ]
           },
           {
@@ -7959,9 +7959,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Newton",
-              "Farad",
-              "Gravitational potential energy"
+              "Voltmeter",
+              "Ohmmeter",
+              "Galvanometer"
             ]
           },
           {
@@ -8014,9 +8014,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Pauli exclusion principle",
-              "Heisenberg uncertainty principle",
-              "Bernoulli's principle"
+              "Resonant frequency",
+              "Cutoff frequency",
+              "Natural frequency"
             ]
           },
           {
@@ -8052,9 +8052,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Heisenberg uncertainty principle",
-              "Pauli exclusion principle",
-              "Threshold frequency"
+              "Pascal's principle",
+              "Archimedes' principle",
+              "Torricelli's principle"
             ]
           }
         ]
@@ -8080,9 +8080,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Jupiter",
-              "Sun",
-              "Uranus"
+              "Artificial satellite",
+              "Dwarf planet",
+              "Asteroid"
             ]
           },
           {
@@ -8114,9 +8114,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Venus",
-              "Natural satellite",
-              "Jupiter"
+              "Proxima Centauri",
+              "Sirius",
+              "Alpha Centauri A"
             ]
           },
           {
@@ -8183,9 +8183,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Titan",
-              "Venus",
-              "Astronomical unit"
+              "Star cluster",
+              "Nebula",
+              "Solar system"
             ]
           },
           {
@@ -8221,9 +8221,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://science.nasa.gov/mission/hubble/multimedia/hubble-glossary/",
             "distractors": [
-              "Triangulum Galaxy",
-              "Sombrero Galaxy",
-              "Whirlpool Galaxy"
+              "RR Lyrae variable",
+              "Mira variable",
+              "Delta Scuti variable"
             ]
           },
           {
@@ -8255,9 +8255,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Sunspot",
-              "Venus",
-              "Parsec"
+              "Aphelion",
+              "Perigee",
+              "Ascending node"
             ]
           },
           {
@@ -8271,9 +8271,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
+              "Light-year",
               "Astronomical unit",
-              "Perihelion",
-              "Sunspot"
+              "Solar radius"
             ]
           }
         ]
@@ -8315,9 +8315,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "1",
-              "Ice hockey",
-              "Badminton"
+              "Deuce",
+              "Fault",
+              "Let"
             ]
           },
           {
@@ -8331,9 +8331,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ice hockey",
-              "Love",
-              "1"
+              "Tennis",
+              "Squash",
+              "Volleyball"
             ]
           },
           {
@@ -8371,9 +8371,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.theifab.com/laws/latest/the-penalty-kick/",
             "distractors": [
-              "Grand slam",
-              "6",
-              "Double"
+              "Free kick",
+              "Corner kick",
+              "Goal kick"
             ]
           },
           {
@@ -8405,9 +8405,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Grand slam",
-              "6",
-              "Penalty kick"
+              "Single",
+              "Triple",
+              "Home run"
             ]
           },
           {
@@ -8423,9 +8423,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Double",
-              "6",
-              "Penalty kick"
+              "Inside-the-park home run",
+              "Two-run homer",
+              "Solo home run"
             ]
           }
         ],
@@ -8479,9 +8479,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.olympics.com/ioc/news/ballon-d-or-winners-messi-ronaldo-zidane-complete-list",
             "distractors": [
-              "147",
-              "Manchester United",
-              "South Africa"
+              "Marta",
+              "Alex Morgan",
+              "Amandine Henry"
             ]
           },
           {
@@ -8497,9 +8497,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.world.rugby/news/617532/tournament-history?lang=en",
             "distractors": [
-              "China",
-              "Malaysia",
-              "Nepal"
+              "New Zealand",
+              "Australia",
+              "England"
             ]
           }
         ]
@@ -8557,9 +8557,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "The Simpsons",
-              "Tom Hanks",
-              "Ratatouille"
+              "Bonnie",
+              "Abby",
+              "Molly"
             ]
           },
           {
@@ -8575,9 +8575,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "The Simpsons",
-              "Boo",
-              "Ratatouille"
+              "Robin Williams",
+              "Bill Murray",
+              "Tom Cruise"
             ]
           }
         ],
@@ -8593,9 +8593,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Frodo Baggins",
+              "The Chronicles of Narnia",
               "Percy Jackson",
-              "Luke Skywalker"
+              "The Lord of the Rings"
             ]
           },
           {
@@ -8611,9 +8611,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Harrison Ford",
-              "Harry Potter",
-              "Steven Spielberg"
+              "Steven Spielberg",
+              "Francis Ford Coppola",
+              "Brian De Palma"
             ]
           },
           {
@@ -8627,9 +8627,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "George Lucas",
-              "Steven Spielberg",
-              "Harry Potter"
+              "Mark Hamill",
+              "Alec Guinness",
+              "Billy Dee Williams"
             ]
           },
           {
@@ -8647,8 +8647,8 @@
             "sourceUrl": "",
             "distractors": [
               "George Lucas",
-              "Harry Potter",
-              "Harrison Ford"
+              "James Cameron",
+              "Robert Zemeckis"
             ]
           }
         ],
@@ -8666,9 +8666,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://www.afi.com/news/brazil-afi-movie-club/",
             "distractors": [
-              "Seven Samurai",
-              "The Shawshank Redemption",
-              "It Happened One Night"
+              "Ridley Scott",
+              "David Lynch",
+              "David Cronenberg"
             ]
           },
           {
@@ -8702,9 +8702,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Terry Gilliam",
-              "Seven Samurai",
-              "It Happened One Night"
+              "The Green Mile",
+              "The Great Escape",
+              "Cool Hand Luke"
             ]
           },
           {
@@ -8718,9 +8718,9 @@
             "sourceStatus": "QA4 verified via source",
             "sourceUrl": "https://www.oscars.org/events/it-happened-one-night-80th-anniversary-screening",
             "distractors": [
-              "Terry Gilliam",
-              "The Shawshank Redemption",
-              "Seven Samurai"
+              "The Thin Man",
+              "Mr. Deeds Goes to Town",
+              "You Can't Take It with You"
             ]
           }
         ]
@@ -8751,9 +8751,9 @@
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
             "sourceUrl": "https://www.loc.gov/static/collections/henry-reed-fiddle-tunes/about-this-collection/related-resources.html",
             "distractors": [
-              "Speed",
-              "4",
-              "Trio"
+              "Clef",
+              "Measure",
+              "Ledger line"
             ]
           },
           {
@@ -8785,9 +8785,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Speed",
-              "4",
-              "Staff"
+              "Concertmaster",
+              "Composer",
+              "Arranger"
             ]
           },
           {
@@ -8803,9 +8803,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "4",
-              "Staff",
-              "Conductor"
+              "Volume",
+              "Pitch",
+              "Rhythm"
             ]
           }
         ],
@@ -8823,9 +8823,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Wolfgang Amadeus Mozart",
-              "Speed",
-              "Miles Davis"
+              "Quartet",
+              "Duet",
+              "Quintet"
             ]
           },
           {
@@ -8841,9 +8841,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Trio",
-              "Wolfgang Amadeus Mozart",
-              "Speed"
+              "Moderato",
+              "Allegro",
+              "Adagio"
             ]
           },
           {
@@ -8857,9 +8857,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Trio",
-              "Wolfgang Amadeus Mozart",
-              "Andante"
+              "John Coltrane",
+              "Chet Baker",
+              "Thelonious Monk"
             ]
           },
           {
@@ -8932,9 +8932,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Georges Bizet",
-              "Giuseppe Verdi",
-              "Gustav Holst"
+              "Perfect fifth",
+              "Major third",
+              "Minor seventh"
             ]
           },
           {
@@ -8976,9 +8976,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Bilbo Baggins",
-              "J. K. Rowling",
-              "Sherlock Holmes"
+              "Granger",
+              "March",
+              "Darling"
             ]
           },
           {
@@ -9013,9 +9013,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Bilbo Baggins",
-              "J. K. Rowling",
-              "Pevensie"
+              "Hercule Poirot",
+              "Miss Marple",
+              "Father Brown"
             ]
           },
           {
@@ -9104,9 +9104,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Frances Hodgson Burnett",
-              "Roald Dahl",
-              "Jane Austen"
+              "Number the Stars",
+              "Gathering Blue",
+              "Messenger"
             ]
           }
         ],
@@ -9142,9 +9142,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Fyodor Dostoevsky",
-              "Hamlet",
-              "Toni Morrison"
+              "Jay Gatsby",
+              "Jordan Baker",
+              "Daisy Buchanan"
             ]
           },
           {
@@ -9158,9 +9158,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Nick Carraway",
-              "Fyodor Dostoevsky",
-              "Toni Morrison"
+              "Macbeth",
+              "Othello",
+              "King Lear"
             ]
           },
           {
@@ -9177,9 +9177,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Toni Morrison",
-              "Nick Carraway",
-              "Hamlet"
+              "Leo Tolstoy",
+              "Anton Chekhov",
+              "Nikolai Gogol"
             ]
           }
         ]
@@ -9259,9 +9259,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Tiramisu",
-              "Chickpea",
-              "Penne"
+              "Provolone",
+              "Burrata",
+              "Ricotta"
             ]
           }
         ],
@@ -9314,9 +9314,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Kimchi",
-              "Yogurt",
-              "Blanching"
+              "Parsley",
+              "Arugula",
+              "Oregano"
             ]
           },
           {
@@ -9333,9 +9333,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Yogurt",
-              "Basil",
-              "Kimchi"
+              "Steaming",
+              "Parboiling",
+              "Shocking"
             ]
           }
         ],
@@ -9351,9 +9351,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "32",
-              "75",
-              "0"
+              "Poaching",
+              "Braising",
+              "Bain-marie"
             ]
           },
           {
@@ -9369,9 +9369,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "32",
-              "75",
-              "0"
+              "Braising",
+              "Poaching",
+              "Slow roasting"
             ]
           },
           {
@@ -9385,9 +9385,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Confit",
-              "Sous vide",
-              "Gochujang"
+              "Sofrito",
+              "Holy trinity",
+              "Bouquet garni"
             ]
           },
           {
@@ -9401,9 +9401,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Kimchi",
-              "Sous vide",
-              "Mirepoix"
+              "Doenjang",
+              "Ssamjang",
+              "Doubanjiang"
             ]
           }
         ]
@@ -9429,9 +9429,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Portrait",
-              "Leonardo da Vinci",
-              "Vincent van Gogh"
+              "Seascape",
+              "Still life",
+              "Portrait"
             ]
           },
           {
@@ -9501,8 +9501,8 @@
             "sourceUrl": "",
             "distractors": [
               "Mosaic",
-              "Surrealism",
-              "Pablo Picasso"
+              "Assemblage",
+              "Fresco"
             ]
           },
           {
@@ -9533,8 +9533,8 @@
             "sourceUrl": "",
             "distractors": [
               "Collage",
-              "Surrealism",
-              "Pablo Picasso"
+              "Fresco",
+              "Stained glass"
             ]
           },
           {
@@ -9572,8 +9572,8 @@
             "sourceUrl": "https://www.canada.ca/en/conservation-institute/services/preventive-conservation/guidelines-collections/paintings.html",
             "distractors": [
               "Egg tempera",
-              "Lithography",
-              "Intaglio"
+              "Gouache",
+              "Acrylic"
             ]
           },
           {
@@ -9592,8 +9592,8 @@
             "sourceUrl": "https://www.metmuseum.org/es/perspectives/scientific-research-at-the-met",
             "distractors": [
               "Casein",
-              "Intaglio",
-              "Lithography"
+              "Encaustic",
+              "Gouache"
             ]
           },
           {
@@ -9611,8 +9611,8 @@
             "sourceUrl": "https://www.metmuseum.org/fr/essays/the-printed-image-in-the-west-history-and-techniques",
             "distractors": [
               "Lithography",
-              "Casein",
-              "Egg tempera"
+              "Woodcut",
+              "Screen printing"
             ]
           },
           {
@@ -9627,8 +9627,8 @@
             "sourceUrl": "",
             "distractors": [
               "Intaglio",
-              "Casein",
-              "Collage"
+              "Screen printing",
+              "Relief printing"
             ]
           }
         ]
@@ -9655,9 +9655,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://developer.mozilla.org/en-US/docs/Glossary/Browser",
             "distractors": [
-              "Mouse",
-              "Wi-Fi",
-              "Domain name"
+              "Email client",
+              "File manager",
+              "Media player"
             ]
           },
           {
@@ -9673,9 +9673,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Domain name",
-              "Mouse",
-              "Web browser"
+              "Bluetooth",
+              "Cellular data",
+              "NFC"
             ]
           },
           {
@@ -9689,9 +9689,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Web browser",
-              "Wi-Fi",
-              "Domain name"
+              "Trackpad",
+              "Joystick",
+              "Trackball"
             ]
           },
           {
@@ -9707,9 +9707,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Wi-Fi",
-              "Mouse",
-              "Web browser"
+              "IP address",
+              "URL path",
+              "Subdomain"
             ]
           }
         ],
@@ -9727,9 +9727,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://csrc.nist.gov/glossary/term/virtual_private_network",
             "distractors": [
-              "Uniform Resource Locator",
-              "Cascading Style Sheets",
-              "Router"
+              "Virtual Public Network",
+              "Verified Private Node",
+              "Virtual Protected Network"
             ]
           },
           {
@@ -9743,9 +9743,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Virtual Private Network",
-              "Uniform Resource Locator",
-              "Cascading Style Sheets"
+              "Modem",
+              "Network switch",
+              "Access point"
             ]
           },
           {
@@ -9759,9 +9759,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Uniform Resource Locator",
-              "Virtual Private Network",
-              "Router"
+              "Computer Style Sheets",
+              "Creative Style Syntax",
+              "Cascading Script Sheets"
             ]
           },
           {
@@ -9775,9 +9775,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Virtual Private Network",
-              "Cascading Style Sheets",
-              "Router"
+              "Universal Resource Link",
+              "Uniform Reference Locator",
+              "Unified Resource Locator"
             ]
           }
         ],
@@ -9796,9 +9796,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://csrc.nist.gov/glossary/term/least_privilege",
             "distractors": [
-              "Public-key cryptography",
-              "Dijkstra's algorithm",
-              "Distributed denial-of-service attack"
+              "Zero-trust architecture",
+              "Separation of duties",
+              "Defense in depth"
             ]
           },
           {
@@ -9816,9 +9816,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://developers.cloudflare.com/fundamentals/security/under-ddos-attack/",
             "distractors": [
-              "Public-key cryptography",
-              "Dijkstra's algorithm",
-              "Principle of least privilege"
+              "Denial-of-service attack",
+              "Man-in-the-middle attack",
+              "Credential-stuffing attack"
             ]
           },
           {
@@ -9836,9 +9836,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Public-key cryptography",
-              "Distributed denial-of-service attack",
-              "Principle of least privilege"
+              "Bellman–Ford algorithm",
+              "A* search algorithm",
+              "Floyd–Warshall algorithm"
             ]
           },
           {
@@ -9857,9 +9857,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Dijkstra's algorithm",
-              "Distributed denial-of-service attack",
-              "Principle of least privilege"
+              "Symmetric-key cryptography",
+              "Hash-based authentication",
+              "One-time pad encryption"
             ]
           }
         ]
@@ -9886,9 +9886,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://nationalzoo.si.edu/center-for-species-survival/amphibians",
             "distractors": [
-              "Platypus",
-              "Tadpole",
-              "Giant panda"
+              "Reptiles",
+              "Mammals",
+              "Fish"
             ]
           },
           {
@@ -9904,9 +9904,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Platypus",
-              "Tadpole",
-              "Amphibians"
+              "Sun bear",
+              "Spectacled bear",
+              "Asiatic black bear"
             ]
           },
           {
@@ -9920,9 +9920,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Platypus",
-              "Amphibians",
-              "Giant panda"
+              "Froglet",
+              "Spawn",
+              "Fingerling"
             ]
           },
           {
@@ -9936,9 +9936,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Tadpole",
-              "Amphibians",
-              "Giant panda"
+              "Echidna",
+              "Otter",
+              "Beaver"
             ]
           }
         ],
@@ -9998,9 +9998,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ostrich",
-              "Octopus",
-              "Ectotherm"
+              "Great white shark",
+              "Basking shark",
+              "Megamouth shark"
             ]
           },
           {
@@ -10014,9 +10014,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Turtle",
-              "Otter",
-              "Leopard"
+              "Emu",
+              "Cassowary",
+              "Rhea"
             ]
           }
         ],
@@ -10034,9 +10034,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://lod.nal.usda.gov/nalt/en/page/28122",
             "distractors": [
-              "Ecdysis",
-              "Xenarthra",
-              "Cetacea"
+              "Mutualism",
+              "Parasitism",
+              "Amensalism"
             ]
           },
           {
@@ -10050,9 +10050,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://oceanservice.noaa.gov/facts/dolphin_porpoise.html",
             "distractors": [
-              "Xenarthra",
-              "Commensalism",
-              "Ecdysis"
+              "Carnivora",
+              "Sirenia",
+              "Rodentia"
             ]
           },
           {
@@ -10069,9 +10069,9 @@
             "sourceStatus": "Inherited source link; not independently re-checked in QA4",
             "sourceUrl": "https://nationalzoo.si.edu/animals/news/why-are-sloths-so-slow-and-other-sloth-facts",
             "distractors": [
-              "Cetacea",
-              "Commensalism",
-              "Ecdysis"
+              "Afrotheria",
+              "Laurasiatheria",
+              "Euarchontoglires"
             ]
           },
           {
@@ -10090,9 +10090,9 @@
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Ectotherm",
-              "Commensalism",
-              "Xenarthra"
+              "Pupation",
+              "Metamorphosis",
+              "Eclosion"
             ]
           }
         ]

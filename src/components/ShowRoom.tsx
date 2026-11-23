@@ -3,14 +3,37 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useParams} from 'next/navigation';
 import Link from 'next/link';
 import {QRCodeSVG} from 'qrcode.react';
+import {Trophy} from 'lucide-react';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
 import type {Action,GameView,MusicStyle,Player,Settings} from '@/lib/game';
 import {actorToken,type DeviceTab} from '@/lib/device-session';
+import {finalStandings} from '@/lib/standings';
 
 const fmt=(n:number)=>n.toLocaleString('en-US');
 const remain=(until:number|undefined,now:number)=>until===undefined? '—' : `${Math.max(0,Math.ceil((until-now)/1000))}s`;
 function Scoreboard({players,chooserId}:{players:Player[];chooserId?:string}){
  return <div className="v2scores">{[...players].sort((a,b)=>b.score-a.score).map((p,i)=><div className={'v2score '+(chooserId===p.id?'selecting':'')} key={p.id}><span className="v2rank">{i+1}</span><strong>{p.name}</strong><b>{fmt(p.score)}</b></div>)}</div>;
+}
+/** One shared curtain call for the TV, phones and host. Ties share first place. */
+function CurtainCall({players,mode='tv'}:{players:Player[];mode?:'tv'|'phone'}){
+ const {winners,standings,tied}=finalStandings(players);
+ return <section className={'v13curtain v13curtain--'+mode} aria-label="Final results" aria-live="polite">
+   <div className="v13confetti" aria-hidden="true">{Array.from({length:36},(_,i)=><span key={i} style={{left:`${(i*37+11)%100}%`,animationDelay:`${((i*17)%8)/10}s`,animationDuration:`${2.35+((i*7)%13)/10}s`,backgroundColor:i%3===0?'#f8d375':i%3===1?'#fff6d9':'#7eb9c1'}}/>)}</div>
+   <div className="v13curtain-inner">
+     <p className="v13curtain-eyebrow">✦ THE KNOW SHOW ✦</p>
+     <h1>That’s a wrap!</h1>
+     <div className="v13trophy"><Trophy size={mode==='tv'?86:64} strokeWidth={1.55} aria-hidden="true"/></div>
+     <p className="v13winner-label">{tied?'CO-WINNERS':'TONIGHT’S CHAMPION'}</p>
+     <div className={'v13winners'+(tied?' v13winners--tie':'')}>
+       {winners.map(p=><div className="v13winner" key={p.id}><strong>{p.name}</strong><span>{fmt(p.score)} <small>POINTS</small></span></div>)}
+     </div>
+     <p className="v13victory-line">{tied?'A shared victory. What a finish!':'A standing ovation for our winner!'}</p>
+     <div className="v13standings">
+       <h2>Final standings</h2>
+       <ol>{standings.map(({player:p,place,isWinner})=><li key={p.id} className={isWinner?'v13first':''}><span className="v13standing-rank">{place}</span><span className="v13standing-name">{p.name}{isWinner&&<Trophy size={15} strokeWidth={2} aria-label="Winner"/>}</span><strong>{fmt(p.score)} <small>pts</small></strong></li>)}</ol>
+     </div>
+   </div>
+ </section>;
 }
 function Board({view,onChoose}:{view:GameView;onChoose?:(key:string)=>void}){
  return <div className="v2board">{view.selected[view.round].map(id=>{
@@ -52,9 +75,8 @@ function DraftStage({view,chooserName,canPick,disabled=false,onChoose}:{view:Gam
 function TV({view,code,origin,now,preview=false}:{view:GameView;code:string;origin:string;now:number;preview?:boolean}){
  const soundtrack=SUNO_SOUNDTRACKS.find(t=>t.id===view.settings.music);
  const track=soundtrack?.arrangements[view.settings.arrangement];
- const lead=[...view.players].sort((a,b)=>b.score-a.score)[0];
- return <main className="v2tv">
-   <header className="v2tvhead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{view.phase==='lobby'?'THE GREEN ROOM':view.phase.startsWith('final')?'THE FINAL WORD':view.phase==='finished'?'THE CURTAIN CALL':view.roundNames[view.round]}</span><span>{code}</span></header>
+ return <main className={"v2tv"+(view.phase==='finished'?" v13tvfinished":"")}>
+   <header className="v2tvhead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{view.phase==='lobby'?'THE GREEN ROOM':view.phase.startsWith('final')?'THE FINAL WORD':view.phase==='finished'?'THE CURTAIN CALL':view.roundNames[view.round]}</span><span>{view.phase==='finished'?'':code}</span></header>
    <div className="v2tvcolumns"><section className="v2tvmain">
      {view.phase==='lobby'&&<div className="v2tvwelcome"><p className="v2eyebrow">WELCOME TO</p><img className="v1welcomelogo" src="/know-show-logo.png" alt="The Know Show"/><h2>Scan to join the fun</h2>{origin&&<div className="v2qrcard"><QRCodeSVG value={`${origin}/room/${code}`} size={245} level="M" marginSize={2}/></div>}<p className="v2roomcode">Room code: <strong>{code}</strong></p><p>{view.players.length} of 8 players joined</p></div>}
      {view.phase==='draft'&&<section className="v2tvdraft" aria-label="Category draft on TV">
@@ -72,13 +94,13 @@ function TV({view,code,origin,now,preview=false}:{view:GameView;code:string;orig
      {view.phase==='final-wager'&&<div className="v2tvstage"><span className="v2eyebrow">ONE LAST QUESTION</span><h2>The Final Word</h2><p>Place your private wager on your phone.</p><p>{view.final?.wagerCount||0} / {view.players.length} wagers locked</p><h3>Category: {view.final?.category}</h3></div>}
      {view.phase==='final-question'&&<div className="v2tvstage"><span className="v2eyebrow">THE FINAL WORD · {view.final?.category}</span><h2 className="v2question">{view.final?.prompt}</h2><div className="v2timer">{view.paused?'PAUSED':remain(view.final?.deadlineAt,now)}</div><p>{view.final?.answerCount||0}/{view.players.length} answers</p></div>}
      {view.phase==='final-results'&&<div className="v2tvstage"><span className="v2eyebrow">THE FINAL WORD</span><h2 className="v2answer">{view.final?.answer}</h2><div className="v2resultgrid">{view.final?.results?.map(p=><div className={'v2result '+(p.correct?'right':'wrong')} key={p.id}><b>{p.name}</b><span>{p.correct?'✓ Correct':'✕ Incorrect'}</span><strong>{p.points>=0?'+':''}{fmt(p.points)}</strong></div>)}</div>{Boolean(view.final?.disputeIds.length)&&<p>Dispute under review</p>}</div>}
-     {view.phase==='finished'&&<div className="v2tvstage"><span className="v2eyebrow">THAT'S A WRAP!</span><h2>The Curtain Call</h2><div className="v2bigpoints">★</div><h2>{lead?.name}</h2><p>{fmt(lead?.score||0)} points</p></div>}
+     {view.phase==='finished'&&<CurtainCall players={view.players}/>}
      {view.paused&&<div className="v2paused">THE SHOW IS PAUSED</div>}
-   </section><aside className="v2tvside"><h3>Leaderboard</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/>
+   </section>{view.phase!=='finished'&&<aside className="v2tvside"><h3>Leaderboard</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/>
    {!preview&&(view.settings.displayMode??'tv')==='tv'&&<div className="v2musicdock"><div className="v2musiclabel">♫ {soundtrack?.label||'Music off'} {soundtrack?`· Arrangement ${view.settings.arrangement+1}`:''}</div>
      {track?<iframe key={track.id} title={`${soundtrack!.label} arrangement ${view.settings.arrangement+1}`} src={sunoEmbedUrl(track.id)} allow="autoplay; encrypted-media; fullscreen" loading="eager" referrerPolicy="strict-origin-when-cross-origin"/>:<p>Soundtrack disabled by host</p>}
      {track&&<small>Press Play here to start the music. Suno controls volume and playback.</small>}</div>}
-   </aside></div>
+   </aside>}</div>
  </main>;
 }
 
@@ -161,10 +183,10 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  },[code,ready,authToken,authMarker]);
  useEffect(()=>{if(!ready)return;void refresh();const t=setInterval(()=>void refresh(),1250);return()=>clearInterval(t);},[ready,refresh]);
  useEffect(()=>{const t=setInterval(()=>setNow(Date.now()),300);return()=>clearInterval(t);},[]);
- const act=useCallback(async(action:Action)=>{if(busy)return;
+ const act=useCallback(async(action:Action,actingToken=authToken)=>{if(busy)return;
    const marker=authMarker;setBusy(true);setError('');
    try{
-     const res=await fetch(`/api/rooms/${code}/action`,{method:'POST',headers:{'Content-Type':'application/json',...(authToken?{Authorization:`Bearer ${authToken}`}:{})},body:JSON.stringify(action)});
+     const res=await fetch(`/api/rooms/${code}/action`,{method:'POST',headers:{'Content-Type':'application/json',...(actingToken?{Authorization:`Bearer ${actingToken}`}:{})},body:JSON.stringify(action)});
      const d=await res.json();if(marker!==authRef.current)return;
      if(!res.ok)throw new Error(d.error||'Action failed.');
      if(d.revision>=lastRev.current){lastRev.current=d.revision;setView(d);}
@@ -196,6 +218,11 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  if(!ready||(!view&&!error))return <main className="v2loading">✳ Preparing The Know Show…</main>;
  if(!view)return <main className="v2loading"><h2>Can't open this room</h2><p>{error}</p><Link href="/">Create a new show</Link></main>;
  if(displayOnly)return <TV view={view} code={code} origin={origin} now={now}/>;
+ if(view.phase==='finished')return <main className="v13phonefinish">
+   <header className="v13finishhead"><Link href="/"><img src="/know-show-logo.png" alt="The Know Show"/></Link><span>THE CURTAIN CALL</span></header>
+   <CurtainCall players={view.players} mode="phone"/>
+   {Boolean(hostToken)&&<div className="v13finishactions"><button type="button" className="v13newshow" disabled={busy} onClick={()=>void act({type:'new-game'},hostToken)}>Start another show</button>{error&&<p role="alert">{error}</p>}</div>}
+ </main>;
  const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.phase==='finished'?'The Curtain Call':view.roundNames[view.round];
  const phonesOnly=(view.settings.displayMode??'tv')==='phones';
  const roomUrl=`${origin}/room/${code}`,hostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
@@ -292,12 +319,12 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='results'&&view.results&&<section className="v2card"><p className="v2eyebrow">THE ANSWER</p><h2>{view.results.answer}</h2><div className="v2resultgrid">{view.players.map(p=>{const r=view.results!.answers[p.id];return <div className={'v2result '+(r?.correct?'right':'wrong')} key={p.id}><b>{p.name}</b><span>{r?.correct?'Correct':r?'Incorrect':'No answer'}</span><strong>{r?.points?`+${fmt(r.points)}`:'0'}</strong></div>;})}</div>
        <button className="v2small" disabled={busy||view.results.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: <strong>{view.final?.category}</strong></p><p>Choose a wager from zero to your current nonnegative score.</p>{view.final?.myWager===undefined?<form className="v2form" onSubmit={e=>{e.preventDefault();void act({type:'wager',amount:Number(wager)});}}><label>Your wager<input type="number" min={0} max={Math.max(0,me?.score||0)} value={wager} onChange={e=>setWager(e.target.value)}/></label><button disabled={busy||Number(wager)>Math.max(0,me?.score||0)}>Lock wager</button></form>:<p>Wager locked: {fmt(view.final.myWager)}</p>}</section>}
-     {view.phase==='final-question'&&<section className="v2card v2questioncard"><div className="v2questiondisplay"><p className="v2eyebrow">THE FINAL WORD · {view.final?.category}</p><h2 className="v2prompt">{view.final?.prompt}</h2><div className="v2countdown" aria-label="Time remaining">{remain(view.final?.deadlineAt,now)}</div>{view.final?.myAnswer!==undefined?<p className="v2locked">Final answer locked: {view.final.myAnswer}</p>:(view.final?.myChoices?.length===4?<ChoiceForm choices={view.final.myChoices} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/>:<AnswerForm key="final-word" value={finalDraft} onChange={setFinalDraft} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/>)}</div></section>}
+     {view.phase==='final-question'&&<section className="v2card v2questioncard"><div className="v2questiondisplay"><p className="v2eyebrow">THE FINAL WORD · {view.final?.category}</p><h2 className="v2prompt">{view.final?.prompt}</h2><div className="v2countdown" aria-label="Time remaining">{remain(view.final?.deadlineAt,now)}</div>{view.final?.myAnswer!==undefined?<p className="v2locked">Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={setFinalDraft} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/>}</div></section>}
      {view.phase==='final-results'&&<section className="v2card"><h2>Correct answer: {view.final?.answer}</h2><div className="v2resultgrid">{view.final?.results?.map(r=><div key={r.id} className={'v2result '+(r.correct?'right':'wrong')}><b>{r.name}</b><span>{r.correct?'Correct':'Incorrect'}</span><strong>{r.points>=0?'+':''}{fmt(r.points)}</strong></div>)}</div><button className="v2small" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>Dispute my result</button></section>}
      {view.phase==='finished'&&<section className="v2card"><h2>Final standings</h2>{sorted.map((p,i)=><p key={p.id}>{i+1}. {p.name} — {fmt(p.score)} points</p>)}</section>}
    </>}
    <section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>
-   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.2</span></footer>
+   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.3</span></footer>
    </>}
  </main>;
 }
