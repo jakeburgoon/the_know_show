@@ -1,19 +1,23 @@
-THE KNOW SHOW — v1.4.1 · GREEN ROOM LAYOUT REFINEMENT
+THE KNOW SHOW — v1.5.0 · FULL CUMULATIVE UPDATE
 
-Complete application based directly on v1.4.0 (which was built on the uploaded v1.3.1 ZIP).
+This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
 
-HOW TO DEPLOY
-1. Extract this ZIP and open the INNER `the-know-show` folder.
-2. Replace the contents of the ROOT of your existing GitHub project with these files, preserving your repository and Vercel connection.
-3. Commit the changes to the main branch, then check your Vercel build.
-4. Open the app on a host device and tap Host a show. Complete four setup steps; scan the QR from another phone to join.
-5. Test a typed answer left in the input field when the timer reaches zero, and confirm the saved draft is scored.
+GITHUB / VERCEL
+1. Unzip this archive. Open its inner the-know-show folder.
+2. Replace the corresponding application files at the ROOT of your existing GitHub repository (not a second nested folder). Commit to main.
+3. Your connected Vercel project should build and deploy. Check the Vercel build log for errors.
+4. Open a new game room and playtest on two phones before a larger show. Camera scanning requires HTTPS and camera permission. Refresh the PWA if it still shows an old version.
 
-No Supabase schema migration or additional environment variables are required.
-The approved main logo, app icons, and all 540 questions are byte-for-byte unchanged.
+NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
+
+NEW IN v1.5.0
+- Full 1.4.2 Final Word improvements: visible server-aligned timer and 18 sets of 3 final hints; additional hints cost 500 pts before wagering, subject to 3-hint cap.
+- More visible Player View sound controls; QR-scanning camera window on homepage; rematch or a fresh home-screen show after the Curtain Call.
+- Answer-first results reveal followed by leaderboard; improved draft turn prompts and subtle navy/gold board depth.
+- Repeat reduction across rematches and new rooms created from the same host browser; 11 seasonal categories added (132 new questions), active by month. Each Build the Board phase includes one seasonal offer when any are in season, alongside regular options.
+- Approved main logo and app icons preserved exactly. 45 original categories / 540 questions unchanged. Total library: 56 categories and 672 questions.
 
 VALIDATION
-27 engine/regression tests passed. TypeScript syntax + focused semantic checks passed with temporary dependency declarations; a full Next.js production build could not be completed here because npm dependencies were not installed.
-Please review the Vercel build log before using this release at a larger event.
+39 automated game-engine tests and a focused TypeScript check passed. Full Next.js production build could not run here because dependency installation timed out; check the Vercel build. No full-device end-to-end QA was run.
 
-NOTE: Phones require tapping Countdown sounds: On for audible ticks and the end bell. A browser may block audio until it receives this user gesture. Draft auto-submission uses the latest text successfully saved to the server while the clock is running; a last-moment keystroke with poor connectivity may not be saved in time.
+See README.md and RELEASE_NOTES.md for more detail.

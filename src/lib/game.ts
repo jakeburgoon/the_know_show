@@ -1,10 +1,12 @@
 import { randomInt, randomUUID, createHash } from 'node:crypto';
-import { CATEGORIES, CATEGORY_LOOKUP, FINALS, getQuestion } from './questions';
+import { CATEGORIES, CATEGORY_LOOKUP, FINALS, availableCategories, getQuestion } from './questions';
 
 export const MAX_SEATS=8;
+export const FINAL_HINT_PRICE=500;
+export const MAX_FINAL_HINTS=3;
 export const ROUND_NAMES=['The Opening Act','The Main Event'] as const;
 export const ROUND_VALUES=[[100,300,500],[200,600,1000]] as const;
-export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished';
+export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished'|'closed';
 export type Mode='individual'|'teams';
 export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'off';
 export type DisplayMode='tv'|'phones';
@@ -15,8 +17,8 @@ export type Player={id:string;name:string;age?:number;score:number;hintsRemainin
 export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean;answerFormat?:'written'|'choices'};
 export type ActiveQuestion={drafts?:Record<string,{answer:string;doubleTake:boolean}>;key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
-export type FinalState={drafts?:Record<string,string>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
-export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[]};
+export type FinalState={drafts?:Record<string,string>;purchasedHints?:Record<string,number>;purchasedHintsUsed?:Record<string,number>;revealedHints?:Record<string,number>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
+export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[]};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
  |{type:'settings';settings:Partial<Settings>}
@@ -27,7 +29,7 @@ export type Action=
  |{type:'hint';kind:'written'}|{type:'pass'}
  |{type:'dispute'}|{type:'resolve-dispute';playerId:string;correct:boolean}|{type:'dismiss-dispute';playerId:string}|{type:'skip-question'}
  |{type:'pause'}|{type:'adjust-score';playerId:string;delta:number}
- |{type:'start-final'}|{type:'wager';amount:number}|{type:'final-answer';answer:string}|{type:'finish'}|{type:'new-game'};
+ |{type:'start-final'}|{type:'buy-final-hint'}|{type:'final-hint'}|{type:'wager';amount:number}|{type:'final-answer';answer:string}|{type:'finish'}|{type:'new-game'}|{type:'close-show'};
 export class GameError extends Error {constructor(message:string){super(message);this.name='GameError';}}
 function assert(x:unknown,message:string):asserts x {if(!x)throw new GameError(message);}
 const log=(s:GameState,m:string)=>{s.announcement=m;s.eventLog=[m,...s.eventLog].slice(0,30);};
@@ -47,7 +49,17 @@ function answerOptions(answer:string,distractors:string[]|undefined,questionId:s
  return options.sort((a,b)=>createHash('sha256').update(`${questionId}:${playerId}:${a}`).digest('hex').localeCompare(createHash('sha256').update(`${questionId}:${playerId}:${b}`).digest('hex')));
 }
 export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv',answerStyle:'written'};}
-export function makeGame(recentQuestionIds:string[]=[]):GameState{return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string').slice(-350)};}
+// Most-recent-last histories; reselecting a category moves it to the back of the queue.
+function rememberRecent(history:readonly string[], values:readonly string[], limit:number):string[]{
+ const known=new Set(values);return [...history.filter(id=>!known.has(id)),...values].slice(-limit);
+}
+export function makeGame(recentQuestionIds:string[]=[],recentCategoryIds:string[]=[],recentCategoryOffers:string[]=[]):GameState{
+ const valid=new Set(CATEGORIES.map(c=>c.id));
+ return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],
+  recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string'&&(!!getQuestion(x)||FINALS.some(f=>f.id===x))).slice(-672),
+  recentCategoryIds:recentCategoryIds.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56),
+  recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56)};
+}
 export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
  assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
  const n=String(name||'').trim().replace(/\s+/g,' ').slice(0,28);assert(n.length>=2,'Enter a name of at least two characters.');
@@ -84,16 +96,38 @@ export function isCorrectForQuestion(given:string,q:{answer:string;aliases?:stri
  if((q.distractors??[]).some(d=>normalize(d)===input))return false;
  return isCorrect(given,q.answer,q.aliases??[]);
 }
-function pickPool(s:GameState){
- const excluded=new Set([...s.selected[0],...s.selected[1]]);
- const allowed=CATEGORIES.filter(c=>!excluded.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
- const total=s.players.length<=3?7:s.players.length<=5?9:11;
- const classic=shuffle(allowed.filter(c=>c.type==='classic')).slice(0,Math.round(total*.6));
- const creative=shuffle(allowed.filter(c=>c.type==='creative')).slice(0,total-classic.length);
- return shuffle([...classic,...creative]).map(c=>c.id);
+function pickPool(s:GameState,now:number){
+ const alreadySelected=new Set([...s.selected[0],...s.selected[1]]);
+ const allowed=availableCategories(new Date(now)).filter(c=>!alreadySelected.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
+ const total=Math.min(allowed.length,s.players.length<=3?7:s.players.length<=5?9:11);
+ // A category only has four questions per difficulty. Selecting it again too soon
+ // makes repeated questions inevitable, so prioritize categories not yet played.
+ // Unoffered categories then take priority, with long-ago offers returned before recent ones.
+ const played=s.recentCategoryIds??[],offered=s.recentCategoryOffers??[];
+ const playedSet=new Set(played),offeredSet=new Set(offered);
+ const ranked=shuffle(allowed).sort((a,b)=>{
+   const aPlayed=playedSet.has(a.id)?1:0,bPlayed=playedSet.has(b.id)?1:0;
+   if(aPlayed!==bPlayed)return aPlayed-bPlayed;
+   const aOffered=offeredSet.has(a.id)?1:0,bOffered=offeredSet.has(b.id)?1:0;
+   if(aOffered!==bOffered)return aOffered-bOffered;
+   if(aPlayed)return played.indexOf(a.id)-played.indexOf(b.id);
+   if(aOffered)return offered.indexOf(a.id)-offered.indexOf(b.id);
+   return 0;
+ });
+ // Every draft during an active season offers exactly one seasonal choice.
+ // Fresh content is favored; when all seasonal candidates have appeared, use
+ // the least-recently offered eligible category rather than dropping seasons.
+ // All remaining choices come from the year-round pool whenever available.
+ const seasonal=ranked.filter(c=>c.activeMonths?.length);
+ const yearRound=ranked.filter(c=>!c.activeMonths?.length);
+ const result=seasonal.length?[seasonal[0],...yearRound]:yearRound;
+ return result.slice(0,total).map(c=>c.id);
 }
-
-function goDraft(s:GameState){s.players.forEach(p=>p.doubleTakesRemaining=1);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s);s.resolution=undefined;s.active=undefined;log(s,`Select four categories for ${ROUND_NAMES[s.round]}.`);}
+function goDraft(s:GameState,now:number){
+ s.players.forEach(p=>p.doubleTakesRemaining=1);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s,now);
+ s.recentCategoryOffers=rememberRecent(s.recentCategoryOffers??[],s.draftPool,56);
+ s.resolution=undefined;s.active=undefined;log(s,`Select four categories for ${ROUND_NAMES[s.round]}.`);
+}
 function nextQuestionChoices(s:GameState){
  const taken=new Set<string>(Object.values(s.questionMap));
  const previous=new Set(s.recentQuestionIds);
@@ -112,7 +146,7 @@ function closeQuestion(s:GameState,now:number,skipped=false){
  const resolution:Resolution={key:a.key,questionId:a.questionId,answer:q.answer,category:CATEGORY_LOOKUP.get(q.categoryId)!.name,
    points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+6500,disputeIds:[],skipped};
  for(const [id,submission] of Object.entries(a.answers)){const p=s.players.find(x=>x.id===id);if(p)p.score+=submission.points;}
- s.usedKeys.push(a.key);s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==q.id),q.id].slice(-350);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
+ s.usedKeys.push(a.key);s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==q.id),q.id].slice(-672);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
  log(s,skipped?'Question skipped.':`The answer is ${q.answer}.`);
 }
 function correctPoints(s:GameState,a:ActiveQuestion,p:Player,at:number,doubleTake=false){
@@ -142,8 +176,8 @@ function storeSubmission(s:GameState,p:Player,answer:string,now:number,useDouble
 }
 function nextSteal(s:GameState,now:number){const a=s.active!;a.stealTurn=true;a.stealId=s.players[(s.chooserIndex+1)%s.players.length].id;a.startedAt=now;a.deadlineAt=now+Math.max(10,s.settings.answerSeconds+(s.players.find(p=>p.id===a.stealId)?.bonusTimeSeconds||0))*1000;log(s,`${s.players.find(p=>p.id===a.stealId)!.name} has one chance to steal.`);}
 function finishFinal(s:GameState,now:number){
- const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:false};}}
- s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-350);s.phase='final-results';f.endsAt=now+12000;log(s,'Final answers are in.');
+ const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:Boolean(f.revealedHints?.[p.id])};}}
+ s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-672);s.phase='final-results';f.endsAt=now+12000;log(s,'Final answers are in.');
 }
 function shiftTimers(s:GameState,delta:number){if(s.active){s.active.introUntilAt+=delta;if(s.active.startedAt)s.active.startedAt+=delta;if(s.active.deadlineAt)s.active.deadlineAt+=delta;}if(s.resolution)s.resolution.endsAt+=delta;if(s.final){if(s.final.startedAt)s.final.startedAt+=delta;if(s.final.deadlineAt)s.final.deadlineAt+=delta;if(s.final.endsAt)s.final.endsAt+=delta;}}
 export function tick(original:GameState,now=Date.now()):GameState {
@@ -177,7 +211,7 @@ export function tick(original:GameState,now=Date.now()):GameState {
  }
  if(s.phase==='results'&&s.resolution&&!s.resolution.disputeIds.length&&now>=s.resolution.endsAt){
    if(s.usedKeys.filter(k=>s.selected[s.round].includes(k.split(':')[0])).length===12){
-     if(s.round===0){s.round=1;goDraft(s);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)).length?FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)):FINALS.filter(f=>f.tier!=='family'))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
+     if(s.round===0){s.round=1;goDraft(s,now);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)).length?FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)):FINALS.filter(f=>f.tier!=='family'))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
    }else{s.phase='board';s.resolution=undefined;}
  }
  if(s.phase==='final-question'&&s.final){
@@ -187,7 +221,7 @@ export function tick(original:GameState,now=Date.now()):GameState {
        const draft=s.final.drafts?.[p.id]?.trim();
        if(!s.final.answers[p.id]&&draft){
          const correct=isCorrectForQuestion(draft,q),wager=s.final.wagers[p.id]??0;
-         s.final.answers[p.id]={answer:draft,at:s.final.deadlineAt??now,correct,points:correct?wager:-wager,doubleTake:false,hintUsed:false,answerFormat:'written'};
+         s.final.answers[p.id]={answer:draft,at:s.final.deadlineAt??now,correct,points:correct?wager:-wager,doubleTake:false,hintUsed:Boolean(s.final.revealedHints?.[p.id]),answerFormat:'written'};
        }
      }
    }
@@ -219,13 +253,13 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    if(action.choiceAccess!==undefined){assert(['off','all','medium-hard','hard'].includes(action.choiceAccess),'Invalid choice availability.');p.choiceAccess=action.choiceAccess;}break;
  }
  case 'start-draft':{
-   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');goDraft(s);break;
+   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');goDraft(s,now);break;
  }
  case 'draft-category':{
    assert(s.phase==='draft','The category draft is closed.');const id=action.categoryId;
    assert(s.draftPool.includes(id),'Choose a category from the available draft.');assert(!s.selected[s.round].includes(id),'Already selected.');
    const chooser=s.players[(s.draftIndex+s.round*4)%s.players.length];assert(actor.kind==='host'||actor.id===chooser.id,`It is ${chooser.name}’s turn.`);
-   s.selected[s.round].push(id);s.draftIndex++;log(s,`${chooser.name} selected ${CATEGORY_LOOKUP.get(id)!.name}.`);
+   s.selected[s.round].push(id);s.recentCategoryIds=rememberRecent(s.recentCategoryIds??[],[id],56);s.draftIndex++;log(s,`${chooser.name} selected ${CATEGORY_LOOKUP.get(id)!.name}.`);
    if(s.selected[s.round].length===4){nextQuestionChoices(s);s.phase='board';s.chooserIndex=s.round===0?0:4;log(s,`${ROUND_NAMES[s.round]} begins!`);}break;
  }
  case 'open-question':{
@@ -312,6 +346,30 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    host(actor);assert(Number.isInteger(action.delta)&&Math.abs(action.delta)<=5000,'Enter a whole-number adjustment of at most 5000 points.');
    const p=s.players.find(p=>p.id===action.playerId);assert(p,'Player not found.');p.score+=action.delta;log(s,`${p.name}'s score adjusted by ${action.delta}.`);break;
  }
+ case 'buy-final-hint':{
+   const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='final-wager'&&!!s.final,'Final hint purchases are closed.');
+   assert(s.final.wagers[p.id]===undefined,'Purchase hints before locking your wager.');
+   const bought=s.final.purchasedHints?.[p.id]??0;
+   assert(Math.min(MAX_FINAL_HINTS,p.hintsRemaining)+bought<MAX_FINAL_HINTS,'You already have access to three Final Word hints.');
+   assert(p.score>=FINAL_HINT_PRICE,'You need at least 500 points to buy a hint.');
+   p.score-=FINAL_HINT_PRICE;(s.final.purchasedHints??={})[p.id]=bought+1;
+   break;
+ }
+ case 'final-hint':{
+   const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='final-question'&&!!s.final,'Final Word hints are not available yet.');
+   assert(!s.final.answers[p.id],'Your final answer is already locked.');
+   assert(now<=(s.final.deadlineAt??0),'Final Word time has expired.');
+   const shown=s.final.revealedHints?.[p.id]??0;
+   assert(shown<MAX_FINAL_HINTS,'All three hints are already revealed.');
+   if(p.hintsRemaining>0){p.hintsRemaining--;}
+   else{
+     const used=s.final.purchasedHintsUsed?.[p.id]??0;
+     assert(used<(s.final.purchasedHints?.[p.id]??0),'No Final Word hints remaining.');
+     (s.final.purchasedHintsUsed??={})[p.id]=used+1;
+   }
+   (s.final.revealedHints??={})[p.id]=shown+1;
+   break;
+ }
  case 'start-final':{
    host(actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagers are not open.');
    s.players.forEach(p=>{if(s.final!.wagers[p.id]===undefined)s.final!.wagers[p.id]=0;});s.final.startedAt=now;s.final.deadlineAt=now+s.settings.finalSeconds*1000;s.phase='final-question';log(s,'The Final Word begins!');break;
@@ -327,12 +385,18 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    const q=FINALS.find(q=>q.id===s.final!.id)!;const ans=String(action.answer||'').trim();assert(ans.length>0&&ans.length<=200,'Enter an answer.');
    // Final Word is always independently typed, regardless of any regular-round accommodation.
    const correct=isCorrectForQuestion(ans,q);const points=(s.final.wagers[p.id]??0)*(correct?1:-1);
-   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:false,answerFormat:'written'};
+   s.final.answers[p.id]={answer:ans,at:now,correct,points,doubleTake:false,hintUsed:Boolean(s.final.revealedHints?.[p.id]),answerFormat:'written'};
    if(s.players.every(p=>s.final!.answers[p.id]))finishFinal(s,now);break;
  }
  case 'finish':{host(actor);assert(s.phase==='final-results'&&!s.final?.disputeIds.length,'Resolve all disputes before finishing.');s.phase='finished';break;}
  case 'new-game':{
-   host(actor);assert(s.phase==='finished','Finish this show first.');const n=makeGame(s.recentQuestionIds);n.id=s.id;n.createdAt=s.createdAt;n.settings=s.settings;n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:1}));return n;
+   host(actor);assert(s.phase==='finished','Finish this show first.');// A rematch carries every played question and selected/offered category.
+   // Include the selected categories for older rooms created before category histories existed.
+   const categories=rememberRecent(s.recentCategoryIds??[],[...s.selected[0],...s.selected[1]],56);
+   const n=makeGame(s.recentQuestionIds,categories,s.recentCategoryOffers??[]);n.id=s.id;n.createdAt=s.createdAt;n.settings={...s.settings};n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:1}));log(n,'Rematch! Same players and settings. Get ready for a new show.');return n;
+ }
+ case 'close-show':{
+   host(actor);assert(s.phase==='finished','Finish this show first.');s.phase='closed';log(s,'The host started a new show. Returning everyone to the home page.');break;
  }
  default:throw new GameError('Unknown action type.');
  }
@@ -362,15 +426,20 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
    myDraft:me?s.final.drafts?.[me.id]:undefined,
+   hintPrice:FINAL_HINT_PRICE, maxHints:MAX_FINAL_HINTS,
+   myPurchasedHints:me?(s.final.purchasedHints?.[me.id]??0):undefined,
+   myPurchasableHints:me&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-Math.min(MAX_FINAL_HINTS,me.hintsRemaining)-(s.final.purchasedHints?.[me.id]??0)):0,
+   myRevealedHints:me&&s.phase!=='final-wager'?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
+   myAvailableHints:me?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),me.hintsRemaining+(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;
  return {revision,serverNow:now,phase:s.phase,roomId:s.id,role:actor,settings:{...s.settings,displayMode:s.settings.displayMode??'tv'},players:s.players,round:s.round,
  roundNames:ROUND_NAMES,roundValues:ROUND_VALUES,selected:s.selected,usedKeys:s.usedKeys,chooserId:currentPlayer(s)?.id,
- categories:CATEGORIES.map(c=>({id:c.id,name:c.name,description:c.description,type:c.type})),draftPool:s.draftPool,draftIndex:s.draftIndex,
+ categories:CATEGORIES.filter(c=>!c.activeMonths||availableCategories(new Date(now)).some(x=>x.id===c.id)||s.draftPool.includes(c.id)||s.selected[0].includes(c.id)||s.selected[1].includes(c.id)).map(c=>({id:c.id,name:c.name,description:c.description,type:c.type})),draftPool:s.draftPool,draftIndex:s.draftIndex,
  draftTurnId:s.players.length?s.players[(s.draftIndex+s.round*4)%s.players.length]?.id:undefined,
- active:current,intro,results:res,final:f,myHints:me?.hintsRemaining,paused:!!s.pausedAt,announcement:s.announcement,eventLog:s.eventLog.slice(0,10),
- yourPlayer:me?.id,playedQuestionIds:s.recentQuestionIds,
+ active:current,intro,results:res,final:f,myHints:me?.hintsRemaining,paused:!!s.pausedAt,pausedAt:s.pausedAt,announcement:s.announcement,eventLog:s.eventLog.slice(0,10),
+ yourPlayer:me?.id,playedQuestionIds:s.recentQuestionIds,playedCategoryIds:s.recentCategoryIds??[],offeredCategoryIds:s.recentCategoryOffers??[],
  };
 }
 export type GameView=ReturnType<typeof makeView>;

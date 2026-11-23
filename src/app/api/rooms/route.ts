@@ -10,7 +10,7 @@ export async function POST(request:Request) {
     const required=process.env.ROOM_CREATION_PASSCODE;
     if(required && body?.passcode!==required) return jsonError('Room creation passcode is incorrect.',403);
     for(let attempt=0;attempt<8;attempt++) {
-      const code=newRoomCode();const hostToken=newToken();const state=makeGame(Array.isArray(body?.recentQuestionIds)?body.recentQuestionIds:[]);
+      const code=newRoomCode();const hostToken=newToken();const state=makeGame(Array.isArray(body?.recentQuestionIds)?body.recentQuestionIds:[],Array.isArray(body?.recentCategoryIds)?body.recentCategoryIds:[],Array.isArray(body?.recentCategoryOffers)?body.recentCategoryOffers:[]);
       const {error}=await db().from('know_show_rooms').insert({code,host_token_hash:tokenHash(hostToken),snapshot:state});
       if(!error) return NextResponse.json({code,token:hostToken,view:makeView(state,{kind:'host'},0)}, {headers:noStore});
       if(error.code!=='23505')throw error;

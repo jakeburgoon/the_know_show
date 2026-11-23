@@ -591,3 +591,83 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-lobby-hero .ks-lobby-qr{margin-top:12px}
 .ks-lobby-players .ks-lobby-hostplay{display:flex;flex-direction:column;gap:10px;margin:18px 0 0;padding:17px 0 0;background:none;border:0;border-top:1px solid #e6d9bb;border-radius:0;box-shadow:none}
 .ks-compact-roomlabel{margin:18px 0 9px;letter-spacing:.12em}
+
+/* v1.4.2 — Final Word: countdown, clue shop, and private hints. */
+.ks-finalwager .v2eyebrow{color:#9b701a;font-size:12px;letter-spacing:.09em;font-weight:900;margin:0 0 6px}
+.ks-finalshop{border:1px solid #d8c389;border-radius:15px;background:#fff9e8;padding:15px 17px;margin:17px 0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.ks-finalshop h3{margin:0 0 5px;color:#153951}.ks-finalshop p{margin:4px 0;font-size:14px;line-height:1.45}
+.ks-finalshop button{background:#153951!important;color:#fbd06b!important;padding:11px 17px!important;border-radius:10px!important;font-weight:900}
+.ks-finalshop button:disabled{opacity:.45}.ks-finalshop .ks-shop-bought{font-weight:800;color:#21614f}
+.ks-finalshop small{color:#776b4b}.ks-wagerlocked{font-weight:700}
+.ks-finalquestion .v2questionheader{align-items:center;margin-bottom:15px;gap:10px}
+.ks-finalquestion .v2categorychip{max-width:calc(100% - 85px);white-space:normal}
+.ks-finalquestion .ks-clock{font-variant-numeric:tabular-nums;flex-shrink:0;min-width:77px}
+.ks-finalhintpanel{position:relative;z-index:1;background:#0b2d48;border:1px solid #be9b55;border-radius:13px;padding:14px;margin:16px 0 0;color:#ffefd2}
+.ks-finalhinthead{display:flex;flex-wrap:wrap;gap:7px;justify-content:space-between;align-items:center;margin:0 0 10px}
+.ks-finalhinthead strong{color:#ffda83;font-size:16px}
+.ks-finalhinthead span{font-size:12px;color:#f2dcaf}
+.ks-finalhintline{background:#173e59;border-left:3px solid #f4cd6b;border-radius:6px;padding:10px 12px;margin:8px 0!important;font-size:14px;line-height:1.45;color:#fff6e3!important}
+.ks-finalhintline b{display:block;color:#ffdb8d;font-size:12px;margin-bottom:3px}
+.ks-finalhintbutton{border-radius:9px!important;border:1px solid #f4c660!important;background:#f4cd6b!important;color:#17344d!important;padding:11px 15px!important;font-weight:900!important;cursor:pointer}
+.ks-finalhintbutton:disabled{opacity:.5;cursor:not-allowed}
+.ks-finalhintpanel small{font-size:12px;color:#e3cead}
+
+/* v1.5.0 — Focused join scanner, replay choices, and show-floor polish. */
+.ks-scan-action{width:100%;border:1px solid #dfb451;border-radius:13px;background:linear-gradient(125deg,#f8d778,#e9b650);color:#143651;box-shadow:0 4px 0 #b98a2d;display:flex;align-items:center;justify-content:center;gap:11px;min-height:58px;padding:13px 15px;font:inherit;font-size:17px;font-weight:900;cursor:pointer;margin:19px 0 22px}
+.ks-scan-action:hover{filter:brightness(1.045)}.ks-manual-join{border-top:1px solid #e7dfce;padding-top:13px}.ks-manual-join .v11fieldlabel{font-size:12px}.ks-manual-join .v11action{min-height:44px;margin-top:8px;font-size:13px}
+.ks-scan-backdrop{position:fixed;z-index:9999;inset:0;display:flex;justify-content:center;align-items:center;background:#061524d9;padding:16px}
+.ks-scan-modal{background:#fffaf0;color:#183a56;border:2px solid #dab75d;border-radius:20px;width:min(100%,470px);padding:18px;box-shadow:0 22px 70px #0008}
+.ks-scan-title{display:flex;align-items:center;justify-content:space-between;gap:12px}.ks-scan-title h2{display:flex;align-items:center;gap:9px;font-size:20px;margin:0 0 12px;color:#173c58}.ks-scan-title button{background:transparent;border:0;color:#163a55;cursor:pointer;padding:6px}
+.ks-camera-window{background:#0d2539;aspect-ratio:4/5;max-height:min(60vh,495px);width:100%;position:relative;overflow:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center}.ks-camera-window video{width:100%;height:100%;object-fit:cover}.ks-camera-frame{position:absolute;pointer-events:none;border:3px solid #f7cd64;border-radius:16px;width:69%;aspect-ratio:1;box-shadow:0 0 0 100vmax #06172636;max-height:75%}.ks-scan-status{font-size:13px;line-height:1.45;min-height:36px;color:#385c67;margin:12px 0}.ks-scan-cancel{width:100%;display:flex;gap:8px;align-items:center;justify-content:center;padding:12px;background:#143a58;color:#fff9ec;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+.ks-aftershow{max-width:920px;margin:18px auto 35px;padding:22px 19px;border:1px solid #d3b467;border-radius:16px;background:#fff8e8;color:#173c56;text-align:center}.ks-aftershow h2{margin:0 0 8px;font-size:24px;color:#163751}.ks-aftershow p{font-size:13px;line-height:1.55;margin:0 auto 16px;max-width:630px}.ks-aftershow-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ks-aftershow button,.ks-aftershow a{font:inherit;font-weight:900;font-size:15px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:13px 16px;border-radius:12px;cursor:pointer}.ks-aftershow button:disabled{opacity:.5;cursor:wait}.ks-rematch{color:#153651;background:#f1c65c;border:1px solid #b89039;box-shadow:0 3px 0 #b98b32}.ks-startfresh{background:#183e5b;color:#fff6e1;border:1px solid #31536b}.ks-aftershow a.ks-startfresh{width:max-content;margin:0 auto}
+@media(max-width:500px){.ks-aftershow-actions{grid-template-columns:1fr}.ks-aftershow{margin:13px 12px 30px}}
+
+/* Sound control stays visible at the top of Player View throughout the show. */
+.ks-soundbar{margin:8px 0 12px;padding:10px 13px;min-height:58px;background:linear-gradient(105deg,#fff5d8,#fffcf2);border:1px solid #e6ce8a;border-radius:11px;box-shadow:0 3px 12px #172b4610}
+.ks-sound-label{display:flex;flex-direction:column;color:#8d6a2e;font-size:11px;font-weight:950;letter-spacing:.11em;text-align:left}.ks-sound-label small{font-size:11px;letter-spacing:0;font-weight:500;margin-top:3px;color:#4b6875}.ks-soundbar>button{flex-shrink:0;min-width:94px;justify-content:center;background:#163c57;color:#fff5df;border:1px solid #d5ae53;border-radius:10px;padding:11px 13px;font-size:15px}.ks-soundbar>button[aria-pressed='true']{background:#f0cb66;color:#14364f}
+@media(max-width:420px){.ks-soundbar{padding:8px}.ks-sound-label small{font-size:10px}.ks-soundbar>button{min-width:77px;padding:10px}}
+
+/* A little dimensionality, with the same restrained navy / teal / gold palette. */
+.v2board{background:linear-gradient(150deg,#0b243f,#1a4662 90%);padding:clamp(5px,1.5vw,12px);border:2px solid #bb994e;box-shadow:inset 0 2px 8px #020f2066,0 12px 32px #0b28432b;border-radius:15px}
+.v2boardcol{gap:clamp(3px,0.6vw,7px)}
+.v2boardcat{background:linear-gradient(155deg,#295775,#173854);border:1px solid #8191a1;border-top:3px solid #dec072;color:#fff8e5!important;box-shadow:inset 0 1px 0 #ffffff24,0 3px 6px #06172844;text-shadow:0 1px 2px #071b3088}
+.v2board .v2tile{position:relative;overflow:hidden;background:linear-gradient(146deg,#275e7b 0%,#1b4666 49%,#123a59 100%);box-shadow:inset 0 2px 1px #ffffff15,0 3px 5px #081c3244;border:1px solid #60849b;color:#ffdc7f!important;text-shadow:0 1px 1px #071b31;letter-spacing:.015em}
+.v2board .v2tile:nth-child(odd){background:linear-gradient(145deg,#285572,#163d5a 61%,#10334f)}
+.v2board .v2tile:before{content:'';position:absolute;inset:0;background:linear-gradient(125deg,#ffffff13 0%,transparent 42%);pointer-events:none}
+.v2board .v2tile:not(:disabled):hover{background:linear-gradient(140deg,#3b7790,#236180);transform:translateY(-1px)}
+.v2board .v2tile.used,.v2tv .v2board .v2tile.used{background:#132f49!important;box-shadow:inset 0 2px 5px #0a1d34!important;border-color:#284660!important;opacity:.65}
+.v2tv .v2board .v2tile{background:linear-gradient(145deg,#285d7a,#16405f)!important}.v2tv .v2board .v2tile:nth-child(odd){background:linear-gradient(145deg,#25526e,#113753)!important}
+.v2tv .v2board .v2tile.used{background:#132f49!important}
+.v2boardcard .v2boardheading{background:linear-gradient(120deg,#153b58,#235d70);border:1px solid #b89651;border-radius:13px;padding:12px;margin:0 0 11px;display:flex;align-items:center;gap:9px;color:#fff7db}
+.v2boardcard .v2boardheading h2{font-size:clamp(19px,4.3vw,29px);line-height:1.2;color:#fff7df;margin:0;font-weight:900}
+.v2boardcard .v2boardheading span{color:#ffd77d;background:#09243d80;border-radius:7px;padding:8px;font-weight:900}
+
+/* Category draft: a distinctive heading and unmistakable active turn. */
+.v2drafthero h1{font-size:clamp(31px,8.5vw,53px);letter-spacing:-.05em;text-shadow:0 3px 7px #061a2f55}
+.ks-draft-spark{color:#f6d078;font-size:.65em;vertical-align:13%;margin-right:3px}
+.v2draftturn{padding:15px 16px;background:linear-gradient(110deg,#082741ad,#1f5365c4);border:2px solid #a9c1c080;box-shadow:0 5px 15px #09203855;gap:5px}
+.v2draftturn.yourturn{background:linear-gradient(110deg,#b98c36,#ebc56b);color:#112f49;border-color:#fff2bc;box-shadow:0 3px 0 #8b671d,0 10px 26px #0b203a55}
+.v2draftturn strong{font-size:clamp(22px,5.5vw,32px);line-height:1.12;font-weight:950;letter-spacing:-.02em}
+.v2draftturn.yourturn>strong,.v2draftturn.yourturn>small,.v2draftturn.yourturn>span{color:#123550}
+.v2draftturn:not(.yourturn)>span{color:#f9d989}
+.v2draftturn:not(.yourturn)>strong{color:#fff8e8}
+.v2tvdraftheader h2{font-size:clamp(31px,4.5vw,60px);text-shadow:0 4px 9px #06152588}.v2tvdraftheader p strong{color:#ffda88}
+
+/* The answer takes the spotlight; points and names follow, then a standings beat. */
+.ks-results-panel{margin:12px 0 5px}
+.ks-reveal{background:radial-gradient(ellipse at 45% 2%,#285d77 0,#153851 55%,#0b2943 100%);color:#fff7e4;border:2px solid #c5a05b;border-radius:19px;box-shadow:0 9px 27px #0e304434;overflow:hidden;position:relative;padding:clamp(18px,4vw,35px) clamp(14px,3vw,30px);min-height:300px}
+.ks-reveal:before{content:'';position:absolute;inset:8px;border:1px solid #f5c9682b;pointer-events:none;border-radius:11px}
+.ks-reveal-answer,.ks-reveal-standings{position:relative;z-index:1;animation:ks-reveal-enter .5s cubic-bezier(.18,.8,.24,1) both;text-align:center}
+.ks-reveal-kicker{color:#f5ce78!important;font-size:clamp(10px,2vw,12px);letter-spacing:.19em;font-weight:950;margin:1px 0 10px!important}
+.ks-reveal-answer h2{font-size:clamp(28px,7vw,52px);line-height:1.12;color:#fff7dc;letter-spacing:-.035em;text-shadow:0 3px 13px #030d1e7a;margin:4px 0 17px;overflow-wrap:anywhere}
+.ks-reveal-rule{width:90px;height:3px;border-radius:8px;background:#e9bf61;margin:0 auto 18px}
+.ks-reveal-players{display:grid;gap:8px;max-width:730px;margin:0 auto}.ks-reveal-player{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:11px;align-items:center;text-align:left;border:1px solid #7195a48c;border-radius:11px;padding:10px 12px;background:#ffffff10}
+.ks-reveal-mark{height:34px;width:34px;display:grid;place-items:center;border-radius:50%;color:#0d2e40;background:#9fe4bf}.ks-reveal-player.incorrect .ks-reveal-mark{color:#fff3e4;background:#bc5c4e}
+.ks-reveal-playername{font-weight:850;font-size:clamp(14px,3.1vw,20px);white-space:normal;overflow-wrap:anywhere}.ks-reveal-playername small{display:block;color:#d0e1e8;font-size:11px;font-weight:550;margin-top:2px}
+.ks-reveal-player>strong{font-size:clamp(16px,3.2vw,22px);color:#ffdf91;font-variant-numeric:tabular-nums;white-space:nowrap}.ks-reveal-player>strong small{font-size:.6em;color:#e5d9be}
+.ks-reveal-standings h2{font-size:clamp(27px,6vw,43px);color:#fff8e4;margin:3px 0 22px}.ks-reveal-standings .v2scores{max-width:800px;margin:0 auto}.ks-reveal-standings .v2score{background:#eff5f1;border:1px solid #c2d5d1;border-radius:9px;padding:10px;margin-bottom:6px}.ks-reveal-next{font-weight:850;color:#f7d68d;margin:17px 0 0;font-size:13px}
+.ks-review-message{color:#ffe0a3;font-size:14px;font-weight:850;margin:12px}
+.ks-dispute-button{display:block;margin:12px auto 4px;background:#fff9ed;color:#19415a;border:1px solid #d6bb7b;border-radius:10px;padding:10px 15px;font-weight:800;cursor:pointer}.ks-dispute-button:disabled{opacity:.55;cursor:not-allowed}
+.v2tvstage:has(.ks-reveal){padding:0}.v2tvmain>.ks-reveal{max-width:100%;margin:0 auto}.v2tvmain>.ks-reveal .ks-reveal-player{padding:12px 17px}
+@keyframes ks-reveal-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.ks-reveal-answer,.ks-reveal-standings{animation:none}.v2board .v2tile{transition:none}}

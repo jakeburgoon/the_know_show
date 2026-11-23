@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check, CircleHelp, Clapperboard, Copy, MonitorPlay, Smartphone, Sparkles, Ticket, Users } from 'lucide-react';
+import QRJoinScanner from '@/components/QRJoinScanner';
 
 export default function Home() {
   const router=useRouter();
@@ -13,7 +14,7 @@ export default function Home() {
   async function createRoom(){
     setBusy(true);setError('');
     try{
-      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode,recentQuestionIds:JSON.parse(localStorage.getItem('knowshow:recentQuestionIds')||'[]')})});
+      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode,recentQuestionIds:JSON.parse(localStorage.getItem('knowshow:recentQuestionIds')||'[]'),recentCategoryIds:JSON.parse(localStorage.getItem('knowshow:recentCategoryIds')||'[]'),recentCategoryOffers:JSON.parse(localStorage.getItem('knowshow:recentCategoryOffers')||'[]')})});
       const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not create room.');
       localStorage.setItem(`knowshow:${data.code}:host`,data.token);
       router.push(`/room/${data.code}`);
@@ -48,14 +49,14 @@ export default function Home() {
         </section>
         <section className="v11entrycard v11joincard" aria-labelledby="v11joinheading"><div className="v11cardtop"><div className="v11cardicon"><Ticket size={24}/></div><span className="v11steplabel">02 / PLAYER</span></div>
           <h3 id="v11joinheading">Join a show</h3><p>Usually you’ll scan the host’s QR code. Have a code? Join here.</p>
-          <label htmlFor="room-code" className="v11fieldlabel">Room code (if you can’t scan)</label>
+          <QRJoinScanner onJoin={joinCode=>router.push(`/room/${joinCode}`)}/><div className="ks-manual-join"><label htmlFor="room-code" className="v11fieldlabel">Or enter a six-character room code</label>
           <input id="room-code" className="v11field v11codefield" autoCapitalize="characters" value={code} onChange={e=>setCode(e.target.value.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6))} onKeyDown={e=>{if(e.key==='Enter')goToRoom();}} placeholder="ABC234" maxLength={6}/>
-          <button type="button" className="v11action v11actionnavy" onClick={goToRoom}>Enter the room <ArrowRight size={19}/></button>
+          <button type="button" className="v11action v11actionnavy" onClick={goToRoom}>Join with code <ArrowRight size={19}/></button></div>
         </section>
       </div>
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
     <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
-    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.4.0</span></footer>
+    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.5.0</span></footer>
   </main>;
 }

@@ -16,8 +16,8 @@ function finishRound(s,a,start=20000){for(let i=0;i<12;i++){const key=keys(s).fi
    assert.equal(s.phase,'results');s=g.tick(s,s.resolution.endsAt+10);
  }return s;}
 
-test('the Standard bank has exactly 45 categories and 540 balanced questions',()=>{
- assert.equal(bank.CATEGORIES.length,45);assert.equal(bank.QUESTION_LOOKUP.size,540);
+test('the Standard bank has 45 year-round categories plus 11 seasonal categories, 672 balanced questions',()=>{
+ assert.equal(bank.CATEGORIES.length,56);assert.equal(bank.QUESTION_LOOKUP.size,672);
  for(const c of bank.CATEGORIES){assert.ok(c.description.length>5);assert.deepEqual(Object.keys(c.questionsByLevel).sort(),['1','2','3']);
   for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
  }
@@ -199,8 +199,8 @@ test('replay tracker prefers unseen questions, within and between game rooms',()
  assert.equal(other.s.phase,'board');assert.notEqual(other.s.questionMap[`${id}:0`],chosen);
 });
 test('creating a new game in the same room carries the already-played history',()=>{
- let {s,a}=setup(2);s.phase='finished';s.recentQuestionIds=['example-history-id'];const next=g.mutate(s,{type:'new-game'},host,3000);
- assert.deepEqual(next.recentQuestionIds,['example-history-id']);assert.equal(next.players[0].doubleTakesRemaining,1);
+ let {s,a}=setup(2);s.phase='finished';s.recentQuestionIds=[bank.CATEGORIES[0].questionsByLevel['1'][0].id];const next=g.mutate(s,{type:'new-game'},host,3000);
+ assert.deepEqual(next.recentQuestionIds,[bank.CATEGORIES[0].questionsByLevel['1'][0].id]);assert.equal(next.players[0].doubleTakesRemaining,1);
 });
 test('host can be a player on the same device without player/host credential mixing',()=>{
  const device=require('../.engine-build/device-session.js');assert.equal(device.actorToken('host',{hostToken:'host-key',playerToken:'player-key'}),'host-key');
@@ -280,4 +280,163 @@ test('Final Word saved draft is automatically scored at zero without requiring L
  assert.equal(s.final.answers[a[0].id].correct,true);
  assert.equal(s.final.answers[a[1].id].correct,false);
  assert.equal(s.final.answers[a[0].id].answerFormat,'written');
+});
+
+test('every Final Word question has three distinct, private, ordered hints',()=>{
+ assert.equal(bank.FINALS.length,18);
+ for(const q of bank.FINALS){
+   assert.equal(q.hints.length,3,q.id);
+   assert.equal(new Set(q.hints.map(h=>h.trim().toLowerCase())).size,3,q.id);
+   for(const h of q.hints)assert.ok(h.length>=12,`${q.id} has a very short clue`);
+ }
+});
+test('final hints are purchasable for 500 points only before wagering and deduct immediately',()=>{
+ let {s,a}=setup(2);s.players[0].score=1100;s.players[0].hintsRemaining=1;
+ s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
+ let v=g.makeView(s,a[0],1,10000);assert.equal(v.final.myPurchasableHints,2);
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],10001);
+ assert.equal(s.players[0].score,600);assert.equal(s.final.purchasedHints[a[0].id],1);
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],10002);
+ assert.equal(s.players[0].score,100);assert.equal(g.makeView(s,a[0],1,10002).final.myPurchasableHints,0);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10003),/three Final Word hints/);
+ assert.throws(()=>g.mutate(s,{type:'wager',amount:101},a[0],10004),/Wager must/);
+ s=g.mutate(s,{type:'wager',amount:100},a[0],10005);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10006),/before locking/);
+ s=g.mutate(s,{type:'wager',amount:0},a[1],10007);
+ assert.equal(s.phase,'final-question');
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10008),/purchases are closed/);
+});
+test('a Final Word hint cannot be purchased when the player lacks 500 points',()=>{
+ let {s,a}=setup(2);s.players[0].score=499;s.players[0].hintsRemaining=0;
+ s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],4000),/at least 500/);
+ assert.equal(s.players[0].score,499);
+});
+test('free remaining hints are used first, purchased hints next, and only three can be revealed',()=>{
+ let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=0;
+ s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
+ for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
+ s=g.mutate(s,{type:'wager',amount:500},a[0],4000);
+ s=g.mutate(s,{type:'wager',amount:0},a[1],4001);
+ let v=g.makeView(s,a[0],1,4050);assert.equal(v.final.myRevealedHints.length,0);
+ assert.equal(v.final.myAvailableHints,3);
+ for(let i=0;i<3;i++){
+   s=g.mutate(s,{type:'final-hint'},a[0],4100+i);
+   v=g.makeView(s,a[0],1,4200+i);
+   assert.deepEqual(v.final.myRevealedHints,bank.FINALS.find(q=>q.id==='f15').hints.slice(0,i+1));
+   assert.equal(v.final.myAvailableHints,2-i);
+   assert.deepEqual(g.makeView(s,a[1],1,4250+i).final.myRevealedHints,[]);
+   assert.deepEqual(g.makeView(s,host,1,4250+i).final.myRevealedHints,[]);
+ }
+ assert.equal(s.players[0].hintsRemaining,0);
+ assert.equal(s.final.purchasedHintsUsed[a[0].id],2);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4300),/three hints/);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[1],4300),/No Final Word hints remaining/);
+ s=g.mutate(s,{type:'final-answer',answer:'Gabriel García Márquez'},a[0],4500);
+ assert.equal(s.final.answers[a[0].id].hintUsed,true);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4600),/already locked/);
+});
+test('players with three remaining hints cannot purchase more, while players with none can buy three',()=>{
+ let {s,a}=setup(2);s.phase='final-wager';s.final={id:'f12',wagers:{},answers:{},disputeIds:[]};
+ s.players[0].score=2000;s.players[0].hintsRemaining=5;
+ assert.equal(g.makeView(s,a[0],1,5000).final.myPurchasableHints,0);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],5000),/three Final Word hints/);
+ s.players[1].score=1600;s.players[1].hintsRemaining=0;
+ for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[1],5001+i);
+ assert.equal(s.players[1].score,100);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5005),/three Final Word hints/);
+});
+test('Final Word hints respect the deadline, and draft auto-submission remembers hint use',()=>{
+ let {s,a}=setup(2);s.players[0].hintsRemaining=1;
+ s.phase='final-wager';s.final={id:'f7',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'wager',amount:0},a[0],8000);s=g.mutate(s,{type:'wager',amount:0},a[1],8001);
+ s=g.mutate(s,{type:'final-hint'},a[0],8100);
+ const due=s.final.deadlineAt;
+ s=g.mutate(s,{type:'save-draft',scope:'final',answer:'antonym'},a[0],due-100);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],due+1),/not available|expired/);
+ s=g.tick(s,due);
+ assert.equal(s.phase,'final-results');assert.equal(s.final.answers[a[0].id].correct,true);
+ assert.equal(s.final.answers[a[0].id].hintUsed,true);
+});
+
+
+test('seasonal availability follows the Eastern date, keeping all 45 year-round categories eligible',()=>{
+ const cases=[
+  ['2026-11-23T15:00:00Z',['thanksgiving','christmas-movies','christmas-music','veterans-military','native-american','harvest-time','college-football'],['winter-olympics','winter-traditions','winter-holidays','new-years']],
+  ['2026-12-20T15:00:00Z',['christmas-movies','christmas-music','winter-olympics','winter-traditions','winter-holidays','new-years'],['thanksgiving','veterans-military','native-american','harvest-time','college-football']],
+  ['2027-01-15T15:00:00Z',['winter-olympics','winter-traditions','winter-holidays','new-years'],['thanksgiving','christmas-movies','christmas-music','veterans-military','native-american']],
+  ['2027-02-15T15:00:00Z',['winter-olympics','winter-traditions','winter-holidays'],['thanksgiving','christmas-movies','christmas-music','new-years','harvest-time']],
+  ['2027-03-15T15:00:00Z',[],['thanksgiving','christmas-movies','christmas-music','winter-olympics','winter-traditions','winter-holidays','new-years','veterans-military','native-american','harvest-time','college-football']],
+  ['2027-09-15T15:00:00Z',['harvest-time','college-football'],['christmas-movies','native-american','veterans-military']],
+  ['2027-10-15T15:00:00Z',['harvest-time','college-football'],['thanksgiving','native-american','veterans-military']]
+ ];
+ const seasonalIds=new Set(bank.CATEGORIES.filter(c=>c.activeMonths).map(c=>c.id));
+ for(const [date,active,off] of cases){const ids=new Set(bank.availableCategories(new Date(date)).map(c=>c.id));
+  for(const id of active)assert.ok(ids.has(id),`${id} should appear on ${date}`);
+  for(const id of off)assert.equal(ids.has(id),false,`${id} should not appear on ${date}`);
+  assert.equal([...ids].filter(id=>!seasonalIds.has(id)).length,45);
+ }
+ // Eastern date rather than UTC date determines the season boundary.
+ assert.ok(bank.availableCategories(new Date('2026-12-01T03:00:00Z')).some(c=>c.id==='thanksgiving'));
+ assert.ok(!bank.availableCategories(new Date('2026-12-01T06:00:00Z')).some(c=>c.id==='thanksgiving'));
+});
+
+test('draft pools never include seasonal categories outside their permitted months',()=>{
+ for(const date of ['2026-11-23','2026-12-23','2027-01-23','2027-02-23','2027-03-23']){
+  const {s,a}=setup(2);const now=Date.parse(date+'T16:00:00Z');
+  const started=g.mutate(s,{type:'start-draft'},host,now);
+  const allowed=new Set(bank.availableCategories(new Date(now)).map(c=>c.id));
+  for(const id of started.draftPool)assert.ok(allowed.has(id),`${id} not permitted on ${date}`);
+ }
+});
+
+test('seasonal distractors are unique, not accepted as answers, and season hints are present',()=>{
+ const seasonal=bank.CATEGORIES.filter(c=>c.activeMonths);
+ assert.equal(seasonal.length,11);
+ for(const category of seasonal){assert.equal(Object.values(category.questionsByLevel).flat().length,12);
+  for(const q of Object.values(category.questionsByLevel).flat()){
+   const opts=[q.answer,...q.distractors];assert.equal(new Set(opts.map(o=>o.toLowerCase())).size,4,q.id);
+   assert.equal(q.distractors.length,3,q.id);
+   assert.ok(q.hint.length>12,q.id);
+   assert.equal(q.hint.toLowerCase().includes(q.answer.toLowerCase()),false,`${q.id} hint gives away answer`);
+   for(const d of q.distractors){assert.equal(q.aliases.some(a=>a.toLowerCase()===d.toLowerCase()),false,`${q.id} matches alias`);assert.equal(g.isCorrectForQuestion(d,q),false,`${q.id}: ${d}`);}
+  }
+ }
+});
+
+test('each Build the Board draft offers one eligible seasonal and nonseasonal choices',()=>{
+ for(const date of ['2026-09-23','2026-11-23','2026-12-23','2027-01-23','2027-02-23']){
+  let {s,a}=setup(4);const now=Date.parse(date+'T16:00:00Z');
+  s=g.mutate(s,{type:'start-draft'},host,now);
+  assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1,`one seasonal: ${date}`);
+  assert.equal(s.draftPool.length,9);
+  assert.equal(s.draftPool.filter(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths).length,8,`eight classics: ${date}`);
+  const season1=s.draftPool.find(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
+  // Simulate four selections (including the seasonal one), so round two excludes those picks.
+  s.selected[0]=[season1,...s.draftPool.filter(id=>id!==season1).slice(0,3)];
+  s.round=1;s.phase='lobby';s=g.mutate(s,{type:'start-draft'},host,now+10000);
+  assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1,`second seasonal: ${date}`);
+  assert.ok(!s.draftPool.includes(season1),`do not repeat selected season: ${date}`);
+ }
+});
+
+test('seasonal offer is mandatory even when every seasonal category was recently offered or played',()=>{
+ let {s,a}=setup(3);const now=Date.parse('2026-11-23T16:00:00Z');
+ const seasonal=bank.availableCategories(new Date(now)).filter(c=>c.activeMonths).map(c=>c.id);
+ s.recentCategoryIds=[...seasonal];s.recentCategoryOffers=[...seasonal];
+ s=g.mutate(s,{type:'start-draft'},host,now);
+ const offered=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
+ assert.equal(offered.length,1);
+ assert.equal(offered[0],seasonal[0]); // Oldest offered is first back in rotation.
+ assert.equal(s.draftPool.length,7);
+ s.selected[0]=[offered[0],...s.draftPool.filter(id=>id!==offered[0]).slice(0,3)];s.round=1;s.phase='lobby';
+ s=g.mutate(s,{type:'start-draft'},host,now+10000);
+ const offered2=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
+ assert.equal(offered2.length,1);
+ assert.notEqual(offered2[0],offered[0]);
+});
+
+test('out-of-season months do not falsely offer holiday categories',()=>{
+ let {s}=setup(3);s=g.mutate(s,{type:'start-draft'},host,Date.parse('2027-03-23T15:00:00Z'));
+ assert.ok(s.draftPool.every(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths));
 });

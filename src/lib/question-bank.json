@@ -1,11 +1,11 @@
 {
-  "version": "v1.3.0-curated-choices-and-curtain-call",
+  "version": "1.5.0",
   "difficultyLevels": [
     "Easy",
     "Medium",
     "Hard"
   ],
-  "source": "QA5 editorial candidates; not all items independently source verified",
+  "source": "Original 540-question bank; 84 earlier seasonal + 48 additional seasonal questions.",
   "categories": [
     {
       "id": "space",
@@ -10093,6 +10093,2536 @@
               "Pupation",
               "Metamorphosis",
               "Eclosion"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "thanksgiving",
+      "name": "Thanksgiving Traditions",
+      "description": "Feasts, parades, people, and the history behind the American holiday.",
+      "type": "creative",
+      "activeMonths": [
+        11
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-thanksgiving-1-1",
+            "level": 1,
+            "prompt": "Which bird is traditionally the centerpiece of many U.S. Thanksgiving dinners?",
+            "answer": "Turkey",
+            "aliases": [],
+            "hint": "This native North American bird is known for its fan-shaped tail.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Goose",
+              "Duck",
+              "Chicken"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-1-2",
+            "level": 1,
+            "prompt": "Which tart red berry is commonly turned into a sauce for Thanksgiving dinner?",
+            "answer": "Cranberry",
+            "aliases": [],
+            "hint": "This fruit is often grown in low, wet beds called bogs.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Lingonberry",
+              "Red currant",
+              "Raspberry"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-1-3",
+            "level": 1,
+            "prompt": "Which squash lends its name to a popular orange Thanksgiving pie?",
+            "answer": "Pumpkin",
+            "aliases": [],
+            "hint": "This crop is also carved into lanterns in October.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Butternut squash",
+              "Acorn squash",
+              "Kabocha squash"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-1-4",
+            "level": 1,
+            "prompt": "Which New York parade is famous for its giant character balloons on Thanksgiving morning?",
+            "answer": "Macy's Thanksgiving Day Parade",
+            "aliases": [
+              "Macys Thanksgiving Day Parade"
+            ],
+            "hint": "It is named for a major department store.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Philadelphia Thanksgiving Day Parade",
+              "America's Thanksgiving Parade",
+              "Chicago Thanksgiving Parade"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-thanksgiving-2-1",
+            "level": 2,
+            "prompt": "Which colony hosted the 1621 harvest gathering often associated with the Thanksgiving story?",
+            "answer": "Plymouth Colony",
+            "aliases": [
+              "Plymouth"
+            ],
+            "hint": "Its settlers arrived on the Mayflower.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Jamestown",
+              "Massachusetts Bay Colony",
+              "Roanoke Colony"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-2-2",
+            "level": 2,
+            "prompt": "Which Native American nation participated in that 1621 harvest gathering with Plymouth colonists?",
+            "answer": "Wampanoag",
+            "aliases": [],
+            "hint": "This nation lived in and around what is now southeastern Massachusetts.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Narragansett",
+              "Pequot",
+              "Massachusett"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-2-3",
+            "level": 2,
+            "prompt": "Which U.S. president issued an 1863 proclamation encouraging a national Thanksgiving observance?",
+            "answer": "Abraham Lincoln",
+            "aliases": [
+              "Lincoln"
+            ],
+            "hint": "His presidency took place during the American Civil War.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "George Washington",
+              "James Madison",
+              "Theodore Roosevelt"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-2-4",
+            "level": 2,
+            "prompt": "Which president signed the 1941 law fixing Thanksgiving on November's fourth Thursday?",
+            "answer": "Franklin D. Roosevelt",
+            "aliases": [
+              "FDR",
+              "Franklin Roosevelt"
+            ],
+            "hint": "He was president when the United States entered World War II.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Herbert Hoover",
+              "Harry S. Truman",
+              "Woodrow Wilson"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-thanksgiving-3-1",
+            "level": 3,
+            "prompt": "Which magazine editor campaigned for a national Thanksgiving and wrote to President Lincoln?",
+            "answer": "Sarah Josepha Hale",
+            "aliases": [],
+            "hint": "She edited Godey's Lady's Book.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Margaret Fuller",
+              "Ida B. Wells",
+              "Elizabeth Cady Stanton"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-3-2",
+            "level": 3,
+            "prompt": "Which cartoon character appeared as Macy's first famous giant character balloon in 1927?",
+            "answer": "Felix the Cat",
+            "aliases": [
+              "Felix"
+            ],
+            "hint": "This black-and-white animated cat predates Mickey Mouse.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "Mickey Mouse",
+              "Popeye",
+              "Snoopy"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-3-3",
+            "level": 3,
+            "prompt": "In what year did the first Macy's Thanksgiving Day Parade take place?",
+            "answer": "1924",
+            "aliases": [],
+            "hint": "The parade began during the 1920s, before giant balloons were introduced.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "1920",
+              "1927",
+              "1931"
+            ]
+          },
+          {
+            "id": "season-thanksgiving-3-4",
+            "level": 3,
+            "prompt": "Which Plymouth colonist described the 1621 harvest gathering in a letter included in Mourt's Relation?",
+            "answer": "Edward Winslow",
+            "aliases": [
+              "Winslow"
+            ],
+            "hint": "He later served as governor of Plymouth Colony.",
+            "categoryId": "thanksgiving",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.nps.gov/liho/learn/historyculture/lincoln-and-thanksgiving.htm",
+            "distractors": [
+              "William Bradford",
+              "Myles Standish",
+              "John Carver"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "christmas-movies",
+      "name": "Christmas Movies",
+      "description": "Beloved holiday films, characters, casts, and cinema classics.",
+      "type": "creative",
+      "activeMonths": [
+        11,
+        12
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-christmas-movies-1-1",
+            "level": 1,
+            "prompt": "In Home Alone, what is the first name of the boy accidentally left behind?",
+            "answer": "Kevin",
+            "aliases": [
+              "Kevin McCallister"
+            ],
+            "hint": "The character's last name is McCallister.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Buzz",
+              "Fuller",
+              "Peter"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-1-2",
+            "level": 1,
+            "prompt": "Which actor plays Buddy the Elf in Elf (2003)?",
+            "answer": "Will Ferrell",
+            "aliases": [],
+            "hint": "He also starred in Anchorman.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Jim Carrey",
+              "Ben Stiller",
+              "Adam Sandler"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-1-3",
+            "level": 1,
+            "prompt": "What is the name of the town where the Whos live in How the Grinch Stole Christmas?",
+            "answer": "Whoville",
+            "aliases": [],
+            "hint": "Its residents have a name that sounds like a question word.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Halloweentown",
+              "Arendelle",
+              "Bedford Falls"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-1-4",
+            "level": 1,
+            "prompt": "In The Polar Express, where does the train take its passengers?",
+            "answer": "North Pole",
+            "aliases": [
+              "The North Pole"
+            ],
+            "hint": "Its destination is associated with Santa's workshop.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "South Pole",
+              "Lapland",
+              "Alaska"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-christmas-movies-2-1",
+            "level": 2,
+            "prompt": "What is the first name of the father played by Chevy Chase in Christmas Vacation?",
+            "answer": "Clark",
+            "aliases": [
+              "Clark Griswold"
+            ],
+            "hint": "His surname is Griswold.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Eddie",
+              "Rusty",
+              "Frank"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-2-2",
+            "level": 2,
+            "prompt": "What gift does Ralphie want in A Christmas Story?",
+            "answer": "Red Ryder BB gun",
+            "aliases": [
+              "Red Ryder",
+              "BB gun"
+            ],
+            "hint": "Adults warn that he might hurt his eye with it.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Lionel train set",
+              "Daisy air rifle",
+              "Schwinn bicycle"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-2-3",
+            "level": 2,
+            "prompt": "Who plays Scott Calvin in The Santa Clause (1994)?",
+            "answer": "Tim Allen",
+            "aliases": [],
+            "hint": "He also voiced Buzz Lightyear.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Chevy Chase",
+              "Robin Williams",
+              "John Candy"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-2-4",
+            "level": 2,
+            "prompt": "In It's a Wonderful Life, what is the first name of the angel who helps George Bailey?",
+            "answer": "Clarence",
+            "aliases": [
+              "Clarence Odbody"
+            ],
+            "hint": "His surname in the film is Odbody.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Gabriel",
+              "Michael",
+              "Raphael"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-christmas-movies-3-1",
+            "level": 3,
+            "prompt": "In the 1947 Miracle on 34th Street, which department store hires Kris Kringle to play Santa?",
+            "answer": "Macy's",
+            "aliases": [
+              "Macys"
+            ],
+            "hint": "It also sponsors a famous parade.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Gimbels",
+              "Bloomingdale's",
+              "Saks Fifth Avenue"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-3-2",
+            "level": 3,
+            "prompt": "Which Muppet plays Bob Cratchit in The Muppet Christmas Carol?",
+            "answer": "Kermit the Frog",
+            "aliases": [
+              "Kermit"
+            ],
+            "hint": "The character is green and is often seen with Miss Piggy.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Fozzie Bear",
+              "Gonzo",
+              "Rizzo the Rat"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-3-3",
+            "level": 3,
+            "prompt": "Which 1954 holiday film stars Bing Crosby and Danny Kaye as former soldiers who become entertainers?",
+            "answer": "White Christmas",
+            "aliases": [],
+            "hint": "Its title shares the name of a famous Irving Berlin song.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Holiday Inn",
+              "Christmas in Connecticut",
+              "Meet Me in St. Louis"
+            ]
+          },
+          {
+            "id": "season-christmas-movies-3-4",
+            "level": 3,
+            "prompt": "Who provides Jack Skellington's singing voice in The Nightmare Before Christmas?",
+            "answer": "Danny Elfman",
+            "aliases": [],
+            "hint": "He also composed the movie's music.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Chris Sarandon",
+              "Ken Page",
+              "Paul Reubens"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "christmas-music",
+      "name": "Christmas Music",
+      "description": "Holiday hits, carols, composers, and festive recordings.",
+      "type": "creative",
+      "activeMonths": [
+        11,
+        12
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-christmas-music-1-1",
+            "level": 1,
+            "prompt": "Who recorded the 1994 holiday hit All I Want for Christmas Is You?",
+            "answer": "Mariah Carey",
+            "aliases": [],
+            "hint": "The singer's album was called Merry Christmas.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Celine Dion",
+              "Whitney Houston",
+              "Christina Aguilera"
+            ]
+          },
+          {
+            "id": "season-christmas-music-1-2",
+            "level": 1,
+            "prompt": "Which seasonal song tells the story of a snowman brought to life by a magical hat?",
+            "answer": "Frosty the Snowman",
+            "aliases": [
+              "Frosty"
+            ],
+            "hint": "The title includes the snowman's name.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Rudolph the Red-Nosed Reindeer",
+              "Jingle Bells",
+              "Here Comes Santa Claus"
+            ]
+          },
+          {
+            "id": "season-christmas-music-1-3",
+            "level": 1,
+            "prompt": "Which holiday song is about a reindeer whose nose helps guide Santa's sleigh?",
+            "answer": "Rudolph the Red-Nosed Reindeer",
+            "aliases": [
+              "Rudolph"
+            ],
+            "hint": "The title names the character known for his red nose.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Run Rudolph Run",
+              "Here Comes Santa Claus",
+              "Grandma Got Run Over by a Reindeer"
+            ]
+          },
+          {
+            "id": "season-christmas-music-1-4",
+            "level": 1,
+            "prompt": "Which singer popularized White Christmas in the 1942 movie Holiday Inn?",
+            "answer": "Bing Crosby",
+            "aliases": [],
+            "hint": "His best-known film partner was Bob Hope.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Frank Sinatra",
+              "Dean Martin",
+              "Nat King Cole"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-christmas-music-2-1",
+            "level": 2,
+            "prompt": "Which composer wrote the score for the ballet The Nutcracker?",
+            "answer": "Pyotr Ilyich Tchaikovsky",
+            "aliases": [
+              "Tchaikovsky"
+            ],
+            "hint": "This Russian composer also wrote Swan Lake.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Igor Stravinsky",
+              "Sergei Prokofiev",
+              "Nikolai Rimsky-Korsakov"
+            ]
+          },
+          {
+            "id": "season-christmas-music-2-2",
+            "level": 2,
+            "prompt": "Which traditional carol was originally performed in German as Stille Nacht?",
+            "answer": "Silent Night",
+            "aliases": [],
+            "hint": "It premiered in Austria in 1818.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "O Christmas Tree",
+              "Joy to the World",
+              "Hark! The Herald Angels Sing"
+            ]
+          },
+          {
+            "id": "season-christmas-music-2-3",
+            "level": 2,
+            "prompt": "What was the name of the charity supergroup behind the 1984 single Do They Know It's Christmas?",
+            "answer": "Band Aid",
+            "aliases": [],
+            "hint": "Its name is a pun on a first-aid supply.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "USA for Africa",
+              "Artists United Against Apartheid",
+              "Traveling Wilburys"
+            ]
+          },
+          {
+            "id": "season-christmas-music-2-4",
+            "level": 2,
+            "prompt": "Which holiday song did Brenda Lee first record in 1958?",
+            "answer": "Rockin' Around the Christmas Tree",
+            "aliases": [
+              "Rocking Around the Christmas Tree"
+            ],
+            "hint": "It describes dancing around a decorated evergreen.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Jingle Bell Rock",
+              "Blue Christmas",
+              "A Holly Jolly Christmas"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-christmas-music-3-1",
+            "level": 3,
+            "prompt": "Which Ukrainian composer arranged the melody of Shchedryk, later adapted into Carol of the Bells?",
+            "answer": "Mykola Leontovych",
+            "aliases": [
+              "Leontovych"
+            ],
+            "hint": "He composed and arranged Ukrainian choral music.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Mykola Lysenko",
+              "Aram Khachaturian",
+              "Sergei Rachmaninoff"
+            ]
+          },
+          {
+            "id": "season-christmas-music-3-2",
+            "level": 3,
+            "prompt": "Which singer introduced Have Yourself a Merry Little Christmas in the 1944 film Meet Me in St. Louis?",
+            "answer": "Judy Garland",
+            "aliases": [],
+            "hint": "She also played Dorothy in The Wizard of Oz.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Bing Crosby",
+              "Dinah Shore",
+              "Jo Stafford"
+            ]
+          },
+          {
+            "id": "season-christmas-music-3-3",
+            "level": 3,
+            "prompt": "Which holiday standard did Irving Berlin write for the 1942 film Holiday Inn?",
+            "answer": "White Christmas",
+            "aliases": [],
+            "hint": "Bing Crosby sang the original movie performance.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "The Christmas Song",
+              "Silver Bells",
+              "Have Yourself a Merry Little Christmas"
+            ]
+          },
+          {
+            "id": "season-christmas-music-3-4",
+            "level": 3,
+            "prompt": "Which jazz singer first recorded The Christmas Song commercially in 1946?",
+            "answer": "Nat King Cole",
+            "aliases": [
+              "Nat Cole"
+            ],
+            "hint": "He led a celebrated trio bearing his stage name.",
+            "categoryId": "christmas-music",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/",
+            "distractors": [
+              "Perry Como",
+              "Bing Crosby",
+              "Johnny Mathis"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "winter-holidays",
+      "name": "Winter Holidays",
+      "description": "Hanukkah, Kwanzaa, Lucia Day, and celebrations across cultures.",
+      "type": "creative",
+      "activeMonths": [
+        12,
+        1,
+        2
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-winter-holidays-1-1",
+            "level": 1,
+            "prompt": "How many nights does Hanukkah traditionally last?",
+            "answer": "Eight",
+            "aliases": [
+              "8"
+            ],
+            "hint": "The holiday's lamp has one light per night plus a helper.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Six",
+              "Seven",
+              "Nine"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-1-2",
+            "level": 1,
+            "prompt": "Which holiday celebrated from December 26 through January 1 highlights African American culture and seven principles?",
+            "answer": "Kwanzaa",
+            "aliases": [],
+            "hint": "It was established in the United States in the 1960s.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Hanukkah",
+              "Las Posadas",
+              "Diwali"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-1-3",
+            "level": 1,
+            "prompt": "What is the name of the lettered four-sided spinning top used in a traditional Hanukkah game?",
+            "answer": "Dreidel",
+            "aliases": [
+              "Dreydl"
+            ],
+            "hint": "The letters on its sides are Hebrew.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Perinola",
+              "Trompo",
+              "Beyblade"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-1-4",
+            "level": 1,
+            "prompt": "What is the name of the shortest daylight day of the year in the Northern Hemisphere?",
+            "answer": "Winter solstice",
+            "aliases": [
+              "December solstice"
+            ],
+            "hint": "It occurs around December 21.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Summer solstice",
+              "Spring equinox",
+              "Autumn equinox"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-winter-holidays-2-1",
+            "level": 2,
+            "prompt": "What is the name for the nine-branched lamp commonly used during Hanukkah?",
+            "answer": "Hanukkiah",
+            "aliases": [
+              "Hanukkah menorah",
+              "Chanukiah"
+            ],
+            "hint": "Eight branches represent the nights; one holds the helper candle.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Kinara",
+              "Advent wreath",
+              "Shabbat candlesticks"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-2-2",
+            "level": 2,
+            "prompt": "Which Kwanzaa principle is celebrated first, on December 26?",
+            "answer": "Umoja",
+            "aliases": [
+              "Unity"
+            ],
+            "hint": "Its English meaning is unity.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Kujichagulia",
+              "Ujima",
+              "Ujamaa"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-2-3",
+            "level": 2,
+            "prompt": "Which country is strongly associated with candlelit St. Lucia Day processions on December 13?",
+            "answer": "Sweden",
+            "aliases": [],
+            "hint": "The tradition is especially prominent in Stockholm.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Norway",
+              "Finland",
+              "Denmark"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-2-4",
+            "level": 2,
+            "prompt": "What are the fried potato pancakes frequently served during Hanukkah called?",
+            "answer": "Latkes",
+            "aliases": [
+              "Latke"
+            ],
+            "hint": "Their name comes from Yiddish, and they are often served with applesauce.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Knishes",
+              "Kugel",
+              "Blintzes"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-winter-holidays-3-1",
+            "level": 3,
+            "prompt": "Which calendar determines the dates of Hanukkah?",
+            "answer": "Hebrew calendar",
+            "aliases": [
+              "Jewish calendar"
+            ],
+            "hint": "It is a lunisolar calendar used to determine many Jewish holidays.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Gregorian calendar",
+              "Julian calendar",
+              "Islamic calendar"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-3-2",
+            "level": 3,
+            "prompt": "What is the name of the seven-candle holder used in Kwanzaa?",
+            "answer": "Kinara",
+            "aliases": [],
+            "hint": "It holds the mishumaa saba, the holiday's seven candles.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Hanukkiah",
+              "Advent wreath",
+              "Shabbat candlesticks"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-3-3",
+            "level": 3,
+            "prompt": "What is the Icelandic tradition of giving books at Christmas called?",
+            "answer": "Jólabókaflóð",
+            "aliases": [
+              "Jolabokaflod",
+              "Christmas Book Flood"
+            ],
+            "hint": "Its name is often translated as a 'Christmas book flood'.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Wassailing",
+              "Las Posadas",
+              "First-footing"
+            ]
+          },
+          {
+            "id": "season-winter-holidays-3-4",
+            "level": 3,
+            "prompt": "Which Scottish New Year's celebration includes traditions such as first-footing?",
+            "answer": "Hogmanay",
+            "aliases": [],
+            "hint": "The celebrations center on the evening of December 31.",
+            "categoryId": "winter-holidays",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.kwanzaa.org/learn.html",
+            "distractors": [
+              "Up Helly Aa",
+              "Beltane",
+              "Burns Night"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "winter-traditions",
+      "name": "Winter Traditions",
+      "description": "Wintertime customs, cozy rituals, ice, snow, and cold-weather curiosities.",
+      "type": "creative",
+      "activeMonths": [
+        12,
+        1,
+        2
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-winter-traditions-1-1",
+            "level": 1,
+            "prompt": "Which piece of winter footwear helps a person walk over deep snow by spreading their weight?",
+            "answer": "Snowshoes",
+            "aliases": [
+              "Snowshoe"
+            ],
+            "hint": "It is attached to a boot and has a broad frame.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Crampons",
+              "Ice skates",
+              "Cross-country skis"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-1-2",
+            "level": 1,
+            "prompt": "Which delicate six-sided ice crystal falls from winter clouds?",
+            "answer": "Snowflake",
+            "aliases": [],
+            "hint": "Its shape is usually symmetrical around six arms.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Hailstone",
+              "Graupel pellet",
+              "Ice pellet"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-1-3",
+            "level": 1,
+            "prompt": "Which warm drink is typically made from milk and cocoa or melted chocolate?",
+            "answer": "Hot chocolate",
+            "aliases": [
+              "Hot cocoa",
+              "Cocoa"
+            ],
+            "hint": "Marshmallows are a popular topping.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Chai latte",
+              "Hot apple cider",
+              "Eggnog"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-1-4",
+            "level": 1,
+            "prompt": "Which activity uses boots with metal blades to glide over a frozen rink?",
+            "answer": "Ice skating",
+            "aliases": [
+              "Skating"
+            ],
+            "hint": "It is the recreational version of what figure skaters do.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Roller skating",
+              "Cross-country skiing",
+              "Snowshoeing"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-winter-traditions-2-1",
+            "level": 2,
+            "prompt": "What is the Swedish term for a relaxed coffee break, often with something sweet?",
+            "answer": "Fika",
+            "aliases": [],
+            "hint": "A cinnamon bun often accompanies this ritual.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Hygge",
+              "Lagom",
+              "Sisu"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-2-2",
+            "level": 2,
+            "prompt": "What kind of dome-shaped snow shelter is traditionally constructed from packed snow blocks?",
+            "answer": "Igloo",
+            "aliases": [],
+            "hint": "The structure is built from blocks arranged in a spiral.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Quinzee",
+              "Snow cave",
+              "Ice hotel"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-2-3",
+            "level": 2,
+            "prompt": "Which Danish word describes a cozy, comfortable feeling often associated with winter evenings?",
+            "answer": "Hygge",
+            "aliases": [],
+            "hint": "It is often pronounced roughly 'HOO-guh'.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Lagom",
+              "Fika",
+              "Sisu"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-2-4",
+            "level": 2,
+            "prompt": "Which winter drink is made by heating wine with spices such as cinnamon and cloves?",
+            "answer": "Mulled wine",
+            "aliases": [
+              "Gluhwein",
+              "Glühwein"
+            ],
+            "hint": "It is often served at European Christmas markets.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Hot toddy",
+              "Eggnog",
+              "Irish coffee"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-winter-traditions-3-1",
+            "level": 3,
+            "prompt": "Which kind of ice forms when supercooled fog droplets freeze on exposed objects?",
+            "answer": "Rime ice",
+            "aliases": [],
+            "hint": "It often builds a white, feathery coating on branches.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Glaze ice",
+              "Frazil ice",
+              "Black ice"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-3-2",
+            "level": 3,
+            "prompt": "What is the traditional orchard custom of singing and toasting apple trees in midwinter?",
+            "answer": "Wassailing",
+            "aliases": [
+              "Wassail"
+            ],
+            "hint": "It is connected with cider-making communities.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Caroling",
+              "First-footing",
+              "Mumming"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-3-3",
+            "level": 3,
+            "prompt": "Which atmospheric optical phenomenon forms a ring around the Sun or Moon as ice crystals refract light?",
+            "answer": "22-degree halo",
+            "aliases": [
+              "22 degree halo",
+              "Halo"
+            ],
+            "hint": "The ring's apparent radius is about 22 degrees.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Sundog",
+              "Light pillar",
+              "Glory"
+            ]
+          },
+          {
+            "id": "season-winter-traditions-3-4",
+            "level": 3,
+            "prompt": "Which French term describes the social time spent relaxing after a day of skiing?",
+            "answer": "Après-ski",
+            "aliases": [
+              "Apres-ski",
+              "Apres ski"
+            ],
+            "hint": "The expression comes from France and refers to what happens once the slopes close.",
+            "categoryId": "winter-traditions",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.weather.gov/",
+            "distractors": [
+              "Fika",
+              "Hygge",
+              "Siesta"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "winter-olympics",
+      "name": "Winter Olympics",
+      "description": "Cold-weather sports, iconic venues, medalists, and Olympic history.",
+      "type": "creative",
+      "activeMonths": [
+        12,
+        1,
+        2
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-winter-olympics-1-1",
+            "level": 1,
+            "prompt": "Which Winter Olympic sport features skaters performing jumps and spins on ice to music?",
+            "answer": "Figure skating",
+            "aliases": [],
+            "hint": "Scores reward both technical elements and performance.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Speed skating",
+              "Short-track speed skating",
+              "Ice dance"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-1-2",
+            "level": 1,
+            "prompt": "Which Winter Olympic sport involves sliding stones toward a round target on ice?",
+            "answer": "Curling",
+            "aliases": [],
+            "hint": "Players sweep the ice in front of a moving stone.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Ice hockey",
+              "Bandy",
+              "Broomball"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-1-3",
+            "level": 1,
+            "prompt": "Which Winter Olympic sport sends two- or four-person sleds down an icy track?",
+            "answer": "Bobsleigh",
+            "aliases": [
+              "Bobsled"
+            ],
+            "hint": "A crew uses a steerable sled.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Luge",
+              "Skeleton",
+              "Snowboard cross"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-1-4",
+            "level": 1,
+            "prompt": "Which winter event combines skiing and rifle target shooting?",
+            "answer": "Biathlon",
+            "aliases": [],
+            "hint": "Missing a target can cost time or a penalty loop.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Nordic combined",
+              "Ski jumping",
+              "Ski mountaineering"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-winter-olympics-2-1",
+            "level": 2,
+            "prompt": "Which French resort town hosted the first Winter Olympics in 1924?",
+            "answer": "Chamonix",
+            "aliases": [],
+            "hint": "It lies near Mont Blanc.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Grenoble",
+              "Albertville",
+              "Annecy"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-2-2",
+            "level": 2,
+            "prompt": "Which country hosted the 1998 Winter Olympic Games in Nagano?",
+            "answer": "Japan",
+            "aliases": [],
+            "hint": "The host city's name is Nagano.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "South Korea",
+              "China",
+              "Norway"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-2-3",
+            "level": 2,
+            "prompt": "In which sledding sport do competitors race headfirst down an ice track?",
+            "answer": "Skeleton",
+            "aliases": [],
+            "hint": "Unlike luge, the rider travels on their stomach.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Luge",
+              "Bobsleigh",
+              "Tobogganing"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-2-4",
+            "level": 2,
+            "prompt": "Which Canadian city hosted the 2010 Winter Olympics?",
+            "answer": "Vancouver",
+            "aliases": [],
+            "hint": "It sits on Canada's Pacific coast.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Calgary",
+              "Montreal",
+              "Toronto"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-winter-olympics-3-1",
+            "level": 3,
+            "prompt": "Which winter sport made its Olympic debut at Nagano 1998?",
+            "answer": "Snowboarding",
+            "aliases": [],
+            "hint": "Competitors ride down snow using a single board.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Ski cross",
+              "Ski slopestyle",
+              "Freeski big air"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-3-2",
+            "level": 3,
+            "prompt": "Which Norwegian skater won three successive women's Olympic figure skating gold medals in 1928, 1932, and 1936?",
+            "answer": "Sonja Henie",
+            "aliases": [],
+            "hint": "She later pursued a career in Hollywood.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Katarina Witt",
+              "Peggy Fleming",
+              "Kristi Yamaguchi"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-3-3",
+            "level": 3,
+            "prompt": "Which U.S. city hosted the 2002 Winter Olympics?",
+            "answer": "Salt Lake City",
+            "aliases": [],
+            "hint": "It is the capital of Utah.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Lake Placid",
+              "Squaw Valley",
+              "Denver"
+            ]
+          },
+          {
+            "id": "season-winter-olympics-3-4",
+            "level": 3,
+            "prompt": "Which Winter Olympics were the first held on the new alternating schedule, two years after the previous Winter Games?",
+            "answer": "Lillehammer 1994",
+            "aliases": [
+              "1994 Lillehammer",
+              "1994 Winter Olympics"
+            ],
+            "hint": "The host nation was Norway.",
+            "categoryId": "winter-olympics",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.olympics.com/ioc/faq/history-and-origin-of-the-games/when-were-the-first-olympic-winter-games-held",
+            "distractors": [
+              "Albertville 1992",
+              "Nagano 1998",
+              "Salt Lake City 2002"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "new-years",
+      "name": "New Year Traditions",
+      "description": "Countdowns, calendars, songs, and New Year customs around the world.",
+      "type": "creative",
+      "activeMonths": [
+        12,
+        1
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-new-years-1-1",
+            "level": 1,
+            "prompt": "What illuminated object descends in Times Square at midnight on New Year's Eve?",
+            "answer": "A ball",
+            "aliases": [
+              "Ball",
+              "Times Square ball"
+            ],
+            "hint": "The tradition began in 1907.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "A bell",
+              "A star",
+              "A clock"
+            ]
+          },
+          {
+            "id": "season-new-years-1-2",
+            "level": 1,
+            "prompt": "Which month begins the Gregorian calendar year?",
+            "answer": "January",
+            "aliases": [],
+            "hint": "This month is named for the Roman god Janus.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "February",
+              "March",
+              "December"
+            ]
+          },
+          {
+            "id": "season-new-years-1-3",
+            "level": 1,
+            "prompt": "What is the calendar date of New Year's Eve in most countries using the Gregorian calendar?",
+            "answer": "December 31",
+            "aliases": [
+              "Dec 31",
+              "31 December"
+            ],
+            "hint": "It falls one day before January 1.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "December 30",
+              "January 1",
+              "January 2"
+            ]
+          },
+          {
+            "id": "season-new-years-1-4",
+            "level": 1,
+            "prompt": "In which U.S. city is the Times Square New Year's Eve countdown held?",
+            "answer": "New York City",
+            "aliases": [
+              "NYC",
+              "New York"
+            ],
+            "hint": "The celebration takes place in Manhattan.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Boston",
+              "Philadelphia",
+              "Chicago"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-new-years-2-1",
+            "level": 2,
+            "prompt": "Which planning term is usually used for a promise to improve a habit at the beginning of a new year?",
+            "answer": "New Year's resolution",
+            "aliases": [
+              "Resolution"
+            ],
+            "hint": "Examples include exercising more or reading more.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "New Year's toast",
+              "New Year's greeting",
+              "New Year's countdown"
+            ]
+          },
+          {
+            "id": "season-new-years-2-2",
+            "level": 2,
+            "prompt": "Which European country is known for eating twelve grapes at midnight on New Year's Eve?",
+            "answer": "Spain",
+            "aliases": [],
+            "hint": "Its capital is Madrid.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Portugal",
+              "Italy",
+              "France"
+            ]
+          },
+          {
+            "id": "season-new-years-2-3",
+            "level": 2,
+            "prompt": "Which Scottish song is traditionally sung at the turning of the year?",
+            "answer": "Auld Lang Syne",
+            "aliases": [],
+            "hint": "Its title translates roughly as 'old long since'.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Loch Lomond",
+              "Flower of Scotland",
+              "Scotland the Brave"
+            ]
+          },
+          {
+            "id": "season-new-years-2-4",
+            "level": 2,
+            "prompt": "Which animal is first in the twelve-year Chinese zodiac cycle?",
+            "answer": "Rat",
+            "aliases": [],
+            "hint": "The animal is said to have won a traditional zodiac race by riding on the ox.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Ox",
+              "Tiger",
+              "Rabbit"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-new-years-3-1",
+            "level": 3,
+            "prompt": "Which Japanese New Year's custom involves ringing a Buddhist temple bell 108 times?",
+            "answer": "Joya no Kane",
+            "aliases": [
+              "Joya no kane"
+            ],
+            "hint": "The ringing symbolizes clearing earthly desires.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Hatsumode",
+              "Otoshidama",
+              "Osechi ryori"
+            ]
+          },
+          {
+            "id": "season-new-years-3-2",
+            "level": 3,
+            "prompt": "In what year was the first Times Square New Year's Eve ball drop held?",
+            "answer": "1907",
+            "aliases": [],
+            "hint": "It began in the first decade of the twentieth century.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "1904",
+              "1910",
+              "1920"
+            ]
+          },
+          {
+            "id": "season-new-years-3-3",
+            "level": 3,
+            "prompt": "Which constituent country of the United Kingdom is most closely associated with Hogmanay and first-footing?",
+            "answer": "Scotland",
+            "aliases": [],
+            "hint": "Its capital is Edinburgh.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Wales",
+              "England",
+              "Northern Ireland"
+            ]
+          },
+          {
+            "id": "season-new-years-3-4",
+            "level": 3,
+            "prompt": "Which country celebrates Tết to mark the lunar new year?",
+            "answer": "Vietnam",
+            "aliases": [
+              "Viet Nam"
+            ],
+            "hint": "Hanoi is its capital.",
+            "categoryId": "new-years",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.britannica.com/topic/New-Years-Day",
+            "distractors": [
+              "Thailand",
+              "Cambodia",
+              "Malaysia"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "veterans-military",
+      "name": "Veterans Day & Military Traditions",
+      "description": "Service branches, commemorations, and military customs.",
+      "type": "creative",
+      "activeMonths": [
+        11
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-veterans-military-1-1",
+            "level": 1,
+            "prompt": "On what date is Veterans Day observed each year in the United States?",
+            "answer": "November 11",
+            "aliases": [
+              "Nov 11",
+              "11/11"
+            ],
+            "hint": "It recalls an armistice that took effect in 1918 at the eleventh hour.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://department.va.gov/veterans-day/history-of-veterans-day/",
+            "distractors": [
+              "November 10",
+              "November 12",
+              "May 30"
+            ]
+          },
+          {
+            "id": "season-veterans-military-1-2",
+            "level": 1,
+            "prompt": "Which U.S. military branch is best known for operating warships and submarines?",
+            "answer": "Navy",
+            "aliases": [
+              "U.S. Navy",
+              "US Navy"
+            ],
+            "hint": "Its service members include sailors and naval aviators.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.defense.gov/About/our-forces/",
+            "distractors": [
+              "Coast Guard",
+              "Army",
+              "Air Force"
+            ]
+          },
+          {
+            "id": "season-veterans-military-1-3",
+            "level": 1,
+            "prompt": "Which U.S. military branch focuses primarily on land-based combat operations?",
+            "answer": "Army",
+            "aliases": [
+              "U.S. Army",
+              "US Army"
+            ],
+            "hint": "It is the oldest and largest U.S. military service.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.army.mil/about/",
+            "distractors": [
+              "Navy",
+              "Air Force",
+              "Space Force"
+            ]
+          },
+          {
+            "id": "season-veterans-military-1-4",
+            "level": 1,
+            "prompt": "Which U.S. military branch uses the motto \"Semper Fidelis,\" meaning \"Always Faithful\"?",
+            "answer": "Marine Corps",
+            "aliases": [
+              "United States Marine Corps",
+              "U.S. Marine Corps",
+              "US Marine Corps",
+              "Marines"
+            ],
+            "hint": "This branch is famous for the Eagle, Globe, and Anchor emblem.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.marines.mil/News/News-Display/Article/2410644/happy-birthday-and-semper-fidelis-marines/",
+            "distractors": [
+              "Navy",
+              "Coast Guard",
+              "Army"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-veterans-military-2-1",
+            "level": 2,
+            "prompt": "What was Veterans Day called before its name was changed in 1954?",
+            "answer": "Armistice Day",
+            "aliases": [
+              "Armistice"
+            ],
+            "hint": "Its original name referred to the agreement that stopped World War I fighting.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://department.va.gov/veterans-day/history-of-veterans-day/",
+            "distractors": [
+              "Memorial Day",
+              "Decoration Day",
+              "Armed Forces Day"
+            ]
+          },
+          {
+            "id": "season-veterans-military-2-2",
+            "level": 2,
+            "prompt": "In what year did the federal holiday officially change its name from Armistice Day to Veterans Day?",
+            "answer": "1954",
+            "aliases": [
+              "Nineteen fifty four"
+            ],
+            "hint": "It happened during the Eisenhower administration.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://department.va.gov/veterans-day/history-of-veterans-day/",
+            "distractors": [
+              "1938",
+              "1947",
+              "1968"
+            ]
+          },
+          {
+            "id": "season-veterans-military-2-3",
+            "level": 2,
+            "prompt": "Which U.S. military branch was established in 2019?",
+            "answer": "Space Force",
+            "aliases": [
+              "U.S. Space Force",
+              "US Space Force"
+            ],
+            "hint": "Its responsibilities include protecting military satellites and space operations.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.spaceforce.mil/about-us/about-space-force/history/",
+            "distractors": [
+              "Air Force",
+              "Coast Guard",
+              "Marine Corps"
+            ]
+          },
+          {
+            "id": "season-veterans-military-2-4",
+            "level": 2,
+            "prompt": "Which military bugle call is traditionally played at U.S. military funerals and memorial ceremonies?",
+            "answer": "Taps",
+            "aliases": [
+              "TAPS"
+            ],
+            "hint": "It is a slow, solemn tune, unlike the morning wake-up call.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier",
+            "distractors": [
+              "Reveille",
+              "To the Colors",
+              "Assembly"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-veterans-military-3-1",
+            "level": 3,
+            "prompt": "Which branch of the U.S. military uses the Latin motto \"Semper Paratus,\" meaning \"Always Ready\"?",
+            "answer": "Coast Guard",
+            "aliases": [
+              "U.S. Coast Guard",
+              "US Coast Guard"
+            ],
+            "hint": "The branch has major missions involving maritime search, rescue, and safety.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.history.uscg.mil/Browse-by-Topic/History-Heritage-Traditions/Semper-Paratus/",
+            "distractors": [
+              "Marine Corps",
+              "Navy",
+              "Air Force"
+            ]
+          },
+          {
+            "id": "season-veterans-military-3-2",
+            "level": 3,
+            "prompt": "Which cemetery hosts the national Veterans Day observance at the Tomb of the Unknown Soldier?",
+            "answer": "Arlington National Cemetery",
+            "aliases": [],
+            "hint": "It lies across the Potomac River from Washington, D.C.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://department.va.gov/veterans-day/history-of-veterans-day/",
+            "distractors": [
+              "Gettysburg National Cemetery",
+              "Fort Rosecrans National Cemetery",
+              "National Memorial Cemetery of the Pacific"
+            ]
+          },
+          {
+            "id": "season-veterans-military-3-3",
+            "level": 3,
+            "prompt": "Which Birmingham, Alabama, veteran organized a 1947 event honoring veterans of all U.S. wars, helping inspire modern Veterans Day?",
+            "answer": "Raymond Weeks",
+            "aliases": [
+              "Weeks"
+            ],
+            "hint": "President Reagan later honored him for his role in the holiday.",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://news.va.gov/125629/the-history-of-veterans-day/",
+            "distractors": [
+              "Alvin York",
+              "Audie Murphy",
+              "John J. Pershing"
+            ]
+          },
+          {
+            "id": "season-veterans-military-3-4",
+            "level": 3,
+            "prompt": "Which U.S. military academy is located in New London, Connecticut?",
+            "answer": "U.S. Coast Guard Academy",
+            "aliases": [
+              "United States Coast Guard Academy",
+              "Coast Guard Academy"
+            ],
+            "hint": "It trains officers for a service whose motto is \"Always Ready\".",
+            "categoryId": "veterans-military",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.uscga.edu/",
+            "distractors": [
+              "U.S. Naval Academy",
+              "U.S. Military Academy",
+              "U.S. Air Force Academy"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "native-american",
+      "name": "Native American History & Culture",
+      "description": "Indigenous nations, history, languages, innovations, and living traditions.",
+      "type": "creative",
+      "activeMonths": [
+        11
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-native-american-1-1",
+            "level": 1,
+            "prompt": "Which crop completes the traditional Three Sisters planting combination of corn, beans, and ___?",
+            "answer": "Squash",
+            "aliases": [
+              "Pumpkin",
+              "Squashes"
+            ],
+            "hint": "Its spreading leaves help shade the soil.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/nk360/Thanksgiving/sq2ss2.html",
+            "distractors": [
+              "Sunflowers",
+              "Potatoes",
+              "Tobacco"
+            ]
+          },
+          {
+            "id": "season-native-american-1-2",
+            "level": 1,
+            "prompt": "In the United States, which month is designated Native American Heritage Month?",
+            "answer": "November",
+            "aliases": [],
+            "hint": "The observance falls in the same month as Thanksgiving.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://nativeamericanheritagemonth.gov/",
+            "distractors": [
+              "October",
+              "September",
+              "December"
+            ]
+          },
+          {
+            "id": "season-native-american-1-3",
+            "level": 1,
+            "prompt": "Which Cherokee inventor created a syllabary that made it possible to write the Cherokee language?",
+            "answer": "Sequoyah",
+            "aliases": [
+              "George Guess"
+            ],
+            "hint": "The writing system was adopted by the Cherokee Nation in the 1820s.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/collections-search/object/yt_rSFAq3Z7a2g",
+            "distractors": [
+              "Sacagawea",
+              "Sitting Bull",
+              "Pocahontas"
+            ]
+          },
+          {
+            "id": "season-native-american-1-4",
+            "level": 1,
+            "prompt": "Which Indigenous peoples are particularly associated with the traditional adobe villages of the American Southwest?",
+            "answer": "Pueblo peoples",
+            "aliases": [
+              "Pueblo",
+              "Pueblos"
+            ],
+            "hint": "Their communities include places such as Taos and Acoma.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nps.gov/articles/000/pueblo-culture.htm",
+            "distractors": [
+              "Tlingit peoples",
+              "Haudenosaunee peoples",
+              "Inuit peoples"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-native-american-2-1",
+            "level": 2,
+            "prompt": "The Haudenosaunee Confederacy has its historic homeland primarily in which region of North America?",
+            "answer": "Northeastern Woodlands",
+            "aliases": [
+              "Northeast",
+              "Northeastern United States"
+            ],
+            "hint": "Its homelands include territory around present-day New York and Ontario.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/nk360/resources/Haudenosaunee-Guide-for-Educators.cshtml",
+            "distractors": [
+              "Great Plains",
+              "Pacific Northwest",
+              "Arctic Coast"
+            ]
+          },
+          {
+            "id": "season-native-american-2-2",
+            "level": 2,
+            "prompt": "Which Indigenous language was used by a famous group of U.S. Marine Code Talkers during World War II?",
+            "answer": "Navajo",
+            "aliases": [
+              "Diné Bizaad",
+              "Dine Bizaad"
+            ],
+            "hint": "The language is also called Diné Bizaad.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/nk360/code-talkers/code-talking/",
+            "distractors": [
+              "Comanche",
+              "Choctaw",
+              "Hopi"
+            ]
+          },
+          {
+            "id": "season-native-american-2-3",
+            "level": 2,
+            "prompt": "Cliff Palace at Mesa Verde was built by ancestors of which Indigenous peoples?",
+            "answer": "Pueblo peoples",
+            "aliases": [
+              "Ancestral Puebloans",
+              "Ancestral Pueblo peoples"
+            ],
+            "hint": "Descendant communities include multiple villages in today’s New Mexico and Arizona.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nps.gov/meve/learn/historyculture/cliff_palace.htm",
+            "distractors": [
+              "Hohokam peoples",
+              "Mississippian peoples",
+              "Hopewell peoples"
+            ]
+          },
+          {
+            "id": "season-native-american-2-4",
+            "level": 2,
+            "prompt": "Which Haudenosaunee cultural object uses shell beads to preserve agreements and convey important messages?",
+            "answer": "Wampum belt",
+            "aliases": [
+              "Wampum",
+              "Wampum belts"
+            ],
+            "hint": "It can have patterns woven from purple and white beads.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/nk360/resources/Haudenosaunee-Guide-for-Educators.cshtml",
+            "distractors": [
+              "Dreamcatcher",
+              "Totem pole",
+              "Medicine wheel"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-native-american-3-1",
+            "level": 3,
+            "prompt": "Which nation joined the five original nations to become the sixth nation of the Haudenosaunee Confederacy?",
+            "answer": "Tuscarora",
+            "aliases": [
+              "Tuscarora Nation"
+            ],
+            "hint": "It moved north after conflict in the Carolinas in the early 1700s.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/nk360/resources/Haudenosaunee-Guide-for-Educators.cshtml",
+            "distractors": [
+              "Oneida",
+              "Cayuga",
+              "Seneca"
+            ]
+          },
+          {
+            "id": "season-native-american-3-2",
+            "level": 3,
+            "prompt": "What kind of writing system did Sequoyah develop for the Cherokee language?",
+            "answer": "Syllabary",
+            "aliases": [
+              "A syllabary"
+            ],
+            "hint": "Its characters generally represent spoken syllables rather than single letters.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://americanindian.si.edu/collections-search/object/yt_rSFAq3Z7a2g",
+            "distractors": [
+              "Alphabet",
+              "Abjad",
+              "Logographic script"
+            ]
+          },
+          {
+            "id": "season-native-american-3-3",
+            "level": 3,
+            "prompt": "Which federal act of 1975 expanded tribal control over programs previously administered by the U.S. government?",
+            "answer": "Indian Self-Determination and Education Assistance Act",
+            "aliases": [
+              "Indian Self-Determination Act",
+              "ISDEAA"
+            ],
+            "hint": "Its title contains the phrase \"Self-Determination.\"",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.bia.gov/service/indian-self-determination",
+            "distractors": [
+              "Indian Reorganization Act",
+              "General Allotment Act",
+              "Indian Removal Act"
+            ]
+          },
+          {
+            "id": "season-native-american-3-4",
+            "level": 3,
+            "prompt": "Which ancestral culture built the monumental great houses at Chaco Canyon in present-day New Mexico?",
+            "answer": "Ancestral Pueblo peoples",
+            "aliases": [
+              "Ancestral Puebloans",
+              "Ancestral Pueblo"
+            ],
+            "hint": "It also has connections with later Pueblo communities across the Southwest.",
+            "categoryId": "native-american",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nps.gov/chcu/learn/historyculture/index.htm",
+            "distractors": [
+              "Hohokam peoples",
+              "Mississippian peoples",
+              "Adena peoples"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "harvest-time",
+      "name": "Harvest Time",
+      "description": "Farming, fall crops, and harvest celebrations around the world.",
+      "type": "creative",
+      "activeMonths": [
+        9,
+        10,
+        11
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-harvest-time-1-1",
+            "level": 1,
+            "prompt": "Which machine can cut, thresh, and clean grain in a single harvesting operation?",
+            "answer": "Combine harvester",
+            "aliases": [
+              "Combine",
+              "Combine machine"
+            ],
+            "hint": "Its name reflects the way it combines several jobs.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nal.usda.gov/",
+            "distractors": [
+              "Seed drill",
+              "Plow",
+              "Cultivator"
+            ]
+          },
+          {
+            "id": "season-harvest-time-1-2",
+            "level": 1,
+            "prompt": "Which fruit is commonly harvested from orchards in autumn and pressed into cider?",
+            "answer": "Apple",
+            "aliases": [
+              "Apples"
+            ],
+            "hint": "The finished drink is often sold fresh at fall farm markets.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.usapple.org/industry-at-a-glance",
+            "distractors": [
+              "Pear",
+              "Peach",
+              "Plum"
+            ]
+          },
+          {
+            "id": "season-harvest-time-1-3",
+            "level": 1,
+            "prompt": "Which grain crop produces large ears with rows of kernels?",
+            "answer": "Corn",
+            "aliases": [
+              "Maize"
+            ],
+            "hint": "Its stalks can be taller than a person by harvest time.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nal.usda.gov/collections/stories/corn",
+            "distractors": [
+              "Sorghum",
+              "Wheat",
+              "Millet"
+            ]
+          },
+          {
+            "id": "season-harvest-time-1-4",
+            "level": 1,
+            "prompt": "Which orange gourd-like crop is commonly grown for carving jack-o-lanterns in the fall?",
+            "answer": "Pumpkin",
+            "aliases": [
+              "Pumpkins"
+            ],
+            "hint": "Its hollowed shell can hold a candle or light.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nal.usda.gov/",
+            "distractors": [
+              "Acorn squash",
+              "Butternut squash",
+              "Kabocha squash"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-harvest-time-2-1",
+            "level": 2,
+            "prompt": "What is the agricultural term for separating edible grain from harvested stalks or husks?",
+            "answer": "Threshing",
+            "aliases": [
+              "Thresh"
+            ],
+            "hint": "This step often happens before chaff is blown away.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.britannica.com/technology/threshing",
+            "distractors": [
+              "Winnowing",
+              "Milling",
+              "Tilling"
+            ]
+          },
+          {
+            "id": "season-harvest-time-2-2",
+            "level": 2,
+            "prompt": "Which grain is widely grown in flooded fields called paddies?",
+            "answer": "Rice",
+            "aliases": [
+              "Paddy rice"
+            ],
+            "hint": "It is a staple grain throughout much of Asia.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.ers.usda.gov/topics/crops/rice/",
+            "distractors": [
+              "Barley",
+              "Rye",
+              "Oats"
+            ]
+          },
+          {
+            "id": "season-harvest-time-2-3",
+            "level": 2,
+            "prompt": "Which farming practice changes the crop grown in a field from season to season to support soil health?",
+            "answer": "Crop rotation",
+            "aliases": [
+              "Rotating crops"
+            ],
+            "hint": "A farmer might plant corn one year and soybeans the next.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nrcs.usda.gov/",
+            "distractors": [
+              "Monoculture",
+              "Intercropping",
+              "Strip cropping"
+            ]
+          },
+          {
+            "id": "season-harvest-time-2-4",
+            "level": 2,
+            "prompt": "Which harvest-related celebration is especially associated with Punjab and takes place in April?",
+            "answer": "Vaisakhi",
+            "aliases": [
+              "Baisakhi"
+            ],
+            "hint": "It is also an important date in Sikh history.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.britannica.com/topic/Vaisakhi",
+            "distractors": [
+              "Pongal",
+              "Onam",
+              "Lohri"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-harvest-time-3-1",
+            "level": 3,
+            "prompt": "Which Roman goddess of agriculture gave English the word \"cereal\"?",
+            "answer": "Ceres",
+            "aliases": [
+              "Ceres goddess"
+            ],
+            "hint": "Her Greek counterpart is Demeter.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.britannica.com/topic/Ceres-Roman-goddess",
+            "distractors": [
+              "Flora",
+              "Pomona",
+              "Vesta"
+            ]
+          },
+          {
+            "id": "season-harvest-time-3-2",
+            "level": 3,
+            "prompt": "Which treat is most strongly associated with East Asian Mid-Autumn Festival celebrations?",
+            "answer": "Mooncakes",
+            "aliases": [
+              "Mooncake"
+            ],
+            "hint": "Its round shape connects to the full moon.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://asia.si.edu/whats-on/events/celebrations/mid-autumn-festival/",
+            "distractors": [
+              "Pineapple cakes",
+              "Sesame balls",
+              "Rice crackers"
+            ]
+          },
+          {
+            "id": "season-harvest-time-3-3",
+            "level": 3,
+            "prompt": "Which berry crop is often harvested by flooding a field so ripe berries float to the surface?",
+            "answer": "Cranberries",
+            "aliases": [
+              "Cranberry"
+            ],
+            "hint": "The flooded growing areas are often called bogs.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.nal.usda.gov/collections/stories/cranberries",
+            "distractors": [
+              "Blueberries",
+              "Raspberries",
+              "Blackberries"
+            ]
+          },
+          {
+            "id": "season-harvest-time-3-4",
+            "level": 3,
+            "prompt": "Which 19th-century invention associated with Cyrus McCormick helped farmers cut grain much faster?",
+            "answer": "Mechanical reaper",
+            "aliases": [
+              "Reaper",
+              "Horse-drawn reaper"
+            ],
+            "hint": "It used a horse-drawn cutting mechanism before tractors became common.",
+            "categoryId": "harvest-time",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.britannica.com/biography/Cyrus-Hall-McCormick",
+            "distractors": [
+              "Cotton gin",
+              "Seed drill",
+              "Threshing machine"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "college-football",
+      "name": "College Football Traditions",
+      "description": "Rivalry games, mascots, trophies, and beloved game-day rituals.",
+      "type": "creative",
+      "activeMonths": [
+        9,
+        10,
+        11
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "season-college-football-1-1",
+            "level": 1,
+            "prompt": "Which team is Ohio State’s traditional opponent in the November rivalry known as \"The Game\"?",
+            "answer": "Michigan Wolverines",
+            "aliases": [
+              "Michigan",
+              "University of Michigan"
+            ],
+            "hint": "They meet in a rivalry between two neighboring states.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://ohiostatebuckeyes.com/",
+            "distractors": [
+              "Michigan State Spartans",
+              "Penn State Nittany Lions",
+              "Notre Dame Fighting Irish"
+            ]
+          },
+          {
+            "id": "season-college-football-1-2",
+            "level": 1,
+            "prompt": "Which university has a live bulldog mascot named Uga?",
+            "answer": "University of Georgia",
+            "aliases": [
+              "Georgia",
+              "Georgia Bulldogs"
+            ],
+            "hint": "Its teams play in the Southeastern Conference.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://georgiadogs.com/",
+            "distractors": [
+              "Mississippi State University",
+              "Fresno State University",
+              "Butler University"
+            ]
+          },
+          {
+            "id": "season-college-football-1-3",
+            "level": 1,
+            "prompt": "At which university is \"Roll Tide\" a famous football cheer?",
+            "answer": "University of Alabama",
+            "aliases": [
+              "Alabama",
+              "Alabama Crimson Tide"
+            ],
+            "hint": "Its team nickname includes Crimson.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://rolltide.com/",
+            "distractors": [
+              "Auburn University",
+              "University of Tennessee",
+              "University of Georgia"
+            ]
+          },
+          {
+            "id": "season-college-football-1-4",
+            "level": 1,
+            "prompt": "Which annual rivalry game features the U.S. Military Academy and U.S. Naval Academy football teams?",
+            "answer": "Army–Navy Game",
+            "aliases": [
+              "Army Navy Game",
+              "Army-Navy"
+            ],
+            "hint": "Its contestants represent two branches of the armed forces.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.armynavygame.com/",
+            "distractors": [
+              "Iron Bowl",
+              "Egg Bowl",
+              "Red River Rivalry"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "season-college-football-2-1",
+            "level": 2,
+            "prompt": "Which school plays Wisconsin for the rivalry trophy Paul Bunyan’s Axe?",
+            "answer": "University of Minnesota",
+            "aliases": [
+              "Minnesota",
+              "Minnesota Golden Gophers"
+            ],
+            "hint": "Its football team is nicknamed the Golden Gophers.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://fs.ncaa.org.s3.amazonaws.com/Docs/stats/football_records/Bowls.pdf",
+            "distractors": [
+              "University of Iowa",
+              "University of Nebraska",
+              "University of Michigan"
+            ]
+          },
+          {
+            "id": "season-college-football-2-2",
+            "level": 2,
+            "prompt": "Purdue and which other Big Ten school compete for the Old Oaken Bucket?",
+            "answer": "Indiana University",
+            "aliases": [
+              "Indiana",
+              "Indiana Hoosiers"
+            ],
+            "hint": "The rival is another public university in the same state.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://fs.ncaa.org.s3.amazonaws.com/Docs/stats/football_records/Bowls.pdf",
+            "distractors": [
+              "University of Illinois",
+              "Northwestern University",
+              "Michigan State University"
+            ]
+          },
+          {
+            "id": "season-college-football-2-3",
+            "level": 2,
+            "prompt": "Which university’s football team touches Howard’s Rock before running onto the field?",
+            "answer": "Clemson University",
+            "aliases": [
+              "Clemson",
+              "Clemson Tigers"
+            ],
+            "hint": "The tradition takes place at Memorial Stadium in South Carolina.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://clemsontigers.com/",
+            "distractors": [
+              "Auburn University",
+              "University of Tennessee",
+              "University of Alabama"
+            ]
+          },
+          {
+            "id": "season-college-football-2-4",
+            "level": 2,
+            "prompt": "Which Texas university is especially known for its \"12th Man\" football tradition?",
+            "answer": "Texas A&M University",
+            "aliases": [
+              "Texas A&M",
+              "Texas A and M"
+            ],
+            "hint": "Its fans stand ready to support the Aggies.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://12thman.com/",
+            "distractors": [
+              "University of Texas",
+              "Texas Tech University",
+              "Texas Christian University"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "season-college-football-3-1",
+            "level": 3,
+            "prompt": "The Little Brown Jug is a traditional rivalry trophy for Michigan and which other school?",
+            "answer": "University of Minnesota",
+            "aliases": [
+              "Minnesota",
+              "Minnesota Golden Gophers"
+            ],
+            "hint": "Its team nickname is the Golden Gophers.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://mgoblue.com/news/2010/2/19/Michigan_Football_Traditions",
+            "distractors": [
+              "University of Wisconsin",
+              "University of Iowa",
+              "Michigan State University"
+            ]
+          },
+          {
+            "id": "season-college-football-3-2",
+            "level": 3,
+            "prompt": "At Ohio State, which marching-band musician traditionally \"dots the i\" in Script Ohio?",
+            "answer": "Sousaphone player",
+            "aliases": [
+              "A sousaphone player",
+              "Sousaphonist"
+            ],
+            "hint": "It is a large brass instrument worn around the body.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://tbdbitl.osu.edu/",
+            "distractors": [
+              "Trumpet player",
+              "Trombone player",
+              "Snare drummer"
+            ]
+          },
+          {
+            "id": "season-college-football-3-3",
+            "level": 3,
+            "prompt": "Which rivalry is nicknamed the Iron Bowl?",
+            "answer": "Alabama vs. Auburn",
+            "aliases": [
+              "Auburn vs Alabama",
+              "Alabama-Auburn"
+            ],
+            "hint": "Both teams are based in the same Southeastern state.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://www.ncaa.com/news/football/article/2024-11-28/iron-bowl-alabama-auburn-rivalry-history",
+            "distractors": [
+              "Alabama vs. Tennessee",
+              "Georgia vs. Georgia Tech",
+              "Ole Miss vs. Mississippi State"
+            ]
+          },
+          {
+            "id": "season-college-football-3-4",
+            "level": 3,
+            "prompt": "Which rivalry trophy is a bronze pig awarded between Iowa and Minnesota?",
+            "answer": "Floyd of Rosedale",
+            "aliases": [
+              "Floyd"
+            ],
+            "hint": "It is named for a real animal from a 1930s wager.",
+            "categoryId": "college-football",
+            "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
+            "sourceUrl": "https://hawkeyesports.com/",
+            "distractors": [
+              "Old Oaken Bucket",
+              "Little Brown Jug",
+              "Paul Bunyan’s Axe"
             ]
           }
         ]
