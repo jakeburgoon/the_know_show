@@ -1,0 +1,976 @@
+[
+  {
+    "id": "category-final-space",
+    "categoryId": "space",
+    "category": "Space Case",
+    "difficulty": "medium-hard",
+    "prompt": "Which 1977 NASA spacecraft crossed the heliopause in 2012, becoming the first human-made craft to enter interstellar space?",
+    "answer": "Voyager 1",
+    "hint": "It carries a recorded cultural message intended for any intelligence that might encounter it.",
+    "hints": [
+      "It carries a recorded cultural message intended for any intelligence that might encounter it.",
+      "It was launched after its twin spacecraft yet overtook it on the way to interstellar space."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-animals",
+    "categoryId": "animals",
+    "category": "Creature Features",
+    "difficulty": "hard",
+    "prompt": "What is the scientific name for the insect order that includes both dragonflies and damselflies?",
+    "answer": "Odonata",
+    "hint": "The insects in this taxonomic order have predatory aquatic young called naiads.",
+    "hints": [
+      "The insects in this taxonomic order have predatory aquatic young called naiads.",
+      "The order’s Greek-derived name refers to teeth, like the root in “orthodontics.”"
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-world",
+    "categoryId": "world",
+    "category": "Map Quest",
+    "difficulty": "medium-hard",
+    "prompt": "Which present-day Central Asian country contains the historic Silk Road city of Samarkand?",
+    "answer": "Uzbekistan",
+    "hint": "The country was once part of the Soviet Union.",
+    "hints": [
+      "The country was once part of the Soviet Union.",
+      "Its capital is the Central Asian city of Tashkent."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-words",
+    "categoryId": "words",
+    "category": "Word Wizardry",
+    "difficulty": "medium-hard",
+    "prompt": "What is a word called when it has two opposite meanings, as the verb 'sanction' can mean either permit or penalize?",
+    "answer": "Contronym",
+    "hint": "The term belongs to the same family of vocabulary labels as “synonym” and “antonym.”",
+    "hints": [
+      "The term belongs to the same family of vocabulary labels as “synonym” and “antonym.”",
+      "Its first syllable sounds like the beginning of “contradiction,” and the rest belongs to a common family of word-label endings."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Contranym",
+      "Auto-antonym",
+      "Janus word",
+      "Antagonym"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-history",
+    "categoryId": "history",
+    "category": "History in a Hurry",
+    "difficulty": "hard",
+    "prompt": "What 1884–1885 meeting set diplomatic rules for European colonial claims in Africa?",
+    "answer": "Berlin Conference",
+    "hint": "Its General Act addressed free trade and navigation in the Congo basin.",
+    "hints": [
+      "Its General Act addressed free trade and navigation in the Congo basin.",
+      "The diplomatic negotiations were hosted under German chancellor Otto von Bismarck."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Congo Conference"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-science",
+    "categoryId": "science",
+    "category": "Lab Notes",
+    "difficulty": "medium-hard",
+    "prompt": "Which Russian chemist published an influential periodic table in 1869 and predicted properties of elements not yet discovered?",
+    "answer": "Dmitri Mendeleev",
+    "hint": "He arranged elements according to patterns in their properties.",
+    "hints": [
+      "He arranged elements according to patterns in their properties.",
+      "He left intentional gaps where he expected future discoveries."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Mendeleev"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-food",
+    "categoryId": "food",
+    "category": "Food for Thought",
+    "difficulty": "medium-hard",
+    "prompt": "What name is given to the browning reaction between amino acids and reducing sugars during cooking?",
+    "answer": "Maillard reaction",
+    "hint": "It is important to the flavor and color of seared meats and toasted bread.",
+    "hints": [
+      "It is important to the flavor and color of seared meats and toasted bread.",
+      "The reaction is named after a French chemist who studied it in the early 1900s."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Maillard"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-movies",
+    "categoryId": "movies",
+    "category": "Screen Time",
+    "difficulty": "hard",
+    "prompt": "Which silent 1927 aviation drama won the first Academy Award for Outstanding Picture, later called Best Picture?",
+    "answer": "Wings",
+    "hint": "The movie used ambitious aerial sequences to depict combat in World War I.",
+    "hints": [
+      "The movie used ambitious aerial sequences to depict combat in World War I.",
+      "It featured Clara Bow and was honored at the Academy’s inaugural ceremony in 1929."
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-music",
+    "categoryId": "music",
+    "category": "Sound Check",
+    "difficulty": "medium-hard",
+    "prompt": "Which Russian composer wrote the piano suite Pictures at an Exhibition after visiting an exhibition of a friend's artwork?",
+    "answer": "Modest Mussorgsky",
+    "hint": "The composition portrays a walk between a sequence of paintings.",
+    "hints": [
+      "The composition portrays a walk between a sequence of paintings.",
+      "The composer belonged to the Russian nationalist circle commonly known as The Five."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Mussorgsky"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-math",
+    "categoryId": "math",
+    "category": "Number Crunch",
+    "difficulty": "medium-hard",
+    "prompt": "How many diagonals does a 12-sided polygon have?",
+    "answer": "54",
+    "hint": "Think about how many vertices each corner can connect to without drawing an edge.",
+    "hints": [
+      "Think about how many vertices each corner can connect to without drawing an edge.",
+      "Each of the twelve vertices can form nine diagonals, but every diagonal is counted twice."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "fifty four",
+      "fifty-four"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-sports",
+    "categoryId": "sports",
+    "category": "Game On",
+    "difficulty": "medium-hard",
+    "prompt": "Which country hosted the first FIFA Women's World Cup in 1991?",
+    "answer": "China",
+    "hint": "The inaugural tournament was staged in Asia.",
+    "hints": [
+      "The inaugural tournament was staged in Asia.",
+      "Matches were played in cities in Guangdong province."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "People's Republic of China"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-books",
+    "categoryId": "books",
+    "category": "Book Nook",
+    "difficulty": "medium-hard",
+    "prompt": "Which George Orwell novel opens with a bright cold day in April and clocks striking thirteen?",
+    "answer": "Nineteen Eighty-Four",
+    "hint": "The novel depicts a state that seeks to control both information and private thought.",
+    "hints": [
+      "The novel depicts a state that seeks to control both information and private thought.",
+      "Its protagonist works at the Ministry of Truth and secretly keeps a diary."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "1984",
+      "Nineteen Eighty Four"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-nature",
+    "categoryId": "nature",
+    "category": "Wild World",
+    "difficulty": "hard",
+    "prompt": "What cold ocean current along the Pacific coast of Peru and Chile helps support rich fishing grounds through upwelling?",
+    "answer": "Humboldt Current",
+    "hint": "Its waters are unusually cool for the latitude and rich in nutrients.",
+    "hints": [
+      "Its waters are unusually cool for the latitude and rich in nutrients.",
+      "It is named after a European naturalist who explored South America."
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-tech",
+    "categoryId": "tech",
+    "category": "Tech Trek",
+    "difficulty": "medium-hard",
+    "prompt": "Which distributed version-control system was created by Linus Torvalds in 2005?",
+    "answer": "Git",
+    "hint": "Its users often work with branches, commits, and merges.",
+    "hints": [
+      "Its users often work with branches, commits, and merges.",
+      "It was originally built to coordinate development of the Linux kernel after a licensing change."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-body",
+    "categoryId": "body",
+    "category": "Body Shop",
+    "difficulty": "medium-hard",
+    "prompt": "Which part of the brain, located behind the brainstem, plays a major role in balance and fine coordination?",
+    "answer": "Cerebellum",
+    "hint": "It contains a very large number of the brain's neurons.",
+    "hints": [
+      "It contains a very large number of the brain's neurons.",
+      "Damage to it may cause unsteady, poorly coordinated movement called ataxia."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-myths",
+    "categoryId": "myths",
+    "category": "Myth Behaving",
+    "difficulty": "hard",
+    "prompt": "What is the name of the river of forgetfulness in Greek mythology's underworld?",
+    "answer": "Lethe",
+    "hint": "Classical writers associated its waters with losing memories before a new life.",
+    "hints": [
+      "Classical writers associated its waters with losing memories before a new life.",
+      "Its name shares an ancient Greek root with the English word “lethargy.”"
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-colors",
+    "categoryId": "colors",
+    "category": "Bright Ideas",
+    "difficulty": "medium-hard",
+    "prompt": "What physical process scatters shorter wavelengths of sunlight more strongly, helping make a clear daytime sky look blue?",
+    "answer": "Rayleigh scattering",
+    "hint": "The same atmospheric process helps explain the warm colors near sunset.",
+    "hints": [
+      "The same atmospheric process helps explain the warm colors near sunset.",
+      "It is named after a British physicist who later received a Nobel Prize."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-landmarks",
+    "categoryId": "landmarks",
+    "category": "Picture This Place",
+    "difficulty": "medium-hard",
+    "prompt": "What three-tiered ancient Roman aqueduct bridge stands near Nîmes in southern France?",
+    "answer": "Pont du Gard",
+    "hint": "The structure formed part of an aqueduct that supplied a Roman settlement called Nemausus.",
+    "hints": [
+      "The structure formed part of an aqueduct that supplied a Roman settlement called Nemausus.",
+      "The ancient aqueduct ran roughly 50 kilometers from a spring near Uzès to Nîmes."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-three",
+    "categoryId": "three",
+    "category": "Three Clues, One Answer",
+    "difficulty": "medium-hard",
+    "prompt": "I can introduce a longer musical composition, begin a literary work, or describe an event that comes before a larger one. What am I?",
+    "answer": "Prelude",
+    "hint": "The term suggests preparation for a main event rather than the event itself.",
+    "hints": [
+      "The term suggests preparation for a main event rather than the event itself.",
+      "In music, a piece of this kind may be paired with a fugue."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-rhyme",
+    "categoryId": "rhyme",
+    "category": "Rhyme Time",
+    "difficulty": "medium-hard",
+    "prompt": "What literary word for a narrative whose characters and events represent broader ideas rhymes with 'category'?",
+    "answer": "Allegory",
+    "hint": "It can convey a moral, religious, or political message through symbolism.",
+    "hints": [
+      "It can convey a moral, religious, or political message through symbolism.",
+      "George Orwell's Animal Farm is often taught as an example."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-misleading",
+    "categoryId": "misleading",
+    "category": "Wait, What?",
+    "difficulty": "medium-hard",
+    "prompt": "During a 24-hour period, how many times do the hour and minute hands of an ordinary analog clock overlap?",
+    "answer": "22",
+    "hint": "The minute hand gains on the hour hand continuously, not just at marked hours.",
+    "hints": [
+      "The minute hand gains on the hour hand continuously, not just at marked hours.",
+      "First work out how often the hands meet during one twelve-hour cycle."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "twenty two",
+      "twenty-two"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-inventions",
+    "categoryId": "inventions",
+    "category": "Who Thought of That?",
+    "difficulty": "medium-hard",
+    "prompt": "Which American medical researcher developed the first widely used injectable vaccine against polio, licensed in 1955?",
+    "answer": "Jonas Salk",
+    "hint": "His work grew from large-scale clinical trials involving schoolchildren.",
+    "hints": [
+      "His work grew from large-scale clinical trials involving schoolchildren.",
+      "Unlike a later oral vaccine, his formulation used an inactivated virus."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Salk"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-usa",
+    "categoryId": "usa",
+    "category": "Across America",
+    "difficulty": "medium-hard",
+    "prompt": "Which U.S. state contains Craters of the Moon National Monument and Preserve, a landscape of extensive volcanic lava flows?",
+    "answer": "Idaho",
+    "hint": "It is in the inland Northwest, not near an active coastal volcano.",
+    "hints": [
+      "It is in the inland Northwest, not near an active coastal volcano.",
+      "Its state nickname is the Gem State."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-oceans",
+    "categoryId": "oceans",
+    "category": "Deep Blue",
+    "difficulty": "hard",
+    "prompt": "What is the name for an ocean layer in which salinity changes rapidly with depth?",
+    "answer": "Halocline",
+    "hint": "Oceanographers use related terms for rapid changes in temperature and density with depth.",
+    "hints": [
+      "Oceanographers use related terms for rapid changes in temperature and density with depth.",
+      "The first part of the term comes from a Greek root for “salt.”"
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-games",
+    "categoryId": "games",
+    "category": "Game Night",
+    "difficulty": "medium-hard",
+    "prompt": "In chess, which opening begins with the moves 1.e4 e5 2.Nf3 Nc6 3.Bb5?",
+    "answer": "Ruy Lopez",
+    "hint": "The opening develops a bishop to attack the defender of a central pawn.",
+    "hints": [
+      "The opening develops a bishop to attack the defender of a central pawn.",
+      "It is named for a sixteenth-century Spanish priest and chess writer."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Spanish Opening",
+      "Spanish Game"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-earth",
+    "categoryId": "earth",
+    "category": "Planet Earth",
+    "difficulty": "hard",
+    "prompt": "What geological term describes a block of crust that has dropped down between roughly parallel normal faults?",
+    "answer": "Graben",
+    "hint": "This kind of structure forms where the crust is being pulled apart.",
+    "hints": [
+      "This kind of structure forms where the crust is being pulled apart.",
+      "It is the opposite of an uplifted fault block known as a horst."
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-literally",
+    "categoryId": "literally",
+    "category": "Literally Speaking",
+    "difficulty": "medium-hard",
+    "prompt": "What phrase describes an expensive or burdensome possession that is difficult to dispose of, traditionally linked to a rare animal?",
+    "answer": "White elephant",
+    "hint": "A traditional explanation connects the idiom to the expense of caring for a rare ceremonial animal given as a gift.",
+    "hints": [
+      "A traditional explanation connects the idiom to the expense of caring for a rare ceremonial animal given as a gift.",
+      "Such animals were especially prized by rulers in the historical kingdom of Siam, now Thailand."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-counting",
+    "categoryId": "counting",
+    "category": "Count On It",
+    "difficulty": "hard",
+    "prompt": "In how many distinct ways can six people stand in a line if two particular people must stand directly next to each other?",
+    "answer": "240",
+    "hint": "Treat the two people who must remain together as a single block.",
+    "hints": [
+      "Treat the two people who must remain together as a single block.",
+      "Arrange five blocks, then consider the two possible orders inside the paired block."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "two hundred forty"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-classroom",
+    "categoryId": "classroom",
+    "category": "Back to School",
+    "difficulty": "medium-hard",
+    "prompt": "What grammatical term names a noun or noun phrase that identifies another nearby noun, as “a scientist” does in “Marie Curie, a scientist, won two Nobel Prizes”?",
+    "answer": "Appositive",
+    "hint": "The added noun phrase is often set off by commas when it gives nonessential information.",
+    "hints": [
+      "The added noun phrase is often set off by commas when it gives nonessential information.",
+      "Its name comes from a Latin root meaning “placed beside.”"
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-us_geography",
+    "categoryId": "us_geography",
+    "category": "U.S. Geography",
+    "difficulty": "medium-hard",
+    "prompt": "Which U.S. state contains Great Sand Dunes National Park, home to North America's tallest sand dunes?",
+    "answer": "Colorado",
+    "hint": "The dunes stand near the Sangre de Cristo Mountains.",
+    "hints": [
+      "The dunes stand near the Sangre de Cristo Mountains.",
+      "The park lies in the San Luis Valley in the southern Rocky Mountains."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-world_geography",
+    "categoryId": "world_geography",
+    "category": "World Geography",
+    "difficulty": "hard",
+    "prompt": "Which West African country has Yamoussoukro as its official capital, while Abidjan is its largest city?",
+    "answer": "Côte d'Ivoire",
+    "hint": "The country borders Ghana and Liberia.",
+    "hints": [
+      "The country borders Ghana and Liberia.",
+      "French is widely used in its government, and its economy has a significant cocoa industry."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Ivory Coast",
+      "Cote d Ivoire",
+      "Cote d'Ivoire"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-us_history",
+    "categoryId": "us_history",
+    "category": "U.S. History",
+    "difficulty": "medium-hard",
+    "prompt": "Which 1857 U.S. Supreme Court case ruled against an enslaved man who argued that residence in free territory entitled him to freedom?",
+    "answer": "Dred Scott v. Sandford",
+    "hint": "The ruling became a major flashpoint in the years before the Civil War.",
+    "hints": [
+      "The ruling became a major flashpoint in the years before the Civil War.",
+      "The case is named after the man who sued for his freedom."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Dred Scott",
+      "Dred Scott decision",
+      "Dred Scott vs Sandford"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-world_history",
+    "categoryId": "world_history",
+    "category": "World History",
+    "difficulty": "medium-hard",
+    "prompt": "Which ruler of the medieval Mali Empire became famous for his lavish pilgrimage to Mecca in 1324?",
+    "answer": "Mansa Musa",
+    "hint": "Stories of his wealth often focus on the gold he distributed on his journey.",
+    "hints": [
+      "Stories of his wealth often focus on the gold he distributed on his journey.",
+      "His pilgrimage passed through Cairo and drew attention to West African trade."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Musa I",
+      "Musa I of Mali"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-biology",
+    "categoryId": "biology",
+    "category": "Biology",
+    "difficulty": "medium-hard",
+    "prompt": "What term describes the regulated, programmed process by which a cell deliberately self-destructs?",
+    "answer": "Apoptosis",
+    "hint": "This controlled pathway helps sculpt tissues during embryonic development.",
+    "hints": [
+      "This controlled pathway helps sculpt tissues during embryonic development.",
+      "Cells undergoing it often break into membrane-bound fragments without triggering the inflammation typical of injury."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-chemistry",
+    "categoryId": "chemistry",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "prompt": "Which acid–base indicator is colorless in acidic solution but turns pink in basic solution?",
+    "answer": "Phenolphthalein",
+    "hint": "It is frequently used to signal an endpoint during titration.",
+    "hints": [
+      "It is frequently used to signal an endpoint during titration.",
+      "Its color change occurs in a range on the basic side of the pH scale."
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-physics",
+    "categoryId": "physics",
+    "category": "Physics",
+    "difficulty": "medium-hard",
+    "prompt": "What is the SI unit of electrical inductance?",
+    "answer": "Henry",
+    "hint": "The quantity it measures can be thought of as electrical inertia in a circuit.",
+    "hints": [
+      "The quantity it measures can be thought of as electrical inertia in a circuit.",
+      "Its unit symbol is H, and its namesake was an American pioneer in electromagnetism."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "henries"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-astronomy",
+    "categoryId": "astronomy",
+    "category": "Astronomy",
+    "difficulty": "medium-hard",
+    "prompt": "What is the name for an extremely luminous active galactic nucleus that can resemble a star in distant images?",
+    "answer": "Quasar",
+    "hint": "Many examples are powered by gas falling toward supermassive black holes.",
+    "hints": [
+      "Many examples are powered by gas falling toward supermassive black holes.",
+      "Its name began as an abbreviation of “quasi-stellar radio source.”"
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-sports_classic",
+    "categoryId": "sports_classic",
+    "category": "Sports",
+    "difficulty": "medium-hard",
+    "prompt": "In golf, what do players call a score of three strokes under par on a single hole?",
+    "answer": "Albatross",
+    "hint": "This golf score is one stroke better than an eagle.",
+    "hints": [
+      "This golf score is one stroke better than an eagle.",
+      "Its name is a bird larger than the one used for two strokes under par."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Double eagle"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-movies_tv",
+    "categoryId": "movies_tv",
+    "category": "Movies & TV",
+    "difficulty": "hard",
+    "prompt": "What 1974 film features Jack Nicholson as private investigator J. J. Gittes, investigating a Los Angeles water conspiracy?",
+    "answer": "Chinatown",
+    "hint": "The story takes place against a backdrop of corruption and drought in 1930s California.",
+    "hints": [
+      "The story takes place against a backdrop of corruption and drought in 1930s California.",
+      "It is a neo-noir mystery directed by Roman Polanski."
+    ],
+    "tier": "adult",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-music_classic",
+    "categoryId": "music_classic",
+    "category": "Music",
+    "difficulty": "medium-hard",
+    "prompt": "Which American jazz vocalist was nicknamed 'Lady Day' by saxophonist Lester Young?",
+    "answer": "Billie Holiday",
+    "hint": "Her career included a powerful performance of the protest song Strange Fruit.",
+    "hints": [
+      "Her career included a powerful performance of the protest song Strange Fruit.",
+      "She became one of the most influential jazz singers of the swing era."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Holiday"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-literature",
+    "categoryId": "literature",
+    "category": "Literature",
+    "difficulty": "hard",
+    "prompt": "Which author wrote the 1969 science-fiction novel The Left Hand of Darkness?",
+    "answer": "Ursula K. Le Guin",
+    "hint": "The book explores gender through a society on a distant planet.",
+    "hints": [
+      "The book explores gender through a society on a distant planet.",
+      "Its author also created the Earthsea fantasy series."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Ursula Le Guin",
+      "Le Guin"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-food_classic",
+    "categoryId": "food_classic",
+    "category": "Food & Drink",
+    "difficulty": "medium-hard",
+    "prompt": "What fermented soybean food from Indonesia is made with whole beans bound together into a firm cake by a fungal culture?",
+    "answer": "Tempeh",
+    "hint": "Unlike tofu, its finished form normally contains clearly recognizable whole soybeans.",
+    "hints": [
+      "Unlike tofu, its finished form normally contains clearly recognizable whole soybeans.",
+      "The beans are joined together during fermentation by a culture of Rhizopus fungi."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Tempe"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-art_classic",
+    "categoryId": "art_classic",
+    "category": "Art",
+    "difficulty": "medium-hard",
+    "prompt": "Which Mexican muralist painted Man at the Crossroads for Rockefeller Center in 1933 before the mural was destroyed?",
+    "answer": "Diego Rivera",
+    "hint": "His politically charged murals often depicted industrial workers and social history.",
+    "hints": [
+      "His politically charged murals often depicted industrial workers and social history.",
+      "He was married to the painter Frida Kahlo."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Rivera"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-technology_classic",
+    "categoryId": "technology_classic",
+    "category": "Technology",
+    "difficulty": "medium-hard",
+    "prompt": "What Palo Alto research center developed Ethernet in the 1970s and helped pioneer graphical computer interfaces?",
+    "answer": "Xerox PARC",
+    "hint": "Its researchers developed the experimental Alto computer decades ago.",
+    "hints": [
+      "Its researchers developed the experimental Alto computer decades ago.",
+      "Among its breakthroughs were early Ethernet work and laser printing research."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "PARC",
+      "Palo Alto Research Center"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-animals_classic",
+    "categoryId": "animals_classic",
+    "category": "Animals",
+    "difficulty": "medium-hard",
+    "prompt": "Which Australian marsupial digs burrows using powerful claws and has a backward-facing pouch?",
+    "answer": "Wombat",
+    "hint": "This mammal is adapted to digging extensive burrow systems rather than climbing trees.",
+    "hints": [
+      "This mammal is adapted to digging extensive burrow systems rather than climbing trees.",
+      "Its closest living relative is the koala."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-thanksgiving",
+    "categoryId": "thanksgiving",
+    "category": "Thanksgiving Traditions",
+    "difficulty": "medium-hard",
+    "prompt": "Who was governor of Plymouth Colony at the time of the 1621 harvest gathering later associated with Thanksgiving?",
+    "answer": "William Bradford",
+    "hint": "He served as Plymouth governor for much of the colony’s early history.",
+    "hints": [
+      "He served as Plymouth governor for much of the colony’s early history.",
+      "He later wrote a history of the colony called Of Plymouth Plantation."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Bradford"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-christmas-movies",
+    "categoryId": "christmas-movies",
+    "category": "Christmas Movies",
+    "difficulty": "medium-hard",
+    "prompt": "Which British actor played Ebenezer Scrooge opposite the Muppets in The Muppet Christmas Carol (1992)?",
+    "answer": "Michael Caine",
+    "hint": "He was the main live-action star in a cast featuring familiar puppet characters.",
+    "hints": [
+      "He was the main live-action star in a cast featuring familiar puppet characters.",
+      "Decades later, he played Alfred in Christopher Nolan's Batman films."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Caine"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-christmas-music",
+    "categoryId": "christmas-music",
+    "category": "Christmas Music",
+    "difficulty": "medium-hard",
+    "prompt": "Which Christmas carol began as a French poem by Placide Cappeau and was set to music by composer Adolphe Adam?",
+    "answer": "O Holy Night",
+    "hint": "The song was originally published in French under the title “Cantique de Noël.”",
+    "hints": [
+      "The song was originally published in French under the title “Cantique de Noël.”",
+      "Its English-language versions are known for an extended, soaring vocal melody."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Oh Holy Night"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-winter-holidays",
+    "categoryId": "winter-holidays",
+    "category": "Winter Holidays",
+    "difficulty": "medium-hard",
+    "prompt": "Which of Kwanzaa's seven principles means 'collective work and responsibility'?",
+    "answer": "Ujima",
+    "hint": "It is one of the Nguzo Saba, expressed in Swahili.",
+    "hints": [
+      "It is one of the Nguzo Saba, expressed in Swahili.",
+      "It is traditionally observed on Kwanzaa's third day."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-winter-traditions",
+    "categoryId": "winter-traditions",
+    "category": "Winter Traditions",
+    "difficulty": "medium-hard",
+    "prompt": "Which horned figure from Alpine folklore is often portrayed accompanying Saint Nicholas in early December?",
+    "answer": "Krampus",
+    "hint": "This figure often serves as a frightening counterpart to the gift-giving saint in Central European folklore.",
+    "hints": [
+      "This figure often serves as a frightening counterpart to the gift-giving saint in Central European folklore.",
+      "According to tradition, it warns or punishes misbehaving children, sometimes using bundles of twigs."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-winter-olympics",
+    "categoryId": "winter-olympics",
+    "category": "Winter Olympics",
+    "difficulty": "medium-hard",
+    "prompt": "Which American speed skater won all five men's speed-skating gold medals at the 1980 Winter Olympics in Lake Placid?",
+    "answer": "Eric Heiden",
+    "hint": "He succeeded across both sprint and distance events at a single Games.",
+    "hints": [
+      "He succeeded across both sprint and distance events at a single Games.",
+      "After skating, he pursued competitive cycling and later medicine."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Heiden"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-new-years",
+    "categoryId": "new-years",
+    "category": "New Year Traditions",
+    "difficulty": "hard",
+    "prompt": "What is the Japanese word for the first visit to a Shinto shrine or Buddhist temple in the New Year?",
+    "answer": "Hatsumōde",
+    "hint": "The word is formed from Japanese elements referring to the beginning of the year and visiting a shrine.",
+    "hints": [
+      "The word is formed from Japanese elements referring to the beginning of the year and visiting a shrine.",
+      "Its pronunciation begins with the Japanese word “hatsu,” meaning “first.”"
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Hatsumode",
+      "Hatsu-mode"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-veterans-military",
+    "categoryId": "veterans-military",
+    "category": "Veterans Day & Military Traditions",
+    "difficulty": "medium-hard",
+    "prompt": "What U.S. law, first enacted in 1944, provided education and housing benefits to many returning World War II veterans?",
+    "answer": "GI Bill",
+    "hint": "The policy transformed access to college education and helped reshape American life after World War II.",
+    "hints": [
+      "The policy transformed access to college education and helped reshape American life after World War II.",
+      "The legislation’s formal title includes the words “Servicemen’s Readjustment.”"
+    ],
+    "tier": "teen",
+    "aliases": [
+      "G.I. Bill",
+      "Servicemen's Readjustment Act",
+      "Servicemen's Readjustment Act of 1944"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-native-american",
+    "categoryId": "native-american",
+    "category": "Native American History & Culture",
+    "difficulty": "hard",
+    "prompt": "Who was the first editor of the Cherokee Phoenix newspaper, launched in 1828 in New Echota?",
+    "answer": "Elias Boudinot",
+    "hint": "Before adopting his English name, this Cherokee journalist was known as Gallegina (Buck) Watie.",
+    "hints": [
+      "Before adopting his English name, this Cherokee journalist was known as Gallegina (Buck) Watie.",
+      "He later became one of the signers of the controversial 1835 Treaty of New Echota."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Elias Boudinot (Cherokee)",
+      "Boudinot"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-harvest-time",
+    "categoryId": "harvest-time",
+    "category": "Harvest Time",
+    "difficulty": "medium-hard",
+    "prompt": "What is the name for livestock feed preserved by fermenting chopped grass, corn, or other crops in airtight storage?",
+    "answer": "Silage",
+    "hint": "Farmers use this feed when fresh pasture or growing crops are unavailable.",
+    "hints": [
+      "Farmers use this feed when fresh pasture or growing crops are unavailable.",
+      "It can be stored in a silo, a pit, or a plastic-wrapped bale."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-college-football",
+    "categoryId": "college-football",
+    "category": "College Football Traditions",
+    "difficulty": "medium-hard",
+    "prompt": "What is the name of the traditional rivalry trophy contested by the Notre Dame and USC football teams?",
+    "answer": "Jeweled Shillelagh",
+    "hint": "The trophy goes to the winner of a long-running rivalry involving an independent program.",
+    "hints": [
+      "The trophy goes to the winner of a long-running rivalry involving an independent program.",
+      "The object it is named for is a traditional Irish walking stick or club."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Shillelagh"
+    ],
+    "distractors": []
+  }
+]

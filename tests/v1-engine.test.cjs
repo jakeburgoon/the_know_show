@@ -282,25 +282,66 @@ test('Final Word saved draft is automatically scored at zero without requiring L
  assert.equal(s.final.answers[a[0].id].answerFormat,'written');
 });
 
-test('every Final Word question has three distinct, private, ordered hints',()=>{
- assert.equal(bank.FINALS.length,18);
+test('every Final Word question has two distinct, private, ordered hints',()=>{
+ assert.equal(bank.LEGACY_FINALS.length,18);
+ assert.equal(bank.CATEGORY_FINALS.length,bank.CATEGORIES.length);
+ assert.equal(bank.FINALS.length,74);
  for(const q of bank.FINALS){
-   assert.equal(q.hints.length,3,q.id);
-   assert.equal(new Set(q.hints.map(h=>h.trim().toLowerCase())).size,3,q.id);
-   for(const h of q.hints)assert.ok(h.length>=12,`${q.id} has a very short clue`);
+   assert.equal(q.hints.length,2,q.id);
+   assert.equal(new Set(q.hints.map(h=>h.trim().toLowerCase())).size,2,q.id);
+   for(const h of q.hints){assert.ok(h.length>=12,`${q.id} has a very short clue`);assert.ok(!h.toLowerCase().includes(q.answer.toLowerCase()),`${q.id} names the answer in a clue`);}
  }
+});
+test('56 category-linked Final Word questions are unique, medium-hard or hard and never used as ordinary board questions',()=>{
+ const normalPrompts=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.prompt.toLowerCase().replace(/\W/g,'')));
+ const normalAnswers=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.answer.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'')));
+ const categoryIds=new Set(bank.CATEGORIES.map(c=>c.id));
+ const unique=new Set();
+ for(const f of bank.CATEGORY_FINALS){
+  assert.ok(categoryIds.has(f.categoryId),f.id);
+  assert.ok(['medium-hard','hard'].includes(f.difficulty),f.id);
+  assert.ok(!unique.has(f.categoryId),'Duplicate finale for '+f.categoryId);unique.add(f.categoryId);
+  assert.ok(!normalPrompts.has(f.prompt.toLowerCase().replace(/\W/g,'')),'Ordinary prompt was reused for '+f.id);
+  assert.ok(!normalAnswers.has(f.answer.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'')),'Ordinary answer was reused for '+f.id);
+  assert.equal(f.hints.length,2,f.id);
+  for(const hint of f.hints){assert.ok(hint.length>=35,f.id);assert.ok(!hint.toLowerCase().includes(f.answer.toLowerCase()),'Hint discloses answer: '+f.id);}
+ }
+ assert.equal(unique.size,56);
+});
+test('Final Word draw respects seasonal months and avoids recent finals and categories played on the board',()=>{
+ const s=g.makeGame();
+ s.selected=[['space','animals','world','words'],['history','science','music','movies']];
+ const july=Date.UTC(2026,6,15,14); const nov=Date.UTC(2026,10,15,14);
+ for(let i=0;i<60;i++){
+  const q=g.chooseFinalQuestion(s,july);
+  assert.ok(q.categoryId);assert.ok(!bank.CATEGORY_LOOKUP.get(q.categoryId).activeMonths,q.id+' not active in July');
+  assert.ok(!s.selected.flat().includes(q.categoryId),q.id+' appeared on the current board');
+ }
+ const activeNov=new Set(bank.availableCategories(new Date(nov)).map(c=>c.id));
+ for(let i=0;i<60;i++)assert.ok(activeNov.has(g.chooseFinalQuestion(s,nov).categoryId));
+ const seen=new Set();
+ for(let i=0;i<37;i++){
+  const q=g.chooseFinalQuestion(s,july);
+  // Maintain history in the same form the real game records completed finals.
+  s.recentQuestionIds.push(q.id);
+  assert.ok(!seen.has(q.id),'A final was repeated before the unseen pool was exhausted');seen.add(q.id);
+ }
+ assert.equal(seen.size,37);
+ // After every unused category outside the board has been played,
+ // continue drawing ONLY from categories outside the board.
+ for(let i=0;i<30;i++)assert.ok(!s.selected.flat().includes(g.chooseFinalQuestion(s,july).categoryId));
 });
 test('Final Word hints cost 500 points, purchase before wagering, and deduct immediately',()=>{
  let {s,a}=setup(2);s.players[0].score=1100;s.players[0].hintsRemaining=1;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
  let v=g.makeView(s,a[0],1,10000);
- assert.equal(v.final.myPurchasableHints,3,'A remaining regular hint cannot restrict Final Word purchases');
+ assert.equal(v.final.myPurchasableHints,2,'A remaining regular hint cannot restrict Final Word purchases');
  assert.equal(v.final.myAvailableHints,0,'No free Final Word hints even with regular hints');
  s=g.mutate(s,{type:'buy-final-hint'},a[0],10001);
  assert.equal(s.players[0].score,600);assert.equal(s.final.purchasedHints[a[0].id],1);
  s=g.mutate(s,{type:'buy-final-hint'},a[0],10002);
- assert.equal(s.players[0].score,100);assert.equal(g.makeView(s,a[0],1,10002).final.myPurchasableHints,1);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10003),/at least 500/);
+ assert.equal(s.players[0].score,100);assert.equal(g.makeView(s,a[0],1,10002).final.myPurchasableHints,0);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10003),/both Final Word hints/);
  assert.throws(()=>g.mutate(s,{type:'wager',amount:101},a[0],10004),/Wager must/);
  s=g.mutate(s,{type:'wager',amount:100},a[0],10005);
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],10006),/before locking/);
@@ -315,48 +356,48 @@ test('a Final Word hint cannot be purchased when the player lacks 500 points',()
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],4000),/at least 500/);
  assert.equal(s.players[0].score,499);
  assert.equal(g.makeView(s,a[0],1,4001).final.myAvailableHints,0);
- assert.equal(g.makeView(s,a[0],1,4001).final.myPurchasableHints,3);
+ assert.equal(g.makeView(s,a[0],1,4001).final.myPurchasableHints,2);
 });
 test('only purchased Final Word hints can be revealed; regular hints are never consumed',()=>{
  let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=3;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
- for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
- assert.equal(s.players[0].score,500);
+ for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
+ assert.equal(s.players[0].score,1000);
  s=g.mutate(s,{type:'wager',amount:500},a[0],4000);
  s=g.mutate(s,{type:'wager',amount:0},a[1],4001);
  let v=g.makeView(s,a[0],1,4050);assert.equal(v.final.myRevealedHints.length,0);
- assert.equal(v.final.myAvailableHints,3);
+ assert.equal(v.final.myAvailableHints,2);
  assert.equal(g.makeView(s,a[1],1,4050).final.myAvailableHints,0);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[1],4075),/No purchased Final Word hints remaining/);
- for(let i=0;i<3;i++){
+ for(let i=0;i<2;i++){
    s=g.mutate(s,{type:'final-hint'},a[0],4100+i);
    v=g.makeView(s,a[0],1,4200+i);
    assert.deepEqual(v.final.myRevealedHints,bank.FINALS.find(q=>q.id==='f15').hints.slice(0,i+1));
-   assert.equal(v.final.myAvailableHints,2-i);
+   assert.equal(v.final.myAvailableHints,1-i);
    assert.deepEqual(g.makeView(s,a[1],1,4250+i).final.myRevealedHints,[]);
    assert.deepEqual(g.makeView(s,host,1,4250+i).final.myRevealedHints,[]);
  }
  assert.equal(s.players[0].hintsRemaining,1);
  assert.equal(s.players[1].hintsRemaining,3);
- assert.equal(s.final.purchasedHintsUsed[a[0].id],3);
- assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4300),/three hints/);
+ assert.equal(s.final.purchasedHintsUsed[a[0].id],2);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4300),/Both hints/);
  s=g.mutate(s,{type:'final-answer',answer:'Gabriel García Márquez'},a[0],4500);
  assert.equal(s.final.answers[a[0].id].hintUsed,true);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4600),/already locked/);
 });
-test('regular hints are independent from Final Word purchases and all three can be bought',()=>{
+test('regular hints are independent from Final Word purchases and only two can be bought',()=>{
  let {s,a}=setup(2);s.phase='final-wager';s.final={id:'f12',wagers:{},answers:{},disputeIds:[]};
  s.players[0].score=2000;s.players[0].hintsRemaining=5;
- assert.equal(g.makeView(s,a[0],1,5000).final.myPurchasableHints,3);
+ assert.equal(g.makeView(s,a[0],1,5000).final.myPurchasableHints,2);
  assert.equal(g.makeView(s,a[0],1,5000).final.myAvailableHints,0);
- for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],5001+i);
- assert.equal(s.players[0].score,500);assert.equal(s.players[0].hintsRemaining,5);
+ for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],5001+i);
+ assert.equal(s.players[0].score,1000);assert.equal(s.players[0].hintsRemaining,5);
  assert.equal(g.makeView(s,a[0],1,5004).final.myPurchasableHints,0);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],5005),/three Final Word hints/);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],5005),/both Final Word hints/);
  s.players[1].score=1600;s.players[1].hintsRemaining=0;
- for(let i=0;i<3;i++)s=g.mutate(s,{type:'buy-final-hint'},a[1],5101+i);
- assert.equal(s.players[1].score,100);
- assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5105),/three Final Word hints/);
+ for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[1],5101+i);
+ assert.equal(s.players[1].score,600);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5105),/both Final Word hints/);
 });
 test('Final Word hints respect the deadline, and draft auto-submission remembers purchased hint use',()=>{
  let {s,a}=setup(2);s.players[0].score=800;s.players[0].hintsRemaining=2;
@@ -453,4 +494,19 @@ test('seasonal offer is mandatory even when every seasonal category was recently
 test('out-of-season months do not falsely offer holiday categories',()=>{
  let {s}=setup(3);s=g.mutate(s,{type:'start-draft'},host,Date.parse('2027-03-23T15:00:00Z'));
  assert.ok(s.draftPool.every(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths));
+});
+
+test('buying hints changes balance and the maximum wager; outcomes use the post-purchase score',()=>{
+ let {s,a}=setup(2);s.players[0].score=3000;s.phase='final-wager';s.final={id:'f16',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],9000);
+ let v=g.makeView(s,a[0],1,9001);
+ assert.equal(v.players.find(p=>p.id===a[0].id).score,2500);
+ assert.equal(v.final.myPurchasedHints,1);assert.equal(v.final.maxHints,2);
+ assert.throws(()=>g.mutate(s,{type:'wager',amount:2501},a[0],9002),/Wager must/);
+ s=g.mutate(s,{type:'wager',amount:1000},a[0],9003);
+ v=g.makeView(s,a[0],1,9004);
+ assert.equal(v.final.myWager,1000);
+ assert.equal(v.players.find(p=>p.id===a[0].id).score+v.final.myWager,3500);
+ assert.equal(v.players.find(p=>p.id===a[0].id).score-v.final.myWager,1500);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],9005),/before locking/);
 });

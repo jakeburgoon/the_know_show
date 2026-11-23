@@ -156,7 +156,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const params=useParams<{code:string}>(),router=useRouter();const code=String(params.code||'').toUpperCase();
  const [ready,setReady]=useState(false),[hostToken,setHostToken]=useState(''),[playerToken,setPlayerToken]=useState(''),[tab,setTab]=useState<DeviceTab>('player'),[origin,setOrigin]=useState('');
  const [view,setView]=useState<GameView|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[now,setNow]=useState(Date.now());
- const [name,setName]=useState(''),[answerDraft,setAnswerDraft]=useState(''),[finalDraft,setFinalDraft]=useState(''),[doubleTake,setDoubleTake]=useState(false),[wager,setWager]=useState('0');
+ const [name,setName]=useState(''),[answerDraft,setAnswerDraft]=useState(''),[finalDraft,setFinalDraft]=useState(''),[doubleTake,setDoubleTake]=useState(false),[wager,setWager]=useState(0);
  const [pairOpen,setPairOpen]=useState(false),[joinOpen,setJoinOpen]=useState(true),[scoreEdits,setScoreEdits]=useState<Record<string,string>>({});
  const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
  const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false);
@@ -299,7 +299,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  },[tab,view?.phase,view?.active?.key,displayOnly]);
  const activeKey=view?.active?.key??view?.intro?.key??'';
  useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft(view?.active?.myDraft??'');setDoubleTake(false);setDraftSaved(false);}},[activeKey]);
- useEffect(()=>{if(view?.phase==='final-wager'){setFinalDraft('');setDraftSaved(false);}else if(view?.phase==='final-question'&&view.final?.myDraft&&finalDraftRef.current==='')setFinalDraft(view.final.myDraft);},[view?.phase]);
+ useEffect(()=>{if(view?.phase==='final-wager'){setFinalDraft('');setDraftSaved(false);setWager(0);}else if(view?.phase==='final-question'&&view.final?.myDraft&&finalDraftRef.current==='')setFinalDraft(view.final.myDraft);},[view?.phase]);
  const genre=SUNO_SOUNDTRACKS.find(t=>t.id===view?.settings.music);
  // Keep this host's category and question histories between separate rooms.
  // This works even when the host is playing on the same device and using Player View.
@@ -356,6 +356,11 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const activeForPlayer=view.phase==='question'&&view.active&&(view.settings.mode==='individual'||view.active.answeringId===me?.id);
  const myDeadline=view.active?.myDeadlineAt??view.active?.deadlineAt;
  const myHasAnswered=Boolean(me&&view.active?.mySubmission!==undefined);
+ const wagerMax=Math.max(0,me?.score??0);
+ const wagerPreview=Math.min(wagerMax,Math.max(0,Math.trunc(wager)));
+ const finalPreviewWager=view.final?.myWager??wagerPreview;
+ const finalHintCount=view.final?.myPurchasedHints??0;
+ const finalHintPrice=view.final?.hintPrice??500;
  return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span></header>
    {hostToken&&<nav className={"v2viewtabs ks-two-tabs"+(view.phase!=='lobby'?" ks-during-show":"")} aria-label="Room views">
      <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>Player View</button>
@@ -363,10 +368,10 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    </nav>}
    {view.phase==='lobby'&&<div className="v2eyebrow ks-compact-roomlabel">GREEN ROOM</div>}
    {isPlayer&&<div className="ks-soundbar"><span className="ks-sound-label">SOUND EFFECTS <small>Last-five-second ticks + time-up bell</small></span><button type="button" onClick={toggleTimerSound} aria-pressed={timerSounds} aria-label={`Countdown sound effects ${timerSounds?'on':'off'}. Tap to toggle.`}>{timerSounds?<Volume2 size={20}/>:<VolumeX size={20}/>} {timerSounds?'On':'Off'}</button></div>}
-   {phonesOnly&&isPlayer&&view.phase!=='lobby'&&!['results','final-results'].includes(view.phase)&&<PocketScores players={view.players} meId={me?.id}/>}
+   {phonesOnly&&isPlayer&&view.phase!=='lobby'&&!['results','final-results','final-wager'].includes(view.phase)&&<PocketScores players={view.players} meId={me?.id}/>}
    {phonesOnly&&hostToken&&<PhoneSoundtrack music={view.settings.music} arrangement={view.settings.arrangement}/>}
    {tab==='tv'&&hostToken?<div className="v2tvpreview"><div className="v2tvpreviewnote"><strong>TV Preview</strong> · For the actual shared TV, open the full-screen TV display from Host Controls. <button type="button" onClick={()=>switchTab(playerToken?'player':hostToken?'host':'player')}>← Back to {playerToken?'Player':'Host'} View</button></div><TV view={view} code={code} origin={origin} now={timerNow} preview/></div>:<>
-   {view.phase!=='lobby'&&!['board','draft','results','final-results'].includes(view.phase)&&!(tab==='player'&&['intro','question','final-question'].includes(view.phase))&&<div className="v2phonestage"><span>{stage}</span><h1>{view.phase==='intro'?'Up next!':view.phase==='results'?'The answer is in':view.phase==='question'?view.active?.category:stage}</h1></div>}
+   {view.phase!=='lobby'&&!['board','draft','results','final-results'].includes(view.phase)&&!(tab==='player'&&['intro','question','final-question','final-wager'].includes(view.phase))&&<div className="v2phonestage"><span>{stage}</span><h1>{view.phase==='intro'?'Up next!':view.phase==='results'?'The answer is in':view.phase==='question'?view.active?.category:stage}</h1></div>}
    {error&&<div className="v2error" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
    {view.paused&&<div className="v2alert">Game paused by the host</div>}
    {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>{autoReturnFromDispute.current=true;switchTab('host');}}>Open Host Controls</button></div>}
@@ -413,7 +418,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase!=='lobby'&&<section className="v2card"><h2>Score adjustments</h2>{view.players.map(p=><div className="v2scoreedit" key={p.id}><span>{p.name} · {fmt(p.score)}</span><input inputMode="numeric" aria-label={`Score adjustment for ${p.name}`} placeholder="+100 or -100" value={scoreEdits[p.id]||''} onChange={e=>setScoreEdits(v=>({...v,[p.id]:e.target.value}))}/><button className="v2small" disabled={busy||!Number.isInteger(Number(scoreEdits[p.id]))||!scoreEdits[p.id]} onClick={()=>{void act({type:'adjust-score',playerId:p.id,delta:Number(scoreEdits[p.id])});setScoreEdits(v=>({...v,[p.id]:''}));}}>Apply</button></div>)}</section>}
    </>}
    {isPlayer&&<>
-     {!['draft','board','intro','question','final-question','results','final-results'].includes(view.phase)&&<div className="v2card v2self"><h2>{me?.name}</h2><strong>{fmt(me?.score||0)} pts</strong><small>{view.settings.mode==='individual'?`${me?.doubleTakesRemaining} Double Takes this round · `:''}{view.phase==='final-wager'?'Final Word hints are purchased separately':`${view.myHints} regular-game hints remaining`}</small></div>}
+     {!['draft','board','intro','question','final-wager','final-question','results','final-results'].includes(view.phase)&&<div className="v2card v2self"><h2>{me?.name}</h2><strong>{fmt(me?.score||0)} pts</strong><small>{view.settings.mode==='individual'?`${me?.doubleTakesRemaining} Double Takes this round · `:''}{view.phase==='final-wager'?'Final Word hints are purchased separately':`${view.myHints} regular-game hints remaining`}</small></div>}
      {view.phase==='lobby'&&<section className="v2card"><h2>You're in!</h2><p>Waiting for the host to begin. Everyone plays the same question, with optional private assistance.</p></section>}
      {view.phase==='draft'&&<DraftStage view={view} chooserName={draftTurn?.name||'Another player'} canPick={view.draftTurnId===me?.id} disabled={busy} onChoose={id=>void act({type:'draft-category',categoryId:id})}/>}
      {view.phase==='board'&&<section className="v2card v2boardcard"><div className="v2boardheading"><h2>{canChoose?'✦ Your turn to choose!':`${view.players.find(p=>p.id===view.chooserId)?.name}’s turn to choose`}</h2><span>{fmt(me?.score||0)} pts</span></div>{canChoose?<Board view={view} onChoose={key=>void act({type:'open-question',key})}/>:<div className="v2boardmini"><Board view={view}/></div>}</section>}
@@ -443,15 +448,36 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      </>}
      </section>}
      {view.phase==='results'&&view.results&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow}/><button className="ks-dispute-button" disabled={busy||view.results.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
-     {view.phase==='final-wager'&&<section className="v2card ks-finalwager"><p className="v2eyebrow">THE FINAL WORD</p><h2>{view.final?.category}</h2><p>Your balance: <strong>{fmt(me?.score||0)} points</strong>. You can wager up to this amount after any hint purchases.</p>
-       {view.final?.myWager===undefined?<>
-         <div className="ks-finalshop"><div><h3>Final Word hint shop</h3><p>Regular-game hints do not carry over. Final Word hints must be purchased with points before you lock your wager.</p><p>Each hint costs <strong>{fmt(view.final?.hintPrice||500)} points</strong>, with a limit of <strong>3 hints</strong>. Purchases reduce your balance and maximum wager immediately.</p><p><strong>{view.final?.myPurchasedHints||0} of 3</strong> Final Word hints purchased.</p></div>
-         <button type="button" className="v2small" disabled={busy||!(view.final?.myPurchasableHints)||((me?.score||0)<(view.final?.hintPrice||500))} onClick={()=>void act({type:'buy-final-hint'})}>Buy Final Word hint · {fmt(view.final?.hintPrice||500)} pts</button>
-         {!(view.final?.myPurchasableHints)&&<small>You already purchased all three Final Word hints.</small>}
-         {Boolean(view.final?.myPurchasableHints)&&((me?.score||0)<(view.final?.hintPrice||500))&&<small>Not enough points for another hint.</small>}
+     {view.phase==='final-wager'&&<section className="ks-finaldecision" aria-label="Final Word hints and wager">
+       <header className="ks-finaldecision-head"><span className="ks-finaldecision-eyebrow">✦ THE FINAL WORD</span><h2>{view.final?.category}</h2><p>You know the category, but the question stays secret until everyone locks their wager.</p></header>
+       <div className="ks-finaldecision-balance"><span>YOUR BALANCE</span><strong>{fmt(me?.score??0)} <small>points</small></strong></div>
+       <div className="ks-finaldecision-section">
+         <div className="ks-finaldecision-sectionhead"><h3>Purchase hints</h3><span>{finalHintCount} / {view.final?.maxHints??2}</span></div>
+         <p>Hints cost <strong>{fmt(finalHintPrice)} points each</strong>. You can buy up to two before locking your wager. Regular-game hints don't carry over.</p>
+         <div className="ks-finaldecision-hints" aria-label={`${finalHintCount} of two hints purchased`}>
+           {Array.from({length:view.final?.maxHints??2},(_,i)=><span key={i} className={i<finalHintCount?'purchased':''}>{i<finalHintCount?'✓':'✧'} Hint {i+1}</span>)}
          </div>
-         <form className="v2form" onSubmit={e=>{e.preventDefault();void act({type:'wager',amount:Number(wager)});}}><label>Your wager<input type="number" min={0} max={Math.max(0,me?.score||0)} value={wager} onChange={e=>setWager(e.target.value)}/></label><button disabled={busy||!Number.isInteger(Number(wager))||Number(wager)<0||Number(wager)>Math.max(0,me?.score||0)}>Lock wager</button></form>
-       </>:<p className="ks-wagerlocked">✓ Wager locked: <strong>{fmt(view.final.myWager)}</strong> points. Waiting for everyone else.</p>}
+         {view.final?.myWager===undefined?<button type="button" className="ks-finaldecision-buy" disabled={busy||view.paused||!(view.final?.myPurchasableHints)||wagerMax<finalHintPrice} onClick={()=>void act({type:'buy-final-hint'})}>+ Buy a hint · −{fmt(finalHintPrice)} pts</button>:<span className="ks-finaldecision-locknote">Hint purchases are closed.</span>}
+         {view.final?.myWager===undefined&&!(view.final?.myPurchasableHints)&&<small>Both Final Word hints are purchased.</small>}
+         {view.final?.myWager===undefined&&Boolean(view.final?.myPurchasableHints)&&wagerMax<finalHintPrice&&<small>You need at least {fmt(finalHintPrice)} points for another hint.</small>}
+         <div className="ks-finaldecision-cost"><span>Spent on hints</span><b>−{fmt(finalHintCount*finalHintPrice)} pts</b></div>
+         <small>Purchases are final. Reveal your hints after the question appears.</small>
+       </div>
+       <form className="ks-finaldecision-section ks-finaldecision-wager" onSubmit={e=>{e.preventDefault();if(view.final?.myWager===undefined)void act({type:'wager',amount:wagerPreview});}}>
+         <div className="ks-finaldecision-sectionhead"><h3>Your wager</h3><span>Max {fmt(wagerMax)} pts</span></div>
+         {view.final?.myWager===undefined?<>
+           <input type="range" min={0} max={Math.max(1,wagerMax)} step={1} value={wagerPreview} disabled={busy||view.paused||wagerMax===0} onChange={e=>setWager(Number(e.target.value))} aria-label="Your Final Word wager" className="ks-finaldecision-slider"/>
+           <div className="ks-finaldecision-wagerline"><span>0</span><label><input aria-label="Wager amount in points" type="number" inputMode="numeric" min={0} max={wagerMax} step={1} value={wagerPreview} disabled={busy||view.paused} onChange={e=>setWager(Math.max(0,Math.min(wagerMax,Math.trunc(Number(e.target.value)||0))))}/><small>pts</small></label><span>{fmt(wagerMax)}</span></div>
+           <div className="ks-finaldecision-shortcuts"><button type="button" disabled={busy||view.paused} onClick={()=>setWager(0)}>No wager</button><button type="button" disabled={busy||view.paused} onClick={()=>setWager(Math.floor(wagerMax/2))}>Half</button><button type="button" disabled={busy||view.paused} onClick={()=>setWager(wagerMax)}>All in</button></div>
+         </>:<p className="ks-finaldecision-locked">✓ Locked: {fmt(view.final.myWager)} pts · Waiting for other players</p>}
+         <div className="ks-finaldecision-outcomes" aria-live="polite">
+           <div className="correct"><span>✓ If correct</span><strong>{fmt((me?.score??0)+finalPreviewWager)}</strong><small>points</small></div>
+           <div className="incorrect"><span>✕ If incorrect</span><strong>{fmt((me?.score??0)-finalPreviewWager)}</strong><small>points</small></div>
+         </div>
+         {view.final?.myWager===undefined&&<button className="ks-finaldecision-submit" type="submit" disabled={busy||view.paused}>Lock hints &amp; wager <span aria-hidden="true">↗</span></button>}
+         {view.final?.myWager===undefined&&<p className="ks-finaldecision-disclaimer">Once locked, you cannot purchase more hints or change your wager.</p>}
+       </form>
+       <details className="ks-finaldecision-standings"><summary>View current standings</summary><Scoreboard players={view.players}/></details>
      </section>}
      {view.phase==='final-question'&&<section className="v2card v2questioncard ks-finalquestion"><div className="v2questiondisplay">
        <div className="v2questionheader"><span className="v2categorychip">THE FINAL WORD · {view.final?.category}</span><span className={"v2quicktimer ks-clock "+(view.final?.deadlineAt&&view.final.deadlineAt-timerNow<=5000?"ks-urgent":"")} role="timer" aria-label="Final Word time remaining">{view.paused?'PAUSED':remain(view.final?.deadlineAt,timerNow)}<small>LEFT</small></span></div>
@@ -459,7 +485,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {view.final?.deadlineAt&&<div className="ks-timebar" role="progressbar" aria-label="Final Word time remaining" aria-valuenow={Math.max(0,Math.ceil((view.final.deadlineAt-timerNow)/1000))} aria-valuemin={0} aria-valuemax={view.settings.finalSeconds}><span style={{width:`${Math.max(0,Math.min(100,((view.final.deadlineAt-timerNow)/(Math.max(1,view.settings.finalSeconds)*1000))*100))}%`}}/></div>}
        {view.final?.myAnswer!==undefined?<p className="v2locked">✓ Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={v=>{setFinalDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/ >}
        {finalDraft.trim()&&view.final?.myAnswer===undefined&&<p className="ks-autosave">{draftSaved?"✓ Final draft saved — will count at zero":"Saving your Final Word draft…"}</p>}
-       <div className="ks-finalhintpanel"><div className="ks-finalhinthead"><strong>Final Word hints</strong><span>{view.final?.myAvailableHints||0} available · {view.final?.myRevealedHints?.length||0} of 3 revealed</span></div>
+       <div className="ks-finalhintpanel"><div className="ks-finalhinthead"><strong>Final Word hints</strong><span>{view.final?.myAvailableHints||0} available · {view.final?.myRevealedHints?.length||0} of {view.final?.maxHints??2} revealed</span></div>
        {(view.final?.myRevealedHints||[]).map((hint,i)=><p className="ks-finalhintline" key={i}><b>Hint {i+1}</b> {hint}</p>)}
        {view.final?.myAnswer===undefined&&<button type="button" className="ks-finalhintbutton" disabled={busy||view.paused||!(view.final?.myAvailableHints)||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onClick={()=>void act({type:'final-hint'})}>Reveal next hint ({view.final?.myAvailableHints||0} left)</button>}
        {!(view.final?.myAvailableHints)&&!(view.final?.myRevealedHints?.length)&&<small>No Final Word hints purchased for this question.</small>}
@@ -467,8 +493,8 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      </div></section>}
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/><button className="ks-dispute-button" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
    </>}
-   {!['results','final-results'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&<a className="v2small" target="_blank" rel="noopener noreferrer" href={`/display/${code}`}>Open TV display ↗</a>}<span>The Know Show · v1.5.1</span></footer>
+   {!['results','final-results','final-wager'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
+   <footer className="v2phonefooter">{hostToken&&<a className="v2small" target="_blank" rel="noopener noreferrer" href={`/display/${code}`}>Open TV display ↗</a>}<span>The Know Show · v1.5.2</span></footer>
    </>}
  </main>;
 }

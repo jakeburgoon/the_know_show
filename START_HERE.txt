@@ -1,4 +1,4 @@
-THE KNOW SHOW — v1.5.1 · FULL CUMULATIVE UPDATE
+THE KNOW SHOW — v1.5.2 · FULL CUMULATIVE UPDATE
 
 This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
 
@@ -10,14 +10,18 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW IN v1.5.1
-- Final Word hints are now entirely separate from regular-game hints. Players start the final with zero; they may buy up to 3 for 500 points each before placing wagers. Purchases immediately reduce wagerable score. All 18 Final Word questions retain three progressive private hints and the visible timer.
+NEW IN v1.5.2
+- One compact Final Word decision screen shows your category, balance, two-hint shop (500 points each), wager slider and exact amount, and live points-if-right / points-if-wrong results. The actual question stays hidden until all wagers are locked.
+- NEW: 56 medium-hard/hard Final Word questions in a separate pool, one per category. Only finals from categories NOT played on either current game board are eligible. Seasonal category finals follow calendar availability, with preference for finals not used recently. The 18 earlier finals remain only for games already underway.
+- Each new final has two progressive, independently reviewed hints; see FINAL_WORD_CATEGORY_REVIEW.csv for questions, acceptable responses, hints and 53 source references / three math derivations.
 - More visible Player View sound controls; QR-scanning camera window on homepage; rematch or a fresh home-screen show after the Curtain Call.
 - Answer-first results reveal followed by leaderboard; improved draft turn prompts and subtle navy/gold board depth.
-- Repeat reduction across rematches and new rooms created from the same host browser; 11 seasonal categories added (132 new questions), active by month. Each Build the Board phase includes one seasonal offer when any are in season, alongside regular options.
-- Approved main logo and app icons preserved exactly. 45 original categories / 540 questions unchanged. Total library: 56 categories and 672 questions.
+- Repeat reduction across rematches and new rooms created from the same host browser; 11 seasonal categories added (132 new regular questions), active by month. Each Build the Board phase includes one seasonal offer when any are in season, alongside regular options.
+- Approved main logo and app icons preserved exactly. 45 original categories / 540 questions unchanged. Total standard bank: 56 categories / 672 questions.
 
 VALIDATION
-39 automated game-engine tests and engine TypeScript compilation passed. Full Next.js production build could not run here because dependency installation timed out; check the Vercel build. No full-device end-to-end QA was run.
+42 automated game-engine tests passed with engine TypeScript compilation, including category restriction, seasonal eligibility, answer separation and two-hint purchase rules. Full Next.js production build could not be run here because package dependencies were incomplete; verify with Vercel. End-to-end phone testing is still recommended.
 
 See README.md and RELEASE_NOTES.md for more detail.
+
+

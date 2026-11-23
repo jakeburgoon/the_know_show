@@ -1,9 +1,9 @@
 import { randomInt, randomUUID, createHash } from 'node:crypto';
-import { CATEGORIES, CATEGORY_LOOKUP, FINALS, availableCategories, getQuestion } from './questions';
+import { CATEGORIES, CATEGORY_LOOKUP, CATEGORY_FINALS, FINALS, availableCategories, getQuestion } from './questions';
 
 export const MAX_SEATS=8;
 export const FINAL_HINT_PRICE=500;
-export const MAX_FINAL_HINTS=3;
+export const MAX_FINAL_HINTS=2;
 export const ROUND_NAMES=['The Opening Act','The Main Event'] as const;
 export const ROUND_VALUES=[[100,300,500],[200,600,1000]] as const;
 export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished'|'closed';
@@ -175,6 +175,26 @@ function storeSubmission(s:GameState,p:Player,answer:string,now:number,useDouble
  }else if(s.players.every(pl=>a.answers[pl.id]))closeQuestion(s,now);
 }
 function nextSteal(s:GameState,now:number){const a=s.active!;a.stealTurn=true;a.stealId=s.players[(s.chooserIndex+1)%s.players.length].id;a.startedAt=now;a.deadlineAt=now+Math.max(10,s.settings.answerSeconds+(s.players.find(p=>p.id===a.stealId)?.bonusTimeSeconds||0))*1000;log(s,`${s.players.find(p=>p.id===a.stealId)!.name} has one chance to steal.`);}
+/**
+ * Draw from the distinct Final Word bank. A Final Word category must NOT
+ * appear anywhere on the board in this show. Prefer unused finales, and when
+ * those are exhausted rotate back to the least recently used eligible ones.
+ * Seasonal categories are eligible only when in season.
+ */
+export function chooseFinalQuestion(s:GameState,now:number){
+ const activeIds=new Set(availableCategories(new Date(now)).map(c=>c.id));
+ const currentBoard=new Set([...s.selected[0],...s.selected[1]]);
+ const eligible=CATEGORY_FINALS.filter(q=>q.categoryId&&activeIds.has(q.categoryId)&&!currentBoard.has(q.categoryId));
+ assert(eligible.length>0,'No eligible Final Word categories remain outside the current board.');
+ const unseen=eligible.filter(q=>!s.recentQuestionIds.includes(q.id));
+ if(unseen.length)return shuffle(unseen)[0];
+ const historyOrder=new Map(s.recentQuestionIds.map((id,i)=>[id,i]));
+ const age=(id:string)=>historyOrder.get(id)??-1;
+ const oldest=Math.min(...eligible.map(q=>age(q.id)));
+ // Multiple equally old questions can remain. Break the tie at random.
+ return shuffle(eligible.filter(q=>age(q.id)===oldest))[0];
+}
+
 function finishFinal(s:GameState,now:number){
  const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:Boolean(f.revealedHints?.[p.id])};}}
  s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-672);s.phase='final-results';f.endsAt=now+12000;log(s,'Final answers are in.');
@@ -211,7 +231,7 @@ export function tick(original:GameState,now=Date.now()):GameState {
  }
  if(s.phase==='results'&&s.resolution&&!s.resolution.disputeIds.length&&now>=s.resolution.endsAt){
    if(s.usedKeys.filter(k=>s.selected[s.round].includes(k.split(':')[0])).length===12){
-     if(s.round===0){s.round=1;goDraft(s,now);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)).length?FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)):FINALS.filter(f=>f.tier!=='family'))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
+     if(s.round===0){s.round=1;goDraft(s,now);}else{s.phase='final-wager';s.final={id:chooseFinalQuestion(s,now).id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
    }else{s.phase='board';s.resolution=undefined;}
  }
  if(s.phase==='final-question'&&s.final){
@@ -351,7 +371,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(s.final.wagers[p.id]===undefined,'Purchase hints before locking your wager.');
    const bought=s.final.purchasedHints?.[p.id]??0;
    // Final Word is a separate hint economy: regular-round hints never carry over.
-   assert(bought<MAX_FINAL_HINTS,'You already purchased all three Final Word hints.');
+   assert(bought<MAX_FINAL_HINTS,'You already purchased both Final Word hints.');
    assert(p.score>=FINAL_HINT_PRICE,'You need at least 500 points to buy a hint.');
    p.score-=FINAL_HINT_PRICE;(s.final.purchasedHints??={})[p.id]=bought+1;
    break;
@@ -361,7 +381,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(!s.final.answers[p.id],'Your final answer is already locked.');
    assert(now<=(s.final.deadlineAt??0),'Final Word time has expired.');
    const shown=s.final.revealedHints?.[p.id]??0;
-   assert(shown<MAX_FINAL_HINTS,'All three hints are already revealed.');
+   assert(shown<MAX_FINAL_HINTS,'Both hints are already revealed.');
    const used=s.final.purchasedHintsUsed?.[p.id]??0;
    assert(used<(s.final.purchasedHints?.[p.id]??0),'No purchased Final Word hints remaining.');
    (s.final.purchasedHintsUsed??={})[p.id]=used+1;
