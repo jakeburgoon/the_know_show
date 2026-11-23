@@ -3,7 +3,8 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useParams} from 'next/navigation';
 import Link from 'next/link';
 import {QRCodeSVG} from 'qrcode.react';
-import {Trophy} from 'lucide-react';
+import {Trophy,Volume2,VolumeX,Play,CheckCircle,Users} from 'lucide-react';
+import HostWizard from './HostWizard';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
 import type {Action,GameView,MusicStyle,Player,Settings} from '@/lib/game';
 import {actorToken,type DeviceTab} from '@/lib/device-session';
@@ -130,12 +131,19 @@ function ChoiceForm({choices,onSubmit,disabled}:{choices:string[];onSubmit:(answ
 function AnswerForm({value,onChange,onSubmit,disabled,label='Your answer'}:{value:string;onChange:(value:string)=>void;onSubmit:(value:string)=>void;disabled:boolean;label?:string;key?:string}){
  return <form className="v2answerform" onSubmit={e=>{e.preventDefault();if(value.trim()){e.currentTarget.querySelector('input')?.blur();onSubmit(value.trim());}}}><label>{label}<input maxLength={200} placeholder="Type your answer" value={value} onChange={e=>onChange(e.target.value)} disabled={disabled}/></label><button type="submit" disabled={disabled||!value.trim()}>Lock answer</button></form>;
 }
+function activeForDraft(view:GameView,id?:string){return Boolean(view.active&&(view.settings.mode==='individual'||view.active.answeringId===id));}
 export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const params=useParams<{code:string}>();const code=String(params.code||'').toUpperCase();
  const [ready,setReady]=useState(false),[hostToken,setHostToken]=useState(''),[playerToken,setPlayerToken]=useState(''),[tab,setTab]=useState<DeviceTab>('player'),[origin,setOrigin]=useState('');
  const [view,setView]=useState<GameView|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[now,setNow]=useState(Date.now());
  const [name,setName]=useState(''),[answerDraft,setAnswerDraft]=useState(''),[finalDraft,setFinalDraft]=useState(''),[doubleTake,setDoubleTake]=useState(false),[wager,setWager]=useState('0');
  const [pairOpen,setPairOpen]=useState(false),[joinOpen,setJoinOpen]=useState(true),[scoreEdits,setScoreEdits]=useState<Record<string,string>>({});
+ const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
+ const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false);
+ const lastSoundSecond=useRef<number|null>(null),lastSoundQuestion=useRef(''),soundContext=useRef<AudioContext|null>(null),autoReturnFromDispute=useRef(false);
+ const draftRef=useRef(''),finalDraftRef=useRef('');
+ draftRef.current=answerDraft;finalDraftRef.current=finalDraft;
+ const saveId=useRef(0);
  const lastRev=useRef(-1);const lastKey=useRef('');const [shareMessage,setShareMessage]=useState('');
  const authToken=displayOnly?'':actorToken(tab,{hostToken,playerToken});
  const authMarker=`${tab}:${authToken}`;
@@ -144,6 +152,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  useEffect(()=>{
    let cancelled=false;
    setOrigin(window.location.origin);
+   try {setSetupStep(Math.min(4,Math.max(0,Number(localStorage.getItem(`knowshow:${code}:setupStep`)||0))));setTimerSounds(localStorage.getItem('knowshow:timerSounds')==='on');}catch{/* Private browsing is fine. */}
    if(displayOnly){setReady(true);return;}
    async function initialize(){
      const query=new URLSearchParams(window.location.search);const paired=query.get('hostToken');
@@ -176,24 +185,73 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    const marker=authMarker;
    try{
      const res=await fetch(`/api/rooms/${code}`,{headers:authToken?{Authorization:`Bearer ${authToken}`}:{},cache:'no-store'});
-     const d=await res.json();if(marker!==authRef.current)return;
+     const d=await res.json();if(marker!==authRef.current)return false;
      if(!res.ok)throw new Error(d.error||'Could not load room.');
      if(d.revision>=lastRev.current){lastRev.current=d.revision;setView(d);setError('');}
    }catch(e){if(marker===authRef.current)setError(e instanceof Error?e.message:'Could not refresh room.');}
  },[code,ready,authToken,authMarker]);
  useEffect(()=>{if(!ready)return;void refresh();const t=setInterval(()=>void refresh(),1250);return()=>clearInterval(t);},[ready,refresh]);
  useEffect(()=>{const t=setInterval(()=>setNow(Date.now()),300);return()=>clearInterval(t);},[]);
- const act=useCallback(async(action:Action,actingToken=authToken)=>{if(busy)return;
+ const act=useCallback(async(action:Action,actingToken=authToken):Promise<boolean>=>{if(busy)return false;
    const marker=authMarker;setBusy(true);setError('');
    try{
      const res=await fetch(`/api/rooms/${code}/action`,{method:'POST',headers:{'Content-Type':'application/json',...(actingToken?{Authorization:`Bearer ${actingToken}`}:{})},body:JSON.stringify(action)});
-     const d=await res.json();if(marker!==authRef.current)return;
+     const d=await res.json();if(marker!==authRef.current)return false;
      if(!res.ok)throw new Error(d.error||'Action failed.');
      if(d.revision>=lastRev.current){lastRev.current=d.revision;setView(d);}
-   }catch(e){if(marker===authRef.current){setError(e instanceof Error?e.message:'Could not update game.');void refresh();}}finally{setBusy(false);}
+     return true;
+   }catch(e){if(marker===authRef.current){setError(e instanceof Error?e.message:'Could not update game.');void refresh();}return false;}finally{setBusy(false);}
  },[busy,code,authToken,authMarker,refresh]);
- const join=async()=>{setBusy(true);setError('');try{const res=await fetch(`/api/rooms/${code}/join`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});const d=await res.json();if(!res.ok)throw new Error(d.error||'Could not join.');localStorage.setItem(`knowshow:${code}:player`,d.token);lastRev.current=-1;setPlayerToken(d.token);setTab('player');setView(d.view);lastRev.current=d.view.revision;}catch(e){setError(e instanceof Error?e.message:'Could not join.');}finally{setBusy(false);}};
+ const join=async(joinName=name,keepHost=false)=>{setBusy(true);setError('');try{const res=await fetch(`/api/rooms/${code}/join`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:joinName})});const d=await res.json();if(!res.ok)throw new Error(d.error||'Could not join.');localStorage.setItem(`knowshow:${code}:player`,d.token);lastRev.current=-1;setPlayerToken(d.token);if(!keepHost){setTab('player');setView(d.view);lastRev.current=d.view.revision;}else{setHostPlaying(true);void refresh();}}catch(e){setError(e instanceof Error?e.message:'Could not join.');}finally{setBusy(false);}};
  const role=view?.role.kind||'spectator',isHost=!displayOnly&&tab==='host'&&role==='host',isPlayer=!displayOnly&&tab==='player'&&role==='player';
+ const advanceSetup=async(update:Partial<Settings>)=>{if(await act({type:'settings',settings:update},hostToken)){
+   setSetupStep(step=>{const next=Math.min(4,step+1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});
+ }};
+ const playTone=useCallback((kind:'tick'|'end')=>{
+   try{
+     const ctx=soundContext.current??new AudioContext();soundContext.current=ctx;
+     if(ctx.state==='suspended')void ctx.resume();
+     const notes=kind==='tick'?[{freq:570,delay:0,duration:.075}]:[{freq:880,delay:0,duration:.12},{freq:1175,delay:.13,duration:.35}];
+     for(const note of notes){const osc=ctx.createOscillator(),gain=ctx.createGain(),start=ctx.currentTime+note.delay;
+       osc.type=kind==='tick'?'square':'sine';osc.frequency.value=note.freq;
+       gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(kind==='tick'?.055:.11,start+.013);gain.gain.exponentialRampToValueAtTime(.0001,start+note.duration);
+       osc.connect(gain);gain.connect(ctx.destination);osc.start(start);osc.stop(start+note.duration+.02);
+     }
+   }catch{/* Audio may be unavailable or disallowed on this device. */}
+ },[]);
+ const toggleTimerSound=()=>{const next=!timerSounds;setTimerSounds(next);localStorage.setItem('knowshow:timerSounds',next?'on':'off');if(next)playTone('tick');};
+ const questionClockId=view?.phase==='question'?`q:${view.active?.key}:${view.active?.stealTurn?'steal':'first'}`:view?.phase==='final-question'?'final':'none';
+ const clockDeadline=view?.phase==='question'?(view.active?.myDeadlineAt??view.active?.deadlineAt):view?.phase==='final-question'?view.final?.deadlineAt:undefined;
+ useEffect(()=>{if(!timerSounds||!view||!isFinite(now)||view.paused||!clockDeadline)return;
+   if(questionClockId!==lastSoundQuestion.current){lastSoundQuestion.current=questionClockId;lastSoundSecond.current=null;}
+   const seconds=Math.max(0,Math.ceil((clockDeadline-now)/1000));
+   const participating=view.role.kind==='player'&&(view.phase==='final-question'?view.final?.myAnswer===undefined:view.active?.mySubmission===undefined);
+   if(!participating||questionClockId==='none'||lastSoundSecond.current===seconds)return;
+   lastSoundSecond.current=seconds;
+   if(seconds>=1&&seconds<=5)playTone('tick');
+   else if(seconds===0&&now-clockDeadline<1300)playTone('end');
+ },[timerSounds,now,view,clockDeadline,questionClockId,playTone]);
+ // Persist drafts before the timer reaches zero. The server scores saved drafts at the deadline.
+ useEffect(()=>{if(!isPlayer||view?.phase!=='question'||!activeForDraft(view,me?.id)||view.active?.myChoices||view.paused||view.active?.mySubmission!==undefined)return;
+   setDraftSaved(false);
+   const draft=answerDraft;const id=++saveId.current;
+   const timer=setTimeout(async()=>{
+     try{const res=await fetch(`/api/rooms/${code}/action`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${playerToken}`},body:JSON.stringify({type:'save-draft',scope:'question',answer:draft,doubleTake})});
+       if(res.ok&&id===saveId.current&&draftRef.current===draft)setDraftSaved(true);
+     }catch{/* Keep the editable answer; user may still lock it manually. */}
+   },240);return()=>clearTimeout(timer);
+ },[answerDraft,doubleTake,view?.phase,view?.active?.key,view?.active?.mySubmission,view?.paused,view?.active?.myChoices,code,playerToken]);
+ useEffect(()=>{if(!isPlayer||view?.phase!=='final-question'||view.final?.myAnswer!==undefined||view.paused)return;
+   const draft=finalDraft;const id=++saveId.current;setDraftSaved(false);
+   const timer=setTimeout(async()=>{
+     try{const res=await fetch(`/api/rooms/${code}/action`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${playerToken}`},body:JSON.stringify({type:'save-draft',scope:'final',answer:draft})});
+       if(res.ok&&id===saveId.current&&finalDraftRef.current===draft)setDraftSaved(true);
+     }catch{/* Manual locking remains available. */}
+   },240);return()=>clearTimeout(timer);
+ },[finalDraft,view?.phase,view?.final?.myAnswer,view?.paused,code,playerToken]);
+ const disputes=(view?.phase==='results'?view.results?.disputeIds:view?.phase==='final-results'?view.final?.disputeIds:[])??[];
+ useEffect(()=>{if(autoReturnFromDispute.current&&tab==='host'&&view?.role.kind==='host'&&disputes.length===0){autoReturnFromDispute.current=false;switchTab('player');}},[tab,view?.revision,view?.role.kind,disputes.length]);
+
  const me=view?.players.find(p=>p.id===view.role.id),canChoose=Boolean(me&&view?.chooserId===me.id);
  const draftTurn=view?.players.find(p=>p.id===view.draftTurnId);
  const lastDisplayedPhase=useRef('');
@@ -205,7 +263,8 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    }
  },[tab,view?.phase,view?.active?.key,displayOnly]);
  const activeKey=view?.active?.key??view?.intro?.key??'';
- useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft('');setDoubleTake(false);}},[activeKey]);
+ useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft(view?.active?.myDraft??'');setDoubleTake(false);setDraftSaved(false);}},[activeKey]);
+ useEffect(()=>{if(view?.phase==='final-wager'){setFinalDraft('');setDraftSaved(false);}else if(view?.phase==='final-question'&&view.final?.myDraft&&finalDraftRef.current==='')setFinalDraft(view.final.myDraft);},[view?.phase]);
  const genre=SUNO_SOUNDTRACKS.find(t=>t.id===view?.settings.music);
  useEffect(()=>{
    if(!hostToken||!view?.playedQuestionIds?.length)return;
@@ -217,6 +276,27 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  if(!ready||(!view&&!error))return <main className="v2loading">✳ Preparing The Know Show…</main>;
  if(!view)return <main className="v2loading"><h2>Can't open this room</h2><p>{error}</p><Link href="/">Create a new show</Link></main>;
  if(displayOnly)return <TV view={view} code={code} origin={origin} now={now}/>;
+ if(isHost&&view.phase==='lobby'&&setupStep<4)return <HostWizard step={setupStep} settings={view.settings} busy={busy} onChoose={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
+ if(isHost&&view.phase==='lobby'&&setupStep>=4){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
+   const answerLabel=(access:Player['choiceAccess'])=>access==='all'?'Four choices · always':access==='medium-hard'?'Four choices · medium and hard':access==='hard'?'Four choices · hard only':'Written answers';
+   return <main className="ks-lobby"><header className="ks-lobby-top"><img src="/know-show-logo.png" alt="The Know Show"/><span>ROOM · {code}</span></header>
+     <section className="ks-lobby-hero"><p className="ks-tag">GREEN ROOM</p><p>Scan to join. Players and teams appear below as they connect.</p>
+       {origin&&<div className="ks-lobby-qr"><QRCodeSVG value={roomUrl} size={235} marginSize={2}/></div>}
+       <div className="ks-lobby-code">ROOM CODE <strong>{code}</strong></div>
+       <div className="ks-lobby-share"><button type="button" onClick={async()=>{try{if(navigator.share)await navigator.share({title:'Join The Know Show',url:roomUrl});else{await navigator.clipboard.writeText(roomUrl);setShareMessage('Join link copied!');}}catch{/* User may dismiss share. */}}}>Share invite</button><a href={`/display/${code}`} target="_blank" rel="noopener noreferrer">Open TV display ↗</a></div>
+       {shareMessage&&<p role="status">{shareMessage}</p>}
+     </section>
+     <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
+      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><div><strong><CheckCircle size={18}/>{p.name}</strong><small>{answerLabel(p.choiceAccess)}</small></div><label>Answer style<select value={p.choiceAccess??'off'} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,choiceAccess:e.target.value as Player['choiceAccess']})}><option value="off">Write answers</option><option value="all">Four choices · always</option><option value="medium-hard">Four choices · medium &amp; hard</option><option value="hard">Four choices · hard only</option></select></label></div>)}</div>}
+      <p className="ks-muted">{view.settings.answerStyle==='mixed'?'Mixed format: set the answer style for each player above.':'You can override anyone’s starting format above.'} The Final Word is always written for everyone.</p>
+      {!playerToken?<div className="ks-lobby-hostplay"><label className="ks-host-checkbox"><input type="checkbox" checked={hostPlaying} onChange={e=>setHostPlaying(e.target.checked)}/><strong>Will you be participating as a player?</strong></label>
+      {hostPlaying&&<form onSubmit={e=>{e.preventDefault();if(hostName.trim())void join(hostName.trim(),true);}}><label>Your name<input value={hostName} maxLength={28} minLength={2} required placeholder="Enter your player name" onChange={e=>setHostName(e.target.value)}/></label><button disabled={busy||hostName.trim().length<2}>Join the players</button></form>}</div>:<div className="ks-lobby-hostplay"><CheckCircle size={19}/> You’re playing too! Your player account is connected to this host device.</div>}
+     </section>
+     <details className="ks-lobby-extras"><summary>Additional settings &amp; accommodations</summary><label>Question time<select value={view.settings.answerSeconds} disabled={busy} onChange={e=>void act({type:'settings',settings:{answerSeconds:Number(e.target.value)}})}>{[15,20,25,30,45,60].map(n=><option key={n} value={n}>{n} seconds</option>)}</select></label><label>Standard hints<select value={view.settings.normalHints} disabled={busy} onChange={e=>void act({type:'settings',settings:{normalHints:Number(e.target.value)}})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n} hints</option>)}</select></label>{view.settings.music!=='off'&&<label>Soundtrack arrangement<select value={view.settings.arrangement} disabled={busy} onChange={e=>void act({type:'settings',settings:{arrangement:Number(e.target.value) as 0|1}})}><option value="0">Arrangement 1</option><option value="1">Arrangement 2</option></select></label>}{view.players.map(p=><div key={p.id}><strong>{p.name}</strong><label>Extra time<select value={p.bonusTimeSeconds} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusTimeSeconds:Number(e.target.value)})}>{[0,5,10,15,20,30].map(n=><option key={n} value={n}>{n}s</option>)}</select></label><label>Extra hints<select value={p.bonusHints} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusHints:Number(e.target.value)})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>)}<details className="ks-lobby-pair"><summary>Pair a second host device (private)</summary><p>Only share this QR with the person helping you host. Do not put it on the TV or share it with players.</p>{origin&&<div className="ks-lobby-qr"><QRCodeSVG value={privateHostUrl} size={180} marginSize={2}/></div>}</details></details>
+     <div className="ks-lobby-actions"><button className="ks-start" type="button" disabled={busy||view.players.length<2} onClick={async()=>{if(await act({type:'start-draft'},hostToken))switchTab('player');}}>START THE SHOW! <Play size={23} fill="currentColor"/></button><small>{view.players.length<2?'At least two players or teams are needed to start.':'The category draft begins immediately. Players take turns choosing categories.'}</small><button className="ks-edit-setup" type="button" onClick={()=>{setSetupStep(0);localStorage.setItem(`knowshow:${code}:setupStep`,'0');}}>Review the four setup questions</button></div>
+     {error&&<p role="alert" className="v2error">{error}</p>}
+   </main>;
+ }
  if(view.phase==='finished')return <main className="v13phonefinish">
    <header className="v13finishhead"><Link href="/"><img src="/know-show-logo.png" alt="The Know Show"/></Link><span>THE CURTAIN CALL</span></header>
    <CurtainCall players={view.players} mode="phone"/>
@@ -230,23 +310,23 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const myDeadline=view.active?.myDeadlineAt??view.active?.deadlineAt;
  const myHasAnswered=Boolean(me&&view.active?.mySubmission!==undefined);
  return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span></header>
-   {hostToken&&<nav className="v2viewtabs" aria-label="Room views">
-     <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>My Player View</button>
-     {hostToken&&<button type="button" className={tab==='host'?'active':''} aria-current={tab==='host'?'page':undefined} onClick={()=>switchTab('host')}>Host Controls</button>}
-     {hostToken&&<button type="button" className={tab==='tv'?'active':''} aria-current={tab==='tv'?'page':undefined} onClick={()=>switchTab('tv')}>TV Preview</button>}
+   {hostToken&&<nav className={"v2viewtabs ks-two-tabs"+(view.phase!=='lobby'?" ks-during-show":"")} aria-label="Room views">
+     <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>Player View</button>
+     {hostToken&&<button type="button" className={tab==='host'?'active':''} aria-current={tab==='host'?'page':undefined} onClick={()=>switchTab('host')}>Host View</button>}
    </nav>}
-   {view.phase==='lobby'&&<section className="v11roomhero" aria-label="The Green Room"><div className="v11roomherobrand"><img src="/know-show-logo.png" alt="The Know Show"/><span>THE GREEN ROOM</span></div><div className="v11roomherofooter"><div><strong>{isHost?'Welcome, showrunner.':'You’re in the right place.'}</strong><small>{isHost?'Get your players ready, then build the board.':'The show begins when everyone’s ready.'}</small></div><div className="v11roomcodeplate"><span>ROOM CODE</span><strong>{code}</strong></div></div></section>}
+   {view.phase==='lobby'&&<div className="v2eyebrow ks-compact-roomlabel">GREEN ROOM</div>}
+   {isPlayer&&['question','final-question'].includes(view.phase)&&<div className="ks-soundbar"><button type="button" onClick={toggleTimerSound} aria-pressed={timerSounds}>{timerSounds?<Volume2 size={18}/>:<VolumeX size={18}/>} Countdown sounds: {timerSounds?'On':'Off'}</button><span>Ticks during the last 5 seconds · bell at 0</span></div>}
    {phonesOnly&&isPlayer&&view.phase!=='lobby'&&<PocketScores players={view.players} meId={me?.id}/>}
    {phonesOnly&&hostToken&&<PhoneSoundtrack music={view.settings.music} arrangement={view.settings.arrangement}/>}
    {tab==='tv'&&hostToken?<div className="v2tvpreview"><div className="v2tvpreviewnote"><strong>TV Preview</strong> · For the actual shared TV, open the full-screen TV display from Host Controls. <button type="button" onClick={()=>switchTab(playerToken?'player':hostToken?'host':'player')}>← Back to {playerToken?'Player':'Host'} View</button></div><TV view={view} code={code} origin={origin} now={now} preview/></div>:<>
-   {!['board','draft'].includes(view.phase)&&!(tab==='player'&&['intro','question','final-question'].includes(view.phase))&&<div className="v2phonestage"><span>{stage}</span><h1>{view.phase==='intro'?'Up next!':view.phase==='results'?'The answer is in':view.phase==='question'?view.active?.category:stage}</h1></div>}
+   {view.phase!=='lobby'&&!['board','draft'].includes(view.phase)&&!(tab==='player'&&['intro','question','final-question'].includes(view.phase))&&<div className="v2phonestage"><span>{stage}</span><h1>{view.phase==='intro'?'Up next!':view.phase==='results'?'The answer is in':view.phase==='question'?view.active?.category:stage}</h1></div>}
    {error&&<div className="v2error" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
    {view.paused&&<div className="v2alert">Game paused by the host</div>}
-   {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>switchTab('host')}>Open Host Controls</button></div>}
+   {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>{autoReturnFromDispute.current=true;switchTab('host');}}>Open Host Controls</button></div>}
    {tab==='player'&&role==='spectator'&&view.phase==='lobby'&&<section className="v2card"><h2>Join the show</h2><p>Choose a player name to join. If playing as a team, enter the team name.</p><form onSubmit={e=>{e.preventDefault();void join();}} className="v2form"><label>{view.settings.mode==='teams'?'Team name':'Player name'}<input required minLength={2} maxLength={28} value={name} onChange={e=>setName(e.target.value)}/></label><button disabled={busy}>Join this room</button></form></section>}
-   {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&<div className="v2card"><p>This show is already in progress. Ask the host for a new room when it ends.</p><Link href={`/display/${code}`}>Watch the TV display</Link></div>}
+   {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&hostToken&&<div className="ks-spectator"><p>You're hosting without playing. Here's the live show. Use the small Host View tab for arbitration.</p><TV view={view} code={code} origin={origin} now={now} preview/></div>}
+   {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&!hostToken&&<div className="v2card"><p>This show is already in progress.</p><Link href={`/display/${code}`}>Watch the TV display</Link></div>}
    {tab==='host'&&!isHost&&<section className="v2card"><h2>Host access unavailable</h2><p>Scan the private host QR code from a device that already has host access. Your player view is unaffected.</p><button className="v2small" onClick={()=>switchTab('player')}>Back to Player View</button></section>}
-   {isHost&&!playerToken&&view.phase==='lobby'&&<section className="v2card v2hostjoin"><h2>Play and host at the same time</h2><p>Join this show as a player. You'll keep your private host access and can switch between both views throughout the game.</p><button className="v2primary" onClick={()=>switchTab('player')}>Join as a player</button></section>}
    {isHost&&<>
      {view.phase==='draft'&&<DraftStage view={view} chooserName={draftTurn?.name||'Another player'} canPick disabled={busy} onChoose={id=>void act({type:'draft-category',categoryId:id})}/>}
      <section className="v2card"><div className="v2between"><h2>Host controls</h2><button className="v2small" disabled={busy} onClick={()=>void act({type:'pause'})}>{view.paused?'Resume':'Pause'} game</button></div>
@@ -292,14 +372,15 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='board'&&<section className="v2card v2boardcard"><div className="v2boardheading"><h2>{canChoose?'Your turn — pick a question':`Waiting for ${view.players.find(p=>p.id===view.chooserId)?.name}`}</h2><span>{fmt(me?.score||0)} pts</span></div>{canChoose?<Board view={view} onChoose={key=>void act({type:'open-question',key})}/>:<div className="v2boardmini"><Board view={view}/></div>}</section>}
      {view.phase==='intro'&&<section className="v2card v2intro" aria-live="polite"><div className="v2introkicker">✳ UP NEXT · {view.roundNames[view.round]}</div><h2>{view.intro?.category}</h2><div className="v2introvalue">{fmt(view.intro?.points||0)}<span> POINTS</span></div><div className="v2introwait">GET READY FOR YOUR QUESTION</div></section>}
      {view.phase==='question'&&view.active&&<section className="v2card v2questioncard"><div className="v2questiondisplay">
-       <div className="v2questionheader"><span className="v2categorychip">{view.active.category}</span><span className="v2questionpoints">{view.active.points} PTS</span><span className="v2quicktimer" aria-label="Time remaining">{view.paused?'Paused':remain(myDeadline,now)}</span></div>
-       <h2 className="v2prompt">{view.active.prompt}</h2>
+       <div className="v2questionheader"><span className="v2categorychip">{view.active.category}</span><span className="v2questionpoints">{view.active.points} PTS</span><span className={"v2quicktimer ks-clock "+(myDeadline&&myDeadline-now<=5000?"ks-urgent":"")} aria-label="Time remaining">{view.paused?'PAUSED':remain(myDeadline,now)}<small>LEFT</small></span></div>
+       <h2 className="v2prompt">{view.active.prompt}</h2>{myDeadline&&<div className="ks-timebar" role="progressbar" aria-label="Question time remaining" aria-valuenow={Math.max(0,Math.ceil((myDeadline-now)/1000))} aria-valuemin={0} aria-valuemax={view.settings.answerSeconds+(me?.bonusTimeSeconds||0)}><span style={{width:`${Math.max(0,Math.min(100,((myDeadline-now)/((view.settings.answerSeconds+(me?.bonusTimeSeconds||0))*1000))*100))}%`}}/></div>}
 
        {activeForPlayer&&!myHasAnswered?<>
          {view.settings.mode==='individual'&&<label className="v2double v2doublecompact"><input type="checkbox" checked={doubleTake} disabled={busy||!me?.doubleTakesRemaining} onChange={e=>setDoubleTake(e.target.checked)}/> <span>✳ Double Take <small>({me?.doubleTakesRemaining} left)</small></span></label>}
          {view.active.myChoices?.length===4
            ? <ChoiceForm choices={view.active.myChoices} disabled={busy||view.paused||Boolean(myDeadline&&now>myDeadline)} onSubmit={val=>void act({type:'submit-answer',answer:val,doubleTake})}/>
-           : <AnswerForm key={view.active.key+(view.active.stealTurn?'-steal':'-first')} value={answerDraft} onChange={setAnswerDraft} disabled={busy||view.paused||Boolean(myDeadline&&now>myDeadline)} onSubmit={val=>void act({type:'submit-answer',answer:val,doubleTake})}/>}
+           : <AnswerForm key={view.active.key+(view.active.stealTurn?'-steal':'-first')} value={answerDraft} onChange={v=>{setAnswerDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(myDeadline&&now>myDeadline)} onSubmit={val=>void act({type:'submit-answer',answer:val,doubleTake})}/>}
+         {!view.active.myChoices&&answerDraft.trim()&&<p className="ks-autosave">{draftSaved?"✓ Draft saved — will count when time runs out":"Saving draft for automatic submission…"}</p>}
        </>:myHasAnswered?<div className="v2locked">✓ Answer locked: {view.active.mySubmission}</div>:<div className="v2locked">{view.settings.mode==='teams'?`${view.players.find(p=>p.id===view.active?.answeringId)?.name} is ${view.active.stealTurn?'attempting a steal':'answering'}.`:'Time to see how everyone does.'}</div>}
      </div>
      {activeForPlayer&&!myHasAnswered&&<>
@@ -317,11 +398,11 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='results'&&view.results&&<section className="v2card"><p className="v2eyebrow">THE ANSWER</p><h2>{view.results.answer}</h2><div className="v2resultgrid">{view.players.map(p=>{const r=view.results!.answers[p.id];return <div className={'v2result '+(r?.correct?'right':'wrong')} key={p.id}><b>{p.name}</b><span>{r?.correct?'Correct':r?'Incorrect':'No answer'}</span><strong>{r?.points?`+${fmt(r.points)}`:'0'}</strong></div>;})}</div>
        <button className="v2small" disabled={busy||view.results.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: <strong>{view.final?.category}</strong></p><p>Choose a wager from zero to your current nonnegative score.</p>{view.final?.myWager===undefined?<form className="v2form" onSubmit={e=>{e.preventDefault();void act({type:'wager',amount:Number(wager)});}}><label>Your wager<input type="number" min={0} max={Math.max(0,me?.score||0)} value={wager} onChange={e=>setWager(e.target.value)}/></label><button disabled={busy||Number(wager)>Math.max(0,me?.score||0)}>Lock wager</button></form>:<p>Wager locked: {fmt(view.final.myWager)}</p>}</section>}
-     {view.phase==='final-question'&&<section className="v2card v2questioncard"><div className="v2questiondisplay"><p className="v2eyebrow">THE FINAL WORD · {view.final?.category}</p><h2 className="v2prompt">{view.final?.prompt}</h2><div className="v2countdown" aria-label="Time remaining">{remain(view.final?.deadlineAt,now)}</div>{view.final?.myAnswer!==undefined?<p className="v2locked">Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={setFinalDraft} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/>}</div></section>}
+     {view.phase==='final-question'&&<section className="v2card v2questioncard"><div className="v2questiondisplay"><p className="v2eyebrow">THE FINAL WORD · {view.final?.category}</p><h2 className="v2prompt">{view.final?.prompt}</h2><div className={"v2countdown ks-finalclock "+(view.final?.deadlineAt&&view.final.deadlineAt-now<=5000?"ks-urgent":"")} aria-label="Time remaining">{remain(view.final?.deadlineAt,now)} remaining</div>{view.final?.myAnswer!==undefined?<p className="v2locked">Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={v=>{setFinalDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&now>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/ >}{finalDraft.trim()&&view.final?.myAnswer===undefined&&<p className="ks-autosave">{draftSaved?"✓ Final draft saved — will count at zero":"Saving your Final Word draft…"}</p>}</div></section>}
      {view.phase==='final-results'&&<section className="v2card"><h2>Correct answer: {view.final?.answer}</h2><div className="v2resultgrid">{view.final?.results?.map(r=><div key={r.id} className={'v2result '+(r.correct?'right':'wrong')}><b>{r.name}</b><span>{r.correct?'Correct':'Incorrect'}</span><strong>{r.points>=0?'+':''}{fmt(r.points)}</strong></div>)}</div><button className="v2small" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>Dispute my result</button></section>}
    </>}
    <section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>
-   <footer className="v2phonefooter">{hostToken&&<button type="button" className="v2small" onClick={()=>switchTab('tv')}>Preview TV screen</button>}<span>The Know Show · v1.3.1</span></footer>
+   <footer className="v2phonefooter">{hostToken&&<a className="v2small" target="_blank" rel="noopener noreferrer" href={`/display/${code}`}>Open TV display ↗</a>}<span>The Know Show · v1.4.0</span></footer>
    </>}
  </main>;
 }

@@ -206,3 +206,78 @@ test('host can be a player on the same device without player/host credential mix
  const device=require('../.engine-build/device-session.js');assert.equal(device.actorToken('host',{hostToken:'host-key',playerToken:'player-key'}),'host-key');
  assert.equal(device.actorToken('player',{hostToken:'host-key',playerToken:'player-key'}),'player-key');
 });
+
+test('guided host answer-format choice applies to people who join afterward',()=>{
+ let s=g.makeGame();
+ s=g.mutate(s,{type:'settings',settings:{answerStyle:'choices'}},host,1000);
+ let one=g.joinGame(s,'Choice Player',undefined,2000);s=one.state;
+ assert.equal(s.players[0].choiceAccess,'all');
+ s=g.mutate(s,{type:'settings',settings:{answerStyle:'mixed'}},host,2100);
+ assert.equal(s.players[0].choiceAccess,'off');
+ let two=g.joinGame(s,'Write Player',undefined,2200);s=two.state;
+ assert.equal(s.players[1].choiceAccess,'off');
+ s=g.mutate(s,{type:'player-bonuses',playerId:two.player.id,choiceAccess:'hard'},host,2300);
+ assert.equal(s.players[1].choiceAccess,'hard');
+ assert.equal(s.settings.answerStyle,'mixed');
+});
+
+test('typed question drafts are private and automatically scored at zero without a speed bonus',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const q=bank.getQuestion(s.active.questionId),end=s.active.deadlineAt;
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:q.answer,doubleTake:false},a[0],end-2000);
+ assert.equal(g.makeView(s,a[0],1,end-1000).active.myDraft,q.answer);
+ assert.equal(g.makeView(s,a[1],1,end-1000).active.myDraft,undefined);
+ assert.equal(g.makeView(s,host,1,end-1000).active.myDraft,undefined);
+ s=g.tick(s,end);
+ assert.equal(s.phase,'results');assert.equal(s.resolution.answers[a[0].id].points,100);
+ assert.equal(s.resolution.answers[a[0].id].answerFormat,'written');
+ assert.equal(s.resolution.answers[a[1].id],undefined);
+});
+
+test('draft can be edited or erased, and only final saved non-empty answer is submitted',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const end=s.active.deadlineAt;
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:'wrong first'},a[0],end-5000);
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:'corrected later'},a[0],end-2000);
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:'unwanted'},a[1],end-1900);
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:''},a[1],end-1800);
+ s=g.tick(s,end);
+ assert.equal(s.phase,'results');assert.equal(s.resolution.answers[a[0].id].answer,'corrected later');
+ assert.equal(s.resolution.answers[a[1].id],undefined);
+});
+
+test('per-player extra time is respected when auto-submitting drafts',()=>{
+ let {s,a}=setup(2);s=g.mutate(s,{type:'player-bonuses',playerId:a[1].id,bonusTimeSeconds:10},host,3000);
+ s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const end=s.active.deadlineAt;
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:'Player one'},a[0],end-1000);
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:'Player two'},a[1],end-1000);
+ s=g.tick(s,end);assert.equal(s.phase,'question');
+ assert.equal(s.active.answers[a[0].id].answer,'Player one');
+ assert.equal(s.active.answers[a[1].id],undefined);
+ s=g.tick(s,end+10000);assert.equal(s.phase,'results');
+ assert.equal(s.resolution.answers[a[1].id].answer,'Player two');
+});
+
+test('team answer draft auto-submits on turn expiry instead of unintentionally passing',()=>{
+ let {s,a}=setup(2,'teams');s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const q=bank.getQuestion(s.active.questionId),end=s.active.deadlineAt;
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:q.answer},a[0],end-1000);
+ s=g.tick(s,end);assert.equal(s.phase,'results');
+ assert.equal(s.resolution.answers[a[0].id].answer,q.answer);
+});
+
+test('Final Word saved draft is automatically scored at zero without requiring Lock answer',()=>{
+ let {s,a}=setup(2);s.phase='final-wager';s.final={id:'f7',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'wager',amount:0},a[0],5000);
+ s=g.mutate(s,{type:'wager',amount:0},a[1],5010);
+ const end=s.final.deadlineAt,answer=bank.FINALS.find(q=>q.id==='f7').answer;
+ s=g.mutate(s,{type:'save-draft',scope:'final',answer},a[0],end-1000);
+ s=g.mutate(s,{type:'save-draft',scope:'final',answer:'wrong'},a[1],end-900);
+ assert.equal(g.makeView(s,a[1],1,end-100).final.myDraft,'wrong');
+ assert.equal(g.makeView(s,host,1,end-100).final.myDraft,undefined);
+ s=g.tick(s,end);assert.equal(s.phase,'final-results');
+ assert.equal(s.final.answers[a[0].id].correct,true);
+ assert.equal(s.final.answers[a[1].id].correct,false);
+ assert.equal(s.final.answers[a[0].id].answerFormat,'written');
+});

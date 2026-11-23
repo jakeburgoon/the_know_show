@@ -41,14 +41,14 @@ export default function Home() {
       <div className="v11entryheading"><p className="v11sectionkicker">THE SHOW STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
       <div className="v11entrygrid">
         <section className="v11entrycard v11createcard" aria-labelledby="v11createheading"><div className="v11cardtop"><div className="v11cardicon"><Clapperboard size={24}/></div><span className="v11steplabel">01 / HOST</span></div>
-          <h3 id="v11createheading">Run the show</h3><p>Create your room, invite your crew, and play along while hosting.</p>
+          <h3 id="v11createheading">Host a show</h3><p>Answer four quick setup questions, invite your players, and start the show.</p>
           <label htmlFor="passcode" className="v11fieldlabel">Room passcode <span>Optional, if configured</span></label>
           <input id="passcode" className="v11field" type="password" value={passcode} onChange={e=>setPasscode(e.target.value)} autoComplete="off" placeholder="Leave blank if not needed"/>
-          <button type="button" className="v11action v11actiongold" disabled={busy} onClick={createRoom}>{busy?'Creating your room…':'Create a show'}<ArrowRight size={19}/></button>
+          <button type="button" className="v11action v11actiongold" disabled={busy} onClick={createRoom}>{busy?'Creating your room…':'Host a show'}<ArrowRight size={19}/></button>
         </section>
         <section className="v11entrycard v11joincard" aria-labelledby="v11joinheading"><div className="v11cardtop"><div className="v11cardicon"><Ticket size={24}/></div><span className="v11steplabel">02 / PLAYER</span></div>
-          <h3 id="v11joinheading">Join the fun</h3><p>Scan the host’s QR code, or enter your room code to get in.</p>
-          <label htmlFor="room-code" className="v11fieldlabel">Your six-character room code</label>
+          <h3 id="v11joinheading">Join a show</h3><p>Usually you’ll scan the host’s QR code. Have a code? Join here.</p>
+          <label htmlFor="room-code" className="v11fieldlabel">Room code (if you can’t scan)</label>
           <input id="room-code" className="v11field v11codefield" autoCapitalize="characters" value={code} onChange={e=>setCode(e.target.value.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'').slice(0,6))} onKeyDown={e=>{if(e.key==='Enter')goToRoom();}} placeholder="ABC234" maxLength={6}/>
           <button type="button" className="v11action v11actionnavy" onClick={goToRoom}>Enter the room <ArrowRight size={19}/></button>
         </section>
@@ -56,6 +56,6 @@ export default function Home() {
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
     <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
-    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.1</span></footer>
+    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.4.0</span></footer>
   </main>;
 }

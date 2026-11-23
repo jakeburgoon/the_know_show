@@ -1,4 +1,10 @@
-# The Know Show — v1.3.0
+# The Know Show v1.4.0
+
+The complete Next.js application. Hosts now start with a four-question setup wizard, share a live QR-code Green Room, and optionally join as a player. During play a larger countdown, user-controlled sound cues, and server-saved typed drafts help players avoid accidental missed answers. All established rules, approved art, and questions are preserved.
+
+See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
+
+# The Know Show — v1.4.0
 
 A live trivia-night app for up to eight players or teams, with a 45-category, 540-question Standard Trivia bank, two rounds of category drafting, optional private four-choice assistance, Double Takes, The Final Word, and a celebratory Curtain Call.
 

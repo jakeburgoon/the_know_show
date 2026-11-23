@@ -9,12 +9,13 @@ export type Mode='individual'|'teams';
 export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'off';
 export type DisplayMode='tv'|'phones';
 export type ChoiceAccess='off'|'all'|'medium-hard'|'hard';
-export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode};
+export type AnswerStyle='written'|'choices'|'mixed';
+export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode;answerStyle?:AnswerStyle};
 export type Player={id:string;name:string;age?:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;choiceAccess?:ChoiceAccess;joinedAt:number;doubleTakesRemaining:number};
 export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean;answerFormat?:'written'|'choices'};
-export type ActiveQuestion={key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
+export type ActiveQuestion={drafts?:Record<string,{answer:string;doubleTake:boolean}>;key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
-export type FinalState={id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
+export type FinalState={drafts?:Record<string,string>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
 export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[]};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
@@ -22,6 +23,7 @@ export type Action=
  |{type:'player-bonuses';playerId:string;bonusHints?:number;bonusTimeSeconds?:number;choiceAccess?:ChoiceAccess}
  |{type:'start-draft'}|{type:'draft-category';categoryId:string}
  |{type:'open-question';key:string}|{type:'submit-answer';answer:string;doubleTake?:boolean}
+ |{type:'save-draft';answer:string;scope:'question'|'final';doubleTake?:boolean}
  |{type:'hint';kind:'written'}|{type:'pass'}
  |{type:'dispute'}|{type:'resolve-dispute';playerId:string;correct:boolean}|{type:'dismiss-dispute';playerId:string}|{type:'skip-question'}
  |{type:'pause'}|{type:'adjust-score';playerId:string;delta:number}
@@ -44,13 +46,13 @@ function answerOptions(answer:string,distractors:string[]|undefined,questionId:s
  assert(options.length===4&&new Set(options.map(x=>normalize(x))).size===4,'This question needs four distinct answer choices.');
  return options.sort((a,b)=>createHash('sha256').update(`${questionId}:${playerId}:${a}`).digest('hex').localeCompare(createHash('sha256').update(`${questionId}:${playerId}:${b}`).digest('hex')));
 }
-export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv'};}
+export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv',answerStyle:'written'};}
 export function makeGame(recentQuestionIds:string[]=[]):GameState{return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string').slice(-350)};}
 export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
  assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
  const n=String(name||'').trim().replace(/\s+/g,' ').slice(0,28);assert(n.length>=2,'Enter a name of at least two characters.');
  assert(!original.players.some(p=>p.name.toLowerCase()===n.toLowerCase()),'That name is already in use.');
- const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,choiceAccess:'off',joinedAt:now,doubleTakesRemaining:1};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
+ const s=structuredClone(original);const p:Player={id:randomUUID(),name:n,score:0,hintsRemaining:s.settings.normalHints,bonusHints:0,bonusTimeSeconds:0,choiceAccess:s.settings.answerStyle==='choices'?'all':'off',joinedAt:now,doubleTakesRemaining:1};s.players.push(p);log(s,`${n} joined the show.`);return {state:s,player:p};
 }
 const normalize=(str:string)=>str.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/^[\s]*(?:(?:what|who|which|where)\s+(?:is|are|was|were)\s+|(?:it is|the answer is)\s+)/,'').replace(/[’']/g,'').replace(/\b(?:a|an|the)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 function distance(a:string,b:string){const prev=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let left=prev[0];prev[0]=i;for(let j=1;j<=b.length;j++){const old=prev[j];prev[j]=Math.min(prev[j]+1,prev[j-1]+1,left+(a[i-1]===b[j-1]?0:1));left=old;}}return prev[b.length];}
@@ -151,10 +153,25 @@ export function tick(original:GameState,now=Date.now()):GameState {
  if(s.phase==='intro'&&s.active&&now>=s.active.introUntilAt){s.phase='question';s.active.startedAt=s.active.introUntilAt;const p=s.players.find(p=>p.id===s.active?.turnId);s.active.deadlineAt=s.active.introUntilAt+(s.settings.answerSeconds+(s.settings.mode==='teams'?(p?.bonusTimeSeconds||0):0))*1000;}
  if(s.phase==='question'&&s.active){const a=s.active;
    if(s.settings.mode==='individual'){
-     const all=s.players.every(p=>a.answers[p.id]);const maxBonus=Math.max(0,...s.players.map(p=>p.bonusTimeSeconds));
-     if(all||now>=(a.deadlineAt??now)+maxBonus*1000)closeQuestion(s,now);
+     // The server, not the player's network latency, decides what was in the box at zero.
+     // Auto-submissions receive no speed bonus and respect each player's extra time.
+     for(const p of s.players){
+       if(s.phase!=='question')break;
+       const due=(a.deadlineAt??now)+p.bonusTimeSeconds*1000;
+       const draft=a.drafts?.[p.id];
+       if(!a.answers[p.id]&&now>=due&&draft?.answer.trim()&&!choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1])))
+         storeSubmission(s,p,draft.answer.trim(),due,draft.doubleTake);
+     }
+     if(s.phase==='question'){
+       const all=s.players.every(p=>a.answers[p.id]);const maxBonus=Math.max(0,...s.players.map(p=>p.bonusTimeSeconds));
+       if(all||now>=(a.deadlineAt??now)+maxBonus*1000)closeQuestion(s,now);
+     }
    }else if(now>=(a.deadlineAt??now)){
-     if(a.stealTurn||s.players.length<2)closeQuestion(s,now);
+     const p=s.players.find(p=>p.id===(a.stealTurn?a.stealId:a.turnId));
+     const draft=p&&a.drafts?.[p.id];
+     if(p&&draft?.answer.trim()&&!a.answers[p.id]&&!choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1])))
+       storeSubmission(s,p,draft.answer.trim(),a.deadlineAt??now);
+     else if(a.stealTurn||s.players.length<2)closeQuestion(s,now);
      else nextSteal(s,now);
    }
  }
@@ -163,7 +180,19 @@ export function tick(original:GameState,now=Date.now()):GameState {
      if(s.round===0){s.round=1;goDraft(s);}else{s.phase='final-wager';s.final={id:shuffle(FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)).length?FINALS.filter(f=>f.tier!=='family'&&!s.recentQuestionIds.includes(f.id)):FINALS.filter(f=>f.tier!=='family'))[0].id,wagers:{},answers:{},disputeIds:[]};log(s,'The Final Word: Place your wagers.');}
    }else{s.phase='board';s.resolution=undefined;}
  }
- if(s.phase==='final-question'&&s.final){if(s.players.every(p=>s.final!.answers[p.id])||now>=(s.final.deadlineAt??now))finishFinal(s,now);}
+ if(s.phase==='final-question'&&s.final){
+   if(now>=(s.final.deadlineAt??now)){
+     const q=FINALS.find(q=>q.id===s.final!.id)!;
+     for(const p of s.players){
+       const draft=s.final.drafts?.[p.id]?.trim();
+       if(!s.final.answers[p.id]&&draft){
+         const correct=isCorrectForQuestion(draft,q),wager=s.final.wagers[p.id]??0;
+         s.final.answers[p.id]={answer:draft,at:s.final.deadlineAt??now,correct,points:correct?wager:-wager,doubleTake:false,hintUsed:false,answerFormat:'written'};
+       }
+     }
+   }
+   if(s.players.every(p=>s.final!.answers[p.id])||now>=(s.final.deadlineAt??now))finishFinal(s,now);
+ }
  if(s.phase==='final-results'&&s.final&&!s.final.disputeIds.length&&now>=(s.final.endsAt??now)){s.phase='finished';log(s,'That’s a wrap!');}
  return s;
 }
@@ -175,6 +204,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects','displayMode'].includes(k)), 'Only display and sound settings can change during the show.');
    if(opts.mode!==undefined){assert(['individual','teams'].includes(opts.mode),'Invalid mode.');s.settings.mode=opts.mode;}
    for(const k of ['answerSeconds','finalSeconds','normalHints'] as const){const v=opts[k];if(v!==undefined){assert(Number.isInteger(v)&&v>=0&&v<=(k==='normalHints'?10:120),`Invalid ${k}.`);s.settings[k]=v;}}
+   if(opts.answerStyle!==undefined){assert(['written','choices','mixed'].includes(opts.answerStyle),'Invalid answer style.');s.settings.answerStyle=opts.answerStyle;for(const p of s.players)p.choiceAccess=opts.answerStyle==='choices'?'all':'off';}
    if(opts.displayMode!==undefined){assert(['tv','phones'].includes(opts.displayMode),'Invalid display mode.');s.settings.displayMode=opts.displayMode;}
    if(opts.music!==undefined){assert(['jazz','indie','retro','game','bluegrass','cinematic','off'].includes(opts.music),'Invalid music.');s.settings.music=opts.music;}
    if(opts.arrangement!==undefined){assert(opts.arrangement===0||opts.arrangement===1,'Invalid arrangement.');s.settings.arrangement=opts.arrangement;}
@@ -208,6 +238,28 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(s.settings.mode==='individual'||(a.stealTurn?a.stealId===p.id:a.turnId===p.id),'It is not your team’s turn.');
    assert(!a.answers[p.id],'You have already answered.');
    if(action.kind==='written'){assert(p.hintsRemaining>0,'No hints remaining.');assert(!a.hintUsers.includes(p.id),'Already used a hint on this question.');p.hintsRemaining--;a.hintUsers.push(p.id);}else throw new GameError('Unknown hint.');break;
+ }
+ case 'save-draft':{
+   const p=player(s,actor);
+   assert(!s.pausedAt,'Game is paused.');
+   const answer=String(action.answer??'').slice(0,200);
+   assert(answer.length<=200,'Draft is too long.');
+   if(action.scope==='question'){
+     assert(s.phase==='question'&&!!s.active,'No question is open.');
+     const a=s.active;
+     assert(s.settings.mode==='individual'||(a.stealTurn?a.stealId:a.turnId)===p.id,'Not your turn.');
+     assert(!choicesEnabled(p.choiceAccess,Number(a.key.split(':')[1])),'This player uses choices.');
+     assert(!a.answers[p.id],'Already answered.');
+     const due=(a.deadlineAt??0)+(s.settings.mode==='individual'?p.bonusTimeSeconds*1000:0);
+     assert(!due||now<=due,'Answer time has expired.');
+     (a.drafts??={})[p.id]={answer,doubleTake:!!action.doubleTake&&s.settings.mode==='individual'&&p.doubleTakesRemaining>0};
+   }else if(action.scope==='final'){
+     assert(s.phase==='final-question'&&!!s.final,'Final Word is not open.');
+     assert(!s.final.answers[p.id],'Already answered.');
+     assert(now<=(s.final.deadlineAt??0),'Final time has expired.');
+     (s.final.drafts??={})[p.id]=answer;
+   }else throw new GameError('Unknown draft type.');
+   break;
  }
  case 'submit-answer':{
    const p=player(s,actor);assert(!s.pausedAt,'Game is paused.');assert(s.phase==='question'&&!!s.active,'Question is not accepting answers.');const a=s.active;
@@ -295,6 +347,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    answeringId:s.active.stealTurn?s.active.stealId:s.active.turnId,
    submissionCount:Object.keys(s.active.answers).length,
    mySubmission:me?s.active.answers[me.id]?.answer:undefined,
+   myDraft:me?s.active.drafts?.[me.id]?.answer:undefined,
    myDeadlineAt:me?(s.active.deadlineAt??0)+me.bonusTimeSeconds*1000:undefined,
    myWrittenHint:(me&&s.active.hintUsers.includes(me.id))?q.hint:undefined,
    myChoices:(me&&choicesEnabled(me.choiceAccess,Number(s.active.key.split(':')[1])))?answerOptions(q.answer,q.distractors,q.id,me.id):undefined,
@@ -308,6 +361,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
+   myDraft:me?s.final.drafts?.[me.id]:undefined,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;

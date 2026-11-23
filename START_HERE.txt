@@ -1,16 +1,19 @@
-The Know Show v1.3.1 — Vercel TypeScript build correction
+THE KNOW SHOW — v1.4.1 · GREEN ROOM LAYOUT REFINEMENT
 
-THE KNOW SHOW — v1.3.0 · BETTER CHOICES + CURTAIN CALL
+Complete application based directly on v1.4.0 (which was built on the uploaded v1.3.1 ZIP).
 
-Complete replacement project for the uploaded v1.2.0 app.
+HOW TO DEPLOY
+1. Extract this ZIP and open the INNER `the-know-show` folder.
+2. Replace the contents of the ROOT of your existing GitHub project with these files, preserving your repository and Vercel connection.
+3. Commit the changes to the main branch, then check your Vercel build.
+4. Open the app on a host device and tap Host a show. Complete four setup steps; scan the QR from another phone to join.
+5. Test a typed answer left in the input field when the timer reaches zero, and confirm the saved draft is scored.
 
-1. Unzip the ZIP file.
-2. Open the INNER `the-know-show` folder.
-3. Upload ALL its contents to the ROOT of your existing GitHub repository, replacing changed paths; commit.
-4. Check your connected Vercel deployment build log and refresh the site / PWA.
-5. Try a short room, with one accommodated player, a written Final Word, and the celebratory finish (including ties).
+No Supabase schema migration or additional environment variables are required.
+The approved main logo, app icons, and all 540 questions are byte-for-byte unchanged.
 
-No new Supabase SQL or env vars are needed. Existing v1.2 rooms and settings are compatible.
-The main logo and app icons remain exactly unchanged.
+VALIDATION
+27 engine/regression tests passed. TypeScript syntax + focused semantic checks passed with temporary dependency declarations; a full Next.js production build could not be completed here because npm dependencies were not installed.
+Please review the Vercel build log before using this release at a larger event.
 
-Inside: README.md, RELEASE_NOTES.md, CHOICE_OPTIONS_QA.csv.
+NOTE: Phones require tapping Countdown sounds: On for audible ticks and the end bell. A browser may block audio until it receives this user gesture. Draft auto-submission uses the latest text successfully saved to the server while the clock is running; a last-moment keystroke with poor connectivity may not be saved in time.

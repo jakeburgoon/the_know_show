@@ -1,3 +1,35 @@
+# v1.4.1 — Leaner Green Room
+
+- Removed the legacy standalone **Join as a player** card from host setup. Host participation remains an optional checkbox and name field immediately under the live joining-player list, with no separate oversized panel.
+- Removed the redundant oversized Green Room heading and its duplicate legacy hero. The new host Green Room uses one small gold **GREEN ROOM** label and puts the QR, room code and player list first.
+- No changes to the setup questions, trivia content, gameplay, roles, scoring, logo, app icons, or database schema.
+- The v1.4.0 two-tab player/host navigation is retained; the TV display remains a separate link.
+
+# v1.4.0 — Guided Host Setup, Player Formats & Countdown
+
+Built from the complete v1.3.1 application, retaining every other game engine feature and the 540-question / 45-category bank.
+
+### A host-first flow
+- Home now emphasizes **Host a show**; manual room-code entry is a secondary fallback to a QR scan.
+- Hosts choose in four steps: individual or team play; TV + phones or phones only; no music or one of the existing soundtrack styles; written answers, four choices, or per-player mixture.
+- The final Green Room centers on a large joining QR code and room code. Player/team names populate live beneath it with each person's answer-format selection. Hosts can override every player's format, including Easy/Medium/Hard choices, and adjust hints and time under optional advanced settings.
+- **Will you be participating?** allows the host to join as a player by name without losing host privileges. At least two contestants/teams are needed to begin.
+- **START THE SHOW!** starts the category draft and automatically switches the host's device to Player View. A nonplaying host receives a live spectator display there instead.
+- Two top tabs replace three: Player View (primary) and smaller Host View. The dedicated TV display is still accessible through a link or direct `/display/{code}` URL. Hosts reviewing a dispute return to Player View automatically after the dispute is resolved.
+
+### Countdown and saved typed answers
+- Prominent large timer, progress bar, urgency effect in the final five seconds, plus a prominent final-round timer.
+- Each player can turn optional five-second tick sounds and a time-up bell on/off. They are off until activated and use the browser's Web Audio system (no separate music files or licensing).
+- Written answers are now saved to the server as the player types (after a short debounce). If time expires without tapping Lock answer, the server automatically grades the latest saved **nonempty draft** at the player's own deadline. This also works for team turns and Final Word.
+- Automatic submissions receive zero speed bonus; Double Take choice is preserved if valid; extra time is honored. Four-choice answers still require a tap. Drafts stay private to the person typing until answers are revealed.
+- Browsers require a tap to activate sound; an offline or very last-second draft may not reach the server before the timer closes. The UI shows whether the draft was saved.
+
+### Preservation and verification
+- The approved logo and both icons are byte-for-byte unchanged; question-bank JSON and three-alternative distractors are unchanged from v1.3.1.
+- 27 engine/regression tests passed (original 21 plus six for setup defaults and draft submission behaviors).
+- TypeScript syntax + focused semantic checks passed with temporary dependency declarations. A complete Next.js production build/browser QA was not possible because dependencies were unavailable in the local runner. Vercel deployment should be verified.
+- No Supabase migration or new environment variables; new state keys are stored within the existing JSON room snapshot.
+
 ## v1.3.1 — Build fix
 
 - Fixed the TypeScript error in `src/components/ShowRoom.tsx` caused by a redundant `finished` phase comparison after the finished-screen early return.
