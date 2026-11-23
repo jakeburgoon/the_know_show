@@ -1,3 +1,15 @@
+# v1.5.4 — Branded room loading, clearer host wording, and TV navigation
+
+Complete cumulative update over v1.5.3. The temporary “Preparing The Know Show…” page is now a branded cream/navy-and-gold loading screen featuring the **approved original logo unchanged**, a short “Setting the Stage” message, and a subtle animated progress accent (respecting reduced-motion settings).
+
+The host answer-format explanations have been rewritten: **Everyone writes** explicitly says **no answer options are given** without redundant Final Word wording; **Everyone chooses** notes that four regular-question options are shown but the **final question** must be written; and **A mix of both** explains that per-player formats can help level the playing field across different ages and abilities, with the final question always written.
+
+The **Open TV display** button appears in the Green Room only if the host selected **TV + phones**, and TV-display links in the host controls and player footer also respect the **Just phones** mode. The Green Room link now navigates in the same app window so a mobile host is not stranded in a second tab. A host accessing the TV display on their own device sees a visible **Back to Green Room** (or **Back to Host View** once the show begins) action. That return explicitly selects Host View even if the host is also a player; non-host TV displays remain uncluttered. The private host token is never placed in the display URL.
+
+**Preserved:** All 672 regular questions, 56 active category-specific Final Word questions and their two paid hints, gameplay/scoring, the four-step setup flow, and the approved main logo and app icons. No Supabase schema or environment changes are needed.
+
+**Validation:** All 42 game-engine tests passed, plus focused static UI checks and TypeScript/TSX syntax parsing. A complete production Next.js build could not be run because access to the npm registry failed (`EAI_AGAIN`). Verify the Vercel build and test navigation on a host phone after deployment.
+
 # v1.5.3 — Reviewed host setup and refreshed homepage
 
 Complete cumulative update over v1.5.2. Host setup choices now highlight locally when tapped; each step advances **only** when the host uses the visible **Next** button. **Previous** stays on the left from step two onward, and the last step shows **Continue to Green Room** on the right. Saving the selected choice remains server-side and must succeed before advancing; failures appear on the setup screen. Returning to earlier steps loads the previously saved settings. The four-question flow, existing settings, and Green Room are otherwise unchanged.

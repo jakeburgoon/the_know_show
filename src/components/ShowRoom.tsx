@@ -95,11 +95,11 @@ function DraftStage({view,chooserName,canPick,disabled=false,onChoose}:{view:Gam
    </div>
  </section>;
 }
-function TV({view,code,origin,now,preview=false}:{view:GameView;code:string;origin:string;now:number;preview?:boolean}){
+function TV({view,code,origin,now,preview=false,returnToHost=false}:{view:GameView;code:string;origin:string;now:number;preview?:boolean;returnToHost?:boolean}){
  const soundtrack=SUNO_SOUNDTRACKS.find(t=>t.id===view.settings.music);
  const track=soundtrack?.arrangements[view.settings.arrangement];
  return <main className={"v2tv"+(view.phase==='finished'?" v13tvfinished":"")}>
-   <header className="v2tvhead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{view.phase==='lobby'?'THE GREEN ROOM':view.phase.startsWith('final')?'THE FINAL WORD':view.phase==='finished'?'THE CURTAIN CALL':view.roundNames[view.round]}</span><span>{view.phase==='finished'?'':code}</span></header>
+   <header className="v2tvhead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><span>{view.phase==='lobby'?'THE GREEN ROOM':view.phase.startsWith('final')?'THE FINAL WORD':view.phase==='finished'?'THE CURTAIN CALL':view.roundNames[view.round]}</span><div className="ks-tv-head-actions"><span>{view.phase==='finished'?'':code}</span>{returnToHost&&<Link className="ks-tv-back" href={`/room/${code}?view=host`}>← Back to {view.phase==='lobby'?'Green Room':'Host View'}</Link>}</div></header>
    <div className="v2tvcolumns"><section className="v2tvmain">
      {view.phase==='lobby'&&<div className="v2tvwelcome"><p className="v2eyebrow">WELCOME TO</p><img className="v1welcomelogo" src="/know-show-logo.png" alt="The Know Show"/><h2>Scan to join the fun</h2>{origin&&<div className="v2qrcard"><QRCodeSVG value={`${origin}/room/${code}`} size={245} level="M" marginSize={2}/></div>}<p className="v2roomcode">Room code: <strong>{code}</strong></p><p>{view.players.length} of 8 players joined</p></div>}
      {view.phase==='draft'&&<section className="v2tvdraft" aria-label="Category draft on TV">
@@ -137,6 +137,16 @@ function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1})
    <small>Tap Play once on this phone. The player stays loaded when you switch between Host and Player. Suno controls volume and playback.</small>
  </details>;
 }
+function BrandedRoomLoading(){
+ return <main className="ks-stage-loading" role="status" aria-live="polite" aria-label="Preparing The Know Show">
+   <div className="ks-stage-loading-card">
+     <img src="/know-show-logo.png" alt="The Know Show" />
+     <p>SETTING THE STAGE</p>
+     <h1>Getting your show ready…</h1>
+     <div className="ks-stage-loading-meter" aria-hidden="true"><span/></div>
+   </div>
+ </main>;
+}
 function PocketScores({players,meId}:{players:Player[];meId?:string}){
  return <section className="v25pocketscores" aria-label="Current leaderboard">
    <div className="v25pocketlabel">LIVE SCORES</div>
@@ -159,7 +169,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const [name,setName]=useState(''),[answerDraft,setAnswerDraft]=useState(''),[finalDraft,setFinalDraft]=useState(''),[doubleTake,setDoubleTake]=useState(false),[wager,setWager]=useState(0);
  const [pairOpen,setPairOpen]=useState(false),[joinOpen,setJoinOpen]=useState(true),[scoreEdits,setScoreEdits]=useState<Record<string,string>>({});
  const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
- const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false);
+ const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false),[returnToHost,setReturnToHost]=useState(false);
  const [serverOffset,setServerOffset]=useState(0);
  const serverOffsetRef=useRef(0),serverClockReady=useRef(false);
  const lastSoundSecond=useRef<number|null>(null),lastSoundQuestion=useRef(''),soundContext=useRef<AudioContext|null>(null),autoReturnFromDispute=useRef(false);
@@ -175,10 +185,13 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    let cancelled=false;
    setOrigin(window.location.origin);
    try {setSetupStep(Math.min(4,Math.max(0,Number(localStorage.getItem(`knowshow:${code}:setupStep`)||0))));setTimerSounds(localStorage.getItem('knowshow:timerSounds')==='on');}catch{/* Private browsing is fine. */}
-   if(displayOnly){setReady(true);return;}
+   if(displayOnly){
+     try{setReturnToHost(Boolean(localStorage.getItem(`knowshow:${code}:host`)));}catch{/* Some TV browsers disable storage. */}
+     setReady(true);return;
+   }
    async function initialize(){
-     const query=new URLSearchParams(window.location.search);const paired=query.get('hostToken');
-     if(paired){query.delete('hostToken');window.history.replaceState(null,'',window.location.pathname+(query.size?'?'+query.toString():''));}
+     const query=new URLSearchParams(window.location.search);const paired=query.get('hostToken');const returningToHost=query.get('view')==='host';
+     if(paired||returningToHost){query.delete('hostToken');query.delete('view');window.history.replaceState(null,'',window.location.pathname+(query.size?'?'+query.toString():''));}
      let h=paired||localStorage.getItem(`knowshow:${code}:host`)||'';
      let p=localStorage.getItem(`knowshow:${code}:player`)||'';
      // v0.2 kept one credential. Identify its role once and retain BOTH credentials.
@@ -192,7 +205,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      if(cancelled)return;
      if(h)localStorage.setItem(`knowshow:${code}:host`,h);
      if(p)localStorage.setItem(`knowshow:${code}:player`,p);
-     setHostToken(h);setPlayerToken(p);setTab(p?'player':h?'host':'player');setReady(true);
+     setHostToken(h);setPlayerToken(p);setTab(returningToHost&&h?'host':p?'player':h?'host':'player');setReady(true);
    }
    void initialize();return()=>{cancelled=true;};
  },[code,displayOnly]);
@@ -319,10 +332,10 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      }
    }catch{/* Local storage is unavailable; rematches still retain history on the server. */}
  },[hostToken,view?.playedQuestionIds,view?.playedCategoryIds,view?.offeredCategoryIds]);
- if(!ready||(!view&&!error))return <main className="v2loading">✳ Preparing The Know Show…</main>;
+ if(!ready||(!view&&!error))return <BrandedRoomLoading/>;
  if(!view)return <main className="v2loading"><h2>Can't open this room</h2><p>{error}</p><Link href="/">Create a new show</Link></main>;
  if(view.phase==='closed')return <main className="v2loading"><p>Taking everyone back to the homepage…</p><Link href="/">Return home</Link></main>;
- if(displayOnly)return <TV view={view} code={code} origin={origin} now={timerNow}/>;
+ if(displayOnly)return <TV view={view} code={code} origin={origin} now={timerNow} returnToHost={returnToHost}/>;
  if(isHost&&view.phase==='lobby'&&setupStep<4)return <HostWizard key={setupStep} step={setupStep} settings={view.settings} busy={busy} error={error} onNext={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
  if(isHost&&view.phase==='lobby'&&setupStep>=4){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
    const answerLabel=(access:Player['choiceAccess'])=>access==='all'?'Four choices · always':access==='medium-hard'?'Four choices · medium and hard':access==='hard'?'Four choices · hard only':'Written answers';
@@ -330,7 +343,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      <section className="ks-lobby-hero"><p className="ks-tag">GREEN ROOM</p><p>Scan to join. Players and teams appear below as they connect.</p>
        {origin&&<div className="ks-lobby-qr"><QRCodeSVG value={roomUrl} size={235} marginSize={2}/></div>}
        <div className="ks-lobby-code">ROOM CODE <strong>{code}</strong></div>
-       <div className="ks-lobby-share"><button type="button" onClick={async()=>{try{if(navigator.share)await navigator.share({title:'Join The Know Show',url:roomUrl});else{await navigator.clipboard.writeText(roomUrl);setShareMessage('Join link copied!');}}catch{/* User may dismiss share. */}}}>Share invite</button><a href={`/display/${code}`} target="_blank" rel="noopener noreferrer">Open TV display ↗</a></div>
+       <div className="ks-lobby-share"><button type="button" onClick={async()=>{try{if(navigator.share)await navigator.share({title:'Join The Know Show',url:roomUrl});else{await navigator.clipboard.writeText(roomUrl);setShareMessage('Join link copied!');}}catch{/* User may dismiss share. */}}}>Share invite</button>{(view.settings.displayMode??'tv')==='tv'&&<Link href={`/display/${code}`}>Open TV display ↗</Link>}</div>
        {shareMessage&&<p role="status">{shareMessage}</p>}
      </section>
      <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
@@ -383,7 +396,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='draft'&&<DraftStage view={view} chooserName={draftTurn?.name||'Another player'} canPick disabled={busy} onChoose={id=>void act({type:'draft-category',categoryId:id})}/>}
      <section className="v2card"><div className="v2between"><h2>Host controls</h2><button className="v2small" disabled={busy} onClick={()=>void act({type:'pause'})}>{view.paused?'Resume':'Pause'} game</button></div>
        <p>{phonesOnly?'Your phone runs the show. Everyone sees the board, questions, and scores on their own device.':'Manage the show here; the main board appears on the TV/laptop.'}</p>
-       <div className="v2buttonrow"><a className="v2button" href={`/display/${code}`} target="_blank" rel="noopener noreferrer">Open TV display ↗</a><button className="v2button muted" onClick={()=>setPairOpen(!pairOpen)}>Private host QR {pairOpen?'−':'+'}</button></div>
+       <div className="v2buttonrow">{!phonesOnly&&<Link className="v2button" href={`/display/${code}`}>Open TV display ↗</Link>}<button className="v2button muted" onClick={()=>setPairOpen(!pairOpen)}>Private host QR {pairOpen?'−':'+'}</button></div>
        {pairOpen&&<div className="v2private"><p><strong>Private host pairing</strong> — Only use this to add host controls to another device (such as your phone if you created the show on a laptop). If you already have the Host Controls tab, you do not need to scan again. Keep this code off the shared TV.</p><div className="v2qrcard"><QRCodeSVG value={hostUrl} size={190} marginSize={2}/></div><p><button className="v2small" onClick={()=>void navigator.clipboard.writeText(hostUrl)}>Copy host link</button></p></div>}
      </section>
      <section className="v2card"><h2>Where everyone plays</h2><p>Switch at any time without restarting the game or losing scores. Players will see the board and questions on their phones in either setting.</p><div className="v2form"><label>Display arrangement<select value={view.settings.displayMode??'tv'} disabled={busy} onChange={e=>void act({type:'settings',settings:{displayMode:e.target.value as NonNullable<Settings['displayMode']>}})}><option value="tv">TV + Phones — shared game screen</option><option value="phones">Phones Only — no TV needed</option></select></label></div></section>
@@ -494,7 +507,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/><button className="ks-dispute-button" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
    </>}
    {!['results','final-results','final-wager'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&<a className="v2small" target="_blank" rel="noopener noreferrer" href={`/display/${code}`}>Open TV display ↗</a>}<span>The Know Show · v1.5.2</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.5.4</span></footer>
    </>}
  </main>;
 }

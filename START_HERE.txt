@@ -1,4 +1,4 @@
-THE KNOW SHOW — v1.5.3 · FULL CUMULATIVE UPDATE
+THE KNOW SHOW — v1.5.4 · FULL CUMULATIVE UPDATE
 
 This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
 
@@ -10,20 +10,14 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW IN v1.5.3
-- Guided host setup: tapping an option now highlights the choice and keeps the host on the same screen. Next advances only after the setting saves; Previous returns to earlier setup questions. Last step: Continue to Green Room.
-- Homepage: “It’s time to SHOW what you KNOW,” shorter supporting copy, and four chips: 2–8 players, 50+ categories, Answer your way, Individuals or teams.
-- All v1.5.2 Final Word, questions, seasonal and replay features are preserved.
-- One compact Final Word decision screen shows your category, balance, two-hint shop (500 points each), wager slider and exact amount, and live points-if-right / points-if-wrong results. The actual question stays hidden until all wagers are locked.
-- NEW: 56 medium-hard/hard Final Word questions in a separate pool, one per category. Only finals from categories NOT played on either current game board are eligible. Seasonal category finals follow calendar availability, with preference for finals not used recently. The 18 earlier finals remain only for games already underway.
-- Each new final has two progressive, independently reviewed hints; see FINAL_WORD_CATEGORY_REVIEW.csv for questions, acceptable responses, hints and 53 source references / three math derivations.
-- More visible Player View sound controls; QR-scanning camera window on homepage; rematch or a fresh home-screen show after the Curtain Call.
-- Answer-first results reveal followed by leaderboard; improved draft turn prompts and subtle navy/gold board depth.
-- Repeat reduction across rematches and new rooms created from the same host browser; 11 seasonal categories added (132 new regular questions), active by month. Each Build the Board phase includes one seasonal offer when any are in season, alongside regular options.
-- Approved main logo and app icons preserved exactly. 45 original categories / 540 questions unchanged. Total standard bank: 56 categories / 672 questions.
+NEW IN v1.5.4
+- Brand-new loading screen while opening a room, using the approved logo with a subtle gold progress animation.
+- Clearer answer-format descriptions in host setup: written answers have no answer options; the other choices say "final question" rather than "Final Word"; the mixed-format description mentions balancing different ages and abilities.
+- Green Room shows "Open TV display" only with TV + Phones. The TV display includes a visible return action on the host device, taking the host back to the Green Room or Host View, even if the host joined as a player.
+- All v1.5.3 and earlier features are included without any question bank, logo, or app icon changes.
 
 VALIDATION
-42 automated game-engine tests passed with engine TypeScript compilation (re-run on v1.5.3), including category restriction, seasonal eligibility, answer separation and two-hint purchase rules. Full Next.js production build could not be run here because package dependencies were incomplete; verify with Vercel. End-to-end phone testing is still recommended.
+42 engine tests and 5 focused UI-contract tests passed; edited TSX files passed TypeScript syntax parsing. The full Next.js production build could not run because the npm registry was unreachable (EAI_AGAIN). Verify the Vercel build and test the TV-display return link on the host phone.
 
 See README.md and RELEASE_NOTES.md for more detail.
 

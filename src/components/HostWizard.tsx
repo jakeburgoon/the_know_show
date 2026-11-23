@@ -18,9 +18,9 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
     {value:'off',title:'No music',details:'Keep things quiet; optional countdown sounds are controlled separately.',icon:<Music2/>},
     ...SUNO_SOUNDTRACKS.map(t=>({value:t.id,title:t.label,details:'Play the selected soundtrack on the host phone or TV.',icon:<Music2/>}))]:
    [
-    {value:'written',title:'Everyone writes',details:'All players type their answers. Final Word is always written.'},
-    {value:'choices',title:'Everyone chooses',details:'Every regular question offers four possible answers. Final Word is written.'},
-    {value:'mixed',title:'A mix of both',details:'Assign written answers or four choices separately to each player on the next screen.'}
+    {value:'written',title:'Everyone writes',details:'Everyone types their answers. No answer options are given.'},
+    {value:'choices',title:'Everyone chooses',details:'Choose from four possible answers for each regular question. The final question is written.'},
+    {value:'mixed',title:'A mix of both',details:'Give each player written answers or four choices. This can help level the playing field across ages or abilities. The final question is written.'}
    ];
  // Keep a choice visible for review. Only Next saves it and advances setup.
  const initialChoice=step===0?settings.mode:step===1?(settings.displayMode??'tv'):step===2?settings.music:(settings.answerStyle??'written');
