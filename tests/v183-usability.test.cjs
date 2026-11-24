@@ -5,9 +5,10 @@ const room=fs.readFileSync('src/components/ShowRoom.tsx','utf8');
 const page=fs.readFileSync('src/app/page.tsx','utf8');
 const css=fs.readFileSync('src/app/globals.css','utf8');
 const layout=fs.readFileSync('src/app/layout.tsx','utf8');
-test('guide is a simple upper-right link, not a second primary action',()=>{
- assert.ok(page.indexOf('className="v11howlink"')<page.indexOf('className="v11overline"'));
- assert.match(css,/\.v11landing \.v11howlink\{display:flex;width:max-content;margin:0 0 4px auto;[^}]*background:transparent;[^}]*text-decoration:underline/);
+test('guide is a compact navy and gold link styled as a button in a separate cream header',()=>{
+ assert.match(page,/<header className="v11landingbar">[\s\S]*?<Link href="\/guide" className="v11howlink"><HelpCircle[^>]*\/> How to play<\/Link>[\s\S]*?<\/header>\s*<section className="v11showcase"/);
+ assert.match(css,/\.v11landing \.v11landingbar\{[^}]*justify-content:flex-end;[^}]*background:var\(--v11cream\)/);
+ assert.match(css,/\.v11landing \.v11landingbar \.v11howlink\{[^}]*background:linear-gradient[^}]*color:#f5cf78;[^}]*box-shadow:/);
 });
 test('touch form controls prevent small-font focus zoom without disabling pinch zoom',()=>{
  assert.match(css,/@media\(max-width:700px\), \(hover:none\) and \(pointer:coarse\)/);

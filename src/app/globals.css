@@ -901,3 +901,53 @@ body{background:var(--v11cream);color:var(--v11navy)}
  .v11landing .v11entryheading{margin-bottom:12px}
  .v11landing .v11entrycard{padding:15px}
 }
+
+/* v1.8.5 — Slim cream header; generous, measured spacing on the landing page. */
+.v11landing .v11landingbar{height:auto;min-height:62px;max-width:1190px;margin:0 auto;padding:9px 28px 12px;justify-content:flex-end;background:var(--v11cream)}
+.v11landing .v11landingbar .v11howlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;margin:0;padding:9px 15px;border:1px solid #345675;border-radius:999px;background:linear-gradient(155deg,#244b6b,#102a47 80%);color:#f5cf78;font-size:13px;font-weight:800;text-decoration:none;box-shadow:inset 0 1px 0 #ffffff24,0 3px 0 #092037,0 5px 10px #102a4720;transition:background .18s,transform .18s}
+.v11landing .v11landingbar .v11howlink:hover{background:linear-gradient(155deg,#305b7a,#173957);color:#ffe4a3}
+.v11landing .v11landingbar .v11howlink:active{transform:translateY(2px);box-shadow:inset 0 1px 0 #ffffff24,0 1px 0 #092037}
+.v11landing .v11landingbar .v11howlink:focus-visible{outline:2px solid #93691e;outline-offset:4px}
+.v11landing .v11showcase{padding:30px 24px 38px;border-top:3px solid #dfb553}
+.v11landing .v11overline{margin:0 0 23px;font-size:11px}
+.v11landing .v11hero-logo{margin:0 auto 17px}
+.v11landing .v11showcase h1{margin:0 auto 19px;line-height:1.2;word-spacing:.025em}
+.v11landing .v11herodeck{line-height:1.65;word-spacing:.025em}
+.v11landing .v11entryzone{padding-top:34px}
+.v11landing .v11entryheading{margin-bottom:24px}
+.v11landing .v11entrygrid{gap:24px}
+.v11landing .v11entrycard{padding:25px;border-radius:19px}
+.v11landing .v11cardtop{margin-bottom:15px}
+.v11landing .v11entrycard>p{margin-bottom:20px;line-height:1.55}
+.v11landing .ks-entry-features{margin:26px auto 28px;gap:11px}
+@media(max-width:700px){
+ .v11landing .v11landingbar{min-height:56px;padding:7px 14px 10px}
+ .v11landing .v11landingbar .v11howlink{min-height:38px;padding:8px 13px;font-size:12px}
+ .v11landing .v11showcase{padding:24px 18px 30px}
+ .v11landing .v11overline{margin-bottom:19px;font-size:10px}
+ .v11landing .v11hero-logo{margin-bottom:15px}
+ .v11landing .v11showcase h1{margin-bottom:17px;line-height:1.2}
+ .v11landing .v11entryzone{padding-top:27px}
+ .v11landing .v11entryheading{margin-bottom:20px}
+ .v11landing .v11entrygrid{gap:22px}
+ .v11landing .v11entrycard{padding:20px}
+ .v11landing .v11cardtop{margin-bottom:13px}
+ .v11landing .v11entrycard>p{margin-bottom:18px}
+}
+/* Smaller viewports keep the primary action accessible without making normal screens cramped. */
+@media(max-width:700px) and (max-height:650px){
+ .v11landing .v11landingbar{min-height:50px;padding-top:5px;padding-bottom:7px}
+ .v11landing .v11showcase{padding-top:15px;padding-bottom:20px}
+ .v11landing .v11overline{margin-bottom:12px}
+ .v11landing .v11hero-logo{max-height:105px;margin-bottom:10px}
+ .v11landing .v11showcase h1{margin-bottom:12px}
+ .v11landing .v11entryzone{padding-top:19px}
+ .v11landing .v11entryheading{margin-bottom:15px}
+ .v11landing .v11entrycard{padding:16px}
+ .v11landing .v11cardtop{margin-bottom:10px}
+ .v11landing .v11entrycard>p{margin-bottom:13px}
+}
+@media(max-width:700px) and (max-height:580px){
+ .v11landing .v11showcase{padding-bottom:15px}
+ .v11landing .v11entryzone{padding-top:16px}
+}

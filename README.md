@@ -1,3 +1,9 @@
+# v1.8.5 — Balanced landing page
+
+- Restore a slim cream header with a small dimensional navy-and-gold How to play button, without a duplicate logo.
+- Increase hero, headline, tagline and entry-card spacing on desktop and mobile; adapt spacing on short phone screens.
+- No gameplay, question bank, branding assets, or database changes.
+
 # v1.8.4 — Landing page spacing
 
 - Restore modest spacing between the hero elements, Ready to play heading, entry cards and secondary features on desktop and mobile. Short phone viewports retain tighter vertical spacing.

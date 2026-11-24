@@ -1,8 +1,10 @@
-THE KNOW SHOW — v1.8.4 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.8.5 · COMPLETE CUMULATIVE APP
 
 Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
 
-NEW IN v1.8.4: Slightly more landing-page breathing room on desktop and mobile, with compact spacing on short phones.
+NEW IN v1.8.5: Slim cream header with a navy-and-gold How to play button, no duplicate logo, and more generous responsive landing spacing.
+
+FROM v1.8.4: Slightly more landing-page breathing room on desktop and mobile, with compact spacing on short phones.
 
 FROM v1.8.3: Gold underlined How to play link in the hero’s top-right, mobile-safe form font sizes, and a clearer, larger Green Room answer-choice slider. No gameplay or database changes.
 
