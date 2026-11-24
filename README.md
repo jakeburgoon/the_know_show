@@ -1,3 +1,23 @@
+# v1.12.0 — Developer Question Lab
+
+This cumulative build adds a private Question Lab inside the existing developer dashboard.
+
+## Highlights
+
+- Browse the full published question bank without starting a show
+- Filter by category, difficulty, image use, search text, or a manually built playtest set
+- Preview any question in a phone-style or TV-style card
+- Toggle Round 1 / Round 2 point values
+- Preview written-answer or multiple-choice presentation
+- Reveal hints and answers manually
+- Try a sample response with the app's real answer-matching logic
+- Build a category-based playtest set for targeted review
+
+Existing feedback dashboard features remain in place.
+
+
+---
+
 # v1.11.1 — Visual trivia pilot
 
 - Flags of the World: 12 regular questions and one Final Word, all visual. 76 categories, 1,072 playable questions.

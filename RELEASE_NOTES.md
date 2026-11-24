@@ -1,3 +1,23 @@
+# v1.12.0 — Developer Question Lab
+
+## Summary
+This release adds a private developer-side Question Lab so published questions can be inspected and playtested without launching a normal game and waiting for categories to appear.
+
+## What changed
+- Added a developer dashboard tab called **Question Lab**
+- Added question-bank browsing with filters for category, difficulty, image-based questions, and text search
+- Added a preview panel for player-like question review
+- Added an answer checker that uses the current app acceptance rules
+- Added a playtest-set builder for manual category selection
+- Kept the feedback dashboard intact and sign-in protected
+
+## Notes
+- No new SQL or environment variables are required if developer feedback is already configured from v1.10.0.
+- Question Lab previews are read-only and do not affect normal question history or future performance statistics.
+
+
+---
+
 # v1.11.1 — Visual trivia pilot
 
 - Flags of the World: 12 regular questions and one Final Word, all visual. 76 categories, 1,072 playable questions.

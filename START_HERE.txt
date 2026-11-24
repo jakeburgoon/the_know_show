@@ -1,5 +1,5 @@
-THE KNOW SHOW — v1.11.1 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.12.0 · COMPLETE CUMULATIVE APP
 
 This archive contains the full cumulative application and all current content.
 
-NEW IN v1.11.1: Famous Landmarks joins Flags of the World as a second image-only category, and the Hard tier in Flags of the World has been recalibrated toward recognizable countries for playtesting. No additional SQL or environment variables if v1.10.0 feedback is already configured. See V1111_IMAGE_EXPANSION.md.
+NEW IN v1.12.0: the password-protected developer dashboard now includes a Question Lab. You can browse the full bank, preview questions without starting a live game, test answer acceptance, and assemble a manual playtest set by category. No new SQL is required beyond the v1.10.0 feedback setup.
