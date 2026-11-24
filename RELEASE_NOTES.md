@@ -1,3 +1,8 @@
+# v1.9.2 — Two lyric categories
+
+- Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.
+- 74 categories; 972 regular and 74 Final Word questions (1,046 playable). Public-domain lyric text only; see `V192_LYRIC_REVIEW.csv` and `V192_AUDIT_NOTES.md`. No schema or engine changes. Deploy between shows.
+
 # v1.9.1 — Wordplay follow-up
 
 - Restore full Before & After blended phrases (six regular questions and one Final Word); the Cuckoo’s Nest Egg answer intentionally combines the novel title with “nest egg.” Clarify that the full blended phrase is required.

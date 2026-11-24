@@ -1,3 +1,8 @@
+# v1.9.2 — Two lyric categories
+
+- Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.
+- 74 categories; 972 regular and 74 Final Word questions (1,046 playable). Public-domain lyric text only; see `V192_LYRIC_REVIEW.csv` and `V192_AUDIT_NOTES.md`. No schema or engine changes. Deploy between shows.
+
 # v1.9.1 — Wordplay follow-up
 
 - Restore full Before & After blended phrases (six regular questions and one Final Word); the Cuckoo’s Nest Egg answer intentionally combines the novel title with “nest egg.” Clarify that the full blended phrase is required.
@@ -95,7 +100,7 @@ Each four-choice player sees a private, single-tap selection on their phone for 
 - TV + Phones or Phones Only; Cool Jazz default with alternate Suno soundtracks. During a show, a compact header music menu lets anyone in the room select the shared track, unless the host turns that permission off. Audio plays only from the host phone or TV. The embedded player may require pressing Play after a track change.
 - Host dispute/ruling controls, automatic return to Player View, replay tracking between rematches and new shows created on the same host browser, room codes, and in-app camera QR joining.
 - The larger sound-effects panel is deferred; prominent synced Final Word timer. Answer-first results animation with ✓/✕, points changes and a leaderboard beat.
-- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase guarantees at least one eligible seasonal category if available; other eligible seasonal categories also compete for the remaining spots. Players are not required to choose one. The 59 year-round categories remain eligible throughout the year, subject to the same-show exclusion.
+- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase guarantees at least one eligible seasonal category if available; other eligible seasonal categories also compete for the remaining spots. Players are not required to choose one. The 60 year-round categories remain eligible throughout the year, subject to the same-show exclusion.
 - Navy-and-gold Curtain Call with trophy, confetti, prominently displayed winner(s) and one final standings table. Ties share the same rank.
 
 ## Final Word question selection and audit

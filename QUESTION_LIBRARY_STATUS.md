@@ -1,3 +1,8 @@
+# v1.9.2 — Two lyric categories
+
+- Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.
+- 74 categories; 972 regular and 74 Final Word questions (1,046 playable). Public-domain lyric text only; see `V192_LYRIC_REVIEW.csv` and `V192_AUDIT_NOTES.md`. No schema or engine changes. Deploy between shows.
+
 # v1.8.0 question-library verification addendum
 
 - 72 total categories: **59 year-round and 13 seasonal**.

@@ -413,9 +413,9 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    if(!hostToken||!view)return;
    try{
      for(const [key,ids,limit] of [
-       ['knowshow:recentQuestionIds',view.playedQuestionIds,1014],
-       ['knowshow:recentCategoryIds',view.playedCategoryIds,72],
-       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,72],
+       ['knowshow:recentQuestionIds',view.playedQuestionIds,1046],
+       ['knowshow:recentCategoryIds',view.playedCategoryIds,74],
+       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,74],
      ] as const){
        if(!ids?.length)continue;
        const old=JSON.parse(localStorage.getItem(key)||'[]') as string[];
@@ -498,7 +498,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {genre&&<label>Arrangement<select value={view.settings.arrangement} onChange={e=>void act({type:'settings',settings:{arrangement:Number(e.target.value) as 0|1}})} disabled={busy}><option value="0">Arrangement 1</option><option value="1">Arrangement 2</option></select></label>}
        <label className="ks-room-music-permission"><input type="checkbox" checked={view.settings.playerMusic!==false} disabled={busy} onChange={e=>void act({type:'settings',settings:{playerMusic:e.target.checked}})}/> Allow joined players to change the shared soundtrack</label><small>Volume, play/pause, and looping remain inside Suno's embedded player—not remotely controllable.</small></div></section>
      {view.phase==='lobby'&&<>
-       <section className="v2card"><h2>Game settings</h2><div className="v2form"><p><strong>Standard Trivia</strong> — 59 year-round categories plus seasonal categories, with Easy, Medium, and Hard questions in each.</p><small>A separate kid-friendly edition may be added in the future.</small>
+       <section className="v2card"><h2>Game settings</h2><div className="v2form"><p><strong>Standard Trivia</strong> — 60 year-round categories plus seasonal categories, with Easy, Medium, and Hard questions in each.</p><small>A separate kid-friendly edition may be added in the future.</small>
         <label>Mode<select value={view.settings.mode} disabled={busy} onChange={e=>void act({type:'settings',settings:{mode:e.target.value as Settings['mode']}})}><option value="individual">Individual — Everyone Answers</option><option value="teams">Team — Turn Based</option></select></label>
         <label>Answer time (seconds)<select value={view.settings.answerSeconds} disabled={busy} onChange={e=>void act({type:'settings',settings:{answerSeconds:Number(e.target.value)}})}>{[15,20,25,30,45,60].map(v=><option key={v} value={v}>{v}</option>)}</select></label>
         <label>Standard written hints<select value={view.settings.normalHints} disabled={busy} onChange={e=>void act({type:'settings',settings:{normalHints:Number(e.target.value)}})}>{[0,1,2,3,4,5].map(v=><option key={v} value={v}>{v}</option>)}</select></label>

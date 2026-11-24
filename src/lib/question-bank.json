@@ -1,5 +1,5 @@
 {
-  "version": "1.9.1",
+  "version": "1.9.2",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -17775,6 +17775,533 @@
       "activeMonths": [
         10,
         11
+      ]
+    },
+    {
+      "id": "finish-that-lyric",
+      "name": "Finish That Lyric!",
+      "description": "Complete missing words from traditional songs and classic standards.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v192-finish-that-lyric-1-1",
+            "level": 1,
+            "prompt": "Complete the lyric from “Take Me Out to the Ball Game”: Buy me some peanuts and ___",
+            "answer": "Cracker Jack",
+            "aliases": [
+              "Cracker Jacks"
+            ],
+            "hint": "The snack is a caramel-coated popcorn and peanut treat.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://www.pdinfo.com/pd-music-genres/pd-popular-songs.php?MW=N",
+            "distractors": [
+              "popcorn",
+              "cotton candy",
+              "lemon drops"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-1-2",
+            "level": 1,
+            "prompt": "Complete the lyric from “Home on the Range”: Where the deer and the ___ play",
+            "answer": "antelope",
+            "aliases": [
+              "antelopes"
+            ],
+            "hint": "A hoofed animal associated with open grasslands.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://balladofamerica.org/home-on-the-range/",
+            "distractors": [
+              "buffalo",
+              "horses",
+              "cattle"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-1-3",
+            "level": 1,
+            "prompt": "Complete the lyric from “I've Been Working on the Railroad”: Can't you hear the captain shouting, Dinah, blow your ___!",
+            "answer": "horn",
+            "aliases": [],
+            "hint": "It is a short word that rhymes with morn.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/ive-been-working-on-the-railroad",
+            "distractors": [
+              "whistle",
+              "trumpet",
+              "bugle"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-1-4",
+            "level": 1,
+            "prompt": "Complete the lyric from “Amazing Grace”: I once was lost, but now am ___",
+            "answer": "found",
+            "aliases": [],
+            "hint": "The word is the opposite of lost.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/amazing-grace",
+            "distractors": [
+              "saved",
+              "free",
+              "home"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v192-finish-that-lyric-2-1",
+            "level": 2,
+            "prompt": "Complete the lyric from “Auld Lang Syne”: We'll take a cup of ___ yet",
+            "answer": "kindness",
+            "aliases": [],
+            "hint": "Think of generosity toward another person.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/auld-lang-syne",
+            "distractors": [
+              "friendship",
+              "good cheer",
+              "memory"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-2-2",
+            "level": 2,
+            "prompt": "Complete the lyric from “Danny Boy”: From glen to glen, and down the ___",
+            "answer": "mountainside",
+            "aliases": [
+              "mountain side"
+            ],
+            "hint": "The landscape is the slope of a large natural elevation.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/danny-boy",
+            "distractors": [
+              "riverbank",
+              "valley floor",
+              "hillside"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-2-3",
+            "level": 2,
+            "prompt": "Complete the lyric from “Scarborough Fair”: Parsley, sage, rosemary, and ___",
+            "answer": "thyme",
+            "aliases": [],
+            "hint": "The herb sounds like a word for what clocks measure.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/scarborough-fair",
+            "distractors": [
+              "basil",
+              "mint",
+              "dill"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-2-4",
+            "level": 2,
+            "prompt": "Complete the lyric from “Molly Malone”: Crying, cockles and ___, alive, alive, oh!",
+            "answer": "mussels",
+            "aliases": [],
+            "hint": "These shellfish have dark elongated shells; the word sounds like a body part.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/molly-malone",
+            "distractors": [
+              "oysters",
+              "clams",
+              "scallops"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v192-finish-that-lyric-3-1",
+            "level": 3,
+            "prompt": "Complete the lyric from “By the Light of the Silvery Moon”: To my honey I'll ___ love's tune",
+            "answer": "croon",
+            "aliases": [],
+            "hint": "The verb means to sing softly and rhymes with moon.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://www.pdinfo.com/pd-music-genres/pd-popular-songs.php?MW=N",
+            "distractors": [
+              "sing",
+              "hum",
+              "play"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-3-2",
+            "level": 3,
+            "prompt": "Complete the lyric from “Oh My Darling, Clementine”: Dwelt a miner, ___, and his daughter, Clementine",
+            "answer": "forty-niner",
+            "aliases": [
+              "forty niner",
+              "49er",
+              "fortyniner"
+            ],
+            "hint": "The nickname refers to the California Gold Rush of 1849.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/oh-my-darling-clementine",
+            "distractors": [
+              "gold prospector",
+              "silver miner",
+              "mountaineer"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-3-3",
+            "level": 3,
+            "prompt": "Complete the lyric from “Give My Regards to Broadway”: Give my regards to Broadway, remember me to ___",
+            "answer": "Herald Square",
+            "aliases": [],
+            "hint": "It is a Manhattan plaza near the original Macy’s flagship store, named for a newspaper.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://irishsheetmusicarchives.com/Sheet-Music-Catalog/Give-My-Regards-To-Broadway-IF-SM-00-298.htm",
+            "distractors": [
+              "Times Square",
+              "Union Square",
+              "Madison Square"
+            ]
+          },
+          {
+            "id": "v192-finish-that-lyric-3-4",
+            "level": 3,
+            "prompt": "Complete the lyric from “Simple Gifts”: 'Twill be in the valley of love and ___",
+            "answer": "delight",
+            "aliases": [],
+            "hint": "The missing word rhymes with right.",
+            "categoryId": "finish-that-lyric",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://chords.page/songs/simple-gifts",
+            "distractors": [
+              "peace",
+              "joy",
+              "grace"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "christmas-sing-along",
+      "name": "Christmas Sing-Along",
+      "description": "Complete the lyrics of familiar Christmas songs and traditional carols.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v192-christmas-sing-along-1-1",
+            "level": 1,
+            "prompt": "Complete the lyric from “Jingle Bells”: Bells on bobtail ring, making ___",
+            "answer": "spirits bright",
+            "aliases": [],
+            "hint": "Think of an upbeat mood; the final word rhymes with night.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/jingle-bells",
+            "distractors": [
+              "hearts light",
+              "children smile",
+              "sleighs fly"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-1-2",
+            "level": 1,
+            "prompt": "Complete the lyric from “Deck the Halls”: Deck the hall with boughs of ___",
+            "answer": "holly",
+            "aliases": [],
+            "hint": "A plant with prickly leaves and red berries.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/deck-the-halls",
+            "distractors": [
+              "ivy",
+              "mistletoe",
+              "pine"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-1-3",
+            "level": 1,
+            "prompt": "Complete the lyric from “Away in a Manger”: The little Lord Jesus asleep on the ___",
+            "answer": "hay",
+            "aliases": [],
+            "hint": "Dried grass used to feed livestock.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/away-in-a-manger",
+            "distractors": [
+              "straw",
+              "floor",
+              "bed"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-1-4",
+            "level": 1,
+            "prompt": "Complete the lyric from “Silent Night”: Sleep in heavenly ___",
+            "answer": "peace",
+            "aliases": [],
+            "hint": "A state of calm without conflict.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/silent-night",
+            "distractors": [
+              "light",
+              "grace",
+              "joy"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-1-5",
+            "level": 1,
+            "prompt": "Complete the lyric from “Joy to the World”: Let every heart prepare Him ___",
+            "answer": "room",
+            "aliases": [],
+            "hint": "A word meaning space; it rhymes with bloom.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/joy-to-the-world",
+            "distractors": [
+              "a place",
+              "a home",
+              "a throne"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-1-6",
+            "level": 1,
+            "prompt": "Complete the lyric from “The Twelve Days of Christmas”: Five gold rings, four calling birds, three ___",
+            "answer": "French hens",
+            "aliases": [],
+            "hint": "The birds are female chickens associated with France.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/the-twelve-days-of-christmas",
+            "distractors": [
+              "turtle doves",
+              "swimming swans",
+              "laying geese"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v192-christmas-sing-along-2-1",
+            "level": 2,
+            "prompt": "Complete the lyric from “Up on the Housetop”: Up on the housetop, click, click, click, down through the chimney with ___",
+            "answer": "good Saint Nick",
+            "aliases": [
+              "good St Nick",
+              "good St. Nick",
+              "good Saint Nicholas",
+              "good St Nicholas"
+            ],
+            "hint": "The missing phrase is a nickname for Santa that rhymes with click.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/up-on-the-housetop",
+            "distractors": [
+              "old Santa Claus",
+              "his toy sack",
+              "a bag of gifts"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-2-2",
+            "level": 2,
+            "prompt": "Complete the lyric from “Jolly Old Saint Nicholas”: Don't you tell a single ___ what I'm going to say",
+            "answer": "soul",
+            "aliases": [],
+            "hint": "A term for the spiritual part of a person.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/jolly-old-saint-nicholas",
+            "distractors": [
+              "word",
+              "friend",
+              "person"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-2-3",
+            "level": 2,
+            "prompt": "Complete the lyric from “O Come, All Ye Faithful”: O come, all ye faithful, joyful and ___",
+            "answer": "triumphant",
+            "aliases": [],
+            "hint": "A word describing the feeling of victory.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/o-come-all-ye-faithful",
+            "distractors": [
+              "glorious",
+              "thankful",
+              "rejoicing"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-2-4",
+            "level": 2,
+            "prompt": "Complete the lyric from “Hark! The Herald Angels Sing”: Peace on earth, and mercy mild, God and sinners ___",
+            "answer": "reconciled",
+            "aliases": [],
+            "hint": "It means brought back into harmony and rhymes with mild.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/hark-the-herald-angels-sing",
+            "distractors": [
+              "redeemed",
+              "forgiven",
+              "united"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-2-5",
+            "level": 2,
+            "prompt": "Complete the lyric from “The First Noel”: In fields where they lay keeping their sheep, on a cold winter’s night that was so ___",
+            "answer": "deep",
+            "aliases": [],
+            "hint": "The word rhymes with sheep.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/the-first-noel",
+            "distractors": [
+              "dark",
+              "still",
+              "long"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-2-6",
+            "level": 2,
+            "prompt": "Complete the lyric from “God Rest Ye Merry, Gentlemen”: O tidings of ___ and joy",
+            "answer": "comfort",
+            "aliases": [],
+            "hint": "A word for reassurance or relief from distress.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/god-rest-ye-merry-gentlemen",
+            "distractors": [
+              "peace",
+              "hope",
+              "love"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v192-christmas-sing-along-3-1",
+            "level": 3,
+            "prompt": "Complete the lyric from “O Holy Night”: A thrill of hope the ___ rejoices",
+            "answer": "weary world",
+            "aliases": [],
+            "hint": "The first word means tired; the second refers to all of humanity.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/o-holy-night",
+            "distractors": [
+              "waiting world",
+              "whole earth",
+              "joyful heart"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-3-2",
+            "level": 3,
+            "prompt": "Complete the lyric from “Angels We Have Heard on High”: And the mountains in reply, echoing their joyous ___",
+            "answer": "strains",
+            "aliases": [],
+            "hint": "An old-fashioned word for passages of music; it rhymes with plains.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/angels-we-have-heard-on-high",
+            "distractors": [
+              "songs",
+              "voices",
+              "praises"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-3-3",
+            "level": 3,
+            "prompt": "Complete the lyric from “What Child Is This”: Whom angels greet with ___, while shepherds watch are keeping?",
+            "answer": "anthems sweet",
+            "aliases": [],
+            "hint": "The phrase describes pleasant songs of praise.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/what-child-is-this",
+            "distractors": [
+              "voices clear",
+              "songs of praise",
+              "music soft"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-3-4",
+            "level": 3,
+            "prompt": "Complete the lyric from “Good King Wenceslas”: When a poor man came in sight, gathering ___",
+            "answer": "winter fuel",
+            "aliases": [],
+            "hint": "He needs something to burn for warmth during the cold season.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/good-king-wenceslas",
+            "distractors": [
+              "fallen branches",
+              "firewood bundles",
+              "winter provisions"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-3-5",
+            "level": 3,
+            "prompt": "Complete the lyric from “The Holly and the Ivy”: The holly bears a berry, as red as any ___",
+            "answer": "blood",
+            "aliases": [],
+            "hint": "The comparison is to the red fluid in the body.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/the-holly-and-the-ivy",
+            "distractors": [
+              "rose",
+              "wine",
+              "ruby"
+            ]
+          },
+          {
+            "id": "v192-christmas-sing-along-3-6",
+            "level": 3,
+            "prompt": "Complete the lyric from “We Three Kings”: Myrrh is mine; its bitter ___ breathes a life of gathering gloom",
+            "answer": "perfume",
+            "aliases": [],
+            "hint": "The word refers to a scent and rhymes with gloom.",
+            "categoryId": "christmas-sing-along",
+            "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+            "sourceUrl": "https://caroling.app/carol/we-three-kings",
+            "distractors": [
+              "fragrance",
+              "incense",
+              "aroma"
+            ]
+          }
+        ]
+      },
+      "activeMonths": [
+        11,
+        12
       ]
     }
   ]

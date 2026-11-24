@@ -7,9 +7,9 @@ const byid=new Map(bank.categories.map(c=>[c.id,c]));
 const specs=[['no-show',null,4],['christmas-lore',[11,12],6],['creepy-creatures',[10,11],6]];
 const allQuestions=bank.categories.flatMap(c=>Object.values(c.questionsByLevel).flat());
 const norm=x=>x.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'');
-test('v1.8.0 library reaches the accurate 1,014 question milestone',()=>{
- assert.equal(bank.categories.length,72);assert.equal(allQuestions.length,942);assert.equal(finals.length,72);
- assert.equal(allQuestions.length+finals.length,1014);
+test('current library reaches the accurate 1,046 question count',()=>{
+ assert.equal(bank.categories.length,74);assert.equal(allQuestions.length,972);assert.equal(finals.length,74);
+ assert.equal(allQuestions.length+finals.length,1046);
 });
 test('new categories have correct seasonal windows and balanced difficulty',()=>{
  for(const [id,months,count] of specs){const c=byid.get(id);assert.ok(c,id);assert.deepEqual(c.activeMonths||null,months);for(const level of ['1','2','3'])assert.equal(c.questionsByLevel[level].length,count,id+level);}

@@ -1310,5 +1310,41 @@
     "tier": "teen",
     "aliases": [],
     "distractors": []
+  },
+  {
+    "id": "category-final-finish-that-lyric",
+    "categoryId": "finish-that-lyric",
+    "category": "Finish That Lyric!",
+    "difficulty": "medium-hard",
+    "prompt": "Complete the lyric from “Swing Low, Sweet Chariot”: I looked over Jordan and what did I see? ... A ___ coming after me",
+    "answer": "band of angels",
+    "hint": "The missing phrase describes a group of heavenly beings.",
+    "hints": [
+      "The missing phrase describes a group of heavenly beings.",
+      "The first word is also used for a group of musicians."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": [],
+    "sourceUrl": "https://chords.page/songs/swing-low-sweet-chariot",
+    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate"
+  },
+  {
+    "id": "category-final-christmas-sing-along",
+    "categoryId": "christmas-sing-along",
+    "category": "Christmas Sing-Along",
+    "difficulty": "medium-hard",
+    "prompt": "Complete the lyric from “I Heard the Bells on Christmas Day”: A voice, a chime, a chant ___, of peace on earth, good-will to men",
+    "answer": "sublime",
+    "hint": "The missing adjective describes something of extraordinary beauty or grandeur.",
+    "hints": [
+      "The missing adjective describes something of extraordinary beauty or grandeur.",
+      "The word rhymes with chime and also describes something awe-inspiring."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": [],
+    "sourceUrl": "https://caroling.app/carol/i-heard-the-bells-on-christmas-day",
+    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate"
   }
 ]
