@@ -412,9 +412,9 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    if(!hostToken||!view)return;
    try{
      for(const [key,ids,limit] of [
-       ['knowshow:recentQuestionIds',view.playedQuestionIds,794],
-       ['knowshow:recentCategoryIds',view.playedCategoryIds,56],
-       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,56],
+       ['knowshow:recentQuestionIds',view.playedQuestionIds,1014],
+       ['knowshow:recentCategoryIds',view.playedCategoryIds,72],
+       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,72],
      ] as const){
        if(!ids?.length)continue;
        const old=JSON.parse(localStorage.getItem(key)||'[]') as string[];

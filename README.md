@@ -1,6 +1,16 @@
-# The Know Show v1.6.1
+# v1.8.0 — 1,000-question milestone
 
-The complete cumulative Next.js app, including 56 categories, 738 regular questions, and 56 Final Word questions. This update simplifies hosting for families: hosts make **two quick choices**—individuals or teams (individuals selected by default), then Just phones or TV + phones (Just phones selected by default). The Green Room lets hosts set a four-position answer-support slider individually for each player. Music is no longer part of initial setup; the host's music player opens when the show begins in phones-only mode, with a short tip pointing to the music menu.
+Complete cumulative application update based on v1.7.0. Adds **The No-Show!** (year-round; 12 regular questions), **Christmas Legends & Lore** (November–December; 18 regular questions), and **Creepy Creatures** (October–November; 18 regular questions), plus **three separate Final Word questions**. Totals: **72 categories, 942 regular questions, 72 category-linked Final Word questions — 1,014 questions**.
+
+The homepage now promotes **over 70 categories** and **over 1,000 questions**, and the How to Play guide reflects the updated library. All previous features, approved logos and app icons, and Supabase schema are retained. See `V180_REGULAR_REVIEW.csv`, `V180_FINAL_WORD_REVIEW.csv`, and `V180_AUDIT_NOTES.md` for this release's question audit. This is an editorially reviewed question expansion, not a guarantee of independent expert certification of every fact. No new environment variables or Supabase migrations are needed.
+
+## v1.7.0 — 13 new year-round categories
+
+Adds 156 regular trivia questions and 13 separate Final Word questions, bringing the bank to **69 categories / 894 regular questions / 69 category-linked Final Word questions**. Review `NEW_REGULAR_CATEGORIES_QA.csv`, `NEW_FINAL_WORD_QA.csv`, and `NEW_CATEGORIES_AUDIT_NOTES.md`. Existing trivia, branding, game logic, and database schema are retained.
+
+# The Know Show v1.7.0
+
+The complete cumulative Next.js app, including 69 categories, 894 regular questions, and 69 Final Word questions. This update simplifies hosting for families: hosts make **two quick choices**—individuals or teams (individuals selected by default), then Just phones or TV + phones (Just phones selected by default). The Green Room lets hosts set a four-position answer-support slider individually for each player. Music is no longer part of initial setup; the host's music player opens when the show begins in phones-only mode, with a short tip pointing to the music menu.
 
 The homepage highlight cards now explain the two 12-question rounds and final question, the 50+ regular and seasonal categories, and available player tools.
 
@@ -21,7 +31,7 @@ The host uses the Green Room slider to assign each player an answer format: **Wr
 
 Each four-choice player sees a private, single-tap selection on their phone for eligible **regular** questions. Written and multiple-choice correct answers receive the same base points. Regular-question speed bonuses are capped at 25% (written) and 10% (four-choice). Double Take rules are unchanged.
 
-**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are two progressive Final Word hints per question in the new standalone 56-question Final Word bank. Regular-game hints never carry into Final Word; each player may instead purchase up to two Final Word hints for 500 points each **before wagering**. Each purchase immediately reduces their balance and maximum wager.
+**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are two progressive Final Word hints per question in the new standalone 69-question Final Word bank. Regular-game hints never carry into Final Word; each player may instead purchase up to two Final Word hints for 500 points each **before wagering**. Each purchase immediately reduces their balance and maximum wager.
 
 ## Game rules and features
 
@@ -32,18 +42,18 @@ Each four-choice player sees a private, single-tap selection on their phone for 
 - TV + Phones or Phones Only; Cool Jazz default with alternate Suno soundtracks. During a show, a compact header music menu lets anyone in the room select the shared track, unless the host turns that permission off. Audio plays only from the host phone or TV. The embedded player may require pressing Play after a track change.
 - Host dispute/ruling controls, automatic return to Player View, replay tracking between rematches and new shows created on the same host browser, room codes, and in-app camera QR joining.
 - The larger sound-effects panel is deferred; prominent synced Final Word timer. Answer-first results animation with ✓/✕, points changes and a leaderboard beat.
-- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase offers one eligible seasonal category (when at least one is in season), alongside year-round categories; players are not required to select it. The 45 year-round categories remain available at all times.
+- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase offers one eligible seasonal category (when at least one is in season), alongside year-round categories; players are not required to select it. The 58 year-round categories remain available at all times.
 - Navy-and-gold Curtain Call with trophy, confetti, prominently displayed winner(s) and one final standings table. Ties share the same rank.
 
 ## Final Word question selection and audit
 
 Final Word has a **dedicated bank of 56 medium-hard/hard questions**, one for each year-round or seasonal category. They do not appear in standard play; Final Word chooses from seasonally eligible categories **not on either board in the current game**, preferring questions not recently seen. The 18 former final questions remain only as compatibility entries for already running rooms.
 
-All 56 active questions and both progressive hints were editorially reviewed for answer accuracy, aliases, and hints that help without spelling out answers. The per-question source/reference and audit worksheet is `FINAL_WORD_CATEGORY_REVIEW.csv`. Consult `FINAL_WORD_FACT_CHECK.md` for review method and limits. This Final Word audit is separate from the 738 regular-game questions.
+The original 56 Final Word questions and both progressive hints were editorially reviewed for answer accuracy, aliases, and hints that help without spelling out answers. The per-question source/reference and audit worksheet is `FINAL_WORD_CATEGORY_REVIEW.csv`. Consult `FINAL_WORD_FACT_CHECK.md` for review method and limits. This Final Word audit is separate from the 894 regular-game questions.
 
 ## Question bank / quality audit
 
-The original 540 prompts, answers, hints, and source tracking are preserved, together with their previously reviewed options. The seasonal bank now contains 198 questions across eleven categories, with six questions per difficulty; 66 are new in v1.5.9, bringing regular play to 738 questions. The original multiple-choice review covered 358 rewritten and 182 retained sets. See `CHOICE_OPTIONS_QA.csv` for the original bank and `SEASONAL_QUESTION_QA.csv` for the first 132 seasonal questions, plus `SEASONAL_QUESTION_EXPANSION_QA.csv` for the 66 additions and their alternatives, hints, and references; consult `QUESTION_LIBRARY_STATUS.md` for the status of source verification. This remains a playtest-ready question set, not a claim that every question has been independently verified.
+The original 540 prompts, answers, hints, and source tracking are preserved, together with their previously reviewed options. The seasonal bank now contains 198 questions across eleven categories, with six questions per difficulty; 66 were introduced in v1.5.6, bringing regular play to 738 questions. The original multiple-choice review covered 358 rewritten and 182 retained sets. See `CHOICE_OPTIONS_QA.csv` for the original bank and `SEASONAL_QUESTION_QA.csv` for the first 132 seasonal questions, plus `SEASONAL_QUESTION_EXPANSION_QA.csv` for the 66 additions and their alternatives, hints, and references; consult `QUESTION_LIBRARY_STATUS.md` for the status of source verification. This remains a playtest-ready question set, not a claim that every question has been independently verified.
 
 ## Development / deployment
 
@@ -67,7 +77,7 @@ Seasonal category visibility is automatic: Thanksgiving, Veterans Day & Military
 
 The 66 added seasonal questions were screened for contextual answer types, plausible alternatives, hint usefulness, category balance, and answer overlap with Final Word. Their individual reference links and editorial notes are in `SEASONAL_QUESTION_EXPANSION_QA.csv`. Original seasonal questions are in `SEASONAL_QUESTION_QA.csv`. This editorial review is not independent source corroboration of every trivia fact.
 
-**v1.5.2:** The Final Word player view combines the hint shop, balance, wager slider, and instant correct/incorrect projections on one screen. See `FINAL_WORD_CATEGORY_REVIEW.csv` for the new 56-question Final Word pool and two paid hints per question. The earlier `FINAL_WORD_HINTS_REVIEW.csv` remains as a legacy reference for games that started in an older version.
+**v1.5.2:** The Final Word player view combines the hint shop, balance, wager slider, and instant correct/incorrect projections on one screen. See `FINAL_WORD_CATEGORY_REVIEW.csv` for the new 69-question Final Word pool and two paid hints per question. The earlier `FINAL_WORD_HINTS_REVIEW.csv` remains as a legacy reference for games that started in an older version.
 
 
 ### Repeat protection (v1.5.5)

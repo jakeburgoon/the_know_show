@@ -59,8 +59,8 @@ export function makeGame(recentQuestionIds:string[]=[],recentCategoryIds:string[
  const valid=new Set(CATEGORIES.map(c=>c.id));
  return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],
   recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string'&&(!!getQuestion(x)||FINALS.some(f=>f.id===x))).slice(-QUESTION_HISTORY_LIMIT),
-  recentCategoryIds:recentCategoryIds.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56),
-  recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56),
+  recentCategoryIds:recentCategoryIds.filter(id=>typeof id==='string'&&valid.has(id)).slice(-CATEGORIES.length),
+  recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-CATEGORIES.length),
   hostHistoryId:hostHistoryId&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(hostHistoryId)?hostHistoryId:undefined};
 }
 export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
@@ -153,7 +153,7 @@ function pickPool(s:GameState,now:number){
 }
 function goDraft(s:GameState,now:number){
  s.players.forEach(p=>p.doubleTakesRemaining=1);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s,now);
- s.recentCategoryOffers=rememberRecent(s.recentCategoryOffers??[],s.draftPool,56);
+ s.recentCategoryOffers=rememberRecent(s.recentCategoryOffers??[],s.draftPool,CATEGORIES.length);
  s.resolution=undefined;s.active=undefined;log(s,`Select four categories for ${ROUND_NAMES[s.round]}.`);
 }
 function nextQuestionChoices(s:GameState){
@@ -337,7 +337,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(s.phase==='draft','The category draft is closed.');const id=action.categoryId;
    assert(s.draftPool.includes(id),'Choose a category from the available draft.');assert(!s.selected[s.round].includes(id),'Already selected.');
    const chooser=s.players[(s.draftIndex+s.round*4)%s.players.length];assert(actor.kind==='host'||actor.id===chooser.id,`It is ${chooser.name}’s turn.`);
-   s.selected[s.round].push(id);s.recentCategoryIds=rememberRecent(s.recentCategoryIds??[],[id],56);s.draftIndex++;log(s,`${chooser.name} selected ${CATEGORY_LOOKUP.get(id)!.name}.`);
+   s.selected[s.round].push(id);s.recentCategoryIds=rememberRecent(s.recentCategoryIds??[],[id],CATEGORIES.length);s.draftIndex++;log(s,`${chooser.name} selected ${CATEGORY_LOOKUP.get(id)!.name}.`);
    if(s.selected[s.round].length===4){nextQuestionChoices(s);s.phase='board';s.chooserIndex=s.round===0?0:4;log(s,`${ROUND_NAMES[s.round]} begins!`);}break;
  }
  case 'open-question':{
@@ -473,7 +473,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  case 'new-game':{
    host(actor);assert(s.phase==='finished','Finish this show first.');// A rematch carries every played question and selected/offered category.
    // Include the selected categories for older rooms created before category histories existed.
-   const categories=rememberRecent(s.recentCategoryIds??[],[...s.selected[0],...s.selected[1]],56);
+   const categories=rememberRecent(s.recentCategoryIds??[],[...s.selected[0],...s.selected[1]],CATEGORIES.length);
    const n=makeGame(s.recentQuestionIds,categories,s.recentCategoryOffers??[],s.hostHistoryId);n.id=s.id;n.createdAt=s.createdAt;n.settings={...s.settings};n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:1}));log(n,'Rematch! Same players and settings. Get ready for a new show.');return n;
  }
  case 'close-show':{

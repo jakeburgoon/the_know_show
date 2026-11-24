@@ -16,8 +16,8 @@ function finishRound(s,a,start=20000){for(let i=0;i<12;i++){const key=keys(s).fi
    assert.equal(s.phase,'results');s=g.tick(s,s.resolution.endsAt+10);
  }return s;}
 
-test('the Standard bank has 45 year-round categories plus 11 seasonal categories, 738 balanced questions',()=>{
- assert.equal(bank.CATEGORIES.length,56);assert.equal(bank.QUESTION_LOOKUP.size,738);
+test('the Standard bank has 59 year-round categories plus 13 seasonal categories, 942 balanced questions',()=>{
+ assert.equal(bank.CATEGORIES.length,72);assert.equal(bank.QUESTION_LOOKUP.size,942);
  for(const c of bank.CATEGORIES){assert.ok(c.description.length>5);assert.deepEqual(Object.keys(c.questionsByLevel).sort(),['1','2','3']);
   for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,c.activeMonths?6:4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
  }
@@ -285,14 +285,14 @@ test('Final Word saved draft is automatically scored at zero without requiring L
 test('every Final Word question has two distinct, private, ordered hints',()=>{
  assert.equal(bank.LEGACY_FINALS.length,18);
  assert.equal(bank.CATEGORY_FINALS.length,bank.CATEGORIES.length);
- assert.equal(bank.FINALS.length,74);
+ assert.equal(bank.FINALS.length,90);
  for(const q of bank.FINALS){
    assert.equal(q.hints.length,2,q.id);
    assert.equal(new Set(q.hints.map(h=>h.trim().toLowerCase())).size,2,q.id);
    for(const h of q.hints){assert.ok(h.length>=12,`${q.id} has a very short clue`);assert.ok(!h.toLowerCase().includes(q.answer.toLowerCase()),`${q.id} names the answer in a clue`);}
  }
 });
-test('56 category-linked Final Word questions are unique, medium-hard or hard and never used as ordinary board questions',()=>{
+test('72 category-linked Final Word questions are unique, medium-hard or hard and never used as ordinary board questions',()=>{
  const normalPrompts=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.prompt.toLowerCase().replace(/\W/g,'')));
  const normalAnswers=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.answer.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'')));
  const categoryIds=new Set(bank.CATEGORIES.map(c=>c.id));
@@ -306,7 +306,7 @@ test('56 category-linked Final Word questions are unique, medium-hard or hard an
   assert.equal(f.hints.length,2,f.id);
   for(const hint of f.hints){assert.ok(hint.length>=35,f.id);assert.ok(!hint.toLowerCase().includes(f.answer.toLowerCase()),'Hint discloses answer: '+f.id);}
  }
- assert.equal(unique.size,56);
+ assert.equal(unique.size,72);
 });
 test('Final Word draw respects seasonal months and avoids recent finals and categories played on the board',()=>{
  const s=g.makeGame();
@@ -412,7 +412,7 @@ test('Final Word drafts remember pre-purchased hint use when auto-submitted',()=
 });
 
 
-test('seasonal availability follows the Eastern date, keeping all 45 year-round categories eligible',()=>{
+test('seasonal availability follows the Eastern date, keeping all 59 year-round categories eligible',()=>{
  const cases=[
   ['2026-11-23T15:00:00Z',['thanksgiving','christmas-movies','christmas-music','veterans-military','native-american','harvest-time','college-football'],['winter-olympics','winter-traditions','winter-holidays','new-years']],
   ['2026-12-20T15:00:00Z',['christmas-movies','christmas-music','winter-olympics','winter-traditions','winter-holidays','new-years'],['thanksgiving','veterans-military','native-american','harvest-time','college-football']],
@@ -426,7 +426,7 @@ test('seasonal availability follows the Eastern date, keeping all 45 year-round 
  for(const [date,active,off] of cases){const ids=new Set(bank.availableCategories(new Date(date)).map(c=>c.id));
   for(const id of active)assert.ok(ids.has(id),`${id} should appear on ${date}`);
   for(const id of off)assert.equal(ids.has(id),false,`${id} should not appear on ${date}`);
-  assert.equal([...ids].filter(id=>!seasonalIds.has(id)).length,45);
+  assert.equal([...ids].filter(id=>!seasonalIds.has(id)).length,59);
  }
  // Eastern date rather than UTC date determines the season boundary.
  assert.ok(bank.availableCategories(new Date('2026-12-01T03:00:00Z')).some(c=>c.id==='thanksgiving'));
@@ -444,7 +444,7 @@ test('draft pools never include seasonal categories outside their permitted mont
 
 test('seasonal distractors are unique, not accepted as answers, and season hints are present',()=>{
  const seasonal=bank.CATEGORIES.filter(c=>c.activeMonths);
- assert.equal(seasonal.length,11);
+ assert.equal(seasonal.length,13);
  for(const category of seasonal){assert.equal(Object.values(category.questionsByLevel).flat().length,18);
   for(const q of Object.values(category.questionsByLevel).flat()){
    const opts=[q.answer,...q.distractors];assert.equal(new Set(opts.map(o=>o.toLowerCase())).size,4,q.id);

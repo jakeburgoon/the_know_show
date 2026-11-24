@@ -1,0 +1,7 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');
+const q=require('../src/lib/question-bank.json');const f=require('../src/lib/final-category-bank.json');
+const newIds=['villains','celebrities','video-games','brands','sci-fi','fantasy','toys','presidents','wars','headlines','connections','before-after','undone'];
+test('new categories have four prompts per level and are available year-round',()=>{for(const id of newIds){const c=q.categories.find(c=>c.id===id);assert.ok(c,id);assert.ok(!c.activeMonths,id);for(const lvl of ['1','2','3']){assert.equal(c.questionsByLevel[lvl].length,4,id+lvl);for(const item of c.questionsByLevel[lvl]){assert.equal(item.distractors.length,3);assert.ok(item.hint.length>=20);}}}});
+test('there is one standalone Final Word item per new category',()=>{for(const id of newIds){const item=f.find(x=>x.categoryId===id);assert.ok(item,id);assert.equal(item.hints.length,2);assert.ok(item.prompt&&item.answer);}});
+test('previously added thirteen categories and their questions remain intact',()=>{assert.ok(q.categories.length>=69);assert.ok(q.categories.reduce((n,c)=>n+Object.values(c.questionsByLevel).flat().length,0)>=894);assert.ok(f.length>=69);});
+test('no new Final Word answer appears in regular question bank',()=>{const answers=new Set(q.categories.flatMap(c=>Object.values(c.questionsByLevel).flat()).map(x=>x.answer.toLowerCase()));for(const fitem of f.filter(x=>newIds.includes(x.categoryId))){assert.ok(!answers.has(fitem.answer.toLowerCase()),fitem.id);}});

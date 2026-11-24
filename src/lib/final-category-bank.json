@@ -972,5 +972,324 @@
       "Shillelagh"
     ],
     "distractors": []
+  },
+  {
+    "id": "category-final-villains",
+    "categoryId": "villains",
+    "category": "Villains We Love to Hate",
+    "difficulty": "medium-hard",
+    "prompt": "In Shakespeare's Othello, which character manipulates the title character into believing Desdemona is unfaithful?",
+    "answer": "Iago",
+    "hint": "He is a military subordinate who resents Othello's promotion decisions.",
+    "hints": [
+      "He is a military subordinate who resents Othello's promotion decisions.",
+      "He plants suspicion involving Cassio and a misplaced handkerchief."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Iago the ensign"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/othello/read/characterList/",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-celebrities",
+    "categoryId": "celebrities",
+    "category": "Celebrity Spotlight",
+    "difficulty": "medium-hard",
+    "prompt": "Which actress won the 2019 Academy Award for Best Actress for portraying Queen Anne in The Favourite?",
+    "answer": "Olivia Colman",
+    "hint": "She is a British actor whose comedy work includes a long-running role in Peep Show.",
+    "hints": [
+      "She is a British actor whose comedy work includes a long-running role in Peep Show.",
+      "She later portrayed Queen Elizabeth II in Netflix's The Crown."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Olivia Coleman",
+      "Colman"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-video-games",
+    "categoryId": "video-games",
+    "category": "Video Game Vault",
+    "difficulty": "hard",
+    "prompt": "Which video-game studio developed both the Uncharted series and The Last of Us?",
+    "answer": "Naughty Dog",
+    "hint": "This U.S. studio first produced games under the name JAM Software.",
+    "hints": [
+      "This U.S. studio first produced games under the name JAM Software.",
+      "The same developer made early Crash Bandicoot games for the original PlayStation."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Naughty Dog Studios"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.naughtydog.com/company",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-brands",
+    "categoryId": "brands",
+    "category": "Brands & Slogans",
+    "difficulty": "medium-hard",
+    "prompt": "Which personal-care brand launched the 2010 ad campaign The Man Your Man Could Smell Like?",
+    "answer": "Old Spice",
+    "hint": "The campaign promoted products commonly sold in the deodorant and body-wash aisle.",
+    "hints": [
+      "The campaign promoted products commonly sold in the deodorant and body-wash aisle.",
+      "An actor named Isaiah Mustafa addressed the camera in its memorable television commercials."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Old Spice Body Wash"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.dandad.org/insights/awards/old-spice-case-study-insights",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-sci-fi",
+    "categoryId": "sci-fi",
+    "category": "Sci-Fi Worlds",
+    "difficulty": "hard",
+    "prompt": "Which science-fiction author created the fictional science of psychohistory in the Foundation stories?",
+    "answer": "Isaac Asimov",
+    "hint": "His stories include a future civilization spanning many star systems.",
+    "hints": [
+      "His stories include a future civilization spanning many star systems.",
+      "He also wrote a well-known series of stories about robots and their laws."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Asimov"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-fantasy",
+    "categoryId": "fantasy",
+    "category": "Fantasy Realms",
+    "difficulty": "hard",
+    "prompt": "In The Lord of the Rings, what Elvish royal name does Aragorn take after becoming king?",
+    "answer": "Elessar",
+    "hint": "The name is traditionally translated as Elfstone in Tolkien's legendarium.",
+    "hints": [
+      "The name is traditionally translated as Elfstone in Tolkien's legendarium.",
+      "Arwen's grandmother Galadriel gives him a green jewel associated with the name."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "King Elessar",
+      "Elessar Telcontar"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.encyclopedia-of-arda.com/e/elfstonearagorn.php",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-toys",
+    "categoryId": "toys",
+    "category": "The Toy Box",
+    "difficulty": "medium-hard",
+    "prompt": "Which inventor developed the Slinky after noticing how a metal spring moved while he worked on ship equipment?",
+    "answer": "Richard James",
+    "hint": "He was an American mechanical engineer working on springs during World War II.",
+    "hints": [
+      "He was an American mechanical engineer working on springs during World War II.",
+      "His wife Betty later played a major role in marketing the famous staircase-walking toy."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Richard T. James"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.museumofplay.org/toys/slinky/",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-presidents",
+    "categoryId": "presidents",
+    "category": "Hail to the Chief",
+    "difficulty": "medium-hard",
+    "prompt": "Which U.S. president was the first to be born after the adoption of the Declaration of Independence in 1776?",
+    "answer": "Martin Van Buren",
+    "hint": "He grew up in New York in a household where Dutch was spoken.",
+    "hints": [
+      "He grew up in New York in a household where Dutch was spoken.",
+      "He served one term immediately after Andrew Jackson."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Van Buren",
+      "President Van Buren"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://prod.millercenter.org/president/vanburen/life-before-the-presidency",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-wars",
+    "categoryId": "wars",
+    "category": "Wars & Turning Points",
+    "difficulty": "hard",
+    "prompt": "Which 1704 battle in the War of the Spanish Succession was a major Allied victory that ended the threat of a French-led march toward Vienna?",
+    "answer": "Battle of Blenheim",
+    "hint": "It was fought along the Danube in what is now southern Germany.",
+    "hints": [
+      "It was fought along the Danube in what is now southern Germany.",
+      "The winning commanders included John Churchill, Duke of Marlborough, and Prince Eugene of Savoy."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Blenheim",
+      "Blenheim Battle"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.nam.ac.uk/explore/battle-blenheim",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-headlines",
+    "categoryId": "headlines",
+    "category": "Extra! Extra!",
+    "difficulty": "medium-hard",
+    "prompt": "An imagined 1922 headline reads: Sealed Royal Burial Found After Years of Searching! Which famous archaeological discovery does it describe?",
+    "answer": "Discovery of Tutankhamun's tomb",
+    "hint": "The burial chamber was found in Egypt's Valley of the Kings.",
+    "hints": [
+      "The burial chamber was found in Egypt's Valley of the Kings.",
+      "British archaeologist Howard Carter led the excavation."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Tutankhamun's tomb",
+      "Tomb of Tutankhamun",
+      "King Tut's tomb",
+      "Finding Tutankhamun Tomb",
+      "Discovery of King Tut Tomb"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://tutankhamun.griffith.ox.ac.uk/people/howard-carter",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-connections",
+    "categoryId": "connections",
+    "category": "Connect the Dots",
+    "difficulty": "medium-hard",
+    "prompt": "Oberon, Titania, and Puck are all characters in which Shakespeare play?",
+    "answer": "A Midsummer Night's Dream",
+    "hint": "Much of the play's action takes place in a forest outside Athens.",
+    "hints": [
+      "Much of the play's action takes place in a forest outside Athens.",
+      "A magical love potion causes confusion among several human couples."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Midsummer Night's Dream"
+    ],
+    "distractors": [],
+    "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-before-after",
+    "categoryId": "before-after",
+    "category": "Before & After",
+    "difficulty": "medium-hard",
+    "prompt": "What blended title joins a dystopian novel about Alex and ultraviolence with a television series about life in a women’s prison?",
+    "answer": "A Clockwork Orange Is the New Black",
+    "hint": "The novel was written by Anthony Burgess in the early 1960s.",
+    "hints": [
+      "The novel was written by Anthony Burgess in the early 1960s.",
+      "The two titles overlap on a word that is both a fruit and a color."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Clockwork Orange Is the New Black"
+    ],
+    "distractors": [],
+    "sourceUrl": "Original wordplay puzzle: independently constructed from two published titles; not a historical claim",
+    "sourceStatus": "Constructed wordplay; title facts editorially checked"
+  },
+  {
+    "id": "category-final-undone",
+    "categoryId": "undone",
+    "category": "Un-Done!",
+    "difficulty": "hard",
+    "prompt": "Which UN word describes something so mysterious or deep that it seems impossible to understand or measure?",
+    "answer": "Unfathomable",
+    "hint": "The term is used both for a person’s motives and for extreme depths.",
+    "hints": [
+      "The term is used both for a person’s motives and for extreme depths.",
+      "Its root is an old nautical unit for measuring water depth."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": [],
+    "sourceUrl": "https://dictionary.cambridge.org/us/dictionary/english/unfathomable",
+    "sourceStatus": "Externally corroborated"
+  },
+  {
+    "id": "category-final-no-show",
+    "categoryId": "no-show",
+    "category": "The No-Show!",
+    "difficulty": "hard",
+    "prompt": "Which Soviet space shuttle orbited Earth once without a crew in 1988 but never flew another space mission?",
+    "answer": "Buran",
+    "hint": "It was the product of a Cold War-era program rivaling NASA’s Space Shuttle.",
+    "hints": [
+      "It was the product of a Cold War-era program rivaling NASA’s Space Shuttle.",
+      "The spacecraft made an automated orbital flight atop an Energia rocket."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
+  },
+  {
+    "id": "category-final-christmas-lore",
+    "categoryId": "christmas-lore",
+    "category": "Christmas Legends & Lore",
+    "difficulty": "medium-hard",
+    "prompt": "What is the name of the Catalan Christmas tradition involving a decorated log that children care for and later tap to receive treats?",
+    "answer": "Tió de Nadal",
+    "hint": "This distinctive gift-giving custom is associated with the Catalonia region of Spain.",
+    "hints": [
+      "This distinctive gift-giving custom is associated with the Catalonia region of Spain.",
+      "Families often give the object a painted face, a blanket, and a little red cap."
+    ],
+    "tier": "teen",
+    "aliases": [
+      "Tio de Nadal",
+      "Caga Tió",
+      "Caga Tio",
+      "Christmas Tió"
+    ],
+    "distractors": []
+  },
+  {
+    "id": "category-final-creepy-creatures",
+    "categoryId": "creepy-creatures",
+    "category": "Creepy Creatures",
+    "difficulty": "medium-hard",
+    "prompt": "What Japanese folkloric fox spirit is famous for shape-shifting and, in some stories, gaining extra tails as it ages?",
+    "answer": "Kitsune",
+    "hint": "In legends, this being can appear in human form and may be mischievous or benevolent.",
+    "hints": [
+      "In legends, this being can appear in human form and may be mischievous or benevolent.",
+      "It is closely associated with fox imagery and the Shinto deity Inari."
+    ],
+    "tier": "teen",
+    "aliases": [],
+    "distractors": []
   }
 ]

@@ -42,7 +42,7 @@ export default function Home() {
       <img className="v11hero-logo" src="/know-show-logo.png" alt="The Know Show"/>
       <h1 id="v11heroheading">It’s time to <em className="v11headline-show">SHOW</em> what you <strong className="v11headline-know">KNOW</strong>.</h1>
       <p className="v11herodeck">Choose your categories, answer your way, and find out who knows the most.</p>
-      <div className="v11featureline" aria-label="How the game works"><span><Users size={17}/> 2–8 players</span><span><Grid2X2 size={17}/> 50+ categories</span><span><PenLine size={17}/> Answer your way</span><span><UsersRound size={17}/> Individuals or teams</span></div>
+      <div className="v11featureline" aria-label="How the game works"><span><Users size={17}/> 2–8 players</span><span><Grid2X2 size={17}/> 70+ categories</span><span><PenLine size={17}/> Answer your way</span><span><UsersRound size={17}/> Individuals or teams</span></div>
     </section>
     <section className="v11entryzone" aria-labelledby="v11startheading">
       <div className="v11entryheading"><p className="v11sectionkicker">GAME NIGHT STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
-    <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Choose from over 50 categories</strong><span>Explore regular and seasonal trivia.</span></div><div><Check size={20}/><strong>Take on 25 questions</strong><span>Two rounds of 12, plus one final question.</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Use hints and try to double your points.</span></div></section>
-    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.6.2</span></footer>
+    <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Choose from over 70 categories</strong><span>Over 1,000 regular and seasonal questions.</span></div><div><Check size={20}/><strong>Take on 25 questions</strong><span>Two rounds of 12, plus one final question.</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Use hints and try to double your points.</span></div></section>
+    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.8.0</span></footer>
   </main>;
 }

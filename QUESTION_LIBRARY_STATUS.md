@@ -1,3 +1,27 @@
+# v1.8.0 question-library verification addendum
+
+- 72 total categories: **59 year-round and 13 seasonal**.
+- 942 regular-game questions (894 existing + 48 newly added).
+- 72 category-specific Final Word questions (69 existing + 3 newly added).
+- **1,014 total**, with all old entries retained.
+- The 51 new questions underwent individual editorial review with source references, but are not claimed as independently fact-certified by experts. See `V180_AUDIT_NOTES.md` and the two V180 review CSVs.
+- Historical statuses below document the earlier bank and have not been silently upgraded.
+
+---
+
+# v1.7.0 category expansion — verification addendum
+
+- **Year-round categories:** 58 (45 original plus 13 new).
+- **Seasonal categories:** 11 (unchanged).
+- **Regular questions:** 894 (738 inherited + 156 new).
+- **Dedicated Final Word questions:** 69 (56 inherited + 13 new).
+- **Total playable questions:** 963.
+- **Review coverage:** All 156 new regular questions received editorial answer/option/hint screening; 18 have separately recorded claim-specific external source corroboration. All 13 new Final Word questions received targeted review (12 supported by external references and one constructed wordplay answer). Remaining new regular facts require individual independent source checks; do not describe the entire new bank as fully externally verified.
+- Review documents: `NEW_REGULAR_CATEGORIES_QA.csv`, `NEW_FINAL_WORD_QA.csv`, and `NEW_CATEGORIES_AUDIT_NOTES.md`.
+- The historical verification numbers below refer to the inherited v1.5.6 regular library and are retained for traceability.
+
+---
+
 # Question-library verification status — v1.5.6
 
 | Source status | Questions |

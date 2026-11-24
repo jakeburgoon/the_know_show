@@ -3,6 +3,7 @@
  * for that ID. No login, no player information, and no database migration.
  */
 import {QUESTION_HISTORY_LIMIT} from './game';
+import {CATEGORIES} from './questions';
 export type SeenHistory={recentQuestionIds:string[];recentCategoryIds:string[];recentCategoryOffers:string[]};
 export function mergeHistory<T extends string>(histories:readonly (readonly T[])[],limit:number):T[]{
  let recent:T[]=[];
@@ -13,7 +14,7 @@ export function mergeHostHistories(stored:readonly Partial<SeenHistory>[],incomi
  const all=[...stored,incoming];
  return {
   recentQuestionIds:mergeHistory(all.map(x=>Array.isArray(x.recentQuestionIds)?x.recentQuestionIds:[]),QUESTION_HISTORY_LIMIT),
-  recentCategoryIds:mergeHistory(all.map(x=>Array.isArray(x.recentCategoryIds)?x.recentCategoryIds:[]),56),
-  recentCategoryOffers:mergeHistory(all.map(x=>Array.isArray(x.recentCategoryOffers)?x.recentCategoryOffers:[]),56),
+  recentCategoryIds:mergeHistory(all.map(x=>Array.isArray(x.recentCategoryIds)?x.recentCategoryIds:[]),CATEGORIES.length),
+  recentCategoryOffers:mergeHistory(all.map(x=>Array.isArray(x.recentCategoryOffers)?x.recentCategoryOffers:[]),CATEGORIES.length),
  };
 }

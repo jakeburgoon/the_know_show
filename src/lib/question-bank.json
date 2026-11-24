@@ -1,5 +1,5 @@
 {
-  "version": "1.5.6",
+  "version": "1.8.0",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -13800,6 +13800,3857 @@
           }
         ]
       }
+    },
+    {
+      "id": "villains",
+      "name": "Villains We Love to Hate",
+      "description": "Memorable antagonists from books, movies, television, and comics.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-villains-1-1",
+            "level": 1,
+            "prompt": "Which masked villain is revealed to be Luke Skywalker's father in Star Wars?",
+            "answer": "Darth Vader",
+            "aliases": [
+              "Vader"
+            ],
+            "hint": "He wears black armor and breathes through a mechanical device.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Kylo Ren",
+              "Grand Moff Tarkin",
+              "Boba Fett"
+            ]
+          },
+          {
+            "id": "v170-villains-1-2",
+            "level": 1,
+            "prompt": "Who is the sea witch who makes a bargain with Ariel in The Little Mermaid?",
+            "answer": "Ursula",
+            "aliases": [],
+            "hint": "She wants to take control of King Triton's underwater kingdom.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Maleficent",
+              "Cruella de Vil",
+              "Mother Gothel"
+            ]
+          },
+          {
+            "id": "v170-villains-1-3",
+            "level": 1,
+            "prompt": "What is the name of Simba's scheming uncle in The Lion King?",
+            "answer": "Scar",
+            "aliases": [],
+            "hint": "He plots with a group of hyenas.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Shere Khan",
+              "Kaa",
+              "Jafar"
+            ]
+          },
+          {
+            "id": "v170-villains-1-4",
+            "level": 1,
+            "prompt": "Which villain wants to make a coat from Dalmatian puppies?",
+            "answer": "Cruella de Vil",
+            "aliases": [
+              "Cruella",
+              "Cruella DeVille"
+            ],
+            "hint": "She is obsessed with a particular spotted fur pattern.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Madame Medusa",
+              "The Evil Queen",
+              "Lady Tremaine"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-villains-2-1",
+            "level": 2,
+            "prompt": "Which villain is Peter Pan's pirate nemesis?",
+            "answer": "Captain Hook",
+            "aliases": [
+              "Hook"
+            ],
+            "hint": "He fears a crocodile that has swallowed a clock.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Long John Silver",
+              "Davy Jones",
+              "Blackbeard"
+            ]
+          },
+          {
+            "id": "v170-villains-2-2",
+            "level": 2,
+            "prompt": "Which dark lord forged the One Ring in The Lord of the Rings?",
+            "answer": "Sauron",
+            "aliases": [],
+            "hint": "His power is centered in the realm of Mordor.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Saruman",
+              "Morgoth",
+              "The Witch-king"
+            ]
+          },
+          {
+            "id": "v170-villains-2-3",
+            "level": 2,
+            "prompt": "Which sorceress curses Princess Aurora in Disney's Sleeping Beauty?",
+            "answer": "Maleficent",
+            "aliases": [],
+            "hint": "She transforms into a dragon near the end of the animated film.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Ursula",
+              "The Evil Queen",
+              "Mother Gothel"
+            ]
+          },
+          {
+            "id": "v170-villains-2-4",
+            "level": 2,
+            "prompt": "Which fictional villain tries to steal the Christmas presents of the Whos?",
+            "answer": "The Grinch",
+            "aliases": [
+              "Grinch"
+            ],
+            "hint": "He lives above Whoville with his dog Max.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Jack Skellington",
+              "Oogie Boogie",
+              "Ebenezer Scrooge"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-villains-3-1",
+            "level": 3,
+            "prompt": "Which criminal mastermind is Sherlock Holmes's intellectual rival in The Final Problem?",
+            "answer": "Professor Moriarty",
+            "aliases": [
+              "Moriarty",
+              "James Moriarty"
+            ],
+            "hint": "He is often portrayed as a mathematics professor with a criminal network.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Charles Augustus Milverton",
+              "Sebastian Moran",
+              "Irene Adler"
+            ]
+          },
+          {
+            "id": "v170-villains-3-2",
+            "level": 3,
+            "prompt": "Which tyrannical nurse is a major antagonist in One Flew Over the Cuckoo's Nest?",
+            "answer": "Nurse Ratched",
+            "aliases": [
+              "Ratched",
+              "Mildred Ratched"
+            ],
+            "hint": "She controls a psychiatric ward through rigid rules and manipulation.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Annie Wilkes",
+              "Miss Trunchbull",
+              "Dolores Umbridge"
+            ]
+          },
+          {
+            "id": "v170-villains-3-3",
+            "level": 3,
+            "prompt": "Which tiger hunts Mowgli in The Jungle Book?",
+            "answer": "Shere Khan",
+            "aliases": [],
+            "hint": "The character is feared by many animals in Kipling's jungle stories.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Bagheera",
+              "Akela",
+              "Kaa"
+            ]
+          },
+          {
+            "id": "v170-villains-3-4",
+            "level": 3,
+            "prompt": "Which villain pursues the Baudelaire orphans and their inheritance in A Series of Unfortunate Events?",
+            "answer": "Count Olaf",
+            "aliases": [
+              "Olaf"
+            ],
+            "hint": "He repeatedly adopts disguises to deceive the adults around the children.",
+            "categoryId": "villains",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/topic/Othello-by-Shakespeare",
+            "distractors": [
+              "Lord Voldemort",
+              "Baron Harkonnen",
+              "Rasputin"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "celebrities",
+      "name": "Celebrity Spotlight",
+      "description": "Well-known performers, actors, and cultural icons across generations.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-celebrities-1-1",
+            "level": 1,
+            "prompt": "Which actor played Jack Dawson in the 1997 movie Titanic?",
+            "answer": "Leonardo DiCaprio",
+            "aliases": [
+              "DiCaprio"
+            ],
+            "hint": "He later starred in Inception and The Revenant.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Brad Pitt",
+              "Matt Damon",
+              "Johnny Depp"
+            ]
+          },
+          {
+            "id": "v170-celebrities-1-2",
+            "level": 1,
+            "prompt": "Which singer is widely nicknamed the King of Pop?",
+            "answer": "Michael Jackson",
+            "aliases": [
+              "Jackson"
+            ],
+            "hint": "His landmark album Thriller was released in the 1980s.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Prince",
+              "Elvis Presley",
+              "Stevie Wonder"
+            ]
+          },
+          {
+            "id": "v170-celebrities-1-3",
+            "level": 1,
+            "prompt": "Which singer released the album Lemonade in 2016?",
+            "answer": "Beyoncé",
+            "aliases": [
+              "Beyonce Knowles"
+            ],
+            "hint": "She was a member of Destiny's Child before her solo career.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Rihanna",
+              "Adele",
+              "Lady Gaga"
+            ]
+          },
+          {
+            "id": "v170-celebrities-1-4",
+            "level": 1,
+            "prompt": "Which actress played Hermione Granger in the Harry Potter films?",
+            "answer": "Emma Watson",
+            "aliases": [
+              "Watson"
+            ],
+            "hint": "She portrayed one of Harry's two closest friends.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Emma Stone",
+              "Keira Knightley",
+              "Anne Hathaway"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-celebrities-2-1",
+            "level": 2,
+            "prompt": "Which actress plays the title character in Netflix's Wednesday series, which debuted in 2022?",
+            "answer": "Jenna Ortega",
+            "aliases": [
+              "Ortega"
+            ],
+            "hint": "Her character attends Nevermore Academy.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Millie Bobby Brown",
+              "Anya Taylor-Joy",
+              "Florence Pugh"
+            ]
+          },
+          {
+            "id": "v170-celebrities-2-2",
+            "level": 2,
+            "prompt": "Which British singer released the albums 19, 21, and 25?",
+            "answer": "Adele",
+            "aliases": [
+              "Adele Adkins"
+            ],
+            "hint": "Her album titles refer to ages rather than dates.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Dua Lipa",
+              "Amy Winehouse",
+              "Ellie Goulding"
+            ]
+          },
+          {
+            "id": "v170-celebrities-2-3",
+            "level": 2,
+            "prompt": "Which actor starred as T'Challa in Marvel's 2018 film Black Panther?",
+            "answer": "Chadwick Boseman",
+            "aliases": [
+              "Boseman"
+            ],
+            "hint": "He also portrayed Jackie Robinson in the film 42.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Michael B. Jordan",
+              "Anthony Mackie",
+              "John Boyega"
+            ]
+          },
+          {
+            "id": "v170-celebrities-2-4",
+            "level": 2,
+            "prompt": "Which actress portrayed Barbie in the 2023 live-action movie of that name?",
+            "answer": "Margot Robbie",
+            "aliases": [
+              "Robbie"
+            ],
+            "hint": "She previously portrayed Harley Quinn in several DC films.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Emma Stone",
+              "Saoirse Ronan",
+              "Jennifer Lawrence"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-celebrities-3-1",
+            "level": 3,
+            "prompt": "Which performer provided motion-capture performances for both Gollum and Caesar in the Planet of the Apes reboot films?",
+            "answer": "Andy Serkis",
+            "aliases": [
+              "Serkis"
+            ],
+            "hint": "He has become particularly associated with digitally created screen characters.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Doug Jones",
+              "Alan Tudyk",
+              "Benedict Cumberbatch"
+            ]
+          },
+          {
+            "id": "v170-celebrities-3-2",
+            "level": 3,
+            "prompt": "Who became the first woman to win the Academy Award for Best Director, for The Hurt Locker?",
+            "answer": "Kathryn Bigelow",
+            "aliases": [
+              "Bigelow"
+            ],
+            "hint": "Her historic win occurred at the 2010 Oscars.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2010",
+            "distractors": [
+              "Sofia Coppola",
+              "Jane Campion",
+              "Greta Gerwig"
+            ]
+          },
+          {
+            "id": "v170-celebrities-3-3",
+            "level": 3,
+            "prompt": "Which actor won the Best Actor Oscar for portraying Truman Capote in the 2005 film Capote?",
+            "answer": "Philip Seymour Hoffman",
+            "aliases": [
+              "Philip Hoffman",
+              "PS Hoffman"
+            ],
+            "hint": "He also appeared in The Master and Doubt.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Sean Penn",
+              "Daniel Day-Lewis",
+              "Joaquin Phoenix"
+            ]
+          },
+          {
+            "id": "v170-celebrities-3-4",
+            "level": 3,
+            "prompt": "Which actress played Queen Elizabeth II in the first two seasons of Netflix's The Crown?",
+            "answer": "Claire Foy",
+            "aliases": [
+              "Foy"
+            ],
+            "hint": "She portrayed the younger version of the monarch in the series.",
+            "categoryId": "celebrities",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
+            "distractors": [
+              "Olivia Colman",
+              "Helen Mirren",
+              "Imelda Staunton"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "video-games",
+      "name": "Video Game Vault",
+      "description": "Game characters, iconic franchises, consoles, and video-game history.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-video-games-1-1",
+            "level": 1,
+            "prompt": "What is the name of Mario's green-clad brother in Nintendo games?",
+            "answer": "Luigi",
+            "aliases": [],
+            "hint": "He also stars in a series about exploring haunted mansions.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Wario",
+              "Yoshi",
+              "Toad"
+            ]
+          },
+          {
+            "id": "v170-video-games-1-2",
+            "level": 1,
+            "prompt": "Who is the sword-wielding hero controlled by players in most Legend of Zelda games?",
+            "answer": "Link",
+            "aliases": [],
+            "hint": "He often carries a shield and travels through Hyrule.",
+            "categoryId": "video-games",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://zelda.nintendo.com/about/",
+            "distractors": [
+              "Zelda",
+              "Ganondorf",
+              "Impa"
+            ]
+          },
+          {
+            "id": "v170-video-games-1-3",
+            "level": 1,
+            "prompt": "Which yellow Pokémon is famous for its electric attacks and friendship with Ash?",
+            "answer": "Pikachu",
+            "aliases": [],
+            "hint": "Its red cheeks can generate electricity.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Raichu",
+              "Pichu",
+              "Jolteon"
+            ]
+          },
+          {
+            "id": "v170-video-games-1-4",
+            "level": 1,
+            "prompt": "Which block-building video game features Creepers and Endermen?",
+            "answer": "Minecraft",
+            "aliases": [],
+            "hint": "Players can mine resources and build shelters to survive the night.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Terraria",
+              "Roblox",
+              "Stardew Valley"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-video-games-2-1",
+            "level": 2,
+            "prompt": "Which company created the Sonic the Hedgehog video-game series?",
+            "answer": "Sega",
+            "aliases": [
+              "SEGA"
+            ],
+            "hint": "The franchise originated as a competitor to Mario's games.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Nintendo",
+              "Capcom",
+              "Konami"
+            ]
+          },
+          {
+            "id": "v170-video-games-2-2",
+            "level": 2,
+            "prompt": "Which fighting-game franchise is known for the announcer shouting Finish Him?",
+            "answer": "Mortal Kombat",
+            "aliases": [
+              "Mortal Combat"
+            ],
+            "hint": "The series introduced the characters Scorpion and Sub-Zero.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Street Fighter",
+              "Tekken",
+              "Soulcalibur"
+            ]
+          },
+          {
+            "id": "v170-video-games-2-3",
+            "level": 2,
+            "prompt": "Which video-game series follows Kratos, a warrior who battles gods?",
+            "answer": "God of War",
+            "aliases": [],
+            "hint": "The earliest games were inspired by Greek mythology.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Devil May Cry",
+              "Darksiders",
+              "Dante's Inferno"
+            ]
+          },
+          {
+            "id": "v170-video-games-2-4",
+            "level": 2,
+            "prompt": "In The Legend of Zelda, what is the name of the kingdom where many adventures take place?",
+            "answer": "Hyrule",
+            "aliases": [],
+            "hint": "It includes locations such as Hyrule Castle and Death Mountain.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Mushroom Kingdom",
+              "Midgar",
+              "Tamriel"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-video-games-3-1",
+            "level": 3,
+            "prompt": "Which 1993 first-person shooter by id Software became famous for its fast action and network deathmatches?",
+            "answer": "Doom",
+            "aliases": [
+              "DOOM"
+            ],
+            "hint": "Its monsters include imps and cacodemons.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Quake",
+              "Wolfenstein 3D",
+              "Duke Nukem 3D"
+            ]
+          },
+          {
+            "id": "v170-video-games-3-2",
+            "level": 3,
+            "prompt": "Which Nintendo game series introduced the bounty hunter Samus Aran?",
+            "answer": "Metroid",
+            "aliases": [],
+            "hint": "The protagonist often explores alien worlds using a powered suit.",
+            "categoryId": "video-games",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
+            "distractors": [
+              "Kid Icarus",
+              "Star Fox",
+              "F-Zero"
+            ]
+          },
+          {
+            "id": "v170-video-games-3-3",
+            "level": 3,
+            "prompt": "Which video game takes place in the underwater city of Rapture?",
+            "answer": "BioShock",
+            "aliases": [
+              "Bioshock"
+            ],
+            "hint": "Players encounter Big Daddies and a substance called ADAM.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Dishonored",
+              "Prey",
+              "System Shock"
+            ]
+          },
+          {
+            "id": "v170-video-games-3-4",
+            "level": 3,
+            "prompt": "In the Portal games, what is the name of the laboratory company behind the testing facility?",
+            "answer": "Aperture Science",
+            "aliases": [
+              "Aperture Laboratories",
+              "Aperture"
+            ],
+            "hint": "The facility's artificial intelligence is named GLaDOS.",
+            "categoryId": "video-games",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://press.nintendo.com/CompanyHistory",
+            "distractors": [
+              "Black Mesa",
+              "Umbrella Corporation",
+              "Vault-Tec"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "brands",
+      "name": "Brands & Slogans",
+      "description": "Advertising catchphrases, company histories, products, and brand identities.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-brands-1-1",
+            "level": 1,
+            "prompt": "Which sportswear brand is associated with the slogan Just Do It?",
+            "answer": "Nike",
+            "aliases": [],
+            "hint": "The company's logo is a swoosh.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Adidas",
+              "Puma",
+              "Reebok"
+            ]
+          },
+          {
+            "id": "v170-brands-1-2",
+            "level": 1,
+            "prompt": "Which fast-food chain is identified by golden arches?",
+            "answer": "McDonald's",
+            "aliases": [
+              "McDonalds"
+            ],
+            "hint": "Its mascot was traditionally a red-haired clown.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Burger King",
+              "Wendy's",
+              "Hardee's"
+            ]
+          },
+          {
+            "id": "v170-brands-1-3",
+            "level": 1,
+            "prompt": "Which fast-food chain used the slogan Have It Your Way?",
+            "answer": "Burger King",
+            "aliases": [],
+            "hint": "Its menu is associated with the Whopper.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "McDonald's",
+              "Wendy's",
+              "Arby's"
+            ]
+          },
+          {
+            "id": "v170-brands-1-4",
+            "level": 1,
+            "prompt": "Which chipmaker promoted the slogan Intel Inside on personal computers?",
+            "answer": "Intel",
+            "aliases": [],
+            "hint": "Its processors include the Core and Xeon product families.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "AMD",
+              "Qualcomm",
+              "Nvidia"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-brands-2-1",
+            "level": 2,
+            "prompt": "Which automobile manufacturer uses the advertising phrase The Ultimate Driving Machine?",
+            "answer": "BMW",
+            "aliases": [
+              "Bavarian Motor Works"
+            ],
+            "hint": "The brand's initials abbreviate a Bavarian company name.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Mercedes-Benz",
+              "Audi",
+              "Lexus"
+            ]
+          },
+          {
+            "id": "v170-brands-2-2",
+            "level": 2,
+            "prompt": "Which candy brand used the slogan Melts in Your Mouth, Not in Your Hands?",
+            "answer": "M&M's",
+            "aliases": [
+              "M and Ms",
+              "M and M",
+              "M&Ms"
+            ],
+            "hint": "The candies have colorful hard shells and a printed letter.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Skittles",
+              "Reese's Pieces",
+              "Smarties"
+            ]
+          },
+          {
+            "id": "v170-brands-2-3",
+            "level": 2,
+            "prompt": "Which restaurant chain popularized the slogan Finger Lickin' Good?",
+            "answer": "KFC",
+            "aliases": [
+              "Kentucky Fried Chicken"
+            ],
+            "hint": "Its founder is associated with the title Colonel.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Popeyes",
+              "Chick-fil-A",
+              "Church's Chicken"
+            ]
+          },
+          {
+            "id": "v170-brands-2-4",
+            "level": 2,
+            "prompt": "Which resort in California has long been marketed as The Happiest Place on Earth?",
+            "answer": "Disneyland",
+            "aliases": [
+              "Disneyland Park"
+            ],
+            "hint": "It was Walt Disney's original theme park, opening in 1955.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Knott's Berry Farm",
+              "Universal Studios Hollywood",
+              "Legoland California"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-brands-3-1",
+            "level": 3,
+            "prompt": "Which diamond company popularized the slogan A Diamond Is Forever?",
+            "answer": "De Beers",
+            "aliases": [
+              "DeBeers"
+            ],
+            "hint": "It is associated with a long-running diamond marketing campaign.",
+            "categoryId": "brands",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://adiamondisforever.com/about-diamonds/a-diamond-is-forever-slogan-history/",
+            "distractors": [
+              "Tiffany & Co.",
+              "Cartier",
+              "Zales"
+            ]
+          },
+          {
+            "id": "v170-brands-3-2",
+            "level": 3,
+            "prompt": "Which shipping company advertised When it absolutely, positively has to be there overnight?",
+            "answer": "FedEx",
+            "aliases": [
+              "Federal Express"
+            ],
+            "hint": "The name was shortened from Federal Express.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "UPS",
+              "DHL",
+              "USPS"
+            ]
+          },
+          {
+            "id": "v170-brands-3-3",
+            "level": 3,
+            "prompt": "Which coffee brand has used the slogan Good to the Last Drop?",
+            "answer": "Maxwell House",
+            "aliases": [
+              "Maxwell House Coffee"
+            ],
+            "hint": "The name refers to a historic hotel in Nashville.",
+            "categoryId": "brands",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.warc.com/en/article/maxwell-house-coffee%3A-good-to-the-last-drop-campaign-29bff3053ddb485baf2916522ff25035",
+            "distractors": [
+              "Folgers",
+              "Nescafé",
+              "Chock full o'Nuts"
+            ]
+          },
+          {
+            "id": "v170-brands-3-4",
+            "level": 3,
+            "prompt": "Which paper-towel brand is known for the slogan The Quicker Picker Upper?",
+            "answer": "Bounty",
+            "aliases": [],
+            "hint": "Advertising often compares its absorbency with competing paper towels.",
+            "categoryId": "brands",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.pg.com/",
+            "distractors": [
+              "Brawny",
+              "Viva",
+              "Scott"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sci-fi",
+      "name": "Sci-Fi Worlds",
+      "description": "Futuristic worlds and characters from science-fiction books, films, and television.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-sci-fi-1-1",
+            "level": 1,
+            "prompt": "On which desert planet does Luke Skywalker grow up in Star Wars?",
+            "answer": "Tatooine",
+            "aliases": [],
+            "hint": "It has twin suns in the original film.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Jakku",
+              "Alderaan",
+              "Naboo"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-1-2",
+            "level": 1,
+            "prompt": "The starship USS Enterprise is central to which science-fiction franchise?",
+            "answer": "Star Trek",
+            "aliases": [],
+            "hint": "The original television series featured Captain James T. Kirk.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Star Wars",
+              "Battlestar Galactica",
+              "The Expanse"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-1-3",
+            "level": 1,
+            "prompt": "Who wrote the 1965 science-fiction novel Dune?",
+            "answer": "Frank Herbert",
+            "aliases": [
+              "Herbert"
+            ],
+            "hint": "The book follows Paul Atreides on a desert planet.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Arthur C. Clarke",
+              "Isaac Asimov",
+              "Ray Bradbury"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-1-4",
+            "level": 1,
+            "prompt": "Which 2009 movie features the blue-skinned Na'vi on the moon Pandora?",
+            "answer": "Avatar",
+            "aliases": [],
+            "hint": "It was directed by James Cameron.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "John Carter",
+              "Valerian",
+              "After Earth"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-sci-fi-2-1",
+            "level": 2,
+            "prompt": "In George Orwell's Nineteen Eighty-Four, what term means accepting two contradictory beliefs at once?",
+            "answer": "Doublethink",
+            "aliases": [],
+            "hint": "It is a mental habit encouraged by the ruling Party.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Newspeak",
+              "Thoughtcrime",
+              "Crimestop"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-2-2",
+            "level": 2,
+            "prompt": "In Dune, what is the name of the valuable spice that extends life and helps space navigation?",
+            "answer": "Melange",
+            "aliases": [
+              "The Spice",
+              "Spice Melange"
+            ],
+            "hint": "The substance is also known simply as the spice.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Ketracel-white",
+              "Unobtainium",
+              "Dilithium"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-2-3",
+            "level": 2,
+            "prompt": "Which gold-colored Star Wars droid specializes in translating languages?",
+            "answer": "C-3PO",
+            "aliases": [
+              "C3PO",
+              "Threepio"
+            ],
+            "hint": "He often travels with a smaller astromech droid.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "R2-D2",
+              "BB-8",
+              "K-2SO"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-2-4",
+            "level": 2,
+            "prompt": "Which long-running British sci-fi series features the Doctor and enemies called Daleks?",
+            "answer": "Doctor Who",
+            "aliases": [],
+            "hint": "Its time-traveling protagonist uses a blue police-box-shaped ship.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Red Dwarf",
+              "Blake's 7",
+              "Torchwood"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-sci-fi-3-1",
+            "level": 3,
+            "prompt": "Which Philip K. Dick novel inspired the 1982 film Blade Runner?",
+            "answer": "Do Androids Dream of Electric Sheep?",
+            "aliases": [
+              "Do Androids Dream of Electric Sheep"
+            ],
+            "hint": "The book explores artificial humans and the meaning of empathy.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.fantasticfiction.com/d/philip-k-dick/do-androids-dream-of-electric-sheep.htm",
+            "distractors": [
+              "The Man in the High Castle",
+              "Ubik",
+              "A Scanner Darkly"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-3-2",
+            "level": 3,
+            "prompt": "What name is given to the fictional ethical rules governing robots in many Isaac Asimov stories?",
+            "answer": "Three Laws of Robotics",
+            "aliases": [
+              "Asimov's Three Laws",
+              "The Three Laws",
+              "Three Laws"
+            ],
+            "hint": "The rules include a prohibition on harming a human being.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Prime Directive",
+              "Laws of Thermodynamics",
+              "Robot Code"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-3-3",
+            "level": 3,
+            "prompt": "Which computer controls the spacecraft Discovery One in 2001: A Space Odyssey?",
+            "answer": "HAL 9000",
+            "aliases": [
+              "HAL",
+              "Hal 9000"
+            ],
+            "hint": "The machine speaks in a calm voice and has a glowing red camera eye.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "Mother",
+              "GERTY",
+              "MU/TH/UR 6000"
+            ]
+          },
+          {
+            "id": "v170-sci-fi-3-4",
+            "level": 3,
+            "prompt": "Which Ursula K. Le Guin novel is set on the wintry planet Gethen?",
+            "answer": "The Left Hand of Darkness",
+            "aliases": [
+              "Left Hand of Darkness"
+            ],
+            "hint": "Its setting is also called Winter.",
+            "categoryId": "sci-fi",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
+            "distractors": [
+              "The Dispossessed",
+              "The Lathe of Heaven",
+              "The Word for World Is Forest"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fantasy",
+      "name": "Fantasy Realms",
+      "description": "Wizards, enchanted worlds, mythical creatures, and fantasy fiction.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-fantasy-1-1",
+            "level": 1,
+            "prompt": "What is the name of the school of witchcraft and wizardry Harry Potter attends?",
+            "answer": "Hogwarts",
+            "aliases": [
+              "Hogwarts School",
+              "Hogwarts School of Witchcraft and Wizardry"
+            ],
+            "hint": "Its students are sorted into four houses.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Beauxbatons",
+              "Durmstrang",
+              "Ilvermorny"
+            ]
+          },
+          {
+            "id": "v170-fantasy-1-2",
+            "level": 1,
+            "prompt": "Who wrote The Hobbit and The Lord of the Rings?",
+            "answer": "J. R. R. Tolkien",
+            "aliases": [
+              "JRR Tolkien",
+              "Tolkien",
+              "John Ronald Reuel Tolkien"
+            ],
+            "hint": "He created the fictional setting called Middle-earth.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "C. S. Lewis",
+              "George R. R. Martin",
+              "Terry Pratchett"
+            ]
+          },
+          {
+            "id": "v170-fantasy-1-3",
+            "level": 1,
+            "prompt": "What is the name of the talking lion in The Chronicles of Narnia?",
+            "answer": "Aslan",
+            "aliases": [],
+            "hint": "He is an important guide to the Pevensie children.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Simba",
+              "Mufasa",
+              "Shere Khan"
+            ]
+          },
+          {
+            "id": "v170-fantasy-1-4",
+            "level": 1,
+            "prompt": "To which magical land is Dorothy carried in The Wonderful Wizard of Oz?",
+            "answer": "Oz",
+            "aliases": [],
+            "hint": "She travels along a yellow brick road.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Narnia",
+              "Neverland",
+              "Wonderland"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-fantasy-2-1",
+            "level": 2,
+            "prompt": "Which creatures manage the underground bank Gringotts in the Harry Potter stories?",
+            "answer": "Goblins",
+            "aliases": [],
+            "hint": "These beings also forge prized magical objects.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "House-elves",
+              "Centaurs",
+              "Trolls"
+            ]
+          },
+          {
+            "id": "v170-fantasy-2-2",
+            "level": 2,
+            "prompt": "Which author created the humorous fantasy setting called Discworld?",
+            "answer": "Terry Pratchett",
+            "aliases": [
+              "Pratchett",
+              "Sir Terry Pratchett"
+            ],
+            "hint": "His fictional world rests on the backs of four elephants carried by a turtle.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Douglas Adams",
+              "Neil Gaiman",
+              "Piers Anthony"
+            ]
+          },
+          {
+            "id": "v170-fantasy-2-3",
+            "level": 2,
+            "prompt": "What name is given to the sword Aragorn carries after it is reforged in The Lord of the Rings?",
+            "answer": "Andúril",
+            "aliases": [
+              "Anduril",
+              "Flame of the West"
+            ],
+            "hint": "It was reforged from the shards of Narsil.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Sting",
+              "Glamdring",
+              "Orcrist"
+            ]
+          },
+          {
+            "id": "v170-fantasy-2-4",
+            "level": 2,
+            "prompt": "In The Princess Bride, what masked pirate identity does Westley eventually assume?",
+            "answer": "Dread Pirate Roberts",
+            "aliases": [
+              "The Dread Pirate Roberts"
+            ],
+            "hint": "The feared title is secretly passed from one person to another.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Captain Flint",
+              "Blackbeard",
+              "Captain Hook"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-fantasy-3-1",
+            "level": 3,
+            "prompt": "In Ursula K. Le Guin's Earthsea novels, what is the true name of the wizard called Sparrowhawk?",
+            "answer": "Ged",
+            "aliases": [],
+            "hint": "He grows up on the island of Gont and studies magic at Roke.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Ogion",
+              "Arren",
+              "Jasper"
+            ]
+          },
+          {
+            "id": "v170-fantasy-3-2",
+            "level": 3,
+            "prompt": "In The Lord of the Rings, what is the name of the inn at Bree where the hobbits meet Strider?",
+            "answer": "The Prancing Pony",
+            "aliases": [
+              "Prancing Pony"
+            ],
+            "hint": "The innkeeper is Barliman Butterbur.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.encyclopedia-of-arda.com/p/prancingpony.php",
+            "distractors": [
+              "The Green Dragon",
+              "The Golden Perch",
+              "The Ivy Bush"
+            ]
+          },
+          {
+            "id": "v170-fantasy-3-3",
+            "level": 3,
+            "prompt": "Which fantasy series features the sprawling fictional city of Ankh-Morpork?",
+            "answer": "Discworld",
+            "aliases": [],
+            "hint": "Its books often satirize politics, journalism, and everyday institutions.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "The Wheel of Time",
+              "The Stormlight Archive",
+              "The Witcher"
+            ]
+          },
+          {
+            "id": "v170-fantasy-3-4",
+            "level": 3,
+            "prompt": "In The Wheel of Time, what is the name of the male half of the One Power?",
+            "answer": "Saidin",
+            "aliases": [
+              "saidin"
+            ],
+            "hint": "The Dark One corrupted this half of the One Power during the sealing of his prison.",
+            "categoryId": "fantasy",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.tolkienestate.com/",
+            "distractors": [
+              "Saidar",
+              "The True Power",
+              "The One Source"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "toys",
+      "name": "The Toy Box",
+      "description": "Classic toys, childhood crazes, famous playthings, and their inventions.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-toys-1-1",
+            "level": 1,
+            "prompt": "Which spring-shaped toy can walk down a set of stairs?",
+            "answer": "Slinky",
+            "aliases": [],
+            "hint": "It was invented after a metal spring fell and moved in an unexpected way.",
+            "categoryId": "toys",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.museumofplay.org/toys/slinky/",
+            "distractors": [
+              "Yo-yo",
+              "Hula Hoop",
+              "Pogo Stick"
+            ]
+          },
+          {
+            "id": "v170-toys-1-2",
+            "level": 1,
+            "prompt": "Which multicolored twisting puzzle has six faces and smaller square stickers or tiles?",
+            "answer": "Rubik's Cube",
+            "aliases": [
+              "Rubiks Cube",
+              "Rubix Cube"
+            ],
+            "hint": "A common version has three rows and three columns on each face.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Pyraminx",
+              "Megaminx",
+              "Soma Cube"
+            ]
+          },
+          {
+            "id": "v170-toys-1-3",
+            "level": 1,
+            "prompt": "What is the name of Mattel's fashion doll introduced in 1959?",
+            "answer": "Barbie",
+            "aliases": [],
+            "hint": "The doll was named after the inventor's daughter Barbara.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Bratz",
+              "Polly Pocket",
+              "Cabbage Patch Kids"
+            ]
+          },
+          {
+            "id": "v170-toys-1-4",
+            "level": 1,
+            "prompt": "Which interlocking plastic building bricks are made by a company whose name comes from Danish words meaning play well?",
+            "answer": "LEGO",
+            "aliases": [
+              "Legos",
+              "Lego Bricks"
+            ],
+            "hint": "Its bricks can be combined to build cars, castles, and spaceships.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "K'NEX",
+              "Mega Bloks",
+              "Tinkertoy"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-toys-2-1",
+            "level": 2,
+            "prompt": "Which drawing toy lets users turn two knobs to move a stylus beneath a gray screen?",
+            "answer": "Etch A Sketch",
+            "aliases": [
+              "Etch-a-Sketch"
+            ],
+            "hint": "Shaking the toy erases the drawing.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Spirograph",
+              "Lite-Brite",
+              "Magna Doodle"
+            ]
+          },
+          {
+            "id": "v170-toys-2-2",
+            "level": 2,
+            "prompt": "Which soft modeling compound was originally marketed as a wallpaper cleaner?",
+            "answer": "Play-Doh",
+            "aliases": [
+              "Play Doh",
+              "Playdough"
+            ],
+            "hint": "It is sold in tubs and frequently used to sculpt colorful shapes.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Silly Putty",
+              "Model Magic",
+              "Kinetic Sand"
+            ]
+          },
+          {
+            "id": "v170-toys-2-3",
+            "level": 2,
+            "prompt": "Which children's toy oven was introduced in the 1960s and originally used a lightbulb as a heat source?",
+            "answer": "Easy-Bake Oven",
+            "aliases": [
+              "Easy Bake Oven"
+            ],
+            "hint": "Children used it to bake miniature cakes.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Creepy Crawlers",
+              "Lite-Brite",
+              "Mr. Machine"
+            ]
+          },
+          {
+            "id": "v170-toys-2-4",
+            "level": 2,
+            "prompt": "Which stereoscopic toy viewer uses circular reels to display pairs of photographs in 3D?",
+            "answer": "View-Master",
+            "aliases": [
+              "View Master"
+            ],
+            "hint": "Its distinctive reels have seven image pairs.",
+            "categoryId": "toys",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.moma.org/collection/works/205547",
+            "distractors": [
+              "Kaleidoscope",
+              "Magic Lantern",
+              "Zoetrope"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-toys-3-1",
+            "level": 3,
+            "prompt": "Which toy soldier action figure debuted under the Hasbro brand in 1964?",
+            "answer": "G.I. Joe",
+            "aliases": [
+              "GI Joe"
+            ],
+            "hint": "The original version was marketed as an action figure rather than a doll.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Action Man",
+              "Major Matt Mason",
+              "Big Jim"
+            ]
+          },
+          {
+            "id": "v170-toys-3-2",
+            "level": 3,
+            "prompt": "Which electronic reaction game, first introduced in 1996, challenges players to respond rapidly to spoken commands using different controls?",
+            "answer": "Bop It",
+            "aliases": [
+              "Bop-It",
+              "Bop It!"
+            ],
+            "hint": "This Hasbro game was designed by Dan Klitsner and tests players’ speed and coordination.",
+            "categoryId": "toys",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.peopleofplay.com/product/bop-it-1",
+            "distractors": [
+              "Simon",
+              "Speak & Spell",
+              "Merlin"
+            ]
+          },
+          {
+            "id": "v170-toys-3-3",
+            "level": 3,
+            "prompt": "What brand of small die-cast toy cars did Mattel launch in 1968?",
+            "answer": "Hot Wheels",
+            "aliases": [
+              "Hotwheels"
+            ],
+            "hint": "Its original tracks were often bright orange.",
+            "categoryId": "toys",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.museumofplay.org/exhibits/toy-hall-of-fame/",
+            "distractors": [
+              "Matchbox",
+              "Corgi Toys",
+              "Dinky Toys"
+            ]
+          },
+          {
+            "id": "v170-toys-3-4",
+            "level": 3,
+            "prompt": "Which toy uses colored translucent pegs inserted into an illuminated panel to make glowing pictures?",
+            "answer": "Lite-Brite",
+            "aliases": [
+              "Lite Brite"
+            ],
+            "hint": "A backlight shines through the small plastic pegs.",
+            "categoryId": "toys",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.toyhalloffame.org/toys/lite-brite/",
+            "distractors": [
+              "Etch A Sketch",
+              "Spirograph",
+              "Colorforms"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "presidents",
+      "name": "Hail to the Chief",
+      "description": "U.S. presidents, White House traditions, elections, and historic firsts.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-presidents-1-1",
+            "level": 1,
+            "prompt": "Which president became the first Black president of the United States in 2009?",
+            "answer": "Barack Obama",
+            "aliases": [
+              "Obama",
+              "President Obama"
+            ],
+            "hint": "He served two terms and had previously represented Illinois in the U.S. Senate.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "George W. Bush",
+              "Bill Clinton",
+              "Joe Biden"
+            ]
+          },
+          {
+            "id": "v170-presidents-1-2",
+            "level": 1,
+            "prompt": "Which president issued the Emancipation Proclamation during the Civil War?",
+            "answer": "Abraham Lincoln",
+            "aliases": [
+              "Lincoln"
+            ],
+            "hint": "He also delivered the Gettysburg Address.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Ulysses S. Grant",
+              "Andrew Johnson",
+              "James Buchanan"
+            ]
+          },
+          {
+            "id": "v170-presidents-1-3",
+            "level": 1,
+            "prompt": "Who was the first U.S. president to live in the White House?",
+            "answer": "John Adams",
+            "aliases": [
+              "Adams",
+              "President John Adams"
+            ],
+            "hint": "He moved into the unfinished residence in 1800.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "George Washington",
+              "Thomas Jefferson",
+              "James Monroe"
+            ]
+          },
+          {
+            "id": "v170-presidents-1-4",
+            "level": 1,
+            "prompt": "Which president led the Rough Riders before his presidency?",
+            "answer": "Theodore Roosevelt",
+            "aliases": [
+              "Teddy Roosevelt",
+              "TR Roosevelt"
+            ],
+            "hint": "He fought in the Spanish-American War.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "William McKinley",
+              "Woodrow Wilson",
+              "William Howard Taft"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-presidents-2-1",
+            "level": 2,
+            "prompt": "Which president completed the Louisiana Purchase in 1803?",
+            "answer": "Thomas Jefferson",
+            "aliases": [
+              "Jefferson"
+            ],
+            "hint": "The transaction bought a vast territory from France.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "James Madison",
+              "James Monroe",
+              "John Quincy Adams"
+            ]
+          },
+          {
+            "id": "v170-presidents-2-2",
+            "level": 2,
+            "prompt": "Which president died about a month after taking office in 1841?",
+            "answer": "William Henry Harrison",
+            "aliases": [
+              "Harrison",
+              "President William Henry Harrison"
+            ],
+            "hint": "His brief presidency began with a famously long inaugural address.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Zachary Taylor",
+              "James Garfield",
+              "Warren G. Harding"
+            ]
+          },
+          {
+            "id": "v170-presidents-2-3",
+            "level": 2,
+            "prompt": "Which president launched the New Deal during the Great Depression?",
+            "answer": "Franklin D. Roosevelt",
+            "aliases": [
+              "FDR",
+              "Franklin Roosevelt"
+            ],
+            "hint": "He also served as president for most of World War II.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Herbert Hoover",
+              "Harry S. Truman",
+              "Dwight D. Eisenhower"
+            ]
+          },
+          {
+            "id": "v170-presidents-2-4",
+            "level": 2,
+            "prompt": "Which U.S. president resigned from office in 1974 during the Watergate scandal?",
+            "answer": "Richard Nixon",
+            "aliases": [
+              "Nixon"
+            ],
+            "hint": "His vice president took over without a presidential election.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Gerald Ford",
+              "Lyndon B. Johnson",
+              "Jimmy Carter"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-presidents-3-1",
+            "level": 3,
+            "prompt": "Which 19th-century president served two nonconsecutive terms, in 1885–1889 and 1893–1897?",
+            "answer": "Grover Cleveland",
+            "aliases": [
+              "Cleveland"
+            ],
+            "hint": "He is traditionally numbered both the 22nd and 24th president.",
+            "categoryId": "presidents",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Benjamin Harrison",
+              "Chester A. Arthur",
+              "Rutherford B. Hayes"
+            ]
+          },
+          {
+            "id": "v170-presidents-3-2",
+            "level": 3,
+            "prompt": "Which president warned of a military-industrial complex in his 1961 farewell address?",
+            "answer": "Dwight D. Eisenhower",
+            "aliases": [
+              "Eisenhower",
+              "Ike Eisenhower"
+            ],
+            "hint": "He had previously served as a top Allied commander in World War II.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Harry S. Truman",
+              "John F. Kennedy",
+              "Lyndon B. Johnson"
+            ]
+          },
+          {
+            "id": "v170-presidents-3-3",
+            "level": 3,
+            "prompt": "Which U.S. president later served as Chief Justice of the Supreme Court?",
+            "answer": "William Howard Taft",
+            "aliases": [
+              "Taft"
+            ],
+            "hint": "He was appointed to the Court in 1921.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "Herbert Hoover",
+              "Calvin Coolidge",
+              "Warren G. Harding"
+            ]
+          },
+          {
+            "id": "v170-presidents-3-4",
+            "level": 3,
+            "prompt": "Which president signed the Civil Rights Act of 1964?",
+            "answer": "Lyndon B. Johnson",
+            "aliases": [
+              "LBJ",
+              "Lyndon Johnson"
+            ],
+            "hint": "He also championed the Great Society social programs.",
+            "categoryId": "presidents",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.whitehousehistory.org/nationals/meet-the-presidents",
+            "distractors": [
+              "John F. Kennedy",
+              "Richard Nixon",
+              "Harry S. Truman"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "wars",
+      "name": "Wars & Turning Points",
+      "description": "Battles, conflicts, alliances, and military turning points in world history.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-wars-1-1",
+            "level": 1,
+            "prompt": "The Battle of Gettysburg was fought during which American war?",
+            "answer": "American Civil War",
+            "aliases": [
+              "Civil War",
+              "US Civil War",
+              "U.S. Civil War"
+            ],
+            "hint": "The opposing sides were the Union and the Confederacy.",
+            "categoryId": "wars",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.nps.gov/gett/learn/historyculture/gettysburg-overview.htm",
+            "distractors": [
+              "American Revolutionary War",
+              "War of 1812",
+              "Mexican-American War"
+            ]
+          },
+          {
+            "id": "v170-wars-1-2",
+            "level": 1,
+            "prompt": "In which country did Allied troops land on D-Day in June 1944?",
+            "answer": "France",
+            "aliases": [],
+            "hint": "The landing beaches were in Normandy.",
+            "categoryId": "wars",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.nationalww2museum.org/war/topics/d-day-and-normandy-campaign",
+            "distractors": [
+              "Italy",
+              "Belgium",
+              "Netherlands"
+            ]
+          },
+          {
+            "id": "v170-wars-1-3",
+            "level": 1,
+            "prompt": "Which war officially ended between Germany and the Allied powers with the 1919 Treaty of Versailles?",
+            "answer": "World War I",
+            "aliases": [
+              "First World War",
+              "WW1",
+              "WWI",
+              "World War 1",
+              "The Great War"
+            ],
+            "hint": "It began in Europe in 1914.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "World War II",
+              "Franco-Prussian War",
+              "Crimean War"
+            ]
+          },
+          {
+            "id": "v170-wars-1-4",
+            "level": 1,
+            "prompt": "Which French ruler was defeated at the Battle of Waterloo in 1815?",
+            "answer": "Napoleon Bonaparte",
+            "aliases": [
+              "Napoleon",
+              "Napoleon I"
+            ],
+            "hint": "He had returned to power during the Hundred Days.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Louis XIV",
+              "Louis XVI",
+              "Charles de Gaulle"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-wars-2-1",
+            "level": 2,
+            "prompt": "Which 1066 battle resulted in William of Normandy defeating England's King Harold II?",
+            "answer": "Battle of Hastings",
+            "aliases": [
+              "Hastings"
+            ],
+            "hint": "It paved the way for the Norman Conquest of England.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Battle of Stamford Bridge",
+              "Battle of Agincourt",
+              "Battle of Bosworth Field"
+            ]
+          },
+          {
+            "id": "v170-wars-2-2",
+            "level": 2,
+            "prompt": "At which Virginia town did a major British army surrender to American and French forces in 1781?",
+            "answer": "Yorktown",
+            "aliases": [
+              "Siege of Yorktown",
+              "Battle of Yorktown"
+            ],
+            "hint": "General Cornwallis commanded the British army.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Lexington",
+              "Saratoga",
+              "Trenton"
+            ]
+          },
+          {
+            "id": "v170-wars-2-3",
+            "level": 2,
+            "prompt": "Which 1942 naval battle was a major U.S. victory over Japan in the Pacific?",
+            "answer": "Battle of Midway",
+            "aliases": [
+              "Midway",
+              "Midway Battle"
+            ],
+            "hint": "U.S. forces sank four Japanese aircraft carriers.",
+            "categoryId": "wars",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.nationalww2museum.org/war/topics/battle-of-midway",
+            "distractors": [
+              "Battle of Coral Sea",
+              "Battle of Leyte Gulf",
+              "Battle of the Philippine Sea"
+            ]
+          },
+          {
+            "id": "v170-wars-2-4",
+            "level": 2,
+            "prompt": "Which 19th-century war pitted Russia against an alliance including Britain, France, and the Ottoman Empire?",
+            "answer": "Crimean War",
+            "aliases": [
+              "The Crimean War"
+            ],
+            "hint": "Much of the fighting occurred around Sevastopol.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Franco-Prussian War",
+              "Russo-Japanese War",
+              "Boer War"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-wars-3-1",
+            "level": 3,
+            "prompt": "Which 1813 battle, also called the Battle of the Nations, ended in a major defeat for Napoleon?",
+            "answer": "Battle of Leipzig",
+            "aliases": [
+              "Leipzig",
+              "Battle of the Nations"
+            ],
+            "hint": "It was fought near a city in Saxony.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Battle of Austerlitz",
+              "Battle of Jena-Auerstedt",
+              "Battle of Wagram"
+            ]
+          },
+          {
+            "id": "v170-wars-3-2",
+            "level": 3,
+            "prompt": "Which 1916 Western Front battle was fought near a river in northern France and became one of World War I's bloodiest offensives?",
+            "answer": "Battle of the Somme",
+            "aliases": [
+              "Somme",
+              "Somme Offensive"
+            ],
+            "hint": "British and French forces launched this offensive in July 1916.",
+            "categoryId": "wars",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.nam.ac.uk/explore/battle-somme",
+            "distractors": [
+              "Battle of Verdun",
+              "Battle of Passchendaele",
+              "First Battle of Ypres"
+            ]
+          },
+          {
+            "id": "v170-wars-3-3",
+            "level": 3,
+            "prompt": "Which 1571 naval battle saw a Holy League fleet defeat the Ottoman fleet near Greece?",
+            "answer": "Battle of Lepanto",
+            "aliases": [
+              "Lepanto"
+            ],
+            "hint": "The battle took place in the Gulf of Patras.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Battle of Preveza",
+              "Battle of Djerba",
+              "Battle of Navarino"
+            ]
+          },
+          {
+            "id": "v170-wars-3-4",
+            "level": 3,
+            "prompt": "Which 732 battle in present-day France is associated with Charles Martel halting an Umayyad raiding force?",
+            "answer": "Battle of Tours",
+            "aliases": [
+              "Tours",
+              "Battle of Poitiers (732)"
+            ],
+            "hint": "It is also known as the Battle of Poitiers, but not the 1356 battle.",
+            "categoryId": "wars",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.britannica.com/event/Battle-of-Blenheim",
+            "distractors": [
+              "Battle of Poitiers (1356)",
+              "Battle of Agincourt",
+              "Battle of Bouvines"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "headlines",
+      "name": "Extra! Extra!",
+      "description": "Identify historic events from original newspaper-style headlines.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-headlines-1-1",
+            "level": 1,
+            "prompt": "An imagined 1969 headline reads: Astronauts Take First Steps on Moon! Which event does it describe?",
+            "answer": "Apollo 11 moon landing",
+            "aliases": [
+              "Apollo 11",
+              "First Moon Landing",
+              "1969 moon landing",
+              "Man on the Moon"
+            ],
+            "hint": "Neil Armstrong and Buzz Aldrin made the historic visit.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Apollo 13 rescue",
+              "First Space Shuttle flight",
+              "Sputnik launch"
+            ]
+          },
+          {
+            "id": "v170-headlines-1-2",
+            "level": 1,
+            "prompt": "An imagined 1989 headline reads: Crowds Cross Border as Berlin Barrier Opens! Which event is it about?",
+            "answer": "Fall of the Berlin Wall",
+            "aliases": [
+              "Berlin Wall Fall",
+              "Berlin Wall Opening",
+              "Berlin Wall came down",
+              "Berlin Wall fell"
+            ],
+            "hint": "The wall had divided a European city for decades.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Reunification of Germany",
+              "Fall of the Soviet Union",
+              "Prague Spring"
+            ]
+          },
+          {
+            "id": "v170-headlines-1-3",
+            "level": 1,
+            "prompt": "An imagined 1912 headline reads: Great Passenger Liner Sinks on Maiden Voyage! Which event is being reported?",
+            "answer": "Sinking of the Titanic",
+            "aliases": [
+              "Titanic Sinking",
+              "Titanic Disaster",
+              "Titanic"
+            ],
+            "hint": "The ship struck an iceberg in the North Atlantic.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Sinking of the Lusitania",
+              "Sinking of the Britannic",
+              "Sinking of the Andrea Doria"
+            ]
+          },
+          {
+            "id": "v170-headlines-1-4",
+            "level": 1,
+            "prompt": "An imagined July 1776 headline reads: Colonies Proclaim Their Independence! Which event does it describe?",
+            "answer": "Adoption of the Declaration of Independence",
+            "aliases": [
+              "Declaration of Independence",
+              "American Declaration of Independence"
+            ],
+            "hint": "Representatives of thirteen British colonies approved a statement of separation.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Signing of the U.S. Constitution",
+              "Boston Tea Party",
+              "Treaty of Paris of 1783"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-headlines-2-1",
+            "level": 2,
+            "prompt": "An imagined 1903 headline reads: Brothers Lift Powered Airplane Into Flight! Which event does it describe?",
+            "answer": "Wright brothers' first powered flight",
+            "aliases": [
+              "Wright Brothers Flight",
+              "Wright Brothers First Flight",
+              "First Powered Flight"
+            ],
+            "hint": "It took place near Kitty Hawk, North Carolina.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Lindbergh's transatlantic flight",
+              "First commercial jet flight",
+              "First hot-air balloon flight"
+            ]
+          },
+          {
+            "id": "v170-headlines-2-2",
+            "level": 2,
+            "prompt": "An imagined 1914 headline reads: New Waterway Links Atlantic and Pacific Oceans! Which opening does it describe?",
+            "answer": "Panama Canal",
+            "aliases": [
+              "Opening of the Panama Canal",
+              "Panama Canal Opening"
+            ],
+            "hint": "Ships can avoid sailing all the way around South America.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Suez Canal",
+              "Erie Canal",
+              "Welland Canal"
+            ]
+          },
+          {
+            "id": "v170-headlines-2-3",
+            "level": 2,
+            "prompt": "An imagined 1930 headline reads: Gandhi Leads Protest March to the Sea Against Salt Tax! Which event does it describe?",
+            "answer": "Salt March",
+            "aliases": [
+              "Dandi March",
+              "Gandhi Salt March",
+              "Salt Satyagraha"
+            ],
+            "hint": "The protest challenged British colonial restrictions on producing salt.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Quit India Movement",
+              "Amritsar Massacre",
+              "Non-Cooperation Movement"
+            ]
+          },
+          {
+            "id": "v170-headlines-2-4",
+            "level": 2,
+            "prompt": "An imagined 1896 headline reads: Athletes Gather in Athens for Reborn International Games! Which event does it describe?",
+            "answer": "First modern Olympic Games",
+            "aliases": [
+              "1896 Olympics",
+              "1896 Summer Olympics",
+              "Athens Olympics 1896"
+            ],
+            "hint": "The revival was promoted by Pierre de Coubertin.",
+            "categoryId": "headlines",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://www.olympics.com/ioc/history",
+            "distractors": [
+              "First Winter Olympics",
+              "First Commonwealth Games",
+              "First Paralympic Games"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-headlines-3-1",
+            "level": 3,
+            "prompt": "An imagined 1917 headline reads: Secret German Message Suggests Alliance With Mexico! Which diplomatic incident does it describe?",
+            "answer": "Zimmermann Telegram",
+            "aliases": [
+              "Zimmerman Telegram",
+              "Zimmermann Note",
+              "Zimmerman Note"
+            ],
+            "hint": "The intercepted message influenced American opinion about entering World War I.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Ems Dispatch",
+              "Trent Affair",
+              "Daily Telegraph Affair"
+            ]
+          },
+          {
+            "id": "v170-headlines-3-2",
+            "level": 3,
+            "prompt": "An imagined 1897 headline reads: Prospectors Rush North After Yukon Gold Finds! Which event does it describe?",
+            "answer": "Klondike Gold Rush",
+            "aliases": [
+              "Yukon Gold Rush",
+              "Klondike Rush"
+            ],
+            "hint": "The stampede drew prospectors toward Dawson City.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "California Gold Rush",
+              "Cariboo Gold Rush",
+              "Black Hills Gold Rush"
+            ]
+          },
+          {
+            "id": "v170-headlines-3-3",
+            "level": 3,
+            "prompt": "An imagined 1858 headline reads: First Messages Travel Beneath the Atlantic! Which technological achievement does it describe?",
+            "answer": "First transatlantic telegraph cable",
+            "aliases": [
+              "Transatlantic Telegraph Cable",
+              "Atlantic Telegraph Cable",
+              "1858 transatlantic cable"
+            ],
+            "hint": "A submarine cable briefly allowed telegraph messages between Europe and North America.",
+            "categoryId": "headlines",
+            "sourceStatus": "Externally corroborated (specific factual claim checked)",
+            "sourceUrl": "https://guides.loc.gov/this-month-in-business-history/august/first-transatlantic-telegraph-cable",
+            "distractors": [
+              "First transatlantic telephone call",
+              "First radio broadcast across Atlantic",
+              "First undersea fiber-optic cable"
+            ]
+          },
+          {
+            "id": "v170-headlines-3-4",
+            "level": 3,
+            "prompt": "An imagined 1886 headline reads: Chicago Labor Rally Ends in Deadly Bombing! Which event is being reported?",
+            "answer": "Haymarket Affair",
+            "aliases": [
+              "Haymarket Riot",
+              "Haymarket Massacre"
+            ],
+            "hint": "The incident became associated with the international labor movement.",
+            "categoryId": "headlines",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.loc.gov/research-centers/newspaper-and-current-periodical/researcher-resources/research-guides/topics-in-chronicling-america/",
+            "distractors": [
+              "Pullman Strike",
+              "Homestead Strike",
+              "Triangle Shirtwaist Fire"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "connections",
+      "name": "Connect the Dots",
+      "description": "Find a shared identity, theme, or category linking three clues.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-connections-1-1",
+            "level": 1,
+            "prompt": "Merlin, Gandalf, and Dumbledore: what type of fictional character connects these three?",
+            "answer": "Wizards",
+            "aliases": [
+              "Wizard",
+              "Wizards and Sorcerers"
+            ],
+            "hint": "All three characters are strongly associated with magic.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Pirates",
+              "Detectives",
+              "Superheroes"
+            ]
+          },
+          {
+            "id": "v170-connections-1-2",
+            "level": 1,
+            "prompt": "Mercury, Venus, and Earth: what are all three?",
+            "answer": "Planets",
+            "aliases": [
+              "Planet"
+            ],
+            "hint": "Each orbits the Sun.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Moons",
+              "Stars",
+              "Comets"
+            ]
+          },
+          {
+            "id": "v170-connections-1-3",
+            "level": 1,
+            "prompt": "Ruby, sapphire, and emerald: what kind of objects are these?",
+            "answer": "Gemstones",
+            "aliases": [
+              "Precious Stones",
+              "Gems"
+            ],
+            "hint": "They are valued as materials for jewelry.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Metals",
+              "Flowers",
+              "Constellations"
+            ]
+          },
+          {
+            "id": "v170-connections-1-4",
+            "level": 1,
+            "prompt": "Piano, guitar, and violin: what type of objects connects these three?",
+            "answer": "Musical instruments",
+            "aliases": [
+              "Instruments"
+            ],
+            "hint": "People use them to perform songs and compositions.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Kitchen appliances",
+              "Sports equipment",
+              "Vehicles"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-connections-2-1",
+            "level": 2,
+            "prompt": "Everest, Kilimanjaro, and Denali: what geographic feature do these share?",
+            "answer": "Mountains",
+            "aliases": [
+              "Mountain Peaks"
+            ],
+            "hint": "People attempt to climb each of them.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Rivers",
+              "Deserts",
+              "Volcanoes"
+            ]
+          },
+          {
+            "id": "v170-connections-2-2",
+            "level": 2,
+            "prompt": "Monet, Renoir, and Degas: what artistic movement links these painters?",
+            "answer": "Impressionism",
+            "aliases": [
+              "Impressionists",
+              "Impressionist Painters"
+            ],
+            "hint": "Their work often explores the effects of light and scenes of modern life.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Cubism",
+              "Surrealism",
+              "Abstract Expressionism"
+            ]
+          },
+          {
+            "id": "v170-connections-2-3",
+            "level": 2,
+            "prompt": "Eiffel Tower, Taj Mahal, and Machu Picchu: what broad category connects these sites?",
+            "answer": "Famous landmarks",
+            "aliases": [
+              "Landmarks"
+            ],
+            "hint": "All three attract travelers and appear frequently on postcards.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "National capitals",
+              "Natural wonders",
+              "Ancient battlefields"
+            ]
+          },
+          {
+            "id": "v170-connections-2-4",
+            "level": 2,
+            "prompt": "Harper Lee, Toni Morrison, and Ernest Hemingway: what profession connects them?",
+            "answer": "Novelists",
+            "aliases": [
+              "Authors",
+              "Writers"
+            ],
+            "hint": "Each wrote celebrated works of American fiction.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Architects",
+              "Physicists",
+              "Film directors"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-connections-3-1",
+            "level": 3,
+            "prompt": "Edgar Allan Poe, H. P. Lovecraft, and Shirley Jackson: which literary genre connects them?",
+            "answer": "Horror fiction",
+            "aliases": [
+              "Horror Writers",
+              "Horror Literature",
+              "Horror"
+            ],
+            "hint": "Their work is known for unsettling or supernatural themes.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Romantic comedy",
+              "Travel writing",
+              "Sports journalism"
+            ]
+          },
+          {
+            "id": "v170-connections-3-2",
+            "level": 3,
+            "prompt": "Lima, Quito, and Bogotá: what type of places are they?",
+            "answer": "South American capital cities",
+            "aliases": [
+              "Capital Cities of South America",
+              "South American Capitals",
+              "Capital Cities"
+            ],
+            "hint": "They serve as seats of national government.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "European port cities",
+              "Caribbean islands",
+              "Asian mountain ranges"
+            ]
+          },
+          {
+            "id": "v170-connections-3-3",
+            "level": 3,
+            "prompt": "Orion, Cassiopeia, and Ursa Major: what celestial category connects them?",
+            "answer": "Constellations",
+            "aliases": [
+              "Star Constellations"
+            ],
+            "hint": "Each is a recognized pattern or region of stars in the sky.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Planets",
+              "Galaxies",
+              "Moons"
+            ]
+          },
+          {
+            "id": "v170-connections-3-4",
+            "level": 3,
+            "prompt": "Hubble, Chandra, and James Webb: which type of research instruments are these?",
+            "answer": "Space telescopes",
+            "aliases": [
+              "Space-Based Telescopes",
+              "Space Observatories"
+            ],
+            "hint": "These observatories examine the universe from above Earth's atmosphere.",
+            "categoryId": "connections",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
+            "distractors": [
+              "Particle accelerators",
+              "Submarines",
+              "Weather balloons"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "before-after",
+      "name": "Before & After",
+      "description": "Blend two recognizable titles or phrases by sharing their overlapping word.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-before-after-1-1",
+            "level": 1,
+            "prompt": "Combine the space-opera movie franchise Star Wars with the English conflict called the Wars of the Roses, overlapping on Wars. What new phrase results?",
+            "answer": "Star Wars of the Roses",
+            "aliases": [
+              "Star Wars of Roses"
+            ],
+            "hint": "Keep the first title intact and attach the second phrase after its repeated word.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Star Wars of the Worlds",
+              "Star Wars of the Rings",
+              "Star Trek of the Roses"
+            ]
+          },
+          {
+            "id": "v170-before-after-1-2",
+            "level": 1,
+            "prompt": "Combine the animated Pixar movie Toy Story with the phrase story time, overlapping on Story. What do you get?",
+            "answer": "Toy Story Time",
+            "aliases": [],
+            "hint": "Start with the film title and end with a common phrase for reading to children.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Toy Story Hour",
+              "Toy Story Book",
+              "Toy Story Club"
+            ]
+          },
+          {
+            "id": "v170-before-after-1-3",
+            "level": 1,
+            "prompt": "Combine the dinosaur-film title Jurassic Park with Park Avenue, overlapping on Park. What results?",
+            "answer": "Jurassic Park Avenue",
+            "aliases": [],
+            "hint": "The second phrase names a well-known Manhattan thoroughfare.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Jurassic Park Boulevard",
+              "Jurassic Park Lane",
+              "Jurassic Park Street"
+            ]
+          },
+          {
+            "id": "v170-before-after-1-4",
+            "level": 1,
+            "prompt": "Combine The Lion King with King Kong, overlapping on King. What phrase results?",
+            "answer": "The Lion King Kong",
+            "aliases": [],
+            "hint": "One title is a Disney animated film; the other names a giant movie ape.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "The Lion King Arthur",
+              "The Lion King Lear",
+              "The Lion King Tut"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-before-after-2-1",
+            "level": 2,
+            "prompt": "Which before-and-after phrase joins a marshmallow-and-nut ice-cream flavor with a trip by car?",
+            "answer": "Rocky Road Trip",
+            "aliases": [],
+            "hint": "The dessert's name ends with a word that also begins the travel phrase.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Rocky Road Show",
+              "Rocky Road Race",
+              "Rocky Road Journey"
+            ]
+          },
+          {
+            "id": "v170-before-after-2-2",
+            "level": 2,
+            "prompt": "Which phrase blends the fable of a chicken who thinks the sky is falling with Louisa May Alcott's novel about the March sisters?",
+            "answer": "Chicken Little Women",
+            "aliases": [],
+            "hint": "The stories share a word describing small size.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Chicken Little Men",
+              "Chicken Little House",
+              "Chicken Little Prince"
+            ]
+          },
+          {
+            "id": "v170-before-after-2-3",
+            "level": 2,
+            "prompt": "Which phrase blends a Disney musical about Belle with an expression meaning performing at maximum intensity?",
+            "answer": "Beauty and the Beast Mode",
+            "aliases": [],
+            "hint": "A creature's name ends the movie title and begins the sports expression.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Beauty and the Beast Quest",
+              "Beauty and the Beast World",
+              "Beauty and the Beast Master"
+            ]
+          },
+          {
+            "id": "v170-before-after-2-4",
+            "level": 2,
+            "prompt": "Which phrase blends a Dr. Seuss book about a mischievous feline with a sports feat of scoring three times?",
+            "answer": "The Cat in the Hat Trick",
+            "aliases": [],
+            "hint": "The repeated word is something worn on the head.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "The Cat in the Hat Rack",
+              "The Cat in the Hat Stand",
+              "The Cat in the Hat Dance"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-before-after-3-1",
+            "level": 3,
+            "prompt": "Which blended title connects Aldous Huxley's dystopian novel with Major League Baseball's annual championship?",
+            "answer": "Brave New World Series",
+            "aliases": [],
+            "hint": "The shared word names the planet we live on.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Brave New World Cup",
+              "Brave New World Tour",
+              "Brave New World Record"
+            ]
+          },
+          {
+            "id": "v170-before-after-3-2",
+            "level": 3,
+            "prompt": "Which phrase combines Ken Kesey's psychiatric-hospital novel with a term for savings set aside for the future?",
+            "answer": "One Flew Over the Cuckoo's Nest Egg",
+            "aliases": [],
+            "hint": "The book title ends with a bird's home, which begins the money phrase.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "One Flew Over the Cuckoo's Nest Box",
+              "One Flew Over the Cuckoo's Nest Party",
+              "One Flew Over the Cuckoo's Nest Bird"
+            ]
+          },
+          {
+            "id": "v170-before-after-3-3",
+            "level": 3,
+            "prompt": "Which phrase blends the 1985 Michael J. Fox time-travel film with Alvin Toffler's book about rapid social change?",
+            "answer": "Back to the Future Shock",
+            "aliases": [],
+            "hint": "The second work was a 1970 book about disorientation caused by change.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "Back to the Future World",
+              "Back to the Future Tense",
+              "Back to the Future Perfect"
+            ]
+          },
+          {
+            "id": "v170-before-after-3-4",
+            "level": 3,
+            "prompt": "Which phrase blends Charles Dickens's 1859 novel set in London and Paris with a city-building video game made by Colossal Order?",
+            "answer": "A Tale of Two Cities: Skylines",
+            "aliases": [
+              "A Tale of Two Cities Skylines"
+            ],
+            "hint": "The game's title starts with the final word of the novel.",
+            "categoryId": "before-after",
+            "sourceStatus": "Original language puzzle; manually checked",
+            "sourceUrl": "",
+            "distractors": [
+              "A Tale of Two Cities: Origins",
+              "A Tale of Two Cities: Heroes",
+              "A Tale of Two Cities: Dreams"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "undone",
+      "name": "Un-Done!",
+      "description": "Vocabulary challenges in which every answer begins with the letters UN.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v170-undone-1-1",
+            "level": 1,
+            "prompt": "Which UN word means not fair or just?",
+            "answer": "Unfair",
+            "aliases": [],
+            "hint": "You might use this adjective when rules favor one side.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unclear",
+              "Unkind",
+              "Unusual"
+            ]
+          },
+          {
+            "id": "v170-undone-1-2",
+            "level": 1,
+            "prompt": "Which UN word describes someone who is not married?",
+            "answer": "Unmarried",
+            "aliases": [],
+            "hint": "The word refers to a person's marital status.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unemployed",
+              "Uncertain",
+              "Unfamiliar"
+            ]
+          },
+          {
+            "id": "v170-undone-1-3",
+            "level": 1,
+            "prompt": "Which UN word means not seen?",
+            "answer": "Unseen",
+            "aliases": [],
+            "hint": "You might describe an object hidden from view this way.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unheard",
+              "Unwritten",
+              "Unspoken"
+            ]
+          },
+          {
+            "id": "v170-undone-1-4",
+            "level": 1,
+            "prompt": "Which UN word means impossible to break?",
+            "answer": "Unbreakable",
+            "aliases": [],
+            "hint": "It could describe a very sturdy material.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unforgettable",
+              "Unbelievable",
+              "Unacceptable"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v170-undone-2-1",
+            "level": 2,
+            "prompt": "Which UN word means impossible to avoid?",
+            "answer": "Unavoidable",
+            "aliases": [],
+            "hint": "It describes an outcome that will happen despite attempts to prevent it.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unalterable",
+              "Unbearable",
+              "Unavailable"
+            ]
+          },
+          {
+            "id": "v170-undone-2-2",
+            "level": 2,
+            "prompt": "Which UN verb means to loosen a knot or remove a fastening made by tying?",
+            "answer": "Untie",
+            "aliases": [],
+            "hint": "You might do this to your shoelaces.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unfold",
+              "Unroll",
+              "Unplug"
+            ]
+          },
+          {
+            "id": "v170-undone-2-3",
+            "level": 2,
+            "prompt": "Which UN word means not expected in advance?",
+            "answer": "Unanticipated",
+            "aliases": [],
+            "hint": "It describes a surprise development in a plan.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unregulated",
+              "Unfinished",
+              "Undisclosed"
+            ]
+          },
+          {
+            "id": "v170-undone-2-4",
+            "level": 2,
+            "prompt": "Which UN word means not publicly revealed or announced?",
+            "answer": "Undisclosed",
+            "aliases": [],
+            "hint": "It often describes information kept confidential.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unfinished",
+              "Unfounded",
+              "Unbalanced"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v170-undone-3-1",
+            "level": 3,
+            "prompt": "Which UN word means never before known or experienced?",
+            "answer": "Unprecedented",
+            "aliases": [],
+            "hint": "A headline might use it for a record-breaking event.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unrestricted",
+              "Unverified",
+              "Unquestioned"
+            ]
+          },
+          {
+            "id": "v170-undone-3-2",
+            "level": 3,
+            "prompt": "Which UN word describes something impossible to understand as speech or language?",
+            "answer": "Unintelligible",
+            "aliases": [],
+            "hint": "You might use it for a badly garbled recording.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unthinkable",
+              "Unalterable",
+              "Unmistakable"
+            ]
+          },
+          {
+            "id": "v170-undone-3-3",
+            "level": 3,
+            "prompt": "Which UN word means incapable of being calmed or satisfied by concessions?",
+            "answer": "Unappeasable",
+            "aliases": [],
+            "hint": "The word can describe anger that no apology settles.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unaccountable",
+              "Unalterable",
+              "Unavoidable"
+            ]
+          },
+          {
+            "id": "v170-undone-3-4",
+            "level": 3,
+            "prompt": "Which UN word describes an argument or position difficult to challenge successfully?",
+            "answer": "Unassailable",
+            "aliases": [],
+            "hint": "It suggests that objections are unlikely to succeed.",
+            "categoryId": "undone",
+            "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
+            "sourceUrl": "https://www.merriam-webster.com/",
+            "distractors": [
+              "Unanswerable",
+              "Untraceable",
+              "Unavoidable"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "no-show",
+      "name": "The No-Show!",
+      "description": "Famous disappearances, cancellations, unbuilt plans, and things that never quite happened.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v180-no-show-1-1",
+            "level": 1,
+            "prompt": "Which pilot disappeared over the Pacific Ocean while attempting a round-the-world flight in 1937?",
+            "answer": "Amelia Earhart",
+            "aliases": [],
+            "hint": "She was one of the best-known American women aviators of the 1930s.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://timeandnavigation.si.edu/navigating-air/early-air-navigators/amelia-earhart",
+            "distractors": [
+              "Amy Johnson",
+              "Bessie Coleman",
+              "Jacqueline Cochran"
+            ]
+          },
+          {
+            "id": "v180-no-show-1-2",
+            "level": 1,
+            "prompt": "Which ship was found sailing without its crew near the Azores in 1872?",
+            "answer": "Mary Celeste",
+            "aliases": [],
+            "hint": "The merchant brigantine had left New York with a cargo bound for Italy.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.history.org.uk/publications/categories/301/resource/10590/the-mary-celeste-the-history-of-a-mystery",
+            "distractors": [
+              "HMS Beagle",
+              "SS Atlantic",
+              "HMS Challenger"
+            ]
+          },
+          {
+            "id": "v180-no-show-1-3",
+            "level": 1,
+            "prompt": "Which English settlement on Roanoke Island became known as the Lost Colony after its colonists disappeared?",
+            "answer": "Roanoke Colony",
+            "aliases": [
+              "Roanoke",
+              "Lost Colony",
+              "Lost Colony of Roanoke"
+            ],
+            "hint": "It was founded before the permanent English settlement at Jamestown.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nps.gov/fora/learn/historyculture/the-lost-colony.htm",
+            "distractors": [
+              "Jamestown",
+              "Plymouth Colony",
+              "Massachusetts Bay Colony"
+            ]
+          },
+          {
+            "id": "v180-no-show-1-4",
+            "level": 1,
+            "prompt": "Which Apollo mission abandoned its planned Moon landing after an oxygen-tank explosion in 1970?",
+            "answer": "Apollo 13",
+            "aliases": [],
+            "hint": "The astronauts returned safely after a major emergency in space.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nasa.gov/mission/apollo-13/",
+            "distractors": [
+              "Apollo 11",
+              "Apollo 12",
+              "Apollo 14"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v180-no-show-2-1",
+            "level": 2,
+            "prompt": "In what year were Summer Olympic Games scheduled for Berlin but canceled because of World War I?",
+            "answer": "1916",
+            "aliases": [],
+            "hint": "The planned competition fell between the Stockholm Games and the Antwerp Games.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.olympics.com/ioc/news/the-modern-games-caught-in-the-upheavals-of-history",
+            "distractors": [
+              "1912",
+              "1920",
+              "1924"
+            ]
+          },
+          {
+            "id": "v180-no-show-2-2",
+            "level": 2,
+            "prompt": "In which city were the 1980 Summer Olympics held despite a U.S.-led boycott?",
+            "answer": "Moscow",
+            "aliases": [],
+            "hint": "The Games took place in the Soviet Union.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://olympics.com/en/olympic-games/moscow-1980",
+            "distractors": [
+              "Montreal",
+              "Seoul",
+              "Los Angeles"
+            ]
+          },
+          {
+            "id": "v180-no-show-2-3",
+            "level": 2,
+            "prompt": "Which proposed Apollo mission number was never flown after NASA reduced its plans for Moon landings?",
+            "answer": "Apollo 18",
+            "aliases": [],
+            "hint": "The final crewed lunar landing took place on Apollo 17.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_18_20.html",
+            "distractors": [
+              "Apollo 14",
+              "Apollo 16",
+              "Apollo 17"
+            ]
+          },
+          {
+            "id": "v180-no-show-2-4",
+            "level": 2,
+            "prompt": "What alias is associated with a 1971 airline hijacker who parachuted from a passenger jet and was never conclusively identified?",
+            "answer": "D. B. Cooper",
+            "aliases": [
+              "DB Cooper",
+              "Dan Cooper",
+              "D B Cooper"
+            ],
+            "hint": "The skyjacker escaped after collecting ransom money in the Pacific Northwest.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.fbi.gov/history/cases-and-criminals/db-cooper-hijacking",
+            "distractors": [
+              "Frank Morris",
+              "John Dillinger",
+              "George Metesky"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v180-no-show-3-1",
+            "level": 3,
+            "prompt": "Which 1845 British Arctic expedition disappeared while searching for the Northwest Passage?",
+            "answer": "Franklin expedition",
+            "aliases": [
+              "Franklin Expedition",
+              "Sir John Franklin expedition"
+            ],
+            "hint": "Its lost ships were named Erebus and Terror.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.rmg.co.uk/stories/maritime-history/curatorial/new-discoveries-wrecks-hms-erebus-terror",
+            "distractors": [
+              "Terra Nova expedition",
+              "Endurance expedition",
+              "Fram expedition"
+            ]
+          },
+          {
+            "id": "v180-no-show-3-2",
+            "level": 3,
+            "prompt": "What was the code name of Nazi Germany’s planned 1940 invasion of Britain that was never launched?",
+            "answer": "Operation Sea Lion",
+            "aliases": [
+              "Operation Sealion",
+              "Sea Lion",
+              "Sealion"
+            ],
+            "hint": "The plan depended on gaining control of the skies over southern England.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.rafmuseum.org.uk/our-collection/supporting-research/online-exhibitions/operation-sealion/",
+            "distractors": [
+              "Operation Barbarossa",
+              "Operation Torch",
+              "Operation Market Garden"
+            ]
+          },
+          {
+            "id": "v180-no-show-3-3",
+            "level": 3,
+            "prompt": "What is the common name of Vladimir Tatlin’s unbuilt spiral monument planned for the Third International?",
+            "answer": "Tatlin’s Tower",
+            "aliases": [
+              "Tatlins Tower",
+              "Monument to the Third International"
+            ],
+            "hint": "Models of the revolutionary-era architectural proposal were displayed, but the full structure was never constructed.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://smarthistory.org/tatlin-tower/",
+            "distractors": [
+              "Palace of the Soviets",
+              "Chicago Spire",
+              "The Illinois"
+            ]
+          },
+          {
+            "id": "v180-no-show-3-4",
+            "level": 3,
+            "prompt": "Which French explorer led a Pacific expedition last seen leaving Australia in 1788 before its ships were wrecked near Vanikoro?",
+            "answer": "La Pérouse",
+            "aliases": [
+              "La Perouse",
+              "Jean Francois de Galaup",
+              "Jean-François de Galaup, comte de Lapérouse"
+            ],
+            "hint": "His two frigates were called La Boussole and L’Astrolabe.",
+            "categoryId": "no-show",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.sl.nsw.gov.au/stories/fate-la-perouse",
+            "distractors": [
+              "Louis Antoine de Bougainville",
+              "Nicolas Baudin",
+              "Louis Isidore Duperrey"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "christmas-lore",
+      "name": "Christmas Legends & Lore",
+      "description": "Santa origins, holiday folklore, decorations, and surprising Christmas traditions.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v180-christmas-lore-1-1",
+            "level": 1,
+            "prompt": "What popular Christmas houseplant has colorful red bracts and is named for diplomat Joel Poinsett?",
+            "answer": "Poinsettia",
+            "aliases": [],
+            "hint": "The plant originated in Mexico and has showy leaves that are often mistaken for flowers.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.si.edu/stories/see-thousands-poinsettias-smithsonian-cares",
+            "distractors": [
+              "Christmas cactus",
+              "Amaryllis",
+              "Cyclamen"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-1-2",
+            "level": 1,
+            "prompt": "Which evergreen plant is traditionally hung over doorways so people can kiss beneath it at Christmas?",
+            "answer": "Mistletoe",
+            "aliases": [],
+            "hint": "The plant commonly grows on trees rather than rooting in the ground.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.english-heritage.org.uk/learn/histories/christmas-greenery-history/",
+            "distractors": [
+              "Holly",
+              "Ivy",
+              "Rosemary"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-1-3",
+            "level": 1,
+            "prompt": "What Christmas countdown item has numbered windows or pockets opened on successive days in December?",
+            "answer": "Advent calendar",
+            "aliases": [],
+            "hint": "Older versions might reveal a picture or short message rather than candy.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nationaltrust.org.uk/discover/history/art-collections/advent-calendar-of-christmas-treasures",
+            "distractors": [
+              "Advent wreath",
+              "Jesse tree",
+              "Nativity scene"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-1-4",
+            "level": 1,
+            "prompt": "What traditional Christmas custom involves burning a large piece of wood in the fireplace?",
+            "answer": "Yule log",
+            "aliases": [],
+            "hint": "A modern dessert with the same name resembles a rolled-up piece of timber.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nationaltrust.org.uk/discover/history/christmas-traditions-from-history",
+            "distractors": [
+              "Advent wreath",
+              "Christingle",
+              "Wassail bowl"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-1-5",
+            "level": 1,
+            "prompt": "Which Christian saint, celebrated on December 6 in many places, helped inspire the modern Santa Claus?",
+            "answer": "Saint Nicholas",
+            "aliases": [
+              "St Nicholas",
+              "St. Nicholas",
+              "Nicholas of Myra"
+            ],
+            "hint": "He is traditionally remembered for helping people in need, especially children.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/biography/Saint-Nicholas",
+            "distractors": [
+              "Saint Patrick",
+              "Saint Valentine",
+              "Saint George"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-1-6",
+            "level": 1,
+            "prompt": "What peppermint-flavored Christmas sweet is commonly shaped like a hooked walking stick?",
+            "answer": "Candy cane",
+            "aliases": [],
+            "hint": "It often has red-and-white stripes.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.history.com/articles/christmas-traditions-history",
+            "distractors": [
+              "Ribbon candy",
+              "Peppermint bark",
+              "Sugarplum"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v180-christmas-lore-2-1",
+            "level": 2,
+            "prompt": "What nine-night Mexican Christmas celebration reenacts Mary and Joseph seeking lodging?",
+            "answer": "Las Posadas",
+            "aliases": [
+              "Posadas"
+            ],
+            "hint": "Its Spanish name refers to inns or places to stay.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.fallriverdiocese.org/app/uploads/sites/19/2023/09/las-posadas-booklet.pdf",
+            "distractors": [
+              "Las Fallas",
+              "Día de Muertos",
+              "Las Luminarias"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-2-2",
+            "level": 2,
+            "prompt": "In northern German Christmas folklore, which companion of Saint Nicholas is often pictured in a dark robe carrying a staff or sack?",
+            "answer": "Knecht Ruprecht",
+            "aliases": [
+              "Ruprecht"
+            ],
+            "hint": "This figure is seen as a stern attendant rather than an angelic gift-bringer.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.stnicholascenter.org/around-the-world/who-travels-with-st-nicholas",
+            "distractors": [
+              "Krampus",
+              "Belsnickel",
+              "Christkind"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-2-3",
+            "level": 2,
+            "prompt": "Which broom-riding figure in Italian folklore brings children gifts around Epiphany in January?",
+            "answer": "La Befana",
+            "aliases": [
+              "Befana"
+            ],
+            "hint": "The name belongs to an elderly female character, not Santa Claus.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.horniman.ac.uk/story/the-wizened-wise-women-of-christmas/",
+            "distractors": [
+              "Frau Holle",
+              "Perchta",
+              "Saint Lucia"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-2-4",
+            "level": 2,
+            "prompt": "In which European country did printed Advent calendars become popular before spreading internationally?",
+            "answer": "Germany",
+            "aliases": [],
+            "hint": "Many of the early commercial calendars appeared in the German-speaking world.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nationaltrust.org.uk/discover/history/art-collections/advent-calendar-of-christmas-treasures",
+            "distractors": [
+              "Austria",
+              "Sweden",
+              "Switzerland"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-2-5",
+            "level": 2,
+            "prompt": "What Swedish word names the traditional Christmas goat decoration, often made from straw?",
+            "answer": "Julbock",
+            "aliases": [
+              "Yule Goat",
+              "Julebukk"
+            ],
+            "hint": "A huge seasonal version is famously erected in the Swedish town of Gävle.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://press.visitsweden.com/gavlechristmasgoat",
+            "distractors": [
+              "Tomte",
+              "Nisse",
+              "Dala horse"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-2-6",
+            "level": 2,
+            "prompt": "What traditional English winter custom involves performing songs, dances, and plays while wearing disguises or masks?",
+            "answer": "Mumming",
+            "aliases": [
+              "Mummers play",
+              "Mummers plays"
+            ],
+            "hint": "One traditional story acted out by costumed groups involves Saint George and a dragon.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.rutgers.edu/news/surprising-history-christmas-traditions",
+            "distractors": [
+              "Wassailing",
+              "Souling",
+              "Caroling"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v180-christmas-lore-3-1",
+            "level": 3,
+            "prompt": "Which fur-clad, sometimes mischievous gift-bringer appears in Pennsylvania German Christmas folklore?",
+            "answer": "Belsnickel",
+            "aliases": [
+              "Pelznickel",
+              "Belsnickle"
+            ],
+            "hint": "Unlike many versions of Santa, the visitor may test children’s behavior.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.history.com/articles/krampus-christmas-legend-origin",
+            "distractors": [
+              "Krampus",
+              "Knecht Ruprecht",
+              "Christkind"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-3-2",
+            "level": 3,
+            "prompt": "In Icelandic Christmas folklore, which enormous animal is said to threaten people who receive no new clothes for the holiday?",
+            "answer": "Yule Cat",
+            "aliases": [
+              "Jólakötturinn",
+              "Jolakotturinn",
+              "Christmas Cat"
+            ],
+            "hint": "The tale links gift-giving with the expectation of wearing something new.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.visiticeland.com/article/meet-the-icelandic-yule-troll-family/",
+            "distractors": [
+              "Yule Goat",
+              "Black Shuck",
+              "Christmas Hare"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-3-3",
+            "level": 3,
+            "prompt": "What is the name of the giantess who is the mother of the 13 Yule Lads in Icelandic Christmas folklore?",
+            "answer": "Grýla",
+            "aliases": [
+              "Gryla"
+            ],
+            "hint": "She belongs to a family of trolls that also includes an enormous Yule Cat.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.visiticeland.com/article/meet-the-icelandic-yule-troll-family/",
+            "distractors": [
+              "Perchta",
+              "Baba Yaga",
+              "La Befana"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-3-4",
+            "level": 3,
+            "prompt": "What is the name of the cheeky squatting figure sometimes hidden in a Catalan Christmas nativity scene?",
+            "answer": "Caganer",
+            "aliases": [],
+            "hint": "It is a tiny figure included alongside more conventional nativity characters.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.catalannews.com/culture/item/a-catalan-christmas-the-unique-traditions-of-the-tio-de-nadal-and-the-caganer",
+            "distractors": [
+              "Olentzero",
+              "Christkind",
+              "Tió de Nadal"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-3-5",
+            "level": 3,
+            "prompt": "Which German-born prince helped popularize decorated Christmas trees among families in Victorian Britain?",
+            "answer": "Prince Albert",
+            "aliases": [
+              "Albert of Saxe-Coburg and Gotha",
+              "Albert, Prince Consort"
+            ],
+            "hint": "Images of the royal family gathered around their tree were widely circulated in the nineteenth-century press.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.rct.uk/articles/a-royal-christmas",
+            "distractors": [
+              "Prince Leopold",
+              "Prince Edward",
+              "Prince George"
+            ]
+          },
+          {
+            "id": "v180-christmas-lore-3-6",
+            "level": 3,
+            "prompt": "Which angelic childlike figure is a traditional Christmas gift-bringer in parts of Germany and Austria?",
+            "answer": "Christkind",
+            "aliases": [],
+            "hint": "This gift-bringing figure became especially familiar in Protestant regions of central Europe.",
+            "categoryId": "christmas-lore",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.christkindlmarket.com/the-christkind/",
+            "distractors": [
+              "Belsnickel",
+              "Krampus",
+              "Père Noël"
+            ]
+          }
+        ]
+      },
+      "activeMonths": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "creepy-creatures",
+      "name": "Creepy Creatures",
+      "description": "Famous monsters, supernatural beings, cryptids, and spooky folklore.",
+      "type": "creative",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "v180-creepy-creatures-1-1",
+            "level": 1,
+            "prompt": "What legendary creature is typically said to drink blood and avoid sunlight?",
+            "answer": "Vampire",
+            "aliases": [],
+            "hint": "Stories often describe one sleeping in a coffin or changing into a bat.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/topic/vampire",
+            "distractors": [
+              "Werewolf",
+              "Zombie",
+              "Ghost"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-1-2",
+            "level": 1,
+            "prompt": "What creature in European folklore is a person who transforms into a wolf?",
+            "answer": "Werewolf",
+            "aliases": [],
+            "hint": "A full moon is linked to the transformation in many modern stories.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/topic/werewolf",
+            "distractors": [
+              "Vampire",
+              "Ghoul",
+              "Zombie"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-1-3",
+            "level": 1,
+            "prompt": "What legendary Scottish lake monster is nicknamed Nessie?",
+            "answer": "Loch Ness Monster",
+            "aliases": [
+              "Nessie",
+              "Loch Ness monster"
+            ],
+            "hint": "The creature is associated with a freshwater loch near Inverness.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.history.com/articles/loch-ness-monster",
+            "distractors": [
+              "Yeti",
+              "Bigfoot",
+              "Chupacabra"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-1-4",
+            "level": 1,
+            "prompt": "Which large, hairy, humanlike creature is a famous legend of the forests of North America?",
+            "answer": "Bigfoot",
+            "aliases": [
+              "Sasquatch"
+            ],
+            "hint": "Reports of this elusive figure are especially associated with the Pacific Northwest.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/topic/Sasquatch",
+            "distractors": [
+              "Yeti",
+              "Mothman",
+              "Jersey Devil"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-1-5",
+            "level": 1,
+            "prompt": "Which ghostly rider haunts the tale The Legend of Sleepy Hollow?",
+            "answer": "Headless Horseman",
+            "aliases": [],
+            "hint": "Ichabod Crane is the schoolteacher pursued in the tale.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://americanhistory.si.edu/explore/stories/illustrating-ichabod",
+            "distractors": [
+              "Bell Witch",
+              "White Lady",
+              "Green Lady"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-1-6",
+            "level": 1,
+            "prompt": "What creature is brought to life by Victor Frankenstein in Mary Shelley’s novel?",
+            "answer": "Frankenstein’s monster",
+            "aliases": [
+              "Frankensteins monster",
+              "Frankenstein monster",
+              "The Creature",
+              "Frankenstein’s creature",
+              "Frankenstein"
+            ],
+            "hint": "It is a creation of a scientist, not the scientist himself.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/topic/Frankenstein-novel-by-Shelley",
+            "distractors": [
+              "Dracula",
+              "The Golem",
+              "The Mummy"
+            ]
+          }
+        ],
+        "2": [
+          {
+            "id": "v180-creepy-creatures-2-1",
+            "level": 2,
+            "prompt": "Which supernatural female figure in Irish folklore is known for a mournful wail that foretells a death?",
+            "answer": "Banshee",
+            "aliases": [],
+            "hint": "The legend is associated with particular Irish families.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://folklife.si.edu/magazine/irish-banshee",
+            "distractors": [
+              "Selkie",
+              "Lamia",
+              "Rusalka"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-2-2",
+            "level": 2,
+            "prompt": "Which legendary creature, reported in Puerto Rico in the 1990s, is said to prey on goats?",
+            "answer": "Chupacabra",
+            "aliases": [
+              "El Chupacabras",
+              "Chupacabras"
+            ],
+            "hint": "Reported sightings spread from the Caribbean through Latin America and the U.S. Southwest.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.amnh.org/explore/ology/ology-cards/281-chupacabra",
+            "distractors": [
+              "Jersey Devil",
+              "Mothman",
+              "Yeti"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-2-3",
+            "level": 2,
+            "prompt": "In Scottish folklore, what dangerous water spirit often appears in the form of a horse?",
+            "answer": "Kelpie",
+            "aliases": [],
+            "hint": "The creature is associated with rivers and lochs.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.dsl.ac.uk/entry/snd/kelpie",
+            "distractors": [
+              "Selkie",
+              "Banshee",
+              "Brownie"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-2-4",
+            "level": 2,
+            "prompt": "Which witchlike figure from Slavic folktales lives in a hut that stands on chicken legs?",
+            "answer": "Baba Yaga",
+            "aliases": [
+              "Baba-Iaga",
+              "Baba Iaga"
+            ],
+            "hint": "She may help or hinder a traveler, depending on the story.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.history.com/articles/baba-yaga-witch-folklore",
+            "distractors": [
+              "La Befana",
+              "Perchta",
+              "Grýla"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-2-5",
+            "level": 2,
+            "prompt": "Which winged, red-eyed figure became a local legend after reported sightings near Point Pleasant, West Virginia, in 1966?",
+            "answer": "Mothman",
+            "aliases": [],
+            "hint": "A museum and festival in the Ohio River valley celebrate the story.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://folklife.si.edu/magazine/mothman-point-pleasant-west-virginia",
+            "distractors": [
+              "Flatwoods Monster",
+              "Jersey Devil",
+              "Thunderbird"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-2-6",
+            "level": 2,
+            "prompt": "What three-headed dog guards the entrance to the Greek underworld in mythology?",
+            "answer": "Cerberus",
+            "aliases": [],
+            "hint": "It serves Hades, rather than one of the Olympian gods.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.britannica.com/topic/Cerberus",
+            "distractors": [
+              "Orthrus",
+              "Chimera",
+              "Hydra"
+            ]
+          }
+        ],
+        "3": [
+          {
+            "id": "v180-creepy-creatures-3-1",
+            "level": 3,
+            "prompt": "What seal-like being in Scottish and northern island folklore can shed its skin to become human?",
+            "answer": "Selkie",
+            "aliases": [],
+            "hint": "Its stories often involve a stolen animal skin.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.scotland.org/inspiration/scottish-myths-folklore-and-legends",
+            "distractors": [
+              "Kelpie",
+              "Merrow",
+              "Nixie"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-3-2",
+            "level": 3,
+            "prompt": "Which legendary beast has a lionlike body, a human face, and often a scorpionlike tail?",
+            "answer": "Manticore",
+            "aliases": [],
+            "hint": "Accounts of the creature trace back to ancient descriptions of beasts from Persia.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://pbswisconsin.org/watch/monstrum/why-manticore-is-a-dungeons-dragons-legend-jjpw2x/",
+            "distractors": [
+              "Sphinx",
+              "Chimera",
+              "Griffin"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-3-3",
+            "level": 3,
+            "prompt": "Which gigantic bird of Arabian folklore is said to be able to carry an elephant?",
+            "answer": "Roc",
+            "aliases": [
+              "Rukh",
+              "Rukh bird",
+              "Rokh"
+            ],
+            "hint": "The creature appears in traditions connected with The Arabian Nights.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.amnh.org/explore/ology/ology-cards/286-roc",
+            "distractors": [
+              "Phoenix",
+              "Simurgh",
+              "Thunderbird"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-3-4",
+            "level": 3,
+            "prompt": "Which mythical hybrid creature from Bavarian folklore is often depicted as a rabbit with antlers and wings?",
+            "answer": "Wolpertinger",
+            "aliases": [],
+            "hint": "The legend is associated with Bavarian tavern stories and novelty taxidermy.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://worldofcreatures.org/creatures/wolpertinger/",
+            "distractors": [
+              "Jackalope",
+              "Skvader",
+              "Al-mi’raj"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-3-5",
+            "level": 3,
+            "prompt": "What Japanese water-dwelling yōkai is often shown with a turtlelike shell and a water-filled hollow on its head?",
+            "answer": "Kappa",
+            "aliases": [],
+            "hint": "Traditional stories connect it with rivers and a fondness for cucumbers.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://www.nippon.com/en/japan-topics/g02008/",
+            "distractors": [
+              "Tengu",
+              "Oni",
+              "Tanuki"
+            ]
+          },
+          {
+            "id": "v180-creepy-creatures-3-6",
+            "level": 3,
+            "prompt": "Which Irish folkloric rider carries his own severed head while traveling on a dark horse?",
+            "answer": "Dullahan",
+            "aliases": [
+              "Dúlagán",
+              "Dulachan"
+            ],
+            "hint": "This figure is an omen of death, not the rider from Washington Irving’s American tale.",
+            "categoryId": "creepy-creatures",
+            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceUrl": "https://blogs.libraries.indiana.edu/lilly/2026/10/29/ghostlore-a-sampling-of-spooky-specters/",
+            "distractors": [
+              "Banshee",
+              "Púca",
+              "Black Annis"
+            ]
+          }
+        ]
+      },
+      "activeMonths": [
+        10,
+        11
+      ]
     }
   ]
 }

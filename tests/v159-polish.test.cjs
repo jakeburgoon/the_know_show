@@ -37,9 +37,9 @@ test('music dropdown closes after selection and gives host and players instructi
  assert.match(css,/\.v2phonehead:has\(\.ks-room-music\[open\]\)/);
 });
 test('How to Play guide is short, nontechnical and highlights bank size',()=>{
- assert.match(guide,/56 categories/);
- assert.match(guide,/738 regular questions/);
- assert.match(guide,/56 Final Word questions/);
+ assert.match(guide,/over 70 categories/);
+ assert.match(guide,/942 regular questions/);
+ assert.match(guide,/72 Final Word questions/);
  assert.match(guide,/highest score wins/);
  assert.doesNotMatch(guide,/schemaVersion|source verification|v1\.0|tolerant spelling/);
  assert.match(home,/How to play/);

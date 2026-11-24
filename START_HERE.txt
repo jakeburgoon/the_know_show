@@ -1,9 +1,35 @@
-THE KNOW SHOW — v1.6.2 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.8.0 · COMPLETE CUMULATIVE APP
 
-This full project replaces v1.6.1 or any earlier release in a single deployment.
+Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
+
+NEW: Three categories (The No-Show!, Christmas Legends & Lore, Creepy Creatures), 48 regular questions and 3 reserved Final Word questions. Library now: 72 categories, 942 regular questions, 72 Final Word questions; 1,014 questions total. The homepage and short How to Play guide promote over 70 categories and over 1,000 questions.
+
+REVIEW: See V180_REGULAR_REVIEW.csv, V180_FINAL_WORD_REVIEW.csv and V180_AUDIT_NOTES.md for question accuracy, choices, hints, links and documented review limits.
+
+GITHUB / VERCEL DEPLOYMENT
+1. Unzip this archive, open the inner the-know-show folder, and place the contents (not the folder itself) at the ROOT of your existing GitHub repository.
+2. Commit changes to main; connected Vercel will trigger a build and deployment.
+3. Check the build result, refresh the PWA, and playtest with at least two devices.
+4. Never upload secrets to GitHub; existing Vercel env vars remain there. No database schema migration or new variables are required.
+
+The approved logo PNG and app icons are unchanged. A source archive is not a substitute for a live Supabase data backup or verified production build.
+
+--- EARLIER RELEASE HISTORY ---
+THE KNOW SHOW — v1.7.0 · COMPLETE CUMULATIVE APP
+
+This full project replaces v1.6.2 or any earlier release in a single deployment.
 No incremental patches, Supabase migrations, or new environment variables are required.
 
-NEW IN v1.6.2
+NEW IN v1.7.0
+- 13 new year-round categories: Villains We Love to Hate; Celebrity Spotlight; Video Game Vault; Brands & Slogans; Sci-Fi Worlds; Fantasy Realms; The Toy Box; Hail to the Chief; Wars & Turning Points; Extra! Extra!; Connect the Dots; Before & After; Un-Done!.
+- 156 new regular questions (4 Easy, 4 Medium, 4 Hard in each category).
+- 13 separate Final Word questions (two paid hints each).
+- New totals: 69 categories, 894 regular questions and 69 Final Word questions (963 total).
+- Question and answer-type review sheets: NEW_REGULAR_CATEGORIES_QA.csv, NEW_FINAL_WORD_QA.csv.
+- Source-audit status: see NEW_CATEGORIES_AUDIT_NOTES.md. Not all 156 new regular questions have independent item-level source verification.
+- No new visual trivia yet; image support is a future feature.
+
+FROM v1.6.2
 - Homepage cards now lead with category variety, then the 25-question game,
   then hints and opportunities to double points.
 - All earlier v1.6.1 hosting, music, and game improvements are included.
@@ -38,6 +64,6 @@ ALSO INCLUDED FROM v1.5.8
 - No change to the scoring rules or any question.
 
 VALIDATION
-56 engine tests, 24 targeted UI checks, and 21 TS/TSX syntax checks passed. Full Next.js production build still must be verified on Vercel.
+84 automated engine + targeted UI checks passed in the local test run. The new category/question records pass structural, uniqueness and overlap checks. Full Next.js production build and multi-device testing still must be verified on Vercel.
 
 See README.md and RELEASE_NOTES.md for more details.

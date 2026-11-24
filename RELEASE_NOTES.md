@@ -1,3 +1,20 @@
+# v1.8.0 — Three new categories and the 1,000-question milestone
+
+- **The No-Show!** is available year-round (12 regular questions); **Christmas Legends & Lore** runs November–December (18 regular); **Creepy Creatures** runs October–November (18 regular).
+- Adds 48 new regular questions and 3 dedicated Final Word questions with two paid hints each, taking the application to **72 categories, 942 regular questions, and 72 final questions (1,014 total)**.
+- Changes the homepage's category promotion to **over 70 categories** and **over 1,000 regular and seasonal questions**; How to Play states **over 1,000 questions** with exact counts.
+- Preserves the full v1.7.0 application, regular questions, Final Word questions, game mechanics, approved logo and app icons, Supabase schema, and host setup.
+- See `V180_REGULAR_REVIEW.csv`, `V180_FINAL_WORD_REVIEW.csv`, and `V180_AUDIT_NOTES.md` for detailed audits and evidence limitations. The full Next.js production build must still be verified on Vercel if not reported separately.
+- **Validation:** 89 Node engine/UI tests passed, along with a focused TypeScript engine compilation. The complete Next.js production build was not run: npm registry access failed with DNS error `EAI_AGAIN`. Confirm compilation on Vercel.
+
+# v1.7.0 — Year-round category expansion
+
+- Adds **13 approved, year-round categories**: Villains We Love to Hate, Celebrity Spotlight, Video Game Vault, Brands & Slogans, Sci-Fi Worlds, Fantasy Realms, The Toy Box, Hail to the Chief, Wars & Turning Points, Extra! Extra!, Connect the Dots, Before & After, and Un-Done!.
+- Adds **156 regular questions** (four per level per category) and **13 standalone Final Word questions** (two paid hints each). The complete bank now contains **69 categories, 894 regular questions, and 69 category-linked Final Word questions**.
+- Separate review files: `NEW_REGULAR_CATEGORIES_QA.csv`, `NEW_FINAL_WORD_QA.csv`, `NEW_CATEGORIES_AUDIT_NOTES.md`.
+- All existing 738 regular questions, 56 Final Word questions, game scoring and flow, assets, and Supabase schema are unchanged.
+- This pack has automated validation and editorial review; per-question reference corroboration and production build remain separate verification steps.
+
 # v1.6.2 — Action-oriented homepage highlight cards
 
 The three homepage highlight cards are now ordered to introduce the variety of categories, the 25-question game structure, and the available hints and Double Takes. Copy is shorter and more inviting: “Choose from over 50 categories” / “Explore regular and seasonal trivia.”; “Take on 25 questions” / “Two rounds of 12, plus one final question.”; and “Make it yours” / “Use hints and try to double your points.” This is a complete cumulative application based on v1.6.1; no game logic, question banks, approved branding, or database schema changed.
