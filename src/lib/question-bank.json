@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.1",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -126,7 +126,9 @@
             "level": 2,
             "prompt": "Who became the first American woman to travel to space?",
             "answer": "Sally Ride",
-            "aliases": [],
+            "aliases": [
+              "Ride"
+            ],
             "hint": "She flew aboard the shuttle Challenger in 1983.",
             "categoryId": "space",
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
@@ -233,19 +235,19 @@
       "questionsByLevel": {
         "1": [
           {
-            "id": "animals-l3-1",
+            "id": "animals-l2-2",
             "level": 1,
-            "prompt": "What is the process of a caterpillar changing into a butterfly called?",
-            "answer": "Metamorphosis",
+            "prompt": "Which flying mammal often hangs upside down while roosting?",
+            "answer": "Bat",
             "aliases": [],
-            "hint": "The same term describes a tadpole becoming a frog.",
+            "hint": "Many species navigate with echolocation.",
             "categoryId": "animals",
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Molting",
-              "Pupation",
-              "Ecdysis"
+              "Flying squirrel",
+              "Sugar glider",
+              "Colugo"
             ]
           },
           {
@@ -333,19 +335,19 @@
             ]
           },
           {
-            "id": "animals-l2-2",
+            "id": "animals-l3-1",
             "level": 2,
-            "prompt": "Which flying mammal often hangs upside down while roosting?",
-            "answer": "Bat",
+            "prompt": "What is the process of a caterpillar changing into a butterfly called?",
+            "answer": "Metamorphosis",
             "aliases": [],
-            "hint": "Many species navigate with echolocation.",
+            "hint": "The same term describes a tadpole becoming a frog.",
             "categoryId": "animals",
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Flying squirrel",
-              "Sugar glider",
-              "Colugo"
+              "Molting",
+              "Pupation",
+              "Ecdysis"
             ]
           },
           {
@@ -353,7 +355,9 @@
             "level": 2,
             "prompt": "What do you call an animal that eats both plants and other animals?",
             "answer": "Omnivore",
-            "aliases": [],
+            "aliases": [
+              "Omnivores"
+            ],
             "hint": "Bears and humans both fit this diet category; the term contrasts with herbivore and carnivore.",
             "categoryId": "animals",
             "sourceStatus": "Not individually source-verified",
@@ -405,7 +409,9 @@
             "level": 3,
             "prompt": "What type of mammal is an echidna, which lays eggs rather than giving live birth?",
             "answer": "Monotreme",
-            "aliases": [],
+            "aliases": [
+              "Monotremes"
+            ],
             "hint": "The platypus belongs to the same small group of egg-laying mammals.",
             "categoryId": "animals",
             "sourceStatus": "Not individually source-verified",
@@ -681,7 +687,9 @@
             "level": 1,
             "prompt": "What do we call words such as “their” and “there” that sound alike but differ in meaning?",
             "answer": "Homophones",
-            "aliases": [],
+            "aliases": [
+              "Homophone"
+            ],
             "hint": "The Greek roots mean “same sound.”",
             "categoryId": "words",
             "sourceStatus": "Not individually source-verified",
@@ -875,7 +883,9 @@
             "level": 1,
             "prompt": "Who is widely credited as the first person to walk on the Moon?",
             "answer": "Neil Armstrong",
-            "aliases": [],
+            "aliases": [
+              "Armstrong"
+            ],
             "hint": "He stepped onto the lunar surface in July 1969.",
             "categoryId": "history",
             "sourceStatus": "Not individually source-verified",
@@ -1059,7 +1069,10 @@
             "level": 3,
             "prompt": "Which empire was ruled by Suleiman the Magnificent in the 16th century?",
             "answer": "Ottoman Empire",
-            "aliases": [],
+            "aliases": [
+              "Ottoman",
+              "Ottomans"
+            ],
             "hint": "Its capital was Constantinople.",
             "categoryId": "history",
             "sourceStatus": "Not individually source-verified",
@@ -1124,7 +1137,9 @@
             "level": 1,
             "prompt": "What are the tiny building blocks of matter called?",
             "answer": "Atoms",
-            "aliases": [],
+            "aliases": [
+              "Atom"
+            ],
             "hint": "Each one has a nucleus with electrons occupying the surrounding region.",
             "categoryId": "science",
             "sourceStatus": "Not individually source-verified",
@@ -1748,7 +1763,8 @@
             "answer": "Bong Joon-ho",
             "aliases": [
               "Bong Joon Ho",
-              "Bong Joonho"
+              "Bong Joonho",
+              "Bong"
             ],
             "hint": "He also directed Snowpiercer and Okja.",
             "categoryId": "movies",
@@ -3155,7 +3171,9 @@
             "level": 1,
             "prompt": "Which organs help you breathe by exchanging oxygen and carbon dioxide?",
             "answer": "Lungs",
-            "aliases": [],
+            "aliases": [
+              "Lung"
+            ],
             "hint": "The right one has three lobes, while the left has two.",
             "categoryId": "body",
             "sourceStatus": "Not individually source-verified",
@@ -4355,10 +4373,10 @@
           {
             "id": "legacy-rhyme-1",
             "level": 2,
-            "prompt": "An animal that rhymes with “boat.”",
+            "prompt": "Which farm animal, often kept for milk, rhymes with boat?",
             "answer": "Goat",
             "aliases": [],
-            "hint": "This farm animal is a common source of milk and may have a beard.",
+            "hint": "It may have a beard and horns.",
             "categoryId": "rhyme",
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
@@ -4373,35 +4391,33 @@
           {
             "id": "rhyme-l3-2",
             "level": 3,
-            "prompt": "Which word means a narrow sea passage and rhymes with date?",
-            "answer": "Strait",
-            "aliases": [
-              "Straits"
-            ],
-            "hint": "It sounds like a word meaning not curved.",
+            "prompt": "Which verb meaning to mock or ridicule someone rhymes with ride?",
+            "answer": "Deride",
+            "aliases": [],
+            "hint": "It implies treating someone with contempt rather than respect.",
             "categoryId": "rhyme",
-            "sourceStatus": "Not individually source-verified",
-            "sourceUrl": "",
+            "sourceStatus": "Definition checked against Cambridge Dictionary",
+            "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/deride",
             "distractors": [
-              "State",
-              "Plate",
-              "Weight"
+              "Chide",
+              "Abide",
+              "Confide"
             ]
           },
           {
             "id": "rhyme-l4-1",
             "level": 3,
-            "prompt": "What verb meaning to drive or chase away rhymes with bell?",
-            "answer": "Expel",
+            "prompt": "Which verb meaning to deliberately avoid something rhymes with chew?",
+            "answer": "Eschew",
             "aliases": [],
-            "hint": "It can mean to remove someone from a school.",
+            "hint": "Someone might do this to a habit they consider harmful.",
             "categoryId": "rhyme",
-            "sourceStatus": "Not individually source-verified",
-            "sourceUrl": "",
+            "sourceStatus": "Definition checked against Cambridge Dictionary",
+            "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/eschew",
             "distractors": [
-              "Foretell",
-              "Compel",
-              "Excel"
+              "Pursue",
+              "Renew",
+              "Subdue"
             ]
           },
           {
@@ -4526,22 +4542,23 @@
           {
             "id": "v1-qa2-wait-what-medium-1",
             "level": 2,
-            "prompt": "Two mothers and two daughters go out to eat, but there are only three people. How is that possible?",
-            "answer": "A grandmother, her daughter, and her granddaughter",
+            "prompt": "In a race, you pass the runner in second place. What place are you in now?",
+            "answer": "Second place",
             "aliases": [
-              "Grandmother mother daughter",
-              "Grandma mom and daughter",
-              "Grandmother mother granddaughter",
-              "Three generations"
+              "Second",
+              "2nd",
+              "2nd place",
+              "2",
+              "Two"
             ],
-            "hint": "One person is both a mother and a daughter.",
+            "hint": "You take the position of the runner you passed.",
             "categoryId": "misleading",
-            "sourceStatus": "Not individually source-verified",
+            "sourceStatus": "Logic puzzle; verified by reasoning",
             "sourceUrl": "",
             "distractors": [
-              "Two sisters and their mother",
-              "Three sisters",
-              "A mother, her son, and his grandmother"
+              "First place",
+              "Third place",
+              "Fourth place"
             ]
           },
           {
@@ -4563,21 +4580,24 @@
             ]
           },
           {
-            "id": "misleading-l3-1",
+            "id": "legacy-misleading-4",
             "level": 2,
-            "prompt": "Five people are in a room. Each shakes hands once with every other person. How many handshakes happen?",
-            "answer": "10",
+            "prompt": "An electric train moves north. Which way does its smoke blow?",
+            "answer": "No smoke",
             "aliases": [
-              "Ten"
+              "It has no smoke",
+              "There is no smoke",
+              "None",
+              "No direction"
             ],
-            "hint": "Count every unique pair of people.",
+            "hint": "Think about the type of engine the vehicle uses.",
             "categoryId": "misleading",
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "9",
-              "11",
-              "12"
+              "Toward the south",
+              "Toward the north",
+              "Straight up"
             ]
           },
           {
@@ -4623,22 +4643,21 @@
             ]
           },
           {
-            "id": "legacy-misleading-4",
+            "id": "misleading-l3-1",
             "level": 3,
-            "prompt": "An electric train moves north. Which way does its smoke blow?",
-            "answer": "It has no smoke",
+            "prompt": "Five people are in a room. Each shakes hands once with every other person. How many handshakes happen?",
+            "answer": "10",
             "aliases": [
-              "no smoke",
-              "there is no smoke"
+              "Ten"
             ],
-            "hint": "Think about the type of engine the vehicle uses.",
+            "hint": "Count every unique pair of people.",
             "categoryId": "misleading",
             "sourceStatus": "Not individually source-verified",
             "sourceUrl": "",
             "distractors": [
-              "Toward the south",
-              "Toward the north",
-              "Straight up"
+              "9",
+              "11",
+              "12"
             ]
           },
           {
@@ -5010,7 +5029,10 @@
             "level": 2,
             "prompt": "Which river forms much of the border between Texas and Mexico?",
             "answer": "Rio Grande",
-            "aliases": [],
+            "aliases": [
+              "Rio Bravo",
+              "Rio Bravo del Norte"
+            ],
             "hint": "Its name means big river in Spanish.",
             "categoryId": "usa",
             "sourceStatus": "Not individually source-verified",
@@ -5288,7 +5310,9 @@
             "prompt": "What name is given to the global system of ocean currents driven by temperature and salinity differences?",
             "answer": "Thermohaline circulation",
             "aliases": [
-              "global conveyor belt"
+              "global conveyor belt",
+              "Ocean conveyor belt",
+              "Global ocean conveyor belt"
             ],
             "hint": "It is driven partly by water-density differences caused by heat and salt.",
             "categoryId": "oceans",
@@ -5761,7 +5785,8 @@
               "Secondary wave",
               "Shear wave",
               "Secondary seismic waves",
-              "Shear waves"
+              "Shear waves",
+              "S wave"
             ],
             "hint": "One of the two main body waves from earthquakes cannot pass through liquids.",
             "categoryId": "earth",
@@ -5799,7 +5824,8 @@
             "prompt": "Which scale is commonly used to describe mineral hardness from 1 to 10?",
             "answer": "Mohs scale",
             "aliases": [
-              "Mohs hardness scale"
+              "Mohs hardness scale",
+              "Mohs"
             ],
             "hint": "Diamond has the top rating of ten; talc has the lowest rating of one.",
             "categoryId": "earth",
@@ -7146,7 +7172,9 @@
             "aliases": [
               "Brown v Board",
               "Brown versus Board of Education",
-              "Brown vs Board"
+              "Brown vs Board",
+              "Brown v Board of Ed",
+              "Brown vs Board of Ed"
             ],
             "hint": "It involved public education.",
             "categoryId": "us_history",
@@ -7261,7 +7289,11 @@
             "level": 2,
             "prompt": "Which empire had its capital at Constantinople until 1453?",
             "answer": "Byzantine Empire",
-            "aliases": [],
+            "aliases": [
+              "Byzantine",
+              "Eastern Roman Empire",
+              "Eastern Roman"
+            ],
             "hint": "It was the eastern continuation of Rome.",
             "categoryId": "world_history",
             "sourceStatus": "Not individually source-verified",
@@ -8473,7 +8505,9 @@
             "level": 3,
             "prompt": "Who became the first winner of the women's Ballon d'Or award in 2018?",
             "answer": "Ada Hegerberg",
-            "aliases": [],
+            "aliases": [
+              "Hegerberg"
+            ],
             "hint": "She is a Norwegian footballer.",
             "categoryId": "sports_classic",
             "sourceStatus": "QA5 externally corroborated (reviewed source matches question)",
@@ -8621,7 +8655,9 @@
             "level": 2,
             "prompt": "In the first Star Wars movie released in 1977, who plays Han Solo?",
             "answer": "Harrison Ford",
-            "aliases": [],
+            "aliases": [
+              "Ford"
+            ],
             "hint": "He also portrayed Indiana Jones.",
             "categoryId": "movies_tv",
             "sourceStatus": "Not individually source-verified",
@@ -8851,7 +8887,9 @@
             "level": 2,
             "prompt": "Which jazz musician recorded the album Kind of Blue in 1959?",
             "answer": "Miles Davis",
-            "aliases": [],
+            "aliases": [
+              "Davis"
+            ],
             "hint": "He was a trumpeter.",
             "categoryId": "music_classic",
             "sourceStatus": "Not individually source-verified",
@@ -8988,7 +9026,8 @@
             "answer": "J. K. Rowling",
             "aliases": [
               "JK Rowling",
-              "Joanne Rowling"
+              "Joanne Rowling",
+              "Rowling"
             ],
             "hint": "Her first novel in the series came out in 1997.",
             "categoryId": "literature",
@@ -9045,7 +9084,8 @@
             "answer": "Frances Hodgson Burnett",
             "aliases": [
               "Frances Burnett",
-              "F H Burnett"
+              "F H Burnett",
+              "Burnett"
             ],
             "hint": "The author also wrote A Little Princess.",
             "categoryId": "literature",
@@ -9062,7 +9102,9 @@
             "level": 2,
             "prompt": "Who wrote both Matilda and The BFG?",
             "answer": "Roald Dahl",
-            "aliases": [],
+            "aliases": [
+              "Dahl"
+            ],
             "hint": "He also wrote Charlie and the Chocolate Factory.",
             "categoryId": "literature",
             "sourceStatus": "Not individually source-verified",
@@ -9135,7 +9177,8 @@
             "prompt": "Who narrates The Great Gatsby?",
             "answer": "Nick Carraway",
             "aliases": [
-              "Nick"
+              "Nick",
+              "Carraway"
             ],
             "hint": "He moves next door to the wealthy man whose parties fascinate him.",
             "categoryId": "literature",
@@ -10160,9 +10203,12 @@
             "id": "season-thanksgiving-1-4",
             "level": 1,
             "prompt": "Which New York parade is famous for its giant character balloons on Thanksgiving morning?",
-            "answer": "Macy's Thanksgiving Day Parade",
+            "answer": "Macy’s parade",
             "aliases": [
-              "Macys Thanksgiving Day Parade"
+              "Macy's Thanksgiving Day Parade",
+              "Macys Thanksgiving Day Parade",
+              "Macys",
+              "Macy’s Thanksgiving Parade"
             ],
             "hint": "It is named for a major department store.",
             "categoryId": "thanksgiving",
@@ -10288,7 +10334,9 @@
             "level": 2,
             "prompt": "Which U.S. president proclaimed a national day of thanksgiving for November 1789?",
             "answer": "George Washington",
-            "aliases": [],
+            "aliases": [
+              "Washington"
+            ],
             "hint": "He held office under the newly ratified U.S. Constitution.",
             "categoryId": "thanksgiving",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -10324,7 +10372,10 @@
             "level": 3,
             "prompt": "Which magazine editor campaigned for a national Thanksgiving and wrote to President Lincoln?",
             "answer": "Sarah Josepha Hale",
-            "aliases": [],
+            "aliases": [
+              "Hale",
+              "Sarah Hale"
+            ],
             "hint": "She edited Godey's Lady's Book.",
             "categoryId": "thanksgiving",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10458,7 +10509,9 @@
             "level": 1,
             "prompt": "Which actor plays Buddy the Elf in Elf (2003)?",
             "answer": "Will Ferrell",
-            "aliases": [],
+            "aliases": [
+              "Ferrell"
+            ],
             "hint": "He also starred in Anchorman.",
             "categoryId": "christmas-movies",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10581,7 +10634,9 @@
             "level": 2,
             "prompt": "Who plays Scott Calvin in The Santa Clause (1994)?",
             "answer": "Tim Allen",
-            "aliases": [],
+            "aliases": [
+              "Allen"
+            ],
             "hint": "He also voiced Buzz Lightyear.",
             "categoryId": "christmas-movies",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10611,21 +10666,22 @@
             ]
           },
           {
-            "id": "season-christmas-movies-2-5",
+            "id": "season-christmas-movies-3-2",
             "level": 2,
-            "prompt": "In Elf (2003), which New York department store hires Buddy for its holiday display?",
-            "answer": "Gimbels",
-            "aliases": [],
-            "hint": "The real-world chain had closed before the film was made.",
-            "categoryId": "christmas-movies",
-            "sourceStatus": "Editorially reviewed; reference recorded",
-            "sourceUrl": "https://www.afi.com/news/holiday-movie-guide/",
-            "distractors": [
-              "Macy’s",
-              "Bloomingdale’s",
-              "Saks Fifth Avenue"
+            "prompt": "Which Muppet plays Bob Cratchit in The Muppet Christmas Carol?",
+            "answer": "Kermit the Frog",
+            "aliases": [
+              "Kermit"
             ],
-            "editorialStatus": "Reviewed for answer type, wrong-answer plausibility, single defensible answer, hint leakage"
+            "hint": "The character is green and is often seen with Miss Piggy.",
+            "categoryId": "christmas-movies",
+            "sourceStatus": "Seasonal editorial review; not individually source-verified",
+            "sourceUrl": "https://www.bfi.org.uk/",
+            "distractors": [
+              "Fozzie Bear",
+              "Gonzo",
+              "Rizzo the Rat"
+            ]
           },
           {
             "id": "season-christmas-movies-2-6",
@@ -10665,22 +10721,21 @@
             ]
           },
           {
-            "id": "season-christmas-movies-3-2",
+            "id": "season-christmas-movies-2-5",
             "level": 3,
-            "prompt": "Which Muppet plays Bob Cratchit in The Muppet Christmas Carol?",
-            "answer": "Kermit the Frog",
-            "aliases": [
-              "Kermit"
-            ],
-            "hint": "The character is green and is often seen with Miss Piggy.",
+            "prompt": "In Elf (2003), which New York department store hires Buddy for its holiday display?",
+            "answer": "Gimbels",
+            "aliases": [],
+            "hint": "The real-world chain had closed before the film was made.",
             "categoryId": "christmas-movies",
-            "sourceStatus": "Seasonal editorial review; not individually source-verified",
-            "sourceUrl": "https://www.bfi.org.uk/",
+            "sourceStatus": "Editorially reviewed; reference recorded",
+            "sourceUrl": "https://www.afi.com/news/holiday-movie-guide/",
             "distractors": [
-              "Fozzie Bear",
-              "Gonzo",
-              "Rizzo the Rat"
-            ]
+              "Macy’s",
+              "Bloomingdale’s",
+              "Saks Fifth Avenue"
+            ],
+            "editorialStatus": "Reviewed for answer type, wrong-answer plausibility, single defensible answer, hint leakage"
           },
           {
             "id": "season-christmas-movies-3-3",
@@ -10703,7 +10758,9 @@
             "level": 3,
             "prompt": "Who provides Jack Skellington's singing voice in The Nightmare Before Christmas?",
             "answer": "Danny Elfman",
-            "aliases": [],
+            "aliases": [
+              "Elfman"
+            ],
             "hint": "He also composed the movie's music.",
             "categoryId": "christmas-movies",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10736,7 +10793,9 @@
             "level": 3,
             "prompt": "Who directed the original 1947 film Miracle on 34th Street?",
             "answer": "George Seaton",
-            "aliases": [],
+            "aliases": [
+              "Seaton"
+            ],
             "hint": "This filmmaker also wrote the screenplay for the 1947 film.",
             "categoryId": "christmas-movies",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -10767,7 +10826,9 @@
             "level": 1,
             "prompt": "Who recorded the 1994 holiday hit All I Want for Christmas Is You?",
             "answer": "Mariah Carey",
-            "aliases": [],
+            "aliases": [
+              "Carey"
+            ],
             "hint": "The singer's album was called Merry Christmas.",
             "categoryId": "christmas-music",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10800,9 +10861,9 @@
             "id": "season-christmas-music-1-3",
             "level": 1,
             "prompt": "Which holiday song is about a reindeer whose nose helps guide Santa's sleigh?",
-            "answer": "Rudolph the Red-Nosed Reindeer",
+            "answer": "Rudolph",
             "aliases": [
-              "Rudolph"
+              "Rudolph the Red-Nosed Reindeer"
             ],
             "hint": "The title names the character known for his red nose.",
             "categoryId": "christmas-music",
@@ -10819,7 +10880,9 @@
             "level": 1,
             "prompt": "Which singer popularized White Christmas in the 1942 movie Holiday Inn?",
             "answer": "Bing Crosby",
-            "aliases": [],
+            "aliases": [
+              "Crosby"
+            ],
             "hint": "His best-known film partner was Bob Hope.",
             "categoryId": "christmas-music",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -10833,17 +10896,21 @@
           {
             "id": "season-christmas-music-1-5",
             "level": 1,
-            "prompt": "Which novelty Christmas song is about a child hoping to receive an unusual animal as a present?",
-            "answer": "I Want a Hippopotamus for Christmas",
-            "aliases": [],
-            "hint": "The animal in the title is much larger than a reindeer.",
+            "prompt": "Complete the novelty Christmas song title: I Want a ___ for Christmas.",
+            "answer": "Hippopotamus",
+            "aliases": [
+              "I Want a Hippopotamus for Christmas",
+              "Hippo",
+              "Hippopotamus for Christmas"
+            ],
+            "hint": "The animal spends much of its time in water.",
             "categoryId": "christmas-music",
             "sourceStatus": "Editorially reviewed; reference recorded",
             "sourceUrl": "https://www.loc.gov/collections/american-sheet-music-1820-to-1860/articles-and-essays/greatest-hits-1820-60-variety-music-cavalcade/1850-to-1860/",
             "distractors": [
-              "Dominick the Donkey",
-              "The Chipmunk Song",
-              "Grandma Got Run Over by a Reindeer"
+              "Donkey",
+              "Reindeer",
+              "Kangaroo"
             ],
             "editorialStatus": "Reviewed for answer type, wrong-answer plausibility, single defensible answer, hint leakage"
           },
@@ -10922,7 +10989,9 @@
             "prompt": "Which holiday song did Brenda Lee first record in 1958?",
             "answer": "Rockin' Around the Christmas Tree",
             "aliases": [
-              "Rocking Around the Christmas Tree"
+              "Rocking Around the Christmas Tree",
+              "Rockin Around",
+              "Rocking Around"
             ],
             "hint": "It describes dancing around a decorated evergreen.",
             "categoryId": "christmas-music",
@@ -10940,7 +11009,8 @@
             "prompt": "Which traditional Christmas carol is also known by the Latin title Adeste Fideles?",
             "answer": "O Come, All Ye Faithful",
             "aliases": [
-              "O Come All Ye Faithful"
+              "O Come All Ye Faithful",
+              "All Ye Faithful"
             ],
             "hint": "Its English lyrics invite worshippers to visit Bethlehem.",
             "categoryId": "christmas-music",
@@ -10958,7 +11028,9 @@
             "level": 2,
             "prompt": "Which singer had an early hit with the 1953 recording of Santa Baby?",
             "answer": "Eartha Kitt",
-            "aliases": [],
+            "aliases": [
+              "Kitt"
+            ],
             "hint": "She was known for a distinctive, theatrical vocal style.",
             "categoryId": "christmas-music",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -10995,7 +11067,9 @@
             "level": 3,
             "prompt": "Which singer introduced Have Yourself a Merry Little Christmas in the 1944 film Meet Me in St. Louis?",
             "answer": "Judy Garland",
-            "aliases": [],
+            "aliases": [
+              "Garland"
+            ],
             "hint": "She also played Dorothy in The Wizard of Oz.",
             "categoryId": "christmas-music",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -11028,7 +11102,8 @@
             "prompt": "Which jazz singer first recorded The Christmas Song commercially in 1946?",
             "answer": "Nat King Cole",
             "aliases": [
-              "Nat Cole"
+              "Nat Cole",
+              "Cole"
             ],
             "hint": "He led a celebrated trio bearing his stage name.",
             "categoryId": "christmas-music",
@@ -11045,7 +11120,10 @@
             "level": 3,
             "prompt": "Who composed the melody for the 1818 Christmas carol Silent Night?",
             "answer": "Franz Xaver Gruber",
-            "aliases": [],
+            "aliases": [
+              "Gruber",
+              "Franz Gruber"
+            ],
             "hint": "The words were written by a different Austrian cleric, Joseph Mohr.",
             "categoryId": "christmas-music",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -11062,7 +11140,10 @@
             "level": 3,
             "prompt": "Under what original title was Jingle Bells published in 1857?",
             "answer": "The One Horse Open Sleigh",
-            "aliases": [],
+            "aliases": [
+              "One Horse Open Sleigh",
+              "One Horse Sleigh"
+            ],
             "hint": "The original title refers to the vehicle rather than its bells.",
             "categoryId": "christmas-music",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -11943,7 +12024,9 @@
             "level": 2,
             "prompt": "Which type of Olympic speed skating uses a short oval where competitors race closely together?",
             "answer": "Short-track speed skating",
-            "aliases": [],
+            "aliases": [
+              "Short track"
+            ],
             "hint": "Athletes often race in a pack rather than separate lanes.",
             "categoryId": "winter-olympics",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -11978,7 +12061,9 @@
             "level": 3,
             "prompt": "Which Norwegian skater won three successive women's Olympic figure skating gold medals in 1928, 1932, and 1936?",
             "answer": "Sonja Henie",
-            "aliases": [],
+            "aliases": [
+              "Henie"
+            ],
             "hint": "She later pursued a career in Hollywood.",
             "categoryId": "winter-olympics",
             "sourceStatus": "Seasonal editorial review; not individually source-verified",
@@ -12504,7 +12589,10 @@
             "level": 1,
             "prompt": "Which U.S. military branch became independent from the Army in 1947?",
             "answer": "Air Force",
-            "aliases": [],
+            "aliases": [
+              "USAF",
+              "U.S. Air Force"
+            ],
             "hint": "Its main mission centers on military aviation.",
             "categoryId": "veterans-military",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -12654,7 +12742,10 @@
             "level": 3,
             "prompt": "Which cemetery hosts the national Veterans Day observance at the Tomb of the Unknown Soldier?",
             "answer": "Arlington National Cemetery",
-            "aliases": [],
+            "aliases": [
+              "Arlington",
+              "Arlington Cemetery"
+            ],
             "hint": "It lies across the Potomac River from Washington, D.C.",
             "categoryId": "veterans-military",
             "sourceStatus": "Seasonal question; reviewed editorially against reference (not independently verified by reviewer)",
@@ -12709,7 +12800,9 @@
             "answer": "3rd U.S. Infantry Regiment",
             "aliases": [
               "Third U.S. Infantry Regiment",
-              "The Old Guard"
+              "The Old Guard",
+              "3rd Infantry Regiment",
+              "Old Guard"
             ],
             "hint": "This unit is also known by the nickname “The Old Guard.”",
             "categoryId": "veterans-military",
@@ -12727,7 +12820,9 @@
             "level": 3,
             "prompt": "Which U.S. president created the Badge of Military Merit in 1782, the decoration that inspired the modern Purple Heart?",
             "answer": "George Washington",
-            "aliases": [],
+            "aliases": [
+              "Washington"
+            ],
             "hint": "The decoration dates to the American Revolutionary War.",
             "categoryId": "veterans-military",
             "sourceStatus": "Editorially reviewed; reference recorded",
@@ -12910,7 +13005,9 @@
             "answer": "Pueblo peoples",
             "aliases": [
               "Ancestral Puebloans",
-              "Ancestral Pueblo peoples"
+              "Ancestral Pueblo peoples",
+              "Pueblo",
+              "Puebloans"
             ],
             "hint": "Descendant communities include multiple villages in today’s New Mexico and Arizona.",
             "categoryId": "native-american",
@@ -13019,9 +13116,9 @@
             "id": "season-native-american-3-3",
             "level": 3,
             "prompt": "Which federal act of 1975 expanded tribal control over programs previously administered by the U.S. government?",
-            "answer": "Indian Self-Determination and Education Assistance Act",
+            "answer": "Indian Self-Determination Act",
             "aliases": [
-              "Indian Self-Determination Act",
+              "Indian Self-Determination and Education Assistance Act",
               "ISDEAA"
             ],
             "hint": "Its title contains the phrase \"Self-Determination.\"",
@@ -14772,19 +14869,22 @@
         ],
         "2": [
           {
-            "id": "v170-sci-fi-2-1",
+            "id": "v170-sci-fi-3-3",
             "level": 2,
-            "prompt": "In George Orwell's Nineteen Eighty-Four, what term means accepting two contradictory beliefs at once?",
-            "answer": "Doublethink",
-            "aliases": [],
-            "hint": "It is a mental habit encouraged by the ruling Party.",
+            "prompt": "Which computer controls the spacecraft Discovery One in 2001: A Space Odyssey?",
+            "answer": "HAL 9000",
+            "aliases": [
+              "HAL",
+              "Hal 9000"
+            ],
+            "hint": "The machine speaks in a calm voice and has a glowing red camera eye.",
             "categoryId": "sci-fi",
             "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
             "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
             "distractors": [
-              "Newspeak",
-              "Thoughtcrime",
-              "Crimestop"
+              "Mother",
+              "GERTY",
+              "MU/TH/UR 6000"
             ]
           },
           {
@@ -14846,10 +14946,12 @@
           {
             "id": "v170-sci-fi-3-1",
             "level": 3,
-            "prompt": "Which Philip K. Dick novel inspired the 1982 film Blade Runner?",
+            "prompt": "Which Philip K. Dick novel inspired the 1982 film Blade Runner? The last two words of the title are enough.",
             "answer": "Do Androids Dream of Electric Sheep?",
             "aliases": [
-              "Do Androids Dream of Electric Sheep"
+              "Do Androids Dream of Electric Sheep",
+              "Electric Sheep",
+              "Androids Dream of Electric Sheep"
             ],
             "hint": "The book explores artificial humans and the meaning of empathy.",
             "categoryId": "sci-fi",
@@ -14882,31 +14984,31 @@
             ]
           },
           {
-            "id": "v170-sci-fi-3-3",
+            "id": "v170-sci-fi-2-1",
             "level": 3,
-            "prompt": "Which computer controls the spacecraft Discovery One in 2001: A Space Odyssey?",
-            "answer": "HAL 9000",
+            "prompt": "In George Orwell's Nineteen Eighty-Four, what term means accepting two contradictory beliefs at once?",
+            "answer": "Doublethink",
             "aliases": [
-              "HAL",
-              "Hal 9000"
+              "Double think"
             ],
-            "hint": "The machine speaks in a calm voice and has a glowing red camera eye.",
+            "hint": "It is a mental habit encouraged by the ruling Party.",
             "categoryId": "sci-fi",
             "sourceStatus": "Editorial check; reference source provided at category level, not individually corroborated",
             "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
             "distractors": [
-              "Mother",
-              "GERTY",
-              "MU/TH/UR 6000"
+              "Newspeak",
+              "Thoughtcrime",
+              "Crimestop"
             ]
           },
           {
             "id": "v170-sci-fi-3-4",
             "level": 3,
-            "prompt": "Which Ursula K. Le Guin novel is set on the wintry planet Gethen?",
+            "prompt": "Which Ursula K. Le Guin novel is set on the wintry planet Gethen? A recognizable short title is enough.",
             "answer": "The Left Hand of Darkness",
             "aliases": [
-              "Left Hand of Darkness"
+              "Left Hand of Darkness",
+              "Left Hand"
             ],
             "hint": "Its setting is also called Winter.",
             "categoryId": "sci-fi",
@@ -15061,7 +15163,8 @@
             "prompt": "In The Princess Bride, what masked pirate identity does Westley eventually assume?",
             "answer": "Dread Pirate Roberts",
             "aliases": [
-              "The Dread Pirate Roberts"
+              "The Dread Pirate Roberts",
+              "Pirate Roberts"
             ],
             "hint": "The feared title is secretly passed from one person to another.",
             "categoryId": "fantasy",
@@ -15176,7 +15279,8 @@
             "answer": "Rubik's Cube",
             "aliases": [
               "Rubiks Cube",
-              "Rubix Cube"
+              "Rubix Cube",
+              "Rubik Cube"
             ],
             "hint": "A common version has three rows and three columns on each face.",
             "categoryId": "toys",
@@ -15485,7 +15589,8 @@
             "answer": "William Henry Harrison",
             "aliases": [
               "Harrison",
-              "President William Henry Harrison"
+              "President William Henry Harrison",
+              "William Harrison"
             ],
             "hint": "His brief presidency began with a famously long inaugural address.",
             "categoryId": "presidents",
@@ -15705,7 +15810,8 @@
             "prompt": "Which 1066 battle resulted in William of Normandy defeating England's King Harold II?",
             "answer": "Battle of Hastings",
             "aliases": [
-              "Hastings"
+              "Hastings",
+              "Hastings Battle"
             ],
             "hint": "It paved the way for the Norman Conquest of England.",
             "categoryId": "wars",
@@ -15869,7 +15975,9 @@
               "Apollo 11",
               "First Moon Landing",
               "1969 moon landing",
-              "Man on the Moon"
+              "Man on the Moon",
+              "Moon landing",
+              "Lunar landing"
             ],
             "hint": "Neil Armstrong and Buzz Aldrin made the historic visit.",
             "categoryId": "headlines",
@@ -15926,9 +16034,9 @@
             "id": "v170-headlines-1-4",
             "level": 1,
             "prompt": "An imagined July 1776 headline reads: Colonies Proclaim Their Independence! Which event does it describe?",
-            "answer": "Adoption of the Declaration of Independence",
+            "answer": "Declaration of Independence",
             "aliases": [
-              "Declaration of Independence",
+              "Adoption of the Declaration of Independence",
               "American Declaration of Independence"
             ],
             "hint": "Representatives of thirteen British colonies approved a statement of separation.",
@@ -15947,11 +16055,13 @@
             "id": "v170-headlines-2-1",
             "level": 2,
             "prompt": "An imagined 1903 headline reads: Brothers Lift Powered Airplane Into Flight! Which event does it describe?",
-            "answer": "Wright brothers' first powered flight",
+            "answer": "Wright brothers’ flight",
             "aliases": [
+              "Wright brothers' first powered flight",
               "Wright Brothers Flight",
               "Wright Brothers First Flight",
-              "First Powered Flight"
+              "First Powered Flight",
+              "Wright brothers"
             ],
             "hint": "It took place near Kitty Hawk, North Carolina.",
             "categoryId": "headlines",
@@ -16067,11 +16177,13 @@
             "id": "v170-headlines-3-3",
             "level": 3,
             "prompt": "An imagined 1858 headline reads: First Messages Travel Beneath the Atlantic! Which technological achievement does it describe?",
-            "answer": "First transatlantic telegraph cable",
+            "answer": "Transatlantic cable",
             "aliases": [
+              "First transatlantic telegraph cable",
               "Transatlantic Telegraph Cable",
               "Atlantic Telegraph Cable",
-              "1858 transatlantic cable"
+              "1858 transatlantic cable",
+              "Atlantic cable"
             ],
             "hint": "A submarine cable briefly allowed telegraph messages between Europe and North America.",
             "categoryId": "headlines",
@@ -16504,7 +16616,7 @@
           {
             "id": "v170-before-after-3-2",
             "level": 3,
-            "prompt": "Which phrase combines Ken Kesey's psychiatric-hospital novel with a term for savings set aside for the future?",
+            "prompt": "Combine the title of Ken Kesey's novel about a psychiatric hospital with a two-word term for savings set aside for the future. Overlap their shared word to create one phrase. What is the full blended phrase?",
             "answer": "One Flew Over the Cuckoo's Nest Egg",
             "aliases": [],
             "hint": "The book title ends with a bird's home, which begins the money phrase.",
@@ -16772,7 +16884,9 @@
             "level": 1,
             "prompt": "Which pilot disappeared over the Pacific Ocean while attempting a round-the-world flight in 1937?",
             "answer": "Amelia Earhart",
-            "aliases": [],
+            "aliases": [
+              "Earhart"
+            ],
             "hint": "She was one of the best-known American women aviators of the 1930s.",
             "categoryId": "no-show",
             "sourceStatus": "Editorially checked; individual reference URL supplied",
@@ -16824,7 +16938,10 @@
             "level": 1,
             "prompt": "Which Apollo mission abandoned its planned Moon landing after an oxygen-tank explosion in 1970?",
             "answer": "Apollo 13",
-            "aliases": [],
+            "aliases": [
+              "Apollo XIII",
+              "Apollo Thirteen"
+            ],
             "hint": "The astronauts returned safely after a major emergency in space.",
             "categoryId": "no-show",
             "sourceStatus": "Editorially checked; individual reference URL supplied",
@@ -16872,12 +16989,16 @@
           {
             "id": "v180-no-show-2-3",
             "level": 2,
-            "prompt": "Which proposed Apollo mission number was never flown after NASA reduced its plans for Moon landings?",
+            "prompt": "Which Apollo mission number immediately followed the last crewed Apollo Moon landing, but was never flown under that number?",
             "answer": "Apollo 18",
-            "aliases": [],
-            "hint": "The final crewed lunar landing took place on Apollo 17.",
+            "aliases": [
+              "18",
+              "Apollo Eighteen",
+              "Apollo XVIII"
+            ],
+            "hint": "Apollo 17 was the final crewed Moon landing of the Apollo program.",
             "categoryId": "no-show",
-            "sourceStatus": "Editorially checked; individual reference URL supplied",
+            "sourceStatus": "NASA mission cancellation reference checked",
             "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_18_20.html",
             "distractors": [
               "Apollo 14",
@@ -16914,7 +17035,9 @@
             "answer": "Franklin expedition",
             "aliases": [
               "Franklin Expedition",
-              "Sir John Franklin expedition"
+              "Sir John Franklin expedition",
+              "Franklin",
+              "John Franklin"
             ],
             "hint": "Its lost ships were named Erebus and Terror.",
             "categoryId": "no-show",
@@ -17116,21 +17239,24 @@
             ]
           },
           {
-            "id": "v180-christmas-lore-2-2",
+            "id": "v180-christmas-lore-3-5",
             "level": 2,
-            "prompt": "In northern German Christmas folklore, which companion of Saint Nicholas is often pictured in a dark robe carrying a staff or sack?",
-            "answer": "Knecht Ruprecht",
+            "prompt": "Which German-born prince helped popularize decorated Christmas trees among families in Victorian Britain?",
+            "answer": "Prince Albert",
             "aliases": [
-              "Ruprecht"
+              "Albert of Saxe-Coburg and Gotha",
+              "Albert, Prince Consort",
+              "Albert",
+              "Prince Consort Albert"
             ],
-            "hint": "This figure is seen as a stern attendant rather than an angelic gift-bringer.",
+            "hint": "Images of the royal family gathered around their tree were widely circulated in the nineteenth-century press.",
             "categoryId": "christmas-lore",
             "sourceStatus": "Editorially checked; individual reference URL supplied",
-            "sourceUrl": "https://www.stnicholascenter.org/around-the-world/who-travels-with-st-nicholas",
+            "sourceUrl": "https://www.rct.uk/articles/a-royal-christmas",
             "distractors": [
-              "Krampus",
-              "Belsnickel",
-              "Christkind"
+              "Prince Leopold",
+              "Prince Edward",
+              "Prince George"
             ]
           },
           {
@@ -17281,22 +17407,21 @@
             ]
           },
           {
-            "id": "v180-christmas-lore-3-5",
+            "id": "v180-christmas-lore-2-2",
             "level": 3,
-            "prompt": "Which German-born prince helped popularize decorated Christmas trees among families in Victorian Britain?",
-            "answer": "Prince Albert",
+            "prompt": "In northern German Christmas folklore, which companion of Saint Nicholas is often pictured in a dark robe carrying a staff or sack?",
+            "answer": "Knecht Ruprecht",
             "aliases": [
-              "Albert of Saxe-Coburg and Gotha",
-              "Albert, Prince Consort"
+              "Ruprecht"
             ],
-            "hint": "Images of the royal family gathered around their tree were widely circulated in the nineteenth-century press.",
+            "hint": "This figure is seen as a stern attendant rather than an angelic gift-bringer.",
             "categoryId": "christmas-lore",
             "sourceStatus": "Editorially checked; individual reference URL supplied",
-            "sourceUrl": "https://www.rct.uk/articles/a-royal-christmas",
+            "sourceUrl": "https://www.stnicholascenter.org/around-the-world/who-travels-with-st-nicholas",
             "distractors": [
-              "Prince Leopold",
-              "Prince Edward",
-              "Prince George"
+              "Krampus",
+              "Belsnickel",
+              "Christkind"
             ]
           },
           {

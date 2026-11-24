@@ -1,3 +1,24 @@
+# v1.9.1 — Wordplay follow-up
+
+- Restore full Before & After blended phrases (six regular questions and one Final Word); the Cuckoo’s Nest Egg answer intentionally combines the novel title with “nest egg.” Clarify that the full blended phrase is required.
+- Replace the grandmother puzzle with a race-position puzzle (Second place), retaining its Medium slot and ID.
+- All other v1.9.0 audit decisions retained. No category removal, scoring, or schema changes. See `V191_QUESTION_CHANGE_LOG.csv` for exact follow-up edits. The v1.9.0 log remains a historical record. Deploy between games.
+
+# v1.9.0 — Conservative question-quality audit
+
+- Screened the 942 regular and 72 category Final Word records by difficulty and answer length, with targeted editorial review of flagged items and aliases. Changed 91 questions (82 regular and 9 Final Word); 923 unchanged. Five paired difficulty swaps (10 questions), 15 prompt revisions and 82 alias-list changes, with overlap between these counts.
+- Retain four regular questions per level (six for seasonal categories), all 72 categories and all 1,014 IDs. No new category, no general fuzzy-matching change, no scoring or database changes.
+- Short answers encouraged; long proper names/titles may remain the displayed canonical answers with shorter context-specific aliases. For some Before & After clues ask for the missing part of the blended phrase.
+- See `V190_QUESTION_CHANGE_LOG.csv` for exact before/after text, levels, choices, aliases, hints and reasons; `V190_AUDIT_NOTES.md` for calibration decisions and limits.
+- All 105 engine/UI tests passed (64 engine, 41 UI), including new acceptance and negative-answer regression tests. Focused TypeScript compilation passed with locally available Node type definitions. Full Next.js production build and live player testing not verified here. Deploy between shows.
+
+# v1.8.6 — Final Word reveal timing and champion title
+
+- Use “The Show’s Champion” instead of “Tonight’s Champion”; co-winner wording is unchanged.
+- Purchase up to two Final Word hints before locking wagers, at the existing cost of 500 points each. Hint text is withheld by the server during wagering; purchases and costs are still visible.
+- Automatically reveal each player's purchased hints when the question and timer start, including when the host starts Final Word manually. No extra taps or sharing of hints with other players.
+- Enforce locked wagers on the server. Preserve scoring, question banks, branding, and schema. Question difficulty and answer-alias audits are deferred to v1.9.0.
+
 # v1.8.5 — Balanced landing page
 
 - Restore a slim cream header with a small dimensional navy-and-gold How to play button, without a duplicate logo.
@@ -63,7 +84,7 @@ The host uses the Green Room slider to assign each player an answer format: **Wr
 
 Each four-choice player sees a private, single-tap selection on their phone for eligible **regular** questions. Written and multiple-choice correct answers receive the same base points. Regular-question speed bonuses are capped at 25% (written) and 10% (four-choice). Double Take rules are unchanged.
 
-**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are two progressive Final Word hints per question in the new standalone 69-question Final Word bank. Regular-game hints never carry into Final Word; each player may instead purchase up to two Final Word hints for 500 points each **before wagering**. Each purchase immediately reduces their balance and maximum wager.
+**The Final Word always requires an independently typed answer**, regardless of a player's answer-format accommodation. There are two progressive Final Word hints per question in the new standalone 69-question Final Word bank. Regular-game hints never carry into Final Word; each player may instead purchase up to two Final Word hints for 500 points each **before wagering**. Each purchase immediately reduces their balance and maximum wager. Purchased hints stay hidden until the question opens, then appear automatically and privately.
 
 ## Game rules and features
 

@@ -238,6 +238,16 @@ export function chooseFinalQuestion(s:GameState,now:number){
  return shuffle(eligible.filter(q=>age(q.id)===oldest))[0];
 }
 
+// Reveal every paid hint at the same instant the Final Word question opens.
+function openFinalQuestion(s:GameState,now:number){
+ const f=s.final!;
+ for(const p of s.players){
+   const bought=f.purchasedHints?.[p.id]??0;
+   (f.purchasedHintsUsed??={})[p.id]=bought;
+   (f.revealedHints??={})[p.id]=bought;
+ }
+ f.startedAt=now;f.deadlineAt=now+s.settings.finalSeconds*1000;s.phase='final-question';log(s,'The Final Word begins!');
+}
 function finishFinal(s:GameState,now:number){
  const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:Boolean(f.revealedHints?.[p.id])};}}
  s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-QUESTION_HISTORY_LIMIT);s.phase='final-results';f.noShow=everyoneMissed(s,f.answers);f.endsAt=now+(f.noShow?16500:13000);log(s,'Final answers are in.');
@@ -435,9 +445,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(bought<MAX_FINAL_HINTS,'You already purchased both Final Word hints.');
    assert(p.score>=FINAL_HINT_PRICE,'You need at least 500 points to buy a hint.');
    p.score-=FINAL_HINT_PRICE;(s.final.purchasedHints??={})[p.id]=bought+1;
-   // Purchased hints are shown right away, while the question remains concealed.
-   (s.final.purchasedHintsUsed??={})[p.id]=bought+1;
-   (s.final.revealedHints??={})[p.id]=bought+1;
+   // Purchases reserve hints; their contents stay hidden until the question opens.
    break;
  }
  case 'final-hint':{
@@ -454,12 +462,12 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  }
  case 'start-final':{
    host(actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagers are not open.');
-   s.players.forEach(p=>{if(s.final!.wagers[p.id]===undefined)s.final!.wagers[p.id]=0;});s.final.startedAt=now;s.final.deadlineAt=now+s.settings.finalSeconds*1000;s.phase='final-question';log(s,'The Final Word begins!');break;
+   s.players.forEach(p=>{if(s.final!.wagers[p.id]===undefined)s.final!.wagers[p.id]=0;});openFinalQuestion(s,now);break;
  }
  case 'wager':{
-   const p=player(s,actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagering has closed.');
+   const p=player(s,actor);assert(s.phase==='final-wager'&&!!s.final,'Final wagering has closed.');assert(s.final.wagers[p.id]===undefined,'Your wager is already locked.');
    assert(Number.isInteger(action.amount)&&action.amount>=0&&action.amount<=Math.max(0,p.score),'Wager must be between zero and your score.');s.final.wagers[p.id]=action.amount;
-   if(s.players.every(pl=>s.final!.wagers[pl.id]!==undefined)){s.final.startedAt=now;s.final.deadlineAt=now+s.settings.finalSeconds*1000;s.phase='final-question';log(s,'The Final Word begins!');}
+   if(s.players.every(pl=>s.final!.wagers[pl.id]!==undefined)){openFinalQuestion(s,now);}
    break;
  }
  case 'final-answer':{
@@ -510,9 +518,9 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    myDraft:me?s.final.drafts?.[me.id]:undefined,
    hintPrice:FINAL_HINT_PRICE, maxHints:MAX_FINAL_HINTS,
    myPurchasedHints:me?(s.final.purchasedHints?.[me.id]??0):undefined,
-   myPurchasableHints:me&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-(s.final.purchasedHints?.[me.id]??0)):0,
-   myRevealedHints:me?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
-   myAvailableHints:me?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
+   myPurchasableHints:me&&s.phase==='final-wager'&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-(s.final.purchasedHints?.[me.id]??0)):0,
+   myRevealedHints:me&&['final-question','final-results','finished'].includes(s.phase)?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
+   myAvailableHints:me&&s.phase==='final-question'?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,
  }:undefined;

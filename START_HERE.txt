@@ -1,8 +1,14 @@
-THE KNOW SHOW — v1.8.5 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.9.1 · COMPLETE CUMULATIVE APP
 
 Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
 
-NEW IN v1.8.5: Slim cream header with a navy-and-gold How to play button, no duplicate logo, and more generous responsive landing spacing.
+NEW IN v1.9.1: Full Before & After blended responses restored; grandmother riddle replaced. See V191_QUESTION_CHANGE_LOG.csv.
+
+FROM v1.9.0: Conservative difficulty and answer-quality audit. Five paired level swaps; short answers and question-specific aliases; 91 question records updated. See V190_QUESTION_CHANGE_LOG.csv and V190_AUDIT_NOTES.md. Deploy between games. No schema changes.
+
+FROM v1.8.6: Time-neutral champion title; paid Final Word hints stay hidden until the question and timer open, and then reveal automatically and privately. No schema or question changes.
+
+FROM v1.8.5: Slim cream header with a navy-and-gold How to play button, no duplicate logo, and more generous responsive landing spacing.
 
 FROM v1.8.4: Slightly more landing-page breathing room on desktop and mobile, with compact spacing on short phones.
 

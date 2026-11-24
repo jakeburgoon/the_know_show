@@ -24,7 +24,7 @@ function CurtainCall({players,mode='tv'}:{players:Player[];mode?:'tv'|'phone'}){
      <p className="v13curtain-eyebrow">✦ THE KNOW SHOW ✦</p>
      <h1>That’s a wrap!</h1>
      <div className="v13trophy"><Trophy size={mode==='tv'?86:64} strokeWidth={1.55} aria-hidden="true"/></div>
-     <p className="v13winner-label">{tied?'CO-WINNERS':'TONIGHT’S CHAMPION'}</p>
+     <p className="v13winner-label">{tied?'CO-WINNERS':'THE SHOW’S CHAMPION'}</p>
      <div className={'v13winners'+(tied?' v13winners--tie':'')}>
        {winners.map(p=><div className="v13winner" key={p.id}><strong>{p.name}</strong><span>{fmt(p.score)} <small>POINTS</small></span></div>)}
      </div>
@@ -569,8 +569,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
          {view.final?.myWager===undefined&&!(view.final?.myPurchasableHints)&&<small>Both Final Word hints are purchased.</small>}
          {view.final?.myWager===undefined&&Boolean(view.final?.myPurchasableHints)&&wagerMax<finalHintPrice&&<small>You need at least {fmt(finalHintPrice)} points for another hint.</small>}
          <div className="ks-finaldecision-cost"><span>Spent on hints</span><b>−{fmt(finalHintCount*finalHintPrice)} pts</b></div>
-         {(view.final?.myRevealedHints||[]).map((hint,i)=><div className="ks-final-bought-hint" key={i}><strong>Hint {i+1}</strong><p>{hint}</p></div>)}
-         <small>Each purchase immediately reveals its clue. Purchases are final; the question appears after wagers lock.</small>
+         <small>Purchased hints will be revealed alongside the Final Word question. All purchases are final.</small>
        </div>
        <form className="ks-finaldecision-section ks-finaldecision-wager" onSubmit={e=>{e.preventDefault();if(view.final?.myWager===undefined)void act({type:'wager',amount:wagerPreview});}}>
          <div className="ks-finaldecision-sectionhead"><h3>Your wager</h3><span>Max {fmt(wagerMax)} pts</span></div>
@@ -591,13 +590,13 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        <div className="v2questionheader"><span className="v2categorychip">THE FINAL WORD · {view.final?.category}</span><span className={"v2quicktimer ks-clock "+(view.final?.deadlineAt&&view.final.deadlineAt-timerNow<=5000?"ks-urgent":"")} role="timer" aria-label="Final Word time remaining">{view.paused?'PAUSED':remain(view.final?.deadlineAt,timerNow)}<small>LEFT</small></span></div>
        <h2 className="v2prompt">{view.final?.prompt}</h2>
        {view.final?.deadlineAt&&<div className="ks-timebar" role="progressbar" aria-label="Final Word time remaining" aria-valuenow={Math.max(0,Math.ceil((view.final.deadlineAt-timerNow)/1000))} aria-valuemin={0} aria-valuemax={view.settings.finalSeconds}><span style={{width:`${Math.max(0,Math.min(100,((view.final.deadlineAt-timerNow)/(Math.max(1,view.settings.finalSeconds)*1000))*100))}%`}}/></div>}
-       {view.final?.myAnswer!==undefined?<p className="v2locked">✓ Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={v=>{setFinalDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/ >}
-       {finalDraft.trim()&&view.final?.myAnswer===undefined&&<p className="ks-autosave">{draftSaved?"✓ Final draft saved — will count at zero":"Saving your Final Word draft…"}</p>}
        <div className="ks-finalhintpanel"><div className="ks-finalhinthead"><strong>Final Word hints</strong><span>{view.final?.myAvailableHints||0} available · {view.final?.myRevealedHints?.length||0} of {view.final?.maxHints??2} revealed</span></div>
        {(view.final?.myRevealedHints||[]).map((hint,i)=><p className="ks-finalhintline" key={i}><b>Hint {i+1}</b> {hint}</p>)}
        {view.final?.myAnswer===undefined&&Boolean(view.final?.myAvailableHints)&&<button type="button" className="ks-finalhintbutton" disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onClick={()=>void act({type:'final-hint'})}>Reveal remaining hint (from an earlier game)</button>}
 
        </div>
+       {view.final?.myAnswer!==undefined?<p className="v2locked">✓ Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={v=>{setFinalDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/ >}
+       {finalDraft.trim()&&view.final?.myAnswer===undefined&&<p className="ks-autosave">{draftSaved?"✓ Final draft saved — will count at zero":"Saving your Final Word draft…"}</p>}
      </div></section>}
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}

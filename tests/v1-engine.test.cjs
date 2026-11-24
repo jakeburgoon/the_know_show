@@ -358,22 +358,37 @@ test('a Final Word hint cannot be purchased when the player lacks 500 points',()
  assert.equal(g.makeView(s,a[0],1,4001).final.myAvailableHints,0);
  assert.equal(g.makeView(s,a[0],1,4001).final.myPurchasableHints,2);
 });
-test('purchased Final Word hints reveal immediately, remain private, and do not consume regular hints',()=>{
+test('purchased Final Word hints remain hidden until all wagers lock, reveal privately, and do not consume regular hints',()=>{
  let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=3;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
  s=g.mutate(s,{type:'buy-final-hint'},a[0],3000);
  let v=g.makeView(s,a[0],1,3001);
- assert.equal(v.final.myRevealedHints.length,1);
+ assert.deepEqual(v.final.myRevealedHints,[]);
+ assert.equal(v.final.myPurchasedHints,1);
+ assert.equal(v.final.prompt,undefined);
  assert.equal(v.final.myAvailableHints,0);
  assert.deepEqual(g.makeView(s,a[1],1,3002).final.myRevealedHints,[]);
  assert.deepEqual(g.makeView(s,host,1,3002).final.myRevealedHints,[]);
  s=g.mutate(s,{type:'buy-final-hint'},a[0],3003);
  v=g.makeView(s,a[0],1,3004);
- assert.deepEqual(v.final.myRevealedHints,bank.FINALS.find(q=>q.id==='f15').hints);
+ assert.deepEqual(v.final.myRevealedHints,[]);
+ assert.equal(v.final.myPurchasedHints,2);
+ assert.equal(v.final.prompt,undefined);
  assert.equal(s.players[0].score,1000);
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],3005),/both Final Word hints/);
  s=g.mutate(s,{type:'wager',amount:500},a[0],4000);
+ assert.deepEqual(g.makeView(s,a[0],1,4000).final.myRevealedHints,[]);
+ assert.throws(()=>g.mutate(s,{type:'wager',amount:0},a[0],4000),/already locked/);
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4000),/not available/);
  s=g.mutate(s,{type:'wager',amount:0},a[1],4001);
+ v=g.makeView(s,a[0],1,4001);
+ const q=bank.FINALS.find(q=>q.id==='f15');
+ assert.equal(v.final.prompt,q.prompt);
+ assert.deepEqual(v.final.myRevealedHints,q.hints);
+ assert.equal(v.final.deadlineAt,4001+s.settings.finalSeconds*1000);
+ assert.deepEqual(g.makeView(s,a[1],1,4001).final.myRevealedHints,[]);
+ assert.deepEqual(g.makeView(s,host,1,4001).final.myRevealedHints,[]);
+ assert.deepEqual(g.makeView(s,{kind:'display'},1,4001).final.myRevealedHints,[]);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4002),/Both hints are already revealed/);
  assert.equal(s.players[0].hintsRemaining,1);
  assert.equal(s.players[1].hintsRemaining,3);
@@ -746,4 +761,50 @@ test('v1.8.1: when Round 1 uses every in-season category, Round 2 offers eight y
  s.selected[0]=[...seasonal,...eligible.filter(c=>!c.activeMonths).slice(0,2)].map(c=>c.id);
  s.round=1;s=g.mutate(s,{type:'start-draft'},host,now);
  assert.equal(s.draftPool.length,8);assert.ok(s.draftPool.every(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths&&!s.selected[0].includes(id)));
+});
+
+ test('host-started Final Word reveals paid hints at question opening and defaults missing wagers to zero',()=>{
+ let {s,a}=setup(3);s.players.forEach(p=>p.score=1500);
+ s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],3000);
+ s=g.mutate(s,{type:'buy-final-hint'},a[1],3001);
+ s=g.mutate(s,{type:'buy-final-hint'},a[1],3002);
+ s=g.mutate(s,{type:'wager',amount:500},a[0],3003);
+ // Older persisted snapshots may already contain revealed counts; still hide text during wagering.
+ s.final.revealedHints={[a[0].id]:1};s.final.purchasedHintsUsed={[a[0].id]:1};
+ for(const actor of [...a,host,{kind:'display'}]){
+   const v=g.makeView(s,actor,1,3004);assert.deepEqual(v.final.myRevealedHints,[]);assert.equal(v.final.prompt,undefined);assert.equal(v.final.answer,undefined);
+ }
+ s=g.mutate(s,{type:'start-final'},host,4000);
+ assert.equal(s.phase,'final-question');assert.equal(s.final.wagers[a[0].id],500);assert.equal(s.final.wagers[a[1].id],0);assert.equal(s.final.wagers[a[2].id],0);
+ const q=bank.FINALS.find(q=>q.id==='f15');
+ for(const [i,actor] of a.entries()){
+   const v=g.makeView(s,actor,1,4000);assert.equal(v.final.prompt,q.prompt);assert.deepEqual(v.final.myRevealedHints,q.hints.slice(0,[1,2,0][i]));assert.equal(v.final.myAvailableHints,0);assert.equal(v.final.myPurchasableHints,0);
+ }
+ assert.deepEqual(g.makeView(s,host,1,4000).final.myRevealedHints,[]);
+ assert.equal(s.final.deadlineAt,4000+s.settings.finalSeconds*1000);
+ });
+
+// v1.9.0: validate the editorial audit against the real scoring engine.
+test('v1.9.0 level swaps preserve balanced pools and match their stored level',()=>{
+ for(const c of bank.CATEGORIES)for(const [level,qs] of Object.entries(c.questionsByLevel)){
+  assert.equal(qs.length,c.activeMonths?6:4,c.id);
+  for(const q of qs)assert.equal(q.level,Number(level),q.id);
+ }
+ for(const [id,level] of [['v170-sci-fi-2-1',3],['v170-sci-fi-3-3',2],['season-christmas-movies-2-5',3],['season-christmas-movies-3-2',2],['v180-christmas-lore-2-2',3],['v180-christmas-lore-3-5',2],['animals-l2-2',1],['animals-l3-1',2],['misleading-l3-1',3],['legacy-misleading-4',2],['v170-wars-2-1',2],['world_history-l4-1',3]]) assert.equal(bank.getQuestion(id).level,level,id);
+});
+test('v1.9.0 accepts intended short answers without blanket partial credit',()=>{
+ for(const [id,yes,no] of [['world_history-l3-2',['Byzantine','Eastern Roman Empire','Byzantne'],['Empire','Ottoman Empire','Roman Empire']],['history-l4-2',['Ottoman'],['Empire','Mughal Empire']],['v1-qa2-wait-what-medium-1',['Second place','Second','2nd'],['First place','Third place','Grandmother']],['v170-before-after-3-2',["One Flew Over the Cuckoo's Nest Egg"],['Nest Egg','Nest Box',"One Flew Over the Cuckoo's Nest"]],['v170-sci-fi-3-1',['Electric Sheep','Do Androids Dream of Electric Sheep?'],['Electric','Ubik']],['tech-l1-2',['Universal Serial Bus'],['USB','Universal System Bus']]]){
+  const q=bank.getQuestion(id);for(const a of yes)assert.equal(g.isCorrectForQuestion(a,q),true,`${id}: ${a}`);for(const a of no)assert.equal(g.isCorrectForQuestion(a,q),false,`${id}: ${a}`);
+ }
+});
+test('v1.9.0 all registered answers and aliases score correctly and all published distractors score incorrectly',()=>{
+ for(const q of [...bank.QUESTION_LOOKUP.values(),...bank.CATEGORY_FINALS]){
+  for(const a of [q.answer,...(q.aliases??[])])assert.equal(g.isCorrectForQuestion(a,q),true,`${q.id}: ${a}`);
+  for(const d of q.distractors??[])assert.equal(g.isCorrectForQuestion(d,q),false,`${q.id}: ${d}`);
+ }
+});
+test('v1.9.0 retains two Final Word hints for all categories and requires the full blended-title response',()=>{
+ assert.equal(bank.CATEGORY_FINALS.length,72);for(const f of bank.CATEGORY_FINALS)assert.equal(f.hints.length,2,f.id);
+ const f=bank.CATEGORY_FINALS.find(q=>q.id==='category-final-before-after');assert.equal(g.isCorrectForQuestion('A Clockwork Orange Is the New Black',f),true);assert.equal(g.isCorrectForQuestion('Clockwork Orange',f),false);assert.equal(g.isCorrectForQuestion('Orange',f),false);
 });

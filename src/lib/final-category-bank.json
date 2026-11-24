@@ -12,7 +12,10 @@
       "It was launched after its twin spacecraft yet overtook it on the way to interstellar space."
     ],
     "tier": "teen",
-    "aliases": [],
+    "aliases": [
+      "Voyager I",
+      "Voyager One"
+    ],
     "distractors": []
   },
   {
@@ -225,7 +228,11 @@
       "It is named after a European naturalist who explored South America."
     ],
     "tier": "adult",
-    "aliases": [],
+    "aliases": [
+      "Humboldt",
+      "Peru Current",
+      "Peruvian Current"
+    ],
     "distractors": []
   },
   {
@@ -289,7 +296,9 @@
       "It is named after a British physicist who later received a Nobel Prize."
     ],
     "tier": "teen",
-    "aliases": [],
+    "aliases": [
+      "Rayleigh"
+    ],
     "distractors": []
   },
   {
@@ -546,7 +555,9 @@
     "aliases": [
       "Dred Scott",
       "Dred Scott decision",
-      "Dred Scott vs Sandford"
+      "Dred Scott vs Sandford",
+      "Scott v Sandford",
+      "Dred Scott case"
     ],
     "distractors": []
   },
@@ -702,7 +713,9 @@
     "tier": "adult",
     "aliases": [
       "Ursula Le Guin",
-      "Le Guin"
+      "Le Guin",
+      "Ursula LeGuin",
+      "LeGuin"
     ],
     "distractors": []
   },
@@ -757,7 +770,8 @@
     "tier": "teen",
     "aliases": [
       "PARC",
-      "Palo Alto Research Center"
+      "Palo Alto Research Center",
+      "Xerox Palo Alto Research Center"
     ],
     "distractors": []
   },
@@ -1163,7 +1177,7 @@
     "category": "Extra! Extra!",
     "difficulty": "medium-hard",
     "prompt": "An imagined 1922 headline reads: Sealed Royal Burial Found After Years of Searching! Which famous archaeological discovery does it describe?",
-    "answer": "Discovery of Tutankhamun's tomb",
+    "answer": "King Tut’s tomb",
     "hint": "The burial chamber was found in Egypt's Valley of the Kings.",
     "hints": [
       "The burial chamber was found in Egypt's Valley of the Kings.",
@@ -1171,11 +1185,15 @@
     ],
     "tier": "teen",
     "aliases": [
+      "Discovery of Tutankhamun's tomb",
       "Tutankhamun's tomb",
       "Tomb of Tutankhamun",
       "King Tut's tomb",
       "Finding Tutankhamun Tomb",
-      "Discovery of King Tut Tomb"
+      "Discovery of King Tut Tomb",
+      "Tutankhamun tomb",
+      "King Tut tomb",
+      "Tutankhamen tomb"
     ],
     "distractors": [],
     "sourceUrl": "https://tutankhamun.griffith.ox.ac.uk/people/howard-carter",
@@ -1195,7 +1213,8 @@
     ],
     "tier": "teen",
     "aliases": [
-      "Midsummer Night's Dream"
+      "Midsummer Night's Dream",
+      "Midsummer Night’s Dream"
     ],
     "distractors": [],
     "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
