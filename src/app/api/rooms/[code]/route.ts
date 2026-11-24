@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getRole,getRoom,updateRoom } from '@/lib/db';
-import { GameError,makeView,tick,type GameState } from '@/lib/game';
+import { GameError,tick,type GameState } from '@/lib/game';
+import {makeFeedbackView} from '@/lib/feedback-server';
 import { jsonError,noStore } from '@/lib/http';
 export const runtime='nodejs';
 export async function GET(request:Request,{params}:{params:Promise<{code:string}>}) {
@@ -15,6 +16,6 @@ export async function GET(request:Request,{params}:{params:Promise<{code:string}
       else {const fresh=await getRoom(code);if(fresh)row=fresh;}
     }
     const actor=await getRole(row,request);
-    return NextResponse.json(makeView(row.snapshot as GameState,actor,row.revision),{headers:noStore});
+    return NextResponse.json(makeFeedbackView(row.snapshot as GameState,actor,row.revision),{headers:noStore});
   } catch(e) {if(e instanceof GameError)return jsonError(e.message,409);console.error('Get room:',e);return jsonError('Could not load the game.',500);}
 }

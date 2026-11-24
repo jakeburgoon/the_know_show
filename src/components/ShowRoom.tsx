@@ -6,9 +6,12 @@ import {QRCodeSVG} from 'qrcode.react';
 import {Trophy,Play,CheckCircle,Users, RotateCcw, Home, Check, X, Layers2, Music2, ChevronDown, Clapperboard} from 'lucide-react';
 import HostWizard from './HostWizard';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
-import type {Action,GameView,MusicStyle,Player,Settings} from '@/lib/game';
+import type {Action,GameView as BaseGameView,MusicStyle,Player,Settings} from '@/lib/game';
 import {actorToken,type DeviceTab} from '@/lib/device-session';
 import {finalStandings} from '@/lib/standings';
+import {FeedbackProvider,FeedbackLink} from './Feedback';
+import type {FeedbackOffer} from '@/lib/feedback-types';
+type GameView=BaseGameView & {feedback?:FeedbackOffer};
 
 const fmt=(n:number)=>n.toLocaleString('en-US');
 const remain=(until:number|undefined,now:number)=>until===undefined? '—' : `${Math.max(0,Math.ceil((until-now)/1000))}s`;
@@ -47,7 +50,7 @@ function NoShowBeat(){
  </div>;
 }
 /** Three beats on a total miss: playful no-show, answer, then standings. */
-function AnswerReveal({view,now,final=false}:{view:GameView;now:number;final?:boolean}){
+function AnswerReveal({view,now,final=false,feedback=false}:{view:GameView;now:number;final?:boolean;feedback?:boolean}){
  const results=view.results;
  const finalResults=view.final?.results;
  const disputes=final?(view.final?.disputeIds??[]):(results?.disputeIds??[]);
@@ -57,6 +60,7 @@ function AnswerReveal({view,now,final=false}:{view:GameView;now:number;final?:bo
  const noShowBeat=Boolean(noShow)&&disputes.length===0&&timeLeft>(final?13000:7500);
  const answer=final?view.final?.answer:results?.answer;
  return <section className="ks-reveal" aria-live="polite" aria-label="Question results">
+   {feedback&&!noShowBeat&&view.feedback?.kind==='question'&&<div className="ks-feedback-reveal-action"><FeedbackLink offer={view.feedback}/></div>}
    {noShowBeat?<NoShowBeat/>:standingsBeat?<div className="ks-reveal-standings" key="standings"><p className="ks-reveal-kicker">✦ THE SCORES ARE IN</p><h2>Updated leaderboard</h2><Scoreboard players={view.players}/></div>
    :<div className="ks-reveal-answer" key="answer"><p className="ks-reveal-kicker">✦ THE CORRECT ANSWER</p><h2>{answer}</h2><div className="ks-reveal-rule"/>
     <div className="ks-reveal-players">{view.players.map(p=>{
@@ -233,7 +237,8 @@ function AnswerForm({value,onChange,onSubmit,disabled,label='Your answer'}:{valu
  return <form className="v2answerform" onSubmit={e=>{e.preventDefault();if(value.trim()){e.currentTarget.querySelector('input')?.blur();onSubmit(value.trim());}}}><label>{label}<input maxLength={200} placeholder="Type your answer" value={value} onChange={e=>onChange(e.target.value)} disabled={disabled}/></label><button type="submit" disabled={disabled||!value.trim()}>Lock answer</button></form>;
 }
 function activeForDraft(view:GameView,id?:string){return Boolean(view.active&&(view.settings.mode==='individual'||view.active.answeringId===id));}
-export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
+export default function ShowRoom(props:{displayOnly?:boolean}){return <FeedbackProvider><ShowRoomContent {...props}/></FeedbackProvider>;}
+function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
  const params=useParams<{code:string}>(),router=useRouter();const code=String(params.code||'').toUpperCase();
  const [ready,setReady]=useState(false),[hostToken,setHostToken]=useState(''),[playerToken,setPlayerToken]=useState(''),[tab,setTab]=useState<DeviceTab>('player'),[origin,setOrigin]=useState('');
  const [view,setView]=useState<GameView|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[now,setNow]=useState(Date.now());
@@ -454,7 +459,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  if(view.phase==='finished')return <main className="v13phonefinish">
    <header className="v13finishhead"><Link href="/"><img src="/know-show-logo.png" alt="The Know Show"/></Link><span>THE CURTAIN CALL</span></header>
    <CurtainCall players={view.players} mode="phone"/>
-   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room with the same settings and resets the scores. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(2);try{localStorage.setItem(`knowshow:${code}:setupStep`,'2');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}{error&&<p role="alert">{error}</p>}</section>
+   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room with the same settings and resets the scores. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(2);try{localStorage.setItem(`knowshow:${code}:setupStep`,'2');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}{error&&<p role="alert">{error}</p>}{view.feedback?.kind==='show'&&<FeedbackLink offer={view.feedback}/>}</section>
  </main>;
  const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.roundNames[view.round];
  const phonesOnly=(view.settings.displayMode??'tv')==='phones';
@@ -516,12 +521,12 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
 
      {view.phase==='board'&&<section className="v2card"><h2>Question selection</h2><p>{view.players.find(p=>p.id===view.chooserId)?.name} chooses next. As host, you can also select.</p><Board view={view} onChoose={key=>void act({type:'open-question',key})}/></section>}
      {(view.phase==='intro'||view.phase==='question')&&<section className="v2card"><h2>{view.intro?.category} · {fmt(view.intro?.points||0)}</h2>{view.phase==='question'?<><p className="v2prompt">{view.active?.prompt}</p><p className="v2hostanswer">Answer is hidden during play so the host can compete fairly.</p><p>{view.active?.submissionCount} / {view.players.length} submitted</p></>:<p>Question appears shortly…</p>}<button className="v2small danger" disabled={busy} onClick={()=>void act({type:'skip-question'})}>Skip faulty question</button></section>}
-     {view.phase==='results'&&view.results&&<section className="v2card"><h2>Results</h2><p>Correct answer: <strong>{view.results.answer}</strong></p><p>Returns to board automatically unless disputed.</p>
+     {view.phase==='results'&&view.results&&<section className="v2card"><h2>Results</h2><FeedbackLink offer={view.feedback}/><p>Correct answer: <strong>{view.results.answer}</strong></p><p>Returns to board automatically unless disputed.</p>
        {view.players.map(p=>{const r=wrongs[p.id],disputed=view.results!.disputeIds.includes(p.id);return <div key={p.id} ref={p.id===disputes[0]?disputeTargetRef:undefined} className={"v2hostresult"+(disputed?" ks-host-disputed":"")}><div><b>{p.name}</b><p>{r?.answer||'(no answer)'} · {r?.correct?'Correct':'Incorrect'}</p>{disputed&&<small>DISPUTE — REVIEW REQUIRED</small>}</div>{r?<div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Mark correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Mark wrong</button></div>:disputed&&<button className="v2small" disabled={busy} onClick={()=>void act({type:'dismiss-dispute',playerId:p.id})}>Dismiss dispute</button>}</div>;})}
      </section>}
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: {view.final?.category}</p><p>{view.final?.wagerCount}/{view.players.length} wagers received.</p><p className="v1wagerprogress">The question will appear automatically when all wagers are locked.</p></section>}
      {view.phase==='final-question'&&<section className="v2card"><h2>The Final Word</h2><p>{view.final?.prompt}</p><p>Answer remains hidden until all final answers are revealed.</p><p>{view.final?.answerCount}/{view.players.length} submitted · {view.paused?'PAUSED':remain(view.final?.deadlineAt,timerNow)}</p></section>}
-     {view.phase==='final-results'&&<section className="v2card"><h2>Final results</h2><p>Answer: <strong>{view.final?.answer}</strong></p>{view.final?.results?.map(p=><div key={p.id} ref={p.id===disputes[0]?disputeTargetRef:undefined} className={"v2hostresult"+(disputes.includes(p.id)?" ks-host-disputed":"")}><div><b>{p.name}: {p.answer}</b>{disputes.includes(p.id)&&<small>REVIEW REQUESTED</small>}</div><div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Incorrect</button></div></div>)}<button className="v2primary" disabled={busy} onClick={()=>void act({type:'finish'})}>Show final standings</button></section>}
+     {view.phase==='final-results'&&<section className="v2card"><h2>Final results</h2><FeedbackLink offer={view.feedback}/><p>Answer: <strong>{view.final?.answer}</strong></p>{view.final?.results?.map(p=><div key={p.id} ref={p.id===disputes[0]?disputeTargetRef:undefined} className={"v2hostresult"+(disputes.includes(p.id)?" ks-host-disputed":"")}><div><b>{p.name}: {p.answer}</b>{disputes.includes(p.id)&&<small>REVIEW REQUESTED</small>}</div><div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Incorrect</button></div></div>)}<button className="v2primary" disabled={busy} onClick={()=>void act({type:'finish'})}>Show final standings</button></section>}
      {view.phase!=='lobby'&&<section className="v2card"><h2>Score adjustments</h2>{view.players.map(p=><div className="v2scoreedit" key={p.id}><span>{p.name} · {fmt(p.score)}</span><input inputMode="numeric" aria-label={`Score adjustment for ${p.name}`} placeholder="+100 or -100" value={scoreEdits[p.id]||''} onChange={e=>setScoreEdits(v=>({...v,[p.id]:e.target.value}))}/><button className="v2small" disabled={busy||!Number.isInteger(Number(scoreEdits[p.id]))||!scoreEdits[p.id]} onClick={()=>{void act({type:'adjust-score',playerId:p.id,delta:Number(scoreEdits[p.id])});setScoreEdits(v=>({...v,[p.id]:''}));}}>Apply</button></div>)}</section>}
    </>}
    {isPlayer&&<>
@@ -554,7 +559,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {view.settings.mode==='teams'&&<button className="v2small" disabled={busy} onClick={()=>void act({type:'pass'})}>Pass to next team</button>}
      </>}
      </section>}
-     {view.phase==='results'&&view.results&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow}/>{(()=>{const r=me?view.results?.answers[me.id]:undefined;return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||view.results!.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results!.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
+     {view.phase==='results'&&view.results&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} feedback/>{(()=>{const r=me?view.results?.answers[me.id]:undefined;return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||view.results!.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results!.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
      {view.phase==='final-wager'&&<section className="ks-finaldecision" aria-label="Final Word hints and wager">
        <header className="ks-finaldecision-head"><span className="ks-finaldecision-eyebrow">✦ THE FINAL WORD</span><h2>{view.final?.category}</h2><p className="ks-final-category-description">{view.categories.find(c=>c.name===view.final?.category)?.description||'A final challenge from this trivia category.'}</p><p className="ks-final-how">Buy any hints and make your wager before the question appears. A correct answer wins your wager; a wrong answer loses it.</p></header>
        <div className="ks-final-current-scores"><div className="ks-final-scorehead">CURRENT STANDINGS <small>Before hints &amp; wagers</small></div><Scoreboard players={view.players}/></div>
@@ -598,7 +603,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {view.final?.myAnswer!==undefined?<p className="v2locked">✓ Final answer locked: {view.final.myAnswer}</p>:<AnswerForm key="final-word" value={finalDraft} onChange={v=>{setFinalDraft(v);setDraftSaved(false);}} disabled={busy||view.paused||Boolean(view.final?.deadlineAt&&timerNow>view.final.deadlineAt)} onSubmit={a=>void act({type:'final-answer',answer:a})}/ >}
        {finalDraft.trim()&&view.final?.myAnswer===undefined&&<p className="ks-autosave">{draftSaved?"✓ Final draft saved — will count at zero":"Saving your Final Word draft…"}</p>}
      </div></section>}
-     {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
+     {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final feedback/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
    <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.5.9</span></footer>

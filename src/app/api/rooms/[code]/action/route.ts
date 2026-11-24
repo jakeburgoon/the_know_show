@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getRole,getRoom,updateRoom } from '@/lib/db';
-import { GameError,makeView,mutate, type Action,type GameState } from '@/lib/game';
+import { GameError,mutate, type Action,type GameState } from '@/lib/game';
+import {makeFeedbackView} from '@/lib/feedback-server';
 import { jsonError,noStore } from '@/lib/http';
 export const runtime='nodejs';
 
@@ -15,7 +16,7 @@ export async function POST(request:Request,{params}:{params:Promise<{code:string
       const actor=await getRole(row,request);
       const next=mutate(row.snapshot as GameState,action,actor);
       const success=await updateRoom(row,next);
-      if(success) return NextResponse.json(makeView(next,actor,row.revision+1),{headers:noStore});
+      if(success) return NextResponse.json(makeFeedbackView(next,actor,row.revision+1),{headers:noStore});
       // An incoming buzzer or other action won this round-trip. Reload and re-check rules.
     }
     return jsonError('The room is busy. Try again.',409);

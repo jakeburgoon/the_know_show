@@ -1,8 +1,10 @@
-THE KNOW SHOW — v1.9.2 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.10.0 · COMPLETE CUMULATIVE APP
 
-Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
+Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing room and player data are preserved. This release requires a new Supabase table and a private developer password. See FEEDBACK_SETUP.md.
 
-NEW IN v1.9.2: Two lyric categories; 74 categories, 972 regular and 74 Final Word questions (1,046 total). See V192_LYRIC_REVIEW.csv and V192_AUDIT_NOTES.md.
+NEW IN v1.10.0: Question feedback, optional post-show feedback, and private developer dashboard at /developer. BEFORE deploying, run supabase/upgrade_v1_10_0.sql and add DEVELOPER_PASSWORD in Vercel (random, at least 24 characters).
+
+FROM v1.9.2: Two lyric categories; 74 categories, 972 regular and 74 Final Word questions (1,046 total). See V192_LYRIC_REVIEW.csv and V192_AUDIT_NOTES.md.
 
 FROM v1.9.1: Full Before & After blended responses restored; grandmother riddle replaced. See V191_QUESTION_CHANGE_LOG.csv.
 
@@ -69,7 +71,7 @@ GITHUB / VERCEL
 3. Your connected Vercel project should build and deploy. Check the Vercel build log for errors.
 4. Open a new game room and playtest on two phones before a larger show. Camera scanning requires HTTPS and camera permission. Refresh the PWA if it still shows an old version.
 
-NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
+v1.10.0 REQUIRES ONE ADDITIVE SUPABASE MIGRATION AND ONE PRIVATE ENVIRONMENT VARIABLE. See FEEDBACK_SETUP.md. Existing server-side secrets stay on Vercel and must not be committed.
 
 INCLUDED FROM v1.5.9 AND EARLIER
 - 66 additional seasonal questions: 6 Easy, 6 Medium, 6 Hard per seasonal category, 738 regular questions total. Full additions and review notes in SEASONAL_QUESTION_EXPANSION_QA.csv.
@@ -82,6 +84,6 @@ ALSO INCLUDED FROM v1.5.8
 - No change to the scoring rules or any question.
 
 VALIDATION
-84 automated engine + targeted UI checks passed in the local test run. The new category/question records pass structural, uniqueness and overlap checks. Full Next.js production build and multi-device testing still must be verified on Vercel.
+115 automated engine + targeted UI checks passed in the local test run. The question records are unchanged from v1.9.2. Full Next.js production build and multi-device testing still must be verified on Vercel.
 
 See README.md and RELEASE_NOTES.md for more details.

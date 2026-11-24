@@ -1,3 +1,10 @@
+# v1.10.0 — Player feedback and private developer dashboard
+
+- Optional question feedback after regular and Final Word reveals; optional show feedback after the Curtain Call.
+- Private `/developer` dashboard: review, filter, update status and export feedback.
+- **Required one-time setup:** run `supabase/upgrade_v1_10_0.sql` and configure `DEVELOPER_PASSWORD` in Vercel. See `FEEDBACK_SETUP.md`.
+- The 74 categories, 1,046 questions, branding and scoring rules are unchanged. Question-performance analytics are deferred.
+
 # v1.9.2 — Two lyric categories
 
 - Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.
@@ -78,7 +85,7 @@ All earlier gameplay, seasonal-category, question-variety, Final Word, answer-re
 
 This ZIP is a **complete replacement project** for the deployed v1.2 app. Extract it, open the inner `the-know-show` folder, and upload the files and folders **inside** that folder to the root of the existing GitHub repository using **Add file → Upload files**. Commit, then let the connected Vercel deployment run. Check the Vercel build log.
 
-- **No new Supabase SQL or environment variables.** Existing room data is compatible; a fresh room is nevertheless recommended for testing.
+- For v1.10.0, run the additive SQL migration and set DEVELOPER_PASSWORD as described in FEEDBACK_SETUP.md. Existing room data is compatible; a fresh room is recommended for testing.
 - Preserve your existing deployment configuration and server-side `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` secrets. Never put secrets in GitHub.
 - The approved main logo `public/know-show-logo.png` is untouched, as are both PWA app icons.
 - If the installed PWA has cached an older version, reopen or refresh it after deployment.

@@ -1,3 +1,8 @@
+# v1.10.0 — Feedback pilot
+
+- Question feedback, post-show feedback, developer review and CSV export. Signed feedback invitations preserve question context across phase changes; anonymous reports are deduplicated by participant and show.
+- Additive Supabase migration and private developer password required. See FEEDBACK_SETUP.md.
+
 # v1.9.2 — Two lyric categories
 
 - Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.

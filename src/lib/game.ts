@@ -19,7 +19,7 @@ export type Submission={answer:string;at:number;correct:boolean;points:number;do
 export type ActiveQuestion={drafts?:Record<string,{answer:string;doubleTake:boolean}>;key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean;noShow?:boolean};
 export type FinalState={drafts?:Record<string,string>;purchasedHints?:Record<string,number>;purchasedHintsUsed?:Record<string,number>;revealedHints?:Record<string,number>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[];noShow?:boolean};
-export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[];hostHistoryId?:string;musicChangedAt?:number};
+export type GameState={schemaVersion:3;id:string;feedbackShowId?:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[];hostHistoryId?:string;musicChangedAt?:number};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
  |{type:'settings';settings:Partial<Settings>}
@@ -58,7 +58,7 @@ function rememberRecent(history:readonly string[], values:readonly string[], lim
 export const QUESTION_HISTORY_LIMIT=CATEGORIES.reduce((total,c)=>total+Object.values(c.questionsByLevel).reduce((n,level)=>n+level.length,0),0)+CATEGORY_FINALS.length;
 export function makeGame(recentQuestionIds:string[]=[],recentCategoryIds:string[]=[],recentCategoryOffers:string[]=[],hostHistoryId?:string):GameState{
  const valid=new Set(CATEGORIES.map(c=>c.id));
- return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],
+ return {schemaVersion:3,id:randomUUID(),feedbackShowId:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],
   recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string'&&(!!getQuestion(x)||FINALS.some(f=>f.id===x))).slice(-QUESTION_HISTORY_LIMIT),
   recentCategoryIds:recentCategoryIds.filter(id=>typeof id==='string'&&valid.has(id)).slice(-CATEGORIES.length),
   recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-CATEGORIES.length),
