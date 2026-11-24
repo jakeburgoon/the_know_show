@@ -1,3 +1,28 @@
+# v1.5.9 — Results, music, and How to Play polish
+
+This is a **complete cumulative application**, built directly on v1.5.8. You may replace earlier versions in one deployment; no intermediate upgrades, Supabase migration, or new environment variables are required.
+
+**Result reveals and disputes**
+- Removes the redundant “Next up: back to the board” label from the standings beat.
+- Increases correct-answer/individual-outcome display time by approximately one second. The scoreboard continues to display automatically afterward.
+- Shows the friendly “Think you got it right? Ask the host to review your answer” request only to players with a nonempty answer that was marked incorrect. The server also rejects review requests from unanswered or already-correct players.
+- When the host opens a review notification, Host View scrolls directly to the disputed player’s answer and highlights the row. After the last dispute is resolved, it returns to Player View.
+
+**A Total No-Show!**
+- Removes the “THE KNOW SHOW PRESENTS” preface; the easter egg begins directly with the announcement.
+- Extends the animated announcement from roughly 2.5 to 3.5 seconds. The answer reveal also gains the extra second above. Existing triggers and reduced-motion behavior remain unchanged.
+
+**Music player**
+- The shared music selector closes immediately after a track is chosen. A brief non-host confirmation tells the player to ask the host to press Play.
+- On the host phone during Just phones play, a newly selected track (including one chosen by another player) expands the host music player. Its header changes from “Open music player” to “Hide music player” when expanded. The host still needs to press Play in Suno's embedded controls. TV playback remains on the separate TV display.
+- The music menu temporarily appears above the sticky Player/Host tabs while open, so its options are not obscured.
+
+**How to Play**
+- Replaces the technical guide with a short family-facing explanation of how the game works, how to win, hosting, playing, Final Word, and music. Calls out 56 categories, 738 regular questions, and 56 dedicated Final Word questions.
+- Makes the small homepage How to Play link more visible without moving it into the main actions.
+
+**Validation:** 56 engine tests and 19 focused UI contract tests passed. All 21 TS/TSX source files passed syntax parsing. No full Next.js production build was possible locally because the npm registry dependencies were unavailable; verify the final build on Vercel. The exact question banks, main logo, app icons, and Supabase schema are unchanged.
+
 # v1.5.8 — A Total No-Show! (small presentation patch)
 
 This complete, cumulative update builds on **v1.5.7**. When **all players submit an incorrect answer** to a regular question or The Final Word, the results sequence briefly displays **“A TOTAL NO-SHOW! Nobody knew that one!”** with a restrained navy-and-gold spotlight and falling-star animation, then automatically reveals the correct answer, player results, and usual updated standings. The celebration lasts about 2.5 seconds. It does not appear for timeouts without an answer, host-skipped questions, or when any player answers correctly. The No-Show is not a bonus, penalty, or additional game rule.

@@ -1,10 +1,12 @@
-# The Know Show v1.5.7
+# The Know Show v1.5.9
 
-The complete Next.js application, cumulative through v1.5.7. In addition to reviewed, Next/Previous guided host setup, refreshed homepage copy with four feature chips, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, a separate 56-question championship pool, and two private hints purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
+Latest: clearer answer-review requests and direct host dispute navigation, an extra second for answer results, a longer No-Show animation without the presenter preface, easier music playback prompts, and a shorter family-facing How to Play guide.
+
+The complete Next.js application, cumulative through v1.5.9. In addition to reviewed, Next/Previous guided host setup, refreshed homepage copy with four feature chips, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, a separate 56-question championship pool, and two private hints purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
 
 In v1.5.5, the room-opening screen uses the approved logo and a subtle gold progress animation. Host answer-format descriptions explain written versus four-choice play in plain language, with a note about balancing ages and abilities. The Green Room shows the TV-display action only for TV + Phones, and hosts opening the display can return directly to Host View, including when also participating as a player. See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
 
-# The Know Show — v1.5.7
+# The Know Show — v1.5.9
 
 A live trivia-night app for up to eight players or teams, with a 56-category, 738-question library (45 year-round categories plus eleven seasonal ones), two rounds of category drafting, optional private four-choice assistance, Double Takes, The Final Word with a two-hint cap and pre-wager hint purchases, and a celebratory Curtain Call.
 
@@ -29,7 +31,7 @@ Each four-choice player sees a private, single-tap selection on their phone for 
 
 - Up to eight individual players or eight teams; the host can also participate on the same device.
 - Players choose four categories per round. Three questions per category: 12 per round, 24 total.
-- Opening Act: 100 / 300 / 500. Main Event: 200 / 600 / 1000.
+- Round 1: 100 / 300 / 500. Round 2: 200 / 600 / 1000.
 - One Double Take per player per round; regular written hints and optional extra time are configurable.
 - TV + Phones or Phones Only; Cool Jazz default with alternate Suno soundtracks. During a show, a compact header music menu lets anyone in the room select the shared track, unless the host turns that permission off. Audio plays only from the host phone or TV. The embedded player may require pressing Play after a track change.
 - Host dispute/ruling controls, automatic return to Player View, replay tracking between rematches and new shows created on the same host browser, room codes, and in-app camera QR joining.
@@ -45,7 +47,7 @@ All 56 active questions and both progressive hints were editorially reviewed for
 
 ## Question bank / quality audit
 
-The original 540 prompts, answers, hints, and source tracking are preserved, together with their previously reviewed options. The seasonal bank now contains 198 questions across eleven categories, with six questions per difficulty; 66 are new in v1.5.7, bringing regular play to 738 questions. The original multiple-choice review covered 358 rewritten and 182 retained sets. See `CHOICE_OPTIONS_QA.csv` for the original bank and `SEASONAL_QUESTION_QA.csv` for the first 132 seasonal questions, plus `SEASONAL_QUESTION_EXPANSION_QA.csv` for the 66 additions and their alternatives, hints, and references; consult `QUESTION_LIBRARY_STATUS.md` for the status of source verification. This remains a playtest-ready question set, not a claim that every question has been independently verified.
+The original 540 prompts, answers, hints, and source tracking are preserved, together with their previously reviewed options. The seasonal bank now contains 198 questions across eleven categories, with six questions per difficulty; 66 are new in v1.5.9, bringing regular play to 738 questions. The original multiple-choice review covered 358 rewritten and 182 retained sets. See `CHOICE_OPTIONS_QA.csv` for the original bank and `SEASONAL_QUESTION_QA.csv` for the first 132 seasonal questions, plus `SEASONAL_QUESTION_EXPANSION_QA.csv` for the 66 additions and their alternatives, hints, and references; consult `QUESTION_LIBRARY_STATUS.md` for the status of source verification. This remains a playtest-ready question set, not a claim that every question has been independently verified.
 
 ## Development / deployment
 

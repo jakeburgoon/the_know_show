@@ -41,7 +41,6 @@ function NoShowBeat(){
  return <div className="ks-noshow" key="no-show" aria-label="A Total No-Show! Nobody knew that one!">
    <div className="ks-noshow-stars" aria-hidden="true">{Array.from({length:7},(_,i)=><span key={i}>✦</span>)}</div>
    <div className="ks-noshow-content"><Clapperboard size={52} strokeWidth={1.55} aria-hidden="true"/>
-     <p className="ks-noshow-eyebrow">THE KNOW SHOW PRESENTS</p>
      <h2>A TOTAL NO-SHOW!</h2>
      <p>Nobody knew that one!</p>
    </div>
@@ -55,10 +54,10 @@ function AnswerReveal({view,now,final=false}:{view:GameView;now:number;final?:bo
  const timeLeft=final?(view.final?.endsAt??now)-now:(results?.endsAt??now)-now;
  const standingsBeat=disputes.length===0&&timeLeft<=(final?4700:3000);
  const noShow=final?view.final?.noShow:results?.noShow;
- const noShowBeat=Boolean(noShow)&&disputes.length===0&&timeLeft>(final?12000:6500);
+ const noShowBeat=Boolean(noShow)&&disputes.length===0&&timeLeft>(final?13000:7500);
  const answer=final?view.final?.answer:results?.answer;
  return <section className="ks-reveal" aria-live="polite" aria-label="Question results">
-   {noShowBeat?<NoShowBeat/>:standingsBeat?<div className="ks-reveal-standings" key="standings"><p className="ks-reveal-kicker">✦ THE SCORES ARE IN</p><h2>Updated leaderboard</h2><Scoreboard players={view.players}/><p className="ks-reveal-next">{final?'The Curtain Call is next!':'Next up: back to the board'}</p></div>
+   {noShowBeat?<NoShowBeat/>:standingsBeat?<div className="ks-reveal-standings" key="standings"><p className="ks-reveal-kicker">✦ THE SCORES ARE IN</p><h2>Updated leaderboard</h2><Scoreboard players={view.players}/></div>
    :<div className="ks-reveal-answer" key="answer"><p className="ks-reveal-kicker">✦ THE CORRECT ANSWER</p><h2>{answer}</h2><div className="ks-reveal-rule"/>
     <div className="ks-reveal-players">{view.players.map(p=>{
       const r=final?finalResults?.find(x=>x.id===p.id):results?.answers[p.id];
@@ -143,35 +142,47 @@ function TV({view,code,origin,now,preview=false,returnToHost=false}:{view:GameVi
 function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1}){
  const soundtrack=SUNO_SOUNDTRACKS.find(t=>t.id===music);
  const track=soundtrack?.arrangements[arrangement];
- if(!track)return <div className="v25phoneaudiooff">Music is off. Only the host can enable it.</div>;
- return <details className="v25phoneaudio">
-   <summary>♫ {soundtrack?.label} · Track {arrangement+1} <span>Open music player</span></summary>
+ const [open,setOpen]=useState(false);
+ const lastTrack=useRef<string|undefined>(track?.id);
+ // A newly selected room track opens the host player's panel, including when
+ // another player chose it. Suno still requires the host to press Play.
+ useEffect(()=>{
+   if(lastTrack.current!==track?.id){lastTrack.current=track?.id;setOpen(Boolean(track));}
+ },[track?.id]);
+ if(!track)return <div className="v25phoneaudiooff">Music is off. Select a track from the music-note menu.</div>;
+ return <details className="v25phoneaudio" open={open} onToggle={e=>setOpen(e.currentTarget.open)}>
+   <summary>♫ {soundtrack?.label} · Track {arrangement+1} <span>{open?'Hide music player':'Open music player'}</span></summary>
    <iframe key={track.id} title={`Host phone music: ${soundtrack?.label} track ${arrangement+1}`} src={sunoEmbedUrl(track.id)} allow="autoplay; encrypted-media; fullscreen" referrerPolicy="strict-origin-when-cross-origin" loading="eager"/>
-   <small>Tap Play once on this phone. The player stays loaded when you switch between Host and Player. Suno controls volume and playback.</small>
+   <small>Host: press Play in the music player to start the selected track. You can hide the panel while it plays.</small>
  </details>;
 }
 /** Compact shared music control. Only the host phone or TV actually plays audio. */
 function RoomMusicMenu({settings,canChoose,isHost,busy,onChoose,onPermissionChange}:{settings:Settings;canChoose:boolean;isHost:boolean;busy:boolean;onChoose:(music:MusicStyle,arrangement:0|1)=>void;onPermissionChange:(enabled:boolean)=>void}){
+ const menuRef=useRef<HTMLDetailsElement>(null);
  const selected=settings.music==='off'?'off':`${settings.music}:${settings.arrangement}`;
  const soundtrack=SUNO_SOUNDTRACKS.find(t=>t.id===settings.music);
  const label=soundtrack?.label??'Music off';
- return <details className="ks-room-music" aria-label="Shared show music">
+ const selectTrack=(value:string)=>{
+   // Close the little menu as soon as a track is picked. The host will see
+   // their music player expand in a Phones Only show; TV playback stays on TV.
+   if(menuRef.current)menuRef.current.open=false;
+   if(value==='off')onChoose('off',0);
+   else{const [music,idx]=value.split(':');onChoose(music as MusicStyle,idx==='1'?1:0);}
+ };
+ return <details ref={menuRef} className="ks-room-music" aria-label="Shared show music">
    <summary><Music2 size={16} aria-hidden="true"/><span>Music</span><ChevronDown size={15} aria-hidden="true"/></summary>
    <div className="ks-room-music-panel">
      <strong>Show soundtrack</strong>
      <small className="ks-room-music-now">Now selected: {label}{soundtrack?` · Track ${settings.arrangement+1}`:''}</small>
      {canChoose?<label>Choose a track
-       <select aria-label="Choose music for the whole show" value={selected} disabled={busy} onChange={e=>{
-        const val=e.target.value;
-        if(val==='off')onChoose('off',0);
-        else{const [music,idx]=val.split(':');onChoose(music as MusicStyle,idx==='1'?1:0);}
-       }}>
+       <select aria-label="Choose music for the whole show" value={selected} disabled={busy} onChange={e=>selectTrack(e.target.value)}>
          <option value="off">No music</option>
          {SUNO_SOUNDTRACKS.flatMap(t=>t.arrangements.map((arr,i)=><option key={`${t.id}:${i}`} value={`${t.id}:${i}`}>{t.label} · Track {i+1}</option>))}
        </select>
      </label>:<p>The host is choosing the music for this room.</p>}
      {isHost&&<label className="ks-room-music-permission"><input type="checkbox" checked={settings.playerMusic!==false} disabled={busy} onChange={e=>onPermissionChange(e.target.checked)}/> Let players choose music</label>}
-     <small>One shared soundtrack plays on the host phone or TV. The playback device may need someone to press Play after a track change.</small>
+     {settings.music!=='off'&&<small className="ks-room-music-instructions">{isHost?'Open the music player and press Play to start this track.':'Ask the host to press Play to start your selected music.'}</small>}
+     <small>One room-wide soundtrack plays from the host phone or shared TV—not from every player's phone.</small>
    </div>
  </details>;
 }
@@ -200,13 +211,16 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const [pairOpen,setPairOpen]=useState(false),[joinOpen,setJoinOpen]=useState(true),[scoreEdits,setScoreEdits]=useState<Record<string,string>>({});
  const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
  const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false),[returnToHost,setReturnToHost]=useState(false);
+ const [focusDispute,setFocusDispute]=useState(false);
+ const [musicNotice,setMusicNotice]=useState('');
+ const disputeTargetRef=useRef<HTMLDivElement>(null);
  const [serverOffset,setServerOffset]=useState(0);
  const serverOffsetRef=useRef(0),serverClockReady=useRef(false);
  const lastSoundSecond=useRef<number|null>(null),lastSoundQuestion=useRef(''),soundContext=useRef<AudioContext|null>(null),autoReturnFromDispute=useRef(false);
  const draftRef=useRef(''),finalDraftRef=useRef('');
  draftRef.current=answerDraft;finalDraftRef.current=finalDraft;
  const saveId=useRef(0);
- const lastRev=useRef(-1);const lastKey=useRef('');const [shareMessage,setShareMessage]=useState('');
+ const lastRev=useRef(-1);const lastKey=useRef('');const lastSharedTrack=useRef('');const [shareMessage,setShareMessage]=useState('');
  const authToken=displayOnly?'':actorToken(tab,{hostToken,playerToken});
  const authMarker=`${tab}:${authToken}`;
  const authRef=useRef(authMarker);
@@ -328,6 +342,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  },[view?.phase,ready,code,router]);
  const disputes=(view?.phase==='results'?view.results?.disputeIds:view?.phase==='final-results'?view.final?.disputeIds:[])??[];
  useEffect(()=>{if(autoReturnFromDispute.current&&tab==='host'&&view?.role.kind==='host'&&disputes.length===0){autoReturnFromDispute.current=false;switchTab('player');}},[tab,view?.revision,view?.role.kind,disputes.length]);
+ useEffect(()=>{if(!focusDispute||!isHost||!disputes.length)return;const target=disputeTargetRef.current;if(target){target.scrollIntoView({behavior:'smooth',block:'center'});setFocusDispute(false);}},[focusDispute,isHost,disputes.length,view?.revision]);
 
  const me=view?.players.find(p=>p.id===view.role.id),canChoose=Boolean(me&&view?.chooserId===me.id);
  const draftTurn=view?.players.find(p=>p.id===view.draftTurnId);
@@ -342,6 +357,17 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const activeKey=view?.active?.key??view?.intro?.key??'';
  useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft(view?.active?.myDraft??'');setDoubleTake(false);setDraftSaved(false);}},[activeKey]);
  useEffect(()=>{if(view?.phase==='final-wager'){setFinalDraft('');setDraftSaved(false);setWager(0);}else if(view?.phase==='final-question'&&view.final?.myDraft&&finalDraftRef.current==='')setFinalDraft(view.final.myDraft);},[view?.phase]);
+ useEffect(()=>{if(!musicNotice)return;const t=setTimeout(()=>setMusicNotice(''),7000);return()=>clearTimeout(t);},[musicNotice]);
+ // The host phone should also be notified when a different player changes
+ // the room soundtrack; the embedded Suno player still needs a Play tap.
+ useEffect(()=>{
+   if(!hostToken||!view||view.phase==='lobby'||view.settings.displayMode!=='phones')return;
+   const key=`${view.settings.music}:${view.settings.arrangement}`;
+   if(lastSharedTrack.current&&lastSharedTrack.current!==key&&view.settings.music!=='off'){
+     setMusicNotice('A new track was chosen. Press Play in the host music player.');
+   }
+   lastSharedTrack.current=key;
+ },[hostToken,view?.settings.music,view?.settings.arrangement,view?.settings.displayMode,view?.phase]);
  const genre=SUNO_SOUNDTRACKS.find(t=>t.id===view?.settings.music);
  // Keep this host's category and question histories between separate rooms.
  // This works even when the host is playing on the same device and using Player View.
@@ -404,7 +430,8 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const finalPreviewWager=view.final?.myWager??wagerPreview;
  const finalHintCount=view.final?.myPurchasedHints??0;
  const finalHintPrice=view.final?.hintPrice??500;
- return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><div className="ks-room-head-actions"><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span>{view.phase!=='lobby'&&<RoomMusicMenu settings={view.settings} canChoose={Boolean(hostToken)||(isPlayer&&view.settings.playerMusic!==false)} isHost={Boolean(hostToken)} busy={busy} onChoose={(music,arrangement)=>void act({type:'choose-music',music,arrangement},hostToken||authToken)} onPermissionChange={enabled=>void act({type:'settings',settings:{playerMusic:enabled}},hostToken)}/>}</div></header>
+ return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><div className="ks-room-head-actions"><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span>{view.phase!=='lobby'&&<RoomMusicMenu settings={view.settings} canChoose={Boolean(hostToken)||(isPlayer&&view.settings.playerMusic!==false)} isHost={Boolean(hostToken)} busy={busy} onChoose={(music,arrangement)=>{void (async()=>{if(await act({type:'choose-music',music,arrangement},hostToken||authToken)){setMusicNotice(music==='off'?'Music has been turned off.':hostToken?'Open the music player and press Play to start the new track.':'Ask the host to press Play to start your selected music.');}})();}} onPermissionChange={enabled=>void act({type:'settings',settings:{playerMusic:enabled}},hostToken)}/>}</div></header>
+   {musicNotice&&<div className="ks-music-notice" role="status"><Music2 size={16} aria-hidden="true"/><span>{musicNotice}</span><button type="button" aria-label="Dismiss music message" onClick={()=>setMusicNotice('')}>×</button></div>}
    {hostToken&&<nav className={"v2viewtabs ks-two-tabs"+(view.phase!=='lobby'?" ks-during-show":"")} aria-label="Room views">
      <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>Player View</button>
      {hostToken&&<button type="button" className={tab==='host'?'active':''} aria-current={tab==='host'?'page':undefined} onClick={()=>switchTab('host')}>Host View</button>}
@@ -415,7 +442,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
    {view.phase!=='lobby'&&!['board','draft','results','final-results'].includes(view.phase)&&!(tab==='player'&&['intro','question','final-question','final-wager'].includes(view.phase))&&<div className="v2phonestage"><span>{stage}</span><h1>{view.phase==='intro'?'Up next!':view.phase==='results'?'The answer is in':view.phase==='question'?view.active?.category:stage}</h1></div>}
    {error&&<div className="v2error" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
    {view.paused&&<div className="v2alert">Game paused by the host</div>}
-   {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>{autoReturnFromDispute.current=true;switchTab('host');}}>Open Host Controls</button></div>}
+   {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>{autoReturnFromDispute.current=true;setFocusDispute(true);switchTab('host');}}>Review answer now</button></div>}
    {tab==='player'&&role==='spectator'&&view.phase==='lobby'&&<section className="v2card"><h2>Join the show</h2><p>Choose a player name to join. If playing as a team, enter the team name.</p><form onSubmit={e=>{e.preventDefault();void join();}} className="v2form"><label>{view.settings.mode==='teams'?'Team name':'Player name'}<input required minLength={2} maxLength={28} value={name} onChange={e=>setName(e.target.value)}/></label><button disabled={busy}>Join this room</button></form></section>}
    {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&hostToken&&<div className="ks-spectator"><p>You're hosting without playing. Here's the live show. Use the small Host View tab for arbitration.</p><TV view={view} code={code} origin={origin} now={timerNow} preview/></div>}
    {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&!hostToken&&<div className="v2card"><p>This show is already in progress.</p><Link href={`/display/${code}`}>Watch the TV display</Link></div>}
@@ -451,11 +478,11 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='board'&&<section className="v2card"><h2>Question selection</h2><p>{view.players.find(p=>p.id===view.chooserId)?.name} chooses next. As host, you can also select.</p><Board view={view} onChoose={key=>void act({type:'open-question',key})}/></section>}
      {(view.phase==='intro'||view.phase==='question')&&<section className="v2card"><h2>{view.intro?.category} · {fmt(view.intro?.points||0)}</h2>{view.phase==='question'?<><p className="v2prompt">{view.active?.prompt}</p><p className="v2hostanswer">Answer is hidden during play so the host can compete fairly.</p><p>{view.active?.submissionCount} / {view.players.length} submitted</p></>:<p>Question appears shortly…</p>}<button className="v2small danger" disabled={busy} onClick={()=>void act({type:'skip-question'})}>Skip faulty question</button></section>}
      {view.phase==='results'&&view.results&&<section className="v2card"><h2>Results</h2><p>Correct answer: <strong>{view.results.answer}</strong></p><p>Returns to board automatically unless disputed.</p>
-       {view.players.map(p=>{const r=wrongs[p.id],disputed=view.results!.disputeIds.includes(p.id);return <div key={p.id} className="v2hostresult"><div><b>{p.name}</b><p>{r?.answer||'(no answer)'} · {r?.correct?'Correct':'Incorrect'}</p>{disputed&&<small>DISPUTE — REVIEW REQUIRED</small>}</div>{r?<div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Mark correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Mark wrong</button></div>:disputed&&<button className="v2small" disabled={busy} onClick={()=>void act({type:'dismiss-dispute',playerId:p.id})}>Dismiss dispute</button>}</div>;})}
+       {view.players.map(p=>{const r=wrongs[p.id],disputed=view.results!.disputeIds.includes(p.id);return <div key={p.id} ref={p.id===disputes[0]?disputeTargetRef:undefined} className={"v2hostresult"+(disputed?" ks-host-disputed":"")}><div><b>{p.name}</b><p>{r?.answer||'(no answer)'} · {r?.correct?'Correct':'Incorrect'}</p>{disputed&&<small>DISPUTE — REVIEW REQUIRED</small>}</div>{r?<div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Mark correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Mark wrong</button></div>:disputed&&<button className="v2small" disabled={busy} onClick={()=>void act({type:'dismiss-dispute',playerId:p.id})}>Dismiss dispute</button>}</div>;})}
      </section>}
      {view.phase==='final-wager'&&<section className="v2card"><h2>The Final Word</h2><p>Category: {view.final?.category}</p><p>{view.final?.wagerCount}/{view.players.length} wagers received.</p><p className="v1wagerprogress">The question will appear automatically when all wagers are locked.</p></section>}
      {view.phase==='final-question'&&<section className="v2card"><h2>The Final Word</h2><p>{view.final?.prompt}</p><p>Answer remains hidden until all final answers are revealed.</p><p>{view.final?.answerCount}/{view.players.length} submitted · {view.paused?'PAUSED':remain(view.final?.deadlineAt,timerNow)}</p></section>}
-     {view.phase==='final-results'&&<section className="v2card"><h2>Final results</h2><p>Answer: <strong>{view.final?.answer}</strong></p>{view.final?.results?.map(p=><div key={p.id} className="v2hostresult"><b>{p.name}: {p.answer}</b><div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Incorrect</button></div></div>)}<button className="v2primary" disabled={busy} onClick={()=>void act({type:'finish'})}>Show final standings</button></section>}
+     {view.phase==='final-results'&&<section className="v2card"><h2>Final results</h2><p>Answer: <strong>{view.final?.answer}</strong></p>{view.final?.results?.map(p=><div key={p.id} ref={p.id===disputes[0]?disputeTargetRef:undefined} className={"v2hostresult"+(disputes.includes(p.id)?" ks-host-disputed":"")}><div><b>{p.name}: {p.answer}</b>{disputes.includes(p.id)&&<small>REVIEW REQUESTED</small>}</div><div className="v2buttonrow"><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:true})}>Correct</button><button className="v2small" disabled={busy} onClick={()=>void act({type:'resolve-dispute',playerId:p.id,correct:false})}>Incorrect</button></div></div>)}<button className="v2primary" disabled={busy} onClick={()=>void act({type:'finish'})}>Show final standings</button></section>}
      {view.phase!=='lobby'&&<section className="v2card"><h2>Score adjustments</h2>{view.players.map(p=><div className="v2scoreedit" key={p.id}><span>{p.name} · {fmt(p.score)}</span><input inputMode="numeric" aria-label={`Score adjustment for ${p.name}`} placeholder="+100 or -100" value={scoreEdits[p.id]||''} onChange={e=>setScoreEdits(v=>({...v,[p.id]:e.target.value}))}/><button className="v2small" disabled={busy||!Number.isInteger(Number(scoreEdits[p.id]))||!scoreEdits[p.id]} onClick={()=>{void act({type:'adjust-score',playerId:p.id,delta:Number(scoreEdits[p.id])});setScoreEdits(v=>({...v,[p.id]:''}));}}>Apply</button></div>)}</section>}
    </>}
    {isPlayer&&<>
@@ -488,7 +515,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {view.settings.mode==='teams'&&<button className="v2small" disabled={busy} onClick={()=>void act({type:'pass'})}>Pass to next team</button>}
      </>}
      </section>}
-     {view.phase==='results'&&view.results&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow}/><button className="ks-dispute-button" disabled={busy||view.results.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
+     {view.phase==='results'&&view.results&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow}/>{(()=>{const r=me?view.results?.answers[me.id]:undefined;return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||view.results!.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.results!.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
      {view.phase==='final-wager'&&<section className="ks-finaldecision" aria-label="Final Word hints and wager">
        <header className="ks-finaldecision-head"><span className="ks-finaldecision-eyebrow">✦ THE FINAL WORD</span><h2>{view.final?.category}</h2><p className="ks-final-category-description">{view.categories.find(c=>c.name===view.final?.category)?.description||'A final challenge from this trivia category.'}</p><p className="ks-final-how">Buy any hints and make your wager before the question appears. A correct answer wins your wager; a wrong answer loses it.</p></header>
        <div className="ks-final-current-scores"><div className="ks-final-scorehead">CURRENT STANDINGS <small>Before hints &amp; wagers</small></div><Scoreboard players={view.players}/></div>
@@ -533,10 +560,10 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
 
        </div>
      </div></section>}
-     {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/><button className="ks-dispute-button" disabled={busy||view.final?.disputeIds.includes(me!.id)} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host reviewing your dispute':'Dispute my result'}</button></section>}
+     {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.5.8</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.5.9</span></footer>
    </>}
  </main>;
 }

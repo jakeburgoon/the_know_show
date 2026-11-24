@@ -22,8 +22,9 @@ test('Green Room reminder appears only in TV setup and retains TV link condition
  assert.match(room,/displayMode\?\?'tv'\)==='tv'&&<p className="ks-lobby-tv-help"/);
  assert.match(room,/Open TV display/);
 });
-test('How to Play guide explains TV casting, separate player phone, and private host QR',()=>{
- assert.match(guide,/HDMI or cast that browser tab/);
- assert.match(guide,/separate, private host QR/);
- assert.match(guide,/mirroring your individual Player View/);
+test('How to Play guide briefly explains shared TV and separate player phones',()=>{
+ assert.match(guide,/dedicated TV display on a laptop connected or cast to your TV/);
+ assert.match(guide,/players still answer on their phones/);
+ assert.match(guide,/highest score wins/);
+ assert.doesNotMatch(guide,/development process|schemaVersion|Standard Trivia is the single v1\.0/);
 });

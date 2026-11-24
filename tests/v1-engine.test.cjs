@@ -606,11 +606,11 @@ test('host may reserve music controls and change the soundtrack without a cooldo
  assert.equal(s.settings.music,'game');
 });
 
-test('Total No-Show requires all players to submit incorrect responses and lasts only 2.5 extra seconds',()=>{
+test('Total No-Show requires all players to submit incorrect responses and adds 3.5 seconds',()=>{
  let {s,a}=setup(3);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
  for(let i=0;i<a.length;i++)s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[i],23000+i*20);
  assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,true);
- assert.equal(s.resolution.endsAt-s.resolution.finishedAt,9000);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,11000);
  assert.equal(g.makeView(s,a[0],1,23100).results.noShow,true);
  s=g.tick(s,s.resolution.endsAt-1);assert.equal(s.phase,'results');
 });
@@ -621,7 +621,7 @@ test('Total No-Show is suppressed when any player answers correctly',()=>{
  s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[0],23000);
  s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23010);
  assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,false);
- assert.equal(s.resolution.endsAt-s.resolution.finishedAt,6500);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,7500);
 });
 
 test('Total No-Show is suppressed for unanswered timeouts and skipped questions',()=>{
@@ -654,11 +654,39 @@ test('Final Word shows a Total No-Show for all wrong written attempts, but not a
  s=g.mutate(s,{type:'final-answer',answer:'totally incorrect guess'},a[0],5500);
  s=g.mutate(s,{type:'final-answer',answer:'also incorrect'},a[1],5600);
  assert.equal(s.phase,'final-results');assert.equal(s.final.noShow,true);
- assert.equal(s.final.endsAt-5600,14500);
+ assert.equal(s.final.endsAt-5600,16500);
  assert.equal(g.makeView(s,a[0],1,5700).final.noShow,true);
  let missed=setup(2);missed.s.phase='final-wager';missed.s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
  for(let i=0;i<missed.a.length;i++)missed.s=g.mutate(missed.s,{type:'wager',amount:0},missed.a[i],5000+i*10);
  missed.s=g.mutate(missed.s,{type:'final-answer',answer:'incorrect guess'},missed.a[0],5500);
  missed.s=g.tick(missed.s,missed.s.final.deadlineAt+10);
  assert.equal(missed.s.phase,'final-results');assert.equal(missed.s.final.noShow,false);
+});
+
+test('only a nonempty incorrect submission can be sent for host review',()=>{
+ let {s,a}=setup(3);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const q=bank.getQuestion(s.active.questionId);
+ s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[0],23000);
+ s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[1],23100);
+ s=g.tick(s,s.active.deadlineAt+100);
+ assert.equal(s.phase,'results');
+ assert.throws(()=>g.mutate(s,{type:'dispute'},a[0],s.resolution.finishedAt+10),/Only submitted answers marked incorrect/);
+ assert.throws(()=>g.mutate(s,{type:'dispute'},a[2],s.resolution.finishedAt+10),/Only submitted answers marked incorrect/);
+ const remaining=s.resolution.endsAt;
+ s=g.mutate(s,{type:'dispute'},a[1],s.resolution.finishedAt+10);
+ assert.equal(s.resolution.disputeIds[0],a[1].id);
+ assert.equal(s.resolution.endsAt,remaining);
+ s=g.mutate(s,{type:'resolve-dispute',playerId:a[1].id,correct:true},host,s.resolution.finishedAt+20);
+ assert.equal(s.resolution.answers[a[1].id].correct,true);
+ assert.deepEqual(s.resolution.disputeIds,[]);
+});
+test('final review rejects unanswered and already correct entries',()=>{
+ let {s,a}=setup(2);s.phase='final-wager';s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
+ for(const p of a)s=g.mutate(s,{type:'wager',amount:0},p,5000);
+ const answer=bank.FINALS[0].answer;
+ s=g.mutate(s,{type:'final-answer',answer},a[0],5500);
+ s=g.tick(s,s.final.deadlineAt+10);
+ assert.equal(s.phase,'final-results');
+ assert.throws(()=>g.mutate(s,{type:'dispute'},a[0],s.final.endsAt-1000),/Only submitted answers marked incorrect/);
+ assert.throws(()=>g.mutate(s,{type:'dispute'},a[1],s.final.endsAt-1000),/Only submitted answers marked incorrect/);
 });

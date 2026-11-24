@@ -766,3 +766,33 @@ body{background:var(--v11cream);color:var(--v11navy)}
 @keyframes ks-noshow-lights{0%{opacity:.85;transform:rotate(-5deg)}100%{opacity:.05;transform:rotate(7deg)}}
 @keyframes ks-noshow-starfall{0%{opacity:0;transform:translateY(-14px) rotate(-20deg)}15%{opacity:.8}75%{opacity:.8}100%{opacity:0;transform:translateY(270px) rotate(160deg)}}
 @media(prefers-reduced-motion:reduce){.ks-noshow:before,.ks-noshow-content,.ks-noshow-stars span{animation:none}.ks-noshow-stars{display:none}.ks-noshow:before{opacity:.12}}
+
+/* v1.5.9: review requests stay contextual; host jumps to the actual disputed answer. */
+.ks-review-prompt{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:5px 13px;margin:12px auto 5px;color:#22445d;font-size:13px;font-weight:750}
+.ks-review-prompt .ks-dispute-button{margin:0;min-height:38px}
+.ks-host-disputed{border:2px solid #cf9e48!important;background:#fff3d8;border-radius:11px;padding:12px!important;box-shadow:0 0 0 3px #f7e8c5;scroll-margin-top:90px}
+.ks-host-disputed small{display:block;font-weight:900;color:#9c5a18}
+/* Music selector is intentionally allowed above the sticky view tabs while open. */
+.v2phonehead:has(.ks-room-music[open]){position:relative;z-index:90}
+.ks-room-music[open]{z-index:92}
+.ks-room-music-panel{z-index:94}
+.ks-room-music-instructions{font-size:.8rem!important;color:#173d57!important;font-weight:800;line-height:1.5!important;background:#f4e7c6;padding:.65rem;border-radius:8px}
+/* A slightly more recognizable How to Play link without taking over the hero. */
+.v11howlink{border:1.5px solid #c9a65e;background:#f8ebce;color:#15364e;box-shadow:0 2px 6px #9e814a22}
+.v11howlink:hover{background:#f1daaa;border-color:#ac873d}
+/* No-show's small starfall gets one more second, matching its extra screen time. */
+.ks-noshow:before{animation-duration:3.4s}
+.ks-noshow-stars span{animation-duration:3.4s}
+/* A short, family-facing guide focused on how to play—not implementation details. */
+.ks-simple-guide{max-width:690px;padding:26px 24px 85px}
+.ks-simple-guide .ks-guide-eyebrow{margin:35px 0 5px;color:#9a752f;font-size:11px;font-weight:900;letter-spacing:.14em}
+.ks-simple-guide h1{margin:0 0 15px;color:#133b54;font-size:clamp(38px,8vw,55px)}
+.ks-simple-guide h2{font-size:clamp(21px,5vw,25px);margin:28px 0 9px;color:#153c55}
+.ks-simple-guide p{line-height:1.6;margin:0 0 12px;font-size:15px}
+.ks-simple-guide .ks-guide-intro{font-size:18px;color:#18394e;line-height:1.5}
+.ks-simple-guide .ks-guide-library{border:1px solid #e4cd91;border-radius:11px;background:#f9eed7;color:#274960;padding:12px 15px}
+.ks-simple-guide section{padding-bottom:3px;border-bottom:1px solid #e7ded0}
+.ks-guide-start{margin-top:24px;display:inline-block;border-radius:11px;background:#173e5d;color:#fff9ea;padding:12px 17px;font-weight:850;text-decoration:none}
+
+.ks-music-notice{background:#f5e6bd;border:1px solid #cba04c;border-radius:10px;padding:9px 11px;color:#173a53;display:flex;gap:8px;align-items:center;font-size:12px;font-weight:750;margin:8px 0}
+.ks-music-notice>span{flex:1;line-height:1.4}.ks-music-notice button{border:0;background:transparent;font-size:18px;color:#26495e;cursor:pointer;line-height:1}

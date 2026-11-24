@@ -186,7 +186,7 @@ function closeQuestion(s:GameState,now:number,skipped=false){
  const a=s.active!;const q=getQuestion(a.questionId)!;
  const noShow=!skipped&&everyoneMissed(s,a.answers);
  const resolution:Resolution={key:a.key,questionId:a.questionId,answer:q.answer,category:CATEGORY_LOOKUP.get(q.categoryId)!.name,
-   points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+(noShow?9000:6500),disputeIds:[],skipped,noShow};
+   points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+(noShow?11000:7500),disputeIds:[],skipped,noShow};
  for(const [id,submission] of Object.entries(a.answers)){const p=s.players.find(x=>x.id===id);if(p)p.score+=submission.points;}
  s.usedKeys.push(a.key);s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==q.id),q.id].slice(-QUESTION_HISTORY_LIMIT);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
  log(s,skipped?'Question skipped.':`The answer is ${q.answer}.`);
@@ -239,7 +239,7 @@ export function chooseFinalQuestion(s:GameState,now:number){
 
 function finishFinal(s:GameState,now:number){
  const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:Boolean(f.revealedHints?.[p.id])};}}
- s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-QUESTION_HISTORY_LIMIT);s.phase='final-results';f.noShow=everyoneMissed(s,f.answers);f.endsAt=now+(f.noShow?14500:12000);log(s,'Final answers are in.');
+ s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-QUESTION_HISTORY_LIMIT);s.phase='final-results';f.noShow=everyoneMissed(s,f.answers);f.endsAt=now+(f.noShow?16500:13000);log(s,'Final answers are in.');
 }
 function shiftTimers(s:GameState,delta:number){if(s.active){s.active.introUntilAt+=delta;if(s.active.startedAt)s.active.startedAt+=delta;if(s.active.deadlineAt)s.active.deadlineAt+=delta;}if(s.resolution)s.resolution.endsAt+=delta;if(s.final){if(s.final.startedAt)s.final.startedAt+=delta;if(s.final.deadlineAt)s.final.deadlineAt+=delta;if(s.final.endsAt)s.final.endsAt+=delta;}}
 export function tick(original:GameState,now=Date.now()):GameState {
@@ -388,6 +388,8 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  case 'dispute':{
    const p=player(s,actor);assert(['results','final-results'].includes(s.phase),'A result can only be disputed after answers are revealed.');
    const ids=s.phase==='results'?s.resolution?.disputeIds:s.final?.disputeIds;assert(ids,'No results.');assert(!ids.includes(p.id),'You already requested review.');
+   const submitted=s.phase==='results'?s.resolution?.answers[p.id]:s.final?.answers[p.id];
+   assert(submitted&&!submitted.correct&&submitted.answer.trim()&&submitted.answer!=='(no answer)','Only submitted answers marked incorrect can be reviewed.');
    if(s.phase==='results'){s.resolution!.disputeIds.push(p.id);}else{s.final!.disputeIds.push(p.id);}log(s,`${p.name} requested a ruling review.`);break;
  }
  case 'resolve-dispute':{
@@ -400,14 +402,14 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
      }else{r.points=action.correct?(s.final?.wagers[p.id]??0):-(s.final?.wagers[p.id]??0);}
      p.score+=r.points;
    }
-   if(s.phase==='results'){s.resolution!.disputeIds=s.resolution!.disputeIds.filter(id=>id!==p.id);s.resolution!.noShow=!s.resolution!.skipped&&everyoneMissed(s,s.resolution!.answers);s.resolution!.endsAt=now+5000;}
-   else{s.final!.disputeIds=s.final!.disputeIds.filter(id=>id!==p.id);s.final!.noShow=everyoneMissed(s,s.final!.answers);s.final!.endsAt=now+8000;}
+   if(s.phase==='results'){s.resolution!.disputeIds=s.resolution!.disputeIds.filter(id=>id!==p.id);s.resolution!.noShow=!s.resolution!.skipped&&everyoneMissed(s,s.resolution!.answers);s.resolution!.endsAt=now+6000;}
+   else{s.final!.disputeIds=s.final!.disputeIds.filter(id=>id!==p.id);s.final!.noShow=everyoneMissed(s,s.final!.answers);s.final!.endsAt=now+9000;}
    log(s,`Host reviewed ${p.name}’s answer.`);break;
  }
  case 'dismiss-dispute':{
    host(actor);assert(s.phase==='results'||s.phase==='final-results','No result dispute to dismiss.');
-   if(s.phase==='results'&&s.resolution){s.resolution.disputeIds=s.resolution.disputeIds.filter(id=>id!==action.playerId);s.resolution.endsAt=now+5000;}
-   if(s.phase==='final-results'&&s.final){s.final.disputeIds=s.final.disputeIds.filter(id=>id!==action.playerId);s.final.endsAt=now+8000;}
+   if(s.phase==='results'&&s.resolution){s.resolution.disputeIds=s.resolution.disputeIds.filter(id=>id!==action.playerId);s.resolution.endsAt=now+6000;}
+   if(s.phase==='final-results'&&s.final){s.final.disputeIds=s.final.disputeIds.filter(id=>id!==action.playerId);s.final.endsAt=now+9000;}
    log(s,'Host closed a dispute.');break;
  }
  case 'skip-question':{

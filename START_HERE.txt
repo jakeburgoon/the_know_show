@@ -1,8 +1,13 @@
-THE KNOW SHOW v1.5.8
+THE KNOW SHOW v1.5.9
 
-THE KNOW SHOW — v1.5.8 · FULL CUMULATIVE UPDATE
+THE KNOW SHOW — v1.5.9 · FULL CUMULATIVE UPDATE
 
 This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
+
+INCLUDED IN v1.5.9
+- Clearer result reviews, direct host-dispute navigation, one more second to read answers, and a longer no-show animation without the old preface.
+- Music menu closes on selection; a brief message explains who presses Play, and the host phone player opens on track changes in Just phones mode.
+- A shorter, more welcoming How to Play page and a more visible link on the homepage.
 
 GITHUB / VERCEL
 1. Unzip this archive. Open its inner the-know-show folder.
@@ -12,17 +17,17 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW THROUGH v1.5.8
+NEW THROUGH v1.5.9
 - 66 additional seasonal questions: 6 Easy, 6 Medium, 6 Hard per seasonal category, 738 regular questions total. Full additions and review notes in SEASONAL_QUESTION_EXPANSION_QA.csv.
 - Weighted, rather than exclude-and-rank, category offers; recently played categories can return, with lower probability. One eligible seasonal category is still offered every Build the Board phase.
 - Small header music menu. Players may change the shared soundtrack, unless the host disables this option. Music plays from host phone or TV, not everyone's device; opening the player/pressing Play can still be needed.
 - All prior improvements, including Final Word and branded screens, remain included. The approved logo and app icons are unchanged.
 
-ADDED IN v1.5.8
+ALSO INCLUDED FROM v1.5.8
 - When everyone actually answers incorrectly, a brief branded “A TOTAL NO-SHOW!” animation precedes the normal answer, individual results, and leaderboard.
 - No change to the scoring rules or any question.
 
 VALIDATION
-54 engine tests, 14 targeted UI checks, and 21 TS/TSX syntax checks passed. Complete Next.js production build remains to be verified on Vercel. Full Next.js production build still must be confirmed on Vercel.
+56 engine tests, 19 targeted UI checks, and 21 TS/TSX syntax checks passed. Complete Next.js production build remains to be verified on Vercel. Full Next.js production build still must be confirmed on Vercel.
 
 See README.md and RELEASE_NOTES.md for more details.
