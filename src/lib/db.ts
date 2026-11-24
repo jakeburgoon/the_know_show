@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { createHash, randomBytes } from 'node:crypto';
+import {exposureJournal} from './exposure';
+import type {GameState} from './game';
 
 export type RoomRow = {
   code: string;
@@ -26,12 +28,11 @@ export async function getRoom(code: string): Promise<RoomRow | null> {
   if (error) throw error;
   return data as RoomRow | null;
 }
-export async function updateRoom(row: RoomRow, snapshot: unknown): Promise<boolean> {
-  const {data,error} = await db().from('know_show_rooms').update({
-    snapshot, revision: row.revision+1, updated_at: new Date().toISOString()
-  }).eq('code',row.code).eq('revision',row.revision).select('revision').maybeSingle();
-  if (error) throw error;
-  return !!data;
+export async function updateRoom(row: RoomRow, snapshot: unknown, historyBase?:GameState): Promise<boolean> {
+  const journal=exposureJournal(historyBase??row.snapshot as GameState,snapshot as GameState);
+  const {data,error}=await db().rpc('ks_commit_room_exposure',{p_code:row.code,p_revision:row.revision,p_snapshot:snapshot,p_journal:journal});
+  if(error)throw error;
+  return data===true;
 }
 export function headerToken(request: Request): string {
   const auth = request.headers.get('authorization') || '';

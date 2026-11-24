@@ -985,3 +985,11 @@ body{background:var(--v11cream);color:var(--v11navy)}
 
 /* v1.12.1 developer category controls */
 .ks-category-list{margin-top:16px}.ks-category-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid #dcd0b8}.ks-category-row small{display:block;margin-top:4px;color:#526578}.ks-category-row button{min-width:94px;min-height:44px}.ks-category-row button:disabled{cursor:wait}
+
+/* v1.13.0 exposure diagnostics */
+.ks-exposure-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px;margin:16px 0}.ks-exposure-summary>div{border:1px solid #d9c79b;background:#fbf5e6;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}.ks-exposure-summary strong{font-size:1.35rem;color:#16344d}.ks-exposure-show,.ks-exposure-item{border:1px solid #ddcfb1;border-radius:10px;padding:12px;margin:12px 0}.ks-exposure-show summary{cursor:pointer;font-weight:700;color:#16344d}.ks-exposure-item p{margin:6px 0}.ks-exposure-item small{color:#765e2a;font-weight:700}
+
+/* v1.13.2 — optional age recommendations in the individual Green Room. */
+.ks-age-support{display:grid;gap:5px;padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid #e2dfd7}
+.ks-age-support select{width:100%;min-height:44px;font-size:16px;box-sizing:border-box}
+.ks-age-support small,.ks-age-note{font-size:12px;line-height:1.4;color:#55687a}

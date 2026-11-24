@@ -1,3 +1,22 @@
+# v1.13.2 — Age-based answer support
+
+- Optional individual Green Room age selector: Under 10 and 10–12 → all regular questions; 13–15 → Medium and Hard; 16–17 → Hard only; 18–29, 30–49, 50+ → written. Not specified leaves existing support unchanged. The host can override the slider. Final Word stays written for everyone. Age does not affect category or question selection or scoring rules.
+- Adult age bands are stored in the private active room state, retained for a rematch, and used for per-show/question aggregate counts, not attached to individual response rows or persistent exposure histories. Under-18 age bands are used to recommend support but are not saved; the host's local selection can reset on refresh or rematch, while the resulting support setting persists. Team seats do not collect age. No exact ages or dates of birth are requested. Child age-group analytics are deferred pending privacy review.
+- In Developer → Show & Question Statistics → Question statistics, adult age-group accuracy appears only when at least 10 answers across 5 shows are available for a question/band, with the same threshold for each displayed answer format. These are attempts, not unique individuals. Overall performance collection remains active for all participants. Historical questions have no age breakdown until qualifying data accumulate. No age summaries appear in recent-show responses or on the public player/TV views.
+- Run `supabase/upgrade_v1_13_2.sql` after the v1.13.0 migration, before uploading. The migration adds a service-role-only report function and no new tables. No new environment variables. Existing question bank, exposure selector and game rules are unchanged. Production integration is not tested locally.
+
+# v1.13.1 — Clearer guest history opt-in
+
+- Explains the benefit directly in the guest history checkbox label: helps avoid repeats. The optional, adults-only restriction and unchecked default remain. No new SQL or environment variables beyond v1.13.0.
+
+# v1.13.0 — Replayability and exposure tracking
+
+- Persistent server-side history at show start; record question exposure at reveal in the same transaction as the room update.
+- Prioritize unseen questions and fresh categories; retain seasonal guarantee, eight options, and category availability settings.
+- Optional adult guest browser history, show and question statistics, category and question selection diagnostics, CSV export.
+- REQUIRED: Run `supabase/upgrade_v1_13_0.sql` before deployment; see `V130_EXPOSURE_SETUP.md` for setup, optional database smoke test and limitations. No new environment variables. Accounts, groups and age data deferred.
+- 76 categories / 1,072 questions unchanged. Famous Landmarks remains disabled unless explicitly enabled.
+
 # v1.12.1 — Accurate flags and category availability
 
 - All 13 flag images are sourced from the user-supplied Flagpedia PNG archive, resized proportionally (maximum 1280 px), visually inspected, and documented in IMAGE_CREDITS.json. Question wording, IDs, hints and difficulty are unchanged. Old image files remain for historical feedback references.

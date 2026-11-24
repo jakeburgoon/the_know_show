@@ -1,3 +1,17 @@
+THE KNOW SHOW — v1.13.2 · COMPLETE CUMULATIVE APP
+
+Run supabase/upgrade_v1_13_2.sql after the v1.13.0 migration. See V132_AGE_SUPPORT_SETUP.md for full update steps.
+
+THE KNOW SHOW — v1.13.1 · COMPLETE CUMULATIVE APP
+
+Guest history opt-in now explains its benefit in the checkbox label. If already on v1.13.0, no further database changes are needed. If upgrading from v1.12.1, run the v1.13.0 migration below before deploying.
+
+THE KNOW SHOW — v1.13.0 · COMPLETE CUMULATIVE APP
+
+REQUIRED: Run supabase/upgrade_v1_13_0.sql in Supabase SQL Editor BEFORE uploading this release. Optional smoke test: supabase/verify_v1_13_0.sql. No new Vercel environment variables. See V130_EXPOSURE_SETUP.md.
+
+New developer section: Show & question statistics. History persists in Supabase; question selection prioritizes unseen questions. Accounts, family profiles and age collection are deferred.
+
 THE KNOW SHOW — v1.12.1 · COMPLETE CUMULATIVE APP
 
 Run supabase/upgrade_v1_12_1.sql in Supabase SQL Editor before uploading this release. No new environment variables. In /developer, select Category availability to manage categories; Famous Landmarks starts disabled. New shows (including rematches) use saved settings. All 13 flag images are now sourced PNGs. See README.md for details.

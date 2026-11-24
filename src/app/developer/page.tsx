@@ -1,12 +1,13 @@
 'use client';
 import QuestionVisual from '@/components/QuestionVisual';
 import CategoryAvailability from '@/components/CategoryAvailability';
+import ExposureDashboard from '@/components/ExposureDashboard';
 import {useEffect,useMemo,useState} from 'react';
 import {FEEDBACK_REASONS,FEEDBACK_STATUSES,type FeedbackRow,type FeedbackStatus} from '@/lib/feedback-types';
 import type {QuestionImage} from '@/lib/questions';
 import {isCorrectForQuestion} from '@/lib/answer-matching';
 
-type DevSection='feedback'|'lab'|'categories';
+type DevSection='feedback'|'lab'|'categories'|'exposure';
 type LabScope='all'|'playtest';
 type LabDifficulty='all'|'easy'|'medium'|'hard'|'final';
 type LabSurface='phone'|'tv';
@@ -131,6 +132,6 @@ export default function DeveloperPage(){
  </div></>;}
  
  return <main className="ks-dev"><header><img src="/know-show-logo.png" alt="The Know Show"/><div><small>PRIVATE · DEVELOPER</small><h1>Developer dashboard</h1></div>{auth==='yes'&&<button onClick={()=>void logout()}>Sign out</button>}</header>
- {auth==='loading'?<p>Checking sign-in…</p>:auth==='disabled'?<p>Configure DEVELOPER_PASSWORD (at least 24 characters) in the server environment to enable the developer dashboard.</p>:auth==='login'?<form className="ks-dev-card" onSubmit={e=>{e.preventDefault();void login();}}><h2>Developer sign-in</h2><label>Private password<input type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button disabled={busy||!password}>Sign in</button></form>:<><nav className="ks-dev-tabs" aria-label="Developer sections"><button className={section==='feedback'?'is-active':''} onClick={()=>setSection('feedback')}>Feedback dashboard</button><button className={section==='lab'?'is-active':''} onClick={()=>setSection('lab')}>Question Lab</button><button className={section==='categories'?'is-active':''} onClick={()=>setSection('categories')}>Category availability</button></nav>{section==='feedback'?renderFeedback():section==='lab'?renderQuestionLab():<CategoryAvailability onUnauthorized={()=>setAuth('login')}/>}{error&&<p className="ks-feedback-error" role="alert">{error}</p>}</>}
+ {auth==='loading'?<p>Checking sign-in…</p>:auth==='disabled'?<p>Configure DEVELOPER_PASSWORD (at least 24 characters) in the server environment to enable the developer dashboard.</p>:auth==='login'?<form className="ks-dev-card" onSubmit={e=>{e.preventDefault();void login();}}><h2>Developer sign-in</h2><label>Private password<input type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button disabled={busy||!password}>Sign in</button></form>:<><nav className="ks-dev-tabs" aria-label="Developer sections"><button className={section==='feedback'?'is-active':''} onClick={()=>setSection('feedback')}>Feedback dashboard</button><button className={section==='lab'?'is-active':''} onClick={()=>setSection('lab')}>Question Lab</button><button className={section==='categories'?'is-active':''} onClick={()=>setSection('categories')}>Category availability</button><button className={section==='exposure'?'is-active':''} onClick={()=>setSection('exposure')}>Show &amp; question statistics</button></nav>{section==='feedback'?renderFeedback():section==='lab'?renderQuestionLab():section==='exposure'?<ExposureDashboard onUnauthorized={()=>setAuth('login')}/>:<CategoryAvailability onUnauthorized={()=>setAuth('login')}/>}{error&&<p className="ks-feedback-error" role="alert">{error}</p>}</>}
  </main>;
 }

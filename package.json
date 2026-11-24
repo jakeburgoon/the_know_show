@@ -1,14 +1,14 @@
 {
   "name": "the-know-show",
-  "version": "1.12.1",
+  "version": "1.13.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test:engine": "tsc --module commonjs --moduleResolution node --target es2022 --outDir .engine-build --skipLibCheck --esModuleInterop --resolveJsonModule src/lib/game.ts src/lib/questions.ts src/lib/device-session.ts src/lib/standings.ts src/lib/host-history.ts src/lib/feedback-server.ts src/lib/feedback-types.ts && node --test tests/v1-engine.test.cjs tests/v110-feedback.test.cjs tests/v111-images.test.cjs tests/v121-category-availability.test.cjs",
-    "test:ui": "node --test tests/v154-ui-contract.test.cjs tests/v157-onboarding.test.cjs tests/v158-noshow-ui.test.cjs tests/v159-polish.test.cjs tests/v160-host-flow.test.cjs tests/v170-bank-expansion.test.cjs tests/v180-milestone.test.cjs tests/v182-landing.test.cjs tests/v183-usability.test.cjs tests/v110-feedback-ui.test.cjs tests/v111-images-ui.test.cjs tests/v112-question-lab.test.cjs tests/v121-category-ui.test.cjs"
+    "test:engine": "tsc --module commonjs --moduleResolution node --target es2022 --outDir .engine-build --skipLibCheck --esModuleInterop --resolveJsonModule src/lib/game.ts src/lib/questions.ts src/lib/device-session.ts src/lib/standings.ts src/lib/host-history.ts src/lib/feedback-server.ts src/lib/feedback-types.ts && node --test tests/v1-engine.test.cjs tests/v110-feedback.test.cjs tests/v111-images.test.cjs tests/v121-category-availability.test.cjs tests/v130-exposure.test.cjs tests/v132-age-support.test.cjs",
+    "test:ui": "node --test tests/v154-ui-contract.test.cjs tests/v157-onboarding.test.cjs tests/v158-noshow-ui.test.cjs tests/v159-polish.test.cjs tests/v160-host-flow.test.cjs tests/v170-bank-expansion.test.cjs tests/v180-milestone.test.cjs tests/v182-landing.test.cjs tests/v183-usability.test.cjs tests/v110-feedback-ui.test.cjs tests/v111-images-ui.test.cjs tests/v112-question-lab.test.cjs tests/v121-category-ui.test.cjs tests/v130-exposure-ui.test.cjs tests/v132-age-ui.test.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.0",

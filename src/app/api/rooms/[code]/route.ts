@@ -16,6 +16,6 @@ export async function GET(request:Request,{params}:{params:Promise<{code:string}
       else {const fresh=await getRoom(code);if(fresh)row=fresh;}
     }
     const actor=await getRole(row,request);
-    return NextResponse.json(makeFeedbackView(row.snapshot as GameState,actor,row.revision),{headers:noStore});
+    return NextResponse.json(makeFeedbackView(row.snapshot as GameState,actor,row.revision,Date.now(),true),{headers:noStore});
   } catch(e) {if(e instanceof GameError)return jsonError(e.message,409);console.error('Get room:',e);return jsonError('Could not load the game.',500);}
 }

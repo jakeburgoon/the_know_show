@@ -7,6 +7,7 @@ import {Trophy,Play,CheckCircle,Users, RotateCcw, Home, Check, X, Layers2, Music
 import HostWizard from './HostWizard';
 import QuestionVisual from './QuestionVisual';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
+import {AGE_BANDS,AGE_LABELS,isAdultAgeBand,type AgeBand} from '@/lib/age-support';
 import type {Action,GameView as BaseGameView,MusicStyle,Player,Settings} from '@/lib/game';
 import {actorToken,type DeviceTab} from '@/lib/device-session';
 import {finalStandings} from '@/lib/standings';
@@ -164,9 +165,10 @@ function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1})
 /** Each player's support is a Green Room decision, not a global setup option. */
 const PLAYER_SUPPORT=['off','hard','medium-hard','all'] as const;
 const PLAYER_SUPPORT_LABELS=['Never — all answers are written','Only for Hard questions','For Medium and Hard questions','For all regular questions'] as const;
-function PlayerAnswerSupport({player,busy,onSave}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>}){
+function PlayerAnswerSupport({player,busy,onSave,individual,onAgeSave}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>;individual:boolean;onAgeSave:(age:AgeBand|null)=>Promise<boolean>}){
  const currentIndex=()=>Math.max(0,PLAYER_SUPPORT.indexOf(player.choiceAccess??'off'));
  const [level,setLevel]=useState(currentIndex);
+ const [localMinorAge,setLocalMinorAge]=useState<AgeBand|null>(null);
  const pending=useRef<number|null>(null);
  const saveTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const onSaveRef=useRef(onSave);onSaveRef.current=onSave;
@@ -184,11 +186,20 @@ function PlayerAnswerSupport({player,busy,onSave}:{player:Player;busy:boolean;on
      if(!saved){pending.current=null;setLevel(serverLevel.current);}
    },350);
  };
+ const chooseAge=async(value:string)=>{
+   // An age selection supersedes any slider change that has not been sent yet.
+   if(saveTimer.current!==null){clearTimeout(saveTimer.current);saveTimer.current=null;}
+   pending.current=null;setLevel(serverLevel.current);
+   const age=value==='unspecified'?null:value as AgeBand;
+   if(await onAgeSave(age))setLocalMinorAge(age&&!isAdultAgeBand(age)?age:null);
+ };
  return <div className="ks-player-support">
+   {individual&&<div className="ks-age-support"><label htmlFor={`age-${player.id}`}>Player age range (optional)</label><select id={`age-${player.id}`} value={player.ageBand??localMinorAge??'unspecified'} disabled={busy} onChange={e=>void chooseAge(e.target.value)}><option value="unspecified">Not specified</option>{AGE_BANDS.map(age=><option key={age} value={age}>{AGE_LABELS[age]}</option>)}</select><small>Helps recommend answer support. Adult age ranges also help improve question difficulty.</small></div>}
    <label htmlFor={`support-${player.id}`}>When should this player see answer choices?</label>
    <p className="ks-support-selected">{PLAYER_SUPPORT_LABELS[level]}</p>
    <input id={`support-${player.id}`} type="range" min={0} max={3} step={1} value={level} disabled={busy} aria-label={`When should ${player.name} see answer choices?`} aria-valuetext={PLAYER_SUPPORT_LABELS[level]} onChange={e=>choose(Number(e.target.value))}/>
    <div className="ks-support-ticks" aria-hidden="true"><span>Never</span><span>Hard only</span><span>Medium + Hard</span><span>All</span></div>
+   {individual&&<small className="ks-age-note">Adjust the recommended answer support to whatever works best for this player.</small>}
  </div>;
 }
 /** Compact shared music control. Only the host phone or TV actually plays audio. */
@@ -243,6 +254,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
  const params=useParams<{code:string}>(),router=useRouter();const code=String(params.code||'').toUpperCase();
  const [ready,setReady]=useState(false),[hostToken,setHostToken]=useState(''),[playerToken,setPlayerToken]=useState(''),[tab,setTab]=useState<DeviceTab>('player'),[origin,setOrigin]=useState('');
  const [view,setView]=useState<GameView|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[now,setNow]=useState(Date.now());
+ const [rememberDevice,setRememberDevice]=useState(false);
  const [name,setName]=useState(''),[answerDraft,setAnswerDraft]=useState(''),[finalDraft,setFinalDraft]=useState(''),[doubleTake,setDoubleTake]=useState(false),[wager,setWager]=useState(0);
  const [pairOpen,setPairOpen]=useState(false),[joinOpen,setJoinOpen]=useState(true),[scoreEdits,setScoreEdits]=useState<Record<string,string>>({});
  const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
@@ -325,7 +337,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      return true;
    }catch(e){if(marker===authRef.current){setError(e instanceof Error?e.message:'Could not update game.');void refresh();}return false;}finally{setBusy(false);}
  },[busy,code,authToken,authMarker,refresh]);
- const join=async(joinName=name,keepHost=false)=>{setBusy(true);setError('');try{const res=await fetch(`/api/rooms/${code}/join`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:joinName})});const d=await res.json();if(!res.ok)throw new Error(d.error||'Could not join.');localStorage.setItem(`knowshow:${code}:player`,d.token);lastRev.current=-1;setPlayerToken(d.token);if(!keepHost){setTab('player');setView(d.view);lastRev.current=d.view.revision;}else{setHostPlaying(true);void refresh();}}catch(e){setError(e instanceof Error?e.message:'Could not join.');}finally{setBusy(false);}};
+ const join=async(joinName=name,keepHost=false)=>{setBusy(true);setError('');try{let rememberDeviceId:string|undefined;if(rememberDevice&&!keepHost){try{let id=localStorage.getItem('knowshow:hostHistoryId');if(!id){id=crypto.randomUUID();localStorage.setItem('knowshow:hostHistoryId',id);}rememberDeviceId=id;}catch{/* Guest history is optional. */}}const res=await fetch(`/api/rooms/${code}/join`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:joinName,rememberDeviceId})});const d=await res.json();if(!res.ok)throw new Error(d.error||'Could not join.');localStorage.setItem(`knowshow:${code}:player`,d.token);lastRev.current=-1;setPlayerToken(d.token);if(!keepHost){setTab('player');setView(d.view);lastRev.current=d.view.revision;}else{setHostPlaying(true);void refresh();}}catch(e){setError(e instanceof Error?e.message:'Could not join.');}finally{setBusy(false);}};
  const role=view?.role.kind||'spectator',isHost=!displayOnly&&tab==='host'&&role==='host',isPlayer=!displayOnly&&tab==='player'&&role==='player';
  const advanceSetup=async(update:Partial<Settings>)=>{if(await act({type:'settings',settings:update},hostToken)){
    setSetupStep(step=>{const next=Math.min(2,step+1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});
@@ -420,8 +432,8 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
    try{
      for(const [key,ids,limit] of [
        ['knowshow:recentQuestionIds',view.playedQuestionIds,1072],
-       ['knowshow:recentCategoryIds',view.playedCategoryIds,75],
-       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,75],
+       ['knowshow:recentCategoryIds',view.playedCategoryIds,76],
+       ['knowshow:recentCategoryOffers',view.offeredCategoryIds,76],
      ] as const){
        if(!ids?.length)continue;
        const old=JSON.parse(localStorage.getItem(key)||'[]') as string[];
@@ -448,7 +460,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      </section>
      <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
       <p className="ks-lobby-support-help">Choose when each player gets four answer choices instead of writing an answer. Different support levels can help level the playing field across ages and abilities. <strong>The final question is written for everyone.</strong></p>
-      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
+      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} individual={view.settings.mode==='individual'} onAgeSave={ageBand=>act({type:'player-age-band',playerId:p.id,ageBand},hostToken)} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
       {!playerToken?<div className="ks-lobby-hostplay"><label className="ks-host-checkbox"><input type="checkbox" checked={hostPlaying} onChange={e=>setHostPlaying(e.target.checked)}/><strong>Will you be participating as a player?</strong></label>
       {hostPlaying&&<form onSubmit={e=>{e.preventDefault();if(hostName.trim())void join(hostName.trim(),true);}}><label>Your name<input value={hostName} maxLength={28} minLength={2} required placeholder="Enter your player name" onChange={e=>setHostName(e.target.value)}/></label><button disabled={busy||hostName.trim().length<2}>Join the players</button></form>}</div>:<div className="ks-lobby-hostplay"><CheckCircle size={19}/> You’re playing too! Your player account is connected to this host device.</div>}
      </section>
@@ -488,7 +500,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
    {error&&<div className="v2error" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
    {view.paused&&<div className="v2alert">Game paused by the host</div>}
    {tab==='player'&&Boolean(hostToken)&&Boolean((view.phase==='results'?view.results?.disputeIds:view.phase==='final-results'?view.final?.disputeIds:[])?.length)&&<div className="v1hostdispute" role="alert"><strong>⚑ A player has disputed a result.</strong><span>Review the answer in Host Controls to continue the game.</span><button type="button" onClick={()=>{autoReturnFromDispute.current=true;setFocusDispute(true);switchTab('host');}}>Review answer now</button></div>}
-   {tab==='player'&&role==='spectator'&&view.phase==='lobby'&&<section className="v2card"><h2>Join the show</h2><p>Choose a player name to join. If playing as a team, enter the team name.</p><form onSubmit={e=>{e.preventDefault();void join();}} className="v2form"><label>{view.settings.mode==='teams'?'Team name':'Player name'}<input required minLength={2} maxLength={28} value={name} onChange={e=>setName(e.target.value)}/></label><button disabled={busy}>Join this room</button></form></section>}
+   {tab==='player'&&role==='spectator'&&view.phase==='lobby'&&<section className="v2card"><h2>Join the show</h2><p>Choose a player name to join. If playing as a team, enter the team name.</p><form onSubmit={e=>{e.preventDefault();void join();}} className="v2form"><label>{view.settings.mode==='teams'?'Team name':'Player name'}<input required minLength={2} maxLength={28} value={name} onChange={e=>setName(e.target.value)}/></label><label className="ks-host-checkbox"><input type="checkbox" checked={rememberDevice} onChange={e=>setRememberDevice(e.target.checked)}/> Remember questions on this device (helps avoid repeats)</label><small>Optional, adults only. Uses a random browser ID to remember questions when you play with other hosts. No account needed.</small><button disabled={busy}>Join this room</button></form></section>}
    {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&hostToken&&<div className="ks-spectator"><p>You're hosting without playing. Here's the live show. Use the small Host View tab for arbitration.</p><TV view={view} code={code} origin={origin} now={timerNow} preview/></div>}
    {tab==='player'&&role==='spectator'&&view.phase!=='lobby'&&!hostToken&&<div className="v2card"><p>This show is already in progress.</p><Link href={`/display/${code}`}>Watch the TV display</Link></div>}
    {tab==='host'&&!isHost&&<section className="v2card"><h2>Host access unavailable</h2><p>Scan the private host QR code from a device that already has host access. Your player view is unaffected.</p><button className="v2small" onClick={()=>switchTab('player')}>Back to Player View</button></section>}
@@ -607,7 +619,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final feedback/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute'})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.12.1</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.2</span></footer>
    </>}
  </main>;
 }

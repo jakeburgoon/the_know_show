@@ -26,8 +26,8 @@ export function feedbackOffer(view:GameView,s:GameState,actor:Actor,now=Date.now
  const ticket:Ticket={expires:now+2*60*60*1000,version:FEEDBACK_VERSION,showId,reporter,kind,question};
  return {kind,ticket:seal(ticket,'feedback-ticket'),question,key:`${showId}:${reporter}:${question?.id??'show'}`};
 }
-export function makeFeedbackView(state:GameState,actor:Actor,revision:number,now=Date.now()){
- const view=makeView(state,actor,revision,now);return {...view,feedback:feedbackOffer(view,state,actor,now)};
+export function makeFeedbackView(state:GameState,actor:Actor,revision:number,now=Date.now(),committedOnly=false){
+ const view=makeView(state,actor,revision,now,committedOnly);return {...view,feedback:feedbackOffer(view,state,actor,now)};
 }
 export function feedbackInsert(ticket:Ticket,body:Record<string,unknown>){
  const clean=(v:unknown,max:number)=>typeof v==='string'?v.trim().slice(0,max):'';
