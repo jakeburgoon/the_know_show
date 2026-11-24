@@ -1,8 +1,12 @@
-THE KNOW SHOW — v1.8.2 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.8.4 · COMPLETE CUMULATIVE APP
 
 Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
 
-NEW IN v1.8.2: Compact landing page on phones and desktops, no duplicate banner, centered How to play, new 1,000-question tagline, and no default hosting passcode field. Configured hosting passcodes are requested only when required; player join codes still work.
+NEW IN v1.8.4: Slightly more landing-page breathing room on desktop and mobile, with compact spacing on short phones.
+
+FROM v1.8.3: Gold underlined How to play link in the hero’s top-right, mobile-safe form font sizes, and a clearer, larger Green Room answer-choice slider. No gameplay or database changes.
+
+FROM v1.8.2: Compact landing page on phones and desktops, no duplicate banner, centered How to play, new 1,000-question tagline, and no default hosting passcode field. Configured hosting passcodes are requested only when required; player join codes still work.
 
 FROM v1.8.1: Eight category offers per round for every player/team count; choose four. At least one eligible seasonal offer is guaranteed when available, and other in-season categories can compete for the remaining spots. Round 2 excludes Round 1 selections. No seasonal selection cap. Existing weighting and question banks remain intact.
 

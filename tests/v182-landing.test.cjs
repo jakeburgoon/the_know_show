@@ -4,11 +4,11 @@ const fs=require('node:fs');
 const page=fs.readFileSync('src/app/page.tsx','utf8');
 const css=fs.readFileSync('src/app/globals.css','utf8');
 const api=fs.readFileSync('src/app/api/rooms/route.ts','utf8');
-test('landing has one logo, no duplicate banner, centered guide and approved tagline',()=>{
+test('landing has one logo, no duplicate banner, guide link and approved tagline',()=>{
  assert.equal((page.match(/src="\/know-show-logo\.png"/g)||[]).length,1);
  assert.doesNotMatch(page,/v11landingbar|v11landingbrand/);
  assert.match(page,/Over 70 categories\. More than 1,000 questions\. A different show every time\./);
- assert.match(page,/className="v11howlink"[\s\S]*?How to play<\/Link>\s*<\/section>/);
+ assert.match(page,/className="v11howlink">How to play<\/Link>/);
  assert.match(css,/\.v11landing \.v11showcase\{padding:20px 18px 18px/);
  assert.match(css,/\.v11landing \.v11entrygrid\{gap:12px;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
  assert.match(css,/@media\(max-width:700px\)\{\s*\.v11landing \.v11showcase\{padding:17px/);
@@ -27,6 +27,6 @@ test('QR join, manual player join code and host-history persistence are preserve
  assert.match(page,/id="room-code"/);
  assert.match(page,/Join with code/);
  assert.match(page,/knowshow:hostHistoryId/);
- assert.match(page,/The Know Show v1\.8\.2/);
- assert.equal(JSON.parse(fs.readFileSync('package.json','utf8')).version,'1.8.2');
+ assert.match(page,/The Know Show v1\.8\.4/);
+ assert.equal(JSON.parse(fs.readFileSync('package.json','utf8')).version,'1.8.4');
 });

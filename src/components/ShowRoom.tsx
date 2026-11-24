@@ -158,7 +158,7 @@ function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1})
 }
 /** Each player's support is a Green Room decision, not a global setup option. */
 const PLAYER_SUPPORT=['off','hard','medium-hard','all'] as const;
-const PLAYER_SUPPORT_LABELS=['All written','Options: Hard','Options: Medium + Hard','Options: All questions'] as const;
+const PLAYER_SUPPORT_LABELS=['Never — all answers are written','Only for Hard questions','For Medium and Hard questions','For all regular questions'] as const;
 function PlayerAnswerSupport({player,busy,onSave}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>}){
  const currentIndex=()=>Math.max(0,PLAYER_SUPPORT.indexOf(player.choiceAccess??'off'));
  const [level,setLevel]=useState(currentIndex);
@@ -180,9 +180,10 @@ function PlayerAnswerSupport({player,busy,onSave}:{player:Player;busy:boolean;on
    },350);
  };
  return <div className="ks-player-support">
-   <label htmlFor={`support-${player.id}`}><span>Answer support</span><strong>{PLAYER_SUPPORT_LABELS[level]}</strong></label>
-   <input id={`support-${player.id}`} type="range" min={0} max={3} step={1} value={level} disabled={busy} aria-label={`${player.name} answer support`} aria-valuetext={PLAYER_SUPPORT_LABELS[level]} onChange={e=>choose(Number(e.target.value))}/>
-   <div className="ks-support-ticks" aria-hidden="true"><span>Written</span><span>Hard</span><span>Medium + Hard</span><span>All</span></div>
+   <label htmlFor={`support-${player.id}`}>When should this player see answer choices?</label>
+   <p className="ks-support-selected">{PLAYER_SUPPORT_LABELS[level]}</p>
+   <input id={`support-${player.id}`} type="range" min={0} max={3} step={1} value={level} disabled={busy} aria-label={`When should ${player.name} see answer choices?`} aria-valuetext={PLAYER_SUPPORT_LABELS[level]} onChange={e=>choose(Number(e.target.value))}/>
+   <div className="ks-support-ticks" aria-hidden="true"><span>Never</span><span>Hard only</span><span>Medium + Hard</span><span>All</span></div>
  </div>;
 }
 /** Compact shared music control. Only the host phone or TV actually plays audio. */
@@ -440,7 +441,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {shareMessage&&<p role="status">{shareMessage}</p>}
      </section>
      <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
-      <p className="ks-lobby-support-help">Choose how each person answers. Move the slider right for four choices on Hard questions, then Medium and Hard, or all questions. Different support levels can help level the playing field across ages and abilities. <strong>The final question is written for everyone.</strong></p>
+      <p className="ks-lobby-support-help">Choose when each player gets four answer choices instead of writing an answer. Different support levels can help level the playing field across ages and abilities. <strong>The final question is written for everyone.</strong></p>
       {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
       {!playerToken?<div className="ks-lobby-hostplay"><label className="ks-host-checkbox"><input type="checkbox" checked={hostPlaying} onChange={e=>setHostPlaying(e.target.checked)}/><strong>Will you be participating as a player?</strong></label>
       {hostPlaying&&<form onSubmit={e=>{e.preventDefault();if(hostName.trim())void join(hostName.trim(),true);}}><label>Your name<input value={hostName} maxLength={28} minLength={2} required placeholder="Enter your player name" onChange={e=>setHostName(e.target.value)}/></label><button disabled={busy||hostName.trim().length<2}>Join the players</button></form>}</div>:<div className="ks-lobby-hostplay"><CheckCircle size={19}/> You’re playing too! Your player account is connected to this host device.</div>}

@@ -1,3 +1,15 @@
+# v1.8.4 — Landing page spacing
+
+- Restore modest spacing between the hero elements, Ready to play heading, entry cards and secondary features on desktop and mobile. Short phone viewports retain tighter vertical spacing.
+- Preserve the upper-right guide link, tagline, branding, all gameplay, question banks and database schema.
+
+# v1.8.3 — Small usability improvements
+
+- Replace the landing-page How to play pill with a gold underlined link in the top-right of the navy hero on all screen sizes.
+- Prevent unintended iOS focus zoom with text fields and selects at least 16px on mobile/touch devices; preserve manual pinch zoom.
+- Green Room answer-choice slider: explicit question, four clearly labeled stops, full current-selection wording, 44px input height and larger 32px thumb. The Final Word remains written for everyone.
+- No gameplay, database, question bank or branding changes.
+
 # v1.8.2 — Compact landing page on phones and desktops
 
 - Remove the separate top banner and duplicate logo on all screen sizes; center How to play beneath the approved headline and new tagline: “Over 70 categories. More than 1,000 questions. A different show every time.”

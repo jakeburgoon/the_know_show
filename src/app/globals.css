@@ -849,3 +849,55 @@ body{background:var(--v11cream);color:var(--v11navy)}
  .v11landing .v11entrygrid{grid-template-columns:1fr;gap:12px}
  .v11landing .v11entrycard{padding:15px}
 }
+
+/* v1.8.3 — a quiet guide link, clearer answer support, and mobile-safe text fields. */
+.v11landing .v11howlink{display:flex;width:max-content;margin:0 0 4px auto;min-height:32px;padding:5px 2px;border:0;border-radius:0;background:transparent;color:#f3cf7c;box-shadow:none;text-decoration:underline;text-underline-offset:3px;font-size:14px;font-weight:750;position:relative;z-index:1}
+.v11landing .v11howlink:hover{background:transparent;color:#fff1b9}
+.v11landing .v11howlink:focus-visible{outline:2px solid #f3cf7c;outline-offset:3px}
+.v11landing .v11showcase{padding-top:8px}
+.ks-player-item .ks-player-support{gap:4px}
+.ks-player-support label{display:block;font-size:14px;line-height:1.35;color:#173953}
+.ks-player-support .ks-support-selected{font-size:13px;font-weight:750;line-height:1.35;color:#133953;margin:0}
+.ks-player-support input[type=range]{display:block;box-sizing:border-box;height:44px;padding:0;margin:0;background:transparent;border:0;box-shadow:none;border-radius:0;touch-action:pan-y}
+.ks-player-support input[type=range]::-webkit-slider-runnable-track{height:12px;border-radius:99px;background:linear-gradient(90deg,#193c5a 0%,#9a8a62 45%,#eec86a 100%)}
+.ks-player-support input[type=range]::-webkit-slider-thumb{width:32px;height:32px;box-sizing:border-box;margin-top:-10px;border:3px solid #fffaf1}
+.ks-player-support input[type=range]::-moz-range-track{height:12px;border-radius:99px;background:linear-gradient(90deg,#193c5a 0%,#9a8a62 45%,#eec86a 100%)}
+.ks-player-support input[type=range]::-moz-range-thumb{width:32px;height:32px;box-sizing:border-box;border:3px solid #fffaf1}
+.ks-support-ticks{grid-template-columns:repeat(4,minmax(0,1fr));font-size:11px;gap:3px;line-height:1.25}
+@media(max-width:700px), (hover:none) and (pointer:coarse){
+ /* iOS Safari zooms on focus below 16px. Do not restrict pinch zoom. */
+ :where(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]):not([type=reset]):not([type=hidden]),textarea,select){font-size:16px!important}
+ .ks-finaldecision-wagerline input{font-size:19px!important}
+ .v11landing .v11showcase{padding-top:6px}
+}
+
+/* v1.8.4 — Restore a little breathing room without burying the play actions. */
+.v11landing .v11showcase{padding-bottom:26px}
+.v11landing .v11overline{margin-bottom:14px}
+.v11landing .v11hero-logo{margin-bottom:9px}
+.v11landing .v11showcase h1{margin-bottom:12px}
+.v11landing .v11entryzone{padding-top:26px}
+.v11landing .v11entryheading{margin-bottom:17px}
+.v11landing .v11entrygrid{gap:18px}
+.v11landing .v11entrycard{padding:21px}
+.v11landing .v11cardtop{margin-bottom:11px}
+.v11landing .v11entrycard>p{margin-bottom:16px}
+.v11landing .ks-entry-features{gap:9px;margin:20px auto 22px}
+@media(max-width:700px){
+ .v11landing .v11showcase{padding-bottom:22px}
+ .v11landing .v11overline{margin-bottom:12px}
+ .v11landing .v11hero-logo{margin-bottom:7px}
+ .v11landing .v11showcase h1{margin-bottom:11px}
+ .v11landing .v11entryzone{padding-top:21px}
+ .v11landing .v11entryheading{margin-bottom:15px}
+ .v11landing .v11entrygrid{gap:17px}
+ .v11landing .v11entrycard{padding:17px}
+ .v11landing .v11cardtop{margin-bottom:10px}
+ .v11landing .v11entrycard>p{margin-bottom:14px}
+}
+@media(max-width:700px) and (max-height:650px){
+ .v11landing .v11showcase{padding-bottom:17px}
+ .v11landing .v11entryzone{padding-top:15px}
+ .v11landing .v11entryheading{margin-bottom:12px}
+ .v11landing .v11entrycard{padding:15px}
+}
