@@ -1,14 +1,10 @@
-# The Know Show v1.5.9
+# The Know Show v1.6.1
 
-Latest: clearer answer-review requests and direct host dispute navigation, an extra second for answer results, a longer No-Show animation without the presenter preface, easier music playback prompts, and a shorter family-facing How to Play guide.
+The complete cumulative Next.js app, including 56 categories, 738 regular questions, and 56 Final Word questions. This update simplifies hosting for families: hosts make **two quick choices**—individuals or teams (individuals selected by default), then Just phones or TV + phones (Just phones selected by default). The Green Room lets hosts set a four-position answer-support slider individually for each player. Music is no longer part of initial setup; the host's music player opens when the show begins in phones-only mode, with a short tip pointing to the music menu.
 
-The complete Next.js application, cumulative through v1.5.9. In addition to reviewed, Next/Previous guided host setup, refreshed homepage copy with four feature chips, reliable countdowns, and automatic submission of saved typed drafts, Final Word now offers a clear server-synchronized timer, a separate 56-question championship pool, and two private hints purchased exclusively for 500 points each before wagering. The host/player flow, in-app QR scanning, score reveals, game-board styling, season-aware category selection, and across-show repeat reduction are also updated. Existing trivia and approved artwork are preserved.
+The homepage highlight cards now explain the two 12-question rounds and final question, the 50+ regular and seasonal categories, and available player tools.
 
-In v1.5.5, the room-opening screen uses the approved logo and a subtle gold progress animation. Host answer-format descriptions explain written versus four-choice play in plain language, with a note about balancing ages and abilities. The Green Room shows the TV-display action only for TV + Phones, and hosts opening the display can return directly to Host View, including when also participating as a player. See `START_HERE.txt` for deployment and `RELEASE_NOTES.md` for detailed changes.
-
-# The Know Show — v1.5.9
-
-A live trivia-night app for up to eight players or teams, with a 56-category, 738-question library (45 year-round categories plus eleven seasonal ones), two rounds of category drafting, optional private four-choice assistance, Double Takes, The Final Word with a two-hint cap and pre-wager hint purchases, and a celebratory Curtain Call.
+All earlier gameplay, seasonal-category, question-variety, Final Word, answer-review, and approved branding improvements remain included. See `START_HERE.txt` and `RELEASE_NOTES.md` for upgrade instructions and details.
 
 ## Installation / upgrade from v1.2
 
@@ -21,7 +17,7 @@ This ZIP is a **complete replacement project** for the deployed v1.2 app. Extrac
 
 ## Answer-format accommodations
 
-The host can assign each player an Answer Format: **Write answers** (default), **Four choices on every regular question**, **Four choices on Medium and Hard**, or **Four choices on Hard**. Adjust these before the game or after pausing an active show.
+The host uses the Green Room slider to assign each player an answer format: **Write answers** (default), **Four choices on every regular question**, **Four choices on Medium and Hard**, or **Four choices on Hard**. Adjust these before the game or after pausing an active show.
 
 Each four-choice player sees a private, single-tap selection on their phone for eligible **regular** questions. Written and multiple-choice correct answers receive the same base points. Regular-question speed bonuses are capped at 25% (written) and 10% (four-choice). Double Take rules are unchanged.
 

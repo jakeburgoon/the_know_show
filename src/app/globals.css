@@ -796,3 +796,24 @@ body{background:var(--v11cream);color:var(--v11navy)}
 
 .ks-music-notice{background:#f5e6bd;border:1px solid #cba04c;border-radius:10px;padding:9px 11px;color:#173a53;display:flex;gap:8px;align-items:center;font-size:12px;font-weight:750;margin:8px 0}
 .ks-music-notice>span{flex:1;line-height:1.4}.ks-music-notice button{border:0;background:transparent;font-size:18px;color:#26495e;cursor:pointer;line-height:1}
+
+/* v1.6.0 — Give every Green Room player one compact, discoverable answer-support control. */
+.ks-lobby-support-help{font-size:13px;line-height:1.55;color:#3b596b;background:#f7f2e4;border-left:3px solid #c39b47;border-radius:7px;padding:11px 13px;margin:17px 0 4px}
+.ks-lobby-support-help strong{color:#173953}
+.ks-player-list{gap:10px}
+.ks-player-item{display:grid;grid-template-columns:minmax(115px,.72fr) minmax(0,2fr);align-items:center;background:#fcfaf2;border-color:#e5d8bd;padding:14px 16px}
+.ks-player-item>.ks-player-name{display:flex;align-items:center;gap:9px;color:#173953;font-size:15px}
+.ks-player-item>.ks-player-name svg{color:#b18a3e;flex-shrink:0}
+.ks-player-support{display:grid;gap:8px;min-width:0}
+.ks-player-support label{display:flex;justify-content:space-between;align-items:center;gap:10px;min-width:0;font-weight:750;font-size:12px;color:#55687a}
+.ks-player-support label strong{color:#133953;text-align:right;font-size:12px}
+.ks-player-support input[type=range]{appearance:none;-webkit-appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,#193c5a 0%,#9a8a62 45%,#eec86a 100%);cursor:pointer;margin:8px 0 3px}
+.ks-player-support input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:21px;height:21px;border-radius:50%;border:3px solid #fffaf1;background:#153a55;box-shadow:0 0 0 2px #d6ab53,0 2px 5px #153a553d}
+.ks-player-support input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;border:3px solid #fffaf1;background:#153a55;box-shadow:0 0 0 2px #d6ab53}
+.ks-player-support input[type=range]:focus-visible{outline:3px solid #c99c41;outline-offset:6px}
+.ks-player-support input[type=range]:disabled{opacity:.5;cursor:wait}
+.ks-support-ticks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;color:#6b777f;font-weight:650;font-size:10px;line-height:1.25;text-align:center}
+.ks-support-ticks span:first-child{text-align:left}.ks-support-ticks span:last-child{text-align:right}
+.ks-music-tip{display:flex;align-items:center;gap:11px;padding:11px 13px;margin:7px 0 8px;border:1px solid #ddc17b;border-radius:12px;background:#fff4d9;color:#173953;box-shadow:0 3px 12px #162d4d10;font-size:12px;line-height:1.45}
+.ks-music-tip>svg{color:#ad8028;flex-shrink:0}.ks-music-tip>span{flex:1}.ks-music-tip button{border:0;background:none;color:#26495e;font-size:19px;cursor:pointer}
+@media(max-width:520px){.ks-player-item{grid-template-columns:1fr;padding:13px;gap:12px}.ks-player-support label{min-width:0}.ks-support-ticks{font-size:9px}}

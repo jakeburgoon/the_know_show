@@ -48,7 +48,7 @@ export default function Home() {
       <div className="v11entryheading"><p className="v11sectionkicker">GAME NIGHT STARTS HERE</p><h2 id="v11startheading">Ready to play?</h2><p>Host a new game or join one that’s already getting started.</p></div>
       <div className="v11entrygrid">
         <section className="v11entrycard v11createcard" aria-labelledby="v11createheading"><div className="v11cardtop"><div className="v11cardicon"><Clapperboard size={24}/></div><span className="v11steplabel">01 / HOST</span></div>
-          <h3 id="v11createheading">Host a show</h3><p>Answer four quick setup questions, invite your players, and start the show.</p>
+          <h3 id="v11createheading">Host a show</h3><p>Make two quick choices, invite players, set each player’s answer support, and start the show.</p>
           <label htmlFor="passcode" className="v11fieldlabel">Room passcode <span>Optional, if configured</span></label>
           <input id="passcode" className="v11field" type="password" value={passcode} onChange={e=>setPasscode(e.target.value)} autoComplete="off" placeholder="Leave blank if not needed"/>
           <button type="button" className="v11action v11actiongold" disabled={busy} onClick={createRoom}>{busy?'Creating your room…':'Host a show'}<ArrowRight size={19}/></button>
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
-    <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
-    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.5.9</span></footer>
+    <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Choose from over 50 categories</strong><span>Explore regular and seasonal trivia.</span></div><div><Check size={20}/><strong>Take on 25 questions</strong><span>Two rounds of 12, plus one final question.</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Use hints and try to double your points.</span></div></section>
+    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.6.2</span></footer>
   </main>;
 }

@@ -142,7 +142,7 @@ function TV({view,code,origin,now,preview=false,returnToHost=false}:{view:GameVi
 function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1}){
  const soundtrack=SUNO_SOUNDTRACKS.find(t=>t.id===music);
  const track=soundtrack?.arrangements[arrangement];
- const [open,setOpen]=useState(false);
+ const [open,setOpen]=useState(Boolean(track));
  const lastTrack=useRef<string|undefined>(track?.id);
  // A newly selected room track opens the host player's panel, including when
  // another player chose it. Suno still requires the host to press Play.
@@ -155,6 +155,35 @@ function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1})
    <iframe key={track.id} title={`Host phone music: ${soundtrack?.label} track ${arrangement+1}`} src={sunoEmbedUrl(track.id)} allow="autoplay; encrypted-media; fullscreen" referrerPolicy="strict-origin-when-cross-origin" loading="eager"/>
    <small>Host: press Play in the music player to start the selected track. You can hide the panel while it plays.</small>
  </details>;
+}
+/** Each player's support is a Green Room decision, not a global setup option. */
+const PLAYER_SUPPORT=['off','hard','medium-hard','all'] as const;
+const PLAYER_SUPPORT_LABELS=['All written','Options: Hard','Options: Medium + Hard','Options: All questions'] as const;
+function PlayerAnswerSupport({player,busy,onSave}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>}){
+ const currentIndex=()=>Math.max(0,PLAYER_SUPPORT.indexOf(player.choiceAccess??'off'));
+ const [level,setLevel]=useState(currentIndex);
+ const pending=useRef<number|null>(null);
+ const saveTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+ const onSaveRef=useRef(onSave);onSaveRef.current=onSave;
+ const serverLevel=useRef(currentIndex());serverLevel.current=currentIndex();
+ useEffect(()=>{
+   if(pending.current===serverLevel.current)pending.current=null;
+   if(pending.current===null)setLevel(serverLevel.current);
+ },[player.choiceAccess]);
+ useEffect(()=>()=>{if(saveTimer.current!==null)clearTimeout(saveTimer.current);},[]);
+ const choose=(next:number)=>{
+   setLevel(next);pending.current=next;
+   if(saveTimer.current!==null)clearTimeout(saveTimer.current);
+   saveTimer.current=setTimeout(async()=>{
+     const saved=await onSaveRef.current(PLAYER_SUPPORT[next]);
+     if(!saved){pending.current=null;setLevel(serverLevel.current);}
+   },350);
+ };
+ return <div className="ks-player-support">
+   <label htmlFor={`support-${player.id}`}><span>Answer support</span><strong>{PLAYER_SUPPORT_LABELS[level]}</strong></label>
+   <input id={`support-${player.id}`} type="range" min={0} max={3} step={1} value={level} disabled={busy} aria-label={`${player.name} answer support`} aria-valuetext={PLAYER_SUPPORT_LABELS[level]} onChange={e=>choose(Number(e.target.value))}/>
+   <div className="ks-support-ticks" aria-hidden="true"><span>Written</span><span>Hard</span><span>Medium + Hard</span><span>All</span></div>
+ </div>;
 }
 /** Compact shared music control. Only the host phone or TV actually plays audio. */
 function RoomMusicMenu({settings,canChoose,isHost,busy,onChoose,onPermissionChange}:{settings:Settings;canChoose:boolean;isHost:boolean;busy:boolean;onChoose:(music:MusicStyle,arrangement:0|1)=>void;onPermissionChange:(enabled:boolean)=>void}){
@@ -212,7 +241,8 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const [setupStep,setSetupStep]=useState(0),[hostPlaying,setHostPlaying]=useState(false),[hostName,setHostName]=useState('');
  const [timerSounds,setTimerSounds]=useState(false),[draftSaved,setDraftSaved]=useState(false),[returnToHost,setReturnToHost]=useState(false);
  const [focusDispute,setFocusDispute]=useState(false);
- const [musicNotice,setMusicNotice]=useState('');
+ const [musicNotice,setMusicNotice]=useState(''),[showMusicTip,setShowMusicTip]=useState(false);
+ const firstPlayerMusicTip=useRef(false);
  const disputeTargetRef=useRef<HTMLDivElement>(null);
  const [serverOffset,setServerOffset]=useState(0);
  const serverOffsetRef=useRef(0),serverClockReady=useRef(false);
@@ -228,7 +258,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  useEffect(()=>{
    let cancelled=false;
    setOrigin(window.location.origin);
-   try {setSetupStep(Math.min(4,Math.max(0,Number(localStorage.getItem(`knowshow:${code}:setupStep`)||0))));setTimerSounds(false);}catch{/* Private browsing is fine. */}
+   try {setSetupStep(Math.min(2,Math.max(0,Number(localStorage.getItem(`knowshow:${code}:setupStep`)||0))));setTimerSounds(false);}catch{/* Private browsing is fine. */}
    if(displayOnly){
      try{setReturnToHost(Boolean(localStorage.getItem(`knowshow:${code}:host`)));}catch{/* Some TV browsers disable storage. */}
      setReady(true);return;
@@ -291,7 +321,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const join=async(joinName=name,keepHost=false)=>{setBusy(true);setError('');try{const res=await fetch(`/api/rooms/${code}/join`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:joinName})});const d=await res.json();if(!res.ok)throw new Error(d.error||'Could not join.');localStorage.setItem(`knowshow:${code}:player`,d.token);lastRev.current=-1;setPlayerToken(d.token);if(!keepHost){setTab('player');setView(d.view);lastRev.current=d.view.revision;}else{setHostPlaying(true);void refresh();}}catch(e){setError(e instanceof Error?e.message:'Could not join.');}finally{setBusy(false);}};
  const role=view?.role.kind||'spectator',isHost=!displayOnly&&tab==='host'&&role==='host',isPlayer=!displayOnly&&tab==='player'&&role==='player';
  const advanceSetup=async(update:Partial<Settings>)=>{if(await act({type:'settings',settings:update},hostToken)){
-   setSetupStep(step=>{const next=Math.min(4,step+1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});
+   setSetupStep(step=>{const next=Math.min(2,step+1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});
  }};
  const playTone=useCallback((kind:'tick'|'end')=>{
    try{
@@ -358,6 +388,13 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  useEffect(()=>{if(activeKey&&activeKey!==lastKey.current){lastKey.current=activeKey;setAnswerDraft(view?.active?.myDraft??'');setDoubleTake(false);setDraftSaved(false);}},[activeKey]);
  useEffect(()=>{if(view?.phase==='final-wager'){setFinalDraft('');setDraftSaved(false);setWager(0);}else if(view?.phase==='final-question'&&view.final?.myDraft&&finalDraftRef.current==='')setFinalDraft(view.final.myDraft);},[view?.phase]);
  useEffect(()=>{if(!musicNotice)return;const t=setTimeout(()=>setMusicNotice(''),7000);return()=>clearTimeout(t);},[musicNotice]);
+ // Show the music control once when the host first enters Player View.
+ useEffect(()=>{
+   if(!displayOnly&&hostToken&&tab==='player'&&view&&view.phase!=='lobby'&&view.phase!=='finished'&&!firstPlayerMusicTip.current){
+     firstPlayerMusicTip.current=true;setShowMusicTip(true);
+   }
+ },[displayOnly,hostToken,tab,view?.phase]);
+ useEffect(()=>{if(!showMusicTip)return;const timer=setTimeout(()=>setShowMusicTip(false),6500);return()=>clearTimeout(timer);},[showMusicTip]);
  // The host phone should also be notified when a different player changes
  // the room soundtrack; the embedded Suno player still needs a Play tap.
  useEffect(()=>{
@@ -391,9 +428,9 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  if(!view)return <main className="v2loading"><h2>Can't open this room</h2><p>{error}</p><Link href="/">Create a new show</Link></main>;
  if(view.phase==='closed')return <main className="v2loading"><p>Taking everyone back to the homepage…</p><Link href="/">Return home</Link></main>;
  if(displayOnly)return <TV view={view} code={code} origin={origin} now={timerNow} returnToHost={returnToHost}/>;
- if(isHost&&view.phase==='lobby'&&setupStep<4)return <HostWizard key={setupStep} step={setupStep} settings={view.settings} busy={busy} error={error} onNext={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
- if(isHost&&view.phase==='lobby'&&setupStep>=4){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
-   const answerLabel=(access:Player['choiceAccess'])=>access==='all'?'Four choices · always':access==='medium-hard'?'Four choices · medium and hard':access==='hard'?'Four choices · hard only':'Written answers';
+ if(isHost&&view.phase==='lobby'&&setupStep<2)return <HostWizard key={setupStep} step={setupStep} settings={view.settings} busy={busy} error={error} onNext={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
+ if(isHost&&view.phase==='lobby'&&setupStep>=2){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
+
    return <main className="ks-lobby"><header className="ks-lobby-top"><img src="/know-show-logo.png" alt="The Know Show"/><span>ROOM · {code}</span></header>
      <section className="ks-lobby-hero"><p className="ks-tag">GREEN ROOM</p><p>Scan to join. Players and teams appear below as they connect.</p>
        {origin&&<div className="ks-lobby-qr"><QRCodeSVG value={roomUrl} size={235} marginSize={2}/></div>}
@@ -403,20 +440,20 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
        {shareMessage&&<p role="status">{shareMessage}</p>}
      </section>
      <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
-      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><div><strong><CheckCircle size={18}/>{p.name}</strong><small>{answerLabel(p.choiceAccess)}</small></div><label>Answer style<select value={p.choiceAccess??'off'} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,choiceAccess:e.target.value as Player['choiceAccess']})}><option value="off">Write answers</option><option value="all">Four choices · always</option><option value="medium-hard">Four choices · medium &amp; hard</option><option value="hard">Four choices · hard only</option></select></label></div>)}</div>}
-      <p className="ks-muted">{view.settings.answerStyle==='mixed'?'Mixed format: set the answer style for each player above.':'You can override anyone’s starting format above.'} The Final Word is always written for everyone.</p>
+      <p className="ks-lobby-support-help">Choose how each person answers. Move the slider right for four choices on Hard questions, then Medium and Hard, or all questions. Different support levels can help level the playing field across ages and abilities. <strong>The final question is written for everyone.</strong></p>
+      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
       {!playerToken?<div className="ks-lobby-hostplay"><label className="ks-host-checkbox"><input type="checkbox" checked={hostPlaying} onChange={e=>setHostPlaying(e.target.checked)}/><strong>Will you be participating as a player?</strong></label>
       {hostPlaying&&<form onSubmit={e=>{e.preventDefault();if(hostName.trim())void join(hostName.trim(),true);}}><label>Your name<input value={hostName} maxLength={28} minLength={2} required placeholder="Enter your player name" onChange={e=>setHostName(e.target.value)}/></label><button disabled={busy||hostName.trim().length<2}>Join the players</button></form>}</div>:<div className="ks-lobby-hostplay"><CheckCircle size={19}/> You’re playing too! Your player account is connected to this host device.</div>}
      </section>
-     <details className="ks-lobby-extras"><summary>Additional settings &amp; accommodations</summary><label>Question time<select value={view.settings.answerSeconds} disabled={busy} onChange={e=>void act({type:'settings',settings:{answerSeconds:Number(e.target.value)}})}>{[15,20,25,30,45,60].map(n=><option key={n} value={n}>{n} seconds</option>)}</select></label><label>Standard hints<select value={view.settings.normalHints} disabled={busy} onChange={e=>void act({type:'settings',settings:{normalHints:Number(e.target.value)}})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n} hints</option>)}</select></label>{view.settings.music!=='off'&&<label>Soundtrack arrangement<select value={view.settings.arrangement} disabled={busy} onChange={e=>void act({type:'settings',settings:{arrangement:Number(e.target.value) as 0|1}})}><option value="0">Arrangement 1</option><option value="1">Arrangement 2</option></select></label>}{view.players.map(p=><div key={p.id}><strong>{p.name}</strong><label>Extra time<select value={p.bonusTimeSeconds} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusTimeSeconds:Number(e.target.value)})}>{[0,5,10,15,20,30].map(n=><option key={n} value={n}>{n}s</option>)}</select></label><label>Extra hints<select value={p.bonusHints} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusHints:Number(e.target.value)})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>)}<details className="ks-lobby-pair"><summary>Pair a second host device (private)</summary><p>Only share this QR with the person helping you host. Do not put it on the TV or share it with players.</p>{origin&&<div className="ks-lobby-qr"><QRCodeSVG value={privateHostUrl} size={180} marginSize={2}/></div>}</details></details>
-     <div className="ks-lobby-actions"><button className="ks-start" type="button" disabled={busy||view.players.length<2} onClick={async()=>{if(await act({type:'start-draft'},hostToken))switchTab('player');}}>START THE SHOW! <Play size={23} fill="currentColor"/></button><small>{view.players.length<2?'At least two players or teams are needed to start.':'The category draft begins immediately. Players take turns choosing categories.'}</small><button className="ks-edit-setup" type="button" onClick={()=>{setSetupStep(0);localStorage.setItem(`knowshow:${code}:setupStep`,'0');}}>Review the four setup questions</button></div>
+     <details className="ks-lobby-extras"><summary>Additional settings</summary><label>Question time<select value={view.settings.answerSeconds} disabled={busy} onChange={e=>void act({type:'settings',settings:{answerSeconds:Number(e.target.value)}})}>{[15,20,25,30,45,60].map(n=><option key={n} value={n}>{n} seconds</option>)}</select></label><label>Standard hints<select value={view.settings.normalHints} disabled={busy} onChange={e=>void act({type:'settings',settings:{normalHints:Number(e.target.value)}})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n} hints</option>)}</select></label>{view.players.map(p=><div key={p.id}><strong>{p.name}</strong><label>Extra time<select value={p.bonusTimeSeconds} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusTimeSeconds:Number(e.target.value)})}>{[0,5,10,15,20,30].map(n=><option key={n} value={n}>{n}s</option>)}</select></label><label>Extra hints<select value={p.bonusHints} disabled={busy} onChange={e=>void act({type:'player-bonuses',playerId:p.id,bonusHints:Number(e.target.value)})}>{[0,1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>)}<details className="ks-lobby-pair"><summary>Pair a second host device (private)</summary><p>Only share this QR with the person helping you host. Do not put it on the TV or share it with players.</p>{origin&&<div className="ks-lobby-qr"><QRCodeSVG value={privateHostUrl} size={180} marginSize={2}/></div>}</details></details>
+     <div className="ks-lobby-actions"><button className="ks-start" type="button" disabled={busy||view.players.length<2} onClick={async()=>{if(await act({type:'start-draft'},hostToken))switchTab('player');}}>START THE SHOW! <Play size={23} fill="currentColor"/></button><small>{view.players.length<2?'At least two players or teams are needed to start.':'The category draft begins immediately. Players take turns choosing categories.'}</small><button className="ks-edit-setup" type="button" onClick={()=>{setSetupStep(0);localStorage.setItem(`knowshow:${code}:setupStep`,'0');}}>Review the two setup questions</button></div>
      {error&&<p role="alert" className="v2error">{error}</p>}
    </main>;
  }
  if(view.phase==='finished')return <main className="v13phonefinish">
    <header className="v13finishhead"><Link href="/"><img src="/know-show-logo.png" alt="The Know Show"/></Link><span>THE CURTAIN CALL</span></header>
    <CurtainCall players={view.players} mode="phone"/>
-   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room with the same settings and resets the scores. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(4);try{localStorage.setItem(`knowshow:${code}:setupStep`,'4');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}{error&&<p role="alert">{error}</p>}</section>
+   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room with the same settings and resets the scores. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(2);try{localStorage.setItem(`knowshow:${code}:setupStep`,'2');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}{error&&<p role="alert">{error}</p>}</section>
  </main>;
  const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.roundNames[view.round];
  const phonesOnly=(view.settings.displayMode??'tv')==='phones';
@@ -432,6 +469,7 @@ export default function ShowRoom({displayOnly=false}:{displayOnly?:boolean}){
  const finalHintPrice=view.final?.hintPrice??500;
  return <main className={'v2phone'+(view.phase==='draft'?' v2draftphase':'')+(phonesOnly?' v25phonesonly':'')+(view.phase==='lobby'?' v11lobby':'')+(tab==='host'?' v11hostmode':'')}><header className="v2phonehead"><Link href="/"><img className="v1brandlogo" src="/know-show-logo.png" alt="The Know Show"/></Link><div className="ks-room-head-actions"><span>{isHost?'HOST':isPlayer?(view.settings.mode==='teams'?'TEAM':'PLAYER'):'GUEST'} · {code}</span>{view.phase!=='lobby'&&<RoomMusicMenu settings={view.settings} canChoose={Boolean(hostToken)||(isPlayer&&view.settings.playerMusic!==false)} isHost={Boolean(hostToken)} busy={busy} onChoose={(music,arrangement)=>{void (async()=>{if(await act({type:'choose-music',music,arrangement},hostToken||authToken)){setMusicNotice(music==='off'?'Music has been turned off.':hostToken?'Open the music player and press Play to start the new track.':'Ask the host to press Play to start your selected music.');}})();}} onPermissionChange={enabled=>void act({type:'settings',settings:{playerMusic:enabled}},hostToken)}/>}</div></header>
    {musicNotice&&<div className="ks-music-notice" role="status"><Music2 size={16} aria-hidden="true"/><span>{musicNotice}</span><button type="button" aria-label="Dismiss music message" onClick={()=>setMusicNotice('')}>×</button></div>}
+   {showMusicTip&&hostToken&&tab==='player'&&<div className="ks-music-tip" role="status"><Music2 size={18} aria-hidden="true"/><span>Choose the soundtrack anytime using the <strong>Music</strong> icon at the top right. {phonesOnly?'Press Play in the music player below to start it.':'Press Play on the shared TV display to start it.'}</span><button type="button" aria-label="Dismiss music tip" onClick={()=>setShowMusicTip(false)}>×</button></div>}
    {hostToken&&<nav className={"v2viewtabs ks-two-tabs"+(view.phase!=='lobby'?" ks-during-show":"")} aria-label="Room views">
      <button type="button" className={tab==='player'?'active':''} aria-current={tab==='player'?'page':undefined} onClick={()=>switchTab('player')}>Player View</button>
      {hostToken&&<button type="button" className={tab==='host'?'active':''} aria-current={tab==='host'?'page':undefined} onClick={()=>switchTab('host')}>Host View</button>}

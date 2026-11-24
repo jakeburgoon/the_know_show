@@ -5,14 +5,18 @@ const wizard=fs.readFileSync('src/components/HostWizard.tsx','utf8');
 const show=fs.readFileSync('src/components/ShowRoom.tsx','utf8');
 const css=fs.readFileSync('src/app/globals.css','utf8');
 
-test('written answer setup clearly says no choices are displayed',()=>{
-  assert.match(wizard,/Everyone types their answers\. No answer options are given\./);
-  assert.doesNotMatch(wizard,/All players type their answers\. Final Word is always written\./);
+test('host setup asks only who plays and how it is displayed, not music or answer style',()=>{
+  assert.match(wizard,/const stages=\['Who is playing\?','How will everyone see the show\?'\]/);
+  assert.match(wizard,/QUESTION \{step\+1\} OF 2/);
+  assert.doesNotMatch(wizard,/What is the soundtrack\?|How will players answer\?|Everyone chooses/);
+  assert.match(wizard,/Continue to Green Room/);
 });
-test('the other formats describe the final question in plain language and inclusive mix',()=>{
-  assert.match(wizard,/The final question is written/);
-  assert.match(wizard,/level the playing field across ages or abilities/);
-  assert.doesNotMatch(wizard,/Final Word is written/);
+test('Green Room offers player-by-player answer support including all-written and all-choices',()=>{
+  assert.match(show,/function PlayerAnswerSupport/);
+  assert.match(show,/PLAYER_SUPPORT=\['off','hard','medium-hard','all'\]/);
+  assert.match(show,/type="range" min=\{0\} max=\{3\} step=\{1\}/);
+  assert.match(show,/Different support levels can help level the playing field/);
+  assert.match(show,/The final question is written for everyone/);
 });
 test('loading uses unchanged logo path, branded styling and reduced-motion support',()=>{
   assert.match(show,/function BrandedRoomLoading/);

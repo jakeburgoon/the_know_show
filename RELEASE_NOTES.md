@@ -1,3 +1,21 @@
+# v1.6.2 — Action-oriented homepage highlight cards
+
+The three homepage highlight cards are now ordered to introduce the variety of categories, the 25-question game structure, and the available hints and Double Takes. Copy is shorter and more inviting: “Choose from over 50 categories” / “Explore regular and seasonal trivia.”; “Take on 25 questions” / “Two rounds of 12, plus one final question.”; and “Make it yours” / “Use hints and try to double your points.” This is a complete cumulative application based on v1.6.1; no game logic, question banks, approved branding, or database schema changed.
+
+# v1.6.1 — Clearer homepage game highlights
+
+The three compact cards at the bottom of the homepage now explain the round structure (two rounds of 12 questions plus one final question), the choice of over 50 regular and seasonal categories, and the existing player tools (hints and Double Takes). No game logic, questions, settings, or branded artwork changed. This is a complete cumulative release that includes everything in v1.6.0.
+
+# v1.6.0 — Two-step hosting, per-player support, and music discovery
+
+This is a complete cumulative release based on v1.5.9. Hosts answer just two setup questions: **individuals or teams** (individuals preselected) and **TV + phones or Just phones** (Just phones preselected). Each selection stays visible until Next is pressed. The Green Room includes four-position answer-support sliders for every joined player: all written, choices on Hard, choices on Medium and Hard, or choices on all regular questions. Host choices are stored per player; The Final Word still requires a written answer. The per-player controls replace the global setup answer-format question. Host participation can still be added from the Green Room.
+
+Music is no longer a setup step. The default jazz soundtrack remains selected. In a phones-only show, the host's embedded music player initially expands when gameplay begins; a short host-only banner points to the Music icon in the upper-right for choosing music. The soundtrack still requires a manual Play action within the Suno player and is shared from a single playback device. A TV + phones show continues to play its music through the dedicated shared TV display to avoid two simultaneous audio sources.
+
+The Green Room collapsible section is named simply **Additional settings**. The duplicate soundtrack-arrangement control has been removed from that section; extra time and extra hints remain available there. Both the homepage and the short **How to Play** guide now explicitly describe the host's **two quick choices**. TV display setup, all game mechanics, scoring, 738 regular and 56 Final Word questions, and all approved artwork are preserved.
+
+No Supabase schema migration or new environment variables are required. A fresh room is recommended when testing the revised onboarding. Full Next.js production build must be verified on Vercel if unavailable locally.
+
 # v1.5.9 — Results, music, and How to Play polish
 
 This is a **complete cumulative application**, built directly on v1.5.8. You may replace earlier versions in one deployment; no intermediate upgrades, Supabase migration, or new environment variables are required.

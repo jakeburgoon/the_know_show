@@ -1,13 +1,23 @@
-THE KNOW SHOW v1.5.9
+THE KNOW SHOW — v1.6.2 · COMPLETE CUMULATIVE APP
 
-THE KNOW SHOW — v1.5.9 · FULL CUMULATIVE UPDATE
+This full project replaces v1.6.1 or any earlier release in a single deployment.
+No incremental patches, Supabase migrations, or new environment variables are required.
 
-This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
+NEW IN v1.6.2
+- Homepage cards now lead with category variety, then the 25-question game,
+  then hints and opportunities to double points.
+- All earlier v1.6.1 hosting, music, and game improvements are included.
 
-INCLUDED IN v1.5.9
-- Clearer result reviews, direct host-dispute navigation, one more second to read answers, and a longer no-show animation without the old preface.
-- Music menu closes on selection; a brief message explains who presses Play, and the host phone player opens on track changes in Just phones mode.
-- A shorter, more welcoming How to Play page and a more visible link on the homepage.
+ALSO INCLUDED FROM v1.6.0
+- Host setup has TWO quick choices: individuals or teams (individuals preselected),
+  then Just phones or TV + phones (Just phones preselected).
+- Every joined player's answer format is set with a four-position slider in the
+  Green Room: all written, Hard-only choices, Medium/Hard choices, or choices always.
+- Music is no longer a setup question. The host's player opens when the show begins
+  in Just phones mode, with a brief banner pointing to the top-right music menu.
+- The Green Room now has a shorter “Additional settings” section without redundant
+  soundtrack arrangement controls.
+- The homepage and How to Play guide both describe TWO setup choices.
 
 GITHUB / VERCEL
 1. Unzip this archive. Open its inner the-know-show folder.
@@ -17,7 +27,7 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW THROUGH v1.5.9
+INCLUDED FROM v1.5.9 AND EARLIER
 - 66 additional seasonal questions: 6 Easy, 6 Medium, 6 Hard per seasonal category, 738 regular questions total. Full additions and review notes in SEASONAL_QUESTION_EXPANSION_QA.csv.
 - Weighted, rather than exclude-and-rank, category offers; recently played categories can return, with lower probability. One eligible seasonal category is still offered every Build the Board phase.
 - Small header music menu. Players may change the shared soundtrack, unless the host disables this option. Music plays from host phone or TV, not everyone's device; opening the player/pressing Play can still be needed.
@@ -28,6 +38,6 @@ ALSO INCLUDED FROM v1.5.8
 - No change to the scoring rules or any question.
 
 VALIDATION
-56 engine tests, 19 targeted UI checks, and 21 TS/TSX syntax checks passed. Complete Next.js production build remains to be verified on Vercel. Full Next.js production build still must be confirmed on Vercel.
+56 engine tests, 24 targeted UI checks, and 21 TS/TSX syntax checks passed. Full Next.js production build still must be verified on Vercel.
 
 See README.md and RELEASE_NOTES.md for more details.

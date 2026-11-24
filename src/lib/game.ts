@@ -49,7 +49,7 @@ function answerOptions(answer:string,distractors:string[]|undefined,questionId:s
  assert(options.length===4&&new Set(options.map(x=>normalize(x))).size===4,'This question needs four distinct answer choices.');
  return options.sort((a,b)=>createHash('sha256').update(`${questionId}:${playerId}:${a}`).digest('hex').localeCompare(createHash('sha256').update(`${questionId}:${playerId}:${b}`).digest('hex')));
 }
-export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv',answerStyle:'written',playerMusic:true};}
+export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'phones',answerStyle:'written',playerMusic:true};}
 // Most-recent-last histories; reselecting a category moves it to the back of the queue.
 function rememberRecent(history:readonly string[], values:readonly string[], limit:number):string[]{
  const known=new Set(values);return [...history.filter(id=>!known.has(id)),...values].slice(-limit);
