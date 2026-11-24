@@ -1,3 +1,12 @@
+# v1.8.1 — Fixed eight-category draft and seasonal variety
+
+- Every new Build the Board phase offers eight categories for 2–8 players or teams; four are selected per round.
+- Reserve one weighted offer for an eligible in-season category, if one remains; draw the remaining offers without replacement from all other eligible categories, including additional in-season categories. No seasonal cap or required seasonal selection.
+- Preserve history-based weights, calendar eligibility, unique offers, and Round 2 exclusion of Round 1 selections. In-progress drafts keep their original offers for compatibility.
+- Update homepage version and How to Play copy; correct stale year-round count in Game settings (59).
+- Keep all 942 regular questions, 72 current Final Word questions, approved logo/app icons, and Supabase schema unchanged. No migration or environment changes required.
+- **Validation:** Focused TypeScript engine compilation and all 92 engine/UI/content tests passed. Full Next.js production build not run because application dependencies are not installed in this environment; verify on Vercel.
+
 # v1.8.0 — Three new categories and the 1,000-question milestone
 
 - **The No-Show!** is available year-round (12 regular questions); **Christmas Legends & Lore** runs November–December (18 regular); **Creepy Creatures** runs October–November (18 regular).

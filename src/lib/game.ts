@@ -2,6 +2,7 @@ import { randomInt, randomUUID, createHash } from 'node:crypto';
 import { CATEGORIES, CATEGORY_LOOKUP, CATEGORY_FINALS, FINALS, availableCategories, getQuestion } from './questions';
 
 export const MAX_SEATS=8;
+export const DRAFT_POOL_SIZE=8;
 export const FINAL_HINT_PRICE=500;
 export const MAX_FINAL_HINTS=2;
 export const ROUND_NAMES=['Round 1','Round 2'] as const;
@@ -140,16 +141,16 @@ function weightedSample<T>(items:readonly T[],count:number,weight:(item:T)=>numb
 function pickPool(s:GameState,now:number){
  const alreadySelected=new Set([...s.selected[0],...s.selected[1]]);
  const allowed=availableCategories(new Date(now)).filter(c=>!alreadySelected.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
- const total=Math.min(allowed.length,s.players.length<=3?7:s.players.length<=5?9:11);
+ const total=Math.min(allowed.length,DRAFT_POOL_SIZE);
  const seasonal=allowed.filter(c=>c.activeMonths?.length);
- const yearRound=allowed.filter(c=>!c.activeMonths?.length);
  const weight=(c:(typeof CATEGORIES)[number])=>categoryDraftWeight(s,c);
- // Always offer one in-season category when one is eligible, but let its
- // selection remain weighted, just like the year-round categories. Players
- // may choose regular categories exclusively; seasonality is never forced.
+ // Reserve one weighted seasonal offer if available. All other eligible
+ // categories, including the remaining seasonal ones, compete for the rest.
+ // Sampling without replacement prevents duplicate offers; no seasonal cap.
  const seasonalPick=seasonal.length?weightedSample(seasonal,1,weight):[];
- const standardPicks=weightedSample(yearRound,total-seasonalPick.length,weight);
- return [...seasonalPick,...standardPicks].map(c=>c.id);
+ const remaining=allowed.filter(c=>c.id!==seasonalPick[0]?.id);
+ const otherPicks=weightedSample(remaining,total-seasonalPick.length,weight);
+ return [...seasonalPick,...otherPicks].map(c=>c.id);
 }
 function goDraft(s:GameState,now:number){
  s.players.forEach(p=>p.doubleTakesRemaining=1);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s,now);

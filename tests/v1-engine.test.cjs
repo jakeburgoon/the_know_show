@@ -27,7 +27,7 @@ test('default settings use single Standard Trivia, Jazz, and 4x3 point values',(
  assert.equal(s.players.length,0);assert.deepEqual(g.ROUND_VALUES,[[100,300,500],[200,600,1000]]);
 });
 test('new draft offers limited categories, four selections and three rows',()=>{
- let {s,a}=setup(4);s=draft(s,a);assert.equal(s.draftPool.length,9);assert.equal(keys(s).length,12);assert.equal(Object.keys(s.questionMap).length,12);
+ let {s,a}=setup(4);s=draft(s,a);assert.equal(s.draftPool.length,8);assert.equal(keys(s).length,12);assert.equal(Object.keys(s.questionMap).length,12);
  assert.equal(new Set(Object.values(s.questionMap)).size,12);
 });
 test('one Double Take per player per round, correct and incorrect scoring',()=>{
@@ -456,18 +456,18 @@ test('seasonal distractors are unique, not accepted as answers, and season hints
  }
 });
 
-test('each Build the Board draft offers one eligible seasonal and nonseasonal choices',()=>{
+test('each Build the Board draft offers at least one eligible seasonal category when available',()=>{
  for(const date of ['2026-09-23','2026-11-23','2026-12-23','2027-01-23','2027-02-23']){
   let {s,a}=setup(4);const now=Date.parse(date+'T16:00:00Z');
   s=g.mutate(s,{type:'start-draft'},host,now);
-  assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1,`one seasonal: ${date}`);
-  assert.equal(s.draftPool.length,9);
-  assert.equal(s.draftPool.filter(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths).length,8,`eight classics: ${date}`);
+  assert.ok(s.draftPool.some(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths),`seasonal guarantee: ${date}`);
+  assert.equal(s.draftPool.length,8);
   const season1=s.draftPool.find(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
   // Simulate four selections (including the seasonal one), so round two excludes those picks.
   s.selected[0]=[season1,...s.draftPool.filter(id=>id!==season1).slice(0,3)];
   s.round=1;s.phase='lobby';s=g.mutate(s,{type:'start-draft'},host,now+10000);
-  assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1,`second seasonal: ${date}`);
+  const remainingSeasonal=bank.availableCategories(new Date(now+10000)).some(c=>c.activeMonths&&!s.selected[0].includes(c.id));
+  assert.equal(s.draftPool.some(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths),remainingSeasonal,`second seasonal: ${date}`);
   assert.ok(!s.draftPool.includes(season1),`do not repeat selected season: ${date}`);
  }
 });
@@ -478,13 +478,13 @@ test('seasonal offer is mandatory even when every seasonal category was recently
  s.recentCategoryIds=[...seasonal];s.recentCategoryOffers=[...seasonal];
  s=g.mutate(s,{type:'start-draft'},host,now);
  const offered=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
- assert.equal(offered.length,1);
+ assert.ok(offered.length>=1);
  assert.ok(seasonal.includes(offered[0]),'seasonal offer must remain available after being used');
- assert.equal(s.draftPool.length,7);
+ assert.equal(s.draftPool.length,8);
  s.selected[0]=[offered[0],...s.draftPool.filter(id=>id!==offered[0]).slice(0,3)];s.round=1;s.phase='lobby';
  s=g.mutate(s,{type:'start-draft'},host,now+10000);
  const offered2=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
- assert.equal(offered2.length,1);
+ assert.ok(offered2.length>=1);
  assert.notEqual(offered2[0],offered[0]);
 });
 
@@ -499,7 +499,9 @@ test('weighted seasonal choices can repeat but favor categories not recently pla
  for(let i=0;i<1200;i++){
   const draft=g.mutate(s,{type:'start-draft'},host,now);
   const eligible=draft.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
-  assert.equal(eligible.length,1);
+  assert.ok(eligible.length>=1);
+  // The first offer is the weighted seasonal guarantee; audit that draw specifically.
+  assert.equal(draft.draftPool[0],eligible[0]);
   sampleCounts.set(eligible[0],sampleCounts.get(eligible[0])+1);
  }
  const recentlyPlayedCount=sampleCounts.get(recent.id);
@@ -514,13 +516,13 @@ test('weighted selection preserves distinct categories and the current-show excl
  s.recentCategoryOffers=[...s.recentCategoryIds];
  s.recentQuestionIds=bank.CATEGORIES.flatMap(c=>Object.values(c.questionsByLevel).flat().slice(0,2).map(q=>q.id));
  s=g.mutate(s,{type:'start-draft'},host,now);
- assert.equal(s.draftPool.length,9);
+ assert.equal(s.draftPool.length,8);
  assert.equal(new Set(s.draftPool).size,s.draftPool.length);
  const picked=s.draftPool.slice(0,4);s.selected[0]=picked;s.round=1;s.phase='lobby';
  s=g.mutate(s,{type:'start-draft'},host,now+5000);
- assert.equal(s.draftPool.length,9);
+ assert.equal(s.draftPool.length,8);
  assert.ok(s.draftPool.every(id=>!picked.includes(id)));
- assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1);
+ assert.ok(s.draftPool.some(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths));
 });
 
 test('out-of-season months do not falsely offer holiday categories',()=>{
@@ -564,7 +566,7 @@ test('previously played categories remain eligible but appear less often than fr
   const draft=g.mutate(s,{type:'start-draft'},host,Date.parse('2027-03-23T15:00:00Z'));
   recentOffers+=draft.draftPool.filter(id=>recent.includes(id)).length;
  }
- const freshOffers=350*9-recentOffers;
+ const freshOffers=350*8-recentOffers;
  assert.ok(recentOffers>0,'played categories must not be hard-blocked');
  assert.ok(recentOffers/8<freshOffers/(classic.length-8),'recent categories should have lower average odds');
 });
@@ -689,4 +691,59 @@ test('final review rejects unanswered and already correct entries',()=>{
  assert.equal(s.phase,'final-results');
  assert.throws(()=>g.mutate(s,{type:'dispute'},a[0],s.final.endsAt-1000),/Only submitted answers marked incorrect/);
  assert.throws(()=>g.mutate(s,{type:'dispute'},a[1],s.final.endsAt-1000),/Only submitted answers marked incorrect/);
+});
+
+
+test('v1.8.1: eight offers in both rounds for every player count and game mode',()=>{
+ const now=Date.parse('2026-11-24T16:00:00Z');
+ for(const mode of ['individual','teams'])for(let count=2;count<=8;count++){
+  let {s,a}=setup(count,mode);s=g.mutate(s,{type:'start-draft'},host,now);
+  for(let round=0;round<2;round++){
+   assert.equal(s.draftPool.length,8,`${mode}: ${count}, round ${round+1}`);
+   assert.equal(new Set(s.draftPool).size,8);
+   assert.ok(s.draftPool.some(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths));
+   if(round)assert.ok(s.draftPool.every(id=>!s.selected[0].includes(id)));
+   for(let i=0;i<4;i++){
+    assert.equal(s.draftPool.filter(id=>!s.selected[round].includes(id)).length,8-i);
+    s=g.mutate(s,{type:'draft-category',categoryId:s.draftPool[i]},a[(i+round*4)%count],now+i+1);
+   }
+   assert.equal(s.phase,'board');assert.equal(keys(s).length,12);
+   if(!round){s.round=1;s.phase='lobby';s=g.mutate(s,{type:'start-draft'},host,now+100);}
+  }
+ }
+});
+
+test('v1.8.1: additional seasonal categories compete and four can be selected',t=>{
+ const now=Date.parse('2026-11-24T16:00:00Z');
+ let {s,a}=setup(4);
+ // Fresh categories have identical weights. Force the weighted draws to select
+ // seasonal categories from the actual eligible pool, without changing production RNG.
+ const allowed=bank.availableCategories(new Date(now));
+ const seasonal=allowed.filter(c=>c.activeMonths);
+ const targets=seasonal.slice(0,4).map(c=>c.id);
+ const remaining=allowed.filter(c=>c.id!==targets[0]);
+ const fractions=[0.5/seasonal.length];
+ for(const target of targets.slice(1)){
+  const index=remaining.findIndex(c=>c.id===target);assert.ok(index>=0);
+  fractions.push((index+0.5)/remaining.length);remaining.splice(index,1);
+ }
+ const crypto=require('node:crypto');const original=crypto.randomInt;
+ const mock=t.mock.method(crypto,'randomInt',max=>max===1_000_000_000&&fractions.length?Math.floor(fractions.shift()*max):original(max));
+ s=g.mutate(s,{type:'start-draft'},host,now);mock.mock.restore();
+ assert.deepEqual(s.draftPool.slice(0,4),targets);
+ for(let i=0;i<4;i++)s=g.mutate(s,{type:'draft-category',categoryId:targets[i]},a[i],now+i+1);
+ assert.equal(s.phase,'board');assert.deepEqual(s.selected[0],targets);assert.equal(keys(s).length,12);
+ s=finishRound(s,a,now+10000);
+ assert.equal(s.round,1);assert.equal(s.phase,'draft');assert.equal(s.draftPool.length,8);
+ assert.ok(s.draftPool.every(id=>!targets.includes(id)));
+ assert.ok(s.draftPool.some(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths));
+});
+
+test('v1.8.1: when Round 1 uses every in-season category, Round 2 offers eight year-round categories',()=>{
+ const now=Date.parse('2026-09-24T16:00:00Z');
+ let {s}=setup(2);const eligible=bank.availableCategories(new Date(now));
+ const seasonal=eligible.filter(c=>c.activeMonths);assert.equal(seasonal.length,2);
+ s.selected[0]=[...seasonal,...eligible.filter(c=>!c.activeMonths).slice(0,2)].map(c=>c.id);
+ s.round=1;s=g.mutate(s,{type:'start-draft'},host,now);
+ assert.equal(s.draftPool.length,8);assert.ok(s.draftPool.every(id=>!bank.CATEGORY_LOOKUP.get(id).activeMonths&&!s.selected[0].includes(id)));
 });

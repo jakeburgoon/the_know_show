@@ -1,3 +1,9 @@
+# v1.8.1 — Build the Board: eight choices, more seasonal variety
+
+Each round offers **eight categories**, regardless of the number of players or teams, and players select four. When an unselected, in-season category is eligible, one offer is guaranteed; the remaining seven are drawn from all other eligible categories with the existing history and question-variety weights. There is no seasonal cap, and no obligation to choose seasonal content. Round 2 excludes all four Round 1 selections. Existing in-progress drafts keep their stored offers; new drafts use the new rules.
+
+The 72-category, 1,014-question library and approved branding are unchanged. No Supabase migration or new environment variables are needed.
+
 # v1.8.0 — 1,000-question milestone
 
 Complete cumulative application update based on v1.7.0. Adds **The No-Show!** (year-round; 12 regular questions), **Christmas Legends & Lore** (November–December; 18 regular questions), and **Creepy Creatures** (October–November; 18 regular questions), plus **three separate Final Word questions**. Totals: **72 categories, 942 regular questions, 72 category-linked Final Word questions — 1,014 questions**.
@@ -36,13 +42,13 @@ Each four-choice player sees a private, single-tap selection on their phone for 
 ## Game rules and features
 
 - Up to eight individual players or eight teams; the host can also participate on the same device.
-- Players choose four categories per round. Three questions per category: 12 per round, 24 total.
+- Players choose four categories from eight offers per round, independent of player count. Three questions per category: 12 per round, 24 total.
 - Round 1: 100 / 300 / 500. Round 2: 200 / 600 / 1000.
 - One Double Take per player per round; regular written hints and optional extra time are configurable.
 - TV + Phones or Phones Only; Cool Jazz default with alternate Suno soundtracks. During a show, a compact header music menu lets anyone in the room select the shared track, unless the host turns that permission off. Audio plays only from the host phone or TV. The embedded player may require pressing Play after a track change.
 - Host dispute/ruling controls, automatic return to Player View, replay tracking between rematches and new shows created on the same host browser, room codes, and in-app camera QR joining.
 - The larger sound-effects panel is deferred; prominent synced Final Word timer. Answer-first results animation with ✓/✕, points changes and a leaderboard beat.
-- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase offers one eligible seasonal category (when at least one is in season), alongside year-round categories; players are not required to select it. The 58 year-round categories remain available at all times.
+- Seasonal categories become eligible automatically in the applicable months using US Eastern calendar time. Every Build the Board phase guarantees at least one eligible seasonal category if available; other eligible seasonal categories also compete for the remaining spots. Players are not required to choose one. The 59 year-round categories remain eligible throughout the year, subject to the same-show exclusion.
 - Navy-and-gold Curtain Call with trophy, confetti, prominently displayed winner(s) and one final standings table. Ties share the same rank.
 
 ## Final Word question selection and audit
@@ -73,7 +79,7 @@ For the detailed changes and validation limits, see `RELEASE_NOTES.md`. A full p
 
 ## Calendar categories and repetition
 
-Seasonal category visibility is automatic: Thanksgiving, Veterans Day & Military Traditions, and Native American History & Culture (November); Christmas Movies and Christmas Music (November–December); Harvest Time and College Football Traditions (September–November); Winter Holidays, Winter Traditions and Winter Olympics (December–February); New Year Traditions (December–January). Each now offers 18 questions (six per difficulty). Category offers use weighted random selection: recently played or offered categories are less likely but are never excluded solely for being used before. The number of unseen questions in each category also affects its probability. One eligible seasonal category is still offered per draft when in season. Individual question selection prioritizes unseen questions, then least-recently-used questions. A finite pool can still eventually repeat. For a **new show created from the same hosting browser**, game history is retained in local storage; **Rematch** retains it in the room state as well. A different host device/browser does not share that history automatically.
+Seasonal category visibility is automatic: Thanksgiving, Veterans Day & Military Traditions, and Native American History & Culture (November); Christmas Movies and Christmas Music (November–December); Harvest Time and College Football Traditions (September–November); Winter Holidays, Winter Traditions and Winter Olympics (December–February); New Year Traditions (December–January); Christmas Legends & Lore (November–December); Creepy Creatures (October–November). Each offers 18 questions (six per difficulty). Category offers use weighted random selection: recently played or offered categories are less likely but are never excluded solely for being used before. The number of unseen questions in each category also affects its probability. At least one eligible seasonal category is offered per draft when available; additional seasonal categories may also appear. Individual question selection prioritizes unseen questions, then least-recently-used questions. A finite pool can still eventually repeat. For a **new show created from the same hosting browser**, game history is retained in local storage; **Rematch** retains it in the room state as well. A different host device/browser does not share that history automatically.
 
 The 66 added seasonal questions were screened for contextual answer types, plausible alternatives, hint usefulness, category balance, and answer overlap with Final Word. Their individual reference links and editorial notes are in `SEASONAL_QUESTION_EXPANSION_QA.csv`. Original seasonal questions are in `SEASONAL_QUESTION_QA.csv`. This editorial review is not independent source corroboration of every trivia fact.
 
