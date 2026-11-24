@@ -1,3 +1,9 @@
+# v1.11.1 — Visual trivia pilot
+
+- Flags of the World: 12 regular questions and one Final Word, all visual. 76 categories, 1,072 playable questions.
+- Optional local image metadata, shared phone/host/TV renderer, image-aware feedback and export. No new database migration after v1.10.0.
+- See `V111_IMAGE_PILOT.md` and `IMAGE_CREDITS.json`. Deploy between shows.
+
 # v1.10.0 — Player feedback and private developer dashboard
 
 - Optional question feedback after regular and Final Word reveals; optional show feedback after the Curtain Call.
@@ -147,3 +153,7 @@ The 66 added seasonal questions were screened for contextual answer types, plaus
 
 ### Repeat protection (v1.5.5)
 The app remembers recent categories and questions within a host browser and recovers the host's recent room histories from Supabase when starting a new show. This reduces repeats across new room codes and rematches on the same browser; it does not yet synchronize histories across browsers or account logins. For the best experience, keep hosting from the same browser until optional account sign-in becomes available. See RELEASE_NOTES.md for details.
+
+
+- Famous Landmarks: 12 regular questions and one Final Word, all visual.
+- Flags of the World: Hard tier adjusted toward recognizable countries for better playtesting calibration.

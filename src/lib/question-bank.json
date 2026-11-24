@@ -1,5 +1,5 @@
 {
-  "version": "1.9.2",
+  "version": "1.11.1",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -18303,6 +18303,588 @@
         11,
         12
       ]
+    },
+    {
+      "id": "flags-world",
+      "name": "Flags of the World",
+      "description": "Identify countries from their national flags. Every question includes an image.",
+      "type": "classic",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "flags-pilot-01",
+            "level": 1,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Japan",
+            "aliases": [],
+            "hint": "Its capital is Tokyo.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Bangladesh",
+              "South Korea",
+              "China"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/japan",
+            "image": {
+              "src": "/trivia-images/f8c6b61e0cbecd08.svg",
+              "alt": "White field with a centered red circle.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-02",
+            "level": 1,
+            "prompt": "Which country does this flag represent?",
+            "answer": "France",
+            "aliases": [],
+            "hint": "Its capital is Paris.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Italy",
+              "Netherlands",
+              "Belgium"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/france",
+            "image": {
+              "src": "/trivia-images/704064bdb86c857a.svg",
+              "alt": "Three equal vertical bands: blue, white and red.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-03",
+            "level": 1,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Germany",
+            "aliases": [],
+            "hint": "Berlin is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Belgium",
+              "Austria",
+              "Spain"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/germany",
+            "image": {
+              "src": "/trivia-images/1c76da186d3c2f27.svg",
+              "alt": "Three equal horizontal bands: black, red and gold.",
+              "width": 1200,
+              "height": 720
+            }
+          },
+          {
+            "id": "flags-pilot-04",
+            "level": 1,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Italy",
+            "aliases": [],
+            "hint": "Rome is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Ireland",
+              "France",
+              "Mexico"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/italy",
+            "image": {
+              "src": "/trivia-images/b52eb9af5368d95a.svg",
+              "alt": "Three equal vertical bands: green, white and red.",
+              "width": 1200,
+              "height": 800
+            }
+          }
+        ],
+        "2": [
+          {
+            "id": "flags-pilot-05",
+            "level": 2,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Sweden",
+            "aliases": [],
+            "hint": "Stockholm is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Finland",
+              "Norway",
+              "Denmark"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/sweden",
+            "image": {
+              "src": "/trivia-images/a1f6aa2a1daa25d3.svg",
+              "alt": "Blue field with a yellow Nordic cross offset toward the hoist.",
+              "width": 1200,
+              "height": 750
+            }
+          },
+          {
+            "id": "flags-pilot-06",
+            "level": 2,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Ukraine",
+            "aliases": [],
+            "hint": "Kyiv is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Lithuania",
+              "Romania",
+              "Sweden"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/ukraine",
+            "image": {
+              "src": "/trivia-images/7c526e68e9372649.svg",
+              "alt": "Two equal horizontal bands: blue above yellow.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-07",
+            "level": 2,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Switzerland",
+            "aliases": [],
+            "hint": "This Alpine country has Bern as its federal city.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Denmark",
+              "Austria",
+              "Georgia"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/switzerland",
+            "image": {
+              "src": "/trivia-images/a4e77e3f4ca9bbd6.svg",
+              "alt": "Square red field with a centered upright white cross.",
+              "width": 1200,
+              "height": 1200
+            }
+          },
+          {
+            "id": "flags-pilot-08",
+            "level": 2,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Bangladesh",
+            "aliases": [],
+            "hint": "Dhaka is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Pakistan",
+              "Japan",
+              "Maldives"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/bangladesh",
+            "image": {
+              "src": "/trivia-images/85072c016e82443f.svg",
+              "alt": "Dark green field with a red circle slightly left of center.",
+              "width": 1200,
+              "height": 720
+            }
+          }
+        ],
+        "3": [
+          {
+            "id": "flags-pilot-09",
+            "level": 3,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Greece",
+            "aliases": [],
+            "hint": "Athens is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Finland",
+              "Israel",
+              "Norway"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/greece",
+            "image": {
+              "src": "/trivia-images/c1a7f9e2d4b68a10.svg",
+              "alt": "Blue and white striped flag with a white cross in a blue canton.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-10",
+            "level": 3,
+            "prompt": "Which country does this flag represent?",
+            "answer": "India",
+            "aliases": [
+              "Republic of India"
+            ],
+            "hint": "New Delhi is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Ireland",
+              "Niger",
+              "Ivory Coast"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/india",
+            "image": {
+              "src": "/trivia-images/9f2b7c4d1e8a6035.svg",
+              "alt": "Horizontal saffron, white, and green bands with a navy wheel in the center.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-11",
+            "level": 3,
+            "prompt": "Which country does this flag represent?",
+            "answer": "Mexico",
+            "aliases": [
+              "United Mexican States"
+            ],
+            "hint": "Mexico City is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Italy",
+              "Hungary",
+              "Bulgaria"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/mexico",
+            "image": {
+              "src": "/trivia-images/e4b9081c7d2f6a33.svg",
+              "alt": "Vertical green, white, and red bands with a small emblem centered in the white band.",
+              "width": 1200,
+              "height": 800
+            }
+          },
+          {
+            "id": "flags-pilot-12",
+            "level": 3,
+            "prompt": "Which country does this flag represent?",
+            "answer": "South Korea",
+            "aliases": [
+              "Republic of Korea"
+            ],
+            "hint": "Seoul is its capital.",
+            "categoryId": "flags-world",
+            "distractors": [
+              "Japan",
+              "North Korea",
+              "Taiwan"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceUrl": "https://flagpedia.net/south-korea",
+            "image": {
+              "src": "/trivia-images/7ab3d5e9c1024f68.svg",
+              "alt": "White field with a red and blue circle in the center and four black trigrams near the corners.",
+              "width": 1200,
+              "height": 800
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "famous-landmarks",
+      "name": "Famous Landmarks",
+      "description": "Identify famous landmarks from images. Every question includes an image.",
+      "type": "classic",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "landmarks-pilot-01",
+            "level": 1,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Eiffel Tower",
+            "aliases": [
+              "La Tour Eiffel"
+            ],
+            "hint": "This Paris landmark was built for the 1889 World's Fair.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Tokyo Tower",
+              "Blackpool Tower",
+              "Space Needle"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+            "image": {
+              "src": "/trivia-images/2d7ac4e91f6058b3.svg",
+              "alt": "A tall iron lattice tower with four curved legs narrowing to a point.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-02",
+            "level": 1,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Statue of Liberty",
+            "aliases": [
+              "Liberty Enlightening the World"
+            ],
+            "hint": "This colossal statue stands in New York Harbor.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Christ the Redeemer",
+              "The Thinker",
+              "Little Mermaid"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
+            "image": {
+              "src": "/trivia-images/84f2c0d71a9b5e46.svg",
+              "alt": "A robed green statue holding a torch aloft.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-03",
+            "level": 1,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Great Pyramid of Giza",
+            "aliases": [
+              "Great Pyramid",
+              "Pyramid of Khufu"
+            ],
+            "hint": "This ancient wonder stands in Egypt.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Louvre Pyramid",
+              "Temple of Kukulcán",
+              "Machu Picchu"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+            "image": {
+              "src": "/trivia-images/c8e15a703b4d92f1.svg",
+              "alt": "A massive desert pyramid with a triangular silhouette.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-04",
+            "level": 1,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Big Ben",
+            "aliases": [
+              "Elizabeth Tower"
+            ],
+            "hint": "This clock tower stands at the Palace of Westminster in London.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Leaning Tower of Pisa",
+              "Philadelphia City Hall",
+              "CN Tower"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Big_Ben",
+            "image": {
+              "src": "/trivia-images/5f9a1d3c7e4b2680.svg",
+              "alt": "A tall ornate clock tower with a large clock face.",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        ],
+        "2": [
+          {
+            "id": "landmarks-pilot-05",
+            "level": 2,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Taj Mahal",
+            "aliases": [],
+            "hint": "This white marble mausoleum is in Agra, India.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Blue Mosque",
+              "Buckingham Palace",
+              "The White House"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Taj_Mahal",
+            "image": {
+              "src": "/trivia-images/d1b7e4a96c2f5038.svg",
+              "alt": "A large white domed building with symmetrical minarets.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-06",
+            "level": 2,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Sydney Opera House",
+            "aliases": [],
+            "hint": "This performing arts center sits on Sydney Harbour.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Guggenheim Museum Bilbao",
+              "Lotus Temple",
+              "Marina Bay Sands"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Sydney_Opera_House",
+            "image": {
+              "src": "/trivia-images/6c0e8d1f2a7b4593.svg",
+              "alt": "A waterfront building with distinctive white sail-like shells.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-07",
+            "level": 2,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Leaning Tower of Pisa",
+            "aliases": [
+              "Tower of Pisa"
+            ],
+            "hint": "This Italian bell tower is famous for its tilt.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Big Ben",
+              "Campanile di San Marco",
+              "Washington Monument"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
+            "image": {
+              "src": "/trivia-images/a37e5d9c1b6042f8.svg",
+              "alt": "A cylindrical stone tower that visibly leans to one side.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-08",
+            "level": 2,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Mount Rushmore",
+            "aliases": [
+              "Mount Rushmore National Memorial"
+            ],
+            "hint": "Four U.S. presidents are carved into this South Dakota mountainside.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Stone Mountain",
+              "Crazy Horse Memorial",
+              "Devils Tower"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Mount_Rushmore",
+            "image": {
+              "src": "/trivia-images/f4a81c6e2d9b3057.svg",
+              "alt": "A mountainside sculpture featuring four presidential faces.",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        ],
+        "3": [
+          {
+            "id": "landmarks-pilot-09",
+            "level": 3,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Colosseum",
+            "aliases": [
+              "Coliseum"
+            ],
+            "hint": "This ancient Roman amphitheater stands in Italy's capital.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Pantheon",
+              "Roman Forum",
+              "Parthenon"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Colosseum",
+            "image": {
+              "src": "/trivia-images/39d2f7a1c8e45b60.svg",
+              "alt": "An oval ancient stone amphitheater with multiple arches.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-10",
+            "level": 3,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Christ the Redeemer",
+            "aliases": [
+              "Cristo Redentor"
+            ],
+            "hint": "This giant statue overlooks Rio de Janeiro.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Statue of Liberty",
+              "Motherland Calls",
+              "The Thinker"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Christ_the_Redeemer_(statue)",
+            "image": {
+              "src": "/trivia-images/b5e70a1d4c8f2639.svg",
+              "alt": "A large statue of Jesus with outstretched arms atop a mountain.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-11",
+            "level": 3,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Sagrada Familia",
+            "aliases": [
+              "La Sagrada Familia",
+              "Basílica de la Sagrada Família"
+            ],
+            "hint": "This still-unfinished basilica is one of Barcelona's most famous landmarks.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Notre-Dame Cathedral",
+              "Westminster Abbey",
+              "Cologne Cathedral"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Sagrada_Família",
+            "image": {
+              "src": "/trivia-images/1e9c4d7a5b8032f6.svg",
+              "alt": "A large church with several tall tapering spires.",
+              "width": 1200,
+              "height": 900
+            }
+          },
+          {
+            "id": "landmarks-pilot-12",
+            "level": 3,
+            "prompt": "Which landmark is shown in this image?",
+            "answer": "Stonehenge",
+            "aliases": [],
+            "hint": "This prehistoric stone circle is in southern England.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Avebury",
+              "Giant's Causeway",
+              "Mount Rushmore"
+            ],
+            "sourceStatus": "Editorial pilot: original SVG illustration",
+            "sourceUrl": "https://en.wikipedia.org/wiki/Stonehenge",
+            "image": {
+              "src": "/trivia-images/af3d8c1e704b5269.svg",
+              "alt": "Several upright stone slabs topped with horizontal lintels.",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        ]
+      }
     }
   ]
 }

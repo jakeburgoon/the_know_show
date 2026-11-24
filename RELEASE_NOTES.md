@@ -1,3 +1,9 @@
+# v1.11.1 — Visual trivia pilot
+
+- Flags of the World: 12 regular questions and one Final Word, all visual. 76 categories, 1,072 playable questions.
+- Optional local image metadata, shared phone/host/TV renderer, image-aware feedback and export. No new database migration after v1.10.0.
+- See `V111_IMAGE_PILOT.md` and `IMAGE_CREDITS.json`. Deploy between shows.
+
 # v1.10.0 — Feedback pilot
 
 - Question feedback, post-show feedback, developer review and CSV export. Signed feedback invitations preserve question context across phase changes; anonymous reports are deduplicated by participant and show.
@@ -339,3 +345,7 @@ Replaced the old small winner label and competing score listings with a dedicate
 - **A complete Next.js production build and browser-based visual QA were not run** in this environment because the npm dependencies could not be installed. Inspect your Vercel build output after uploading, and try the finish screen on a phone and TV.
 - No Supabase schema changes, environment variable changes, or credential changes are needed. Existing v1.2 rooms and player accommodation settings remain compatible.
 - `public/know-show-logo.png` is **byte-for-byte identical** to the supplied v1.2 logo. The existing app icons are also unmodified.
+
+
+- Famous Landmarks: 12 regular questions and one Final Word, all visual.
+- Flags of the World: Hard tier adjusted toward recognizable countries for better playtesting calibration.

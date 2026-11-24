@@ -1,0 +1,4 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');
+const read=p=>fs.readFileSync(p,'utf8');
+test('shared visual renderer is used on TV, host and phones, and both answer reveals',()=>{const s=read('src/components/ShowRoom.tsx');assert.equal((s.match(/<QuestionVisual image=/g)||[]).length,7);assert.match(s,/image=\{final\?view.final\?\.image:results\?\.image\}/);assert.match(read('src/components/QuestionVisual.tsx'),/onError=/);assert.match(read('src/app/globals.css'),/object-fit:contain/);});
+test('feedback form and dashboard preserve visual question and exported image metadata',()=>{assert.match(read('src/components/Feedback.tsx'),/image=\{question.image\}/);const d=read('src/app/developer/page.tsx');assert.match(d,/image=\{r.question.image\}/);assert.match(d,/r.question\?\.image/);});

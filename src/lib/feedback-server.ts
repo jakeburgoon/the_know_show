@@ -18,9 +18,9 @@ export function feedbackOffer(view:GameView,s:GameState,actor:Actor,now=Date.now
  const reporter=sign(`${showId}:${actor.kind}:${actor.id??'host'}`,'feedback-reporter');
  let question:QuestionContext|undefined;
  if(view.phase==='results'&&view.results){const r=view.results,q=getQuestion(r.questionId);if(!q)return;const a=actor.id?r.answers[actor.id]:undefined;
- question={id:q.id,category:CATEGORY_LOOKUP.get(q.categoryId)?.name??r.category,difficulty:['Easy','Medium','Hard'][q.level-1]??String(q.level),prompt:q.prompt,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?.answerFormat??null,hintUsed:a?.hintUsed??null,hintText:[q.hint],choices:[q.answer,...(q.distractors??[])],points:r.points};
+ question={id:q.id,category:CATEGORY_LOOKUP.get(q.categoryId)?.name??r.category,difficulty:['Easy','Medium','Hard'][q.level-1]??String(q.level),prompt:q.prompt,image:q.image,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?.answerFormat??null,hintUsed:a?.hintUsed??null,hintText:[q.hint],choices:[q.answer,...(q.distractors??[])],points:r.points};
  }else if(view.phase==='final-results'&&s.final){const f=s.final,q=FINALS.find(x=>x.id===f.id);if(!q)return;const a=actor.id?f.answers[actor.id]:undefined;
- question={id:q.id,category:q.category,difficulty:'Final Word',prompt:q.prompt,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?'written':null,hintUsed:actor.id?Boolean(f.revealedHints?.[actor.id]):null,hintText:q.hints,choices:[],points:null};
+ question={id:q.id,category:q.category,difficulty:'Final Word',prompt:q.prompt,image:q.image,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?'written':null,hintUsed:actor.id?Boolean(f.revealedHints?.[actor.id]):null,hintText:q.hints,choices:[],points:null};
  }else if(view.phase!=='finished')return;
  const kind=question?'question':'show';
  const ticket:Ticket={expires:now+2*60*60*1000,version:FEEDBACK_VERSION,showId,reporter,kind,question};
@@ -31,7 +31,7 @@ export function makeFeedbackView(state:GameState,actor:Actor,revision:number,now
 }
 export function feedbackInsert(ticket:Ticket,body:Record<string,unknown>){
  const clean=(v:unknown,max:number)=>typeof v==='string'?v.trim().slice(0,max):'';
- const reasons=Array.isArray(body.reasons)?[...new Set(body.reasons.filter((r):r is string=>typeof r==='string'&&FEEDBACK_REASONS.some(([key])=>key===r)))]:[];
+ const reasons=Array.isArray(body.reasons)?[...new Set(body.reasons.filter((r):r is string=>typeof r==='string'&&FEEDBACK_REASONS.some(([key])=>key===r)&&(r!=='image'||!!ticket.question?.image)))]:[];
  const comment=clean(body.comment,2000),experience=clean(body.experience,2000),categoryIdeas=clean(body.categoryIdeas,1000);
  const rating=typeof body.rating==='number'&&Number.isInteger(body.rating)&&body.rating>=1&&body.rating<=5?body.rating:null;
  if(ticket.kind==='question'&&!reasons.length)return null;

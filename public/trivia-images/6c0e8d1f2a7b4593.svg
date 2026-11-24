@@ -1,0 +1,10 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="600" fill="#dff3ff"/>
+<rect y="420" width="800" height="180" fill="#68a5d8"/>
+<rect x="170" y="390" width="460" height="40" fill="#b89b74"/>
+<g fill="#f7f5ef" stroke="#c8c8c8" stroke-width="5">
+<path d="M260 390 Q290 250 390 220 Q375 320 330 390 Z"/>
+<path d="M350 390 Q390 210 520 180 Q500 315 435 390 Z"/>
+<path d="M430 390 Q470 250 570 225 Q550 315 510 390 Z"/>
+</g>
+</svg>

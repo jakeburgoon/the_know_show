@@ -1346,5 +1346,54 @@
     "distractors": [],
     "sourceUrl": "https://caroling.app/carol/i-heard-the-bells-on-christmas-day",
     "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate"
+  },
+  {
+    "id": "category-final-flags-world",
+    "categoryId": "flags-world",
+    "category": "Flags of the World",
+    "difficulty": "hard",
+    "prompt": "Name the Pacific island nation represented by this flag.",
+    "answer": "Palau",
+    "aliases": [
+      "Republic of Palau"
+    ],
+    "hint": "This Pacific island nation includes the Rock Islands.",
+    "hints": [
+      "This Pacific island nation includes the Rock Islands, famous for their marine biodiversity.",
+      "Its capital is Ngerulmud, on the island of Babeldaob."
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "image": {
+      "src": "/trivia-images/bbec30e30397343a.svg",
+      "alt": "Light blue field with a yellow circle slightly left of center.",
+      "width": 1200,
+      "height": 750
+    },
+    "sourceUrl": "https://flagpedia.net/palau"
+  },
+  {
+    "id": "category-final-famous-landmarks",
+    "categoryId": "famous-landmarks",
+    "category": "Famous Landmarks",
+    "difficulty": "hard",
+    "prompt": "Name the landmark shown in this image.",
+    "answer": "Machu Picchu",
+    "aliases": [],
+    "hint": "This Inca citadel sits high in the Andes of Peru.",
+    "hints": [
+      "This landmark is an Inca site in Peru, high in the Andes Mountains.",
+      "It is often called the “Lost City of the Incas.”"
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "image": {
+      "src": "/trivia-images/68b1d4e9a2c7053f.svg",
+      "alt": "Terraced stone ruins perched on a mountain ridge.",
+      "width": 1200,
+      "height": 900
+    },
+    "sourceUrl": "https://en.wikipedia.org/wiki/Machu_Picchu",
+    "sourceStatus": "Editorial pilot: original SVG illustration"
   }
 ]

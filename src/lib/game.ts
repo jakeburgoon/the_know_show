@@ -497,7 +497,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
  const q=s.active?getQuestion(s.active.questionId):undefined;
  const intro=s.active&&q?{key:s.active.key,category:CATEGORY_LOOKUP.get(q.categoryId)?.name,points:roundPoints(s,s.active.key),until:s.active.introUntilAt}:undefined;
  const current=s.phase==='question'&&s.active&&q?{
-   ...intro,prompt:q.prompt,startedAt:s.active.startedAt,deadlineAt:s.active.deadlineAt,stealTurn:!!s.active.stealTurn,
+   ...intro,prompt:q.prompt,image:q.image,startedAt:s.active.startedAt,deadlineAt:s.active.deadlineAt,stealTurn:!!s.active.stealTurn,
    answeringId:s.active.stealTurn?s.active.stealId:s.active.turnId,
    submissionCount:Object.keys(s.active.answers).length,
    mySubmission:me?s.active.answers[me.id]?.answer:undefined,
@@ -508,10 +508,11 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
    // Never send the answer before reveal—even to the host, who may also be playing.
    hostAnswer:undefined,
  }:undefined;
- const res=s.resolution?{...s.resolution,answers:Object.fromEntries(Object.entries(s.resolution.answers).map(([id,a])=>[id,{...a}]))}:undefined;
+ const res=s.resolution?{...s.resolution,image:getQuestion(s.resolution.questionId)?.image,answers:Object.fromEntries(Object.entries(s.resolution.answers).map(([id,a])=>[id,{...a}]))}:undefined;
  const finalQ=s.final?FINALS.find(f=>f.id===s.final?.id):undefined;
  const f=s.final&&finalQ?{
    category:finalQ.category,prompt:['final-question','final-results','finished'].includes(s.phase)?finalQ.prompt:undefined,
+   image:['final-question','final-results','finished'].includes(s.phase)?finalQ.image:undefined,
    answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
    deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,noShow:s.final.noShow,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
