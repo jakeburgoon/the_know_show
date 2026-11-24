@@ -1,4 +1,6 @@
-THE KNOW SHOW — v1.5.4 · FULL CUMULATIVE UPDATE
+THE KNOW SHOW v1.5.8
+
+THE KNOW SHOW — v1.5.8 · FULL CUMULATIVE UPDATE
 
 This is the COMPLETE application; you may deploy it directly over any earlier version, including v1.3.1 or v1.4.1. You do NOT need to install intermediate releases.
 
@@ -10,15 +12,17 @@ GITHUB / VERCEL
 
 NO SUPABASE MIGRATION OR NEW ENVIRONMENT VARIABLES. Existing server-side secrets stay on Vercel and must not be committed.
 
-NEW IN v1.5.4
-- Brand-new loading screen while opening a room, using the approved logo with a subtle gold progress animation.
-- Clearer answer-format descriptions in host setup: written answers have no answer options; the other choices say "final question" rather than "Final Word"; the mixed-format description mentions balancing different ages and abilities.
-- Green Room shows "Open TV display" only with TV + Phones. The TV display includes a visible return action on the host device, taking the host back to the Green Room or Host View, even if the host joined as a player.
-- All v1.5.3 and earlier features are included without any question bank, logo, or app icon changes.
+NEW THROUGH v1.5.8
+- 66 additional seasonal questions: 6 Easy, 6 Medium, 6 Hard per seasonal category, 738 regular questions total. Full additions and review notes in SEASONAL_QUESTION_EXPANSION_QA.csv.
+- Weighted, rather than exclude-and-rank, category offers; recently played categories can return, with lower probability. One eligible seasonal category is still offered every Build the Board phase.
+- Small header music menu. Players may change the shared soundtrack, unless the host disables this option. Music plays from host phone or TV, not everyone's device; opening the player/pressing Play can still be needed.
+- All prior improvements, including Final Word and branded screens, remain included. The approved logo and app icons are unchanged.
+
+ADDED IN v1.5.8
+- When everyone actually answers incorrectly, a brief branded “A TOTAL NO-SHOW!” animation precedes the normal answer, individual results, and leaderboard.
+- No change to the scoring rules or any question.
 
 VALIDATION
-42 engine tests and 5 focused UI-contract tests passed; edited TSX files passed TypeScript syntax parsing. The full Next.js production build could not run because the npm registry was unreachable (EAI_AGAIN). Verify the Vercel build and test the TV-display return link on the host phone.
+54 engine tests, 14 targeted UI checks, and 21 TS/TSX syntax checks passed. Complete Next.js production build remains to be verified on Vercel. Full Next.js production build still must be confirmed on Vercel.
 
-See README.md and RELEASE_NOTES.md for more detail.
-
-
+See README.md and RELEASE_NOTES.md for more details.

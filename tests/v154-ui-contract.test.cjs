@@ -30,3 +30,16 @@ test('host TV return is linked and works when the host has a player credential t
   assert.match(show,/returningToHost&&h\?'host':p\?'player'/);
   assert.match(show,/localStorage\.getItem\(`knowshow:\$\{code\}:host`\)/);
 });
+
+test('compact header music menu presents a single shared selection and host permission',()=>{
+  assert.match(show,/function RoomMusicMenu/);
+  assert.match(show,/aria-label="Choose music for the whole show"/);
+  assert.match(show,/Let players choose music/);
+  assert.match(show,/ks-room-head-actions/);
+  assert.match(css,/ks-room-music-panel/);
+});
+test('music selection is on room header instead of opening deep host controls',()=>{
+  assert.match(show,/view\.phase!=='lobby'&&<RoomMusicMenu/);
+  assert.match(show,/type:'choose-music',music,arrangement/);
+  assert.match(show,/settings:\{playerMusic:enabled\}/);
+});

@@ -16,10 +16,10 @@ function finishRound(s,a,start=20000){for(let i=0;i<12;i++){const key=keys(s).fi
    assert.equal(s.phase,'results');s=g.tick(s,s.resolution.endsAt+10);
  }return s;}
 
-test('the Standard bank has 45 year-round categories plus 11 seasonal categories, 672 balanced questions',()=>{
- assert.equal(bank.CATEGORIES.length,56);assert.equal(bank.QUESTION_LOOKUP.size,672);
+test('the Standard bank has 45 year-round categories plus 11 seasonal categories, 738 balanced questions',()=>{
+ assert.equal(bank.CATEGORIES.length,56);assert.equal(bank.QUESTION_LOOKUP.size,738);
  for(const c of bank.CATEGORIES){assert.ok(c.description.length>5);assert.deepEqual(Object.keys(c.questionsByLevel).sort(),['1','2','3']);
-  for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
+  for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,c.activeMonths?6:4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
  }
 });
 test('default settings use single Standard Trivia, Jazz, and 4x3 point values',()=>{
@@ -358,29 +358,26 @@ test('a Final Word hint cannot be purchased when the player lacks 500 points',()
  assert.equal(g.makeView(s,a[0],1,4001).final.myAvailableHints,0);
  assert.equal(g.makeView(s,a[0],1,4001).final.myPurchasableHints,2);
 });
-test('only purchased Final Word hints can be revealed; regular hints are never consumed',()=>{
+test('purchased Final Word hints reveal immediately, remain private, and do not consume regular hints',()=>{
  let {s,a}=setup(2);s.players[0].score=2000;s.players[0].hintsRemaining=1;s.players[1].hintsRemaining=3;
  s.phase='final-wager';s.final={id:'f15',wagers:{},answers:{},disputeIds:[]};
- for(let i=0;i<2;i++)s=g.mutate(s,{type:'buy-final-hint'},a[0],3000+i);
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],3000);
+ let v=g.makeView(s,a[0],1,3001);
+ assert.equal(v.final.myRevealedHints.length,1);
+ assert.equal(v.final.myAvailableHints,0);
+ assert.deepEqual(g.makeView(s,a[1],1,3002).final.myRevealedHints,[]);
+ assert.deepEqual(g.makeView(s,host,1,3002).final.myRevealedHints,[]);
+ s=g.mutate(s,{type:'buy-final-hint'},a[0],3003);
+ v=g.makeView(s,a[0],1,3004);
+ assert.deepEqual(v.final.myRevealedHints,bank.FINALS.find(q=>q.id==='f15').hints);
  assert.equal(s.players[0].score,1000);
+ assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],3005),/both Final Word hints/);
  s=g.mutate(s,{type:'wager',amount:500},a[0],4000);
  s=g.mutate(s,{type:'wager',amount:0},a[1],4001);
- let v=g.makeView(s,a[0],1,4050);assert.equal(v.final.myRevealedHints.length,0);
- assert.equal(v.final.myAvailableHints,2);
- assert.equal(g.makeView(s,a[1],1,4050).final.myAvailableHints,0);
- assert.throws(()=>g.mutate(s,{type:'final-hint'},a[1],4075),/No purchased Final Word hints remaining/);
- for(let i=0;i<2;i++){
-   s=g.mutate(s,{type:'final-hint'},a[0],4100+i);
-   v=g.makeView(s,a[0],1,4200+i);
-   assert.deepEqual(v.final.myRevealedHints,bank.FINALS.find(q=>q.id==='f15').hints.slice(0,i+1));
-   assert.equal(v.final.myAvailableHints,1-i);
-   assert.deepEqual(g.makeView(s,a[1],1,4250+i).final.myRevealedHints,[]);
-   assert.deepEqual(g.makeView(s,host,1,4250+i).final.myRevealedHints,[]);
- }
+ assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4002),/Both hints are already revealed/);
  assert.equal(s.players[0].hintsRemaining,1);
  assert.equal(s.players[1].hintsRemaining,3);
  assert.equal(s.final.purchasedHintsUsed[a[0].id],2);
- assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4300),/Both hints/);
  s=g.mutate(s,{type:'final-answer',answer:'Gabriel García Márquez'},a[0],4500);
  assert.equal(s.final.answers[a[0].id].hintUsed,true);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],4600),/already locked/);
@@ -399,12 +396,12 @@ test('regular hints are independent from Final Word purchases and only two can b
  assert.equal(s.players[1].score,600);
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[1],5105),/both Final Word hints/);
 });
-test('Final Word hints respect the deadline, and draft auto-submission remembers purchased hint use',()=>{
+test('Final Word drafts remember pre-purchased hint use when auto-submitted',()=>{
  let {s,a}=setup(2);s.players[0].score=800;s.players[0].hintsRemaining=2;
  s.phase='final-wager';s.final={id:'f7',wagers:{},answers:{},disputeIds:[]};
  s=g.mutate(s,{type:'buy-final-hint'},a[0],7500);
  s=g.mutate(s,{type:'wager',amount:0},a[0],8000);s=g.mutate(s,{type:'wager',amount:0},a[1],8001);
- s=g.mutate(s,{type:'final-hint'},a[0],8100);
+ assert.equal(g.makeView(s,a[0],1,8100).final.myRevealedHints.length,1);
  const due=s.final.deadlineAt;
  s=g.mutate(s,{type:'save-draft',scope:'final',answer:'antonym'},a[0],due-100);
  assert.throws(()=>g.mutate(s,{type:'final-hint'},a[0],due+1),/not available|expired/);
@@ -448,7 +445,7 @@ test('draft pools never include seasonal categories outside their permitted mont
 test('seasonal distractors are unique, not accepted as answers, and season hints are present',()=>{
  const seasonal=bank.CATEGORIES.filter(c=>c.activeMonths);
  assert.equal(seasonal.length,11);
- for(const category of seasonal){assert.equal(Object.values(category.questionsByLevel).flat().length,12);
+ for(const category of seasonal){assert.equal(Object.values(category.questionsByLevel).flat().length,18);
   for(const q of Object.values(category.questionsByLevel).flat()){
    const opts=[q.answer,...q.distractors];assert.equal(new Set(opts.map(o=>o.toLowerCase())).size,4,q.id);
    assert.equal(q.distractors.length,3,q.id);
@@ -482,13 +479,48 @@ test('seasonal offer is mandatory even when every seasonal category was recently
  s=g.mutate(s,{type:'start-draft'},host,now);
  const offered=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
  assert.equal(offered.length,1);
- assert.equal(offered[0],seasonal[0]); // Oldest offered is first back in rotation.
+ assert.ok(seasonal.includes(offered[0]),'seasonal offer must remain available after being used');
  assert.equal(s.draftPool.length,7);
  s.selected[0]=[offered[0],...s.draftPool.filter(id=>id!==offered[0]).slice(0,3)];s.round=1;s.phase='lobby';
  s=g.mutate(s,{type:'start-draft'},host,now+10000);
  const offered2=s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
  assert.equal(offered2.length,1);
  assert.notEqual(offered2[0],offered[0]);
+});
+
+test('weighted seasonal choices can repeat but favor categories not recently played or offered',()=>{
+ const now=Date.parse('2026-11-23T16:00:00Z');
+ const available=bank.availableCategories(new Date(now)).filter(c=>c.activeMonths);
+ assert.ok(available.length>=3);
+ const recent=available[0];
+ let {s}=setup(3);s.recentCategoryIds=[recent.id];s.recentCategoryOffers=[recent.id];
+ const sampleCounts=new Map(available.map(c=>[c.id,0]));
+ // The host is in the lobby, so each run represents an independent draft.
+ for(let i=0;i<1200;i++){
+  const draft=g.mutate(s,{type:'start-draft'},host,now);
+  const eligible=draft.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths);
+  assert.equal(eligible.length,1);
+  sampleCounts.set(eligible[0],sampleCounts.get(eligible[0])+1);
+ }
+ const recentlyPlayedCount=sampleCounts.get(recent.id);
+ const freshCounts=available.slice(1).map(c=>sampleCounts.get(c.id));
+ assert.ok(recentlyPlayedCount>0,'previously played category must have nonzero probability');
+ assert.ok(freshCounts.every(count=>count>recentlyPlayedCount),`recent ${recentlyPlayedCount}, fresh ${freshCounts.join(',')}`);
+});
+
+test('weighted selection preserves distinct categories and the current-show exclusion',()=>{
+ const now=Date.parse('2026-11-23T16:00:00Z');
+ let {s}=setup(5);s.recentCategoryIds=bank.CATEGORIES.map(c=>c.id);
+ s.recentCategoryOffers=[...s.recentCategoryIds];
+ s.recentQuestionIds=bank.CATEGORIES.flatMap(c=>Object.values(c.questionsByLevel).flat().slice(0,2).map(q=>q.id));
+ s=g.mutate(s,{type:'start-draft'},host,now);
+ assert.equal(s.draftPool.length,9);
+ assert.equal(new Set(s.draftPool).size,s.draftPool.length);
+ const picked=s.draftPool.slice(0,4);s.selected[0]=picked;s.round=1;s.phase='lobby';
+ s=g.mutate(s,{type:'start-draft'},host,now+5000);
+ assert.equal(s.draftPool.length,9);
+ assert.ok(s.draftPool.every(id=>!picked.includes(id)));
+ assert.equal(s.draftPool.filter(id=>bank.CATEGORY_LOOKUP.get(id).activeMonths).length,1);
 });
 
 test('out-of-season months do not falsely offer holiday categories',()=>{
@@ -509,4 +541,124 @@ test('buying hints changes balance and the maximum wager; outcomes use the post-
  assert.equal(v.players.find(p=>p.id===a[0].id).score+v.final.myWager,3500);
  assert.equal(v.players.find(p=>p.id===a[0].id).score-v.final.myWager,1500);
  assert.throws(()=>g.mutate(s,{type:'buy-final-hint'},a[0],9005),/before locking/);
+});
+
+const hh=require('../.engine-build/host-history.js');
+test('history merging preserves newest encounter ordering across separate hosted rooms',()=>{
+ const prior=[
+   {recentQuestionIds:['q01','q02','q03'],recentCategoryIds:['a','b'],recentCategoryOffers:['a','b','c']},
+   {recentQuestionIds:['q02','q03','q04'],recentCategoryIds:['b','c'],recentCategoryOffers:['c','d']},
+ ];
+ const merged=hh.mergeHostHistories(prior,{recentQuestionIds:['q05','q02'],recentCategoryIds:['d'],recentCategoryOffers:['a']});
+ assert.deepEqual(merged.recentQuestionIds,['q01','q03','q04','q05','q02']);
+ assert.deepEqual(merged.recentCategoryIds,['a','b','c','d']);
+ assert.deepEqual(merged.recentCategoryOffers,['b','c','d','a']);
+});
+test('previously played categories remain eligible but appear less often than fresh classics',()=>{
+ let {s}=setup(4);
+ const classic=bank.CATEGORIES.filter(c=>!c.activeMonths);
+ const recent=classic.slice(0,8).map(c=>c.id);
+ s.recentCategoryIds=[...recent];s.recentCategoryOffers=[...recent];
+ let recentOffers=0;
+ for(let i=0;i<350;i++){
+  const draft=g.mutate(s,{type:'start-draft'},host,Date.parse('2027-03-23T15:00:00Z'));
+  recentOffers+=draft.draftPool.filter(id=>recent.includes(id)).length;
+ }
+ const freshOffers=350*9-recentOffers;
+ assert.ok(recentOffers>0,'played categories must not be hard-blocked');
+ assert.ok(recentOffers/8<freshOffers/(classic.length-8),'recent categories should have lower average odds');
+});
+test('rematches preserve the host history ID and recent question IDs',()=>{
+ let {s}=setup(2);
+ s.hostHistoryId='550e8400-e29b-41d4-a716-446655440000';
+ s.recentQuestionIds=['f1','f2'];
+ s.recentCategoryIds=['space-case'];
+ s.phase='finished';
+ const next=g.mutate(s,{type:'new-game'},host,1000);
+ assert.equal(next.hostHistoryId,s.hostHistoryId);
+ assert.deepEqual(next.recentQuestionIds,['f1','f2']);
+});
+
+test('joined players can choose the one shared soundtrack; other players see that selection',()=>{
+ let {s,a}=setup(3);
+ assert.equal(s.settings.playerMusic,true);
+ s=g.mutate(s,{type:'choose-music',music:'retro',arrangement:1},a[0],10000);
+ assert.equal(s.settings.music,'retro');assert.equal(s.settings.arrangement,1);
+ const view=g.makeView(s,a[1],2,10001);
+ assert.equal(view.settings.music,'retro');assert.equal(view.settings.arrangement,1);
+ assert.throws(()=>g.mutate(s,{type:'choose-music',music:'jazz',arrangement:0},{kind:'spectator'},16000),/Join the show/);
+ assert.throws(()=>g.mutate(s,{type:'choose-music',music:'indie',arrangement:0},a[1],11000),/just changed/);
+ s=g.mutate(s,{type:'choose-music',music:'indie',arrangement:0},a[1],16001);
+ assert.equal(s.settings.music,'indie');
+});
+
+test('host may reserve music controls and change the soundtrack without a cooldown',()=>{
+ let {s,a}=setup(2);
+ s=g.mutate(s,{type:'settings',settings:{playerMusic:false}},host,6000);
+ assert.throws(()=>g.mutate(s,{type:'choose-music',music:'bluegrass',arrangement:0},a[0],7000),/reserved music selections/);
+ s=g.mutate(s,{type:'choose-music',music:'cinematic',arrangement:1},host,7000);
+ assert.equal(s.settings.music,'cinematic');
+ s=g.mutate(s,{type:'choose-music',music:'jazz',arrangement:0},host,7001);
+ assert.equal(s.settings.music,'jazz');
+ assert.throws(()=>g.mutate(s,{type:'choose-music',music:'nonexistent',arrangement:0},host,7002),/Invalid music track/);
+ s=g.mutate(s,{type:'settings',settings:{playerMusic:true}},host,7100);
+ s=g.mutate(s,{type:'choose-music',music:'game',arrangement:0},a[0],13000);
+ assert.equal(s.settings.music,'game');
+});
+
+test('Total No-Show requires all players to submit incorrect responses and lasts only 2.5 extra seconds',()=>{
+ let {s,a}=setup(3);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ for(let i=0;i<a.length;i++)s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[i],23000+i*20);
+ assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,true);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,9000);
+ assert.equal(g.makeView(s,a[0],1,23100).results.noShow,true);
+ s=g.tick(s,s.resolution.endsAt-1);assert.equal(s.phase,'results');
+});
+
+test('Total No-Show is suppressed when any player answers correctly',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ const q=bank.getQuestion(s.active.questionId);
+ s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[0],23000);
+ s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23010);
+ assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,false);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,6500);
+});
+
+test('Total No-Show is suppressed for unanswered timeouts and skipped questions',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[0],23000);
+ s=g.tick(s,s.active.deadlineAt+100);
+ assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,false);
+ let second=setup(2);second.s=draft(second.s,second.a);
+ second.s=open(second.s,second.a[0],keys(second.s)[0]);
+ second.s=g.mutate(second.s,{type:'skip-question'},host,23000);
+ assert.equal(second.s.resolution.skipped,true);
+ assert.equal(second.s.resolution.noShow,false);
+});
+
+test('host correcting a disputed answer removes Total No-Show status',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
+ s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[0],23000);
+ s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[1],23010);
+ assert.equal(s.resolution.noShow,true);
+ s=g.mutate(s,{type:'dispute'},a[0],23100);
+ s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:true},host,23200);
+ assert.equal(s.resolution.noShow,false);
+ assert.equal(s.resolution.answers[a[0].id].correct,true);
+});
+
+test('Final Word shows a Total No-Show for all wrong written attempts, but not a missing answer',()=>{
+ let {s,a}=setup(2);s.phase='final-wager';s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
+ for(let i=0;i<a.length;i++)s=g.mutate(s,{type:'wager',amount:0},a[i],5000+i*10);
+ assert.equal(s.phase,'final-question');
+ s=g.mutate(s,{type:'final-answer',answer:'totally incorrect guess'},a[0],5500);
+ s=g.mutate(s,{type:'final-answer',answer:'also incorrect'},a[1],5600);
+ assert.equal(s.phase,'final-results');assert.equal(s.final.noShow,true);
+ assert.equal(s.final.endsAt-5600,14500);
+ assert.equal(g.makeView(s,a[0],1,5700).final.noShow,true);
+ let missed=setup(2);missed.s.phase='final-wager';missed.s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
+ for(let i=0;i<missed.a.length;i++)missed.s=g.mutate(missed.s,{type:'wager',amount:0},missed.a[i],5000+i*10);
+ missed.s=g.mutate(missed.s,{type:'final-answer',answer:'incorrect guess'},missed.a[0],5500);
+ missed.s=g.tick(missed.s,missed.s.final.deadlineAt+10);
+ assert.equal(missed.s.phase,'final-results');assert.equal(missed.s.final.noShow,false);
 });

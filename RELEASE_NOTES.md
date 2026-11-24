@@ -1,3 +1,79 @@
+# v1.5.8 — A Total No-Show! (small presentation patch)
+
+This complete, cumulative update builds on **v1.5.7**. When **all players submit an incorrect answer** to a regular question or The Final Word, the results sequence briefly displays **“A TOTAL NO-SHOW! Nobody knew that one!”** with a restrained navy-and-gold spotlight and falling-star animation, then automatically reveals the correct answer, player results, and usual updated standings. The celebration lasts about 2.5 seconds. It does not appear for timeouts without an answer, host-skipped questions, or when any player answers correctly. The No-Show is not a bonus, penalty, or additional game rule.
+
+- Only the results sequence changes; normal scoring, disputes, rounds, question content, music, branding, and settings are preserved.
+- The engine lengthens all-incorrect results by only 2.5 seconds so the correct answer and leaderboard remain readable. Other results keep their original timings.
+- Host disputes can still change a ruling; a corrected result suppresses the all-incorrect flag.
+- Motion respects operating-system reduced-motion preferences.
+- The supplied application is the **complete app**, not incremental patch files. All assets and questions remain exactly as supplied in v1.5.7.
+- **Validation:** 54 automated game-engine tests and 14 targeted UI contract checks passed. All 21 TS/TSX source files passed syntax parsing. Approved art, regular/Final Word banks, and schema are byte-for-byte unchanged. A full Next.js production build still must be verified on Vercel.
+
+# v1.5.7 — Clearer TV-versus-phones host onboarding
+
+This cumulative update keeps the v1.5.6 game engine, questions, music functionality, and artwork unchanged. It makes the display-mode choice understandable for hosts setting up The Know Show without prior instructions.
+
+- The host setup question is now **How will everyone see the show?**
+- **TV + phones** clearly identifies the dedicated shared game display, distinct from any player's own screen.
+- A short conditional explanation appears only when TV mode is chosen. It covers laptop HDMI or screen casting, a compatible smart-TV browser, and the option for the host to play from a separate phone.
+- **Just phones** explicitly says no TV or laptop is needed.
+- The Green Room includes a compact TV-setup reminder next to the **Open TV display** link.
+- The How to Play guide explains the public player link versus the private host-pairing link, and warns that mirroring a Player View is not the shared board.
+- Future roadmap (not in this release): optional cross-device player accounts and question-performance statistics for difficulty calibration.
+
+**Validation:** 49 engine tests and 11 UI contract checks passed using the existing local engine build. The engine compilation command could not be rerun because this environment lacks complete Node type declarations; no engine source was changed.
+
+**Deployment:** This is a complete app ZIP. No Supabase schema migration or new environment variables. The full Next.js production build still needs Vercel verification.
+
+# v1.5.6 — Seasonal question expansion, weighted category offers, and shared music controls
+
+This cumulative update includes **66 new seasonal questions** (two more Easy, Medium and Hard questions across each of 11 seasonal categories), bringing the regular question bank to **738 questions in 56 categories**: 540 year-round and 198 seasonal. All 56 dedicated Final Word questions remain separate and unchanged. The initial 672 question records and approved artwork are retained.
+
+**Question QA:** All 66 additions are listed in `SEASONAL_QUESTION_EXPANSION_QA.csv` with correct answers, three same-type alternative choices, aliases, a non-giveaway hint, a reference link, and editorial notes. The questions were checked for duplicate options, overlap with protected Final Word answers, and appropriate difficulty distribution. Source links provide supporting references; they do **not** imply every question has been fully independently verified by a subject-matter expert. Two candidate additions that overlapped Final Word answers were replaced before release.
+
+**Build the Board:** Weighted random offers replace rigid preference for unplayed categories. A recently selected category remains eligible but less likely; the odds recover as time passes. Newly offered-but-unselected categories get a gentler penalty. The engine also considers how many unseen questions remain. One eligible seasonal category is guaranteed in each draft while seasonals are active, but it need not be chosen. Regular categories remain available alongside it. Categories already drafted in the current show cannot reappear in a later category slot during the same show.
+
+**Music control:** A small Music menu in the player/host header displays the selected soundtrack and offers No music or one of 12 track arrangements. **Joined players can select the room-wide track by default**, with a five-second cooldown to avoid rapid conflicting changes. The host can disable player choices, retaining sole music selection permission. Only the host device (phones-only) or TV plays the soundtrack; changing tracks remotely does not remotely press Play on Suno's embed, and browsers may require a manual tap. There are no changes to the deferred sound-effects feature. Music permissions and the chosen track use existing room settings: **no Supabase schema migration or new environment variables**.
+
+**Validation:** 49 game-engine tests passed, including new player-music authorization tests. Targeted UI contract and changed TypeScript syntax tests were performed separately. A complete Next.js production build was not available locally because the full npm dependencies were not installed; the Vercel deployment must verify the build.
+
+# v1.5.5 — Repeat reduction and player-screen refinements
+
+v1.5.5 strengthened recent category/question history retention within a browser and rematches, with Final Word decision-screen and gameplay UI refinements, as described in the bundled preceding files. This release retains all those features.
+
+# v1.5.5 — Repeat Protection and Player View Refinements
+
+This is a complete, cumulative app release built on v1.5.4. It does **not** add sign-in accounts yet.
+
+## Repeat protection
+- Creates an anonymous host-history identifier in each hosting browser. When that browser starts another room, the server can recover previous question/category history from existing Supabase room records, in addition to the browser's cached history.
+- Prioritizes unplayed categories, then categories with more unseen questions, to reduce repetition across separate shows.
+- Prioritizes unseen regular questions and avoids recently used answers when choosing among still-unseen questions.
+- Keeps Final Word history and recent category offers; retains histories through rematches.
+- Limits repeat histories to the complete 672 regular + 56 Final Word question pool.
+- No database schema migration is needed. Anonymous history remains tied to the current browser. A future optional account feature can allow cross-device and cross-host player histories.
+
+## Playing view and Final Word
+- Final Word category description and a short explanation of the wager outcome now appear above the wager controls.
+- Current standings appear openly on the Final Word decision panel, rather than behind an expandable section.
+- Each purchased Final Word hint appears immediately, before the player chooses whether to buy the second hint or lock a wager. Hints remain private to that player.
+- Removes the large Sound Effects panel (audio cues can be revisited later).
+- Removes duplicate top scores while choosing questions. Keeps the main leaderboard at the bottom of the player view.
+- Replaces Double Take's emoji with a gold, outlined overlapping-cards icon.
+- Labels regular rounds simply Round 1 and Round 2; the Round 2 opening says “Double the pressure. Double the points.” The Final Word keeps its established name.
+- Updates outdated homepage footer wording.
+
+## Validation
+- 45 game-engine tests and 5 UI-contract tests pass.
+- Eight-show local selection simulation (24 questions per show, using preserved history): 192 questions with no exact repeats. This illustrates the algorithm; it is not a cross-device guarantee.
+- Modified TypeScript/TSX files pass parsing checks. A complete Next.js/Vercel production build was not run in this environment.
+- Question bank, main logo, and app icon files remain unchanged.
+
+## Deploy
+Copy all files inside `the-know-show/` over the existing repository files, then commit and deploy to Vercel. No new environment variables or Supabase migration required for this version.
+
+---
+
 # v1.5.4 — Branded room loading, clearer host wording, and TV navigation
 
 Complete cumulative update over v1.5.3. The temporary “Preparing The Know Show…” page is now a branded cream/navy-and-gold loading screen featuring the **approved original logo unchanged**, a short “Setting the Stage” message, and a subtle animated progress accent (respecting reduced-motion settings).

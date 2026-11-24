@@ -562,6 +562,12 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-wizard-option{display:flex;align-items:center;text-align:left;width:100%;gap:14px;padding:16px;border:2px solid #dce2df;border-radius:14px;background:#fff;color:#173951;cursor:pointer;transition:border-color .15s,box-shadow .15s;min-height:82px}
 .ks-wizard-option.selected,.ks-wizard-option:hover{border-color:#cba448;background:#fff6db;box-shadow:0 3px 12px #a88a3a1f}
 .ks-wizard-option:disabled{opacity:.5;cursor:wait}.ks-wizard-icon{flex:none;display:flex;align-items:center;color:#c69c3e}.ks-wizard-option-text{flex:1;display:grid;gap:6px}.ks-wizard-option strong{font-size:16px}.ks-wizard-option small{line-height:1.38;font-size:13px;color:#5d7182;font-weight:500}.ks-wizard-check{display:grid;place-items:center;color:#bd8e26}
+/* Helpful TV instructions are shown only when that display arrangement is selected. */
+.ks-wizard-tv-help{background:#f7f4e9;border-left:3px solid #cba448;border-radius:8px;margin-top:14px;padding:12px 14px;color:#254255;font-size:13px;line-height:1.48}
+.ks-wizard-tv-help strong{display:block;color:#133b55;font-size:13px;margin-bottom:5px}
+.ks-wizard-tv-help p{margin:0 0 6px}
+.ks-wizard-tv-help small{display:block;color:#607486;line-height:1.42;font-size:12px}
+.ks-lobby-tv-help{margin:12px auto 0;max-width:530px;color:#5e6e79;font-size:12px;line-height:1.45}
 /* Explicit review-and-continue navigation: choosing a card never changes steps. */
 .ks-wizard-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
 .ks-back{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#274e62;border:none;padding:12px 3px;font-weight:800;cursor:pointer}
@@ -711,3 +717,52 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .v2tvhead .ks-tv-back:focus-visible{outline:3px solid white;outline-offset:3px}
 @media(max-width:580px){.v2tvhead{flex-wrap:wrap}.ks-tv-head-actions{gap:8px}.v2tvhead .ks-tv-back{padding:8px 10px;min-height:40px}}
 @media(prefers-reduced-motion:reduce){.ks-stage-loading-meter span{animation:none;transform:translateX(80%)}}
+
+/* v1.5.5 — Final Word decision clarity and space-efficient playing view */
+.ks-final-category-description{color:#f6ddb0!important;font-size:14px!important;font-weight:720!important;line-height:1.45!important;margin:4px 0 0!important}
+.ks-final-how{max-width:620px;margin:9px auto 0!important;color:#d6e2ed!important;line-height:1.45!important;font-size:13px!important}
+.ks-final-current-scores{padding:13px 14px;background:#183b55;border:1px solid #47637a;border-radius:11px;display:grid;gap:7px}
+.ks-final-scorehead{color:#efce77;font-weight:850;font-size:11px;letter-spacing:.11em;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ks-final-scorehead small{font-size:10px;font-weight:500;letter-spacing:0;color:#d0dce5}
+.ks-final-current-scores .v2scores{display:grid;gap:5px;margin:0}
+.ks-final-current-scores .v2score{background:#f8f1de;border:1px solid #e2cf9f;color:#153750;border-radius:8px;padding:8px 11px;min-height:auto}
+.ks-final-current-scores .v2score strong,.ks-final-current-scores .v2score b{color:#153750}
+.ks-final-current-scores .v2rank{width:26px;height:26px;font-size:12px}
+.ks-final-bought-hint{background:#f8efdb;border:1px solid #e5c871;color:#183b55;border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.ks-final-bought-hint strong{font-size:12px;font-weight:900;color:#95702b;letter-spacing:.08em;text-transform:uppercase}
+.ks-final-bought-hint p{font-size:14px;line-height:1.45;color:#16394f;margin:0}
+.v2doublecompact span{display:inline-flex;align-items:center;gap:5px}
+.v2boardheading{justify-content:flex-start}
+@media(max-width:420px){.ks-final-current-scores{padding:11px}.ks-final-current-scores .v2score{padding:7px 9px}}
+
+/* v1.5.6 — one discrete, shared music selector, available directly in the player view. */
+.ks-room-head-actions {display:flex; align-items:center; gap:.5rem; justify-content:flex-end; min-width:0;}
+.ks-room-head-actions>span {white-space:nowrap; font-size:.7rem;}
+.ks-room-music {position:relative; z-index:20; font-size:.82rem;}
+.ks-room-music>summary {list-style:none; display:flex; align-items:center; gap:.32rem; cursor:pointer; border:1px solid #c3a568; border-radius:99px; padding:.43rem .64rem; color:#15344f; background:#f5ebd4; font-weight:750; white-space:nowrap;}
+.ks-room-music>summary::-webkit-details-marker {display:none;}
+.ks-room-music[open]>summary {background:#eacb86;}
+.ks-room-music-panel {position:absolute; top:calc(100% + .48rem); right:0; width:min(21rem,calc(100vw - 2rem)); padding:1rem; border-radius:14px; background:#fffaf0; color:#18344a; box-shadow:0 12px 35px rgba(7,30,48,.25); border:1px solid #d5bc7d; display:grid; gap:.65rem; z-index:22;}
+.ks-room-music-panel>strong {font-size:1rem;}
+.ks-room-music-panel small {font-size:.75rem; line-height:1.45; color:#536171;}
+.ks-room-music-panel label:not(.ks-room-music-permission) {display:grid; gap:.28rem; font-weight:650;}
+.ks-room-music-panel select {width:100%; border-radius:8px; padding:.58rem; background:white; color:#15344f; border:1px solid #adc0cc; font-size:.9rem;}
+.ks-room-music-permission {display:flex!important; align-items:center; gap:.5rem; cursor:pointer; font-weight:650;}
+.ks-room-music-permission input {width:1.05rem; height:1.05rem; flex-shrink:0; accent-color:#174264;}
+@media(max-width:420px){.ks-room-head-actions>span {font-size:.61rem;}.ks-room-music>summary {padding:.38rem .45rem;}.ks-room-music>summary span{display:none}}
+
+/* v1.5.8: the short "Total No-Show" wink before an all-incorrect answer reveal. */
+.ks-noshow{min-height:265px;display:grid;place-items:center;text-align:center;isolation:isolate;position:relative;overflow:hidden}
+.ks-noshow:before{content:"";position:absolute;top:-45%;left:12%;width:76%;height:125%;background:radial-gradient(ellipse,#f9d58224 0%,#f9d58209 34%,transparent 68%);transform-origin:50% 0;animation:ks-noshow-lights 2.4s ease-out both;pointer-events:none}
+.ks-noshow-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;animation:ks-noshow-enter .5s ease-out both}
+.ks-noshow-content>svg{color:#f3cb76;transform:rotate(-8deg)}
+.ks-noshow-eyebrow{font-size:11px;letter-spacing:.17em;font-weight:900;color:#e2d7bd!important;margin:3px 0 0!important}
+.ks-noshow h2{font-size:clamp(26px,6vw,49px);line-height:1.12;color:#f9d783;margin:2px 0 1px;letter-spacing:-.025em;text-shadow:0 2px 13px #061724}
+.ks-noshow-content>p:last-child{font-size:clamp(14px,3vw,19px);margin:0!important;color:#fff4d9;font-weight:700}
+.ks-noshow-stars{pointer-events:none;position:absolute;inset:0;z-index:0;overflow:hidden}
+.ks-noshow-stars span{position:absolute;top:4%;font-size:clamp(15px,3vw,24px);color:#f3d28a;opacity:0;animation:ks-noshow-starfall 2.45s ease-in forwards}
+.ks-noshow-stars span:nth-child(1){left:9%;animation-delay:.08s}.ks-noshow-stars span:nth-child(2){left:24%;animation-delay:.23s;font-size:13px}.ks-noshow-stars span:nth-child(3){left:38%;animation-delay:.06s}.ks-noshow-stars span:nth-child(4){left:61%;animation-delay:.31s;font-size:13px}.ks-noshow-stars span:nth-child(5){left:75%;animation-delay:.13s}.ks-noshow-stars span:nth-child(6){left:88%;animation-delay:.26s;font-size:14px}.ks-noshow-stars span:nth-child(7){left:50%;animation-delay:.2s;font-size:13px}
+@keyframes ks-noshow-enter{from{opacity:0;transform:translateY(9px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes ks-noshow-lights{0%{opacity:.85;transform:rotate(-5deg)}100%{opacity:.05;transform:rotate(7deg)}}
+@keyframes ks-noshow-starfall{0%{opacity:0;transform:translateY(-14px) rotate(-20deg)}15%{opacity:.8}75%{opacity:.8}100%{opacity:0;transform:translateY(270px) rotate(160deg)}}
+@media(prefers-reduced-motion:reduce){.ks-noshow:before,.ks-noshow-content,.ks-noshow-stars span{animation:none}.ks-noshow-stars{display:none}.ks-noshow:before{opacity:.12}}

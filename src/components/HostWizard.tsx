@@ -4,7 +4,7 @@ import {ArrowLeft,ArrowRight,Check,Clapperboard,MonitorPlay,Music2,Smartphone,Us
 import {SUNO_SOUNDTRACKS} from '@/lib/suno-catalog';
 import type {AnswerStyle,DisplayMode,Mode,MusicStyle,Settings} from '@/lib/game';
 
-const stages=['Who is playing?','Where will the show happen?','What is the soundtrack?','How will players answer?'];
+const stages=['Who is playing?','How will everyone see the show?','What is the soundtrack?','How will players answer?'];
 type Props={step:number;settings:Settings;busy:boolean;error?:string;onBack:()=>void;onNext:(update:Partial<Settings>)=>Promise<void>};
 export default function HostWizard({step,settings,busy,error,onBack,onNext}:Props){
  const options: {value:string;title:string;details:string;icon?:React.ReactNode}[] =
@@ -12,8 +12,8 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
     {value:'individual',title:'Individual players',details:'Everyone answers every question and earns their own points.',icon:<Users/>},
     {value:'teams',title:'Teams',details:'Each team joins under one team name. Teams take turns answering and can steal.',icon:<Users/>}]:
    step===1?[
-    {value:'tv',title:'TV + phones',details:'Show the big game board on a TV. Players answer on their phones.',icon:<MonitorPlay/>},
-    {value:'phones',title:'Just phones',details:'Each player sees the questions and scores on their own device.',icon:<Smartphone/>}]:
+    {value:'tv',title:'TV + phones',details:'Show the shared game board on a TV using a laptop or compatible TV browser. Players answer on their phones.',icon:<MonitorPlay/>},
+    {value:'phones',title:'Just phones',details:'Everyone sees the board, questions, and scores on their own phone. No TV or laptop needed.',icon:<Smartphone/>}]:
    step===2?[
     {value:'off',title:'No music',details:'Keep things quiet; optional countdown sounds are controlled separately.',icon:<Music2/>},
     ...SUNO_SOUNDTRACKS.map(t=>({value:t.id,title:t.label,details:'Play the selected soundtrack on the host phone or TV.',icon:<Music2/>}))]:
@@ -46,6 +46,11 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
        <span className="ks-wizard-check">{selected===opt.value?<Check size={20}/>:<ArrowRight size={19}/>}</span>
       </button>)}
     </div>
+    {step===1&&selected==='tv'&&<aside className="ks-wizard-tv-help" aria-label="How TV mode works">
+      <strong>Setting up the shared TV display</strong>
+      <p>In the Green Room, open <b>TV display</b> on a laptop and connect it to your TV by HDMI or screen casting. A compatible smart-TV browser may open that display directly. The host can join as a player from a second phone.</p>
+      <small>Mirroring someone’s Player View shows their personal screen, not the shared game board.</small>
+    </aside>}
     {error&&<p className="ks-wizard-error" role="alert">{error}</p>}
     <nav className="ks-wizard-nav" aria-label="Setup navigation">
       {step>0?<button className="ks-back" type="button" disabled={busy} onClick={onBack}><ArrowLeft size={18}/> Previous</button>:<span aria-hidden="true"/>}

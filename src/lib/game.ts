@@ -4,7 +4,7 @@ import { CATEGORIES, CATEGORY_LOOKUP, CATEGORY_FINALS, FINALS, availableCategori
 export const MAX_SEATS=8;
 export const FINAL_HINT_PRICE=500;
 export const MAX_FINAL_HINTS=2;
-export const ROUND_NAMES=['The Opening Act','The Main Event'] as const;
+export const ROUND_NAMES=['Round 1','Round 2'] as const;
 export const ROUND_VALUES=[[100,300,500],[200,600,1000]] as const;
 export type Phase='lobby'|'draft'|'board'|'intro'|'question'|'results'|'final-wager'|'final-question'|'final-results'|'finished'|'closed';
 export type Mode='individual'|'teams';
@@ -12,16 +12,17 @@ export type MusicStyle='jazz'|'indie'|'retro'|'game'|'bluegrass'|'cinematic'|'of
 export type DisplayMode='tv'|'phones';
 export type ChoiceAccess='off'|'all'|'medium-hard'|'hard';
 export type AnswerStyle='written'|'choices'|'mixed';
-export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode;answerStyle?:AnswerStyle};
+export type Settings={mode:Mode;answerSeconds:number;finalSeconds:number;normalHints:number;music:MusicStyle;arrangement:0|1;effects:boolean;displayMode?:DisplayMode;answerStyle?:AnswerStyle;playerMusic?:boolean};
 export type Player={id:string;name:string;age?:number;score:number;hintsRemaining:number;bonusHints:number;bonusTimeSeconds:number;choiceAccess?:ChoiceAccess;joinedAt:number;doubleTakesRemaining:number};
 export type Submission={answer:string;at:number;correct:boolean;points:number;doubleTake:boolean;hintUsed:boolean;answerFormat?:'written'|'choices'};
 export type ActiveQuestion={drafts?:Record<string,{answer:string;doubleTake:boolean}>;key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
-export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean};
-export type FinalState={drafts?:Record<string,string>;purchasedHints?:Record<string,number>;purchasedHintsUsed?:Record<string,number>;revealedHints?:Record<string,number>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[]};
-export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[]};
+export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean;noShow?:boolean};
+export type FinalState={drafts?:Record<string,string>;purchasedHints?:Record<string,number>;purchasedHintsUsed?:Record<string,number>;revealedHints?:Record<string,number>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[];noShow?:boolean};
+export type GameState={schemaVersion:3;id:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[];hostHistoryId?:string;musicChangedAt?:number};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
  |{type:'settings';settings:Partial<Settings>}
+ |{type:'choose-music';music:MusicStyle;arrangement:0|1}
  |{type:'player-bonuses';playerId:string;bonusHints?:number;bonusTimeSeconds?:number;choiceAccess?:ChoiceAccess}
  |{type:'start-draft'}|{type:'draft-category';categoryId:string}
  |{type:'open-question';key:string}|{type:'submit-answer';answer:string;doubleTake?:boolean}
@@ -48,17 +49,19 @@ function answerOptions(answer:string,distractors:string[]|undefined,questionId:s
  assert(options.length===4&&new Set(options.map(x=>normalize(x))).size===4,'This question needs four distinct answer choices.');
  return options.sort((a,b)=>createHash('sha256').update(`${questionId}:${playerId}:${a}`).digest('hex').localeCompare(createHash('sha256').update(`${questionId}:${playerId}:${b}`).digest('hex')));
 }
-export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv',answerStyle:'written'};}
+export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'tv',answerStyle:'written',playerMusic:true};}
 // Most-recent-last histories; reselecting a category moves it to the back of the queue.
 function rememberRecent(history:readonly string[], values:readonly string[], limit:number):string[]{
  const known=new Set(values);return [...history.filter(id=>!known.has(id)),...values].slice(-limit);
 }
-export function makeGame(recentQuestionIds:string[]=[],recentCategoryIds:string[]=[],recentCategoryOffers:string[]=[]):GameState{
+export const QUESTION_HISTORY_LIMIT=CATEGORIES.reduce((total,c)=>total+Object.values(c.questionsByLevel).reduce((n,level)=>n+level.length,0),0)+CATEGORY_FINALS.length;
+export function makeGame(recentQuestionIds:string[]=[],recentCategoryIds:string[]=[],recentCategoryOffers:string[]=[],hostHistoryId?:string):GameState{
  const valid=new Set(CATEGORIES.map(c=>c.id));
  return {schemaVersion:3,id:randomUUID(),createdAt:Date.now(),phase:'lobby',settings:defaultSettings(),players:[],round:0,selected:[[],[]],draftPool:[],draftIndex:0,usedKeys:[],questionMap:{},chooserIndex:0,eventLog:[],
-  recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string'&&(!!getQuestion(x)||FINALS.some(f=>f.id===x))).slice(-672),
+  recentQuestionIds:recentQuestionIds.filter(x=>typeof x==='string'&&(!!getQuestion(x)||FINALS.some(f=>f.id===x))).slice(-QUESTION_HISTORY_LIMIT),
   recentCategoryIds:recentCategoryIds.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56),
-  recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56)};
+  recentCategoryOffers:recentCategoryOffers.filter(id=>typeof id==='string'&&valid.has(id)).slice(-56),
+  hostHistoryId:hostHistoryId&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(hostHistoryId)?hostHistoryId:undefined};
 }
 export function joinGame(original:GameState,name:string,age?:number,now=Date.now()) {
  assert(original.phase==='lobby','The show has already started.');assert(original.players.length<MAX_SEATS,'The room is full.');
@@ -96,32 +99,57 @@ export function isCorrectForQuestion(given:string,q:{answer:string;aliases?:stri
  if((q.distractors??[]).some(d=>normalize(d)===input))return false;
  return isCorrect(given,q.answer,q.aliases??[]);
 }
+/** A previously played or offered category remains possible: these weights
+ * merely make more familiar/recently seen categories less likely to be offered.
+ * We also protect the available question variety at each difficulty level. */
+function categoryDraftWeight(s:GameState,c:(typeof CATEGORIES)[number]):number {
+ const played=s.recentCategoryIds??[],offered=s.recentCategoryOffers??[];
+ const playedAt=played.indexOf(c.id),offeredAt=offered.indexOf(c.id);
+ let weight=1;
+ if(playedAt!==-1){
+  const stepsSince=played.length-1-playedAt;
+  // Newly played: 25% weight; gradually recovers to 75% after ten other plays.
+  weight*=0.25+0.50*Math.min(1,stepsSince/10);
+ }
+ if(offeredAt!==-1){
+  const stepsSince=offered.length-1-offeredAt;
+  // Merely appearing as a choice also cools a category down, but less strongly.
+  weight*=0.70+0.28*Math.min(1,stepsSince/10);
+ }
+ const seen=new Set(s.recentQuestionIds);
+ const questionLevels=[1,2,3].map(level=>c.questionsByLevel[String(level)]??[]);
+ const remaining=questionLevels.reduce((count,questions)=>count+questions.filter(q=>!seen.has(q.id)).length,0);
+ const total=questionLevels.reduce((count,questions)=>count+questions.length,0);
+ // Categories with exhausted questions can return eventually, but have low odds.
+ weight*=0.20+0.80*Math.pow(total?remaining/total:0,1.2);
+ return Math.max(0.01,weight);
+}
+/** Sample without replacement, using cryptographic random draws for each offer. */
+function weightedSample<T>(items:readonly T[],count:number,weight:(item:T)=>number):T[]{
+ const available=[...items],result:T[]=[];
+ while(available.length&&result.length<count){
+  const weights=available.map(item=>Math.max(0.0001,weight(item)));
+  const sum=weights.reduce((a,b)=>a+b,0);
+  let target=(randomInt(1_000_000_000)/1_000_000_000)*sum;
+  let index=weights.length-1;
+  for(let i=0;i<weights.length;i++){target-=weights[i];if(target<0){index=i;break;}}
+  result.push(available.splice(index,1)[0]);
+ }
+ return result;
+}
 function pickPool(s:GameState,now:number){
  const alreadySelected=new Set([...s.selected[0],...s.selected[1]]);
  const allowed=availableCategories(new Date(now)).filter(c=>!alreadySelected.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
  const total=Math.min(allowed.length,s.players.length<=3?7:s.players.length<=5?9:11);
- // A category only has four questions per difficulty. Selecting it again too soon
- // makes repeated questions inevitable, so prioritize categories not yet played.
- // Unoffered categories then take priority, with long-ago offers returned before recent ones.
- const played=s.recentCategoryIds??[],offered=s.recentCategoryOffers??[];
- const playedSet=new Set(played),offeredSet=new Set(offered);
- const ranked=shuffle(allowed).sort((a,b)=>{
-   const aPlayed=playedSet.has(a.id)?1:0,bPlayed=playedSet.has(b.id)?1:0;
-   if(aPlayed!==bPlayed)return aPlayed-bPlayed;
-   const aOffered=offeredSet.has(a.id)?1:0,bOffered=offeredSet.has(b.id)?1:0;
-   if(aOffered!==bOffered)return aOffered-bOffered;
-   if(aPlayed)return played.indexOf(a.id)-played.indexOf(b.id);
-   if(aOffered)return offered.indexOf(a.id)-offered.indexOf(b.id);
-   return 0;
- });
- // Every draft during an active season offers exactly one seasonal choice.
- // Fresh content is favored; when all seasonal candidates have appeared, use
- // the least-recently offered eligible category rather than dropping seasons.
- // All remaining choices come from the year-round pool whenever available.
- const seasonal=ranked.filter(c=>c.activeMonths?.length);
- const yearRound=ranked.filter(c=>!c.activeMonths?.length);
- const result=seasonal.length?[seasonal[0],...yearRound]:yearRound;
- return result.slice(0,total).map(c=>c.id);
+ const seasonal=allowed.filter(c=>c.activeMonths?.length);
+ const yearRound=allowed.filter(c=>!c.activeMonths?.length);
+ const weight=(c:(typeof CATEGORIES)[number])=>categoryDraftWeight(s,c);
+ // Always offer one in-season category when one is eligible, but let its
+ // selection remain weighted, just like the year-round categories. Players
+ // may choose regular categories exclusively; seasonality is never forced.
+ const seasonalPick=seasonal.length?weightedSample(seasonal,1,weight):[];
+ const standardPicks=weightedSample(yearRound,total-seasonalPick.length,weight);
+ return [...seasonalPick,...standardPicks].map(c=>c.id);
 }
 function goDraft(s:GameState,now:number){
  s.players.forEach(p=>p.doubleTakesRemaining=1);s.phase='draft';s.draftIndex=0;s.draftPool=pickPool(s,now);
@@ -131,22 +159,36 @@ function goDraft(s:GameState,now:number){
 function nextQuestionChoices(s:GameState){
  const taken=new Set<string>(Object.values(s.questionMap));
  const previous=new Set(s.recentQuestionIds);
+ const recentAnswers=new Set(s.recentQuestionIds.slice(-120).map(id=>getQuestion(id)?.answer.toLowerCase().trim()).filter(Boolean));
  for(const id of s.selected[s.round])for(let level=0;level<3;level++){
    const key=`${id}:${level}`,c=CATEGORY_LOOKUP.get(id)!;
    const eligible=shuffle(c.questionsByLevel[String(level+1)]);
    // Prefer unseen questions; if exhausted, choose the oldest previously played question.
-   const chosen=eligible.find(q=>!previous.has(q.id)&&!taken.has(q.id))
+   const fresh=eligible.filter(q=>!previous.has(q.id)&&!taken.has(q.id));
+   // Prefer an unseen question whose answer has not just appeared under another category.
+   const chosen=fresh.find(q=>!recentAnswers.has(q.answer.toLowerCase().trim()))??fresh[0]
      ??eligible.filter(q=>!taken.has(q.id)).sort((a,b)=>s.recentQuestionIds.indexOf(a.id)-s.recentQuestionIds.indexOf(b.id))[0];
    assert(chosen,`No available question for ${c.name} level ${level+1}.`);
    s.questionMap[key]=chosen.id;taken.add(chosen.id);
  }
 }
+/** A no-show is only earned by a complete set of *incorrect attempts*.
+ * Blank answers, timeouts, and host-skipped questions are not a no-show.
+ * This also works for two-team questions where both teams actually answered.
+ */
+function everyoneMissed(s:GameState,answers:Record<string,Submission>):boolean {
+ return s.players.length>=2&&s.players.every(p=>{
+  const submission=answers[p.id];
+  return Boolean(submission&&!submission.correct&&submission.answer.trim()&&submission.answer!=='(no answer)');
+ });
+}
 function closeQuestion(s:GameState,now:number,skipped=false){
  const a=s.active!;const q=getQuestion(a.questionId)!;
+ const noShow=!skipped&&everyoneMissed(s,a.answers);
  const resolution:Resolution={key:a.key,questionId:a.questionId,answer:q.answer,category:CATEGORY_LOOKUP.get(q.categoryId)!.name,
-   points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+6500,disputeIds:[],skipped};
+   points:roundPoints(s,a.key),answers:a.answers,finishedAt:now,endsAt:now+(noShow?9000:6500),disputeIds:[],skipped,noShow};
  for(const [id,submission] of Object.entries(a.answers)){const p=s.players.find(x=>x.id===id);if(p)p.score+=submission.points;}
- s.usedKeys.push(a.key);s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==q.id),q.id].slice(-672);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
+ s.usedKeys.push(a.key);s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==q.id),q.id].slice(-QUESTION_HISTORY_LIMIT);s.resolution=resolution;s.active=undefined;s.phase='results';s.chooserIndex++;
  log(s,skipped?'Question skipped.':`The answer is ${q.answer}.`);
 }
 function correctPoints(s:GameState,a:ActiveQuestion,p:Player,at:number,doubleTake=false){
@@ -197,7 +239,7 @@ export function chooseFinalQuestion(s:GameState,now:number){
 
 function finishFinal(s:GameState,now:number){
  const f=s.final!;for(const p of s.players){const r=f.answers[p.id];if(r)p.score+=r.points;else {const loss=f.wagers[p.id]||0;p.score-=loss;f.answers[p.id]={answer:'(no answer)',at:now,correct:false,points:-loss,doubleTake:false,hintUsed:Boolean(f.revealedHints?.[p.id])};}}
- s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-672);s.phase='final-results';f.endsAt=now+12000;log(s,'Final answers are in.');
+ s.recentQuestionIds=[...s.recentQuestionIds.filter(id=>id!==f.id),f.id].slice(-QUESTION_HISTORY_LIMIT);s.phase='final-results';f.noShow=everyoneMissed(s,f.answers);f.endsAt=now+(f.noShow?14500:12000);log(s,'Final answers are in.');
 }
 function shiftTimers(s:GameState,delta:number){if(s.active){s.active.introUntilAt+=delta;if(s.active.startedAt)s.active.startedAt+=delta;if(s.active.deadlineAt)s.active.deadlineAt+=delta;}if(s.resolution)s.resolution.endsAt+=delta;if(s.final){if(s.final.startedAt)s.final.startedAt+=delta;if(s.final.deadlineAt)s.final.deadlineAt+=delta;if(s.final.endsAt)s.final.endsAt+=delta;}}
 export function tick(original:GameState,now=Date.now()):GameState {
@@ -253,9 +295,24 @@ export function tick(original:GameState,now=Date.now()):GameState {
 export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now()):GameState {
  assert(action&&typeof action.type==='string','Invalid action.');let s:GameState=structuredClone(tick(original,now));
  switch(action.type){
+ case 'choose-music':{
+   // A joined player may choose the shared room soundtrack when permitted by the host.
+   // Music always plays from a single host/TV embed, not from every player phone.
+   if(actor.kind!=='host'){
+     player(s,actor);
+     assert(s.settings.playerMusic!==false,'The host has reserved music selections.');
+     assert(!s.musicChangedAt||now-s.musicChangedAt>=5000,'Music was just changed. Please try again in a few seconds.');
+   }
+   assert(['jazz','indie','retro','game','bluegrass','cinematic','off'].includes(action.music),'Invalid music track.');
+   assert(action.arrangement===0||action.arrangement===1,'Invalid arrangement.');
+   if(s.settings.music!==action.music||s.settings.arrangement!==action.arrangement){
+     s.settings.music=action.music;s.settings.arrangement=action.arrangement;s.musicChangedAt=now;
+   }
+   break;
+ }
  case 'settings':{
    host(actor);const opts=action.settings;
-   assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects','displayMode'].includes(k)), 'Only display and sound settings can change during the show.');
+   assert(s.phase==='lobby'||Object.keys(opts).every(k=>['music','arrangement','effects','displayMode','playerMusic'].includes(k)), 'Only display and sound settings can change during the show.');
    if(opts.mode!==undefined){assert(['individual','teams'].includes(opts.mode),'Invalid mode.');s.settings.mode=opts.mode;}
    for(const k of ['answerSeconds','finalSeconds','normalHints'] as const){const v=opts[k];if(v!==undefined){assert(Number.isInteger(v)&&v>=0&&v<=(k==='normalHints'?10:120),`Invalid ${k}.`);s.settings[k]=v;}}
    if(opts.answerStyle!==undefined){assert(['written','choices','mixed'].includes(opts.answerStyle),'Invalid answer style.');s.settings.answerStyle=opts.answerStyle;for(const p of s.players)p.choiceAccess=opts.answerStyle==='choices'?'all':'off';}
@@ -263,6 +320,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    if(opts.music!==undefined){assert(['jazz','indie','retro','game','bluegrass','cinematic','off'].includes(opts.music),'Invalid music.');s.settings.music=opts.music;}
    if(opts.arrangement!==undefined){assert(opts.arrangement===0||opts.arrangement===1,'Invalid arrangement.');s.settings.arrangement=opts.arrangement;}
    if(opts.effects!==undefined){assert(typeof opts.effects==='boolean','Invalid effects choice.');s.settings.effects=opts.effects;}
+   if(opts.playerMusic!==undefined){assert(typeof opts.playerMusic==='boolean','Invalid music permission.');s.settings.playerMusic=opts.playerMusic;}
    if(opts.normalHints!==undefined)for(const p of s.players)p.hintsRemaining=s.settings.normalHints+p.bonusHints;
    break;
  }
@@ -342,8 +400,8 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
      }else{r.points=action.correct?(s.final?.wagers[p.id]??0):-(s.final?.wagers[p.id]??0);}
      p.score+=r.points;
    }
-   if(s.phase==='results'){s.resolution!.disputeIds=s.resolution!.disputeIds.filter(id=>id!==p.id);s.resolution!.endsAt=now+5000;}
-   else{s.final!.disputeIds=s.final!.disputeIds.filter(id=>id!==p.id);s.final!.endsAt=now+8000;}
+   if(s.phase==='results'){s.resolution!.disputeIds=s.resolution!.disputeIds.filter(id=>id!==p.id);s.resolution!.noShow=!s.resolution!.skipped&&everyoneMissed(s,s.resolution!.answers);s.resolution!.endsAt=now+5000;}
+   else{s.final!.disputeIds=s.final!.disputeIds.filter(id=>id!==p.id);s.final!.noShow=everyoneMissed(s,s.final!.answers);s.final!.endsAt=now+8000;}
    log(s,`Host reviewed ${p.name}’s answer.`);break;
  }
  case 'dismiss-dispute':{
@@ -374,6 +432,9 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    assert(bought<MAX_FINAL_HINTS,'You already purchased both Final Word hints.');
    assert(p.score>=FINAL_HINT_PRICE,'You need at least 500 points to buy a hint.');
    p.score-=FINAL_HINT_PRICE;(s.final.purchasedHints??={})[p.id]=bought+1;
+   // Purchased hints are shown right away, while the question remains concealed.
+   (s.final.purchasedHintsUsed??={})[p.id]=bought+1;
+   (s.final.revealedHints??={})[p.id]=bought+1;
    break;
  }
  case 'final-hint':{
@@ -411,7 +472,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    host(actor);assert(s.phase==='finished','Finish this show first.');// A rematch carries every played question and selected/offered category.
    // Include the selected categories for older rooms created before category histories existed.
    const categories=rememberRecent(s.recentCategoryIds??[],[...s.selected[0],...s.selected[1]],56);
-   const n=makeGame(s.recentQuestionIds,categories,s.recentCategoryOffers??[]);n.id=s.id;n.createdAt=s.createdAt;n.settings={...s.settings};n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:1}));log(n,'Rematch! Same players and settings. Get ready for a new show.');return n;
+   const n=makeGame(s.recentQuestionIds,categories,s.recentCategoryOffers??[],s.hostHistoryId);n.id=s.id;n.createdAt=s.createdAt;n.settings={...s.settings};n.players=s.players.map(p=>({...p,score:0,hintsRemaining:n.settings.normalHints+p.bonusHints,doubleTakesRemaining:1}));log(n,'Rematch! Same players and settings. Get ready for a new show.');return n;
  }
  case 'close-show':{
    host(actor);assert(s.phase==='finished','Finish this show first.');s.phase='closed';log(s,'The host started a new show. Returning everyone to the home page.');break;
@@ -441,13 +502,13 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
  const f=s.final&&finalQ?{
    category:finalQ.category,prompt:['final-question','final-results','finished'].includes(s.phase)?finalQ.prompt:undefined,
    answer:['final-results','finished'].includes(s.phase)?finalQ.answer:undefined,
-   deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
+   deadlineAt:s.final.deadlineAt,endsAt:s.final.endsAt,noShow:s.final.noShow,wagerCount:Object.keys(s.final.wagers).length,answerCount:Object.keys(s.final.answers).length,
    myWager:me?s.final.wagers[me.id]:undefined,myAnswer:me?s.final.answers[me.id]?.answer:undefined,
    myDraft:me?s.final.drafts?.[me.id]:undefined,
    hintPrice:FINAL_HINT_PRICE, maxHints:MAX_FINAL_HINTS,
    myPurchasedHints:me?(s.final.purchasedHints?.[me.id]??0):undefined,
    myPurchasableHints:me&&s.final.wagers[me.id]===undefined?Math.max(0,MAX_FINAL_HINTS-(s.final.purchasedHints?.[me.id]??0)):0,
-   myRevealedHints:me&&s.phase!=='final-wager'?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
+   myRevealedHints:me?finalQ.hints.slice(0,s.final.revealedHints?.[me.id]??0):[],
    myAvailableHints:me?Math.max(0,Math.min(MAX_FINAL_HINTS-(s.final.revealedHints?.[me.id]??0),(s.final.purchasedHints?.[me.id]??0)-(s.final.purchasedHintsUsed?.[me.id]??0))):0,
    results:['final-results','finished'].includes(s.phase)?s.players.map(p=>({id:p.id,name:p.name,answer:s.final!.answers[p.id]?.answer||'(no answer)',correct:s.final!.answers[p.id]?.correct||false,points:s.final!.answers[p.id]?.points||0,wager:s.final!.wagers[p.id]??0})):undefined,
    disputeIds:s.final.disputeIds,

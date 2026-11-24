@@ -14,7 +14,13 @@ export default function Home() {
   async function createRoom(){
     setBusy(true);setError('');
     try{
-      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode,recentQuestionIds:JSON.parse(localStorage.getItem('knowshow:recentQuestionIds')||'[]'),recentCategoryIds:JSON.parse(localStorage.getItem('knowshow:recentCategoryIds')||'[]'),recentCategoryOffers:JSON.parse(localStorage.getItem('knowshow:recentCategoryOffers')||'[]')})});
+      // Store one anonymous host profile for all shows started in this browser.
+      // The server can restore its game history even if a local question list is stale.
+      let hostHistoryId=localStorage.getItem('knowshow:hostHistoryId')||'';
+      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(hostHistoryId)){
+        hostHistoryId=crypto.randomUUID();localStorage.setItem('knowshow:hostHistoryId',hostHistoryId);
+      }
+      const response=await fetch('/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode,hostHistoryId,recentQuestionIds:JSON.parse(localStorage.getItem('knowshow:recentQuestionIds')||'[]'),recentCategoryIds:JSON.parse(localStorage.getItem('knowshow:recentCategoryIds')||'[]'),recentCategoryOffers:JSON.parse(localStorage.getItem('knowshow:recentCategoryOffers')||'[]')})});
       const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not create room.');
       localStorage.setItem(`knowshow:${data.code}:host`,data.token);
       router.push(`/room/${data.code}`);
@@ -57,6 +63,6 @@ export default function Home() {
       {error&&<div role="alert" className="v11entryerror">{error}</div>}
     </section>
     <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Four categories</strong><span>Three questions each</span></div><div><Check size={20}/><strong>Everyone plays</strong><span>One answer at a time</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Hints & Double Takes</span></div></section>
-    <footer className="v11landingfooter"><span>THE OPENING ACT · THE MAIN EVENT · THE FINAL WORD</span><span>The Know Show v1.5.4</span></footer>
+    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.5.5</span></footer>
   </main>;
 }
