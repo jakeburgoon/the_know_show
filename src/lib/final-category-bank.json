@@ -1365,12 +1365,13 @@
     "tier": "adult",
     "distractors": [],
     "image": {
-      "src": "/trivia-images/bbec30e30397343a.svg",
+      "src": "/trivia-images/1d0ead61488c1be8.png",
       "alt": "Light blue field with a yellow circle slightly left of center.",
-      "width": 1200,
-      "height": 750
+      "width": 1280,
+      "height": 800
     },
-    "sourceUrl": "https://flagpedia.net/palau"
+    "sourceUrl": "https://flagpedia.net/palau",
+    "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn"
   },
   {
     "id": "category-final-famous-landmarks",

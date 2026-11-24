@@ -1,5 +1,5 @@
 {
-  "version": "1.12.0",
+  "version": "1.12.1",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -18324,13 +18324,13 @@
               "South Korea",
               "China"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/japan",
             "image": {
-              "src": "/trivia-images/f8c6b61e0cbecd08.svg",
+              "src": "/trivia-images/d905aaa42045812d.png",
               "alt": "White field with a centered red circle.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           },
           {
@@ -18346,13 +18346,13 @@
               "Netherlands",
               "Belgium"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/france",
             "image": {
-              "src": "/trivia-images/704064bdb86c857a.svg",
+              "src": "/trivia-images/cf291f03809e7b65.png",
               "alt": "Three equal vertical bands: blue, white and red.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           },
           {
@@ -18368,13 +18368,13 @@
               "Austria",
               "Spain"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/germany",
             "image": {
-              "src": "/trivia-images/1c76da186d3c2f27.svg",
+              "src": "/trivia-images/50eb7d97e9834428.png",
               "alt": "Three equal horizontal bands: black, red and gold.",
-              "width": 1200,
-              "height": 720
+              "width": 1280,
+              "height": 768
             }
           },
           {
@@ -18390,13 +18390,13 @@
               "France",
               "Mexico"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/italy",
             "image": {
-              "src": "/trivia-images/b52eb9af5368d95a.svg",
+              "src": "/trivia-images/fe9404e839f2423f.png",
               "alt": "Three equal vertical bands: green, white and red.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           }
         ],
@@ -18414,13 +18414,13 @@
               "Norway",
               "Denmark"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/sweden",
             "image": {
-              "src": "/trivia-images/a1f6aa2a1daa25d3.svg",
+              "src": "/trivia-images/eb6bc45627c0aa76.png",
               "alt": "Blue field with a yellow Nordic cross offset toward the hoist.",
-              "width": 1200,
-              "height": 750
+              "width": 1280,
+              "height": 800
             }
           },
           {
@@ -18436,13 +18436,13 @@
               "Romania",
               "Sweden"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/ukraine",
             "image": {
-              "src": "/trivia-images/7c526e68e9372649.svg",
+              "src": "/trivia-images/a95209be44565cae.png",
               "alt": "Two equal horizontal bands: blue above yellow.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           },
           {
@@ -18458,13 +18458,13 @@
               "Austria",
               "Georgia"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/switzerland",
             "image": {
-              "src": "/trivia-images/a4e77e3f4ca9bbd6.svg",
+              "src": "/trivia-images/5d1f38d84c05f4d9.png",
               "alt": "Square red field with a centered upright white cross.",
-              "width": 1200,
-              "height": 1200
+              "width": 1280,
+              "height": 1280
             }
           },
           {
@@ -18480,13 +18480,13 @@
               "Japan",
               "Maldives"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/bangladesh",
             "image": {
-              "src": "/trivia-images/85072c016e82443f.svg",
+              "src": "/trivia-images/98ca48801ed2dc70.png",
               "alt": "Dark green field with a red circle slightly left of center.",
-              "width": 1200,
-              "height": 720
+              "width": 1280,
+              "height": 768
             }
           }
         ],
@@ -18504,13 +18504,13 @@
               "Israel",
               "Norway"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/greece",
             "image": {
-              "src": "/trivia-images/c1a7f9e2d4b68a10.svg",
+              "src": "/trivia-images/9fedf3719ca78da7.png",
               "alt": "Blue and white striped flag with a white cross in a blue canton.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           },
           {
@@ -18528,13 +18528,13 @@
               "Niger",
               "Ivory Coast"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/india",
             "image": {
-              "src": "/trivia-images/9f2b7c4d1e8a6035.svg",
+              "src": "/trivia-images/2592bcdae440ac29.png",
               "alt": "Horizontal saffron, white, and green bands with a navy wheel in the center.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           },
           {
@@ -18552,13 +18552,13 @@
               "Hungary",
               "Bulgaria"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/mexico",
             "image": {
-              "src": "/trivia-images/e4b9081c7d2f6a33.svg",
+              "src": "/trivia-images/71a5b4221aad270a.png",
               "alt": "Vertical green, white, and red bands with a small emblem centered in the white band.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 732
             }
           },
           {
@@ -18576,13 +18576,13 @@
               "North Korea",
               "Taiwan"
             ],
-            "sourceStatus": "Editorial pilot: original SVG; reference design from Flagpedia country index",
+            "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
             "sourceUrl": "https://flagpedia.net/south-korea",
             "image": {
-              "src": "/trivia-images/7ab3d5e9c1024f68.svg",
+              "src": "/trivia-images/200de5f78d7750fc.png",
               "alt": "White field with a red and blue circle in the center and four black trigrams near the corners.",
-              "width": 1200,
-              "height": 800
+              "width": 1280,
+              "height": 854
             }
           }
         ]

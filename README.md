@@ -1,3 +1,11 @@
+# v1.12.1 — Accurate flags and category availability
+
+- All 13 flag images are sourced from the user-supplied Flagpedia PNG archive, resized proportionally (maximum 1280 px), visually inspected, and documented in IMAGE_CREDITS.json. Question wording, IDs, hints and difficulty are unchanged. Old image files remain for historical feedback references.
+- Developer dashboard → Category availability: enable or disable any category globally. Changes are stored server-side and captured when a new show starts, including rematches. Already-started shows are not interrupted. Disabled categories are excluded from both boards and Final Word but remain available in Question Lab. Seasonal availability still applies. At least 12 year-round categories must remain enabled.
+- Famous Landmarks is initially disabled by the migration because it still contains temporary illustrations. Re-enable it after actual photos are installed. Rerunning the migration does not overwrite an existing choice.
+- REQUIRED: Run `supabase/upgrade_v1_12_1.sql` in the existing Supabase SQL Editor **before** deploying. No new Vercel variables. If the migration is missing or database access fails, starting a new show returns an explanatory error rather than silently ignoring category settings.
+- Focused engine compilation passed; 77/78 engine tests and 52/52 UI/source tests passed. The one pre-existing failure concerns Machu Picchu appearing in both the ordinary bank and the Famous Landmarks Final Word. Full Next.js production build and live Supabase/browser testing remain unverified.
+
 # v1.12.0 — Developer Question Lab
 
 This cumulative build adds a private Question Lab inside the existing developer dashboard.

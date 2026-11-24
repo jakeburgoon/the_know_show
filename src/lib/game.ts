@@ -21,7 +21,7 @@ export type Submission={answer:string;at:number;correct:boolean;points:number;do
 export type ActiveQuestion={drafts?:Record<string,{answer:string;doubleTake:boolean}>;key:string;questionId:string;introUntilAt:number;startedAt?:number;deadlineAt?:number;answers:Record<string,Submission>;hintUsers:string[];turnId?:string;stealId?:string;stealTurn?:boolean};
 export type Resolution={key:string;questionId:string;answer:string;category:string;points:number;answers:Record<string,Submission>;finishedAt:number;endsAt:number;disputeIds:string[];skipped?:boolean;noShow?:boolean};
 export type FinalState={drafts?:Record<string,string>;purchasedHints?:Record<string,number>;purchasedHintsUsed?:Record<string,number>;revealedHints?:Record<string,number>;id:string;wagers:Record<string,number>;answers:Record<string,Submission>;startedAt?:number;deadlineAt?:number;endsAt?:number;disputeIds:string[];noShow?:boolean};
-export type GameState={schemaVersion:3;id:string;feedbackShowId?:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[];hostHistoryId?:string;musicChangedAt?:number};
+export type GameState={schemaVersion:3;id:string;feedbackShowId?:string;createdAt:number;phase:Phase;settings:Settings;players:Player[];round:0|1;selected:[string[],string[]];draftPool:string[];draftIndex:number;usedKeys:string[];questionMap:Record<string,string>;chooserIndex:number;active?:ActiveQuestion;resolution?:Resolution;final?:FinalState;pausedAt?:number;announcement?:string;eventLog:string[];recentQuestionIds:string[];recentCategoryIds?:string[];recentCategoryOffers?:string[];hostHistoryId?:string;musicChangedAt?:number;disabledCategoryIds?:string[]};
 export type Actor={kind:'host'|'player'|'spectator';id?:string};
 export type Action=
  |{type:'settings';settings:Partial<Settings>}
@@ -112,7 +112,7 @@ function weightedSample<T>(items:readonly T[],count:number,weight:(item:T)=>numb
 }
 function pickPool(s:GameState,now:number){
  const alreadySelected=new Set([...s.selected[0],...s.selected[1]]);
- const allowed=availableCategories(new Date(now)).filter(c=>!alreadySelected.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
+ const allowed=availableCategories(new Date(now)).filter(c=>!s.disabledCategoryIds?.includes(c.id)&&!alreadySelected.has(c.id)&&[1,2,3].every(n=>(c.questionsByLevel[String(n)]??[]).length>=4));
  const total=Math.min(allowed.length,DRAFT_POOL_SIZE);
  const seasonal=allowed.filter(c=>c.activeMonths?.length);
  const weight=(c:(typeof CATEGORIES)[number])=>categoryDraftWeight(s,c);
@@ -197,7 +197,7 @@ function nextSteal(s:GameState,now:number){const a=s.active!;a.stealTurn=true;a.
  * Seasonal categories are eligible only when in season.
  */
 export function chooseFinalQuestion(s:GameState,now:number){
- const activeIds=new Set(availableCategories(new Date(now)).map(c=>c.id));
+ const activeIds=new Set(availableCategories(new Date(now)).filter(c=>!s.disabledCategoryIds?.includes(c.id)).map(c=>c.id));
  const currentBoard=new Set([...s.selected[0],...s.selected[1]]);
  const eligible=CATEGORY_FINALS.filter(q=>q.categoryId&&activeIds.has(q.categoryId)&&!currentBoard.has(q.categoryId));
  assert(eligible.length>0,'No eligible Final Word categories remain outside the current board.');
@@ -314,7 +314,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    if(action.choiceAccess!==undefined){assert(['off','all','medium-hard','hard'].includes(action.choiceAccess),'Invalid choice availability.');p.choiceAccess=action.choiceAccess;}break;
  }
  case 'start-draft':{
-   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');goDraft(s,now);break;
+   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');assert(CATEGORIES.filter(c=>!c.activeMonths&&!s.disabledCategoryIds?.includes(c.id)).length>=12,'At least 12 year-round categories must be enabled. Ask the developer to update category availability.');goDraft(s,now);break;
  }
  case 'draft-category':{
    assert(s.phase==='draft','The category draft is closed.');const id=action.categoryId;

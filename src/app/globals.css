@@ -982,3 +982,6 @@ body{background:var(--v11cream);color:var(--v11navy)}
 @media(max-width:900px){.ks-lab-layout{grid-template-columns:1fr;}.ks-lab-grid--builder{grid-template-columns:1fr;}.ks-lab-list{max-height:360px;}.ks-lab-prompt{font-size:1.2rem;}}
 
 .ks-lab-preview:not(.ks-lab-preview--tv){max-width:390px;margin-inline:auto;width:100%;box-sizing:border-box}.ks-lab-preview--tv{width:100%;box-sizing:border-box}
+
+/* v1.12.1 developer category controls */
+.ks-category-list{margin-top:16px}.ks-category-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid #dcd0b8}.ks-category-row small{display:block;margin-top:4px;color:#526578}.ks-category-row button{min-width:94px;min-height:44px}.ks-category-row button:disabled{cursor:wait}
