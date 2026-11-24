@@ -1,3 +1,11 @@
+# v1.8.2 — Compact landing page on phones and desktops
+
+- Remove the separate top banner and duplicate logo on all screen sizes; center How to play beneath the approved headline and new tagline: “Over 70 categories. More than 1,000 questions. A different show every time.”
+- Reduce hero height, whitespace and card decoration; put Host a show and Join a show ahead of secondary feature badges. Keep the QR scanner and six-character player join code.
+- Hide the hosting passcode field by default. If the existing server-side ROOM_CREATION_PASSCODE gate rejects creation, reveal a password field and allow a retry. This is a deployment-wide hosting credential, not the automatically generated player join code; no authentication changes or Green Room passcode feature.
+- No gameplay, question bank, logo, icon, database or environment changes. All v1.8.1 draft improvements are retained.
+- Validation: 95 automated engine and UI/content tests passed; full production build requires Vercel because application dependencies are not installed locally.
+
 # v1.8.1 — Build the Board: eight choices, more seasonal variety
 
 Each round offers **eight categories**, regardless of the number of players or teams, and players select four. When an unselected, in-season category is eligible, one offer is guaranteed; the remaining seven are drawn from all other eligible categories with the existing history and question-variety weights. There is no seasonal cap, and no obligation to choose seasonal content. Round 2 excludes all four Round 1 selections. Existing in-progress drafts keep their stored offers; new drafts use the new rules.

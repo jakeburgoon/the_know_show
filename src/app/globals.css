@@ -817,3 +817,35 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-music-tip{display:flex;align-items:center;gap:11px;padding:11px 13px;margin:7px 0 8px;border:1px solid #ddc17b;border-radius:12px;background:#fff4d9;color:#173953;box-shadow:0 3px 12px #162d4d10;font-size:12px;line-height:1.45}
 .ks-music-tip>svg{color:#ad8028;flex-shrink:0}.ks-music-tip>span{flex:1}.ks-music-tip button{border:0;background:none;color:#26495e;font-size:19px;cursor:pointer}
 @media(max-width:520px){.ks-player-item{grid-template-columns:1fr;padding:13px;gap:12px}.ks-player-support label{min-width:0}.ks-support-ticks{font-size:9px}}
+
+/* v1.8.2 — compact landing page at every viewport size; keep actions above secondary details. */
+.v11landing .v11showcase{padding:20px 18px 18px;border-top:0}
+.v11landing .v11overline{margin:0 0 9px;font-size:10px}
+.v11landing .v11hero-logo{width:min(88vw,450px);max-height:150px;margin:0 auto 4px}
+.v11landing .v11showcase h1{font-size:clamp(27px,4vw,42px);margin:4px auto 8px;line-height:1.13}
+.v11landing .v11herodeck{font-size:clamp(14px,1.6vw,17px);line-height:1.45;max-width:690px}
+.v11landing .v11howlink{margin-top:13px;min-height:40px;padding:8px 15px;justify-content:center}
+.v11landing .v11entryzone{padding:19px 20px 8px;max-width:920px}
+.v11landing .v11entryheading{margin-bottom:12px}
+.v11landing .v11entryheading h2{font-size:clamp(24px,3vw,32px);margin:0}
+.v11landing .v11entrygrid{gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.v11landing .v11entrycard{padding:18px;border-radius:16px}
+.v11landing .v11cardtop{justify-content:flex-start;gap:10px;margin:0 0 8px}
+.v11landing .v11cardicon{width:36px;height:36px;border-radius:9px;flex:none}
+.v11landing .v11entrycard h3{font-size:23px;margin:0;line-height:1.15}
+.v11landing .v11entrycard>p{min-height:0;max-width:none;margin:0 0 12px;font-size:14px;line-height:1.4}
+.v11landing .ks-host-entry{margin:0}
+.v11landing .ks-host-entry .v11action{margin:0;min-height:48px}
+.v11landing .ks-host-passcode .v11field{margin-bottom:10px}
+.v11landing .ks-host-entry .v11entryerror{margin:0 0 10px;font-size:13px}
+.v11landing .ks-entry-features{gap:7px;margin:12px auto 16px;padding:0 12px}
+.v11landing .ks-entry-features span{color:#183651;border-color:#e5d9b8;background:#fff9ee;padding:6px 10px;font-size:12px}
+.v11landing .ks-entry-features svg{color:#ad7b27}
+@media(max-width:700px){
+ .v11landing .v11showcase{padding:17px 14px 16px}
+ .v11landing .v11hero-logo{width:min(88vw,390px);max-height:116px}
+ .v11landing .v11showcase h1{font-size:clamp(26px,7.3vw,34px);max-width:450px}
+ .v11landing .v11entryzone{padding:15px 14px 6px}
+ .v11landing .v11entrygrid{grid-template-columns:1fr;gap:12px}
+ .v11landing .v11entrycard{padding:15px}
+}

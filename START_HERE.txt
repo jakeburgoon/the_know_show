@@ -1,8 +1,10 @@
-THE KNOW SHOW — v1.8.1 · COMPLETE CUMULATIVE APP
+THE KNOW SHOW — v1.8.2 · COMPLETE CUMULATIVE APP
 
 Deploy the complete app from this ZIP directly over any earlier version (including v1.7.0 or v1.5.4). No intermediate installations required. Existing Vercel environment settings and Supabase deployment remain unchanged.
 
-NEW IN v1.8.1: Eight category offers per round for every player/team count; choose four. At least one eligible seasonal offer is guaranteed when available, and other in-season categories can compete for the remaining spots. Round 2 excludes Round 1 selections. No seasonal selection cap. Existing weighting and question banks remain intact.
+NEW IN v1.8.2: Compact landing page on phones and desktops, no duplicate banner, centered How to play, new 1,000-question tagline, and no default hosting passcode field. Configured hosting passcodes are requested only when required; player join codes still work.
+
+FROM v1.8.1: Eight category offers per round for every player/team count; choose four. At least one eligible seasonal offer is guaranteed when available, and other in-season categories can compete for the remaining spots. Round 2 excludes Round 1 selections. No seasonal selection cap. Existing weighting and question banks remain intact.
 
 FROM v1.8.0: Three categories (The No-Show!, Christmas Legends & Lore, Creepy Creatures), 48 regular questions and 3 reserved Final Word questions. Library now: 72 categories, 942 regular questions, 72 Final Word questions; 1,014 questions total. The homepage and short How to Play guide promote over 70 categories and over 1,000 questions.
 
