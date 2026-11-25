@@ -546,7 +546,9 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
  const q=s.active?getQuestion(s.active.questionId):undefined;
  const intro=s.active&&q?{key:s.active.key,category:CATEGORY_LOOKUP.get(q.categoryId)?.name,points:roundPoints(s,s.active.key),until:s.active.introUntilAt}:undefined;
  const current=s.phase==='question'&&s.active&&q?{
-   ...intro,prompt:q.prompt,image:q.image,startedAt:s.active.startedAt,deadlineAt:s.active.deadlineAt,stealTurn:!!s.active.stealTurn,
+   // An active view always has a question key; do not spread the optional intro view.
+   key:s.active.key,category:CATEGORY_LOOKUP.get(q.categoryId)?.name,points:roundPoints(s,s.active.key),until:s.active.introUntilAt,
+   prompt:q.prompt,image:q.image,startedAt:s.active.startedAt,deadlineAt:s.active.deadlineAt,stealTurn:!!s.active.stealTurn,
    answeringId:s.active.stealTurn?s.active.stealId:s.active.turnId,
    submissionCount:Object.keys(s.active.answers).length,
    mySubmission:me?s.active.answers[me.id]?.answer:undefined,

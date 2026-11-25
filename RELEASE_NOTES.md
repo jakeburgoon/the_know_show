@@ -1,3 +1,7 @@
+# v1.13.9 — Production typecheck hotfix
+
+Preserve required active question identifiers in the game view so hint actions pass strict TypeScript checking. Replace CSS align-items:end with flex-end. No SQL changes. All v1.13.8 features retained.
+
 # v1.13.8 — First-show recommendation and next-show tips
 
 Everyone chooses is the new-room default and appears first with a first-show recommendation. Curtain Call offers a short suggestion for a different answer format; rematches retain settings unless changed. See V138_FIRST_SHOW_SETUP.md. No new SQL beyond v1.13.5.

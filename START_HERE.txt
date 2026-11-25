@@ -1,3 +1,7 @@
+THE KNOW SHOW — v1.13.9 · PRODUCTION TYPECHECK HOTFIX
+
+No new SQL if v1.13.5 SQL already applied. This release retains v1.13.8 features and fixes the active-question identifier type.
+
 THE KNOW SHOW — v1.13.8 · COMPLETE CUMULATIVE APP
 
 See V138_FIRST_SHOW_SETUP.md. If upgrading from v1.13.2, run the v1.13.5 SQL migration before deploying. No additional SQL if already on v1.13.5 or later.
