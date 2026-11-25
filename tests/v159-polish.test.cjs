@@ -10,12 +10,12 @@ test('No Show animation skips old presenter, runs longer, and leaderboard needs 
  assert.doesNotMatch(show,/THE KNOW SHOW PRESENTS/);
  assert.match(show,/A TOTAL NO-SHOW!/);
  assert.doesNotMatch(show,/Next up: back to the board/);
- assert.match(show,/timeLeft>\(final\?13000:7500\)/);
+ assert.match(show,/timeLeft>\(final\?14000:8500\)/);
  assert.match(css,/\.ks-noshow-stars span\{animation-duration:3\.4s\}/);
 });
 test('results grant more time to see answers, and incorrect submissions alone can dispute',()=>{
- assert.match(game,/endsAt:now\+\(noShow\?11000:7500\)/);
- assert.match(game,/f\.endsAt=now\+\(f\.noShow\?16500:13000\)/);
+ assert.match(game,/endsAt:now\+\(noShow\?12000:8500\)/);
+ assert.match(game,/f\.endsAt=now\+\(f\.noShow\?17500:14000\)/);
  assert.match(game,/Only submitted answers marked incorrect can be reviewed/);
  assert.match(show,/Think you got it right\?/);
  assert.match(show,/Ask the host to review your answer/);

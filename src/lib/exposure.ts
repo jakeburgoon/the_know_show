@@ -11,14 +11,14 @@ export const seenCount=(s:GameState,id:string)=>s.recentQuestionIds.includes(id)
 export function auditSelection(s:GameState,id:string,candidates:readonly {id:string}[]):SelectionAudit{
  return {seenBefore:seenCount(s,id)>0,unseenAvailable:candidates.filter(q=>!seenCount(s,q.id)).length,candidates:candidates.length,seenBy:seenCount(s,id),historyScopes:s.historyScopeCount??1,minimumSeenBy:Math.min(...candidates.map(q=>seenCount(s,q.id)))};
 }
-function counts(answers:Record<string,Submission>,seats:number,skipped=false,hintUsers=0,hintCount=hintUsers){
+function counts(answers:Record<string,Submission>,seats:number,skipped=false,hintUsers=0,hintCount=hintUsers,purchases?:Record<string,{options?:true;fiftyFifty?:true}>){
  const a=Object.values(answers).filter(x=>x.answer.trim()&&x.answer!=='(no answer)');
  const written=a.filter(x=>x.answerFormat!=='choices'),choices=a.filter(x=>x.answerFormat==='choices');
  const timed=a.filter(x=>typeof x.responseMs==='number'&&Number.isFinite(x.responseMs));
- return {attempted:skipped?0:a.length,correct:skipped?0:a.filter(x=>x.correct).length,written:skipped?0:written.length,writtenCorrect:skipped?0:written.filter(x=>x.correct).length,choices:skipped?0:choices.length,choicesCorrect:skipped?0:choices.filter(x=>x.correct).length,hints:skipped?0:a.filter(x=>x.hintUsed).length,hintUsers,hintCount,notAnswered:skipped?0:Math.max(0,seats-a.length),eligibleSeats:seats,overturned:skipped?0:a.filter(x=>x.overturned).length,timed:skipped?0:timed.length,responseMs:skipped?0:timed.reduce((n,x)=>n+(x.responseMs??0),0),skipped,
+ return {attempted:skipped?0:a.length,correct:skipped?0:a.filter(x=>x.correct).length,written:skipped?0:written.length,writtenCorrect:skipped?0:written.filter(x=>x.correct).length,choices:skipped?0:choices.length,choicesCorrect:skipped?0:choices.filter(x=>x.correct).length,hints:skipped?0:a.filter(x=>x.hintUsed).length,hintUsers,hintCount,assistanceCounts:Object.fromEntries(['written','provided-options','purchased-options','fifty-fifty'].map(mode=>[mode,{attempts:skipped?0:a.filter(x=>x.assistance===mode).length,correct:skipped?0:a.filter(x=>x.assistance===mode&&x.correct).length}])),optionsPurchases:Object.values(purchases??{}).filter(p=>p.options).length,fiftyFiftyPurchases:Object.values(purchases??{}).filter(p=>p.fiftyFifty).length,notAnswered:skipped?0:Math.max(0,seats-a.length),eligibleSeats:seats,overturned:skipped?0:a.filter(x=>x.overturned).length,timed:skipped?0:timed.length,responseMs:skipped?0:timed.reduce((n,x)=>n+(x.responseMs??0),0),skipped,
   // No display names, device IDs, room player IDs, or raw typed answers. Canonical
   // choice index 0=correct, 1–3=distractors as stored at the time of play.
-  responses:skipped?[]:a.map(x=>({format:x.answerFormat??'written',correct:x.correct,initialCorrect:x.initialCorrect??x.correct,hintUsed:x.hintUsed,responseMs:x.responseMs??null,overturned:!!x.overturned,optionIndex:x.optionIndex??null}))};
+  responses:skipped?[]:a.map(x=>({format:x.answerFormat??'written',correct:x.correct,initialCorrect:x.initialCorrect??x.correct,hintUsed:x.hintUsed,assistance:x.assistance??null,optionsPurchased:x.optionsPurchased??null,fiftyFiftyPurchased:x.fiftyFiftyPurchased??null,responseMs:x.responseMs??null,overturned:!!x.overturned,optionIndex:x.optionIndex??null}))};
 }
 /** Adult-only aggregate counts, never age-tagged individual responses. Teams are not individuals. */
 function ageSummary(state:GameState,answers:Record<string,Submission>,skipped=false){
@@ -35,18 +35,18 @@ function ageSummary(state:GameState,answers:Record<string,Submission>,skipped=fa
 export function exposureJournal(before:GameState,after:GameState,now=Date.now()){
  const showId=after.feedbackShowId??after.id;
  const started=before.phase==='lobby'&&after.phase==='draft';
- const draft=after.phase==='draft'&&(started||before.round!==after.round||before.phase!=='draft');
+ const draft=after.phase==='draft'&&(started||before.round!==after.round||(!before.resolution?.resumePhase&&before.phase!=='draft'));
  const selected=after.selected.flat().filter(id=>!before.selected.flat().includes(id));
  const complete=after.phase==='finished'&&before.phase!=='finished';
  const exposures:{id:string;category:string;level:number;round:number;at:string;diagnostic:SelectionAudit|null;stats:(ReturnType<typeof counts>&{ageSummary?:ReturnType<typeof ageSummary>})|null}[]=[];
  const add=(id:string,final:boolean,at:number,stats:(ReturnType<typeof counts>&{ageSummary?:ReturnType<typeof ageSummary>})|null)=>{
   const q=final?FINALS.find(x=>x.id===id):getQuestion(id);if(!q)return;
   const category=q.categoryId??'legacy';const level=final?4:(q as {level:number}).level;
-  exposures.push({id,category,level,round:final?3:after.round+1,at:new Date(at).toISOString(),diagnostic:after.selectionAudit?.[id]??null,stats});
+  exposures.push({id,category,level,round:final?3:(after.resolution?.questionId===id?(after.resolution.round??after.round):after.round)+1,at:new Date(at).toISOString(),diagnostic:after.selectionAudit?.[id]??null,stats});
  };
  if(after.phase==='question'&&after.active?.startedAt!==undefined&&(before.phase!=='question'||before.active?.questionId!==after.active.questionId))add(after.active.questionId,false,after.active.startedAt,null);
- if(after.phase==='results'&&after.resolution&&(before.phase!=='results'||JSON.stringify(before.resolution?.answers)!==JSON.stringify(after.resolution.answers))){
-  const r=after.resolution;add(r.questionId,false,r.revealedAt??before.active?.startedAt??r.finishedAt,{...counts(r.answers,r.eligibleSeats??after.players.length,!!r.skipped,r.hintUsers?.length??0),ageSummary:ageSummary(after,r.answers,!!r.skipped)});
+ if(after.phase==='results'&&after.resolution&&(before.resolution?.questionId!==after.resolution.questionId||JSON.stringify(before.resolution?.answers)!==JSON.stringify(after.resolution.answers))){
+  const r=after.resolution;add(r.questionId,false,r.revealedAt??before.active?.startedAt??r.finishedAt,{...counts(r.answers,r.eligibleSeats??after.players.length,!!r.skipped,r.hintUsers?.length??0,r.hintPurchases?Object.values(r.hintPurchases).reduce((n,p)=>n+Number(!!p.options)+Number(!!p.fiftyFifty),0):r.hintUsers?.length??0,r.hintPurchases),ageSummary:ageSummary(after,r.answers,!!r.skipped)});
  }
  if(after.phase==='final-question'&&after.final?.startedAt!==undefined&&before.phase!=='final-question')add(after.final.id,true,after.final.startedAt,null);
  if((after.phase==='final-results'||after.phase==='finished')&&after.final?.startedAt!==undefined&&(before.phase==='final-question'||before.phase==='final-wager'||(before.phase==='final-results'&&JSON.stringify(before.final?.answers)!==JSON.stringify(after.final.answers)))){

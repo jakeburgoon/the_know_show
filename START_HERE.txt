@@ -1,3 +1,11 @@
+THE KNOW SHOW — v1.13.4 · COMPLETE CUMULATIVE APP
+
+No new SQL or environment variables if v1.13.2 or v1.13.3 is deployed. See V134_ANSWER_FORMAT_SETUP.md.
+
+THE KNOW SHOW — v1.13.3 · COMPLETE CUMULATIVE APP
+
+No new SQL or environment variables if v1.13.2 is deployed. See V133_GAMEPLAY_SETUP.md.
+
 THE KNOW SHOW — v1.13.2 · COMPLETE CUMULATIVE APP
 
 Run supabase/upgrade_v1_13_2.sql after the v1.13.0 migration. See V132_AGE_SUPPORT_SETUP.md for full update steps.

@@ -5,17 +5,17 @@ const wizard=fs.readFileSync('src/components/HostWizard.tsx','utf8');
 const show=fs.readFileSync('src/components/ShowRoom.tsx','utf8');
 const css=fs.readFileSync('src/app/globals.css','utf8');
 
-test('host setup asks only who plays and how it is displayed, not music or answer style',()=>{
-  assert.match(wizard,/const stages=\['Who is playing\?','How will everyone see the show\?'\]/);
-  assert.match(wizard,/QUESTION \{step\+1\} OF 2/);
-  assert.doesNotMatch(wizard,/What is the soundtrack\?|How will players answer\?|Everyone chooses/);
+test('host setup asks who plays, display and answer format, not music',()=>{
+  assert.match(wizard,/const stages=\['Who is playing\?','How will everyone see the show\?','How will players answer questions\?'\]/);
+  assert.match(wizard,/QUESTION \{step\+1\} OF 3/);
+  assert.doesNotMatch(wizard,/What is the soundtrack\?/);assert.match(wizard,/Everyone chooses/);
   assert.match(wizard,/Continue to Green Room/);
 });
 test('Green Room offers player-by-player answer support including all-written and all-choices',()=>{
   assert.match(show,/function PlayerAnswerSupport/);
   assert.match(show,/PLAYER_SUPPORT=\['off','hard','medium-hard','all'\]/);
   assert.match(show,/type="range" min=\{0\} max=\{3\} step=\{1\}/);
-  assert.match(show,/Different support levels can help level the playing field/);
+  assert.match(show,/Different answer formats can help level the playing field/);
   assert.match(show,/The final question is written for everyone/);
 });
 test('loading uses unchanged logo path, branded styling and reduced-motion support',()=>{

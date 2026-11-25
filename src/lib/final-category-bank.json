@@ -6,17 +6,20 @@
     "difficulty": "medium-hard",
     "prompt": "Which 1977 NASA spacecraft crossed the heliopause in 2012, becoming the first human-made craft to enter interstellar space?",
     "answer": "Voyager 1",
-    "hint": "It carries a recorded cultural message intended for any intelligence that might encounter it.",
+    "hint": "It photographed Jupiter and Saturn, including a close flyby of Saturn’s moon Titan.",
     "hints": [
-      "It carries a recorded cultural message intended for any intelligence that might encounter it.",
-      "It was launched after its twin spacecraft yet overtook it on the way to interstellar space."
+      "It photographed Jupiter and Saturn, including a close flyby of Saturn’s moon Titan.",
+      "Its name suggests a long journey, and it carries the lower number of a pair of sister spacecraft."
     ],
     "tier": "teen",
     "aliases": [
       "Voyager I",
       "Voyager One"
     ],
-    "distractors": []
+    "distractors": [],
+    "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-1/",
+    "topicPreview": "The first missions into interstellar space",
+    "finalEligible": true
   },
   {
     "id": "category-final-animals",
@@ -25,14 +28,16 @@
     "difficulty": "hard",
     "prompt": "What is the scientific name for the insect order that includes both dragonflies and damselflies?",
     "answer": "Odonata",
-    "hint": "The insects in this taxonomic order have predatory aquatic young called naiads.",
+    "hint": "Members of this order have aquatic predatory young and large compound eyes as adults.",
     "hints": [
-      "The insects in this taxonomic order have predatory aquatic young called naiads.",
-      "The order’s Greek-derived name refers to teeth, like the root in “orthodontics.”"
+      "Members of this order have aquatic predatory young and large compound eyes as adults.",
+      "The Greek root of the order’s name relates to teeth and also appears in the vocabulary of dentistry."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Scientific classification of flying insects",
+    "finalEligible": true
   },
   {
     "id": "category-final-world",
@@ -41,14 +46,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which present-day Central Asian country contains the historic Silk Road city of Samarkand?",
     "answer": "Uzbekistan",
-    "hint": "The country was once part of the Soviet Union.",
+    "hint": "Samarkand and Bukhara were major trading cities within this former Soviet republic.",
     "hints": [
-      "The country was once part of the Soviet Union.",
-      "Its capital is the Central Asian city of Tashkent."
+      "Samarkand and Bukhara were major trading cities within this former Soviet republic.",
+      "Its capital is Tashkent, and it is one of two doubly landlocked countries."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Silk Road cities of Central Asia",
+    "finalEligible": true
   },
   {
     "id": "category-final-words",
@@ -57,10 +64,10 @@
     "difficulty": "medium-hard",
     "prompt": "What is a word called when it has two opposite meanings, as the verb 'sanction' can mean either permit or penalize?",
     "answer": "Contronym",
-    "hint": "The term belongs to the same family of vocabulary labels as “synonym” and “antonym.”",
+    "hint": "The same phenomenon occurs with “dust,” which can mean to remove fine particles or to apply them.",
     "hints": [
-      "The term belongs to the same family of vocabulary labels as “synonym” and “antonym.”",
-      "Its first syllable sounds like the beginning of “contradiction,” and the rest belongs to a common family of word-label endings."
+      "The same phenomenon occurs with “dust,” which can mean to remove fine particles or to apply them.",
+      "The usual term combines a prefix suggesting opposition with the ending found in synonym and antonym."
     ],
     "tier": "teen",
     "aliases": [
@@ -69,7 +76,9 @@
       "Janus word",
       "Antagonym"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Words with opposing meanings",
+    "finalEligible": true
   },
   {
     "id": "category-final-history",
@@ -78,16 +87,18 @@
     "difficulty": "hard",
     "prompt": "What 1884–1885 meeting set diplomatic rules for European colonial claims in Africa?",
     "answer": "Berlin Conference",
-    "hint": "Its General Act addressed free trade and navigation in the Congo basin.",
+    "hint": "German chancellor Otto von Bismarck convened the meeting.",
     "hints": [
-      "Its General Act addressed free trade and navigation in the Congo basin.",
-      "The diplomatic negotiations were hosted under German chancellor Otto von Bismarck."
+      "German chancellor Otto von Bismarck convened the meeting.",
+      "The meeting is named for the German capital rather than for a location in Africa."
     ],
     "tier": "adult",
     "aliases": [
       "Congo Conference"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "European colonial expansion in Africa",
+    "finalEligible": true
   },
   {
     "id": "category-final-science",
@@ -96,16 +107,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which Russian chemist published an influential periodic table in 1869 and predicted properties of elements not yet discovered?",
     "answer": "Dmitri Mendeleev",
-    "hint": "He arranged elements according to patterns in their properties.",
+    "hint": "The discoverers of gallium and germanium later confirmed some of his predictions.",
     "hints": [
-      "He arranged elements according to patterns in their properties.",
-      "He left intentional gaps where he expected future discoveries."
+      "The discoverers of gallium and germanium later confirmed some of his predictions.",
+      "His surname begins with the same six letters as that of the monk famous for experiments with pea plants."
     ],
     "tier": "teen",
     "aliases": [
       "Mendeleev"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The history of the periodic table",
+    "finalEligible": true
   },
   {
     "id": "category-final-food",
@@ -114,16 +127,18 @@
     "difficulty": "medium-hard",
     "prompt": "What name is given to the browning reaction between amino acids and reducing sugars during cooking?",
     "answer": "Maillard reaction",
-    "hint": "It is important to the flavor and color of seared meats and toasted bread.",
+    "hint": "The reaction gives bread crust and seared meat much of their distinctive flavor, unlike caramelization of sugar alone.",
     "hints": [
-      "It is important to the flavor and color of seared meats and toasted bread.",
-      "The reaction is named after a French chemist who studied it in the early 1900s."
+      "The reaction gives bread crust and seared meat much of their distinctive flavor, unlike caramelization of sugar alone.",
+      "The term bears the surname of a French chemist, Louis-Camille, who studied the process in the early twentieth century."
     ],
     "tier": "teen",
     "aliases": [
       "Maillard"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The chemistry behind cooked-food flavors",
+    "finalEligible": true
   },
   {
     "id": "category-final-movies",
@@ -132,14 +147,16 @@
     "difficulty": "hard",
     "prompt": "Which silent 1927 aviation drama won the first Academy Award for Outstanding Picture, later called Best Picture?",
     "answer": "Wings",
-    "hint": "The movie used ambitious aerial sequences to depict combat in World War I.",
+    "hint": "Clara Bow starred in this film about World War I pilots.",
     "hints": [
-      "The movie used ambitious aerial sequences to depict combat in World War I.",
-      "It featured Clara Bow and was honored at the Academy’s inaugural ceremony in 1929."
+      "Clara Bow starred in this film about World War I pilots.",
+      "The title is a plural noun that can also refer to separate sections of a building."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Early Hollywood and the Academy Awards",
+    "finalEligible": true
   },
   {
     "id": "category-final-music",
@@ -148,16 +165,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which Russian composer wrote the piano suite Pictures at an Exhibition after visiting an exhibition of a friend's artwork?",
     "answer": "Modest Mussorgsky",
-    "hint": "The composition portrays a walk between a sequence of paintings.",
+    "hint": "The composer also wrote the orchestral piece Night on Bald Mountain.",
     "hints": [
-      "The composition portrays a walk between a sequence of paintings.",
-      "The composer belonged to the Russian nationalist circle commonly known as The Five."
+      "The composer also wrote the orchestral piece Night on Bald Mountain.",
+      "He belonged to the group of Russian nationalist composers known as The Five; his unusual first name is also an English adjective."
     ],
     "tier": "teen",
     "aliases": [
       "Mussorgsky"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Russian composers and program music",
+    "finalEligible": true
   },
   {
     "id": "category-final-math",
@@ -166,17 +185,20 @@
     "difficulty": "medium-hard",
     "prompt": "How many diagonals does a 12-sided polygon have?",
     "answer": "54",
-    "hint": "Think about how many vertices each corner can connect to without drawing an edge.",
+    "hint": "A diagonal joins two nonadjacent vertices rather than neighboring vertices.",
     "hints": [
-      "Think about how many vertices each corner can connect to without drawing an edge.",
-      "Each of the twelve vertices can form nine diagonals, but every diagonal is counted twice."
+      "A diagonal joins two nonadjacent vertices rather than neighboring vertices.",
+      "Count the possible connections from one vertex, then correct for counting every connection twice."
     ],
     "tier": "teen",
     "aliases": [
       "fifty four",
       "fifty-four"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Geometry of polygons",
+    "finalEligible": false,
+    "finalExclusionReason": "Computation rather than primarily factual recall; paid hints risk becoming the solution method."
   },
   {
     "id": "category-final-sports",
@@ -185,16 +207,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which country hosted the first FIFA Women's World Cup in 1991?",
     "answer": "China",
-    "hint": "The inaugural tournament was staged in Asia.",
+    "hint": "The tournament featured games in Guangzhou and other cities in Guangdong province.",
     "hints": [
-      "The inaugural tournament was staged in Asia.",
-      "Matches were played in cities in Guangdong province."
+      "The tournament featured games in Guangzhou and other cities in Guangdong province.",
+      "The same country hosted the 2007 tournament and the 2008 Summer Olympics."
     ],
     "tier": "teen",
     "aliases": [
       "People's Republic of China"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The early history of women's international soccer",
+    "finalEligible": true
   },
   {
     "id": "category-final-books",
@@ -203,17 +227,19 @@
     "difficulty": "medium-hard",
     "prompt": "Which George Orwell novel opens with a bright cold day in April and clocks striking thirteen?",
     "answer": "Nineteen Eighty-Four",
-    "hint": "The novel depicts a state that seeks to control both information and private thought.",
+    "hint": "Winston Smith works for the Ministry of Truth in this novel.",
     "hints": [
-      "The novel depicts a state that seeks to control both information and private thought.",
-      "Its protagonist works at the Ministry of Truth and secretly keeps a diary."
+      "Winston Smith works for the Ministry of Truth in this novel.",
+      "Its title is a calendar year in the decade before the fall of the Berlin Wall."
     ],
     "tier": "teen",
     "aliases": [
       "1984",
       "Nineteen Eighty Four"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Twentieth-century dystopian literature",
+    "finalEligible": true
   },
   {
     "id": "category-final-nature",
@@ -222,10 +248,10 @@
     "difficulty": "hard",
     "prompt": "What cold ocean current along the Pacific coast of Peru and Chile helps support rich fishing grounds through upwelling?",
     "answer": "Humboldt Current",
-    "hint": "Its waters are unusually cool for the latitude and rich in nutrients.",
+    "hint": "The current is associated with cold, nutrient-rich water and large anchovy fisheries.",
     "hints": [
-      "Its waters are unusually cool for the latitude and rich in nutrients.",
-      "It is named after a European naturalist who explored South America."
+      "The current is associated with cold, nutrient-rich water and large anchovy fisheries.",
+      "It shares its name with a penguin species and a German naturalist who explored South America."
     ],
     "tier": "adult",
     "aliases": [
@@ -233,7 +259,9 @@
       "Peru Current",
       "Peruvian Current"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Ocean currents and coastal ecosystems",
+    "finalEligible": true
   },
   {
     "id": "category-final-tech",
@@ -242,14 +270,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which distributed version-control system was created by Linus Torvalds in 2005?",
     "answer": "Git",
-    "hint": "Its users often work with branches, commits, and merges.",
+    "hint": "This system was created to coordinate development of the Linux kernel.",
     "hints": [
-      "Its users often work with branches, commits, and merges.",
-      "It was originally built to coordinate development of the Linux kernel after a licensing change."
+      "This system was created to coordinate development of the Linux kernel.",
+      "Its short name is also a British slang term for an unpleasant person."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Software development and collaboration tools",
+    "finalEligible": true
   },
   {
     "id": "category-final-body",
@@ -258,14 +288,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which part of the brain, located behind the brainstem, plays a major role in balance and fine coordination?",
     "answer": "Cerebellum",
-    "hint": "It contains a very large number of the brain's neurons.",
+    "hint": "Damage to this structure can produce ataxia, including unsteady walking.",
     "hints": [
-      "It contains a very large number of the brain's neurons.",
-      "Damage to it may cause unsteady, poorly coordinated movement called ataxia."
+      "Damage to this structure can produce ataxia, including unsteady walking.",
+      "Its Latin name is a diminutive of the word for brain, rather than a name referring to its location."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Brain structures and motor control",
+    "finalEligible": true
   },
   {
     "id": "category-final-myths",
@@ -274,14 +306,16 @@
     "difficulty": "hard",
     "prompt": "What is the name of the river of forgetfulness in Greek mythology's underworld?",
     "answer": "Lethe",
-    "hint": "Classical writers associated its waters with losing memories before a new life.",
+    "hint": "In classical accounts, souls drank its waters before returning to earthly life.",
     "hints": [
-      "Classical writers associated its waters with losing memories before a new life.",
-      "Its name shares an ancient Greek root with the English word “lethargy.”"
+      "In classical accounts, souls drank its waters before returning to earthly life.",
+      "The name shares an ancient Greek root with the English word lethargy."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Rivers of the Greek underworld",
+    "finalEligible": true
   },
   {
     "id": "category-final-colors",
@@ -290,16 +324,18 @@
     "difficulty": "medium-hard",
     "prompt": "What physical process scatters shorter wavelengths of sunlight more strongly, helping make a clear daytime sky look blue?",
     "answer": "Rayleigh scattering",
-    "hint": "The same atmospheric process helps explain the warm colors near sunset.",
+    "hint": "The same scattering mechanism helps explain the reddish colors of the sky near sunset.",
     "hints": [
-      "The same atmospheric process helps explain the warm colors near sunset.",
-      "It is named after a British physicist who later received a Nobel Prize."
+      "The same scattering mechanism helps explain the reddish colors of the sky near sunset.",
+      "The physicist’s surname begins with a sound like a narrow beam of light."
     ],
     "tier": "teen",
     "aliases": [
       "Rayleigh"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Light and color in the atmosphere",
+    "finalEligible": true
   },
   {
     "id": "category-final-landmarks",
@@ -308,14 +344,16 @@
     "difficulty": "medium-hard",
     "prompt": "What three-tiered ancient Roman aqueduct bridge stands near Nîmes in southern France?",
     "answer": "Pont du Gard",
-    "hint": "The structure formed part of an aqueduct that supplied a Roman settlement called Nemausus.",
+    "hint": "This aqueduct once supplied water to the Roman settlement of Nemausus.",
     "hints": [
-      "The structure formed part of an aqueduct that supplied a Roman settlement called Nemausus.",
-      "The ancient aqueduct ran roughly 50 kilometers from a spring near Uzès to Nîmes."
+      "This aqueduct once supplied water to the Roman settlement of Nemausus.",
+      "Its French name begins with the word for bridge and ends with the name associated with the local river and département."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Roman engineering in southern Europe",
+    "finalEligible": true
   },
   {
     "id": "category-final-three",
@@ -324,14 +362,17 @@
     "difficulty": "medium-hard",
     "prompt": "I can introduce a longer musical composition, begin a literary work, or describe an event that comes before a larger one. What am I?",
     "answer": "Prelude",
-    "hint": "The term suggests preparation for a main event rather than the event itself.",
+    "hint": "Bach often paired a piece of this kind with a fugue.",
     "hints": [
-      "The term suggests preparation for a main event rather than the event itself.",
-      "In music, a piece of this kind may be paired with a fugue."
+      "Bach often paired a piece of this kind with a fugue.",
+      "The prefix suggests something that takes place before the main event."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Words connecting music and literature",
+    "finalEligible": false,
+    "finalExclusionReason": "Convergent word puzzle; additional clues effectively become more puzzle inputs."
   },
   {
     "id": "category-final-rhyme",
@@ -340,14 +381,17 @@
     "difficulty": "medium-hard",
     "prompt": "What literary word for a narrative whose characters and events represent broader ideas rhymes with 'category'?",
     "answer": "Allegory",
-    "hint": "It can convey a moral, religious, or political message through symbolism.",
+    "hint": "George Orwell’s Animal Farm is often taught as an example of this form of storytelling.",
     "hints": [
-      "It can convey a moral, religious, or political message through symbolism.",
-      "George Orwell's Animal Farm is often taught as an example."
+      "George Orwell’s Animal Farm is often taught as an example of this form of storytelling.",
+      "The word belongs to a family of literary terms involving representation and interpretation."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Literary devices and symbolic narratives",
+    "finalEligible": false,
+    "finalExclusionReason": "Rhyme already restricts the answer; additional hints can make the answer mechanically deducible."
   },
   {
     "id": "category-final-misleading",
@@ -356,17 +400,20 @@
     "difficulty": "medium-hard",
     "prompt": "During a 24-hour period, how many times do the hour and minute hands of an ordinary analog clock overlap?",
     "answer": "22",
-    "hint": "The minute hand gains on the hour hand continuously, not just at marked hours.",
+    "hint": "The minute hand continually gains on the hour hand, even between marked hours.",
     "hints": [
-      "The minute hand gains on the hour hand continuously, not just at marked hours.",
-      "First work out how often the hands meet during one twelve-hour cycle."
+      "The minute hand continually gains on the hour hand, even between marked hours.",
+      "Work out the number of meetings during a twelve-hour cycle before scaling it to the full day."
     ],
     "tier": "teen",
     "aliases": [
       "twenty two",
       "twenty-two"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Analog clocks and relative motion",
+    "finalEligible": false,
+    "finalExclusionReason": "Trick or riddle format; a hint can expose the trick rather than support recall."
   },
   {
     "id": "category-final-inventions",
@@ -375,16 +422,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which American medical researcher developed the first widely used injectable vaccine against polio, licensed in 1955?",
     "answer": "Jonas Salk",
-    "hint": "His work grew from large-scale clinical trials involving schoolchildren.",
+    "hint": "His vaccine used inactivated virus, unlike the later oral vaccine associated with Albert Sabin.",
     "hints": [
-      "His work grew from large-scale clinical trials involving schoolchildren.",
-      "Unlike a later oral vaccine, his formulation used an inactivated virus."
+      "His vaccine used inactivated virus, unlike the later oral vaccine associated with Albert Sabin.",
+      "His given name resembles that of the biblical prophet associated with a great fish, with the final consonant changed."
     ],
     "tier": "teen",
     "aliases": [
       "Salk"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The history of vaccination",
+    "finalEligible": true
   },
   {
     "id": "category-final-usa",
@@ -393,14 +442,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which U.S. state contains Craters of the Moon National Monument and Preserve, a landscape of extensive volcanic lava flows?",
     "answer": "Idaho",
-    "hint": "It is in the inland Northwest, not near an active coastal volcano.",
+    "hint": "The monument protects lava fields of the Snake River Plain.",
     "hints": [
-      "It is in the inland Northwest, not near an active coastal volcano.",
-      "Its state nickname is the Gem State."
+      "The monument protects lava fields of the Snake River Plain.",
+      "The state is nicknamed the Gem State and has Boise as its capital."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Volcanic landscapes in the inland Northwest",
+    "finalEligible": true
   },
   {
     "id": "category-final-oceans",
@@ -409,14 +460,16 @@
     "difficulty": "hard",
     "prompt": "What is the name for an ocean layer in which salinity changes rapidly with depth?",
     "answer": "Halocline",
-    "hint": "Oceanographers use related terms for rapid changes in temperature and density with depth.",
+    "hint": "Oceanographers use a related term, thermocline, for a layer where temperature changes rapidly.",
     "hints": [
-      "Oceanographers use related terms for rapid changes in temperature and density with depth.",
-      "The first part of the term comes from a Greek root for “salt.”"
+      "Oceanographers use a related term, thermocline, for a layer where temperature changes rapidly.",
+      "The first part comes from a Greek root meaning salt, also used in the word halophile."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The layers of the ocean",
+    "finalEligible": true
   },
   {
     "id": "category-final-games",
@@ -425,17 +478,19 @@
     "difficulty": "medium-hard",
     "prompt": "In chess, which opening begins with the moves 1.e4 e5 2.Nf3 Nc6 3.Bb5?",
     "answer": "Ruy Lopez",
-    "hint": "The opening develops a bishop to attack the defender of a central pawn.",
+    "hint": "The opening develops a bishop to threaten a knight defending a central pawn.",
     "hints": [
-      "The opening develops a bishop to attack the defender of a central pawn.",
-      "It is named for a sixteenth-century Spanish priest and chess writer."
+      "The opening develops a bishop to threaten a knight defending a central pawn.",
+      "It is also known as the Spanish Opening, after a sixteenth-century Spanish priest."
     ],
     "tier": "teen",
     "aliases": [
       "Spanish Opening",
       "Spanish Game"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Classical chess openings",
+    "finalEligible": true
   },
   {
     "id": "category-final-earth",
@@ -444,14 +499,16 @@
     "difficulty": "hard",
     "prompt": "What geological term describes a block of crust that has dropped down between roughly parallel normal faults?",
     "answer": "Graben",
-    "hint": "This kind of structure forms where the crust is being pulled apart.",
+    "hint": "These structures form where tectonic forces stretch the crust.",
     "hints": [
-      "This kind of structure forms where the crust is being pulled apart.",
-      "It is the opposite of an uplifted fault block known as a horst."
+      "These structures form where tectonic forces stretch the crust.",
+      "The German-derived term means a trench or ditch and is the opposite of a horst."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Faults and the structure of Earth's crust",
+    "finalEligible": true
   },
   {
     "id": "category-final-literally",
@@ -460,14 +517,16 @@
     "difficulty": "medium-hard",
     "prompt": "What phrase describes an expensive or burdensome possession that is difficult to dispose of, traditionally linked to a rare animal?",
     "answer": "White elephant",
-    "hint": "A traditional explanation connects the idiom to the expense of caring for a rare ceremonial animal given as a gift.",
+    "hint": "One traditional explanation connects the idiom with costly gifts from rulers of Siam.",
     "hints": [
-      "A traditional explanation connects the idiom to the expense of caring for a rare ceremonial animal given as a gift.",
-      "Such animals were especially prized by rulers in the historical kingdom of Siam, now Thailand."
+      "One traditional explanation connects the idiom with costly gifts from rulers of Siam.",
+      "The expression combines a color with the name of an animal traditionally associated with royalty in Southeast Asia."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Idioms with historical associations",
+    "finalEligible": true
   },
   {
     "id": "category-final-counting",
@@ -476,16 +535,19 @@
     "difficulty": "hard",
     "prompt": "In how many distinct ways can six people stand in a line if two particular people must stand directly next to each other?",
     "answer": "240",
-    "hint": "Treat the two people who must remain together as a single block.",
+    "hint": "Think of the adjacent pair as a single unit while arranging the people.",
     "hints": [
-      "Treat the two people who must remain together as a single block.",
-      "Arrange five blocks, then consider the two possible orders inside the paired block."
+      "Think of the adjacent pair as a single unit while arranging the people.",
+      "After arranging the units, allow for the two possible orders within the pair."
     ],
     "tier": "adult",
     "aliases": [
       "two hundred forty"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Arrangements and permutations",
+    "finalEligible": false,
+    "finalExclusionReason": "Combinatorial puzzle; paid hints provide the solution method."
   },
   {
     "id": "category-final-classroom",
@@ -494,14 +556,16 @@
     "difficulty": "medium-hard",
     "prompt": "What grammatical term names a noun or noun phrase that identifies another nearby noun, as “a scientist” does in “Marie Curie, a scientist, won two Nobel Prizes”?",
     "answer": "Appositive",
-    "hint": "The added noun phrase is often set off by commas when it gives nonessential information.",
+    "hint": "A nonessential phrase of this kind is usually set off by commas.",
     "hints": [
-      "The added noun phrase is often set off by commas when it gives nonessential information.",
-      "Its name comes from a Latin root meaning “placed beside.”"
+      "A nonessential phrase of this kind is usually set off by commas.",
+      "Its Latin roots suggest placing something beside another thing."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Grammar and sentence structure",
+    "finalEligible": true
   },
   {
     "id": "category-final-us_geography",
@@ -510,14 +574,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which U.S. state contains Great Sand Dunes National Park, home to North America's tallest sand dunes?",
     "answer": "Colorado",
-    "hint": "The dunes stand near the Sangre de Cristo Mountains.",
+    "hint": "These dunes lie near the Sangre de Cristo Mountains in the San Luis Valley.",
     "hints": [
-      "The dunes stand near the Sangre de Cristo Mountains.",
-      "The park lies in the San Luis Valley in the southern Rocky Mountains."
+      "These dunes lie near the Sangre de Cristo Mountains in the San Luis Valley.",
+      "The state also contains the headwaters of the river that carved the Grand Canyon and is nicknamed the Centennial State."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "National parks of the American West",
+    "finalEligible": true
   },
   {
     "id": "category-final-world_geography",
@@ -526,10 +592,10 @@
     "difficulty": "hard",
     "prompt": "Which West African country has Yamoussoukro as its official capital, while Abidjan is its largest city?",
     "answer": "Côte d'Ivoire",
-    "hint": "The country borders Ghana and Liberia.",
+    "hint": "The country borders Ghana and Liberia and is a major cocoa producer.",
     "hints": [
-      "The country borders Ghana and Liberia.",
-      "French is widely used in its government, and its economy has a significant cocoa industry."
+      "The country borders Ghana and Liberia and is a major cocoa producer.",
+      "Its English name refers to a valuable material historically obtained from elephant tusks."
     ],
     "tier": "adult",
     "aliases": [
@@ -537,7 +603,9 @@
       "Cote d Ivoire",
       "Cote d'Ivoire"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "West African capitals and countries",
+    "finalEligible": true
   },
   {
     "id": "category-final-us_history",
@@ -546,10 +614,10 @@
     "difficulty": "medium-hard",
     "prompt": "Which 1857 U.S. Supreme Court case ruled against an enslaved man who argued that residence in free territory entitled him to freedom?",
     "answer": "Dred Scott v. Sandford",
-    "hint": "The ruling became a major flashpoint in the years before the Civil War.",
+    "hint": "Chief Justice Roger Taney delivered the majority opinion, denying federal citizenship to people of African descent.",
     "hints": [
-      "The ruling became a major flashpoint in the years before the Civil War.",
-      "The case is named after the man who sued for his freedom."
+      "Chief Justice Roger Taney delivered the majority opinion, denying federal citizenship to people of African descent.",
+      "The plaintiff’s given name sounds like a word for intense fear; the case is often referred to by his name alone."
     ],
     "tier": "teen",
     "aliases": [
@@ -559,7 +627,9 @@
       "Scott v Sandford",
       "Dred Scott case"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Supreme Court decisions before the Civil War",
+    "finalEligible": true
   },
   {
     "id": "category-final-world_history",
@@ -568,17 +638,19 @@
     "difficulty": "medium-hard",
     "prompt": "Which ruler of the medieval Mali Empire became famous for his lavish pilgrimage to Mecca in 1324?",
     "answer": "Mansa Musa",
-    "hint": "Stories of his wealth often focus on the gold he distributed on his journey.",
+    "hint": "The ruler distributed so much gold in Cairo during his pilgrimage that accounts describe economic effects there.",
     "hints": [
-      "Stories of his wealth often focus on the gold he distributed on his journey.",
-      "His pilgrimage passed through Cairo and drew attention to West African trade."
+      "The ruler distributed so much gold in Cairo during his pilgrimage that accounts describe economic effects there.",
+      "The first part of his usual name is a royal title; the second corresponds to the name Moses in Arabic."
     ],
     "tier": "teen",
     "aliases": [
       "Musa I",
       "Musa I of Mali"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Medieval West African empires",
+    "finalEligible": true
   },
   {
     "id": "category-final-biology",
@@ -587,14 +659,16 @@
     "difficulty": "medium-hard",
     "prompt": "What term describes the regulated, programmed process by which a cell deliberately self-destructs?",
     "answer": "Apoptosis",
-    "hint": "This controlled pathway helps sculpt tissues during embryonic development.",
+    "hint": "This regulated process helps sculpt developing tissues, including the spaces between fingers.",
     "hints": [
-      "This controlled pathway helps sculpt tissues during embryonic development.",
-      "Cells undergoing it often break into membrane-bound fragments without triggering the inflammation typical of injury."
+      "This regulated process helps sculpt developing tissues, including the spaces between fingers.",
+      "Its Greek-derived name evokes falling away, as leaves or petals do, rather than accidental cell injury."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Cell death and tissue development",
+    "finalEligible": true
   },
   {
     "id": "category-final-chemistry",
@@ -603,14 +677,16 @@
     "difficulty": "hard",
     "prompt": "Which acid–base indicator is colorless in acidic solution but turns pink in basic solution?",
     "answer": "Phenolphthalein",
-    "hint": "It is frequently used to signal an endpoint during titration.",
+    "hint": "This indicator is commonly used to detect the endpoint in acid-base titrations.",
     "hints": [
-      "It is frequently used to signal an endpoint during titration.",
-      "Its color change occurs in a range on the basic side of the pH scale."
+      "This indicator is commonly used to detect the endpoint in acid-base titrations.",
+      "The name starts with a reference to phenol and has a long ending shared with a family of organic indicator dyes."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Laboratory acid-base indicators",
+    "finalEligible": true
   },
   {
     "id": "category-final-physics",
@@ -619,16 +695,18 @@
     "difficulty": "medium-hard",
     "prompt": "What is the SI unit of electrical inductance?",
     "answer": "Henry",
-    "hint": "The quantity it measures can be thought of as electrical inertia in a circuit.",
+    "hint": "The unit can express the inductance that produces one volt when current changes at one ampere per second.",
     "hints": [
-      "The quantity it measures can be thought of as electrical inertia in a circuit.",
-      "Its unit symbol is H, and its namesake was an American pioneer in electromagnetism."
+      "The unit can express the inductance that produces one volt when current changes at one ampere per second.",
+      "Its namesake was an American physicist named Joseph; the surname is also a common English given name."
     ],
     "tier": "teen",
     "aliases": [
       "henries"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Electrical units and electromagnetism",
+    "finalEligible": true
   },
   {
     "id": "category-final-astronomy",
@@ -637,14 +715,16 @@
     "difficulty": "medium-hard",
     "prompt": "What is the name for an extremely luminous active galactic nucleus that can resemble a star in distant images?",
     "answer": "Quasar",
-    "hint": "Many examples are powered by gas falling toward supermassive black holes.",
+    "hint": "Many of these objects are powered by matter falling toward supermassive black holes.",
     "hints": [
-      "Many examples are powered by gas falling toward supermassive black holes.",
-      "Its name began as an abbreviation of “quasi-stellar radio source.”"
+      "Many of these objects are powered by matter falling toward supermassive black holes.",
+      "The term was coined by shortening an expression meaning almost star-like radio source."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Extremely luminous distant objects",
+    "finalEligible": true
   },
   {
     "id": "category-final-sports_classic",
@@ -653,16 +733,18 @@
     "difficulty": "medium-hard",
     "prompt": "In golf, what do players call a score of three strokes under par on a single hole?",
     "answer": "Albatross",
-    "hint": "This golf score is one stroke better than an eagle.",
+    "hint": "This score is rarer than an eagle and is also called a double eagle.",
     "hints": [
-      "This golf score is one stroke better than an eagle.",
-      "Its name is a bird larger than the one used for two strokes under par."
+      "This score is rarer than an eagle and is also called a double eagle.",
+      "Its animal namesake is a large ocean-going bird famous for exceptionally long flights."
     ],
     "tier": "teen",
     "aliases": [
       "Double eagle"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Golf scoring terminology",
+    "finalEligible": true
   },
   {
     "id": "category-final-movies_tv",
@@ -671,14 +753,16 @@
     "difficulty": "hard",
     "prompt": "What 1974 film features Jack Nicholson as private investigator J. J. Gittes, investigating a Los Angeles water conspiracy?",
     "answer": "Chinatown",
-    "hint": "The story takes place against a backdrop of corruption and drought in 1930s California.",
+    "hint": "Faye Dunaway co-starred in this Roman Polanski film.",
     "hints": [
-      "The story takes place against a backdrop of corruption and drought in 1930s California.",
-      "It is a neo-noir mystery directed by Roman Polanski."
+      "Faye Dunaway co-starred in this Roman Polanski film.",
+      "The title is a single word for a kind of urban neighborhood, rather than the name of a person."
     ],
     "tier": "adult",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "American crime films of the 1970s",
+    "finalEligible": true
   },
   {
     "id": "category-final-music_classic",
@@ -687,16 +771,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which American jazz vocalist was nicknamed 'Lady Day' by saxophonist Lester Young?",
     "answer": "Billie Holiday",
-    "hint": "Her career included a powerful performance of the protest song Strange Fruit.",
+    "hint": "Her recordings include the protest song Strange Fruit and the standard God Bless the Child.",
     "hints": [
-      "Her career included a powerful performance of the protest song Strange Fruit.",
-      "She became one of the most influential jazz singers of the swing era."
+      "Her recordings include the protest song Strange Fruit and the standard God Bless the Child.",
+      "Her stage surname is a word associated with a day of celebration or time away from work."
     ],
     "tier": "teen",
     "aliases": [
       "Holiday"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Jazz vocalists of the swing era",
+    "finalEligible": true
   },
   {
     "id": "category-final-literature",
@@ -705,10 +791,10 @@
     "difficulty": "hard",
     "prompt": "Which author wrote the 1969 science-fiction novel The Left Hand of Darkness?",
     "answer": "Ursula K. Le Guin",
-    "hint": "The book explores gender through a society on a distant planet.",
+    "hint": "The author also wrote the Earthsea series and The Dispossessed.",
     "hints": [
-      "The book explores gender through a society on a distant planet.",
-      "Its author also created the Earthsea fantasy series."
+      "The author also wrote the Earthsea series and The Dispossessed.",
+      "Her given name is shared with the sea witch in Disney’s animated The Little Mermaid."
     ],
     "tier": "adult",
     "aliases": [
@@ -717,7 +803,9 @@
       "Ursula LeGuin",
       "LeGuin"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Twentieth-century speculative fiction",
+    "finalEligible": true
   },
   {
     "id": "category-final-food_classic",
@@ -726,16 +814,18 @@
     "difficulty": "medium-hard",
     "prompt": "What fermented soybean food from Indonesia is made with whole beans bound together into a firm cake by a fungal culture?",
     "answer": "Tempeh",
-    "hint": "Unlike tofu, its finished form normally contains clearly recognizable whole soybeans.",
+    "hint": "It originated in Indonesia and can be sliced or fried as a protein-rich alternative to meat.",
     "hints": [
-      "Unlike tofu, its finished form normally contains clearly recognizable whole soybeans.",
-      "The beans are joined together during fermentation by a culture of Rhizopus fungi."
+      "It originated in Indonesia and can be sliced or fried as a protein-rich alternative to meat.",
+      "The Javanese-derived name is short and starts with the same three letters as tempo."
     ],
     "tier": "teen",
     "aliases": [
       "Tempe"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Traditional Southeast Asian soy foods",
+    "finalEligible": true
   },
   {
     "id": "category-final-art_classic",
@@ -744,16 +834,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which Mexican muralist painted Man at the Crossroads for Rockefeller Center in 1933 before the mural was destroyed?",
     "answer": "Diego Rivera",
-    "hint": "His politically charged murals often depicted industrial workers and social history.",
+    "hint": "His murals often depicted industry, workers and Mexican history.",
     "hints": [
-      "His politically charged murals often depicted industrial workers and social history.",
-      "He was married to the painter Frida Kahlo."
+      "His murals often depicted industry, workers and Mexican history.",
+      "He was married to Frida Kahlo; his surname is similar to the Spanish word for a riverbank."
     ],
     "tier": "teen",
     "aliases": [
       "Rivera"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Mexican muralism and public art",
+    "finalEligible": true
   },
   {
     "id": "category-final-technology_classic",
@@ -762,10 +854,10 @@
     "difficulty": "medium-hard",
     "prompt": "What Palo Alto research center developed Ethernet in the 1970s and helped pioneer graphical computer interfaces?",
     "answer": "Xerox PARC",
-    "hint": "Its researchers developed the experimental Alto computer decades ago.",
+    "hint": "The researchers built the Alto computer with a graphical interface and mouse.",
     "hints": [
-      "Its researchers developed the experimental Alto computer decades ago.",
-      "Among its breakthroughs were early Ethernet work and laser printing research."
+      "The researchers built the Alto computer with a graphical interface and mouse.",
+      "Its familiar name combines a photocopier brand and a four-letter acronym for its location and purpose."
     ],
     "tier": "teen",
     "aliases": [
@@ -773,7 +865,9 @@
       "Palo Alto Research Center",
       "Xerox Palo Alto Research Center"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Origins of modern personal computing",
+    "finalEligible": true
   },
   {
     "id": "category-final-animals_classic",
@@ -782,14 +876,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which Australian marsupial digs burrows using powerful claws and has a backward-facing pouch?",
     "answer": "Wombat",
-    "hint": "This mammal is adapted to digging extensive burrow systems rather than climbing trees.",
+    "hint": "Its closest living relative is the koala, although it lives on the ground and digs extensive burrows.",
     "hints": [
-      "This mammal is adapted to digging extensive burrow systems rather than climbing trees.",
-      "Its closest living relative is the koala."
+      "Its closest living relative is the koala, although it lives on the ground and digs extensive burrows.",
+      "It is famous for an unusual feature of its droppings: their cube-like shape."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Australian marsupials and their adaptations",
+    "finalEligible": true
   },
   {
     "id": "category-final-thanksgiving",
@@ -798,16 +894,18 @@
     "difficulty": "medium-hard",
     "prompt": "Who was governor of Plymouth Colony at the time of the 1621 harvest gathering later associated with Thanksgiving?",
     "answer": "William Bradford",
-    "hint": "He served as Plymouth governor for much of the colony’s early history.",
+    "hint": "This Mayflower passenger later wrote Of Plymouth Plantation, a major historical source about the colony.",
     "hints": [
-      "He served as Plymouth governor for much of the colony’s early history.",
-      "He later wrote a history of the colony called Of Plymouth Plantation."
+      "This Mayflower passenger later wrote Of Plymouth Plantation, a major historical source about the colony.",
+      "His surname is shared by a major city in West Yorkshire, England."
     ],
     "tier": "teen",
     "aliases": [
       "Bradford"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The leaders of Plymouth Colony",
+    "finalEligible": true
   },
   {
     "id": "category-final-christmas-movies",
@@ -816,16 +914,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which British actor played Ebenezer Scrooge opposite the Muppets in The Muppet Christmas Carol (1992)?",
     "answer": "Michael Caine",
-    "hint": "He was the main live-action star in a cast featuring familiar puppet characters.",
+    "hint": "He played Alfred in Christopher Nolan’s Batman films.",
     "hints": [
-      "He was the main live-action star in a cast featuring familiar puppet characters.",
-      "Decades later, he played Alfred in Christopher Nolan's Batman films."
+      "He played Alfred in Christopher Nolan’s Batman films.",
+      "He also played Nigel Powers in the third Austin Powers film and appeared in The Italian Job (1969)."
     ],
     "tier": "teen",
     "aliases": [
       "Caine"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Actors in classic holiday films",
+    "finalEligible": true
   },
   {
     "id": "category-final-christmas-music",
@@ -834,16 +934,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which Christmas carol began as a French poem by Placide Cappeau and was set to music by composer Adolphe Adam?",
     "answer": "O Holy Night",
-    "hint": "The song was originally published in French under the title “Cantique de Noël.”",
+    "hint": "The French original is known as Cantique de Noël, and the English version became popular in the nineteenth century.",
     "hints": [
-      "The song was originally published in French under the title “Cantique de Noël.”",
-      "Its English-language versions are known for an extended, soaring vocal melody."
+      "The French original is known as Cantique de Noël, and the English version became popular in the nineteenth century.",
+      "Its English title evokes a particular time of day rather than the name of a person or place."
     ],
     "tier": "teen",
     "aliases": [
       "Oh Holy Night"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "The origins of familiar Christmas carols",
+    "finalEligible": true
   },
   {
     "id": "category-final-winter-holidays",
@@ -852,14 +954,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which of Kwanzaa's seven principles means 'collective work and responsibility'?",
     "answer": "Ujima",
-    "hint": "It is one of the Nguzo Saba, expressed in Swahili.",
+    "hint": "The principle is observed on the third day of Kwanzaa, following unity and self-determination.",
     "hints": [
-      "It is one of the Nguzo Saba, expressed in Swahili.",
-      "It is traditionally observed on Kwanzaa's third day."
+      "The principle is observed on the third day of Kwanzaa, following unity and self-determination.",
+      "The three-syllable Swahili name starts with an “oo” sound and ends with a “mah” sound."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Kwanzaa principles and traditions",
+    "finalEligible": true
   },
   {
     "id": "category-final-winter-traditions",
@@ -868,14 +972,16 @@
     "difficulty": "medium-hard",
     "prompt": "Which horned figure from Alpine folklore is often portrayed accompanying Saint Nicholas in early December?",
     "answer": "Krampus",
-    "hint": "This figure often serves as a frightening counterpart to the gift-giving saint in Central European folklore.",
+    "hint": "This frightening companion is associated with processions in Austria and neighboring Alpine regions.",
     "hints": [
-      "This figure often serves as a frightening counterpart to the gift-giving saint in Central European folklore.",
-      "According to tradition, it warns or punishes misbehaving children, sometimes using bundles of twigs."
+      "This frightening companion is associated with processions in Austria and neighboring Alpine regions.",
+      "One proposed origin of the name is an old German word for a claw or hook."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Alpine folklore and Saint Nicholas",
+    "finalEligible": true
   },
   {
     "id": "category-final-winter-olympics",
@@ -884,16 +990,18 @@
     "difficulty": "medium-hard",
     "prompt": "Which American speed skater won all five men's speed-skating gold medals at the 1980 Winter Olympics in Lake Placid?",
     "answer": "Eric Heiden",
-    "hint": "He succeeded across both sprint and distance events at a single Games.",
+    "hint": "He won gold at distances from 500 meters through 10,000 meters at the same Games.",
     "hints": [
-      "He succeeded across both sprint and distance events at a single Games.",
-      "After skating, he pursued competitive cycling and later medicine."
+      "He won gold at distances from 500 meters through 10,000 meters at the same Games.",
+      "After his skating career he competed in cycling and became a physician; his first name is also that of the explorer often called the Red."
     ],
     "tier": "teen",
     "aliases": [
       "Heiden"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Outstanding individual Winter Olympic achievements",
+    "finalEligible": true
   },
   {
     "id": "category-final-new-years",
@@ -902,17 +1010,19 @@
     "difficulty": "hard",
     "prompt": "What is the Japanese word for the first visit to a Shinto shrine or Buddhist temple in the New Year?",
     "answer": "Hatsumōde",
-    "hint": "The word is formed from Japanese elements referring to the beginning of the year and visiting a shrine.",
+    "hint": "Many people make this visit around midnight or during the first days of January, offering prayers for the coming year.",
     "hints": [
-      "The word is formed from Japanese elements referring to the beginning of the year and visiting a shrine.",
-      "Its pronunciation begins with the Japanese word “hatsu,” meaning “first.”"
+      "Many people make this visit around midnight or during the first days of January, offering prayers for the coming year.",
+      "The name begins with the Japanese word for “first,” which also appears in the term for the first sunrise of the year."
     ],
     "tier": "adult",
     "aliases": [
       "Hatsumode",
       "Hatsu-mode"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Japanese customs at the start of the year",
+    "finalEligible": true
   },
   {
     "id": "category-final-veterans-military",
@@ -921,10 +1031,10 @@
     "difficulty": "medium-hard",
     "prompt": "What U.S. law, first enacted in 1944, provided education and housing benefits to many returning World War II veterans?",
     "answer": "GI Bill",
-    "hint": "The policy transformed access to college education and helped reshape American life after World War II.",
+    "hint": "The formal name of the 1944 law includes Servicemen’s Readjustment.",
     "hints": [
-      "The policy transformed access to college education and helped reshape American life after World War II.",
-      "The legislation’s formal title includes the words “Servicemen’s Readjustment.”"
+      "The formal name of the 1944 law includes Servicemen’s Readjustment.",
+      "Its familiar nickname starts with the two-letter abbreviation commonly associated with American enlisted soldiers."
     ],
     "tier": "teen",
     "aliases": [
@@ -932,7 +1042,9 @@
       "Servicemen's Readjustment Act",
       "Servicemen's Readjustment Act of 1944"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Postwar veterans' benefits in the United States",
+    "finalEligible": true
   },
   {
     "id": "category-final-native-american",
@@ -941,17 +1053,19 @@
     "difficulty": "hard",
     "prompt": "Who was the first editor of the Cherokee Phoenix newspaper, launched in 1828 in New Echota?",
     "answer": "Elias Boudinot",
-    "hint": "Before adopting his English name, this Cherokee journalist was known as Gallegina (Buck) Watie.",
+    "hint": "This editor later signed the controversial Treaty of New Echota in 1835.",
     "hints": [
-      "Before adopting his English name, this Cherokee journalist was known as Gallegina (Buck) Watie.",
-      "He later became one of the signers of the controversial 1835 Treaty of New Echota."
+      "This editor later signed the controversial Treaty of New Echota in 1835.",
+      "He adopted the name of a supporter of his education who served as president of the American Bible Society."
     ],
     "tier": "adult",
     "aliases": [
       "Elias Boudinot (Cherokee)",
       "Boudinot"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Early Cherokee journalism and publishing",
+    "finalEligible": true
   },
   {
     "id": "category-final-harvest-time",
@@ -960,14 +1074,16 @@
     "difficulty": "medium-hard",
     "prompt": "What is the name for livestock feed preserved by fermenting chopped grass, corn, or other crops in airtight storage?",
     "answer": "Silage",
-    "hint": "Farmers use this feed when fresh pasture or growing crops are unavailable.",
+    "hint": "Lactic acid fermentation helps preserve these crops in oxygen-limited storage.",
     "hints": [
-      "Farmers use this feed when fresh pasture or growing crops are unavailable.",
-      "It can be stored in a silo, a pit, or a plastic-wrapped bale."
+      "Lactic acid fermentation helps preserve these crops in oxygen-limited storage.",
+      "Its name is related to the word silo, the structure in which this feed has traditionally been stored."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Preserving agricultural crops for livestock",
+    "finalEligible": true
   },
   {
     "id": "category-final-college-football",
@@ -976,16 +1092,18 @@
     "difficulty": "medium-hard",
     "prompt": "What is the name of the traditional rivalry trophy contested by the Notre Dame and USC football teams?",
     "answer": "Jeweled Shillelagh",
-    "hint": "The trophy goes to the winner of a long-running rivalry involving an independent program.",
+    "hint": "The trophy is decorated with symbols representing victories by the Trojans and the Fighting Irish.",
     "hints": [
-      "The trophy goes to the winner of a long-running rivalry involving an independent program.",
-      "The object it is named for is a traditional Irish walking stick or club."
+      "The trophy is decorated with symbols representing victories by the Trojans and the Fighting Irish.",
+      "The trophy takes its name from a traditional Irish walking stick or club."
     ],
     "tier": "teen",
     "aliases": [
       "Shillelagh"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Notre Dame–USC rivalry traditions",
+    "finalEligible": true
   },
   {
     "id": "category-final-villains",
@@ -994,10 +1112,10 @@
     "difficulty": "medium-hard",
     "prompt": "In Shakespeare's Othello, which character manipulates the title character into believing Desdemona is unfaithful?",
     "answer": "Iago",
-    "hint": "He is a military subordinate who resents Othello's promotion decisions.",
+    "hint": "This character uses a misplaced handkerchief to fuel jealousy involving Cassio.",
     "hints": [
-      "He is a military subordinate who resents Othello's promotion decisions.",
-      "He plants suspicion involving Cassio and a misplaced handkerchief."
+      "This character uses a misplaced handkerchief to fuel jealousy involving Cassio.",
+      "His name is also that of the villainous parrot in Disney's Aladdin."
     ],
     "tier": "teen",
     "aliases": [
@@ -1005,7 +1123,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/othello/read/characterList/",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Shakespearean antagonists",
+    "finalEligible": true
   },
   {
     "id": "category-final-celebrities",
@@ -1014,10 +1134,10 @@
     "difficulty": "medium-hard",
     "prompt": "Which actress won the 2019 Academy Award for Best Actress for portraying Queen Anne in The Favourite?",
     "answer": "Olivia Colman",
-    "hint": "She is a British actor whose comedy work includes a long-running role in Peep Show.",
+    "hint": "She starred in the British comedy Peep Show and the crime drama Broadchurch.",
     "hints": [
-      "She is a British actor whose comedy work includes a long-running role in Peep Show.",
-      "She later portrayed Queen Elizabeth II in Netflix's The Crown."
+      "She starred in the British comedy Peep Show and the crime drama Broadchurch.",
+      "She played Queen Elizabeth II in the third and fourth seasons of Netflix’s The Crown."
     ],
     "tier": "teen",
     "aliases": [
@@ -1026,7 +1146,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.oscars.org/oscars/ceremonies/2019",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Academy Award-winning contemporary actors",
+    "finalEligible": true
   },
   {
     "id": "category-final-video-games",
@@ -1035,10 +1157,10 @@
     "difficulty": "hard",
     "prompt": "Which video-game studio developed both the Uncharted series and The Last of Us?",
     "answer": "Naughty Dog",
-    "hint": "This U.S. studio first produced games under the name JAM Software.",
+    "hint": "This studio created the original Crash Bandicoot games for PlayStation.",
     "hints": [
-      "This U.S. studio first produced games under the name JAM Software.",
-      "The same developer made early Crash Bandicoot games for the original PlayStation."
+      "This studio created the original Crash Bandicoot games for PlayStation.",
+      "The studio’s name is a two-word phrase one might use when scolding a household pet."
     ],
     "tier": "teen",
     "aliases": [
@@ -1046,7 +1168,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.naughtydog.com/company",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "PlayStation game developers",
+    "finalEligible": true
   },
   {
     "id": "category-final-brands",
@@ -1055,10 +1179,10 @@
     "difficulty": "medium-hard",
     "prompt": "Which personal-care brand launched the 2010 ad campaign The Man Your Man Could Smell Like?",
     "answer": "Old Spice",
-    "hint": "The campaign promoted products commonly sold in the deodorant and body-wash aisle.",
+    "hint": "Isaiah Mustafa appeared in the campaign’s fast-paced television commercials.",
     "hints": [
-      "The campaign promoted products commonly sold in the deodorant and body-wash aisle.",
-      "An actor named Isaiah Mustafa addressed the camera in its memorable television commercials."
+      "Isaiah Mustafa appeared in the campaign’s fast-paced television commercials.",
+      "The brand’s two-word name evokes cooking and seasoning rather than personal grooming."
     ],
     "tier": "teen",
     "aliases": [
@@ -1066,7 +1190,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.dandad.org/insights/awards/old-spice-case-study-insights",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Memorable personal-care advertising",
+    "finalEligible": true
   },
   {
     "id": "category-final-sci-fi",
@@ -1075,10 +1201,10 @@
     "difficulty": "hard",
     "prompt": "Which science-fiction author created the fictional science of psychohistory in the Foundation stories?",
     "answer": "Isaac Asimov",
-    "hint": "His stories include a future civilization spanning many star systems.",
+    "hint": "He also wrote the Robot stories associated with three laws governing robot behavior.",
     "hints": [
-      "His stories include a future civilization spanning many star systems.",
-      "He also wrote a well-known series of stories about robots and their laws."
+      "He also wrote the Robot stories associated with three laws governing robot behavior.",
+      "His first name is shared with the scientist who formulated the three laws of motion."
     ],
     "tier": "teen",
     "aliases": [
@@ -1086,7 +1212,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://sf-encyclopedia.com/entry/psychohistory",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Classic science-fiction authors",
+    "finalEligible": true
   },
   {
     "id": "category-final-fantasy",
@@ -1095,10 +1223,10 @@
     "difficulty": "hard",
     "prompt": "In The Lord of the Rings, what Elvish royal name does Aragorn take after becoming king?",
     "answer": "Elessar",
-    "hint": "The name is traditionally translated as Elfstone in Tolkien's legendarium.",
+    "hint": "Galadriel gives Aragorn a green jewel associated with this royal name.",
     "hints": [
-      "The name is traditionally translated as Elfstone in Tolkien's legendarium.",
-      "Arwen's grandmother Galadriel gives him a green jewel associated with the name."
+      "Galadriel gives Aragorn a green jewel associated with this royal name.",
+      "Its traditional English translation is Elfstone, suggesting both his heritage and a gemstone."
     ],
     "tier": "teen",
     "aliases": [
@@ -1107,7 +1235,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.encyclopedia-of-arda.com/e/elfstonearagorn.php",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Names and titles in Tolkien's Middle-earth",
+    "finalEligible": true
   },
   {
     "id": "category-final-toys",
@@ -1116,10 +1246,10 @@
     "difficulty": "medium-hard",
     "prompt": "Which inventor developed the Slinky after noticing how a metal spring moved while he worked on ship equipment?",
     "answer": "Richard James",
-    "hint": "He was an American mechanical engineer working on springs during World War II.",
+    "hint": "The inventor’s wife Betty helped market the toy and ran the company for decades.",
     "hints": [
-      "He was an American mechanical engineer working on springs during World War II.",
-      "His wife Betty later played a major role in marketing the famous staircase-walking toy."
+      "The inventor’s wife Betty helped market the toy and ran the company for decades.",
+      "His given name is shared with the English king nicknamed the Lionheart; his surname is also a common given name."
     ],
     "tier": "teen",
     "aliases": [
@@ -1127,7 +1257,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.museumofplay.org/toys/slinky/",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "The invention of classic spring-powered toys",
+    "finalEligible": true
   },
   {
     "id": "category-final-presidents",
@@ -1136,10 +1268,10 @@
     "difficulty": "medium-hard",
     "prompt": "Which U.S. president was the first to be born after the adoption of the Declaration of Independence in 1776?",
     "answer": "Martin Van Buren",
-    "hint": "He grew up in New York in a household where Dutch was spoken.",
+    "hint": "He grew up in a Dutch-speaking family in Kinderhook, New York.",
     "hints": [
-      "He grew up in New York in a household where Dutch was spoken.",
-      "He served one term immediately after Andrew Jackson."
+      "He grew up in a Dutch-speaking family in Kinderhook, New York.",
+      "He served one term immediately after Andrew Jackson and was succeeded by William Henry Harrison."
     ],
     "tier": "teen",
     "aliases": [
@@ -1148,7 +1280,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://prod.millercenter.org/president/vanburen/life-before-the-presidency",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Early American presidents",
+    "finalEligible": true
   },
   {
     "id": "category-final-wars",
@@ -1157,10 +1291,10 @@
     "difficulty": "hard",
     "prompt": "Which 1704 battle in the War of the Spanish Succession was a major Allied victory that ended the threat of a French-led march toward Vienna?",
     "answer": "Battle of Blenheim",
-    "hint": "It was fought along the Danube in what is now southern Germany.",
+    "hint": "John Churchill, Duke of Marlborough, and Prince Eugene of Savoy commanded the victorious forces.",
     "hints": [
-      "It was fought along the Danube in what is now southern Germany.",
-      "The winning commanders included John Churchill, Duke of Marlborough, and Prince Eugene of Savoy."
+      "John Churchill, Duke of Marlborough, and Prince Eugene of Savoy commanded the victorious forces.",
+      "The battle shares its name with the English palace built for Marlborough near Oxford."
     ],
     "tier": "teen",
     "aliases": [
@@ -1169,7 +1303,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.nam.ac.uk/explore/battle-blenheim",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "European battles of the early eighteenth century",
+    "finalEligible": true
   },
   {
     "id": "category-final-headlines",
@@ -1178,10 +1314,10 @@
     "difficulty": "medium-hard",
     "prompt": "An imagined 1922 headline reads: Sealed Royal Burial Found After Years of Searching! Which famous archaeological discovery does it describe?",
     "answer": "King Tut’s tomb",
-    "hint": "The burial chamber was found in Egypt's Valley of the Kings.",
+    "hint": "Howard Carter led the excavation in Egypt's Valley of the Kings.",
     "hints": [
-      "The burial chamber was found in Egypt's Valley of the Kings.",
-      "British archaeologist Howard Carter led the excavation."
+      "Howard Carter led the excavation in Egypt's Valley of the Kings.",
+      "The discovery is associated with a famous gold funerary mask; the young pharaoh’s name is often shortened to three letters."
     ],
     "tier": "teen",
     "aliases": [
@@ -1197,7 +1333,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://tutankhamun.griffith.ox.ac.uk/people/howard-carter",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Major archaeological discoveries of the 1920s",
+    "finalEligible": true
   },
   {
     "id": "category-final-connections",
@@ -1206,10 +1344,10 @@
     "difficulty": "medium-hard",
     "prompt": "Oberon, Titania, and Puck are all characters in which Shakespeare play?",
     "answer": "A Midsummer Night's Dream",
-    "hint": "Much of the play's action takes place in a forest outside Athens.",
+    "hint": "The play involves a magical love potion and a group of amateur actors rehearsing a performance.",
     "hints": [
-      "Much of the play's action takes place in a forest outside Athens.",
-      "A magical love potion causes confusion among several human couples."
+      "The play involves a magical love potion and a group of amateur actors rehearsing a performance.",
+      "The title evokes a season and the time of day when people are asleep."
     ],
     "tier": "teen",
     "aliases": [
@@ -1218,7 +1356,9 @@
     ],
     "distractors": [],
     "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Shakespearean comedy and folklore",
+    "finalEligible": true
   },
   {
     "id": "category-final-before-after",
@@ -1227,10 +1367,10 @@
     "difficulty": "medium-hard",
     "prompt": "What blended title joins a dystopian novel about Alex and ultraviolence with a television series about life in a women’s prison?",
     "answer": "A Clockwork Orange Is the New Black",
-    "hint": "The novel was written by Anthony Burgess in the early 1960s.",
+    "hint": "Anthony Burgess wrote the novel; the television series was adapted from Piper Kerman's memoir.",
     "hints": [
-      "The novel was written by Anthony Burgess in the early 1960s.",
-      "The two titles overlap on a word that is both a fruit and a color."
+      "Anthony Burgess wrote the novel; the television series was adapted from Piper Kerman's memoir.",
+      "The titles overlap on a word that is both a fruit and a color."
     ],
     "tier": "teen",
     "aliases": [
@@ -1238,7 +1378,10 @@
     ],
     "distractors": [],
     "sourceUrl": "Original wordplay puzzle: independently constructed from two published titles; not a historical claim",
-    "sourceStatus": "Constructed wordplay; title facts editorially checked"
+    "sourceStatus": "Constructed wordplay; title facts editorially checked",
+    "topicPreview": "Blended titles from books and television",
+    "finalEligible": false,
+    "finalExclusionReason": "Blended-title puzzle; hints can expose the mechanical construction."
   },
   {
     "id": "category-final-undone",
@@ -1247,16 +1390,18 @@
     "difficulty": "hard",
     "prompt": "Which UN word describes something so mysterious or deep that it seems impossible to understand or measure?",
     "answer": "Unfathomable",
-    "hint": "The term is used both for a person’s motives and for extreme depths.",
+    "hint": "The adjective can describe a person's motives as well as something of extraordinary depth.",
     "hints": [
-      "The term is used both for a person’s motives and for extreme depths.",
-      "Its root is an old nautical unit for measuring water depth."
+      "The adjective can describe a person's motives as well as something of extraordinary depth.",
+      "Its root is also a nautical unit traditionally equal to six feet."
     ],
     "tier": "teen",
     "aliases": [],
     "distractors": [],
     "sourceUrl": "https://dictionary.cambridge.org/us/dictionary/english/unfathomable",
-    "sourceStatus": "Externally corroborated"
+    "sourceStatus": "Externally corroborated",
+    "topicPreview": "Vocabulary with negative prefixes",
+    "finalEligible": true
   },
   {
     "id": "category-final-no-show",
@@ -1265,14 +1410,16 @@
     "difficulty": "hard",
     "prompt": "Which Soviet space shuttle orbited Earth once without a crew in 1988 but never flew another space mission?",
     "answer": "Buran",
-    "hint": "It was the product of a Cold War-era program rivaling NASA’s Space Shuttle.",
+    "hint": "The spacecraft completed an automated orbital flight atop an Energia rocket.",
     "hints": [
-      "It was the product of a Cold War-era program rivaling NASA’s Space Shuttle.",
-      "The spacecraft made an automated orbital flight atop an Energia rocket."
+      "The spacecraft completed an automated orbital flight atop an Energia rocket.",
+      "Its Russian name refers to a fierce winter storm."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Space programs that never reached their potential",
+    "finalEligible": true
   },
   {
     "id": "category-final-christmas-lore",
@@ -1281,10 +1428,10 @@
     "difficulty": "medium-hard",
     "prompt": "What is the name of the Catalan Christmas tradition involving a decorated log that children care for and later tap to receive treats?",
     "answer": "Tió de Nadal",
-    "hint": "This distinctive gift-giving custom is associated with the Catalonia region of Spain.",
+    "hint": "Families often give the object a painted face, little red cap and blanket.",
     "hints": [
-      "This distinctive gift-giving custom is associated with the Catalonia region of Spain.",
-      "Families often give the object a painted face, a blanket, and a little red cap."
+      "Families often give the object a painted face, little red cap and blanket.",
+      "The name has the same word for Christmas found in the Catalan greeting Bon Nadal."
     ],
     "tier": "teen",
     "aliases": [
@@ -1293,7 +1440,9 @@
       "Caga Tio",
       "Christmas Tió"
     ],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Christmas folklore in Catalonia",
+    "finalEligible": true
   },
   {
     "id": "category-final-creepy-creatures",
@@ -1302,14 +1451,16 @@
     "difficulty": "medium-hard",
     "prompt": "What Japanese folkloric fox spirit is famous for shape-shifting and, in some stories, gaining extra tails as it ages?",
     "answer": "Kitsune",
-    "hint": "In legends, this being can appear in human form and may be mischievous or benevolent.",
+    "hint": "This being is closely associated with the Shinto deity Inari.",
     "hints": [
-      "In legends, this being can appear in human form and may be mischievous or benevolent.",
-      "It is closely associated with fox imagery and the Shinto deity Inari."
+      "This being is closely associated with the Shinto deity Inari.",
+      "The Japanese name is also the ordinary word for the animal in the question; it has three syllables."
     ],
     "tier": "teen",
     "aliases": [],
-    "distractors": []
+    "distractors": [],
+    "topicPreview": "Shape-shifting beings in Japanese folklore",
+    "finalEligible": true
   },
   {
     "id": "category-final-finish-that-lyric",
@@ -1318,16 +1469,19 @@
     "difficulty": "medium-hard",
     "prompt": "Complete the lyric from “Swing Low, Sweet Chariot”: I looked over Jordan and what did I see? ... A ___ coming after me",
     "answer": "band of angels",
-    "hint": "The missing phrase describes a group of heavenly beings.",
+    "hint": "The traditional spiritual uses imagery of crossing the Jordan and being carried to heaven.",
     "hints": [
-      "The missing phrase describes a group of heavenly beings.",
-      "The first word is also used for a group of musicians."
+      "The traditional spiritual uses imagery of crossing the Jordan and being carried to heaven.",
+      "The missing phrase uses a collective noun also used for a group of musicians and refers to heavenly beings."
     ],
     "tier": "teen",
     "aliases": [],
     "distractors": [],
     "sourceUrl": "https://chords.page/songs/swing-low-sweet-chariot",
-    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate"
+    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+    "topicPreview": "Traditional spirituals",
+    "finalEligible": false,
+    "finalExclusionReason": "Short fill-in completion; hints can become a giveaway. Retained for regular play."
   },
   {
     "id": "category-final-christmas-sing-along",
@@ -1336,16 +1490,19 @@
     "difficulty": "medium-hard",
     "prompt": "Complete the lyric from “I Heard the Bells on Christmas Day”: A voice, a chime, a chant ___, of peace on earth, good-will to men",
     "answer": "sublime",
-    "hint": "The missing adjective describes something of extraordinary beauty or grandeur.",
+    "hint": "The carol is based on a poem by Henry Wadsworth Longfellow.",
     "hints": [
-      "The missing adjective describes something of extraordinary beauty or grandeur.",
-      "The word rhymes with chime and also describes something awe-inspiring."
+      "The carol is based on a poem by Henry Wadsworth Longfellow.",
+      "The missing adjective means exceptionally beautiful or awe-inspiring and rhymes with chime."
     ],
     "tier": "teen",
     "aliases": [],
     "distractors": [],
     "sourceUrl": "https://caroling.app/carol/i-heard-the-bells-on-christmas-day",
-    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate"
+    "sourceStatus": "Lyric wording checked against linked public-domain text; editorial difficulty estimate",
+    "topicPreview": "Nineteenth-century Christmas carols",
+    "finalEligible": false,
+    "finalExclusionReason": "Short fill-in completion; rhyming hints can effectively supply the answer."
   },
   {
     "id": "category-final-flags-world",
@@ -1357,10 +1514,10 @@
     "aliases": [
       "Republic of Palau"
     ],
-    "hint": "This Pacific island nation includes the Rock Islands.",
+    "hint": "This island nation includes the Rock Islands and lies east of the Philippines.",
     "hints": [
-      "This Pacific island nation includes the Rock Islands, famous for their marine biodiversity.",
-      "Its capital is Ngerulmud, on the island of Babeldaob."
+      "This island nation includes the Rock Islands and lies east of the Philippines.",
+      "Its former capital was Koror. The disk on its flag represents the moon, rather than the sun."
     ],
     "tier": "adult",
     "distractors": [],
@@ -1371,7 +1528,9 @@
       "height": 800
     },
     "sourceUrl": "https://flagpedia.net/palau",
-    "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn"
+    "sourceStatus": "Flagpedia finished PNG; supplied bitmap resized proportionally, not redrawn",
+    "topicPreview": "National flag identification in Oceania",
+    "finalEligible": true
   },
   {
     "id": "category-final-famous-landmarks",
@@ -1381,10 +1540,10 @@
     "prompt": "Name the landmark shown in this image.",
     "answer": "Machu Picchu",
     "aliases": [],
-    "hint": "This Inca citadel sits high in the Andes of Peru.",
+    "hint": "This mountain citadel lies above the Urubamba River valley in Peru.",
     "hints": [
-      "This landmark is an Inca site in Peru, high in the Andes Mountains.",
-      "It is often called the “Lost City of the Incas.”"
+      "This mountain citadel lies above the Urubamba River valley in Peru.",
+      "Its Quechua name is commonly interpreted as referring to an old mountain or peak."
     ],
     "tier": "adult",
     "distractors": [],
@@ -1395,6 +1554,8 @@
       "height": 900
     },
     "sourceUrl": "https://en.wikipedia.org/wiki/Machu_Picchu",
-    "sourceStatus": "Editorial pilot: original SVG illustration"
+    "sourceStatus": "Editorial pilot: original SVG illustration",
+    "topicPreview": "Inca architecture in the Andes",
+    "finalEligible": true
   }
 ]

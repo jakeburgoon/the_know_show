@@ -7,7 +7,7 @@ export const dynamic='force-dynamic';
 type LabDifficulty='all'|'easy'|'medium'|'hard'|'final';
 type LabSurface='phone'|'tv';
 type LabAnswerMode='written'|'choices';
-type LabEntry={key:string;kind:'regular'|'final';id:string;categoryId:string;categoryName:string;level:number|null;difficulty:LabDifficulty;prompt:string;answer:string;aliases:string[];hintText:string[];distractors:string[];image?:QuestionImage;sourceUrl?:string;tier?:string};
+type LabEntry={key:string;kind:'regular'|'final';id:string;categoryId:string;categoryName:string;level:number|null;difficulty:LabDifficulty;prompt:string;answer:string;aliases:string[];hintText:string[];distractors:string[];image?:QuestionImage;sourceUrl?:string;tier?:string;topicPreview?:string;finalEligible?:boolean;finalExclusionReason?:string};
 
 const ALL_CATEGORY_OPTIONS=CATEGORIES.map(c=>({id:c.id,name:c.name})).sort((a,b)=>a.name.localeCompare(b.name));
 const REGULAR_LAB_ENTRIES:LabEntry[]=CATEGORIES.flatMap(category=>Object.entries(category.questionsByLevel).flatMap(([level,questions])=>questions.map(q=>({
@@ -41,7 +41,7 @@ const FINAL_LAB_ENTRIES:LabEntry[]=CATEGORY_FINALS.map(q=>({
  distractors:q.distractors??[],
  image:q.image,
  sourceUrl:q.sourceUrl,
- tier:q.tier
+ tier:q.tier,topicPreview:q.topicPreview,finalEligible:q.finalEligible,finalExclusionReason:q.finalExclusionReason
 }));
 const LAB_ENTRIES:LabEntry[]=[...REGULAR_LAB_ENTRIES,...FINAL_LAB_ENTRIES];
 

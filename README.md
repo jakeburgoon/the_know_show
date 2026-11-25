@@ -1,3 +1,23 @@
+# v1.13.7 — Hint purchase controls
+
+Gold lightbulb buttons in regular play; sequential, refundable Final Word hint tiles before wager lock; fixed wager with affordability clamp and live score projections. See V137_HINT_TILES_SETUP.md. No new SQL.
+
+# v1.13.4 — Answer Format & Player Preferences
+
+- Host setup has three steps, including four answer formats: Everyone writes (default), Everyone chooses, Everyone uses the same mixture (Hard or Medium and Hard), and Individual answer preferences.
+- Common formats apply to new joiners; individual mode asks joiners and participating hosts for a preference. Hosts can override individual settings in the Green Room and live Host View. Age suggestions in the new setup are advisory, with a Use suggestion button; explicit player choices are not overwritten. Legacy rooms without the new format setup retain their prior age behavior.
+- Players may request changes during a show; host approval/decline does not interrupt gameplay. Changes begin with the next question, with the current question's answer-format snapshot retained. Final Word is still written-only; setup calls it the final question. Scoring is unchanged. Preferences are room-state fields, not account profiles.
+- No new SQL or environment variables if v1.13.2 or v1.13.3 is already deployed. The cumulative update-only ZIP includes files changed since v1.12.1; run the v1.13.0 and v1.13.2 SQL migrations if not already applied. Upload the contents of the the-know-show folder at the repository root, keeping paths intact.
+- Validation: 100/101 engine tests pass (four new answer-format tests pass); the existing Famous Landmarks/Machu Picchu overlap remains. 58/58 UI source-contract tests pass. Changed TS/TSX files parse successfully. Full Next.js typecheck/build and real-device/Supabase tests are not available in this environment.
+- Live smoke test: create a new room for each common format, join from two devices, verify question choices match the host selection; in individual mode verify player preference, age suggestion, host override, request/approval during an open question, and next-question behavior. Confirm the final question remains written for everyone.
+
+# v1.13.3 — Gameplay flexibility and review breaks
+
+- Live per-player answer support in Host View, effective at the next question; welcoming explanation and 9.5-second host onboarding tip with settings and score controls.
+- One additional second of answer reveal; late review of the previous regular question before the next question begins; server-enforced pause for disputes, with corrected scores and statistics.
+- One shared five-second feedback break per result, followed by a resumption notice. Feedback can still be finished after the break.
+- No new Supabase migration or environment variables. See `V133_GAMEPLAY_SETUP.md`. Privacy and age-analysis scope unchanged.
+
 # v1.13.2 — Age-based answer support
 
 - Optional individual Green Room age selector: Under 10 and 10–12 → all regular questions; 13–15 → Medium and Hard; 16–17 → Hard only; 18–29, 30–49, 50+ → written. Not specified leaves existing support unchanged. The host can override the slider. Final Word stays written for everyone. Age does not affect category or question selection or scoring rules.

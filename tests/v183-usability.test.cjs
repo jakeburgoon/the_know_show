@@ -17,7 +17,7 @@ test('touch form controls prevent small-font focus zoom without disabling pinch 
 });
 test('slider poses a direct question, explains selected choice, and retains original four settings',()=>{
  assert.match(room,/When should this player see answer choices\?/);
- assert.match(room,/\['Never — all answers are written','Only for Hard questions','For Medium and Hard questions','For all regular questions'\]/);
+ assert.match(room,/\['Written answers','Choices for Hard questions','Choices for Medium and Hard questions','Choices for all regular questions'\]/);
  assert.match(room,/PLAYER_SUPPORT=\['off','hard','medium-hard','all'\]/);
  assert.match(room,/min=\{0\} max=\{3\} step=\{1\}/);
  assert.match(room,/aria-valuetext=\{PLAYER_SUPPORT_LABELS\[level\]\}/);

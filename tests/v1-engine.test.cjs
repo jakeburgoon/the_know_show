@@ -59,17 +59,16 @@ test('private choices appear only for eligible question levels, not host or othe
  assert.equal(g.makeView(s,a[1],1,43000).active.myChoices,undefined);
  assert.equal(g.makeView(s,host,1,43000).active.myChoices,undefined);
 });
-test('choice setting can be assigned and changed only before game or when paused',()=>{
+test('choice setting changes live but takes effect on the next question',()=>{
  let {s,a}=setup(2);
  s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'hard'},host,3000);
  assert.equal(s.players[0].choiceAccess,'hard');
  s=draft(s,a);s=open(s,a[0],keys(s)[0]);
- assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23100),/Pause/);
- s=g.mutate(s,{type:'pause'},host,23100);
- s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23110);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23100);
  assert.equal(s.players[0].choiceAccess,'all');
- assert.equal(g.makeView(s,a[0],1,23150).active.myChoices.length,4);
- assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'other'},host,23150),/Invalid/);
+ assert.equal(g.makeView(s,a[0],1,23150).active.myChoices,undefined);
+ s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[0],23200);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[1],23300);s=g.tick(s,s.resolution.endsAt+1);s=open(s,a[1],keys(s)[1],40000);assert.equal(g.makeView(s,a[0],1,43000).active.myChoices.length,4);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'other'},host,43150),/Invalid/);
 });
 test('four-choice players earn full base points with a reduced speed bonus',()=>{
  let {s,a}=setup(2);
@@ -169,12 +168,13 @@ test('dispute blocks auto-advance and host ruling corrects score',()=>{
  s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:true},host,90010);
  assert.equal(s.players[0].score,100);s=g.tick(s,100000);assert.equal(s.phase,'board');
 });
-test('pause and accommodation updates preserve spent hints',()=>{
- let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
- s=g.mutate(s,{type:'hint',kind:'written'},a[0],23100);assert.equal(s.players[0].hintsRemaining,2);
- assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,bonusHints:2},host,23200),/Pause/);
- s=g.mutate(s,{type:'pause'},host,23300);s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,bonusHints:2},host,23500);
- assert.equal(s.players[0].hintsRemaining,4);
+test('pause and accommodation updates preserve purchased hints and points',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);s.players[0].score=100;
+ s=g.mutate(s,{type:'hint',kind:'options',key:s.active.key},a[0],23100);assert.equal(s.players[0].score,75);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,bonusTimeSeconds:5},host,23200),/Pause/);
+ s=g.mutate(s,{type:'pause'},host,23300);s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,bonusTimeSeconds:5},host,23500);
+ assert.equal(s.players[0].score,75);assert.equal(s.active.hintPurchases[a[0].id].options,true);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[0].id,bonusHints:2},host,23501),/purchased/);
 });
 test('full 24-question game advances automatically to Final Word and auto-reveals when all wagers are in',()=>{
  let {s,a}=setup(2);s=draft(s,a);
@@ -213,9 +213,9 @@ test('guided host answer-format choice applies to people who join afterward',()=
  let one=g.joinGame(s,'Choice Player',undefined,2000);s=one.state;
  assert.equal(s.players[0].choiceAccess,'all');
  s=g.mutate(s,{type:'settings',settings:{answerStyle:'mixed'}},host,2100);
- assert.equal(s.players[0].choiceAccess,'off');
+ assert.equal(s.players[0].choiceAccess,'hard');
  let two=g.joinGame(s,'Write Player',undefined,2200);s=two.state;
- assert.equal(s.players[1].choiceAccess,'off');
+ assert.equal(s.players[1].choiceAccess,'hard');
  s=g.mutate(s,{type:'player-bonuses',playerId:two.player.id,choiceAccess:'hard'},host,2300);
  assert.equal(s.players[1].choiceAccess,'hard');
  assert.equal(s.settings.answerStyle,'mixed');
@@ -320,13 +320,14 @@ test('Final Word draw respects seasonal months and avoids recent finals and cate
  const activeNov=new Set(bank.availableCategories(new Date(nov)).map(c=>c.id));
  for(let i=0;i<60;i++)assert.ok(activeNov.has(g.chooseFinalQuestion(s,nov).categoryId));
  const seen=new Set();
- for(let i=0;i<37;i++){
+ const expected=g.finalCandidates(s,july).length;
+ for(let i=0;i<expected;i++){
   const q=g.chooseFinalQuestion(s,july);
   // Maintain history in the same form the real game records completed finals.
   s.recentQuestionIds.push(q.id);
   assert.ok(!seen.has(q.id),'A final was repeated before the unseen pool was exhausted');seen.add(q.id);
  }
- assert.equal(seen.size,37);
+ assert.equal(seen.size,expected);
  // After every unused category outside the board has been played,
  // continue drawing ONLY from categories outside the board.
  for(let i=0;i<30;i++)assert.ok(!s.selected.flat().includes(g.chooseFinalQuestion(s,july).categoryId));
@@ -627,7 +628,7 @@ test('Total No-Show requires all players to submit incorrect responses and adds 
  let {s,a}=setup(3);s=draft(s,a);s=open(s,a[0],keys(s)[0]);
  for(let i=0;i<a.length;i++)s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[i],23000+i*20);
  assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,true);
- assert.equal(s.resolution.endsAt-s.resolution.finishedAt,11000);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,12000);
  assert.equal(g.makeView(s,a[0],1,23100).results.noShow,true);
  s=g.tick(s,s.resolution.endsAt-1);assert.equal(s.phase,'results');
 });
@@ -638,7 +639,7 @@ test('Total No-Show is suppressed when any player answers correctly',()=>{
  s=g.mutate(s,{type:'submit-answer',answer:'incorrect guess'},a[0],23000);
  s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23010);
  assert.equal(s.phase,'results');assert.equal(s.resolution.noShow,false);
- assert.equal(s.resolution.endsAt-s.resolution.finishedAt,7500);
+ assert.equal(s.resolution.endsAt-s.resolution.finishedAt,8500);
 });
 
 test('Total No-Show is suppressed for unanswered timeouts and skipped questions',()=>{
@@ -671,7 +672,7 @@ test('Final Word shows a Total No-Show for all wrong written attempts, but not a
  s=g.mutate(s,{type:'final-answer',answer:'totally incorrect guess'},a[0],5500);
  s=g.mutate(s,{type:'final-answer',answer:'also incorrect'},a[1],5600);
  assert.equal(s.phase,'final-results');assert.equal(s.final.noShow,true);
- assert.equal(s.final.endsAt-5600,16500);
+ assert.equal(s.final.endsAt-5600,17500);
  assert.equal(g.makeView(s,a[0],1,5700).final.noShow,true);
  let missed=setup(2);missed.s.phase='final-wager';missed.s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};
  for(let i=0;i<missed.a.length;i++)missed.s=g.mutate(missed.s,{type:'wager',amount:0},missed.a[i],5000+i*10);
@@ -825,4 +826,49 @@ test('v1.9.2 lyric categories have short completions, seasonal eligibility, sour
   const final=bank.CATEGORY_FINALS.find(q=>q.categoryId===id);assert.ok(final);assert.equal(final.hints.length,2);assert.ok(final.answer.split(/\s+/).length<=3);
  }
  const q=bank.getQuestion('v192-christmas-sing-along-2-1');assert.ok(g.isCorrectForQuestion('good St Nick',q));assert.ok(!g.isCorrectForQuestion('Santa Claus',q));
+});
+
+test('live support preserves active written drafts and the actual answer format for scoring and statistics',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);const q=bank.getQuestion(s.active.questionId);
+ s=g.mutate(s,{type:'save-draft',scope:'question',answer:q.answer},a[0],23000);
+ s=g.mutate(s,{type:'player-bonuses',playerId:a[0].id,choiceAccess:'all'},host,23100);
+ assert.equal(g.makeView(s,a[0],1,23200).active.myChoices,undefined);
+ assert.equal(g.makeView(s,a[0],1,23200).active.myDraft,q.answer);
+ s=g.tick(s,s.active.deadlineAt+1);
+ assert.equal(s.resolution.answers[a[0].id].answerFormat,'written');assert.equal(s.resolution.answers[a[0].id].correct,true);
+ assert.throws(()=>g.mutate(s,{type:'player-bonuses',playerId:a[1].id,choiceAccess:'all'},a[0],s.resolution.finishedAt+1),/Only the host/);
+});
+
+test('last-answer review is private to an eligible player, pauses the board, updates stats once, and closes at next question',()=>{
+ const {exposureJournal}=require('../.engine-build/exposure.js');let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);const q=bank.getQuestion(s.active.questionId);
+ s=g.mutate(s,{type:'submit-answer',answer:'wrong answer'},a[0],23000);s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23100);
+ const deadline=s.resolution.endsAt;s=g.tick(s,deadline+1);assert.equal(s.phase,'board');assert.equal(g.makeView(s,a[0],1,deadline+1).lastReview.questionId,q.id);assert.equal(g.makeView(s,a[1],1,deadline+1).lastReview,undefined);assert.equal(g.makeView(s,host,1,deadline+1).results,undefined);
+ let before=s;s=g.mutate(s,{type:'dispute',questionId:q.id},a[0],deadline+2);assert.equal(s.phase,'results');assert.equal(exposureJournal(before,s).exposures.length,0);assert.equal(g.tick(s,90000).phase,'results');assert.throws(()=>g.mutate(s,{type:'open-question',key:keys(s)[1]},a[1],90000),/not ready/);
+ before=s;s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:true,questionId:q.id},host,90001);assert.equal(s.players[0].score,100);assert.equal(exposureJournal(before,s).exposures.length,1);s=g.tick(s,s.resolution.endsAt+1);assert.equal(s.phase,'board');assert.equal(g.makeView(s,a[0],1,100000).lastReview,undefined);
+ s=open(s,a[1],keys(s)[1],100000);assert.throws(()=>g.mutate(s,{type:'dispute',questionId:q.id},a[0],103000),/before the next question/);
+});
+
+test('late review across the Round 1 boundary preserves the Round 2 draft and original point value',()=>{
+ const {exposureJournal}=require('../.engine-build/exposure.js');let {s,a}=setup(2);s=draft(s,a);const k=keys(s);s.usedKeys=k.slice(0,11);s=open(s,a[0],k[11]);const q=bank.getQuestion(s.active.questionId);
+ s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[0],23000);s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23100);const deadline=s.resolution.endsAt;s=g.tick(s,deadline+1);assert.equal(s.phase,'draft');assert.equal(s.round,1);const pool=[...s.draftPool];s=g.mutate(s,{type:'draft-category',categoryId:pool[0]},host,deadline+2);s=g.mutate(s,{type:'dispute',questionId:q.id},a[0],deadline+3);assert.equal(s.phase,'results');const before=s;s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:true},host,deadline+4);assert.equal(s.players[0].score,500);assert.equal(exposureJournal(before,s).exposures[0].round,1);const reviewed=s;s=g.tick(s,s.resolution.endsAt+1);assert.equal(s.phase,'draft');assert.deepEqual(s.draftPool,pool);assert.deepEqual(s.selected[1],[pool[0]]);assert.deepEqual(exposureJournal(reviewed,s).offers,{});
+});
+
+test('a denied review cannot be repeatedly reopened; stale requests cannot target a new result',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[0],23000);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[1],23100);const id=s.resolution.questionId;
+ s=g.mutate(s,{type:'dispute',questionId:id},a[0],23200);s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:false,questionId:id},host,23300);assert.throws(()=>g.mutate(s,{type:'dispute',questionId:id},a[0],23400),/already reviewed/);assert.throws(()=>g.mutate(s,{type:'dispute',questionId:'stale'},a[1],23400),/window has closed/);
+});
+
+test('question feedback grants one shared five-second result break, never extends repeatedly, and cannot be started by spectators',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s=open(s,a[0],keys(s)[0]);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[0],23000);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[1],23100);const original=s.resolution.endsAt,id=s.resolution.questionId;
+ assert.throws(()=>g.mutate(s,{type:'feedback-pause',questionId:id},{kind:'spectator'},23200),/Join the show/);s=g.mutate(s,{type:'feedback-pause',questionId:id},a[0],original-500);assert.equal(s.resolution.endsAt,original+5000);assert.equal(s.resolution.feedbackPauseUntil,original+4500);assert.equal(g.makeView(s,a[1],1,original).feedbackPauseUntil,original+4500);
+ s=g.mutate(s,{type:'feedback-pause',questionId:id},a[1],original+1);assert.equal(s.resolution.endsAt,original+5000);assert.equal(g.tick(s,original+4999).phase,'results');s=g.tick(s,original+5000);assert.equal(s.phase,'board');s=g.mutate(s,{type:'feedback-pause',questionId:id},a[0],original+5001);assert.equal(s.phase,'board');assert.equal(g.makeView(s,a[0],1,original+5001).feedbackPauseUntil,undefined);
+});
+
+test('feedback break also delays Final Word finish but never overrides an unresolved dispute',()=>{
+ let {s,a}=setup(2);s.phase='final-wager';s.final={id:bank.FINALS[0].id,wagers:{},answers:{},disputeIds:[]};for(const p of a)s=g.mutate(s,{type:'wager',amount:0},p,5000);for(const p of a)s=g.mutate(s,{type:'final-answer',answer:'wrong answer'},p,5500);const end=s.final.endsAt;
+ s=g.mutate(s,{type:'feedback-pause',questionId:s.final.id},a[0],end-1000);assert.equal(s.final.endsAt,end+5000);assert.throws(()=>g.mutate(s,{type:'finish'},host,end),/feedback break/);s=g.mutate(s,{type:'dispute',questionId:s.final.id},a[1],end+1);assert.equal(g.tick(s,end+100000).phase,'final-results');s=g.mutate(s,{type:'dismiss-dispute',playerId:a[1].id},host,end+100001);assert.equal(g.tick(s,s.final.endsAt+1).phase,'finished');
+});
+
+test('review after Round 2 preserves existing Final Word wagers and ends when Final Word begins',()=>{
+ let {s,a}=setup(2);s=draft(s,a);s.round=1;s.selected[1]=s.selected[0];s.selected[0]=[];const k=keys(s);s.usedKeys=k.slice(0,11);s=open(s,a[0],k[11]);const q=bank.getQuestion(s.active.questionId);s=g.mutate(s,{type:'submit-answer',answer:'wrong'},a[0],23000);s=g.mutate(s,{type:'submit-answer',answer:q.answer},a[1],23100);const end=s.resolution.endsAt;s=g.tick(s,end+1);assert.equal(s.phase,'final-wager');const finalId=s.final.id;s=g.mutate(s,{type:'wager',amount:0},a[1],end+2);s=g.mutate(s,{type:'dispute',questionId:q.id},a[0],end+3);assert.equal(s.phase,'results');assert.throws(()=>g.mutate(s,{type:'wager',amount:0},a[0],end+4),/closed/);s=g.mutate(s,{type:'resolve-dispute',playerId:a[0].id,correct:true},host,end+5);assert.equal(s.players[0].score,1000);s=g.tick(s,s.resolution.endsAt+1);assert.equal(s.phase,'final-wager');assert.equal(s.final.id,finalId);assert.equal(s.final.wagers[a[1].id],0);s=g.mutate(s,{type:'wager',amount:0},a[0],s.resolution.endsAt+2);assert.equal(s.phase,'final-question');assert.equal(s.resolution,undefined);
 });

@@ -21,6 +21,6 @@ test('animation matches the existing gold/navy palette and respects reduced moti
 });
 test('engine gates the animation on wrong submitted answers and preserves standard timings',()=>{
  assert.match(game,/const noShow=!skipped&&everyoneMissed\(s,a\.answers\)/);
- assert.match(game,/endsAt:now\+\(noShow\?11000:7500\)/);
- assert.match(game,/f\.endsAt=now\+\(f\.noShow\?16500:13000\)/);
+ assert.match(game,/endsAt:now\+\(noShow\?12000:8500\)/);
+ assert.match(game,/f\.endsAt=now\+\(f\.noShow\?17500:14000\)/);
 });
