@@ -7,9 +7,9 @@ const byid=new Map(bank.categories.map(c=>[c.id,c]));
 const specs=[['no-show',null,4],['christmas-lore',[11,12],6],['creepy-creatures',[10,11],6]];
 const allQuestions=bank.categories.flatMap(c=>Object.values(c.questionsByLevel).flat());
 const norm=x=>x.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'');
-test('current library reaches the accurate 1,072 question count',()=>{
- assert.equal(bank.categories.length,76);assert.equal(allQuestions.length,996);assert.equal(finals.length,76);
- assert.equal(allQuestions.length+finals.length,1072);
+test('current library reaches the accurate 1,076 question count',()=>{
+ assert.equal(bank.categories.length,76);assert.equal(allQuestions.length,999);assert.equal(finals.length,77);
+ assert.equal(allQuestions.length+finals.length,1076);
 });
 test('new categories have correct seasonal windows and balanced difficulty',()=>{
  for(const [id,months,count] of specs){const c=byid.get(id);assert.ok(c,id);assert.deepEqual(c.activeMonths||null,months);for(const level of ['1','2','3'])assert.equal(c.questionsByLevel[level].length,count,id+level);}
@@ -29,6 +29,6 @@ test('one reserved final per category with two hints and no regular-answer overl
 });
 test('homepage and guide include both milestone claims',()=>{
  const page=fs.readFileSync('src/app/page.tsx','utf8');const guide=fs.readFileSync('src/app/guide/page.tsx','utf8');
- assert.match(page,/over 70 categories/);assert.match(page,/Over 1,000 regular and seasonal questions/);
+ assert.match(page,/over 70 categories/);assert.match(page,/Over 1,000 questions/);
  assert.match(guide,/over 70 categories/);assert.match(guide,/over 1,000 questions/);
 });

@@ -1,5 +1,5 @@
 {
-  "version": "1.13.0",
+  "version": "1.13.13",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -18590,106 +18590,140 @@
     },
     {
       "id": "famous-landmarks",
-      "name": "Famous Landmarks",
-      "description": "Identify famous landmarks from images. Every question includes an image.",
+      "name": "Picture This: Famous Landmarks",
+      "description": "Identify famous human-made landmarks from real photographs around the world.",
       "type": "classic",
       "questionsByLevel": {
         "1": [
           {
             "id": "landmarks-pilot-01",
             "level": 1,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Eiffel Tower",
             "aliases": [
               "La Tour Eiffel"
             ],
-            "hint": "This Paris landmark was built for the 1889 World's Fair.",
+            "hint": "Built for the 1889 Paris exposition.",
             "categoryId": "famous-landmarks",
             "distractors": [
               "Tokyo Tower",
               "Blackpool Tower",
               "Space Needle"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/41164224/",
             "image": {
-              "src": "/trivia-images/2d7ac4e91f6058b3.svg",
-              "alt": "A tall iron lattice tower with four curved legs narrowing to a point.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/430e813f5515c00d.jpg",
+              "width": 1280,
+              "height": 1600,
+              "alt": "A tall iron lattice tower in a city park."
             }
           },
           {
             "id": "landmarks-pilot-02",
             "level": 1,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Statue of Liberty",
             "aliases": [
-              "Liberty Enlightening the World"
+              "Liberty Enlightening the World",
+              "Lady Liberty"
             ],
-            "hint": "This colossal statue stands in New York Harbor.",
+            "hint": "A gift from France to the United States.",
             "categoryId": "famous-landmarks",
             "distractors": [
               "Christ the Redeemer",
-              "The Thinker",
-              "Little Mermaid"
+              "The Motherland Calls",
+              "Statue of Unity"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/15868902/",
             "image": {
-              "src": "/trivia-images/84f2c0d71a9b5e46.svg",
-              "alt": "A robed green statue holding a torch aloft.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/f85e6c3565c47517.jpg",
+              "width": 1060,
+              "height": 1600,
+              "alt": "A green robed statue holding a torch."
             }
           },
           {
-            "id": "landmarks-pilot-03",
+            "id": "landmarks-photo-giza",
             "level": 1,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Great Pyramid of Giza",
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Pyramids of Giza",
             "aliases": [
+              "Giza Pyramids",
+              "Pyramids at Giza",
+              "Great Pyramid of Giza",
               "Great Pyramid",
-              "Pyramid of Khufu"
+              "Pyramid of Khufu",
+              "Giza pyramid complex",
+              "Egyptian pyramids",
+              "Pyramids of Egypt"
             ],
-            "hint": "This ancient wonder stands in Egypt.",
+            "hint": "These ancient Egyptian monuments stand near Cairo.",
             "categoryId": "famous-landmarks",
             "distractors": [
-              "Louvre Pyramid",
-              "Temple of Kukulcán",
-              "Machu Picchu"
+              "Pyramids of Meroë",
+              "Pyramids of Dahshur",
+              "Pyramids of Saqqara"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/37662644/",
             "image": {
-              "src": "/trivia-images/c8e15a703b4d92f1.svg",
-              "alt": "A massive desert pyramid with a triangular silhouette.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/3fcb471dad227e73.jpg",
+              "width": 1600,
+              "height": 1200,
+              "alt": "Several ancient pyramids in a desert."
             }
           },
           {
             "id": "landmarks-pilot-04",
             "level": 1,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Big Ben",
             "aliases": [
-              "Elizabeth Tower"
+              "Elizabeth Tower",
+              "Big Ben clock tower",
+              "Clock Tower of the Palace of Westminster"
             ],
-            "hint": "This clock tower stands at the Palace of Westminster in London.",
+            "hint": "The clock tower stands beside the UK Parliament.",
             "categoryId": "famous-landmarks",
             "distractors": [
-              "Leaning Tower of Pisa",
-              "Philadelphia City Hall",
-              "CN Tower"
+              "Peace Tower",
+              "Rajabai Clock Tower",
+              "Spasskaya Tower"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Big_Ben",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/35962134/",
             "image": {
-              "src": "/trivia-images/5f9a1d3c7e4b2680.svg",
-              "alt": "A tall ornate clock tower with a large clock face.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/1d5fa547865e5e19.jpg",
+              "width": 1067,
+              "height": 1600,
+              "alt": "An ornate tall clock tower beside a large building."
+            }
+          },
+          {
+            "id": "landmarks-pilot-07",
+            "level": 1,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Leaning Tower of Pisa",
+            "aliases": [
+              "Tower of Pisa",
+              "Pisa Tower"
+            ],
+            "hint": "An Italian bell tower known for its tilt.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Campanile of St Mark",
+              "Torre degli Asinelli",
+              "Giotto’s Bell Tower"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/35909649/",
+            "image": {
+              "src": "/trivia-images/a22fe5e8470ff063.jpg",
+              "width": 900,
+              "height": 1600,
+              "alt": "A tilted cylindrical stone tower."
             }
           }
         ],
@@ -18697,190 +18731,245 @@
           {
             "id": "landmarks-pilot-05",
             "level": 2,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Taj Mahal",
             "aliases": [],
-            "hint": "This white marble mausoleum is in Agra, India.",
+            "hint": "A Mughal emperor built this mausoleum in Agra.",
             "categoryId": "famous-landmarks",
             "distractors": [
-              "Blue Mosque",
-              "Buckingham Palace",
-              "The White House"
+              "Humayun’s Tomb",
+              "Bibi Ka Maqbara",
+              "Safdarjung’s Tomb"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Taj_Mahal",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/16614143/",
             "image": {
-              "src": "/trivia-images/d1b7e4a96c2f5038.svg",
-              "alt": "A large white domed building with symmetrical minarets.",
-              "width": 1200,
-              "height": 900
-            }
-          },
-          {
-            "id": "landmarks-pilot-06",
-            "level": 2,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Sydney Opera House",
-            "aliases": [],
-            "hint": "This performing arts center sits on Sydney Harbour.",
-            "categoryId": "famous-landmarks",
-            "distractors": [
-              "Guggenheim Museum Bilbao",
-              "Lotus Temple",
-              "Marina Bay Sands"
-            ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Sydney_Opera_House",
-            "image": {
-              "src": "/trivia-images/6c0e8d1f2a7b4593.svg",
-              "alt": "A waterfront building with distinctive white sail-like shells.",
-              "width": 1200,
-              "height": 900
-            }
-          },
-          {
-            "id": "landmarks-pilot-07",
-            "level": 2,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Leaning Tower of Pisa",
-            "aliases": [
-              "Tower of Pisa"
-            ],
-            "hint": "This Italian bell tower is famous for its tilt.",
-            "categoryId": "famous-landmarks",
-            "distractors": [
-              "Big Ben",
-              "Campanile di San Marco",
-              "Washington Monument"
-            ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
-            "image": {
-              "src": "/trivia-images/a37e5d9c1b6042f8.svg",
-              "alt": "A cylindrical stone tower that visibly leans to one side.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/ed1561ed2a73e551.jpg",
+              "width": 1600,
+              "height": 1065,
+              "alt": "A white domed building with four minarets."
             }
           },
           {
             "id": "landmarks-pilot-08",
             "level": 2,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Mount Rushmore",
             "aliases": [
-              "Mount Rushmore National Memorial"
+              "Mount Rushmore National Memorial",
+              "Mt Rushmore"
             ],
-            "hint": "Four U.S. presidents are carved into this South Dakota mountainside.",
+            "hint": "Four American presidents are carved here.",
             "categoryId": "famous-landmarks",
             "distractors": [
-              "Stone Mountain",
               "Crazy Horse Memorial",
-              "Devils Tower"
+              "Stone Mountain",
+              "The Motherland Calls"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Mount_Rushmore",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/7173118/",
             "image": {
-              "src": "/trivia-images/f4a81c6e2d9b3057.svg",
-              "alt": "A mountainside sculpture featuring four presidential faces.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/6975edb7301e7f7f.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "Four faces carved into a rocky mountainside."
+            }
+          },
+          {
+            "id": "landmarks-pilot-09",
+            "level": 2,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Colosseum",
+            "aliases": [
+              "Coliseum",
+              "Roman Colosseum",
+              "Flavian Amphitheatre",
+              "Flavian Amphitheater"
+            ],
+            "hint": "Roman gladiatorial contests took place here.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Arena of Verona",
+              "Amphitheatre of El Jem",
+              "Arena of Nîmes"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/36440973/",
+            "image": {
+              "src": "/trivia-images/8d6e7ba1540e00f6.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A large ruined oval stone arena with arched openings."
+            }
+          },
+          {
+            "id": "landmarks-photo-wall",
+            "level": 2,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Great Wall of China",
+            "aliases": [
+              "Great Wall",
+              "The Great Wall",
+              "Chinese Great Wall"
+            ],
+            "hint": "A long defensive fortification in East Asia.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Hadrian’s Wall",
+              "Walls of Constantinople",
+              "Antonine Wall"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/37099875/",
+            "image": {
+              "src": "/trivia-images/a99f73e20b084f3a.jpg",
+              "width": 1146,
+              "height": 1600,
+              "alt": "A stone fortification winding over wooded hills."
+            }
+          },
+          {
+            "id": "landmarks-photo-golden-gate",
+            "level": 2,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Golden Gate Bridge",
+            "aliases": [
+              "Golden Gate"
+            ],
+            "hint": "This suspension bridge connects San Francisco to Marin County.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "George Washington Bridge",
+              "Verrazzano-Narrows Bridge",
+              "Mackinac Bridge"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/4449624/",
+            "image": {
+              "src": "/trivia-images/f277cb8bc9f3ae6d.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A red-orange suspension bridge in fog."
             }
           }
         ],
         "3": [
           {
-            "id": "landmarks-pilot-09",
-            "level": 3,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Colosseum",
-            "aliases": [
-              "Coliseum"
-            ],
-            "hint": "This ancient Roman amphitheater stands in Italy's capital.",
-            "categoryId": "famous-landmarks",
-            "distractors": [
-              "Pantheon",
-              "Roman Forum",
-              "Parthenon"
-            ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Colosseum",
-            "image": {
-              "src": "/trivia-images/39d2f7a1c8e45b60.svg",
-              "alt": "An oval ancient stone amphitheater with multiple arches.",
-              "width": 1200,
-              "height": 900
-            }
-          },
-          {
-            "id": "landmarks-pilot-10",
-            "level": 3,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Christ the Redeemer",
-            "aliases": [
-              "Cristo Redentor"
-            ],
-            "hint": "This giant statue overlooks Rio de Janeiro.",
-            "categoryId": "famous-landmarks",
-            "distractors": [
-              "Statue of Liberty",
-              "Motherland Calls",
-              "The Thinker"
-            ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Christ_the_Redeemer_(statue)",
-            "image": {
-              "src": "/trivia-images/b5e70a1d4c8f2639.svg",
-              "alt": "A large statue of Jesus with outstretched arms atop a mountain.",
-              "width": 1200,
-              "height": 900
-            }
-          },
-          {
-            "id": "landmarks-pilot-11",
-            "level": 3,
-            "prompt": "Which landmark is shown in this image?",
-            "answer": "Sagrada Familia",
-            "aliases": [
-              "La Sagrada Familia",
-              "Basílica de la Sagrada Família"
-            ],
-            "hint": "This still-unfinished basilica is one of Barcelona's most famous landmarks.",
-            "categoryId": "famous-landmarks",
-            "distractors": [
-              "Notre-Dame Cathedral",
-              "Westminster Abbey",
-              "Cologne Cathedral"
-            ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Sagrada_Família",
-            "image": {
-              "src": "/trivia-images/1e9c4d7a5b8032f6.svg",
-              "alt": "A large church with several tall tapering spires.",
-              "width": 1200,
-              "height": 900
-            }
-          },
-          {
             "id": "landmarks-pilot-12",
             "level": 3,
-            "prompt": "Which landmark is shown in this image?",
+            "prompt": "Which landmark is shown in this photograph?",
             "answer": "Stonehenge",
             "aliases": [],
-            "hint": "This prehistoric stone circle is in southern England.",
+            "hint": "A prehistoric monument on Salisbury Plain.",
             "categoryId": "famous-landmarks",
             "distractors": [
               "Avebury",
-              "Giant's Causeway",
-              "Mount Rushmore"
+              "Ring of Brodgar",
+              "Castlerigg Stone Circle"
             ],
-            "sourceStatus": "Editorial pilot: original SVG illustration",
-            "sourceUrl": "https://en.wikipedia.org/wiki/Stonehenge",
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/32419135/",
             "image": {
-              "src": "/trivia-images/af3d8c1e704b5269.svg",
-              "alt": "Several upright stone slabs topped with horizontal lintels.",
-              "width": 1200,
-              "height": 900
+              "src": "/trivia-images/7aaf2d775a382e06.jpg",
+              "width": 1600,
+              "height": 1200,
+              "alt": "Upright stone slabs topped with horizontal stones."
+            }
+          },
+          {
+            "id": "landmarks-photo-empire",
+            "level": 3,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Empire State Building",
+            "aliases": [
+              "Empire State"
+            ],
+            "hint": "A New York Art Deco skyscraper completed in 1931.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Chrysler Building",
+              "30 Rockefeller Plaza",
+              "Woolworth Building"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/19516341/",
+            "image": {
+              "src": "/trivia-images/c900f574ef7d5250.jpg",
+              "width": 925,
+              "height": 1600,
+              "alt": "A tall stepped skyscraper with a spire."
+            }
+          },
+          {
+            "id": "landmarks-photo-brooklyn",
+            "level": 3,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Brooklyn Bridge",
+            "aliases": [],
+            "hint": "A historic bridge across the East River.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Manhattan Bridge",
+              "Williamsburg Bridge",
+              "Queensboro Bridge"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/15859322/",
+            "image": {
+              "src": "/trivia-images/2e5f08335649e6ff.jpg",
+              "width": 1600,
+              "height": 1066,
+              "alt": "A bridge with stone arches and a web of suspension cables."
+            }
+          },
+          {
+            "id": "landmarks-photo-arc",
+            "level": 3,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Arc de Triomphe",
+            "aliases": [
+              "Arc de Triomphe de l’Étoile",
+              "Arch of Triumph",
+              "Triumphal Arch of Paris"
+            ],
+            "hint": "A Paris monument at the western end of the Champs-Élysées.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Arc de Triomphe du Carrousel",
+              "Wellington Arch",
+              "Arco della Pace"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/14858296/",
+            "image": {
+              "src": "/trivia-images/e6685631872fac30.jpg",
+              "width": 1600,
+              "height": 1258,
+              "alt": "A large stone triumphal arch at a road junction."
+            }
+          },
+          {
+            "id": "landmarks-photo-parthenon",
+            "level": 3,
+            "prompt": "Which landmark is shown in this photograph?",
+            "answer": "Parthenon",
+            "aliases": [
+              "The Parthenon"
+            ],
+            "hint": "An ancient temple dedicated to Athena on the Acropolis.",
+            "categoryId": "famous-landmarks",
+            "distractors": [
+              "Temple of Hephaestus",
+              "Temple of Poseidon at Sounion",
+              "Temple of Aphaia"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/5961718/",
+            "image": {
+              "src": "/trivia-images/10779f7aeeb40e63.jpg",
+              "width": 1600,
+              "height": 900,
+              "alt": "An ancient rectangular temple with stone columns."
             }
           }
         ]

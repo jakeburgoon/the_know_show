@@ -227,18 +227,23 @@ export function finalCandidates(s:GameState,now:number){
  const currentBoard=new Set([...s.selected[0],...s.selected[1]]);
  return ELIGIBLE_CATEGORY_FINALS.filter(q=>q.categoryId&&activeIds.has(q.categoryId)&&!currentBoard.has(q.categoryId));
 }
+// A category with more than one equally eligible final does not gain extra lottery tickets.
+function chooseFinalCategoryBalanced(questions:typeof ELIGIBLE_CATEGORY_FINALS){
+ const category=shuffle([...new Set(questions.map(q=>q.categoryId))])[0];
+ return shuffle(questions.filter(q=>q.categoryId===category))[0];
+}
 export function chooseFinalQuestion(s:GameState,now:number){
  const eligible=finalCandidates(s,now);
  assert(eligible.length>0,'No eligible Final Word categories remain outside the current board.');
  const unseen=eligible.filter(q=>!s.recentQuestionIds.includes(q.id));
- if(unseen.length)return shuffle(unseen)[0];
+ if(unseen.length)return chooseFinalCategoryBalanced(unseen);
  const historyOrder=new Map(s.recentQuestionIds.map((id,i)=>[id,i]));
  const age=(id:string)=>historyOrder.get(id)??-1;
  const fewest=Math.min(...eligible.map(q=>seenCount(s,q.id)));
  const leastSeen=eligible.filter(q=>seenCount(s,q.id)===fewest);
  const oldest=Math.min(...leastSeen.map(q=>age(q.id)));
  // Multiple equally old questions can remain. Break the tie at random.
- return shuffle(leastSeen.filter(q=>age(q.id)===oldest))[0];
+ return chooseFinalCategoryBalanced(leastSeen.filter(q=>age(q.id)===oldest));
 }
 
 // Reveal every paid hint at the same instant the Final Word question opens.
@@ -360,7 +365,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
    if(action.ageBand===null){delete p.ageBand;}else{if(!s.settings.answerFormatConfigured&&p.requestedChoiceAccess===undefined)p.choiceAccess=AGE_SUPPORT[action.ageBand];if(isAdultAgeBand(action.ageBand))p.ageBand=action.ageBand;else delete p.ageBand;}break;
  }
  case 'start-draft':{
-   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');assert(CATEGORIES.filter(c=>!c.activeMonths&&!s.disabledCategoryIds?.includes(c.id)).length>=12,'At least 12 year-round categories must be enabled. Ask the developer to update category availability.');assert(ELIGIBLE_CATEGORY_FINALS.filter(q=>q.categoryId&&!CATEGORY_LOOKUP.get(q.categoryId)?.activeMonths&&!s.disabledCategoryIds?.includes(q.categoryId)).length>=9,'At least 9 year-round Final Word eligible categories must be enabled. Ask the developer to update category availability.');for(const p of s.players)if(!isAdultAgeBand(p.ageBand))delete p.ageBand;goDraft(s,now);break;
+   host(actor);assert(s.phase==='lobby'&&s.players.length>=2,'At least two players or teams are required.');assert(CATEGORIES.filter(c=>!c.activeMonths&&!s.disabledCategoryIds?.includes(c.id)).length>=12,'At least 12 year-round categories must be enabled. Ask the developer to update category availability.');assert(new Set(ELIGIBLE_CATEGORY_FINALS.filter(q=>q.categoryId&&!CATEGORY_LOOKUP.get(q.categoryId)?.activeMonths&&!s.disabledCategoryIds?.includes(q.categoryId)).map(q=>q.categoryId)).size>=9,'At least 9 year-round Final Word eligible categories must be enabled. Ask the developer to update category availability.');for(const p of s.players)if(!isAdultAgeBand(p.ageBand))delete p.ageBand;goDraft(s,now);break;
  }
  case 'draft-category':{
    assert(s.phase==='draft','The category draft is closed.');const id=action.categoryId;

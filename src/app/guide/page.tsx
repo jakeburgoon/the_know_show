@@ -5,7 +5,7 @@ export default function Guide(){return <main className="guide ks-simple-guide">
  <p className="ks-guide-eyebrow">YOUR GAME NIGHT, YOUR SHOW</p>
  <h1>How to play</h1>
  <p className="ks-guide-intro">The Know Show is a trivia game for 2–8 players or teams. Pick categories, answer questions, and earn points over two rounds. Then make your final wager—<strong>the highest score wins!</strong></p>
- <p className="ks-guide-library">Explore <strong>over 70 categories</strong> and <strong>over 1,000 questions</strong>, including seasonal and image-based trivia. The library contains 996 regular questions and 76 Final Word questions; some are reserved for future use.</p>
+ <p className="ks-guide-library">Explore <strong>over 70 categories</strong> and <strong>over 1,000 questions</strong>, including seasonal and image-based trivia. The library contains 999 regular questions and 77 Final Word questions; some are reserved for future use.</p>
  <section><h2>Get the show started</h2><p>Tap <strong>Host a Show</strong> and make <strong>three quick choices</strong>: individuals or teams, just phones or TV + phones, and how players will answer. Share the Green Room QR code so players can join with a name—no account needed. The host can play too. With TV + phones, open the dedicated TV display on a laptop connected or cast to your TV; players still answer on their phones.</p></section>
  <section><h2>Choose your answer format</h2><ul>
   <li><strong>Everyone chooses:</strong> Four answer options. Recommended for your first show.</li>

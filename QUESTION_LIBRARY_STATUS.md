@@ -1,3 +1,7 @@
+# v1.13.13 — Photographic landmarks and app icon
+
+Picture This: Famous Landmarks replaces the illustration pilot (15 regular photographs, two Final Word photos). New full-bleed home-screen icon. 76 categories / 999 regular / 77 category finals. See V1313_LANDMARKS_SETUP.md. Enable the renamed category from Developer > Category Availability when ready. No SQL changes.
+
 # v1.9.2 — Two lyric categories
 
 - Finish That Lyric! (year-round): 12 regular + 1 Final Word. Christmas Sing-Along (November–December): 18 regular + 1 Final Word.

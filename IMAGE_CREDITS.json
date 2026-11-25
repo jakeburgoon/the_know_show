@@ -117,107 +117,156 @@
     "reference": "https://flagpedia.net/south-korea"
   },
   {
-    "image": "/trivia-images/5f9a1d3c7e4b2680.svg",
-    "subject": "Big Ben",
-    "source": "https://en.wikipedia.org/wiki/Big_Ben",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/b5e70a1d4c8f2639.svg",
-    "subject": "Christ the Redeemer",
-    "source": "https://en.wikipedia.org/wiki/Christ_the_Redeemer_(statue)",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/39d2f7a1c8e45b60.svg",
-    "subject": "Colosseum",
-    "source": "https://en.wikipedia.org/wiki/Colosseum",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/2d7ac4e91f6058b3.svg",
-    "subject": "Eiffel Tower",
-    "source": "https://en.wikipedia.org/wiki/Eiffel_Tower",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/68b1d4e9a2c7053f.svg",
-    "subject": "Machu Picchu",
-    "source": "https://en.wikipedia.org/wiki/Machu_Picchu",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/6c0e8d1f2a7b4593.svg",
-    "subject": "Sydney Opera House",
-    "source": "https://en.wikipedia.org/wiki/Sydney_Opera_House",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/a37e5d9c1b6042f8.svg",
+    "image": "/trivia-images/a22fe5e8470ff063.jpg",
     "subject": "Leaning Tower of Pisa",
-    "source": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
+    "source": "https://www.pexels.com/photo/35909649/",
+    "creator": "babar-rehman",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-babar-rehman-2147844641-35909649.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/35909649/"
   },
   {
-    "image": "/trivia-images/c8e15a703b4d92f1.svg",
-    "subject": "Great Pyramid of Giza",
-    "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/f4a81c6e2d9b3057.svg",
-    "subject": "Mount Rushmore",
-    "source": "https://en.wikipedia.org/wiki/Mount_Rushmore",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/1e9c4d7a5b8032f6.svg",
-    "subject": "Sagrada Familia",
-    "source": "https://en.wikipedia.org/wiki/Sagrada_Família",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/84f2c0d71a9b5e46.svg",
-    "subject": "Statue of Liberty",
-    "source": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
-  },
-  {
-    "image": "/trivia-images/af3d8c1e704b5269.svg",
+    "image": "/trivia-images/7aaf2d775a382e06.jpg",
     "subject": "Stonehenge",
-    "source": "https://en.wikipedia.org/wiki/Stonehenge",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
+    "source": "https://www.pexels.com/photo/32419135/",
+    "creator": "bob-jenkin",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-bob-jenkin-2007649943-32419135.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/32419135/"
   },
   {
-    "image": "/trivia-images/d1b7e4a96c2f5038.svg",
+    "image": "/trivia-images/1d5fa547865e5e19.jpg",
+    "subject": "Big Ben",
+    "source": "https://www.pexels.com/photo/35962134/",
+    "creator": "bob-jenkin",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-bob-jenkin-2007649943-35962134.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/35962134/"
+  },
+  {
+    "image": "/trivia-images/c900f574ef7d5250.jpg",
+    "subject": "Empire State Building",
+    "source": "https://www.pexels.com/photo/19516341/",
+    "creator": "franklyn-gutierrez",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-franklyn-gutierrez-842974377-19516341.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/19516341/"
+  },
+  {
+    "image": "/trivia-images/8d6e7ba1540e00f6.jpg",
+    "subject": "Colosseum",
+    "source": "https://www.pexels.com/photo/36440973/",
+    "creator": "irving-rodriguez",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-irving-rodriguez-2159999911-36440973.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/36440973/"
+  },
+  {
+    "image": "/trivia-images/ed1561ed2a73e551.jpg",
     "subject": "Taj Mahal",
-    "source": "https://en.wikipedia.org/wiki/Taj_Mahal",
-    "creator": "The Know Show (original vector illustration)",
-    "rights": "Original illustrative SVG created for in-app trivia use",
-    "notes": "Not a downloaded third-party image; simplified, recognizable depiction for gameplay."
+    "source": "https://www.pexels.com/photo/16614143/",
+    "creator": "kabita-darlami",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-kabita-darlami-2613403-16614143.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/16614143/"
+  },
+  {
+    "image": "/trivia-images/10779f7aeeb40e63.jpg",
+    "subject": "Parthenon",
+    "source": "https://www.pexels.com/photo/5961718/",
+    "creator": "kevin-lee",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-kevin-lee-3825870-5961718.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/5961718/"
+  },
+  {
+    "image": "/trivia-images/3b66a7f420674d29.jpg",
+    "subject": "Saint Basil's Cathedral",
+    "source": "https://www.pexels.com/photo/34407017/",
+    "creator": "konevi",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-konevi-34407017.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/34407017/"
+  },
+  {
+    "image": "/trivia-images/2e5f08335649e6ff.jpg",
+    "subject": "Brooklyn Bridge",
+    "source": "https://www.pexels.com/photo/15859322/",
+    "creator": "kyle-miller",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-kyle-miller-169884138-15859322.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/15859322/"
+  },
+  {
+    "image": "/trivia-images/a99f73e20b084f3a.jpg",
+    "subject": "Great Wall of China",
+    "source": "https://www.pexels.com/photo/37099875/",
+    "creator": "michael-wright",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-michael-wright-2160641032-37099875.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/37099875/"
+  },
+  {
+    "image": "/trivia-images/6975edb7301e7f7f.jpg",
+    "subject": "Mount Rushmore",
+    "source": "https://www.pexels.com/photo/7173118/",
+    "creator": "mnannapaneni",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-mnannapaneni-7173118.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/7173118/"
+  },
+  {
+    "image": "/trivia-images/12e3fdcb7e8f4f2e.jpg",
+    "subject": "Brandenburg Gate",
+    "source": "https://www.pexels.com/photo/37923937/",
+    "creator": "nino-keller",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-nino-keller-235371028-37923937.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/37923937/"
+  },
+  {
+    "image": "/trivia-images/3fcb471dad227e73.jpg",
+    "subject": "Pyramids of Giza",
+    "source": "https://www.pexels.com/photo/37662644/",
+    "creator": "omar",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-omar-167169385-37662644.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/37662644/"
+  },
+  {
+    "image": "/trivia-images/430e813f5515c00d.jpg",
+    "subject": "Eiffel Tower",
+    "source": "https://www.pexels.com/photo/41164224/",
+    "creator": "ricardo-contreras-plaza",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-ricardo-contreras-plaza-2152804848-41164224.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/41164224/"
+  },
+  {
+    "image": "/trivia-images/e6685631872fac30.jpg",
+    "subject": "Arc de Triomphe",
+    "source": "https://www.pexels.com/photo/14858296/",
+    "creator": "vidit-goel",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-vidit-goel-2136806-14858296.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/14858296/"
+  },
+  {
+    "image": "/trivia-images/f277cb8bc9f3ae6d.jpg",
+    "subject": "Golden Gate Bridge",
+    "source": "https://www.pexels.com/photo/4449624/",
+    "creator": "vlada-karpovich",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-vlada-karpovich-4449624.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/4449624/"
+  },
+  {
+    "image": "/trivia-images/f85e6c3565c47517.jpg",
+    "subject": "Statue of Liberty",
+    "source": "https://www.pexels.com/photo/15868902/",
+    "creator": "yunus-erdogdu",
+    "rights": "Pexels License (https://www.pexels.com/license/); separate depicted-content rights may apply",
+    "notes": "User-supplied original: pexels-yunus-erdogdu-479655827-15868902.jpg; contributor handle inferred from filename; no crop; source page not individually verified except Saint Basil’s Cathedral.",
+    "reference": "https://www.pexels.com/photo/15868902/"
   }
 ]

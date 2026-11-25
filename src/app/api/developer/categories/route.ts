@@ -1,6 +1,6 @@
 import {NextResponse,type NextRequest} from 'next/server';
 import {db} from '@/lib/db';
-import {CATEGORIES,CATEGORY_LOOKUP} from '@/lib/questions';
+import {CATEGORIES,CATEGORY_LOOKUP,ELIGIBLE_CATEGORY_FINALS} from '@/lib/questions';
 import {readDisabledCategories,categoryAvailability} from '@/lib/category-availability';
 import {SESSION_COOKIE,validDeveloperSession} from '@/lib/feedback-server';
 import {jsonError,noStore} from '@/lib/http';
@@ -20,6 +20,7 @@ export async function PATCH(request:NextRequest){
   const disabled=new Set(await readDisabledCategories());
   if(body.enabled)disabled.delete(body.id);else disabled.add(body.id);
   if(CATEGORIES.filter(c=>!c.activeMonths&&!disabled.has(c.id)).length<12)return jsonError('Keep at least 12 year-round categories enabled so both boards and Final Word remain playable.',409);
+  if(new Set(ELIGIBLE_CATEGORY_FINALS.filter(q=>q.categoryId&&!CATEGORY_LOOKUP.get(q.categoryId)?.activeMonths&&!disabled.has(q.categoryId)).map(q=>q.categoryId)).size<9)return jsonError('Keep at least 9 year-round Final Word eligible categories enabled.',409);
   const {error}=await db().from('know_show_category_availability').upsert({category_id:body.id,enabled:body.enabled,updated_at:new Date().toISOString()},{onConflict:'category_id'});
   if(error)throw error;
   return NextResponse.json({categories:categoryAvailability(await readDisabledCategories())},{headers:noStore});

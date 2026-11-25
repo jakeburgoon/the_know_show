@@ -1533,29 +1533,64 @@
     "finalEligible": true
   },
   {
-    "id": "category-final-famous-landmarks",
+    "id": "category-final-landmarks-st-basil",
     "categoryId": "famous-landmarks",
-    "category": "Famous Landmarks",
-    "difficulty": "hard",
-    "prompt": "Name the landmark shown in this image.",
-    "answer": "Machu Picchu",
-    "aliases": [],
-    "hint": "This mountain citadel lies above the Urubamba River valley in Peru.",
+    "category": "Picture This: Famous Landmarks",
+    "difficulty": "medium-hard",
+    "prompt": "Identify the cathedral shown in this photograph.",
+    "answer": "Saint Basil's Cathedral",
+    "hint": "Ivan the Terrible commissioned this church, now a landmark on Moscow’s Red Square.",
     "hints": [
-      "This mountain citadel lies above the Urubamba River valley in Peru.",
-      "Its Quechua name is commonly interpreted as referring to an old mountain or peak."
+      "Ivan the Terrible commissioned this church, now a landmark on Moscow’s Red Square.",
+      "Its popular name honors a saint associated with the herb whose name also appears in pesto recipes."
     ],
     "tier": "adult",
+    "aliases": [
+      "St Basil’s Cathedral",
+      "St. Basil’s Cathedral",
+      "Saint Basil Cathedral",
+      "St Basil Cathedral",
+      "Cathedral of Saint Basil",
+      "Cathedral of the Intercession",
+      "Pokrovsky Cathedral"
+    ],
     "distractors": [],
+    "topicPreview": "Historic religious architecture in Eastern Europe",
+    "finalEligible": true,
     "image": {
-      "src": "/trivia-images/68b1d4e9a2c7053f.svg",
-      "alt": "Terraced stone ruins perched on a mountain ridge.",
-      "width": 1200,
-      "height": 900
+      "src": "/trivia-images/3b66a7f420674d29.jpg",
+      "width": 1048,
+      "height": 1600,
+      "alt": "A church with several colorful onion-shaped domes."
     },
-    "sourceUrl": "https://en.wikipedia.org/wiki/Machu_Picchu",
-    "sourceStatus": "Editorial pilot: original SVG illustration",
-    "topicPreview": "Inca architecture in the Andes",
-    "finalEligible": true
+    "sourceUrl": "https://whc.unesco.org/en/list/0545/"
+  },
+  {
+    "id": "category-final-landmarks-brandenburg",
+    "categoryId": "famous-landmarks",
+    "category": "Picture This: Famous Landmarks",
+    "difficulty": "medium-hard",
+    "prompt": "Identify the historic monument shown in this photograph.",
+    "answer": "Brandenburg Gate",
+    "hint": "This neoclassical monument became a symbol of German reunification after the fall of the Berlin Wall.",
+    "hints": [
+      "This neoclassical monument became a symbol of German reunification after the fall of the Berlin Wall.",
+      "A four-horse chariot crowns it; the monument is named for a region bordering the city."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Brandenburger Tor",
+      "Brandenburg Tor"
+    ],
+    "distractors": [],
+    "topicPreview": "Historic European monuments",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/12e3fdcb7e8f4f2e.jpg",
+      "width": 1600,
+      "height": 1067,
+      "alt": "A classical stone gateway with a chariot sculpture on top."
+    },
+    "sourceUrl": "https://www.visitberlin.de/en/brandenburg-gate"
   }
 ]

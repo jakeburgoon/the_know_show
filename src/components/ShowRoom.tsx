@@ -464,7 +464,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
    if(!hostToken||!view)return;
    try{
      for(const [key,ids,limit] of [
-       ['knowshow:recentQuestionIds',view.playedQuestionIds,1072],
+       ['knowshow:recentQuestionIds',view.playedQuestionIds,1076],
        ['knowshow:recentCategoryIds',view.playedCategoryIds,76],
        ['knowshow:recentCategoryOffers',view.offeredCategoryIds,76],
      ] as const){
@@ -659,7 +659,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final feedback requestPause={requestFeedbackPause}/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'&&!view.final?.reviewedIds?.includes(me!.id)?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute',questionId:view.final?.questionId})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['lobby','results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.12</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.13</span></footer>
    </>}
  </main>;
 }

@@ -3,8 +3,8 @@ const g=require('../.engine-build/game.js'),b=require('../.engine-build/question
 const archived=['math','counting','three','rhyme','misleading','before-after','finish-that-lyric','christmas-sing-along'];
 const now=Date.parse('2026-11-25T16:00:00Z'),host={kind:'host'};
 function ready(){let s=g.makeGame();s=g.joinGame(s,'One').state;s=g.joinGame(s,'Two').state;return s;}
-test('all 76 category finals have topic previews and ordered distinct clues; eight archived categories retain their regular questions',()=>{
- assert.equal(b.CATEGORY_FINALS.length,76);assert.equal(b.ELIGIBLE_CATEGORY_FINALS.length,68);
+test('all 77 category finals have topic previews and ordered distinct clues; eight archived categories retain their regular questions',()=>{
+ assert.equal(b.CATEGORY_FINALS.length,77);assert.equal(b.ELIGIBLE_CATEGORY_FINALS.length,69);
  assert.deepEqual(b.CATEGORY_FINALS.filter(q=>q.finalEligible===false).map(q=>q.categoryId).sort(),archived.sort());
  for(const q of b.CATEGORY_FINALS){assert.ok(q.topicPreview.length>=15,q.id);assert.equal(q.hint,q.hints[0]);assert.equal(q.hints.length,2);assert.notEqual(q.hints[0],q.hints[1]);for(const clue of [q.topicPreview,...q.hints])assert.ok(!clue.toLowerCase().includes(q.answer.toLowerCase()),q.id);assert.equal(typeof q.finalEligible,'boolean');if(!q.finalEligible)assert.ok(q.finalExclusionReason);}
  for(const id of archived)assert.ok(b.CATEGORY_LOOKUP.get(id).questionsByLevel['1'].length>=4);

@@ -16,10 +16,10 @@ function finishRound(s,a,start=20000){for(let i=0;i<12;i++){const key=keys(s).fi
    assert.equal(s.phase,'results');s=g.tick(s,s.resolution.endsAt+10);
  }return s;}
 
-test('the Standard bank has 62 year-round categories plus 14 seasonal categories, 996 balanced questions',()=>{
- assert.equal(bank.CATEGORIES.length,76);assert.equal(bank.QUESTION_LOOKUP.size,996);
+test('the Standard bank has 62 year-round categories plus 14 seasonal categories, 999 balanced questions',()=>{
+ assert.equal(bank.CATEGORIES.length,76);assert.equal(bank.QUESTION_LOOKUP.size,999);
  for(const c of bank.CATEGORIES){assert.ok(c.description.length>5);assert.deepEqual(Object.keys(c.questionsByLevel).sort(),['1','2','3']);
-  for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,c.activeMonths?6:4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
+  for(const qs of Object.values(c.questionsByLevel)){assert.equal(qs.length,c.activeMonths?6:c.id==='famous-landmarks'?5:4);for(const q of qs){assert.ok(q.prompt&&q.answer&&q.hint);assert.ok(q.id);assert.ok(q.aliases instanceof Array);}}
  }
 });
 test('default settings use single Standard Trivia, Jazz, and 4x3 point values',()=>{
@@ -284,15 +284,15 @@ test('Final Word saved draft is automatically scored at zero without requiring L
 
 test('every Final Word question has two distinct, private, ordered hints',()=>{
  assert.equal(bank.LEGACY_FINALS.length,18);
- assert.equal(bank.CATEGORY_FINALS.length,bank.CATEGORIES.length);
- assert.equal(bank.FINALS.length,94);
+ assert.equal(bank.CATEGORY_FINALS.length,bank.CATEGORIES.length+1);
+ assert.equal(bank.FINALS.length,95);
  for(const q of bank.FINALS){
    assert.equal(q.hints.length,2,q.id);
    assert.equal(new Set(q.hints.map(h=>h.trim().toLowerCase())).size,2,q.id);
    for(const h of q.hints){assert.ok(h.length>=12,`${q.id} has a very short clue`);assert.ok(!h.toLowerCase().includes(q.answer.toLowerCase()),`${q.id} names the answer in a clue`);}
  }
 });
-test('76 category-linked Final Word questions are unique, medium-hard or hard and never used as ordinary board questions',()=>{
+test('77 category-linked Final Word questions are unique, medium-hard or hard and never used as ordinary board questions',()=>{
  const normalPrompts=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.prompt.toLowerCase().replace(/\W/g,'')));
  const normalAnswers=new Set([...bank.QUESTION_LOOKUP.values()].map(q=>q.answer.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'')));
  const categoryIds=new Set(bank.CATEGORIES.map(c=>c.id));
@@ -300,13 +300,15 @@ test('76 category-linked Final Word questions are unique, medium-hard or hard an
  for(const f of bank.CATEGORY_FINALS){
   assert.ok(categoryIds.has(f.categoryId),f.id);
   assert.ok(['medium-hard','hard'].includes(f.difficulty),f.id);
-  assert.ok(!unique.has(f.categoryId),'Duplicate finale for '+f.categoryId);unique.add(f.categoryId);
+  assert.ok(!unique.has(f.id),'Duplicate finale ID '+f.id);unique.add(f.id);
   assert.ok(!normalPrompts.has(f.prompt.toLowerCase().replace(/\W/g,'')),'Ordinary prompt was reused for '+f.id);
   assert.ok(!normalAnswers.has(f.answer.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'')),'Ordinary answer was reused for '+f.id);
   assert.equal(f.hints.length,2,f.id);
   for(const hint of f.hints){assert.ok(hint.length>=35,f.id);assert.ok(!hint.toLowerCase().includes(f.answer.toLowerCase()),'Hint discloses answer: '+f.id);}
  }
- assert.equal(unique.size,76);
+ assert.equal(unique.size,77);
+ assert.equal(new Set(bank.CATEGORY_FINALS.map(f=>f.categoryId)).size,76);
+ assert.equal(bank.CATEGORY_FINALS.filter(f=>f.categoryId==='famous-landmarks').length,2);
 });
 test('Final Word draw respects seasonal months and avoids recent finals and categories played on the board',()=>{
  const s=g.makeGame();
@@ -789,7 +791,7 @@ test('v1.8.1: when Round 1 uses every in-season category, Round 2 offers eight y
 // v1.9.0: validate the editorial audit against the real scoring engine.
 test('v1.9.0 level swaps preserve balanced pools and match their stored level',()=>{
  for(const c of bank.CATEGORIES)for(const [level,qs] of Object.entries(c.questionsByLevel)){
-  assert.equal(qs.length,c.activeMonths?6:4,c.id);
+  assert.equal(qs.length,c.activeMonths?6:c.id==='famous-landmarks'?5:4,c.id);
   for(const q of qs)assert.equal(q.level,Number(level),q.id);
  }
  for(const [id,level] of [['v170-sci-fi-2-1',3],['v170-sci-fi-3-3',2],['season-christmas-movies-2-5',3],['season-christmas-movies-3-2',2],['v180-christmas-lore-2-2',3],['v180-christmas-lore-3-5',2],['animals-l2-2',1],['animals-l3-1',2],['misleading-l3-1',3],['legacy-misleading-4',2],['v170-wars-2-1',2],['world_history-l4-1',3]]) assert.equal(bank.getQuestion(id).level,level,id);
@@ -806,7 +808,7 @@ test('v1.9.0 all registered answers and aliases score correctly and all publishe
  }
 });
 test('v1.9.0 retains two Final Word hints for all categories and requires the full blended-title response',()=>{
- assert.equal(bank.CATEGORY_FINALS.length,76);for(const f of bank.CATEGORY_FINALS)assert.equal(f.hints.length,2,f.id);
+ assert.equal(bank.CATEGORY_FINALS.length,77);for(const f of bank.CATEGORY_FINALS)assert.equal(f.hints.length,2,f.id);
  const f=bank.CATEGORY_FINALS.find(q=>q.id==='category-final-before-after');assert.equal(g.isCorrectForQuestion('A Clockwork Orange Is the New Black',f),true);assert.equal(g.isCorrectForQuestion('Clockwork Orange',f),false);assert.equal(g.isCorrectForQuestion('Orange',f),false);
 });
 

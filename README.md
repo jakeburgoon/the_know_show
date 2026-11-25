@@ -1,3 +1,7 @@
+# v1.13.13 — Photographic landmarks and app icon
+
+Picture This: Famous Landmarks replaces the illustration pilot (15 regular photographs, two Final Word photos). New full-bleed home-screen icon. 76 categories / 999 regular / 77 category finals. See V1313_LANDMARKS_SETUP.md. Enable the renamed category from Developer > Category Availability when ready. No SQL changes.
+
 # v1.13.12 — Rules refresh
 
 Updated full How to Play guide and shortened mode-aware player quick rules. No gameplay, question-bank, or SQL changes.
