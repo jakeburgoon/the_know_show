@@ -13,3 +13,10 @@ test('Curtain Call suggestions match every common format and do not change setti
  const settings={answerStyle:style,mixedAccess:mix},copy={...settings};assert.match(nextFormatTip(settings).text,expected);assert.deepEqual(settings,copy);
  }
 });
+
+test('Green Room summary reflects all common formats and both mixtures, without altering settings',()=>{
+ const {lobbyFormatSummary}=require('../.engine-build/answer-format-tip.js');
+ for(const [style,mix,access,desc] of [['choices','hard','all',/four answer options/],['written','hard','off',/write their own/],['mixed','hard','hard',/Easy and Medium answers.*Hard questions/],['mixed','medium-hard','medium-hard',/Easy answers.*Medium and Hard/],['individual','hard','off',/prefer to answer when joining/]]){
+ const settings={answerStyle:style,mixedAccess:mix},copy={...settings};const summary=lobbyFormatSummary(settings);assert.equal(summary.defaultAccess,access);assert.equal(summary.individual,style==='individual');assert.match(summary.description,desc);assert.deepEqual(settings,copy);assert.equal(summary.defaultAccess,g.defaultChoiceAccess(settings));
+ }
+});

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {QRCodeSVG} from 'qrcode.react';
 import {Trophy,Play,CheckCircle,Users, RotateCcw, Home, Check, X, Layers2, Music2, ChevronDown, Clapperboard, Lightbulb} from 'lucide-react';
 import HostWizard from './HostWizard';
-import {nextFormatTip} from '@/lib/answer-format-tip';
+import {nextFormatTip,lobbyFormatSummary} from '@/lib/answer-format-tip';
 import QuestionVisual from './QuestionVisual';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
 import {AGE_BANDS,AGE_LABELS,AGE_SUPPORT,isAdultAgeBand,type AgeBand} from '@/lib/age-support';
@@ -166,12 +166,12 @@ function PhoneSoundtrack({music,arrangement}:{music:MusicStyle;arrangement:0|1})
    <small>Host: press Play in the music player to start the selected track. You can hide the panel while it plays.</small>
  </details>;
 }
-/** Each player's support is a Green Room decision, not a global setup option. */
+/** The selected show format is the default; hosts may customize individual seats. */
 const PLAYER_SUPPORT=['off','hard','medium-hard','all'] as const;
 const PLAYER_SUPPORT_LABELS=['Written answers','Choices for Hard questions','Choices for Medium and Hard questions','Choices for all regular questions'] as const;
 const formatLabel=(value:Player['choiceAccess'])=>PLAYER_SUPPORT_LABELS[Math.max(0,PLAYER_SUPPORT.indexOf(value??'off'))];
 function AnswerFormatPicker({value,onChange}:{value:NonNullable<Player['choiceAccess']>;onChange:(value:NonNullable<Player['choiceAccess']>)=>void}){return <div className="ks-format-picker"><label>How would you like to answer questions?<select value={value==='off'?'off':value==='all'?'all':'mixed'} onChange={e=>onChange(e.target.value==='mixed'?'hard':e.target.value as NonNullable<Player['choiceAccess']>)}><option value="off">Write my own answers</option><option value="all">Choose from four options</option><option value="mixed">A mixture of both</option></select></label>{(value==='hard'||value==='medium-hard')&&<label>When would you like answer choices?<select value={value} onChange={e=>onChange(e.target.value as 'hard'|'medium-hard')}><option value="hard">Hard questions only</option><option value="medium-hard">Medium and Hard questions</option></select></label>}<small>Choose the experience you’ll enjoy most. Your host may adjust settings to suit the group. The final question is written for everyone.</small></div>;}
-function PlayerAnswerSupport({player,busy,onSave,individual,onAgeSave}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>;individual:boolean;onAgeSave:(age:AgeBand|null)=>Promise<boolean>}){
+function PlayerAnswerSupport({player,busy,onSave,individual,onAgeSave,settings}:{player:Player;busy:boolean;onSave:(choice:Player['choiceAccess'])=>Promise<boolean>;individual:boolean;onAgeSave:(age:AgeBand|null)=>Promise<boolean>;settings:Settings}){
  const currentIndex=()=>Math.max(0,PLAYER_SUPPORT.indexOf(player.choiceAccess??'off'));
  const [level,setLevel]=useState(currentIndex);
  const [localMinorAge,setLocalMinorAge]=useState<AgeBand|null>(null);
@@ -199,15 +199,20 @@ function PlayerAnswerSupport({player,busy,onSave,individual,onAgeSave}:{player:P
    const age=value==='unspecified'?null:value as AgeBand;
    if(await onAgeSave(age))setLocalMinorAge(age&&!isAdultAgeBand(age)?age:null);
  };
- return <div className="ks-player-support">
-   {individual&&<div className="ks-age-support"><label htmlFor={`age-${player.id}`}>Player age range (optional)</label><select id={`age-${player.id}`} value={player.ageBand??localMinorAge??'unspecified'} disabled={busy} onChange={e=>void chooseAge(e.target.value)}><option value="unspecified">Not specified</option>{AGE_BANDS.map(age=><option key={age} value={age}>{AGE_LABELS[age]}</option>)}</select><small>Helps recommend an answer format. Adult age ranges also help improve question difficulty.</small></div>}
-   {player.requestedChoiceAccess!==undefined&&<small>Requested: {formatLabel(player.requestedChoiceAccess)}</small>}{player.pendingChoiceAccess!==undefined&&<small>New request: {formatLabel(player.pendingChoiceAccess)} — adjust the slider to respond.</small>}
+ const summary=lobbyFormatSummary(settings);
+ const controls=<>
    {individual&&(player.ageBand??localMinorAge)&&<div className="ks-age-note">Age-based suggestion: {formatLabel(AGE_SUPPORT[(player.ageBand??localMinorAge)!])}. <button type="button" className="v2small" disabled={busy} onClick={()=>choose(PLAYER_SUPPORT.indexOf(AGE_SUPPORT[(player.ageBand??localMinorAge)!]))}>Use suggestion</button></div>}
    <label htmlFor={`support-${player.id}`}>When should this player see answer choices?</label>
    <p className="ks-support-selected">{PLAYER_SUPPORT_LABELS[level]}</p>
    <input id={`support-${player.id}`} type="range" min={0} max={3} step={1} value={level} disabled={busy} aria-label={`When should ${player.name} see answer choices?`} aria-valuetext={PLAYER_SUPPORT_LABELS[level]} onChange={e=>choose(Number(e.target.value))}/>
    <div className="ks-support-ticks" aria-hidden="true"><span>Never</span><span>Hard only</span><span>Medium + Hard</span><span>All</span></div>
-   {individual&&<small className="ks-age-note">Respect player preferences whenever possible. Adjust the answer format to suit the group.</small>}
+   <small className="ks-age-note">{summary.individual?'Respect player preferences whenever possible. ':''}Adjust the answer format to suit the group. Different answer formats can help level the playing field across ages and abilities, or make the game more relaxing and enjoyable.</small>
+ </>;
+ return <div className="ks-player-support">
+   <div className="ks-player-format-current"><strong>{PLAYER_SUPPORT_LABELS[level]}</strong>{!summary.individual&&PLAYER_SUPPORT[level]!==summary.defaultAccess&&<small>Customized</small>}</div>
+   {individual&&<div className="ks-age-support"><label htmlFor={`age-${player.id}`}>Player age range (optional)</label><select id={`age-${player.id}`} value={player.ageBand??localMinorAge??'unspecified'} disabled={busy} onChange={e=>void chooseAge(e.target.value)}><option value="unspecified">Not specified</option>{AGE_BANDS.map(age=><option key={age} value={age}>{AGE_LABELS[age]}</option>)}</select><small>Adult age ranges help improve question difficulty. Age-based format suggestions are optional.</small></div>}
+   {summary.individual&&player.requestedChoiceAccess!==undefined&&<small>Requested: {formatLabel(player.requestedChoiceAccess)}</small>}{player.pendingChoiceAccess!==undefined&&<small>New request: {formatLabel(player.pendingChoiceAccess)} — {summary.individual?'adjust the slider':'open Customize answer format'} to respond.</small>}
+   {summary.individual?<div className="ks-player-format-controls">{controls}</div>:<details className="ks-player-format-customize"><summary>Customize answer format <ChevronDown size={16} aria-hidden="true"/></summary><div className="ks-player-format-controls">{controls}</div></details>}
  </div>;
 }
 /** Compact shared music control. Only the host phone or TV actually plays audio. */
@@ -467,7 +472,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
  if(view.phase==='closed')return <main className="v2loading"><p>Taking everyone back to the homepage…</p><Link href="/">Return home</Link></main>;
  if(displayOnly)return <TV view={view} code={code} origin={origin} now={timerNow} returnToHost={returnToHost}/>;
  if(isHost&&view.phase==='lobby'&&setupStep<3)return <HostWizard key={setupStep} step={setupStep} settings={view.settings} busy={busy} error={error} onNext={advanceSetup} onBack={()=>{setSetupStep(step=>{const next=Math.max(0,step-1);localStorage.setItem(`knowshow:${code}:setupStep`,String(next));return next;});}}/>;
- if(isHost&&view.phase==='lobby'&&setupStep>=3){const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
+ if(isHost&&view.phase==='lobby'&&setupStep>=3){const formatSummary=lobbyFormatSummary(view.settings);const roomUrl=`${origin}/room/${code}`,privateHostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
 
    return <main className="ks-lobby"><header className="ks-lobby-top"><img src="/know-show-logo.png" alt="The Know Show"/><span>ROOM · {code}</span></header>
      <section className="ks-lobby-hero"><p className="ks-tag">GREEN ROOM</p><p>Scan to join. Players and teams appear below as they connect.</p>
@@ -478,8 +483,8 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
        {shareMessage&&<p role="status">{shareMessage}</p>}
      </section>
      <section className="ks-lobby-players"><div className="ks-lobby-heading"><h2><Users size={22}/> {view.settings.mode==='teams'?'Teams':'Players'} ({view.players.length}/8)</h2><span>LIVE JOIN LIST</span></div>
-      <p className="ks-lobby-support-help">Choose when each player gets four answer choices instead of writing an answer. Different answer formats can help level the playing field across ages and abilities. Answer choices can also make the game more relaxing and enjoyable, whatever your age or experience. <strong>The final question is written for everyone.</strong></p>
-      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} individual={view.settings.mode==='individual'} onAgeSave={ageBand=>act({type:'player-age-band',playerId:p.id,ageBand},hostToken)} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
+      <div className="ks-lobby-support-help"><strong className="ks-lobby-format-title">Answer format: {formatSummary.title}</strong><span>{formatSummary.description} {formatSummary.individual?'Review the requested formats and adjust as needed for a fair and enjoyable show.':'You can make individual adjustments if needed.'} <strong>The final question is written for everyone.</strong></span></div>
+      {view.players.length===0?<p className="ks-empty">Waiting for your first {view.settings.mode==='teams'?'team':'player'} to join…</p>:<div className="ks-player-list">{view.players.map(p=><div className="ks-player-item" key={p.id}><strong className="ks-player-name"><CheckCircle size={18}/>{p.name}</strong><PlayerAnswerSupport player={p} busy={busy} settings={view.settings} individual={view.settings.mode==='individual'} onAgeSave={ageBand=>act({type:'player-age-band',playerId:p.id,ageBand},hostToken)} onSave={choiceAccess=>act({type:'player-bonuses',playerId:p.id,choiceAccess},hostToken)}/></div>)}</div>}
       {!playerToken?<div className="ks-lobby-hostplay"><label className="ks-host-checkbox"><input type="checkbox" checked={hostPlaying} onChange={e=>setHostPlaying(e.target.checked)}/><strong>Will you be participating as a player?</strong></label>
       {hostPlaying&&<form onSubmit={e=>{e.preventDefault();if(hostName.trim())void join(hostName.trim(),true);}}><label>Your name<input value={hostName} maxLength={28} minLength={2} required placeholder="Enter your player name" onChange={e=>setHostName(e.target.value)}/></label>{view.settings.answerStyle==='individual'&&<AnswerFormatPicker value={joinFormat} onChange={setJoinFormat}/>}<button disabled={busy||hostName.trim().length<2}>Join the players</button></form>}</div>:<div className="ks-lobby-hostplay"><CheckCircle size={19}/> You’re playing too! Your player seat is connected to this host device.</div>}
      </section>
@@ -646,7 +651,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final feedback requestPause={requestFeedbackPause}/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'&&!view.final?.reviewedIds?.includes(me!.id)?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute',questionId:view.final?.questionId})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.9</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.10</span></footer>
    </>}
  </main>;
 }

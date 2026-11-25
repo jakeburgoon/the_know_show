@@ -1,3 +1,7 @@
+# v1.13.10 — Simpler Green Room answer formats
+
+The chosen common format is summarized; individual customization is collapsed by default. Individual preferences show expanded controls and requested formats. Optional ages stay visible; age suggestions only appear with the customization controls. No SQL changes.
+
 # v1.13.9 — Production typecheck hotfix
 
 Preserve required active question identifiers in the game view so hint actions pass strict TypeScript checking. Replace CSS align-items:end with flex-end. No SQL changes. All v1.13.8 features retained.

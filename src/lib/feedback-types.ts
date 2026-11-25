@@ -10,4 +10,4 @@ import type {QuestionImage} from './questions';
 export type QuestionContext = {id:string;category:string;difficulty:string;prompt:string;answer:string;submittedAnswer:string|null;correct:boolean|null;answerFormat:string|null;hintUsed:boolean|null;hintText:string[];choices:string[];points:number|null;image?:QuestionImage};
 export type FeedbackOffer = {kind:'question'|'show';ticket:string;question?:QuestionContext;key:string};
 export type FeedbackRow = {id:string;created_at:string;app_version:string;show_id:string;kind:'question'|'show';question_id:string|null;question:QuestionContext|null;reasons:string[];comment:string;rating:number|null;experience:string;category_ideas:string;status:FeedbackStatus};
-export const FEEDBACK_VERSION='1.13.9';
+export const FEEDBACK_VERSION='1.13.10';

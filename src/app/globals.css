@@ -1010,3 +1010,15 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-next-format-tip h3{font-size:16px;margin:0 0 6px;color:#173c56}
 .ks-aftershow .ks-next-format-tip p{margin:0 auto 6px;font-size:13px;line-height:1.5}
 .ks-next-format-tip small{font-size:12px;color:#536675;line-height:1.4}
+
+/* v1.13.10 — Green Room: the chosen format is the default, not another required decision. */
+.ks-lobby-format-title{display:block;margin-bottom:4px;font-size:14px}
+.ks-player-format-current{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;color:#173953;font-size:13px;line-height:1.4;margin-bottom:5px}
+.ks-player-format-current small{font-size:11px;color:#806226;background:#f3e8ce;border-radius:4px;padding:2px 6px}
+.ks-player-format-customize{min-width:0}
+.ks-player-format-customize>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#173953;font-size:13px;font-weight:700;cursor:pointer;list-style:none;padding:7px 0;min-height:32px}
+.ks-player-format-customize>summary::-webkit-details-marker{display:none}
+.ks-player-format-customize>summary:focus-visible{outline:2px solid #c99c41;outline-offset:3px;border-radius:4px}
+.ks-player-format-customize[open]>summary svg{transform:rotate(180deg)}
+.ks-player-format-controls{display:grid;gap:5px;min-width:0;padding-top:5px}
+.ks-player-format-customize[open] .ks-player-format-controls{border-top:1px solid #e2dfd7;padding-top:10px}
