@@ -1,3 +1,11 @@
+# v1.13.12 — Rules refresh
+
+Updated full How to Play guide and shortened mode-aware player quick rules. No gameplay, question-bank, or SQL changes.
+
+# v1.13.11 — Player settings and direct host review
+
+Simplified joined-player Green Room, gear menu for answer-format requests and quick rules, temporary player reminder, and automatic focus/scroll to the first pending host decision. No SQL changes.
+
 # v1.13.10 — Simpler Green Room answer formats
 
 The chosen common format is summarized; individual customization is collapsed by default. Individual preferences show expanded controls and requested formats. Optional ages stay visible; age suggestions only appear with the customization controls. No SQL changes.

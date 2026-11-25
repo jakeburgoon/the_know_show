@@ -71,6 +71,6 @@ export default function Home() {
     </section>
     <div className="v11featureline ks-entry-features" aria-label="How the game works"><span><Users size={17}/> 2–8 players</span><span><PenLine size={17}/> Answer your way</span><span><UsersRound size={17}/> Individuals or teams</span></div>
     <section className="v11showstrip" aria-label="Game highlights"><div><Sparkles size={20}/><strong>Choose from over 70 categories</strong><span>Over 1,000 regular and seasonal questions.</span></div><div><Check size={20}/><strong>Take on 25 questions</strong><span>Two rounds of 12, plus one final question.</span></div><div><Copy size={20}/><strong>Make it yours</strong><span>Use hints and try to double your points.</span></div></section>
-    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.13.10</span></footer>
+    <footer className="v11landingfooter"><span>ROUND 1 · ROUND 2 · THE FINAL WORD</span><span>The Know Show v1.13.12</span></footer>
   </main>;
 }

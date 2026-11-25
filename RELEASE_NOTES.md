@@ -1,3 +1,7 @@
+# v1.13.12 — Rules refresh
+
+Updated full How to Play guide and shortened mode-aware player quick rules. No gameplay, question-bank, or SQL changes.
+
 # v1.13.9 — Production typecheck hotfix
 
 Preserve required active question identifiers in the game view so hint actions pass strict TypeScript checking. Replace CSS align-items:end with flex-end. No SQL changes. All v1.13.8 features retained.

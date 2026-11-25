@@ -1022,3 +1022,27 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-player-format-customize[open]>summary svg{transform:rotate(180deg)}
 .ks-player-format-controls{display:grid;gap:5px;min-width:0;padding-top:5px}
 .ks-player-format-customize[open] .ks-player-format-controls{border-top:1px solid #e2dfd7;padding-top:10px}
+
+/* v1.13.11 — compact player controls and direct host review navigation */
+.ks-player-settings{position:relative;z-index:20;flex:none}
+.ks-player-settings>summary{list-style:none;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border:1px solid #c3a568;border-radius:99px;padding:.42rem;color:#15344f;background:#f5ebd4}
+.ks-player-settings>summary::-webkit-details-marker{display:none}
+.ks-player-settings[open]>summary{background:#eacb86}
+.ks-settings-dot{position:absolute;right:0;top:0;width:9px;height:9px;background:#a87222;border:1px solid white;border-radius:50%}
+.v2phonehead:has(.ks-player-settings[open]){position:relative;z-index:90}
+.ks-player-settings[open]{z-index:96}
+.ks-player-settings-panel{position:absolute;top:calc(100% + .48rem);right:0;width:min(21rem,calc(100vw - 2.5rem));max-height:65vh;overflow-y:auto;box-sizing:border-box;padding:1rem;border:1px solid #d5bc7d;border-radius:14px;background:#fffaf0;color:#18344a;box-shadow:0 12px 35px rgba(7,30,48,.25);display:grid;gap:.55rem;font-size:.9rem;font-weight:400}
+.ks-player-settings-panel h3,.ks-player-settings-panel p{margin:0}
+.ks-player-settings-panel small{color:#536171;font-size:.78rem;line-height:1.45}
+.ks-player-settings-panel label{display:grid;gap:.3rem;font-weight:600}
+.ks-player-settings-panel select{width:100%;padding:.55rem;border:1px solid #adc0cc;border-radius:8px;background:white;color:#15344f;font-size:.88rem}
+.ks-player-settings-panel button{width:100%;font-size:.85rem}
+.ks-player-quick-rules{border-top:1px solid #e3d9c7;padding-top:.65rem}
+.ks-player-quick-rules>summary{display:flex;align-items:center;gap:.5rem;cursor:pointer;font-weight:700;list-style:none}
+.ks-player-quick-rules p{margin-top:.5rem;line-height:1.5;font-size:.83rem}
+.ks-joined-waiting>svg{color:#187c6b}.ks-joined-format{border-top:1px solid #e3d9c7;padding-top:.8rem;display:grid;gap:.25rem}.ks-joined-format small{color:#536b7e}.ks-joined-list>div{display:flex;align-items:center;gap:.6rem;padding:.45rem 0}.ks-joined-list>div svg{color:#b49243}
+@media(max-width:420px){.ks-room-head-actions{gap:.3rem}.ks-player-settings>summary{padding:.36rem}.v2phonehead .v1brandlogo{max-width:92px;object-fit:contain}}
+
+/* v1.13.12 — compact, scannable in-game rules */
+.ks-player-quick-rules ul{margin:.5rem 0 0;padding-left:1.1rem;font-size:.83rem;line-height:1.4;display:grid;gap:.35rem}
+.ks-player-quick-rules li{padding:0;color:#18344a}

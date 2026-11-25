@@ -1,3 +1,7 @@
+THE KNOW SHOW — v1.13.12 · RULES REFRESH
+
+Updated full How to Play guide and shortened mode-aware player quick rules. No gameplay, question-bank, or SQL changes.
+
 THE KNOW SHOW — v1.13.9 · PRODUCTION TYPECHECK HOTFIX
 
 No new SQL if v1.13.5 SQL already applied. This release retains v1.13.8 features and fixes the active-question identifier type.

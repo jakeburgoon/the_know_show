@@ -28,6 +28,6 @@ test('QR join, manual player join code and host-history persistence are preserve
  assert.match(page,/id="room-code"/);
  assert.match(page,/Join with code/);
  assert.match(page,/knowshow:hostHistoryId/);
- assert.match(page,/The Know Show v1\.13\.10/);
- assert.equal(JSON.parse(fs.readFileSync('package.json','utf8')).version,'1.13.10');
+ assert.match(page,/The Know Show v1\.13\.12/);
+ assert.equal(JSON.parse(fs.readFileSync('package.json','utf8')).version,'1.13.12');
 });
