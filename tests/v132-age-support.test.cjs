@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const g=require('../.engine-build/game.js'),e=require('../.engine-build/exposure.js'),b=require('../.engine-build/questions.js'),a=require('../.engine-build/age-support.js');
 const host={kind:'host'},now=Date.UTC(2026,10,24,12);
-function lobby(){let s=g.makeGame();for(const name of ['Player A','Player B','Player C'])s=g.joinGame(s,name,undefined,now).state;return s;}
+function lobby(){let s=g.makeGame();s.settings.answerStyle='written';for(const name of ['Player A','Player B','Player C'])s=g.joinGame(s,name,undefined,now).state;return s;}
 function age(s,idx,ageBand){return g.mutate(s,{type:'player-age-band',playerId:s.players[idx].id,ageBand},host,now);}
 test('all seven bands recommend correct support; minor age is not saved; unspecified leaves support unchanged; override wins',()=>{
  let s=lobby();for(const band of a.AGE_BANDS){s=age(s,0,band);assert.equal(s.players[0].choiceAccess,a.AGE_SUPPORT[band]);assert.equal(s.players[0].ageBand,a.isAdultAgeBand(band)?band:undefined);assert.equal(s.players[1].choiceAccess,'off');}

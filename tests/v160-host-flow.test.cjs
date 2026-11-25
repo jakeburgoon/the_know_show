@@ -7,9 +7,9 @@ const game=fs.readFileSync('src/lib/game.ts','utf8');
 const home=fs.readFileSync('src/app/page.tsx','utf8');
 const guide=fs.readFileSync('src/app/guide/page.tsx','utf8');
 const css=fs.readFileSync('src/app/globals.css','utf8');
-test('individual/phones are selected by default, without needing to touch the options',()=>{
+test('individual/phones/choices are selected by default, without needing to touch the options',()=>{
  assert.match(game,/mode:'individual'/);
- assert.match(game,/displayMode:'phones',answerStyle:'written'/);
+ assert.match(game,/displayMode:'phones',answerStyle:'choices'/);
  assert.match(wizard,/settings\.mode:step===1\?\(settings\.displayMode\?\?'phones'\)/);
  assert.match(wizard,/onClick=\{\(\)=>setSelected\(opt\.value\)\}/);
  assert.match(wizard,/onClick=\{\(\)=>void next\(\)\}/);

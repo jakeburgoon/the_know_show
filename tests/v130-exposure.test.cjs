@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const g=require('../.engine-build/game.js'),b=require('../.engine-build/questions.js'),e=require('../.engine-build/exposure.js');
 const now=Date.parse('2026-11-24T16:00:00Z'),host={kind:'host'};
-function ready(){let s=g.makeGame([],[],[],'00000000-0000-4000-8000-000000000001');s=g.joinGame(s,'One').state;s=g.joinGame(s,'Two').state;return s;}
+function ready(){let s=g.makeGame([],[],[],'00000000-0000-4000-8000-000000000001');s.settings.answerStyle='written';s=g.joinGame(s,'One').state;s=g.joinGame(s,'Two').state;return s;}
 function board(s,category,at=now){s=g.mutate(s,{type:'start-draft'},host,at);if(!s.draftPool.includes(category))s.draftPool[7]=category;s=g.mutate(s,{type:'draft-category',categoryId:category},host,at+1);for(let i=1;i<4;i++)s=g.mutate(s,{type:'draft-category',categoryId:s.draftPool.find(id=>!s.selected[0].includes(id))},host,at+i+1);return s;}
 const season=b.availableCategories(new Date(now)).find(c=>c.activeMonths);
 const regular=b.CATEGORIES.find(c=>!c.activeMonths);

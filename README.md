@@ -1,3 +1,7 @@
+# v1.13.8 — First-show recommendation and next-show tips
+
+Everyone chooses is the new-room default and appears first with a first-show recommendation. Curtain Call offers a short suggestion for a different answer format; rematches retain settings unless changed. See V138_FIRST_SHOW_SETUP.md. No new SQL beyond v1.13.5.
+
 # v1.13.7 — Hint purchase controls
 
 Gold lightbulb buttons in regular play; sequential, refundable Final Word hint tiles before wager lock; fixed wager with affordability clamp and live score projections. See V137_HINT_TILES_SETUP.md. No new SQL.

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {QRCodeSVG} from 'qrcode.react';
 import {Trophy,Play,CheckCircle,Users, RotateCcw, Home, Check, X, Layers2, Music2, ChevronDown, Clapperboard, Lightbulb} from 'lucide-react';
 import HostWizard from './HostWizard';
+import {nextFormatTip} from '@/lib/answer-format-tip';
 import QuestionVisual from './QuestionVisual';
 import {SUNO_SOUNDTRACKS,sunoEmbedUrl} from '@/lib/suno-catalog';
 import {AGE_BANDS,AGE_LABELS,AGE_SUPPORT,isAdultAgeBand,type AgeBand} from '@/lib/age-support';
@@ -487,11 +488,11 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      {error&&<p role="alert" className="v2error">{error}</p>}
    </main>;
  }
- if(view.phase==='finished')return <main className="v13phonefinish">
+ if(view.phase==='finished'){const formatTip=nextFormatTip(view.settings);return <main className="v13phonefinish">
    <header className="v13finishhead"><Link href="/"><img src="/know-show-logo.png" alt="The Know Show"/></Link><span>THE CURTAIN CALL</span></header>
    <CurtainCall players={view.players} mode="phone"/>
-   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room with the same settings and resets the scores. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(2);try{localStorage.setItem(`knowshow:${code}:setupStep`,'2');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}{error&&<p role="alert">{error}</p>}{view.feedback?.kind==='show'&&<FeedbackLink offer={view.feedback}/>}</section>
- </main>;
+   <section className="ks-aftershow" aria-label="Play again options"><h2>Ready for another round?</h2>{hostToken?<><p>Rematch keeps everyone in this room, resets the scores, and lets you review the answer format before the next show. A new show brings everyone back to the homepage.</p><div className="ks-aftershow-actions"><button type="button" className="ks-rematch" disabled={busy} onClick={async()=>{if(await act({type:'new-game'},hostToken)){setSetupStep(2);try{localStorage.setItem(`knowshow:${code}:setupStep`,'2');}catch{}switchTab('host');}}}><RotateCcw size={20}/> Rematch · Same players</button><button type="button" className="ks-startfresh" disabled={busy} onClick={async()=>{if(await act({type:'close-show'},hostToken))router.replace('/');}}><Home size={19}/> Start a new show</button></div></>:<><p>The host can start a rematch with the same players. Your phone will follow automatically.</p><Link href="/" className="ks-startfresh"><Home size={19}/> Back to homepage</Link></>}<aside className="ks-next-format-tip"><h3>{formatTip.title}</h3><p>{formatTip.text}</p><small>{hostToken?'Choose your answer format when setting up the rematch or a new show.':'Ask your host about trying a different answer format next show.'}</small></aside>{error&&<p role="alert">{error}</p>}{view.feedback?.kind==='show'&&<FeedbackLink offer={view.feedback}/>}</section>
+ </main>;}
  const stage=view.phase==='lobby'?'Green Room':view.phase==='draft'?'Category Draft':view.phase.startsWith('final')?'The Final Word':view.roundNames[view.round];
  const phonesOnly=(view.settings.displayMode??'tv')==='phones';
  const roomUrl=`${origin}/room/${code}`,hostUrl=`${roomUrl}?hostToken=${encodeURIComponent(hostToken)}`;
@@ -645,7 +646,7 @@ function ShowRoomContent({displayOnly=false}:{displayOnly?:boolean}){
      {view.phase==='final-results'&&<section className="ks-results-panel"><AnswerReveal view={view} now={timerNow} final feedback requestPause={requestFeedbackPause}/>{(()=>{const r=view.final?.results?.find(x=>x.id===me?.id);return r&&!r.correct&&r.answer.trim()&&r.answer!=='(no answer)'&&!view.final?.reviewedIds?.includes(me!.id)?<div className="ks-review-prompt"><span>Think you got it right?</span><button className="ks-dispute-button" disabled={busy||Boolean(view.final?.disputeIds.includes(me!.id))} onClick={()=>void act({type:'dispute',questionId:view.final?.questionId})}>{view.final?.disputeIds.includes(me!.id)?'Host is reviewing your answer':'Ask the host to review your answer'}</button></div>:null;})()}</section>}
    </>}
    {!['results','final-results','final-wager','final-question'].includes(view.phase)&&<section className={'v2card'+(phonesOnly?' v25detailscores':'')}><h3>{phonesOnly?'Full leaderboard':'Live scores'}</h3><Scoreboard players={view.players} chooserId={view.phase==='board'?view.chooserId:undefined}/></section>}
-   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.7</span></footer>
+   <footer className="v2phonefooter">{hostToken&&!phonesOnly&&<Link className="v2small" href={`/display/${code}`}>Open TV display ↗</Link>}<span>The Know Show · v1.13.8</span></footer>
    </>}
  </main>;
 }

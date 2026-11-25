@@ -4,7 +4,7 @@ const g=require('../.engine-build/game.js');
 const bank=require('../.engine-build/questions.js');
 const host={kind:'host'};
 const keys=s=>s.selected[s.round].flatMap(id=>[0,1,2].map(l=>`${id}:${l}`));
-function setup(count=4,mode='individual',prior=[]){let s=g.makeGame(prior);s=g.mutate(s,{type:'settings',settings:{mode}},host,1000);const a=[];
+function setup(count=4,mode='individual',prior=[]){let s=g.makeGame(prior);s.settings.answerStyle='written';s=g.mutate(s,{type:'settings',settings:{mode}},host,1000);const a=[];
   for(let i=0;i<count;i++){const out=g.joinGame(s,'Player '+(i+1),undefined,2000+i);s=out.state;a.push({kind:'player',id:out.player.id});}return {s,a};}
 function draft(s,a,now=10000){s=g.mutate(s,{type:'start-draft'},host,now);assert.equal(s.phase,'draft');assert.ok(s.draftPool.length>=4);
   for(let i=0;i<4;i++)s=g.mutate(s,{type:'draft-category',categoryId:s.draftPool[i]},a[(i+s.round*4)%a.length],now+i+1);

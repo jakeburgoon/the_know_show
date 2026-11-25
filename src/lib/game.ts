@@ -68,7 +68,7 @@ function visibleOptions(a:ActiveQuestion,p:Player,q:NonNullable<ReturnType<typeo
  const keep=(q.distractors??[])[createHash('sha256').update(`fifty-fifty:${q.id}:${p.id}`).digest().readUInt32BE(0)%3];
  return options.filter(x=>x===q.answer||x===keep);
 }
-export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'phones',answerStyle:'written',playerMusic:true};}
+export function defaultSettings():Settings{return {mode:'individual',answerSeconds:20,finalSeconds:45,normalHints:3,music:'jazz',arrangement:0,effects:false,displayMode:'phones',answerStyle:'choices',playerMusic:true};}
 // Most-recent-last histories; reselecting a category moves it to the back of the queue.
 function rememberRecent(history:readonly string[], values:readonly string[], limit:number):string[]{
  const known=new Set(values);return [...history.filter(id=>!known.has(id)),...values].slice(-limit);

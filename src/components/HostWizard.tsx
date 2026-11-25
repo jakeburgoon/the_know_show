@@ -6,19 +6,19 @@ import type {DisplayMode,Mode,Settings} from '@/lib/game';
 const stages=['Who is playing?','How will everyone see the show?','How will players answer questions?'];
 type Props={step:number;settings:Settings;busy:boolean;error?:string;onBack:()=>void;onNext:(update:Partial<Settings>)=>Promise<void>};
 export default function HostWizard({step,settings,busy,error,onBack,onNext}:Props){
- const options: {value:string;title:string;details:string;icon?:React.ReactNode}[] =
+ const options: {value:string;title:string;details:string;recommendation?:string;icon?:React.ReactNode}[] =
    step===0?[
     {value:'individual',title:'Individual players',details:'Everyone answers every question and earns their own points.',icon:<Users/>},
     {value:'teams',title:'Teams',details:'Each team joins under one team name. Teams take turns answering and can steal.',icon:<Users/>}]:
    step===1?[
     {value:'tv',title:'TV + phones',details:'Show the shared game board on a TV using a laptop or compatible TV browser. Players answer on their phones.',icon:<MonitorPlay/>},
     {value:'phones',title:'Just phones',details:'Everyone sees the board, questions, and scores on their own phone. No TV or laptop needed.',icon:<Smartphone/>}]:[
+    {value:'choices',title:'Everyone chooses',details:'Four answer options are given. Players select the answer they think is correct.',recommendation:'Recommended for your first show'},
     {value:'written',title:'Everyone writes',details:'No answer options are given. Players must recall and write their own answers.'},
-    {value:'choices',title:'Everyone chooses',details:'Four answer options are given. Players select the answer they think is correct.'},
     {value:'mixed',title:'Everyone uses the same mixture',details:'For example, players choose from options for Hard questions but recall and write their answers for Easy and Medium questions.'},
     {value:'individual',title:'Individual answer preferences',details:'Let players choose how they answer. Great for relaxed games or groups with different ages and experience levels. Players may have different advantages when earning points.'}];
  // Keep a choice visible for review. Only Next saves it and advances setup.
- const initialChoice=step===0?settings.mode:step===1?(settings.displayMode??'phones'):(settings.answerStyle??'written');
+ const initialChoice=step===0?settings.mode:step===1?(settings.displayMode??'phones'):(settings.answerStyle??'choices');
  const [selected,setSelected]=useState<string>(initialChoice);
  const [mixed,setMixed]=useState<'hard'|'medium-hard'>(settings.mixedAccess??'hard');
  const next=async()=>{
@@ -37,7 +37,7 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
     <div className="ks-wizard-options">
       {options.map(opt=><button key={opt.value} type="button" disabled={busy} className={'ks-wizard-option'+(selected===opt.value?' selected':'')} onClick={()=>setSelected(opt.value)} aria-pressed={selected===opt.value}>
        {opt.icon&&<span className="ks-wizard-icon">{opt.icon}</span>}
-       <span className="ks-wizard-option-text"><strong>{opt.title}</strong><small>{opt.details}</small></span>
+       <span className="ks-wizard-option-text"><strong>{opt.title}</strong>{opt.recommendation&&<span className="ks-format-recommendation">{opt.recommendation}</span>}<small>{opt.details}</small></span>
        <span className="ks-wizard-check">{selected===opt.value?<Check size={20}/>:<ArrowRight size={19}/>}</span>
       </button>)}
     </div>
