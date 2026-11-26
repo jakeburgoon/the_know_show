@@ -11,8 +11,8 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
     {value:'individual',title:'Individual players',details:'Everyone answers every question and earns their own points.',icon:<Users/>},
     {value:'teams',title:'Teams',details:'Each team joins under one team name. Teams take turns answering and can steal.',icon:<Users/>}]:
    step===1?[
-    {value:'tv',title:'TV + phones',details:'Show the shared game board on a TV using a laptop or compatible TV browser. Players answer on their phones.',icon:<MonitorPlay/>},
-    {value:'phones',title:'Just phones',details:'Everyone sees the board, questions, and scores on their own phone. No TV or laptop needed.',icon:<Smartphone/>}]:[
+    {value:'tv',title:'Use your TV as a shared game board',details:'Show the shared game board on a TV using a spare phone, tablet, laptop or compatible TV browser. Players answer on their phones.',icon:<MonitorPlay/>},
+    {value:'phones',title:'Everyone plays on their phone',details:'Everyone sees the board, questions, and scores on their own phone. No TV or laptop needed.',icon:<Smartphone/>}]:[
     {value:'choices',title:'Everyone chooses',details:'Four answer options are given. Players select the answer they think is correct.',recommendation:'Recommended for your first show'},
     {value:'written',title:'Everyone writes',details:'No answer options are given. Players must recall and write their own answers.'},
     {value:'mixed',title:'Everyone uses the same mixture',details:'For example, players choose from options for Hard questions but recall and write their answers for Easy and Medium questions.'},
@@ -43,7 +43,7 @@ export default function HostWizard({step,settings,busy,error,onBack,onNext}:Prop
     </div>
     {step===1&&selected==='tv'&&<aside className="ks-wizard-tv-help" aria-label="How TV mode works">
       <strong>Setting up the shared TV display</strong>
-      <p>In the Green Room, open <b>TV display</b> on a laptop and connect it to your TV by HDMI or screen casting. A compatible smart-TV browser may open that display directly. The host can join as a player from a second phone.</p>
+      <p>Keep hosting on this device. In the Green Room you’ll get a show code. On a spare phone, tablet or laptop, open The Know Show and choose <b>Connect a TV Display</b>. Connect that device by HDMI or screen casting, if supported. A compatible smart-TV browser can open the display directly. You can also join as a player on your host device.</p>
       <small>Mirroring someone’s Player View shows their personal screen, not the shared game board.</small>
     </aside>}
     {step===2&&selected==='mixed'&&<aside className="ks-wizard-tv-help"><strong>When should answer options be available?</strong><label><input type="radio" name="mix" checked={mixed==='hard'} onChange={()=>setMixed('hard')}/> Hard questions only</label><label><input type="radio" name="mix" checked={mixed==='medium-hard'} onChange={()=>setMixed('medium-hard')}/> Medium and Hard questions</label></aside>}

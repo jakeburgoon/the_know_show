@@ -439,7 +439,7 @@ export function mutate(original:GameState,action:Action,actor:Actor,now=Date.now
  }
  case 'dispute':{
    const p=player(s,actor);
-   if(s.resolution&&(['board','draft','final-wager'] as string[]).includes(s.phase)){s.resolution.resumePhase=s.phase as 'board'|'draft'|'final-wager';s.phase='results';}
+   if(s.phase==='board'&&s.resolution&&s.resolution.round===s.round){s.resolution.resumePhase='board';s.phase='results';}
    assert(['results','final-results'].includes(s.phase),'A result can only be disputed before the next question begins.');
    const result=s.phase==='results'?s.resolution:s.final;assert(!action.questionId||action.questionId===(s.phase==='results'?s.resolution?.questionId:s.final?.id),'That review window has closed.');assert(!result?.reviewedIds?.includes(p.id),'The host has already reviewed this answer.');
    const ids=s.phase==='results'?s.resolution?.disputeIds:s.final?.disputeIds;assert(ids,'No results.');assert(!ids.includes(p.id),'You already requested review.');
@@ -587,7 +587,7 @@ export function makeView(original:GameState,actor:Actor,revision:number,now=Date
  categories:CATEGORIES.filter(c=>!c.activeMonths||availableCategories(new Date(now)).some(x=>x.id===c.id)||s.draftPool.includes(c.id)||s.selected[0].includes(c.id)||s.selected[1].includes(c.id)).map(c=>({id:c.id,name:c.name,description:c.description,type:c.type})),draftPool:s.draftPool,draftIndex:s.draftIndex,
  draftTurnId:s.players.length?s.players[(s.draftIndex+s.round*4)%s.players.length]?.id:undefined,
  active:current,intro,results:res,final:f,feedbackPauseUntil:s.phase==='results'?s.resolution?.feedbackPauseUntil:s.phase==='final-results'?s.final?.feedbackPauseUntil:undefined,
- lastReview:me&&s.resolution&&['board','draft','final-wager'].includes(s.phase)&&s.resolution.answers[me.id]&&!s.resolution.answers[me.id].correct&&s.resolution.answers[me.id].answer.trim()&&s.resolution.answers[me.id].answer!=='(no answer)'&&!s.resolution.reviewedIds?.includes(me.id)?{questionId:s.resolution.questionId}:undefined,myHints:me?.hintsRemaining,paused:!!s.pausedAt,pausedAt:s.pausedAt,announcement:s.announcement,eventLog:s.eventLog.slice(0,10),
+ lastReview:me&&s.resolution&&s.phase==='board'&&s.resolution.round===s.round&&s.resolution.answers[me.id]&&!s.resolution.answers[me.id].correct&&s.resolution.answers[me.id].answer.trim()&&s.resolution.answers[me.id].answer!=='(no answer)'&&!s.resolution.reviewedIds?.includes(me.id)?{questionId:s.resolution.questionId}:undefined,myHints:me?.hintsRemaining,paused:!!s.pausedAt,pausedAt:s.pausedAt,announcement:s.announcement,eventLog:s.eventLog.slice(0,10),
  answerFormatRequestCount:s.players.filter(p=>p.pendingChoiceAccess!==undefined).length,yourPlayer:me?.id,playedQuestionIds:s.recentQuestionIds,playedCategoryIds:s.recentCategoryIds??[],offeredCategoryIds:s.recentCategoryOffers??[],
  };
 }

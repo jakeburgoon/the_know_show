@@ -1046,3 +1046,17 @@ body{background:var(--v11cream);color:var(--v11navy)}
 /* v1.13.12 — compact, scannable in-game rules */
 .ks-player-quick-rules ul{margin:.5rem 0 0;padding-left:1.1rem;font-size:.83rem;line-height:1.4;display:grid;gap:.35rem}
 .ks-player-quick-rules li{padding:0;color:#18344a}
+
+/* Keep the same TV iframe alive, including during full-stage reveals. */
+.v2tvcolumns.ks-tv-full-stage{grid-template-columns:minmax(0,1fr);position:relative}
+.v2tvside.ks-tv-side-parked{position:absolute;left:0;top:0;width:320px;height:400px;overflow:hidden;clip-path:inset(50%);pointer-events:none;padding:0;margin:0;border:0}
+.ks-lobby-host-pair{margin:12px 0;padding:14px;border:1px solid #d5b66c;border-radius:12px;background:#fffaf0}
+.ks-lobby-host-pair summary{font-weight:750;cursor:pointer}
+.ks-lobby-tv-help button{margin:8px 0;padding:8px 12px;border:1px solid #c7a65a;border-radius:8px;background:#fff8e6;color:#12344c;font-weight:700}
+.ks-lobby-tv-help small{display:block}
+.ks-display-entry{margin:14px auto;max-width:520px;text-align:center;padding:14px;border:1px solid #d7bf87;border-radius:14px}
+.ks-display-entry input{max-width:170px;margin:8px auto;text-align:center}
+
+/* Host and player views are equally accessible when both credentials are on the phone. */
+.ks-two-tabs.ks-during-show{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ks-two-tabs.ks-during-show button:first-child,.ks-two-tabs.ks-during-show button:last-child{font-size:13px;min-height:42px;padding:9px 6px;opacity:1}

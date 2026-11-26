@@ -31,7 +31,7 @@ test('the lobby TV link only appears with the TV-plus-phones setting',()=>{
 });
 test('host TV return is linked and works when the host has a player credential too',()=>{
   assert.match(show,/returnToHost&&<Link className="ks-tv-back" href=\{`\/room\/\$\{code\}\?view=host`\}/);
-  assert.match(show,/returningToHost&&h\?'host':p\?'player'/);
+  assert.match(show,/\(paired\|\|returningToHost\)&&h\?'host':p\?'player'/);
   assert.match(show,/localStorage\.getItem\(`knowshow:\$\{code\}:host`\)/);
 });
 

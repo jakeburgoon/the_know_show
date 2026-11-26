@@ -1,3 +1,7 @@
+# v1.14.0 — Shared display foundations (private review)
+
+Persistent TV music iframe, separate display connection, clearer private host pairing and phone controls, and round-boundary answer review fix. See V140_FOUNDATIONS_SETUP.md for deployment, limitations and real-device checks. No new SQL for v1.13.18. Existing content and private-review restrictions remain.
+
 # v1.13.18 — Final Word hint refinement (private review)
 
 Shortens the second hints for Prancer and Meet Me in St. Louis, preserving the first hints, image assets, question counts and gameplay. No SQL changes. Deploy between games.
