@@ -1,3 +1,7 @@
+# v1.13.18 — Final Word hint refinement (private review)
+
+Shortens the second hints for Prancer and Meet Me in St. Louis, preserving the first hints, image assets, question counts and gameplay. No SQL changes. Deploy between games.
+
 # v1.13.17 — Name That Movie: Christmas Classics (private review)
 
 79 categories / 1,047 regular / 82 category-linked Final Word records (1,129 total). Adds 18 regular film/TV stills (six per difficulty) and two written finals, Prancer and Meet Me in St. Louis. Active November and December (US Eastern); enabled unless disabled in Developer > Category Availability. Original images preserved proportionally, encoded as neutral-name JPEGs. See CHRISTMAS_SCENE_IMAGE_AUDIT.csv and IMAGE_CREDITS.json. All movie stills remain uncleared; remove or replace before public/commercial release. Image-to-title mapping based on supplied filenames and scene review, not independent frame authentication. Potential future Christmas/movie expansion content, no monetization gating. Revised both tapir hints as agreed. No SQL or gameplay mechanics changes. Deploy between games.
