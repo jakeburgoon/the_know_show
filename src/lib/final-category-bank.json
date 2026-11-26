@@ -1592,5 +1592,147 @@
       "alt": "A classical stone gateway with a chariot sculpture on top."
     },
     "sourceUrl": "https://www.visitberlin.de/en/brandenburg-gate"
+  },
+  {
+    "id": "category-final-classic-poster-17",
+    "categoryId": "classic-movie-posters",
+    "category": "Name That Movie: Classic Posters",
+    "difficulty": "hard",
+    "prompt": "Identify the classic film depicted on this vintage movie poster.",
+    "answer": "The Mark of Zorro",
+    "hint": "Tyrone Power plays Diego Vega, who returns from Spain to find a corrupt ruler in California.",
+    "hints": [
+      "Tyrone Power plays Diego Vega, who returns from Spain to find a corrupt ruler in California.",
+      "The hero’s calling card is a letter carved with a sword; the title refers to that distinctive signature."
+    ],
+    "tier": "adult",
+    "aliases": [
+      "Mark of Zorro"
+    ],
+    "distractors": [],
+    "topicPreview": "Classic Hollywood swashbuckling adventures",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/a4e6da8fa8918101.jpg",
+      "width": 1018,
+      "height": 1544,
+      "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+    },
+    "sourceUrl": "https://catalog.afi.com/Film/1001-THE-MARKOFZORRO"
+  },
+  {
+    "id": "category-final-animal-photo-05",
+    "categoryId": "picture-this-animals",
+    "category": "Picture This: Animals",
+    "difficulty": "hard",
+    "prompt": "Identify the animal pictured in this photograph.",
+    "answer": "Tapir",
+    "aliases": [
+      "Malayan tapir",
+      "Asian tapir",
+      "Malaysian tapir",
+      "Banded tapir"
+    ],
+    "hint": "Although it resembles a pig with a short trunk, this mammal is more closely related to horses and rhinoceroses.",
+    "hints": [
+      "Although it resembles a pig with a short trunk, this mammal is more closely related to horses and rhinoceroses.",
+      "Its five-letter name differs by just one vowel from a word meaning to gradually become narrower."
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "topicPreview": "Unusual hoofed mammals",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/ea5f038e5d7d4508.jpg",
+      "width": 1600,
+      "height": 1067,
+      "alt": "A black and white hoofed mammal with a short flexible snout."
+    },
+    "sourceUrl": "https://animals.sandiegozoo.org/animals/tapir",
+    "sourceStatus": "Final clues checked against San Diego Zoo; photograph source in IMAGE_CREDITS.json"
+  },
+  {
+    "id": "category-final-animal-photo-07",
+    "categoryId": "picture-this-animals",
+    "category": "Picture This: Animals",
+    "difficulty": "hard",
+    "prompt": "Identify the animal pictured in this photograph.",
+    "answer": "Secretary bird",
+    "aliases": [
+      "Secretarybird",
+      "Secretary-bird"
+    ],
+    "hint": "This long-legged African bird of prey hunts mainly on the ground, using powerful kicks to subdue animals such as snakes.",
+    "hints": [
+      "This long-legged African bird of prey hunts mainly on the ground, using powerful kicks to subdue animals such as snakes.",
+      "Its English name is traditionally linked to the resemblance of its head feathers to quill pens tucked behind an office worker’s ear."
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "topicPreview": "Birds of prey in Africa",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/c03a49040b308397.jpg",
+      "width": 1600,
+      "height": 1200,
+      "alt": "A long-legged gray and black bird with a feathered crest in dry grassland."
+    },
+    "sourceUrl": "https://animals.sandiegozoo.org/animals/secretary-bird",
+    "sourceStatus": "Final clues checked against San Diego Zoo; photograph source in IMAGE_CREDITS.json"
+  },
+  {
+    "id": "category-final-christmas-scene-19",
+    "categoryId": "christmas-movie-scenes",
+    "category": "Name That Movie: Christmas Classics",
+    "difficulty": "hard",
+    "prompt": "Name the holiday film represented by this still image.",
+    "answer": "Prancer",
+    "aliases": [],
+    "hint": "In this 1989 family film, a girl named Jessica cares for an injured reindeer she believes belongs to Santa.",
+    "hints": [
+      "In this 1989 family film, a girl named Jessica cares for an injured reindeer she believes belongs to Santa.",
+      "The title is one of the names in the famous Christmas poem’s list of reindeer, and it means someone who moves with lively, showy steps."
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "topicPreview": "Christmas family films of the 1980s",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/df782766bbb1df43.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "A girl kneels beside a reindeer at night."
+    },
+    "sourceUrl": "https://family.20thcenturystudios.com/movies/prancer",
+    "sourceStatus": "Final clues checked against film references; still source and rights unverified"
+  },
+  {
+    "id": "category-final-christmas-scene-20",
+    "categoryId": "christmas-movie-scenes",
+    "category": "Name That Movie: Christmas Classics",
+    "difficulty": "hard",
+    "prompt": "Name the holiday film represented by this still image.",
+    "answer": "Meet Me in St. Louis",
+    "aliases": [
+      "Meet Me in Saint Louis",
+      "Meet Me in St Louis"
+    ],
+    "hint": "This 1944 musical introduced the holiday song “Have Yourself a Merry Little Christmas.”",
+    "hints": [
+      "This 1944 musical introduced the holiday song “Have Yourself a Merry Little Christmas.”",
+      "The title is an invitation to get together in the Missouri city that hosted the 1904 World’s Fair."
+    ],
+    "tier": "adult",
+    "distractors": [],
+    "topicPreview": "Golden Age Hollywood musicals",
+    "finalEligible": true,
+    "image": {
+      "src": "/trivia-images/5594fcf2e10b1972.jpg",
+      "width": 500,
+      "height": 372,
+      "alt": "A group gathers in a warmly lit period living room."
+    },
+    "sourceUrl": "https://www.tcm.com/articles/musical/18523/meet-me-in-st-louis-1944",
+    "sourceStatus": "Final clues checked against film references; still source and rights unverified"
   }
 ]

@@ -1,0 +1,3 @@
+# v1.13.15 private review
+
+Uses 13 user-approved edited posters instead of opaque masks. Four per difficulty and one Final Word. Prior draft omitted posters: Jaws, The Wizard of Oz, Vertigo and 12 Angry Men. They are not in the current question bank or assets. No SQL or environment changes. Update ZIP is based on v1.13.13 (the last non-review release). If you installed the private v1.13.14 draft, use a clean full copy instead; removed draft images would otherwise remain in Git. No rights clearance is implied by title editing. Do not publish this package until image rights are verified. Use the supplied audit for traceability. Deploy between games only.

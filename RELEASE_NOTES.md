@@ -1,3 +1,15 @@
+# v1.13.17 — Name That Movie: Christmas Classics (private review)
+
+79 categories / 1,047 regular / 82 category-linked Final Word records (1,129 total). Adds 18 regular film/TV stills (six per difficulty) and two written finals, Prancer and Meet Me in St. Louis. Active November and December (US Eastern); enabled unless disabled in Developer > Category Availability. Original images preserved proportionally, encoded as neutral-name JPEGs. See CHRISTMAS_SCENE_IMAGE_AUDIT.csv and IMAGE_CREDITS.json. All movie stills remain uncleared; remove or replace before public/commercial release. Image-to-title mapping based on supplied filenames and scene review, not independent frame authentication. Potential future Christmas/movie expansion content, no monetization gating. Revised both tapir hints as agreed. No SQL or gameplay mechanics changes. Deploy between games.
+
+# v1.13.16 — Picture This: Animals (private review)
+
+78 categories / 1,029 regular / 80 category-linked Final Word records (1,109 total). Adds 18 animal photos, six per level, and two reserved written Final Word photos (tapir and secretary bird). Ocelot held in reserve. Photos resized proportionally to a maximum of 1,600 pixels; credits and source IDs recorded. No schema changes. Retains previous movie-poster private-review rights caveat. Deploy between games.
+
+# v1.13.15 — Edited classic movie posters (private review)
+
+77 categories / 1,011 regular / 78 category-linked Final Word questions (1,089 total). Four regular posters per difficulty and one Final Word (The Mark of Zorro). Uses the 13 supplied edited files, not the previous opaque masks. Exact poster edition rights still require verification; do not deploy publicly. No SQL changes.
+
 # v1.13.13 — Photographic landmarks and app icon
 
 Picture This: Famous Landmarks replaces the illustration pilot (15 regular photographs, two Final Word photos). New full-bleed home-screen icon. 76 categories / 999 regular / 77 category finals. See V1313_LANDMARKS_SETUP.md. Enable the renamed category from Developer > Category Availability when ready. No SQL changes.

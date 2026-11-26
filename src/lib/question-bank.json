@@ -1,5 +1,5 @@
 {
-  "version": "1.13.13",
+  "version": "1.13.17",
   "difficultyLevels": [
     "Easy",
     "Medium",
@@ -18970,6 +18970,1183 @@
               "width": 1600,
               "height": 900,
               "alt": "An ancient rectangular temple with stone columns."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "classic-movie-posters",
+      "name": "Name That Movie: Classic Posters",
+      "description": "Identify classic films from vintage movie posters with their titles concealed.",
+      "type": "classic",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "classic-poster-06",
+            "level": 1,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "King Kong",
+            "aliases": [],
+            "hint": "A giant ape is brought to New York City.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "Son of Kong",
+              "Mighty Joe Young",
+              "The Lost World"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kingkongposter.jpg",
+            "image": {
+              "src": "/trivia-images/787ccc5b1fb9c71c.jpg",
+              "width": 1071,
+              "height": 1469,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-12",
+            "level": 1,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "The Birds",
+            "aliases": [
+              "Birds"
+            ],
+            "hint": "A California coastal town experiences unexplained attacks by wildlife.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "Psycho",
+              "The Raven",
+              "The Swarm"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Birds_original_poster.jpg",
+            "image": {
+              "src": "/trivia-images/74dc7a3924d6ae52.jpg",
+              "width": 1003,
+              "height": 1600,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-13",
+            "level": 1,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "It's a Wonderful Life",
+            "aliases": [
+              "Its a Wonderful Life"
+            ],
+            "hint": "George Bailey is shown what life would have been like without him.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "The Bishop’s Wife",
+              "The Shop Around the Corner",
+              "Miracle on 34th Street"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=530551&picture=vintage-movie",
+            "image": {
+              "src": "/trivia-images/8a233b0016bfc72a.jpg",
+              "width": 1022,
+              "height": 1539,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-16",
+            "level": 1,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Singin' in the Rain",
+            "aliases": [
+              "Singing in the Rain",
+              "Singin in the Rain"
+            ],
+            "hint": "A musical comedy about the transition from silent movies to talkies.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "An American in Paris",
+              "The Band Wagon",
+              "On the Town"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=527897&picture=vintage-musical",
+            "image": {
+              "src": "/trivia-images/e85dbd81ab60b470.jpg",
+              "width": 1018,
+              "height": 1544,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          }
+        ],
+        "2": [
+          {
+            "id": "classic-poster-05",
+            "level": 2,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Casablanca",
+            "aliases": [],
+            "hint": "Much of the film takes place in a nightclub in wartime Morocco.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "The Maltese Falcon",
+              "To Have and Have Not",
+              "Notorious"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=520746&picture=hollywood-stars",
+            "image": {
+              "src": "/trivia-images/e978df48ba0a720b.jpg",
+              "width": 1024,
+              "height": 1536,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-02",
+            "level": 2,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Breakfast at Tiffany's",
+            "aliases": [
+              "Breakfast at Tiffanys"
+            ],
+            "hint": "Holly Golightly is the central character.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "Roman Holiday",
+              "Sabrina",
+              "Funny Face"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Breakfast_at_Tiffany's_(1961_poster).jpg",
+            "image": {
+              "src": "/trivia-images/018b2f6bac3dfc87.jpg",
+              "width": 1024,
+              "height": 1536,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-04",
+            "level": 2,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Gone with the Wind",
+            "aliases": [],
+            "hint": "The story is set in the American South during the Civil War and Reconstruction.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "Jezebel",
+              "Raintree County",
+              "The Little Foxes"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Poster_-_Gone_With_the_Wind_02.jpg",
+            "image": {
+              "src": "/trivia-images/cda74edbd158bcc8.jpg",
+              "width": 1024,
+              "height": 1536,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-11",
+            "level": 2,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "West Side Story",
+            "aliases": [],
+            "hint": "The Jets and Sharks are rival gangs in this musical.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "On the Town",
+              "Guys and Dolls",
+              "The Music Man"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=531130&picture=vintage-lobby-poster",
+            "image": {
+              "src": "/trivia-images/353640442cf00b75.jpg",
+              "width": 1016,
+              "height": 1547,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          }
+        ],
+        "3": [
+          {
+            "id": "classic-poster-01",
+            "level": 3,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Attack of the 50 Foot Woman",
+            "aliases": [
+              "Attack of the 50 Ft Woman",
+              "Attack of the Fifty Foot Woman"
+            ],
+            "hint": "An enormous woman terrorizes a small town.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "The Incredible Shrinking Man",
+              "The Amazing Colossal Man",
+              "The Giant Gila Monster"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=552855&picture=attack-of-the-50-ft-woman",
+            "image": {
+              "src": "/trivia-images/db2651d85c1ec6e6.jpg",
+              "width": 1024,
+              "height": 1536,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-03",
+            "level": 3,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Bride of Frankenstein",
+            "aliases": [
+              "The Bride of Frankenstein"
+            ],
+            "hint": "A scientist creates a companion for the monster.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "Son of Frankenstein",
+              "The Ghost of Frankenstein",
+              "The Invisible Man"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Bride_of_Frankenstein_(1935_poster).jpg",
+            "image": {
+              "src": "/trivia-images/2bcd17e053d29c72.jpg",
+              "width": 1026,
+              "height": 1533,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-08",
+            "level": 3,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Creature from the Black Lagoon",
+            "aliases": [
+              "The Creature from the Black Lagoon"
+            ],
+            "hint": "A scientific expedition encounters an amphibious creature in the Amazon.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "The Monster That Challenged the World",
+              "The Beast from 20,000 Fathoms",
+              "The Creature Walks Among Us"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Creature_from_the_Black_Lagoon_poster.jpg",
+            "image": {
+              "src": "/trivia-images/9699892abd825078.jpg",
+              "width": 1018,
+              "height": 1544,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          },
+          {
+            "id": "classic-poster-07",
+            "level": 3,
+            "prompt": "Name the movie shown on this poster.",
+            "answer": "Gentlemen Prefer Blondes",
+            "aliases": [],
+            "hint": "Two showgirls travel to Paris on an ocean liner.",
+            "categoryId": "classic-movie-posters",
+            "distractors": [
+              "How to Marry a Millionaire",
+              "There’s No Business Like Show Business",
+              "Some Like It Hot"
+            ],
+            "sourceStatus": "User-supplied edited poster; exact edition rights not cleared; private review only",
+            "sourceUrl": "https://www.publicdomainpictures.net/en/view-image.php?image=589520&picture=marilyn-monroe",
+            "image": {
+              "src": "/trivia-images/c6dc4f47b286067c.jpg",
+              "width": 1024,
+              "height": 1536,
+              "alt": "Vintage movie poster with its title replaced by a trivia prompt."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "picture-this-animals",
+      "name": "Picture This: Animals",
+      "description": "Identify distinctive animals from real photographs.",
+      "type": "classic",
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "animal-photo-04",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Toucan",
+            "aliases": [
+              "Toco toucan"
+            ],
+            "hint": "A tropical American bird known for its oversized colorful bill.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Hornbill",
+              "Puffin",
+              "Parrot"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/36938292/",
+            "image": {
+              "src": "/trivia-images/75bf5e00f8d65d2a.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A black and white bird with a large orange and yellow bill."
+            }
+          },
+          {
+            "id": "animal-photo-08",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Walrus",
+            "aliases": [],
+            "hint": "This Arctic marine mammal has prominent tusks.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Sea lion",
+              "Elephant seal",
+              "Manatee"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/12064897/",
+            "image": {
+              "src": "/trivia-images/0818f0c39125cdbd.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A large wrinkled marine mammal resting on rocks with long tusks."
+            }
+          },
+          {
+            "id": "animal-photo-16",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Chameleon",
+            "aliases": [],
+            "hint": "Its eyes can move independently and its tongue can extend rapidly to catch insects.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Iguana",
+              "Gecko",
+              "Monitor lizard"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/38514383/",
+            "image": {
+              "src": "/trivia-images/4f58d6e0e2bf379f.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A green patterned lizard with a curled tail and prominent eyes."
+            }
+          },
+          {
+            "id": "animal-photo-19",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Meerkat",
+            "aliases": [
+              "Suricate"
+            ],
+            "hint": "Members of its social group often stand guard for predators.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Prairie dog",
+              "Marmot",
+              "Ground squirrel"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/20208990/",
+            "image": {
+              "src": "/trivia-images/15e324c7957bd22a.jpg",
+              "width": 1067,
+              "height": 1600,
+              "alt": "A small upright brown mammal looking into the distance."
+            }
+          },
+          {
+            "id": "animal-photo-20",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Armadillo",
+            "aliases": [],
+            "hint": "Its body is protected by plates of bony armor.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Pangolin",
+              "Anteater",
+              "Porcupine"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/37214888/",
+            "image": {
+              "src": "/trivia-images/c9157c2ff04d4255.jpg",
+              "width": 1600,
+              "height": 1280,
+              "alt": "A small gray mammal with a rounded segmented armored shell."
+            }
+          },
+          {
+            "id": "animal-photo-15",
+            "level": 1,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Hammerhead shark",
+            "aliases": [
+              "Hammerhead"
+            ],
+            "hint": "Its eyes are set at the ends of a wide head.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Tiger shark",
+              "Whale shark",
+              "Great white shark"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/4781942/",
+            "image": {
+              "src": "/trivia-images/51bb398a29ed9ecb.jpg",
+              "width": 1600,
+              "height": 1060,
+              "alt": "A shark swimming underwater with a broad flattened head."
+            }
+          }
+        ],
+        "2": [
+          {
+            "id": "animal-photo-03",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Red panda",
+            "aliases": [
+              "Lesser panda"
+            ],
+            "hint": "This Asian mammal spends much of its time in trees and eats bamboo.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Raccoon",
+              "Ringtail",
+              "Coati"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/17816781/",
+            "image": {
+              "src": "/trivia-images/e76a3f7ef90e0e7a.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A reddish mammal with white facial markings perched on a branch."
+            }
+          },
+          {
+            "id": "animal-photo-06",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Manatee",
+            "aliases": [
+              "Sea cow",
+              "West Indian manatee"
+            ],
+            "hint": "This aquatic plant-eater has a broad, rounded paddle-shaped tail.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Dugong",
+              "Elephant seal",
+              "Sea lion"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/4766707/",
+            "image": {
+              "src": "/trivia-images/cf05c17d3087a6be.jpg",
+              "width": 1280,
+              "height": 1600,
+              "alt": "A rounded gray aquatic mammal swimming with a broad paddle-shaped tail."
+            }
+          },
+          {
+            "id": "animal-photo-11",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Capybara",
+            "aliases": [],
+            "hint": "It is the largest living rodent and is native to South America.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Wombat",
+              "Marmot",
+              "Beaver"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/32953693/",
+            "image": {
+              "src": "/trivia-images/dd66d9df59788cc8.jpg",
+              "width": 1600,
+              "height": 1200,
+              "alt": "A large brown rodent with short legs feeding near water."
+            }
+          },
+          {
+            "id": "animal-photo-21",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Ring-tailed lemur",
+            "aliases": [
+              "Lemur",
+              "Ring tailed lemur"
+            ],
+            "hint": "This primate from Madagascar has a conspicuously striped tail.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Coati",
+              "Raccoon",
+              "Spider monkey"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/37769447/",
+            "image": {
+              "src": "/trivia-images/212788f981030449.jpg",
+              "width": 1600,
+              "height": 1600,
+              "alt": "A gray primate with a black-and-white ringed tail sitting in a woven shelter."
+            }
+          },
+          {
+            "id": "animal-photo-12",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Puffin",
+            "aliases": [
+              "Atlantic puffin"
+            ],
+            "hint": "This seabird has a brightly colored breeding-season bill.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Penguin",
+              "Kingfisher",
+              "Cormorant"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/38636731/",
+            "image": {
+              "src": "/trivia-images/2e2919c5784728b8.jpg",
+              "width": 1600,
+              "height": 1069,
+              "alt": "A small black and white seabird with an orange bill in grass."
+            }
+          },
+          {
+            "id": "animal-photo-14",
+            "level": 2,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Komodo dragon",
+            "aliases": [
+              "Komodo monitor",
+              "Komodo dragons"
+            ],
+            "hint": "This enormous lizard is native to a handful of Indonesian islands.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Iguana",
+              "Gila monster",
+              "Crocodile"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/8856172/",
+            "image": {
+              "src": "/trivia-images/d1bffffb08f763e5.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "Two large brown lizards resting on a beach."
+            }
+          }
+        ],
+        "3": [
+          {
+            "id": "animal-photo-02",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Axolotl",
+            "aliases": [
+              "Mexican axolotl",
+              "Mexican walking fish"
+            ],
+            "hint": "This Mexican salamander normally retains its external gills into adulthood.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Newt",
+              "Tadpole",
+              "Mudskipper"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/31446364/",
+            "image": {
+              "src": "/trivia-images/714b725d1a3b1677.jpg",
+              "width": 1600,
+              "height": 903,
+              "alt": "A pale aquatic amphibian with feathery external gills resting on a hand."
+            }
+          },
+          {
+            "id": "animal-photo-10",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Echidna",
+            "aliases": [
+              "Spiny anteater",
+              "Short-beaked echidna"
+            ],
+            "hint": "This spiny mammal lays eggs and feeds on insects.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Hedgehog",
+              "Porcupine",
+              "Armadillo"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/34694955/",
+            "image": {
+              "src": "/trivia-images/d85e7c8fb686aeb4.jpg",
+              "width": 1600,
+              "height": 1070,
+              "alt": "A spiny mammal with a long narrow snout walking on the ground."
+            }
+          },
+          {
+            "id": "animal-photo-01",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Cassowary",
+            "aliases": [
+              "Southern cassowary"
+            ],
+            "hint": "This large flightless bird has a helmet-like casque on its head.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Emu",
+              "Ostrich",
+              "Rhea"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/27953367/",
+            "image": {
+              "src": "/trivia-images/763235e4796ebce5.jpg",
+              "width": 1600,
+              "height": 1068,
+              "alt": "A large dark bird with a bright blue neck and helmet-like head crest."
+            }
+          },
+          {
+            "id": "animal-photo-09",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Tasmanian devil",
+            "aliases": [
+              "Tasmanian devils"
+            ],
+            "hint": "This carnivorous marsupial is native to an island south of mainland Australia.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Wolverine",
+              "Wombat",
+              "Badger"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/22499012/",
+            "image": {
+              "src": "/trivia-images/439cd9118f216350.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A stocky black mammal with rounded ears and white markings."
+            }
+          },
+          {
+            "id": "animal-photo-13",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Lionfish",
+            "aliases": [
+              "Red lionfish",
+              "Common lionfish"
+            ],
+            "hint": "This striped reef fish has long venomous fin spines.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Pufferfish",
+              "Clownfish",
+              "Moray eel"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/31047099/",
+            "image": {
+              "src": "/trivia-images/d4dc58844a31f274.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A striped fish with long radiating fin spines swimming against blue water."
+            }
+          },
+          {
+            "id": "animal-photo-17",
+            "level": 3,
+            "prompt": "What animal is shown in this photograph?",
+            "answer": "Cuttlefish",
+            "aliases": [],
+            "hint": "This cephalopod has an internal structure called a cuttlebone.",
+            "categoryId": "picture-this-animals",
+            "distractors": [
+              "Squid",
+              "Octopus",
+              "Nautilus"
+            ],
+            "sourceStatus": "User-supplied Pexels photograph; visual identification reviewed",
+            "sourceUrl": "https://www.pexels.com/photo/1200289/",
+            "image": {
+              "src": "/trivia-images/a31817edbb60aaae.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A reddish marine animal with an elongated body, fin fringe and multiple arms."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "christmas-movie-scenes",
+      "name": "Name That Movie: Christmas Classics",
+      "description": "Identify holiday films and beloved Christmas specials from memorable but less obvious scenes.",
+      "type": "classic",
+      "activeMonths": [
+        11,
+        12
+      ],
+      "questionsByLevel": {
+        "1": [
+          {
+            "id": "christmas-scene-01",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Home Alone",
+            "aliases": [],
+            "hint": "A boy is accidentally left behind when his family travels to Paris.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Home Alone 2: Lost in New York",
+              "The Santa Clause",
+              "Jingle All the Way"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/eb454c4818d329c8.jpg",
+              "width": 738,
+              "height": 416,
+              "alt": "A boy wearing a knit hat looks at a magazine."
+            }
+          },
+          {
+            "id": "christmas-scene-02",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Home Alone 2: Lost in New York",
+            "aliases": [
+              "Home Alone 2",
+              "Home Alone II",
+              "Lost in New York"
+            ],
+            "hint": "The young hero takes the wrong flight and ends up in Manhattan.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Home Alone",
+              "Home Alone 3",
+              "The Santa Clause 2"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/b06a8941a5ce632c.jpg",
+              "width": 1600,
+              "height": 866,
+              "alt": "A boy in a winter hat stands near a toy display with two men behind him."
+            }
+          },
+          {
+            "id": "christmas-scene-03",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "The Santa Clause",
+            "aliases": [
+              "Santa Clause",
+              "The Santa Clause (1994)"
+            ],
+            "hint": "A divorced father inherits a magical job after an accident on his roof.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "The Santa Clause 2",
+              "Jingle All the Way",
+              "The Christmas Chronicles"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/51866b705b2da1db.jpg",
+              "width": 674,
+              "height": 455,
+              "alt": "A man and a child sit together in red outfits."
+            }
+          },
+          {
+            "id": "christmas-scene-04",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "A Christmas Story",
+            "aliases": [
+              "Christmas Story"
+            ],
+            "hint": "A young boy longs for a Red Ryder BB gun.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "A Christmas Story Christmas",
+              "National Lampoon’s Christmas Vacation",
+              "The Santa Clause"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/ecfa5267f02d8532.jpg",
+              "width": 1280,
+              "height": 720,
+              "alt": "A child in winter clothing grimaces while an adult adjusts a scarf."
+            }
+          },
+          {
+            "id": "christmas-scene-05",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "The Polar Express",
+            "aliases": [
+              "Polar Express"
+            ],
+            "hint": "A mysterious train takes children to the North Pole on Christmas Eve.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Arthur Christmas",
+              "A Christmas Carol",
+              "Klaus"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/8dbfb613878543dc.jpg",
+              "width": 1408,
+              "height": 750,
+              "alt": "Two animated children stand atop a train at night."
+            }
+          },
+          {
+            "id": "christmas-scene-06",
+            "level": 1,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "It’s a Wonderful Life",
+            "aliases": [
+              "Its a Wonderful Life",
+              "It is a Wonderful Life"
+            ],
+            "hint": "A guardian angel shows a man how his town would have changed without him.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Miracle on 34th Street",
+              "The Bishop’s Wife",
+              "White Christmas"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/cb0a65ca7a7a4098.jpg",
+              "width": 1600,
+              "height": 900,
+              "alt": "A black-and-white image of a couple standing outdoors."
+            }
+          }
+        ],
+        "2": [
+          {
+            "id": "christmas-scene-07",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Elf",
+            "aliases": [],
+            "hint": "A man raised at the North Pole travels to New York to find his father.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "The Santa Clause",
+              "The Christmas Chronicles",
+              "Fred Claus"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/475ddaf6aaac413f.jpg",
+              "width": 1280,
+              "height": 720,
+              "alt": "A snowy landscape dotted with enormous striped candy canes."
+            }
+          },
+          {
+            "id": "christmas-scene-08",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "White Christmas",
+            "aliases": [],
+            "hint": "Two former soldiers stage a musical show at a Vermont inn.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Holiday Inn",
+              "Meet Me in St. Louis",
+              "The Bells of St. Mary’s"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/41a7722c35bf7da0.jpg",
+              "width": 1296,
+              "height": 730,
+              "alt": "Four people gather at a table around a Vermont travel advertisement."
+            }
+          },
+          {
+            "id": "christmas-scene-09",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Miracle on 34th Street",
+            "aliases": [
+              "Miracle on Thirty Fourth Street",
+              "Miracle on 34th St",
+              "Miracle on 34th Street (1947)"
+            ],
+            "hint": "A department-store Santa must defend his claim to be the real thing.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "The Bishop’s Wife",
+              "It Happened on Fifth Avenue",
+              "It’s a Wonderful Life"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/74f6a8c28cc4d092.jpg",
+              "width": 1140,
+              "height": 760,
+              "alt": "A black-and-white image of a man dressed as Santa with a girl and a seated woman."
+            }
+          },
+          {
+            "id": "christmas-scene-10",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Jingle All the Way",
+            "aliases": [],
+            "hint": "Two fathers compete to find a coveted Turbo Man action figure.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Christmas with the Kranks",
+              "Deck the Halls",
+              "The Santa Clause"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/4b137afab9874b77.jpg",
+              "width": 1600,
+              "height": 1097,
+              "alt": "Two men stand on a crowded street decorated for the holidays."
+            }
+          },
+          {
+            "id": "christmas-scene-11",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Rudolph the Red-Nosed Reindeer",
+            "aliases": [
+              "Rudolph",
+              "Rudolph the Red Nosed Reindeer"
+            ],
+            "hint": "A 1964 stop-motion special follows a young reindeer rejected for an unusual trait.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Santa Claus Is Comin’ to Town",
+              "The Year Without a Santa Claus",
+              "The Little Drummer Boy"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/0f34220ecde7039e.jpg",
+              "width": 517,
+              "height": 386,
+              "alt": "A stop-motion snowman stands beside a decorated tree."
+            }
+          },
+          {
+            "id": "christmas-scene-12",
+            "level": 2,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Die Hard",
+            "aliases": [],
+            "hint": "A New York police officer is trapped in a Los Angeles skyscraper during a holiday party.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Lethal Weapon",
+              "Die Hard 2",
+              "The Long Kiss Goodnight"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/f598f485c345ca26.jpg",
+              "width": 1600,
+              "height": 1067,
+              "alt": "A man in a sleeveless shirt stands near colorful Christmas lights."
+            }
+          }
+        ],
+        "3": [
+          {
+            "id": "christmas-scene-13",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Arthur Christmas",
+            "aliases": [],
+            "hint": "Santa’s son tries to deliver a present that was accidentally missed.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Klaus",
+              "The Polar Express",
+              "The Christmas Chronicles"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/91ea865f3872babe.jpg",
+              "width": 1600,
+              "height": 900,
+              "alt": "Animated figures stand in a high-tech control room with a wrapped gift."
+            }
+          },
+          {
+            "id": "christmas-scene-14",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Klaus",
+            "aliases": [],
+            "hint": "A postman sent to a remote northern town befriends a reclusive toymaker.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Arthur Christmas",
+              "The Polar Express",
+              "A Christmas Carol"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/bf264fcc76109c08.jpg",
+              "width": 1600,
+              "height": 900,
+              "alt": "Two animated figures face one another in a snowy woodland."
+            }
+          },
+          {
+            "id": "christmas-scene-15",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "The Grinch",
+            "aliases": [
+              "Dr. Seuss’ The Grinch",
+              "Dr Seuss The Grinch",
+              "How the Grinch Stole Christmas"
+            ],
+            "hint": "A green recluse plots to steal a town’s holiday celebrations.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Arthur Christmas",
+              "The Lorax",
+              "The Polar Express"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/b0fbca648b000083.jpg",
+              "width": 691,
+              "height": 289,
+              "alt": "An elaborate colorful animated mechanical contraption."
+            }
+          },
+          {
+            "id": "christmas-scene-16",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Christmas with the Kranks",
+            "aliases": [
+              "Christmas With The Kranks"
+            ],
+            "hint": "A couple plans to skip the holidays and take a cruise instead.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "Deck the Halls",
+              "National Lampoon’s Christmas Vacation",
+              "Four Christmases"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/db242df2df90e19b.jpg",
+              "width": 1600,
+              "height": 873,
+              "alt": "A man stands on a roof beside a large snowman decoration."
+            }
+          },
+          {
+            "id": "christmas-scene-17",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Love Actually",
+            "aliases": [],
+            "hint": "Interwoven romantic stories unfold in the weeks before Christmas in London.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "The Holiday",
+              "Last Christmas",
+              "Serendipity"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/2cd9d9edd6634667.jpg",
+              "width": 1600,
+              "height": 800,
+              "alt": "Three people ride in a car, including a child wearing a green costume."
+            }
+          },
+          {
+            "id": "christmas-scene-18",
+            "level": 3,
+            "prompt": "Which Christmas movie or holiday special is this scene from?",
+            "answer": "Scrooged",
+            "aliases": [],
+            "hint": "A cynical television executive is visited by spirits on Christmas Eve.",
+            "categoryId": "christmas-movie-scenes",
+            "distractors": [
+              "A Christmas Carol",
+              "Ghostbusters",
+              "Groundhog Day"
+            ],
+            "sourceStatus": "User-supplied still; title from filename and scene review; original source and rights unverified",
+            "sourceUrl": "",
+            "image": {
+              "src": "/trivia-images/a7a8695b82b9128f.jpg",
+              "width": 1600,
+              "height": 1095,
+              "alt": "Two men appear beside a yellow taxi."
             }
           }
         ]

@@ -38,8 +38,8 @@ test('music dropdown closes after selection and gives host and players instructi
 });
 test('How to Play guide is short, nontechnical and highlights bank size',()=>{
  assert.match(guide,/over 70 categories/);
- assert.match(guide,/999 regular questions/);
- assert.match(guide,/77 Final Word questions/);
+ assert.match(guide,/1,047 regular questions/);
+ assert.match(guide,/82 Final Word questions/);
  assert.match(guide,/highest score wins/);
  assert.doesNotMatch(guide,/schemaVersion|source verification|v1\.0|tolerant spelling/);
  assert.match(home,/How to play/);
