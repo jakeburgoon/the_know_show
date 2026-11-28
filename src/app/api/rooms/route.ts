@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db, newRoomCode, newToken, tokenHash } from '@/lib/db';
+import {readDisabledCategories} from '@/lib/category-availability';
 import {mergeHostHistories} from '@/lib/host-history';
 import { makeGame, makeView } from '@/lib/game';
 import { jsonError, noStore } from '@/lib/http';
@@ -18,8 +19,10 @@ export async function POST(request:Request) {
       recentCategoryIds:Array.isArray(body?.recentCategoryIds)?body.recentCategoryIds:[],
       recentCategoryOffers:Array.isArray(body?.recentCategoryOffers)?body.recentCategoryOffers:[],
     });
+    // Load category availability for the host's lobby picker; start-draft revalidates.
+    const disabledCategoryIds=await readDisabledCategories().catch(e=>{console.error('Initial category availability:',e);return undefined;});
     for(let attempt=0;attempt<8;attempt++) {
-      const code=newRoomCode();const hostToken=newToken();const state=makeGame(histories.recentQuestionIds,histories.recentCategoryIds,histories.recentCategoryOffers,hostHistoryId);
+      const code=newRoomCode();const hostToken=newToken();const state=makeGame(histories.recentQuestionIds,histories.recentCategoryIds,histories.recentCategoryOffers,hostHistoryId);state.disabledCategoryIds=disabledCategoryIds;
       const {error}=await db().from('know_show_rooms').insert({code,host_token_hash:tokenHash(hostToken),snapshot:state});
       if(!error) return NextResponse.json({code,token:hostToken,view:makeView(state,{kind:'host'},0)}, {headers:noStore});
       if(error.code!=='23505')throw error;

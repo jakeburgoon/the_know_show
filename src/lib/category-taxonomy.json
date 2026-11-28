@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "superCategories": [
+    {
+      "id": "entertainment",
+      "name": "Arts & Entertainment"
+    },
+    {
+      "id": "history",
+      "name": "History & Government"
+    },
+    {
+      "id": "geography",
+      "name": "Geography & World Cultures"
+    },
+    {
+      "id": "science",
+      "name": "Science & Nature"
+    },
+    {
+      "id": "sports",
+      "name": "Sports & Games"
+    },
+    {
+      "id": "literature",
+      "name": "Literature & Language"
+    },
+    {
+      "id": "puzzles",
+      "name": "Wordplay & Puzzles"
+    },
+    {
+      "id": "everyday",
+      "name": "General Knowledge & Everyday Life"
+    },
+    {
+      "id": "seasonal",
+      "name": "Seasonal & Holidays"
+    },
+    {
+      "id": "visual",
+      "name": "Visual Trivia"
+    }
+  ],
+  "categoryTags": {
+    "space": [
+      "science"
+    ],
+    "animals": [
+      "science"
+    ],
+    "world": [
+      "geography"
+    ],
+    "words": [
+      "literature",
+      "puzzles"
+    ],
+    "history": [
+      "history"
+    ],
+    "science": [
+      "science"
+    ],
+    "food": [
+      "everyday"
+    ],
+    "movies": [
+      "entertainment"
+    ],
+    "music": [
+      "entertainment"
+    ],
+    "math": [
+      "science",
+      "puzzles"
+    ],
+    "sports": [
+      "sports"
+    ],
+    "books": [
+      "literature"
+    ],
+    "nature": [
+      "science"
+    ],
+    "tech": [
+      "science"
+    ],
+    "body": [
+      "science"
+    ],
+    "myths": [
+      "literature",
+      "geography"
+    ],
+    "colors": [
+      "everyday",
+      "science"
+    ],
+    "landmarks": [
+      "geography",
+      "history"
+    ],
+    "three": [
+      "puzzles",
+      "everyday"
+    ],
+    "rhyme": [
+      "puzzles",
+      "literature"
+    ],
+    "misleading": [
+      "puzzles",
+      "everyday"
+    ],
+    "inventions": [
+      "science",
+      "history",
+      "everyday"
+    ],
+    "usa": [
+      "geography",
+      "history"
+    ],
+    "oceans": [
+      "science",
+      "geography"
+    ],
+    "games": [
+      "sports",
+      "puzzles"
+    ],
+    "earth": [
+      "science",
+      "geography"
+    ],
+    "literally": [
+      "literature",
+      "puzzles"
+    ],
+    "counting": [
+      "puzzles",
+      "science",
+      "everyday"
+    ],
+    "classroom": [
+      "everyday"
+    ],
+    "us_geography": [
+      "geography"
+    ],
+    "world_geography": [
+      "geography"
+    ],
+    "us_history": [
+      "history"
+    ],
+    "world_history": [
+      "history"
+    ],
+    "biology": [
+      "science"
+    ],
+    "chemistry": [
+      "science"
+    ],
+    "physics": [
+      "science"
+    ],
+    "astronomy": [
+      "science"
+    ],
+    "sports_classic": [
+      "sports"
+    ],
+    "movies_tv": [
+      "entertainment"
+    ],
+    "music_classic": [
+      "entertainment"
+    ],
+    "literature": [
+      "literature"
+    ],
+    "food_classic": [
+      "everyday"
+    ],
+    "art_classic": [
+      "entertainment"
+    ],
+    "technology_classic": [
+      "science"
+    ],
+    "animals_classic": [
+      "science"
+    ],
+    "thanksgiving": [
+      "seasonal",
+      "history",
+      "everyday",
+      "geography"
+    ],
+    "christmas-movies": [
+      "seasonal",
+      "entertainment"
+    ],
+    "christmas-music": [
+      "seasonal",
+      "entertainment"
+    ],
+    "winter-holidays": [
+      "seasonal",
+      "geography"
+    ],
+    "winter-traditions": [
+      "seasonal",
+      "geography",
+      "everyday"
+    ],
+    "winter-olympics": [
+      "seasonal",
+      "sports",
+      "history"
+    ],
+    "new-years": [
+      "seasonal",
+      "geography",
+      "everyday"
+    ],
+    "veterans-military": [
+      "seasonal",
+      "history"
+    ],
+    "native-american": [
+      "seasonal",
+      "history",
+      "geography"
+    ],
+    "harvest-time": [
+      "seasonal",
+      "everyday",
+      "science",
+      "geography"
+    ],
+    "college-football": [
+      "seasonal",
+      "sports"
+    ],
+    "villains": [
+      "entertainment",
+      "literature"
+    ],
+    "celebrities": [
+      "entertainment"
+    ],
+    "video-games": [
+      "sports",
+      "entertainment"
+    ],
+    "brands": [
+      "everyday",
+      "entertainment",
+      "history"
+    ],
+    "sci-fi": [
+      "literature",
+      "entertainment"
+    ],
+    "fantasy": [
+      "literature",
+      "entertainment"
+    ],
+    "toys": [
+      "everyday",
+      "sports",
+      "entertainment"
+    ],
+    "presidents": [
+      "history"
+    ],
+    "wars": [
+      "history"
+    ],
+    "headlines": [
+      "history",
+      "puzzles"
+    ],
+    "connections": [
+      "puzzles",
+      "everyday"
+    ],
+    "before-after": [
+      "puzzles",
+      "literature",
+      "entertainment"
+    ],
+    "undone": [
+      "puzzles",
+      "literature"
+    ],
+    "no-show": [
+      "everyday",
+      "history",
+      "entertainment"
+    ],
+    "christmas-lore": [
+      "seasonal",
+      "literature",
+      "geography"
+    ],
+    "creepy-creatures": [
+      "seasonal",
+      "literature"
+    ],
+    "finish-that-lyric": [
+      "entertainment",
+      "puzzles"
+    ],
+    "christmas-sing-along": [
+      "seasonal",
+      "entertainment",
+      "puzzles"
+    ],
+    "flags-world": [
+      "visual",
+      "geography"
+    ],
+    "famous-landmarks": [
+      "visual",
+      "geography",
+      "history"
+    ],
+    "classic-movie-posters": [
+      "visual",
+      "entertainment"
+    ],
+    "picture-this-animals": [
+      "visual",
+      "science"
+    ],
+    "christmas-movie-scenes": [
+      "visual",
+      "entertainment",
+      "seasonal"
+    ]
+  },
+  "questionExtraTags": {}
+}

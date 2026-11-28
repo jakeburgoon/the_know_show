@@ -13,7 +13,7 @@ export async function POST(request:Request,{params}:{params:Promise<{code:string
   let action:Action;
   try {action=await request.json();} catch {return jsonError('Invalid game action.');}
   try {
-    for(let attempt=0;attempt<12;attempt++) {
+    for(let attempt=0;attempt<32;attempt++) {
       let row=await getRoom(code);if(!row)return jsonError('Room not found.',404);
       const actor=await getRole(row,request);
       let state=row.snapshot as GameState;
@@ -24,11 +24,18 @@ export async function POST(request:Request,{params}:{params:Promise<{code:string
         if(!await updateRoom(row,advanced))continue;
         row={...row,snapshot:advanced,revision:row.revision+1};state=advanced;
       }
+      if(action.type==='set-featured-categories'&&actor.kind==='host'&&state.phase==='lobby'){
+        try{state={...state,disabledCategoryIds:await readDisabledCategories()};}
+        catch(e){console.error('Feature category availability:',e);return jsonError('Could not check category availability. Please retry.',503);}
+      }
       if(action.type==='start-draft'&&actor.kind==='host'&&state.phase==='lobby'){
         try{state={...state,disabledCategoryIds:await readDisabledCategories()};state=await hydrateExposure(state);}
         catch(e){console.error('Show setup history or category availability:',e);return jsonError('Could not load saved question history or category availability. Check the v1.13.0 Supabase migration and retry. The show has not started.',503);}
       }
       const next=mutate(state,action,actor,now);
+      if(action.type==='new-game'&&actor.kind==='host'){
+        next.disabledCategoryIds=await readDisabledCategories().catch(e=>{console.error('Rematch category availability:',e);return undefined;});
+      }
       const success=await updateRoom(row,next,state);
       if(success) return NextResponse.json(makeFeedbackView(next,actor,row.revision+1,Date.now(),true),{headers:noStore});
       // An incoming buzzer or other action won this round-trip. Reload and re-check rules.

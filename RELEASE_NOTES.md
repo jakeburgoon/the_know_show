@@ -1,3 +1,15 @@
+# v1.14.2 — Party voting and Topics
+
+- Keep v1.14.1 support for up to 16 individuals or eight teams.
+- For 9–16 individuals, each round opens a private ballot: choose 1–4 of eight offered categories. Each category receives at most one vote per person. All submissions automatically close voting; a host can close incomplete voting with confirmation. The four highest totals win, with randomized ties (including zero-vote slots if necessary). Totals are hidden until closure.
+- For 2–8 individuals and all supported team counts, retain turn-based drafting.
+- Host-featured picker uses ten approved Topics, a prominent All Topics control, current topic label, persistent global search, and shared selection state for cross-listed categories. Up to four featured picks still distribute across the two rounds; no guaranteed board position or vote bonus.
+- Existing v1.13 exposure journal and JSON room snapshot support the changes without schema migration. Start a fresh room after deployment.
+
+# v1.14.1 — Holiday party patch (private review)
+
+Increases individual capacity to 16 (teams remain at eight), adds optional host-featured categories in the Green Room, and compacts large-group results and scores. Up to four host picks are offered across the two rounds; players still choose four of eight offered categories per round. Existing question bank, database schema and developer dashboard are unchanged. Deploy between shows. See V141_PARTY_SETUP.md for installation and verification.
+
 # v1.14.0 — Shared display foundations (private review)
 
 Persistent TV music iframe, separate display connection, clearer private host pairing and phone controls, and round-boundary answer review fix. See V140_FOUNDATIONS_SETUP.md for deployment, limitations and real-device checks. No new SQL for v1.13.18. Existing content and private-review restrictions remain.

@@ -10,7 +10,7 @@ export async function POST(request:Request,{params}:{params:Promise<{code:string
   if(!/^[A-HJ-NP-Z2-9]{6}$/.test(code))return jsonError('Invalid room code.');
   let body:{name?:unknown;rememberDeviceId?:unknown;choiceAccess?:unknown};
   try {body=await request.json();}catch{return jsonError('Invalid join request.');}
-  for(let attempt=0;attempt<10;attempt++) {
+  for(let attempt=0;attempt<24;attempt++) {
     try {
       const row=await getRoom(code);if(!row)return jsonError('Room not found.',404);
       const {state,player}=joinGame(row.snapshot as GameState,String(body.name??''),undefined,Date.now(),body.choiceAccess);
