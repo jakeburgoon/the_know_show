@@ -1066,3 +1066,8 @@ body{background:var(--v11cream);color:var(--v11navy)}
 .ks-question-editor textarea{width:100%;min-height:64px;resize:vertical;font:inherit;padding:10px;border:1px solid #657084;border-radius:8px;background:#101b2e;color:#fff}
 .ks-question-editor details{padding:10px;border:1px solid #657084;border-radius:8px}
 .ks-question-editor .ks-lab-callout{overflow-wrap:anywhere}
+
+/* Question Lab editor: modal rather than an off-screen inline panel. */
+.ks-question-editor-dialog{position:fixed;inset:0;margin:auto;width:min(94vw,760px);max-width:94vw;max-height:90dvh;padding:0;border:1px solid #ad9456;border-radius:12px;background:#fffaf0;color:#142941;overflow:auto;overscroll-behavior:contain;box-shadow:0 16px 65px #0008;}
+.ks-question-editor-dialog::backdrop{background:#05121fc9;}
+.ks-question-editor-dialog .ks-question-editor{margin:0;border:0;border-radius:0;}
