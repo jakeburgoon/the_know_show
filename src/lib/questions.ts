@@ -1,7 +1,8 @@
+import {buildCatalog,scopedCatalog} from './library-context';
 import bank from './question-bank.json';
 import categoryFinalBank from './final-category-bank.json';
 export type QuestionImage = {src:string;alt:string;width:number;height:number};
-export type Question = {id:string;level:number;prompt:string;answer:string;hint:string;aliases:string[];distractors?:string[];categoryId:string;editorialStatus?:string;sourceStatus?:string;sourceUrl?:string;image?:QuestionImage};
+export type Question = {enabled?:boolean;extraTags?:string[];libraryRevision?:number;id:string;level:number;prompt:string;answer:string;hint:string;aliases:string[];distractors?:string[];categoryId:string;editorialStatus?:string;sourceStatus?:string;sourceUrl?:string;image?:QuestionImage};
 export type Category = {id:string;name:string;description:string;type:'classic'|'creative';activeMonths?:number[];questionsByLevel: Record<string,Question[]>};
 export const CATEGORIES = bank.categories as Category[];
 /** Seasonal eligibility is determined by the show's server clock in US Eastern time. */
@@ -10,13 +11,13 @@ export function monthForShow(date:Date=new Date()):number {
 }
 export function availableCategories(date:Date=new Date()):Category[] {
  const month=monthForShow(date);
- return CATEGORIES.filter(c=>!c.activeMonths||c.activeMonths.includes(month));
+ return currentCatalog().categories.filter(c=>!c.activeMonths||c.activeMonths.includes(month));
 }
 export const CATEGORY_LOOKUP = new Map(CATEGORIES.map(c=>[c.id,c]));
 export const QUESTION_LOOKUP = new Map(CATEGORIES.flatMap(c=>Object.values(c.questionsByLevel).flat()).map(q=>[q.id,q]));
 export function cellKey(categoryId:string,level:number){return `${categoryId}:${level}`;}
-export function getQuestion(id:string){return QUESTION_LOOKUP.get(id);}
-export type FinalQuestion = { id: string; category: string; categoryId?: string; difficulty?: 'medium-hard'|'hard'; prompt: string; answer: string; hint: string; hints: [string,string]; tier: 'family'|'teen'|'adult'; topicPreview?:string; finalEligible?:boolean; finalExclusionReason?:string; aliases?: string[]; distractors?:string[]; image?:QuestionImage; sourceUrl?:string };
+export function getQuestion(id:string){return currentCatalog().questionLookup.get(id);}
+export type FinalQuestion = {enabled?:boolean;extraTags?:string[];libraryRevision?:number; id: string; category: string; categoryId?: string; difficulty?: 'medium-hard'|'hard'; prompt: string; answer: string; hint: string; hints: [string,string]; tier: 'family'|'teen'|'adult'; topicPreview?:string; finalEligible?:boolean; finalExclusionReason?:string; aliases?: string[]; distractors?:string[]; image?:QuestionImage; sourceUrl?:string };
 // Legacy entries are retained solely so rooms already in Final Word can finish safely on deployment.
 // New shows draw exclusively from the category-linked Final Word bank below.
 export const LEGACY_FINALS: FinalQuestion[] = [
@@ -40,5 +41,9 @@ export const LEGACY_FINALS: FinalQuestion[] = [
   {id:'f18',distractors:['Lluís Domènech i Montaner', 'Josep Puig i Cadafalch', 'Rafael Moneo'],category:'Architecture',prompt:'This Catalan architect designed Barcelona’s Sagrada Família basilica.',answer:'Antoni Gaudí',hint:'His surname begins with G.',hints:["This architect was a leading figure in Catalan Modernisme.", "His designs often feature flowing organic shapes and colorful mosaic surfaces."],tier:'adult',aliases:['Gaudi','Antoni Gaudi']},
 ];
 export const CATEGORY_FINALS: FinalQuestion[] = categoryFinalBank as unknown as FinalQuestion[];
-export const ELIGIBLE_CATEGORY_FINALS = CATEGORY_FINALS.filter(q=>q.finalEligible!==false);
+export const ELIGIBLE_CATEGORY_FINALS = CATEGORY_FINALS.filter(q=>q.enabled!==false&&q.finalEligible!==false);
 export const FINALS: FinalQuestion[] = [...LEGACY_FINALS,...CATEGORY_FINALS];
+
+const BASE_CATALOG=buildCatalog({categories:CATEGORIES,finals:CATEGORY_FINALS},LEGACY_FINALS);
+export function currentCatalog(){return scopedCatalog()??BASE_CATALOG;}
+export const getFinalQuestion=(id:string)=>currentCatalog().finals.find(q=>q.id===id);

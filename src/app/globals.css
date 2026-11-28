@@ -1060,3 +1060,9 @@ body{background:var(--v11cream);color:var(--v11navy)}
 /* Host and player views are equally accessible when both credentials are on the phone. */
 .ks-two-tabs.ks-during-show{grid-template-columns:repeat(2,minmax(0,1fr))}
 .ks-two-tabs.ks-during-show button:first-child,.ks-two-tabs.ks-during-show button:last-child{font-size:13px;min-height:42px;padding:9px 6px;opacity:1}
+
+/* v1.15 private editor; deliberately uses the dashboard's existing controls. */
+.ks-question-editor{border:1px solid #ad9456;display:grid;gap:12px}
+.ks-question-editor textarea{width:100%;min-height:64px;resize:vertical;font:inherit;padding:10px;border:1px solid #657084;border-radius:8px;background:#101b2e;color:#fff}
+.ks-question-editor details{padding:10px;border:1px solid #657084;border-radius:8px}
+.ks-question-editor .ks-lab-callout{overflow-wrap:anywhere}

@@ -269,3 +269,8 @@ $$;
 revoke all on function public.ks_age_question_report() from public,anon,authenticated;
 grant execute on function public.ks_age_question_report() to service_role;
 commit;
+
+-- Explicit server-only API grants for fresh projects with automatic grants disabled.
+revoke all on public.know_show_rooms, public.know_show_members from public, anon, authenticated;
+grant select, insert, update on public.know_show_rooms to service_role;
+grant select, insert, delete on public.know_show_members to service_role;

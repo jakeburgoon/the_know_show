@@ -1,6 +1,6 @@
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {type Actor,type GameState,type GameView,makeView} from './game';
-import {CATEGORY_LOOKUP,FINALS,getQuestion} from './questions';
+import {currentCatalog,getFinalQuestion,getQuestion} from './questions';
 import {FEEDBACK_REASONS,FEEDBACK_VERSION,type FeedbackOffer,type QuestionContext} from './feedback-types';
 export const SESSION_COOKIE='ks_developer';
 export function developerPassword(){const p=process.env.DEVELOPER_PASSWORD;return p&&p.length>=24?p:undefined;}
@@ -18,8 +18,8 @@ export function feedbackOffer(view:GameView,s:GameState,actor:Actor,now=Date.now
  const reporter=sign(`${showId}:${actor.kind}:${actor.id??'host'}`,'feedback-reporter');
  let question:QuestionContext|undefined;
  if(view.phase==='results'&&view.results){const r=view.results,q=getQuestion(r.questionId);if(!q)return;const a=actor.id?r.answers[actor.id]:undefined;
- question={id:q.id,category:CATEGORY_LOOKUP.get(q.categoryId)?.name??r.category,difficulty:['Easy','Medium','Hard'][q.level-1]??String(q.level),prompt:q.prompt,image:q.image,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?.answerFormat??null,hintUsed:a?.hintUsed??null,hintText:[...(a?.optionsPurchased?['Purchased answer options']:[]),...(a?.fiftyFiftyPurchased?['Purchased 50/50']:[])],choices:[q.answer,...(q.distractors??[])],points:r.points};
- }else if(view.phase==='final-results'&&s.final){const f=s.final,q=FINALS.find(x=>x.id===f.id);if(!q)return;const a=actor.id?f.answers[actor.id]:undefined;
+ question={id:q.id,category:currentCatalog().categoryLookup.get(q.categoryId)?.name??r.category,difficulty:['Easy','Medium','Hard'][q.level-1]??String(q.level),prompt:q.prompt,image:q.image,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?.answerFormat??null,hintUsed:a?.hintUsed??null,hintText:[...(a?.optionsPurchased?['Purchased answer options']:[]),...(a?.fiftyFiftyPurchased?['Purchased 50/50']:[])],choices:[q.answer,...(q.distractors??[])],points:r.points};
+ }else if(view.phase==='final-results'&&s.final){const f=s.final,q=getFinalQuestion(f.id);if(!q)return;const a=actor.id?f.answers[actor.id]:undefined;
  question={id:q.id,category:q.category,difficulty:'Final Word',prompt:q.prompt,image:q.image,answer:q.answer,submittedAnswer:a?.answer??null,correct:a?.correct??null,answerFormat:a?'written':null,hintUsed:actor.id?Boolean(f.revealedHints?.[actor.id]):null,hintText:q.hints,choices:[],points:null};
  }else if(view.phase!=='finished')return;
  const kind=question?'question':'show';

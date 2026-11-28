@@ -1,7 +1,7 @@
 /** Pure journal generation; server persists this with the same CAS as room state. */
 import {createHash} from 'node:crypto';
 import type {GameState,Submission} from './game';
-import {getQuestion,FINALS} from './questions';
+import {getQuestion,getFinalQuestion} from './questions';
 import {ADULT_AGE_BANDS,isAdultAgeBand} from './age-support';
 export type SelectionAudit={seenBefore:boolean;unseenAvailable:number;candidates:number;seenBy:number;historyScopes:number;minimumSeenBy:number};
 export const deviceHistoryKey=(id:string)=>createHash('sha256').update('know-show-host:'+id).digest('hex');
@@ -38,11 +38,11 @@ export function exposureJournal(before:GameState,after:GameState,now=Date.now())
  const draft=after.phase==='draft'&&(started||before.round!==after.round||(!before.resolution?.resumePhase&&before.phase!=='draft'));
  const selected=after.selected.flat().filter(id=>!before.selected.flat().includes(id));
  const complete=after.phase==='finished'&&before.phase!=='finished';
- const exposures:{id:string;category:string;level:number;round:number;at:string;diagnostic:SelectionAudit|null;stats:(ReturnType<typeof counts>&{ageSummary?:ReturnType<typeof ageSummary>})|null}[]=[];
+ const exposures:{id:string;category:string;level:number;round:number;at:string;diagnostic:(SelectionAudit&{libraryRevision?:number;prompt?:string;answer?:string})|null;stats:(ReturnType<typeof counts>&{ageSummary?:ReturnType<typeof ageSummary>})|null}[]=[];
  const add=(id:string,final:boolean,at:number,stats:(ReturnType<typeof counts>&{ageSummary?:ReturnType<typeof ageSummary>})|null)=>{
-  const q=final?FINALS.find(x=>x.id===id):getQuestion(id);if(!q)return;
+  const q=final?getFinalQuestion(id):getQuestion(id);if(!q)return;
   const category=q.categoryId??'legacy';const level=final?4:(q as {level:number}).level;
-  exposures.push({id,category,level,round:final?3:(after.resolution?.questionId===id?(after.resolution.round??after.round):after.round)+1,at:new Date(at).toISOString(),diagnostic:after.selectionAudit?.[id]??null,stats});
+  exposures.push({id,category,level,round:final?3:(after.resolution?.questionId===id?(after.resolution.round??after.round):after.round)+1,at:new Date(at).toISOString(),diagnostic:after.selectionAudit?.[id]?{...after.selectionAudit[id],libraryRevision:q.libraryRevision??0,prompt:q.prompt,answer:q.answer}:null,stats});
  };
  if(after.phase==='question'&&after.active?.startedAt!==undefined&&(before.phase!=='question'||before.active?.questionId!==after.active.questionId))add(after.active.questionId,false,after.active.startedAt,null);
  if(after.phase==='results'&&after.resolution&&(before.resolution?.questionId!==after.resolution.questionId||JSON.stringify(before.resolution?.answers)!==JSON.stringify(after.resolution.answers))){
